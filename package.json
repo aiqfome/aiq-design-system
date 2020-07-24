@@ -1,0 +1,24 @@
+{
+  "name": "design-system",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "repository": "git@github.com:aiqfome/design-system.git",
+  "license": "MIT",
+  "scripts": {
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.10.5",
+    "@storybook/addon-actions": "^5.3.19",
+    "@storybook/addon-links": "^5.3.19",
+    "@storybook/addons": "^5.3.19",
+    "@storybook/react": "^5.3.19",
+    "@types/react": "^16.9.43",
+    "babel-loader": "^8.1.0",
+    "react": "^16.13.1",
+    "ts-loader": "^8.0.1",
+    "typescript": "^3.9.7"
+  },
+  "dependencies": {}
+}
