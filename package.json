@@ -5,7 +5,7 @@
   "repository": "git@github.com:aiqfome/design-system.git",
   "license": "MIT",
   "scripts": {
-    "storybook": "start-storybook -p 6006",
+    "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook"
   },
   "devDependencies": {
@@ -20,5 +20,11 @@
     "ts-loader": "^8.0.1",
     "typescript": "^3.9.7"
   },
-  "dependencies": {}
+  "dependencies": {
+    "downshift": "^6.0.2",
+    "paths.macro": "^3.0.0",
+    "react-icons": "^3.10.0",
+    "styled-components": "^5.1.1",
+    "styled-system": "^5.1.5"
+  }
 }
