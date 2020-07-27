@@ -11,10 +11,6 @@ export const BoxStyled = styled.div`
   ${fontWeight}
 `
 
-export const Box = props => {
+export const Box: React.FC = ({...props}) => {
   return <BoxStyled {...props} />
 }
-
-Box.propTypes = {}
-
-Box.defaultProps = {}

@@ -10,4 +10,4 @@ export default {
   title: atomicDir(base)
 }
 
-export const basic = () => <Box />
+export const basic = () => <Box color="blue">Design System</Box>
