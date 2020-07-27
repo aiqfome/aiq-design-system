@@ -9,33 +9,39 @@ import { IoIosArrowDown } from 'react-icons/io'
 
 import { Box } from '../Box'
 import { Input } from '../Input'
+import { Button } from '../Button'
 
 const Container = styled(Box)`
   position: relative;
+  ul{
+    background: ${({ theme }) => theme.colors.white};
+    border: 1px solid ${({ theme }) => theme.colors.lightGrey};
+    padding: 10px;
+    list-style-type: none;
+    position: absolute;
+    top: 57px;
+    overflow: hidden;
+    z-index: 1;
+    width: 100%;
+
+    li {
+      cursor: pointer;
+      padding: 8px;
+    }
+
+    ${({ isOpen }) =>
+      !isOpen &&
+      css`
+        display: none;
+      `}
+    }
 `
 
-const List = styled.ul`
-  bottom: 75px;
-  background: ${({ theme }) => theme.colors.white};
-  border: 1px solid ${({ theme }) => theme.colors.lightGrey};
-  padding: 10px;
-  list-style-type: none;
+const ButtonStyled = styled(Button)`
   position: absolute;
-  overflow: hidden;
-  z-index: 1;
-  width: 100%;
-
-  li {
-    cursor: pointer;
-    padding: 8px;
-  }
-
-  ${({ isOpen }) =>
-    !isOpen &&
-    css`
-      display: none;
-    `}
-`
+  top: 24px;
+  right: 14px;
+`;
 
 export const Select = ({ label, items, ...props }) => {
   const [inputItems, setInputItems] = useState(items)
@@ -60,8 +66,8 @@ export const Select = ({ label, items, ...props }) => {
   })
 
   return (
-    <Container>
-      <List {...getMenuProps()} isOpen={isOpen}>
+    <Container isOpen={isOpen}>
+      <ul {...getMenuProps()} >
         {isOpen &&
           inputItems &&
           inputItems.length > 0 &&
@@ -76,23 +82,29 @@ export const Select = ({ label, items, ...props }) => {
               {item}
             </li>
           ))}
-      </List>
-
-      <Box {...getComboboxProps()}>
+      </ul>
+        
+      <Box {...getComboboxProps()} forwardedRef={getComboboxProps()['ref']} >
         <Input
+          inputRef={getInputProps()['ref']}          
           {...getInputProps()}
           label={label}
-          sufix={inputItems && <IoIosArrowDown {...getToggleButtonProps()} />}
         />
+        {inputItems && (
+          <ButtonStyled
+            palette='primary' mr={5}
+            type="button"
+            {...getToggleButtonProps()}
+            aria-label="toggle menu">
+            <IoIosArrowDown  />
+          </ButtonStyled>)}
+        
+        
       </Box>
     </Container>
   )
 }
 
-Select.propTypes = {
-  label: PropTypes.string,
-  items: PropTypes.array
-}
 
 Select.defaultProps = {
   items: []

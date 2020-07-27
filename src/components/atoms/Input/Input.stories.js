@@ -10,4 +10,4 @@ export default {
   title: atomicDir(base)
 }
 
-export const basic = () => <Input />
+export const basic = () => <Input value="teste" />

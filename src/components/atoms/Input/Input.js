@@ -134,6 +134,7 @@ export const Input = ({
   type,
   errorMessage,
   sufix,
+  value,
   ...props
 }) => {
   const [showPassword, setShowPassword] = useState(false)
@@ -178,12 +179,12 @@ export const Input = ({
     return (
       <Container {...props}>
         <LabelStyled errorForm={errorForm}>
-          <input placeholder=' ' type={type} ref={inputRef} name={name} />
+          <input placeholder=' ' type={type}  value={value} ref={inputRef} name={name} />
           <Text>{label}</Text>
 
-          <Button palette='primary' mr={5}>
+          <Button palette='primary' mr={5}></Button>
             {sufix}
-          </Button>
+     
         </LabelStyled>
 
         {errorForm ? (
@@ -198,14 +199,16 @@ export const Input = ({
   }
 
   return (
-    <Container {...props}>
+    <Container >
       <LabelStyled errorForm={errorForm}>
         <input
+          value={value}
           placeholder=' '
           name={name}
           type={type}
           ref={inputRef}
           autoComplete='off'
+          
         />
         <Text>{label}</Text>
       </LabelStyled>
