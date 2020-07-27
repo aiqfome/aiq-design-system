@@ -1,10 +1,15 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, {ReactNode} from 'react'
 
-import styled, { css } from 'styled-components'
+import styled, { css, DefaultTheme } from 'styled-components'
 
-const drawerVariations = {
-  right: css`
+export interface Props extends DefaultTheme{
+  variation?: string,
+  opened: boolean,
+  children?: ReactNode,
+} 
+
+const drawerVariations: {[index: string]:any}  = {
+  right: css<Props>`
     right: 0;
 
     ${({ opened }) =>
@@ -19,7 +24,7 @@ const drawerVariations = {
         transform: translateX(500px);
       `}
   `,
-  left: css`
+  left: css<Props>`
     left: 0;
 
     ${({ opened }) =>
@@ -36,7 +41,7 @@ const drawerVariations = {
   `
 }
 
-export const DrawerStyled = styled.div`
+export const DrawerStyled = styled.div<Props>`
   background-color: ${props => props.theme.colors.white};
   border: 1px solid ${props => props.theme.colors.mediumGrey};
   position: fixed;
@@ -48,19 +53,10 @@ export const DrawerStyled = styled.div`
   ${({ variation }) => drawerVariations[variation || 'right']}
 `
 
-export const Drawer = ({ opened, children, ...props }) => {
+export const Drawer: React.FC<Props> = ({ opened = false, children, ...props }) => {
   return (
     <DrawerStyled opened={opened} {...props}>
       {children}
     </DrawerStyled>
   )
-}
-
-Drawer.propTypes = {
-  opened: PropTypes.bool,
-  children: PropTypes.node
-}
-
-Drawer.defaultProps = {
-  opened: false
 }
