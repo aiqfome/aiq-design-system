@@ -40,6 +40,6 @@ const LoadingSpinner = styled.svg.attrs({
   }
 `
 
-export const Loading = () => {
+export const Loading: React.FC = () => {
   return <LoadingSpinner />
 }
