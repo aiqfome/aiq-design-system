@@ -11,7 +11,7 @@ import {
   fontSize,
   FontSizeProps, 
   fontWeight,
-  FontWeightProps 
+  FontWeightProps
 } from 'styled-system'
 
 export interface Props extends 

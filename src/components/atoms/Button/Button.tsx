@@ -1,14 +1,32 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { ReactChildren, ReactNode } from 'react'
 
-import styled, { css } from 'styled-components'
-import { color, space, layout, fontSize, fontWeight } from 'styled-system'
+import styled, { css, DefaultTheme } from 'styled-components'
+import { 
+  color,
+  space, 
+  SpaceProps,
+  layout, 
+  LayoutProps,
+  fontSize, 
+  FontSizeProps,
+  fontWeight ,
+  FontWeightProps
+} from 'styled-system'
 
 import { Icon } from '../Icon'
 import { Text } from '../Text'
 
-const buttonVariations = {
-  text: css`
+export interface Props extends DefaultTheme, 
+   SpaceProps, LayoutProps, FontSizeProps, FontWeightProps {
+    children?: ReactNode,
+    prefix?: Node,
+    sufix?: Node,
+    variant?: string,
+    palette ?: string,
+}
+
+const buttonVariations:  {[index: string]:any} = {
+  text: css<Props>`
     border: none;
     background: none;
     color: ${({ theme }) => theme.colors.darkGrey};
@@ -30,7 +48,7 @@ const buttonVariations = {
         color: ${({ theme }) => theme.colors.secondary};
       `}
   `,
-  contained: css`
+  contained: css<Props>`
     border: none;
     font-weight: ${({ theme }) => theme.fontWeights.semiBold};
 
@@ -45,7 +63,7 @@ const buttonVariations = {
         }
       `};
   `,
-  outlined: css`
+  outlined: css<Props>`
     ${({ palette }) =>
       palette === 'primary' &&
       css`
@@ -65,7 +83,7 @@ const buttonVariations = {
   `
 }
 
-export const ButtonStyled = styled.button`
+export const ButtonStyled = styled.button<Props>`
   ${color}
   ${space}
   ${layout}
@@ -84,12 +102,12 @@ export const ButtonStyled = styled.button`
   cursor: pointer;
 `
 
-export const Button = ({ children, prefix, sufix, ...props }) => {
+export const Button: React.FC<Props> = ({ children, prefix, sufix, ...props }) => {
   if (prefix) {
     return (
       <ButtonStyled {...props}>
-        <Icon mr={5}>{prefix}</Icon>
-        <Text fontSize='medium'>{children}</Text>
+        <Icon cursor="pointer" mr={5}>{prefix}</Icon>
+        <Text cursor="pointer" fontSize='medium'>{children}</Text>
       </ButtonStyled>
     )
   }
@@ -97,23 +115,15 @@ export const Button = ({ children, prefix, sufix, ...props }) => {
   if (sufix) {
     return (
       <ButtonStyled {...props}>
-        <Text fontSize='medium'>{children}</Text>
-        <Icon ml={5}>{sufix}</Icon>
+        <Text cursor="pointer" fontSize='medium'>{children}</Text>
+        <Icon cursor="pointer" ml={5}>{sufix}</Icon>
       </ButtonStyled>
     )
   }
 
   return (
     <ButtonStyled {...props}>
-      <Text fontSize='medium'>{children}</Text>
+      <Text cursor="pointer" fontSize='medium'>{children}</Text>
     </ButtonStyled>
   )
 }
-
-Button.propTypes = {
-  children: PropTypes.node,
-  prefix: PropTypes.node,
-  sufix: PropTypes.node
-}
-
-Button.defaultProps = {}
