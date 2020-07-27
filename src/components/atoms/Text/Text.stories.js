@@ -10,4 +10,6 @@ export default {
   title: atomicDir(base)
 }
 
-export const basic = () => <Text />
+export const basic = () => <Text>Design System</Text>
+
+export const cursor = () => <Text cursor="pointer">Design System</Text>
