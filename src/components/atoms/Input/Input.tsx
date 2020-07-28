@@ -10,6 +10,17 @@ import { Box } from '../Box'
 import { Button } from '../Button'
 import { Text } from '../Text'
 
+export interface Props {
+  name?: string,
+  inputRef?:  React.RefObject<HTMLInputElement>,
+  label?: string,
+  errorForm?: boolean,
+  type?: string,
+  errorMessage?: string,
+  sufix?: Node,
+  value ?: string
+}
+
 const Container = styled(Box)`
   ${color}
   ${space}
@@ -18,7 +29,7 @@ const Container = styled(Box)`
   ${fontWeight}
 `
 
-const LabelStyled = styled.label`
+const LabelStyled = styled.label<Props>`
   position: relative;
   padding-top: 6px;
   line-height: 1.5;
@@ -126,12 +137,12 @@ const LabelStyled = styled.label`
   }
 `
 
-export const Input = ({
+export const Input: React.FC<Props> = ({
   name,
   inputRef,
   label,
   errorForm,
-  type,
+  type = 'text',
   errorMessage,
   sufix,
   value,
@@ -222,18 +233,4 @@ export const Input = ({
       )}
     </Container>
   )
-}
-
-Input.propTypes = {
-  name: PropTypes.string,
-  inputRef: PropTypes.func,
-  label: PropTypes.string,
-  errorForm: PropTypes.bool,
-  type: PropTypes.string,
-  errorMessage: PropTypes.string,
-  sufix: PropTypes.node
-}
-
-Input.defaultProps = {
-  type: 'text'
 }

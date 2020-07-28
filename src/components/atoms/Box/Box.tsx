@@ -1,10 +1,21 @@
 import React, {RefObject} from 'react'
 
 import styled from 'styled-components'
-import { color, space, layout, fontSize, fontWeight } from 'styled-system'
+import { 
+  color, 
+  space,
+  SpaceProps,
+  layout, 
+  LayoutProps, 
+  fontSize, 
+  FontSizeProps, 
+  fontWeight, 
+  FontWeightProps 
+} from 'styled-system'
 
-export interface Props {
-  forwardedRef?: RefObject<HTMLDivElement>
+export interface Props extends
+  SpaceProps, LayoutProps, FontSizeProps, FontWeightProps {
+  forwardedRef?: RefObject<HTMLDivElement>,
 }
 
 export const BoxStyled = styled.div`

@@ -16,13 +16,14 @@ import {
 import { Icon } from '../Icon'
 import { Text } from '../Text'
 
-export interface Props extends DefaultTheme, 
+export interface Props extends DefaultTheme,
    SpaceProps, LayoutProps, FontSizeProps, FontWeightProps {
     children?: ReactNode,
     prefix?: Node,
     sufix?: Node,
-    variant?: string,
+    variant?: "text" | "contained" | "outlined" | "neutral",
     palette ?: string,
+    onClick?: any
 }
 
 const buttonVariations:  {[index: string]:any} = {
