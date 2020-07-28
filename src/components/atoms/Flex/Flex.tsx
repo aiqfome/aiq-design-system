@@ -1,32 +1,35 @@
 import PropTypes from 'prop-types'
 
 import styled, { css } from 'styled-components'
-import { 
-  space, 
+import {
+  space,
   SpaceProps,
-  layout, 
+  layout,
   LayoutProps,
-  fontSize, 
+  fontSize,
   FontSizeProps,
-  fontWeight, 
+  fontWeight,
   FontWeightProps,
-  variant 
+  variant
 } from 'styled-system'
 
-
-export interface Props extends  SpaceProps, LayoutProps, FontSizeProps, FontWeightProps {
-  variant?:  string,
-  justifyContent?: string,
-  alignItems?: string,
-  flexDirection?: string,
-  height?: string,
-  padding?: string,
-  backgroundColor?: string,
-  fullHeight?: boolean,
+export interface Props
+  extends SpaceProps,
+    LayoutProps,
+    FontSizeProps,
+    FontWeightProps {
+  variant?: string
+  justifyContent?: string
+  alignItems?: string
+  flexDirection?: string
+  height?: string
+  padding?: string
+  backgroundColor?: string
+  fullHeight?: boolean
   flex?: number
 }
 
-const flexVariations: {[index: string]:any} = {
+const flexVariations: { [index: string]: any } = {
   auto: css``,
   centralized: css`
     justify-content: center;
@@ -54,7 +57,7 @@ export const Flex = styled.div<Props>`
   background-color: ${props => props.backgroundColor};
   flex: ${props => props.flex};
   
-  ${ ({ variant }) => flexVariations[variant || 'auto']}
+  ${({ variant }) => flexVariations[variant || 'auto']}
 
   ${({ fullHeight }) =>
     !!fullHeight &&
