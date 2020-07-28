@@ -1,14 +1,14 @@
-import React, {ReactNode} from 'react'
+import React, { ReactNode } from 'react'
 
 import styled, { css, DefaultTheme } from 'styled-components'
 
-export interface Props extends DefaultTheme{
-  variation?: string,
-  opened: boolean,
-  children?: ReactNode,
-} 
+export interface Props extends DefaultTheme {
+  variation?: string
+  opened: boolean
+  children?: ReactNode
+}
 
-const drawerVariations: {[index: string]:any}  = {
+const drawerVariations: { [index: string]: any } = {
   right: css<Props>`
     right: 0;
 
@@ -53,7 +53,11 @@ export const DrawerStyled = styled.div<Props>`
   ${({ variation }) => drawerVariations[variation || 'right']}
 `
 
-export const Drawer: React.FC<Props> = ({ opened = false, children, ...props }) => {
+export const Drawer: React.FC<Props> = ({
+  opened = false,
+  children,
+  ...props
+}) => {
   return (
     <DrawerStyled opened={opened} {...props}>
       {children}

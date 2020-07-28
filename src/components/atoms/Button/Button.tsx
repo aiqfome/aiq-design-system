@@ -1,32 +1,36 @@
 import React, { ReactNode } from 'react'
 
 import styled, { css, DefaultTheme } from 'styled-components'
-import { 
+import {
   color,
-  space, 
+  space,
   SpaceProps,
-  layout, 
+  layout,
   LayoutProps,
-  fontSize, 
+  fontSize,
   FontSizeProps,
-  fontWeight ,
+  fontWeight,
   FontWeightProps
 } from 'styled-system'
 
 import { Icon } from '../Icon'
 import { Text } from '../Text'
 
-export interface Props extends DefaultTheme,
-   SpaceProps, LayoutProps, FontSizeProps, FontWeightProps {
-    children?: ReactNode,
-    prefix?: Node,
-    sufix?: Node,
-    variant?: "text" | "contained" | "outlined" | "neutral",
-    palette ?: string,
-    onClick?: any
+export interface Props
+  extends DefaultTheme,
+    SpaceProps,
+    LayoutProps,
+    FontSizeProps,
+    FontWeightProps {
+  children?: ReactNode
+  prefix?: Node
+  sufix?: Node
+  variant?: string
+  palette?: string
+  onClick?: any
 }
 
-const buttonVariations:  {[index: string]:any} = {
+const buttonVariations: { [index: string]: any } = {
   text: css<Props>`
     border: none;
     background: none;
@@ -103,12 +107,21 @@ export const ButtonStyled = styled.button<Props>`
   cursor: pointer;
 `
 
-export const Button: React.FC<Props> = ({ children, prefix, sufix, ...props }) => {
+export const Button: React.FC<Props> = ({
+  children,
+  prefix,
+  sufix,
+  ...props
+}) => {
   if (prefix) {
     return (
       <ButtonStyled {...props}>
-        <Icon cursor="pointer" mr={5}>{prefix}</Icon>
-        <Text cursor="pointer" fontSize='medium'>{children}</Text>
+        <Icon cursor='pointer' mr={5}>
+          {prefix}
+        </Icon>
+        <Text cursor='pointer' fontSize='medium'>
+          {children}
+        </Text>
       </ButtonStyled>
     )
   }
@@ -116,15 +129,21 @@ export const Button: React.FC<Props> = ({ children, prefix, sufix, ...props }) =
   if (sufix) {
     return (
       <ButtonStyled {...props}>
-        <Text cursor="pointer" fontSize='medium'>{children}</Text>
-        <Icon cursor="pointer" ml={5}>{sufix}</Icon>
+        <Text cursor='pointer' fontSize='medium'>
+          {children}
+        </Text>
+        <Icon cursor='pointer' ml={5}>
+          {sufix}
+        </Icon>
       </ButtonStyled>
     )
   }
 
   return (
     <ButtonStyled {...props}>
-      <Text cursor="pointer" fontSize='medium'>{children}</Text>
+      <Text cursor='pointer' fontSize='medium'>
+        {children}
+      </Text>
     </ButtonStyled>
   )
 }
