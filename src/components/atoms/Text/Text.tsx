@@ -1,21 +1,25 @@
 import PropTypes from 'prop-types'
 
 import styled from 'styled-components'
-import { 
-  color, 
-  ColorProps, 
-  space, 
-  SpaceProps, 
-  layout, 
+import {
+  color,
+  ColorProps,
+  space,
+  SpaceProps,
+  layout,
   LayoutProps,
   fontSize,
-  FontSizeProps, 
+  FontSizeProps,
   fontWeight,
   FontWeightProps
 } from 'styled-system'
 
-export interface Props extends 
-  ColorProps, SpaceProps, LayoutProps, FontSizeProps, FontWeightProps {
+export interface Props
+  extends ColorProps,
+    SpaceProps,
+    LayoutProps,
+    FontSizeProps,
+    FontWeightProps {
   cursor?: string
 }
 
@@ -26,6 +30,5 @@ export const Text = styled.span<Props>`
   ${fontSize}
   ${fontWeight}
 
-  cursor: ${props => props.cursor || 'auto' };
+  cursor: ${props => props.cursor || 'auto'};
 `
-

@@ -3,9 +3,9 @@ import React from 'react'
 import styled from 'styled-components'
 
 export interface Props {
-  src: string,
+  src: string
   alt: string
-} 
+}
 
 export const AvatarStyled = styled.img<Props>`
   width: 36px;
