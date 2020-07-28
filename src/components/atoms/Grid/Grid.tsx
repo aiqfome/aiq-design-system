@@ -1,24 +1,25 @@
 import React from 'react'
 
 import styled from 'styled-components'
-import { 
+import {
   color,
-  space, 
+  space,
   SpaceProps,
   grid,
   GridProps,
-  layout, 
+  layout,
   LayoutProps,
-  fontSize, 
+  fontSize,
   FontSizeProps,
-  fontWeight, 
-  FontWeightProps,
+  fontWeight,
+  FontWeightProps
 } from 'styled-system'
 
-export interface Props extends  SpaceProps, LayoutProps, FontSizeProps, FontWeightProps{
-
-}
-
+export interface Props
+  extends SpaceProps,
+    LayoutProps,
+    FontSizeProps,
+    FontWeightProps {}
 
 export const GridStyled = styled.div<Props>`
   ${color}
@@ -31,6 +32,6 @@ export const GridStyled = styled.div<Props>`
   display: grid;
 `
 
-export const Grid: React.FC<Props> = ({...props}) => {
+export const Grid: React.FC<Props> = ({ ...props }) => {
   return <GridStyled {...props} />
 }
