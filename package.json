@@ -6,7 +6,8 @@
   "license": "MIT",
   "scripts": {
     "storybook": "start-storybook -p 9009 -s public",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "gen:component": "hygen cafeina component"
   },
   "devDependencies": {
     "@babel/core": "^7.10.5",
@@ -38,6 +39,7 @@
     "@types/styled-components": "^5.1.1",
     "@types/styled-system": "^5.1.9",
     "downshift": "^6.0.2",
+    "hygen": "^6.0.4",
     "paths.macro": "^3.0.0",
     "react-icons": "^3.10.0",
     "styled-components": "^5.1.1",
