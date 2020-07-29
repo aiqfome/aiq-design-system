@@ -12,6 +12,7 @@
   "devDependencies": {
     "@babel/core": "^7.10.5",
     "@storybook/addon-actions": "^5.3.19",
+    "@storybook/addon-docs": "^5.3.19",
     "@storybook/addon-links": "^5.3.19",
     "@storybook/addons": "^5.3.19",
     "@storybook/react": "^5.3.19",
@@ -32,6 +33,7 @@
     "eslint-plugin-standard": "^4.0.1",
     "prettier": "^2.0.5",
     "react": "^16.13.1",
+    "react-docgen-typescript-loader": "^3.7.2",
     "ts-loader": "^8.0.1",
     "typescript": "^3.9.7"
   },

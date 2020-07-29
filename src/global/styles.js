@@ -22,4 +22,4 @@ export default createGlobalStyle`
     cursor: pointer;
     font-family: 'Work Sans', sans-serif;
   }
-`
+`;
