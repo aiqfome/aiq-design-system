@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import React, { ReactNode, ForwardRefRenderFunction, forwardRef } from 'react'
 
 import styled, { css, DefaultTheme } from 'styled-components'
 import {
@@ -22,11 +22,12 @@ export interface Props
     LayoutProps,
     FontSizeProps,
     FontWeightProps {
-  children?: ReactNode
+  children: ReactNode
   prefix?: Node
   sufix?: Node
-  variant?: string
+  variant?: 'text' | 'contained' | 'outlined' | 'neutral'
   palette?: string
+  onClick?: any
 }
 
 const buttonVariations: { [index: string]: any } = {
@@ -106,12 +107,10 @@ export const ButtonStyled = styled.button<Props>`
   cursor: pointer;
 `
 
-export const Button: React.FC<Props> = ({
-  children,
-  prefix,
-  sufix,
-  ...props
-}) => {
+export const ButtonComponent: ForwardRefRenderFunction<
+  HTMLButtonElement,
+  Props
+> = ({ children, prefix, sufix, ...props }) => {
   if (prefix) {
     return (
       <ButtonStyled {...props}>
@@ -146,3 +145,5 @@ export const Button: React.FC<Props> = ({
     </ButtonStyled>
   )
 }
+
+export const Button = forwardRef(ButtonComponent)
