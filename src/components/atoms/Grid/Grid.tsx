@@ -19,7 +19,10 @@ export interface Props
   extends SpaceProps,
     LayoutProps,
     FontSizeProps,
-    FontWeightProps {}
+    GridProps,
+    FontWeightProps {
+  color?: string
+}
 
 export const GridStyled = styled.div<Props>`
   ${color}

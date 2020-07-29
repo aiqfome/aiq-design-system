@@ -1,9 +1,9 @@
 import React from 'react'
-
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 export interface Props {
-  src: string
+  src?: string
   alt: string
 }
 
@@ -15,4 +15,9 @@ export const AvatarStyled = styled.img<Props>`
 
 export const Avatar: React.FC<Props> = ({ src, alt, ...props }) => {
   return <AvatarStyled src={src} alt={alt} {...props} />
+}
+
+Avatar.propTypes = {
+  src: PropTypes.string,
+  alt: PropTypes.string.isRequired
 }

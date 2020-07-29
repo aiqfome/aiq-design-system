@@ -1,4 +1,4 @@
-import React, { ForwardRefRenderFunction, forwardRef } from 'react'
+import React, { ForwardRefRenderFunction, forwardRef, ReactNode } from 'react'
 
 import styled from 'styled-components'
 import {
@@ -17,7 +17,10 @@ export interface Props
   extends SpaceProps,
     LayoutProps,
     FontSizeProps,
-    FontWeightProps {}
+    FontWeightProps {
+  children?: ReactNode
+  color?: string
+}
 
 export const BoxStyled = styled.div`
   ${color}
