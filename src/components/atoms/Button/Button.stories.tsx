@@ -30,7 +30,7 @@ export const containedPrimary: React.FC = () => (
 )
 
 export const outlinedPrimary: React.FC = () => (
-  <Button palette='primary' variant='outlined'>
+  <Button palette='primary' variant='outlined' marginBottom='teste'>
     Design System
   </Button>
 )

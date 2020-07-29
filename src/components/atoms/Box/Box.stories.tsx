@@ -7,4 +7,8 @@ export default {
   title: 'atoms/Box'
 }
 
-export const basic: React.FC = () => <Box color='warning'>Design System</Box>
+export const basic: React.FC = () => (
+  <Box marginBottom={10} color='blue'>
+    Design System
+  </Box>
+)

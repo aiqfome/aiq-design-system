@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 export interface Props {
   src?: string
-  alt?: string
+  alt: string
 }
 
 export const AvatarStyled = styled.img<Props>`
@@ -19,5 +19,5 @@ export const Avatar: React.FC<Props> = ({ src, alt, ...props }) => {
 
 Avatar.propTypes = {
   src: PropTypes.string,
-  alt: PropTypes.string
+  alt: PropTypes.string.isRequired
 }
