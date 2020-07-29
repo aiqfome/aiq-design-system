@@ -5,10 +5,10 @@ import React from 'react'
 
 import styled from 'styled-components'
 
-export interface Props {}
+interface Props {}
 
-export const <%=h.inflection.camelize(name)%>Styled = styled.div<Props>``
+const <%=h.inflection.camelize(name)%>Styled = styled.div<Props>``
 
-export const <%=h.inflection.camelize(name)%>: React.FC<Props> = ({...props}) => {
-  return <<%=h.inflection.camelize(name)%>Styled {...props} />
+export const <%=h.inflection.camelize(name)%>: React.FC<Props> = () => {
+  return <<%=h.inflection.camelize(name)%>Styled />
 }
