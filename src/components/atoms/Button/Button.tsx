@@ -25,7 +25,7 @@ export interface Props
   children: ReactNode
   prefix?: Node
   sufix?: Node
-  variant?: string
+  variant?: 'text' | 'contained' | 'outlined' | 'neutral'
   palette?: string
   onClick?: any
 }
