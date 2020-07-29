@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-import PropTypes from 'prop-types'
+import React, { useState, InputHTMLAttributes } from 'react'
 
 import { MdVisibility, MdVisibilityOff } from 'react-icons/md'
 
@@ -10,7 +9,17 @@ import { Box } from '../Box'
 import { Button } from '../Button'
 import { Text } from '../Text'
 
-const Container = styled(Box)`
+export interface Props extends InputHTMLAttributes<HTMLInputElement> {
+  name?: string
+  inputRef?: React.RefObject<HTMLInputElement>
+  label?: string
+  errorForm?: boolean
+  type?: string
+  errorMessage?: string
+  sufix?: Node
+}
+
+const Container = styled.div`
   ${color}
   ${space}
   ${layout}
@@ -18,7 +27,7 @@ const Container = styled(Box)`
   ${fontWeight}
 `
 
-const LabelStyled = styled.label`
+const LabelStyled = styled.label<Props>`
   position: relative;
   padding-top: 6px;
   line-height: 1.5;
@@ -126,14 +135,15 @@ const LabelStyled = styled.label`
   }
 `
 
-export const Input = ({
+export const Input: React.FC<Props> = ({
   name,
   inputRef,
   label,
   errorForm,
-  type,
+  type = 'text',
   errorMessage,
   sufix,
+  value,
   ...props
 }) => {
   const [showPassword, setShowPassword] = useState(false)
@@ -143,6 +153,7 @@ export const Input = ({
       <Container {...props}>
         <LabelStyled errorForm={errorForm}>
           <input
+            {...props}
             placeholder=' '
             type={showPassword ? 'text' : 'password'}
             ref={inputRef}
@@ -178,12 +189,17 @@ export const Input = ({
     return (
       <Container {...props}>
         <LabelStyled errorForm={errorForm}>
-          <input placeholder=' ' type={type} ref={inputRef} name={name} />
+          <input
+            {...props}
+            placeholder=' '
+            type={type}
+            value={value}
+            ref={inputRef}
+            name={name}
+          />
           <Text>{label}</Text>
 
-          <Button palette='primary' mr={5}>
-            {sufix}
-          </Button>
+          {sufix}
         </LabelStyled>
 
         {errorForm ? (
@@ -198,9 +214,11 @@ export const Input = ({
   }
 
   return (
-    <Container {...props}>
+    <Container>
       <LabelStyled errorForm={errorForm}>
         <input
+          {...props}
+          value={value}
           placeholder=' '
           name={name}
           type={type}
@@ -219,18 +237,4 @@ export const Input = ({
       )}
     </Container>
   )
-}
-
-Input.propTypes = {
-  name: PropTypes.string,
-  inputRef: PropTypes.func,
-  label: PropTypes.string,
-  errorForm: PropTypes.bool,
-  type: PropTypes.string,
-  errorMessage: PropTypes.string,
-  sufix: PropTypes.node
-}
-
-Input.defaultProps = {
-  type: 'text'
 }

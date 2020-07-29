@@ -10,4 +10,7 @@ export default {
   title: atomicDir(base)
 }
 
-export const basic = () => <Select />
+export const basic = () => {
+  const itens = ['React', 'CSS', 'PHP', 'HTML']
+  return <Select label="design-system" items={itens} />
+}
