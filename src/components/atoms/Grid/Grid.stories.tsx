@@ -1,18 +1,15 @@
 import React from 'react'
 
-import base from 'paths.macro'
-import { atomicDir } from '../../utils/helpers/atomicDir'
-
-import { Grid } from './Grid';
-import { Text } from '../Text';
+import { Grid } from './Grid'
+import { Text } from '../Text'
 
 export default {
   component: Grid,
-  title: atomicDir(base)
+  title: 'atoms/Grid'
 }
 
-export const basic = () => (
-  <Grid color="primary"  >
+export const basic: React.FC = () => (
+  <Grid color='primary'>
     <Text>Design System</Text>
     <Text>Design System</Text>
     <Text>Design System</Text>
@@ -20,8 +17,8 @@ export const basic = () => (
   </Grid>
 )
 
-export const templateColumns = () => (
-  <Grid color="primary" gridTemplateColumns='1fr 2fr' >
+export const templateColumns: React.FC = () => (
+  <Grid color='primary' gridTemplateColumns='1fr 2fr'>
     <Text>Design System</Text>
     <Text>Design System</Text>
     <Text>Design System</Text>

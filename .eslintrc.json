@@ -30,6 +30,8 @@
       }
     ],
     "react-hooks/rules-of-hooks": "error",
+    "react/prop-types": "off",
+    "@typescript-eslint/no-explicit-any": "off",
     "react-hooks/exhaustive-deps": "warn",
     "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
     "import/prefer-default-export": "off"

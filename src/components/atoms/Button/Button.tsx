@@ -23,8 +23,8 @@ export interface Props
     FontSizeProps,
     FontWeightProps {
   children: ReactNode
-  prefix?: Node
-  sufix?: Node
+  prefix?: any
+  sufix?: any
   variant?: 'text' | 'contained' | 'outlined' | 'neutral'
   palette?: string
   onClick?: any

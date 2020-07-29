@@ -1,21 +1,13 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
 import styled from 'styled-components'
-import {
-  color,
-  ColorProps,
-  space,
-  SpaceProps,
-  layout,
-  LayoutProps
-} from 'styled-system'
+import { color, space, layout } from 'styled-system'
 
 import { Flex, Props as FlexProps } from '../Flex'
 
 export interface Props extends FlexProps {
   cursor?: string
-  children?: Node
+  children?: any
 }
 
 export const IconStyled = styled(Flex)<Props>`

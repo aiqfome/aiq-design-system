@@ -1,17 +1,14 @@
 import React from 'react'
 
-import base from 'paths.macro'
-import { atomicDir } from '../../utils/helpers/atomicDir'
-
 import { Loading } from './Loading'
 import { Flex } from '../Flex'
 
 export default {
   component: Loading,
-  title: atomicDir(base)
+  title: 'atoms/Loading'
 }
 
-export const basic = () => (
+export const basic: React.FC = () => (
   <Flex justifyContent='center' alignItems='center' height='100vh'>
     <Loading />
   </Flex>

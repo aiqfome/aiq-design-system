@@ -15,7 +15,6 @@ export default createGlobalStyle`
     color: ${props => props.theme.colors.almostBlack};
     -webkit-font-smoothing: antialiased;
     font-weight: 400;
-    overflow: hidden;
   }
 
   button {

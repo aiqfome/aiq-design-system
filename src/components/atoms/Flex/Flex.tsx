@@ -1,6 +1,4 @@
-import PropTypes from 'prop-types'
-
-import styled, { css } from 'styled-components'
+import styled, { css, DefaultTheme } from 'styled-components'
 import {
   space,
   SpaceProps,
@@ -9,16 +7,16 @@ import {
   fontSize,
   FontSizeProps,
   fontWeight,
-  FontWeightProps,
-  variant
+  FontWeightProps
 } from 'styled-system'
 
 export interface Props
   extends SpaceProps,
+    DefaultTheme,
     LayoutProps,
     FontSizeProps,
     FontWeightProps {
-  variant?: string
+  variant?: 'auto' | 'centralized' | 'fullCentralized'
   justifyContent?: string
   alignItems?: string
   flexDirection?: string
