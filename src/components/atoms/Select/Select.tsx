@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import PropTypes from 'prop-types'
 
 import styled, { css } from 'styled-components'
 
@@ -11,9 +10,15 @@ import { Box } from '../Box'
 import { Input } from '../Input'
 import { Button } from '../Button'
 
-const Container = styled(Box)`
+export interface Props {
+  label?: string
+  items?: string[]
+  isOpen?: boolean
+}
+
+const Container = styled.div<Props>`
   position: relative;
-  ul{
+  ul {
     background: ${({ theme }) => theme.colors.white};
     border: 1px solid ${({ theme }) => theme.colors.lightGrey};
     padding: 10px;
@@ -34,16 +39,16 @@ const Container = styled(Box)`
       css`
         display: none;
       `}
-    }
+  }
 `
 
 const ButtonStyled = styled(Button)`
   position: absolute;
   top: 24px;
   right: 14px;
-`;
+`
 
-export const Select = ({ label, items, ...props }) => {
+export const Select: React.FC<Props> = ({ label, items = [], ...props }) => {
   const [inputItems, setInputItems] = useState(items)
 
   const {
@@ -56,7 +61,7 @@ export const Select = ({ label, items, ...props }) => {
     getItemProps
   } = useCombobox({
     items: inputItems,
-    onInputValueChange: ({ inputValue }) => {
+    onInputValueChange: ({ inputValue = '' }) => {
       setInputItems(
         items.filter(item =>
           item.toLowerCase().startsWith(inputValue.toLowerCase())
@@ -67,7 +72,7 @@ export const Select = ({ label, items, ...props }) => {
 
   return (
     <Container isOpen={isOpen}>
-      <ul {...getMenuProps()} >
+      <ul {...getMenuProps()}>
         {isOpen &&
           inputItems &&
           inputItems.length > 0 &&
@@ -83,29 +88,28 @@ export const Select = ({ label, items, ...props }) => {
             </li>
           ))}
       </ul>
-        
-      <Box {...getComboboxProps()} forwardedRef={getComboboxProps()['ref']} >
+
+      <Box {...getComboboxProps()}>
         <Input
-          inputRef={getInputProps()['ref']}          
-          {...getInputProps()}
+          onChange={getInputProps().onChange}
+          onBlur={getInputProps().onBlur}
+          onKeyDown={getInputProps().onKeyDown}
+          value={getInputProps().value}
+          inputRef={getInputProps().ref}
           label={label}
         />
         {inputItems && (
           <ButtonStyled
-            palette='primary' mr={5}
-            type="button"
+            palette='primary'
+            mr={5}
+            type='button'
             {...getToggleButtonProps()}
-            aria-label="toggle menu">
-            <IoIosArrowDown  />
-          </ButtonStyled>)}
-        
-        
+            aria-label='toggle menu'
+          >
+            <IoIosArrowDown />
+          </ButtonStyled>
+        )}
       </Box>
     </Container>
   )
-}
-
-
-Select.defaultProps = {
-  items: []
 }

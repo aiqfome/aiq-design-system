@@ -1,22 +1,23 @@
-import React, {RefObject} from 'react'
+import React, { ForwardRefRenderFunction, forwardRef } from 'react'
 
 import styled from 'styled-components'
-import { 
-  color, 
+import {
+  color,
   space,
   SpaceProps,
-  layout, 
-  LayoutProps, 
-  fontSize, 
-  FontSizeProps, 
-  fontWeight, 
-  FontWeightProps 
+  layout,
+  LayoutProps,
+  fontSize,
+  FontSizeProps,
+  fontWeight,
+  FontWeightProps
 } from 'styled-system'
 
-export interface Props extends
-  SpaceProps, LayoutProps, FontSizeProps, FontWeightProps {
-  forwardedRef?: RefObject<HTMLDivElement>,
-}
+export interface Props
+  extends SpaceProps,
+    LayoutProps,
+    FontSizeProps,
+    FontWeightProps {}
 
 export const BoxStyled = styled.div`
   ${color}
@@ -26,6 +27,15 @@ export const BoxStyled = styled.div`
   ${fontWeight}
 `
 
-export const Box: React.FC<Props> = ({forwardedRef, ...props}) => {
-  return <BoxStyled {...props} ref={forwardedRef} />
+export const BoxComponent: ForwardRefRenderFunction<HTMLDivElement, Props> = (
+  { children, ...props },
+  ref
+) => {
+  return (
+    <BoxStyled ref={ref} {...props}>
+      {children}
+    </BoxStyled>
+  )
 }
+
+export const Box = forwardRef(BoxComponent)

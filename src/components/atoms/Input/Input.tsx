@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-import PropTypes from 'prop-types'
+import React, { useState, InputHTMLAttributes } from 'react'
 
 import { MdVisibility, MdVisibilityOff } from 'react-icons/md'
 
@@ -10,18 +9,17 @@ import { Box } from '../Box'
 import { Button } from '../Button'
 import { Text } from '../Text'
 
-export interface Props {
-  name?: string,
-  inputRef?:  React.RefObject<HTMLInputElement>,
-  label?: string,
-  errorForm?: boolean,
-  type?: string,
-  errorMessage?: string,
-  sufix?: Node,
-  value ?: string
+export interface Props extends InputHTMLAttributes<HTMLInputElement> {
+  name?: string
+  inputRef?: React.RefObject<HTMLInputElement>
+  label?: string
+  errorForm?: boolean
+  type?: string
+  errorMessage?: string
+  sufix?: Node
 }
 
-const Container = styled(Box)`
+const Container = styled.div`
   ${color}
   ${space}
   ${layout}
@@ -155,6 +153,7 @@ export const Input: React.FC<Props> = ({
       <Container {...props}>
         <LabelStyled errorForm={errorForm}>
           <input
+            {...props}
             placeholder=' '
             type={showPassword ? 'text' : 'password'}
             ref={inputRef}
@@ -190,12 +189,17 @@ export const Input: React.FC<Props> = ({
     return (
       <Container {...props}>
         <LabelStyled errorForm={errorForm}>
-          <input placeholder=' ' type={type}  value={value} ref={inputRef} name={name} />
+          <input
+            {...props}
+            placeholder=' '
+            type={type}
+            value={value}
+            ref={inputRef}
+            name={name}
+          />
           <Text>{label}</Text>
 
-          <Button palette='primary' mr={5}></Button>
-            {sufix}
-     
+          {sufix}
         </LabelStyled>
 
         {errorForm ? (
@@ -210,16 +214,16 @@ export const Input: React.FC<Props> = ({
   }
 
   return (
-    <Container >
+    <Container>
       <LabelStyled errorForm={errorForm}>
         <input
+          {...props}
           value={value}
           placeholder=' '
           name={name}
           type={type}
           ref={inputRef}
           autoComplete='off'
-          
         />
         <Text>{label}</Text>
       </LabelStyled>
