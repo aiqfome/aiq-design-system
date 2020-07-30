@@ -3,7 +3,7 @@ import React, { ReactNode } from 'react'
 import styled, { css, DefaultTheme } from 'styled-components'
 
 export interface Props extends DefaultTheme {
-  variation?: string
+  variation?: 'right' | 'left'
   opened: boolean
   children?: ReactNode
 }
