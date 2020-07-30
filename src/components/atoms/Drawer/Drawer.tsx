@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react'
-
+import PropTypes from 'prop-types'
 import styled, { css, DefaultTheme } from 'styled-components'
 
 export interface Props extends DefaultTheme {
@@ -63,4 +63,10 @@ export const Drawer: React.FC<Props> = ({
       {children}
     </DrawerStyled>
   )
+}
+
+Drawer.propTypes = {
+  opened: PropTypes.bool.isRequired,
+  variation: PropTypes.oneOf(['right', 'left']),
+  children: PropTypes.node
 }

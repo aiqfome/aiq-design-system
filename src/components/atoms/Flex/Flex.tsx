@@ -1,4 +1,5 @@
 import styled, { css, DefaultTheme } from 'styled-components'
+import PropTypes from 'prop-types'
 import {
   space,
   SpaceProps,
@@ -63,3 +64,15 @@ export const Flex = styled.div<Props>`
       height: 100vh;
     `}
 `
+
+Flex.propTypes = {
+  variant: PropTypes.oneOf(['auto', 'centralized', 'fullCentralized']),
+  justifyContent: PropTypes.string,
+  alignItems: PropTypes.string,
+  flexDirection: PropTypes.string,
+  height: PropTypes.string,
+  padding: PropTypes.string,
+  backgroundColor: PropTypes.string,
+  fullHeight: PropTypes.bool,
+  flex: PropTypes.number
+}
