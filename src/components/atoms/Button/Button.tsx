@@ -22,11 +22,17 @@ export interface Props
     LayoutProps,
     FontSizeProps,
     FontWeightProps {
-  children: ReactNode
+  children?: ReactNode
   prefix?: any
   sufix?: any
   refButton?: any
-  variant?: 'text' | 'contained' | 'outlined' | 'neutral'
+  variant?:
+    | 'text'
+    | 'contained'
+    | 'outlined'
+    | 'neutral'
+    | 'fab'
+    | 'fabWithText'
   palette?: string
   onClick?: any
 }
@@ -86,6 +92,43 @@ const buttonVariations: { [index: string]: any } = {
     background: ${({ theme }) => theme.colors.white};
     color: ${({ theme }) => theme.colors.black};
     border: 1px solid ${({ theme }) => theme.colors.mediumGrey};
+  `,
+  fab: css<Props>`
+    border-radius: 28px;
+    border: none;
+    height: 56px;
+    max-height: none;
+    width: 56px;
+
+    color: ${({ theme }) => theme.colors.white};
+    ${({ palette }) =>
+      palette === 'primary' &&
+      css`
+        background: ${({ theme }) => theme.colors.primary};
+      `}
+
+    ${({ palette }) =>
+      palette === 'secondary' &&
+      css`
+        background: ${({ theme }) => theme.colors.secondary};
+      `}
+  `,
+  fabWithText: css<Props>`
+    border-radius: 21px;
+    border: none;
+    padding: 14px 18px;
+    color: ${({ theme }) => theme.colors.white};
+    ${({ palette }) =>
+      palette === 'primary' &&
+      css`
+        background: ${({ theme }) => theme.colors.primary};
+      `}
+
+    ${({ palette }) =>
+      palette === 'secondary' &&
+      css`
+        background: ${({ theme }) => theme.colors.secondary};
+      `}
   `
 }
 
@@ -115,6 +158,14 @@ export const Button: React.FC<Props> = ({
   sufix,
   ...props
 }) => {
+  if (prefix && !children) {
+    return (
+      <ButtonStyled {...props}>
+        <Icon cursor='pointer'>{prefix}</Icon>
+      </ButtonStyled>
+    )
+  }
+
   if (prefix) {
     return (
       <ButtonStyled {...props}>
@@ -151,7 +202,7 @@ export const Button: React.FC<Props> = ({
 }
 
 Button.propTypes = {
-  children: PropTypes.any.isRequired,
+  children: PropTypes.any,
   prefix: PropTypes.any,
   sufix: PropTypes.any,
   refButton: PropTypes.any
