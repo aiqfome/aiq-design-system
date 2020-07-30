@@ -1,10 +1,11 @@
-import { addDecorator } from '@storybook/react';
+import { addDecorator, addParameters } from '@storybook/react';
 import React from 'react';
 import {ThemeProvider} from 'styled-components';
 
 import GlobalStyles from '../src/global/styles';
 import theme from '../src/providers/theme';
 
+import themeStorybook from './theme';
 
 function withTheme(storyFn) {
   return (
@@ -15,5 +16,11 @@ function withTheme(storyFn) {
   );
 }
 
+
+addParameters({
+  options: {
+    theme: themeStorybook,
+  },
+});
 
 addDecorator(withTheme);
