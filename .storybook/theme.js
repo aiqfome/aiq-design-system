@@ -6,6 +6,6 @@ export default create({
   colorSecondary: '#5D1887',
 
   // brandTitle: 'aiqfome',
-  // brandImage: 'https://lh3.googleusercontent.com/1ubvdwPMZPMd25BwnegPvDvX1HKznvrMVsBT7lIkgQafJm2Lyh1opctuWD0ybxU7iwPP',
+  brandImage: './logo.svg',
   brandUrl: 'https://aiqfome.com/',
 });
