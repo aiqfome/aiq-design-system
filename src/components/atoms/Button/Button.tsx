@@ -110,7 +110,6 @@ export const ButtonStyled = styled.button<Props>`
 
 export const Button: React.FC<Props> = ({
   children,
-  refButton,
   prefix,
   sufix,
   ...props
