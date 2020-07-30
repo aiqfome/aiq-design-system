@@ -44,7 +44,7 @@ export const info: React.FC = () => {
       addToast({
         type: 'info',
         title: 'Hi ✌️',
-        description: 'I am a info toast'
+        description: 'I am an info toast'
       })
     }
 
@@ -100,7 +100,7 @@ export const error: React.FC = () => {
       addToast({
         type: 'error',
         title: 'Hi ✌️',
-        description: 'I am a error toast'
+        description: 'I am an error toast'
       })
     }
 
