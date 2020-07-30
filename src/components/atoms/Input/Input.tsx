@@ -242,9 +242,7 @@ export const Input: React.FC<Props> = ({
 
 Input.propTypes = {
   name: PropTypes.string,
-  inputRef: PropTypes.shape({
-    current: PropTypes.instanceOf(HTMLInputElement)
-  }),
+  inputRef: PropTypes.any,
   label: PropTypes.string,
   errorForm: PropTypes.bool,
   type: PropTypes.string,
