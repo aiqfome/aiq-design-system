@@ -5,14 +5,14 @@ import styled, { DefaultTheme } from 'styled-components'
 export interface Props extends DefaultTheme {
   checked?: boolean
   disabled?: boolean
-  onChange?: any
+  onClick?: any
 }
 
 const CheckboxStyled = styled.div<Props>`
   opacity: ${props => (props.disabled ? 0.5 : 1)};
 
   :hover {
-    cursor: pointer;
+    cursor: ${props => (props.disabled ? 'not-allowed' : 'pointer')};
   }
 
   input {
@@ -47,7 +47,6 @@ const CheckboxStyled = styled.div<Props>`
     display: block;
   }
 
-  /* Style the checkmark/indicator */
   span:after {
     left: 4px;
     top: 1px;
@@ -61,9 +60,20 @@ const CheckboxStyled = styled.div<Props>`
   }
 `
 
-export const Checkbox: React.FC<Props> = ({ checked, disabled, ...props }) => {
+export const Checkbox: React.FC<Props> = ({
+  checked,
+  disabled,
+  onClick,
+  ...props
+}) => {
+  function handleClickCheckbox() {
+    if (!disabled) {
+      onClick()
+    }
+  }
+
   return (
-    <CheckboxStyled disabled={disabled}>
+    <CheckboxStyled disabled={disabled} onClick={handleClickCheckbox}>
       <input type='Checkbox' checked={checked} disabled={disabled} {...props} />
       <span />
     </CheckboxStyled>
@@ -73,5 +83,5 @@ export const Checkbox: React.FC<Props> = ({ checked, disabled, ...props }) => {
 Checkbox.propTypes = {
   checked: PropTypes.bool,
   disabled: PropTypes.bool,
-  onChange: PropTypes.any
+  onClick: PropTypes.any
 }

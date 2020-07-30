@@ -7,16 +7,38 @@ export default {
   title: 'atoms/Checkbox'
 }
 
-export const basic: React.FC = () => {
+export const Basic: React.FC = () => {
   const [checked, setChecked] = useState(false)
 
-  return <Checkbox onChange={() => setChecked(!checked)} checked={checked} />
+  return <Checkbox onClick={() => setChecked(!checked)} checked={checked} />
 }
 
-export const checked: React.FC = () => <Checkbox checked={true} />
+export const Checked: React.FC = () => {
+  const [checked, setChecked] = useState(true)
 
-export const disabled: React.FC = () => <Checkbox disabled={true} />
+  return <Checkbox onClick={() => setChecked(!checked)} checked={checked} />
+}
 
-export const disabledChecked: React.FC = () => (
-  <Checkbox checked={true} disabled={true} />
-)
+export const Disabled: React.FC = () => {
+  const [checked, setChecked] = useState(false)
+
+  return (
+    <Checkbox
+      onClick={() => setChecked(!checked)}
+      disabled={true}
+      checked={checked}
+    />
+  )
+}
+
+export const DisabledChecked: React.FC = () => {
+  const [checked, setChecked] = useState(true)
+
+  return (
+    <Checkbox
+      onClick={() => setChecked(!checked)}
+      disabled={true}
+      checked={checked}
+    />
+  )
+}
