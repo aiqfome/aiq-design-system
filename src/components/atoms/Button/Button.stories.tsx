@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { AiOutlineGithub } from 'react-icons/ai'
+import { MdAdd } from 'react-icons/md'
 
 import { Button } from './Button'
 
@@ -49,4 +50,28 @@ export const sufix: React.FC = () => (
   <Button palette='primary' sufix={<AiOutlineGithub />} variant='contained'>
     Design System
   </Button>
+)
+
+export const fab: React.FC = () => (
+  <Button palette='primary' variant='fabWithText'>
+    Design System
+  </Button>
+)
+
+export const fabWithPrefix: React.FC = () => (
+  <Button
+    palette='primary'
+    prefix={<MdAdd size={24} color='#FFF' />}
+    variant='fabWithText'
+  >
+    Design System
+  </Button>
+)
+
+export const fabWithOutChildren: React.FC = () => (
+  <Button
+    palette='primary'
+    prefix={<MdAdd size={24} color='#FFF' />}
+    variant='fab'
+  />
 )
