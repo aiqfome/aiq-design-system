@@ -1,5 +1,5 @@
 import React, { useState, InputHTMLAttributes } from 'react'
-
+import PropTypes from 'prop-types'
 import { MdVisibility, MdVisibilityOff } from 'react-icons/md'
 
 import styled from 'styled-components'
@@ -11,12 +11,13 @@ import { Text } from '../Text'
 
 export interface Props extends InputHTMLAttributes<HTMLInputElement> {
   name?: string
-  inputRef?: React.RefObject<HTMLInputElement>
+  inputRef?: any
   label?: string
   errorForm?: boolean
   type?: string
   errorMessage?: string
-  sufix?: Node
+  value?: string
+  sufix?: any
 }
 
 const Container = styled.div`
@@ -237,4 +238,17 @@ export const Input: React.FC<Props> = ({
       )}
     </Container>
   )
+}
+
+Input.propTypes = {
+  name: PropTypes.string,
+  inputRef: PropTypes.shape({
+    current: PropTypes.instanceOf(HTMLInputElement)
+  }),
+  label: PropTypes.string,
+  errorForm: PropTypes.bool,
+  type: PropTypes.string,
+  errorMessage: PropTypes.string,
+  sufix: PropTypes.any,
+  value: PropTypes.string
 }

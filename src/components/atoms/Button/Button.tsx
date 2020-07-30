@@ -1,5 +1,5 @@
 import React, { ReactNode, ForwardRefRenderFunction, forwardRef } from 'react'
-
+import PropTypes from 'prop-types'
 import styled, { css, DefaultTheme } from 'styled-components'
 import {
   color,
@@ -145,5 +145,11 @@ export const ButtonComponent: ForwardRefRenderFunction<
     </ButtonStyled>
   )
 }
+
+// ButtonComponent.propTypes = {
+//   children: PropTypes.any.isRequired,
+//   prefix: PropTypes.any,
+//   sufix: PropTypes.any
+// }
 
 export const Button = forwardRef(ButtonComponent)

@@ -18,8 +18,8 @@ export interface Props
     LayoutProps,
     FontSizeProps,
     FontWeightProps {
-  children?: ReactNode
   color?: string
+  children?: any
 }
 
 export const BoxStyled = styled.div`
@@ -30,15 +30,11 @@ export const BoxStyled = styled.div`
   ${fontWeight}
 `
 
-export const BoxComponent: ForwardRefRenderFunction<HTMLDivElement, Props> = (
-  { children, ...props },
+export const RefBox: ForwardRefRenderFunction<HTMLDivElement, Props> = (
+  { ...props },
   ref
 ) => {
-  return (
-    <BoxStyled ref={ref} {...props}>
-      {children}
-    </BoxStyled>
-  )
+  return <BoxStyled ref={ref} {...props} />
 }
 
-export const Box = forwardRef(BoxComponent)
+export const Box = forwardRef(RefBox)

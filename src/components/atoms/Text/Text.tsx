@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types'
-
 import styled from 'styled-components'
 import {
   color,
@@ -32,3 +31,7 @@ export const Text = styled.span<Props>`
 
   cursor: ${props => props.cursor || 'auto'};
 `
+
+Text.propTypes = {
+  cursor: PropTypes.string
+}
