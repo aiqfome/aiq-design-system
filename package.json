@@ -52,7 +52,9 @@
     "hygen": "^6.0.4",
     "paths.macro": "^3.0.0",
     "react-icons": "^3.10.0",
+    "react-spring": "^8.0.27",
     "styled-components": "^5.1.1",
-    "styled-system": "^5.1.5"
+    "styled-system": "^5.1.5",
+    "uuidv4": "^6.2.0"
   }
 }
