@@ -1,7 +1,6 @@
 import React from 'react'
-
+import PropTypes from 'prop-types'
 import styled, { DefaultTheme } from 'styled-components'
-
 import { space } from 'styled-system'
 
 export interface Props extends DefaultTheme {
@@ -97,4 +96,9 @@ export const Switch: React.FC<Props> = ({
       <input type='checkbox' checked={checked} disabled={disabled} />
     </SwitchStyled>
   )
+}
+
+Switch.propTypes = {
+  checked: PropTypes.bool,
+  disabled: PropTypes.bool
 }
