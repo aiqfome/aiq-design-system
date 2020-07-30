@@ -1,5 +1,5 @@
 import React from 'react'
-
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import {
   color,
@@ -37,4 +37,8 @@ export const GridStyled = styled.div<Props>`
 
 export const Grid: React.FC<Props> = ({ ...props }) => {
   return <GridStyled {...props} />
+}
+
+GridStyled.propTypes = {
+  color: PropTypes.string
 }

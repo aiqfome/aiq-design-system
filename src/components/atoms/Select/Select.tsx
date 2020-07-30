@@ -1,9 +1,7 @@
 import React, { useState } from 'react'
-
 import styled, { css } from 'styled-components'
-
+import PropTypes from 'prop-types'
 import { useCombobox } from 'downshift'
-
 import { IoIosArrowDown } from 'react-icons/io'
 
 import { Box } from '../Box'
@@ -89,7 +87,7 @@ export const Select: React.FC<Props> = ({ label, items = [], ...props }) => {
           ))}
       </ul>
 
-      <Box {...getComboboxProps()}>
+      <Box refBox={getComboboxProps().ref}>
         <Input
           onChange={getInputProps().onChange}
           onBlur={getInputProps().onBlur}
@@ -102,8 +100,8 @@ export const Select: React.FC<Props> = ({ label, items = [], ...props }) => {
           <ButtonStyled
             palette='primary'
             mr={5}
-            type='button'
-            {...getToggleButtonProps()}
+            refButton={getToggleButtonProps().ref}
+            onClick={getToggleButtonProps().onClick}
             aria-label='toggle menu'
           >
             <IoIosArrowDown />
@@ -112,4 +110,14 @@ export const Select: React.FC<Props> = ({ label, items = [], ...props }) => {
       </Box>
     </Container>
   )
+}
+
+Select.propTypes = {
+  label: PropTypes.string,
+  items: PropTypes.array,
+  isOpen: PropTypes.bool
+}
+
+Select.defaultProps = {
+  items: []
 }

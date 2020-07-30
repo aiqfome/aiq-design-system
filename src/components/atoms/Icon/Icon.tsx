@@ -1,5 +1,5 @@
 import React from 'react'
-
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { color, space, layout } from 'styled-system'
 
@@ -22,4 +22,9 @@ export const IconStyled = styled(Flex)<Props>`
 
 export const Icon: React.FC<Props> = ({ children, ...props }) => {
   return <IconStyled {...props}>{children}</IconStyled>
+}
+
+Icon.propTypes = {
+  cursor: PropTypes.string,
+  children: PropTypes.any
 }

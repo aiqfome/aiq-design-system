@@ -1,5 +1,5 @@
-import React, { ReactNode, ForwardRefRenderFunction, forwardRef } from 'react'
-
+import React, { ReactNode } from 'react'
+import PropTypes from 'prop-types'
 import styled, { css, DefaultTheme } from 'styled-components'
 import {
   color,
@@ -25,6 +25,7 @@ export interface Props
   children: ReactNode
   prefix?: any
   sufix?: any
+  refButton?: any
   variant?: 'text' | 'contained' | 'outlined' | 'neutral'
   palette?: string
   onClick?: any
@@ -107,10 +108,13 @@ export const ButtonStyled = styled.button<Props>`
   cursor: pointer;
 `
 
-export const ButtonComponent: ForwardRefRenderFunction<
-  HTMLButtonElement,
-  Props
-> = ({ children, prefix, sufix, ...props }) => {
+export const Button: React.FC<Props> = ({
+  children,
+  refButton,
+  prefix,
+  sufix,
+  ...props
+}) => {
   if (prefix) {
     return (
       <ButtonStyled {...props}>
@@ -146,4 +150,9 @@ export const ButtonComponent: ForwardRefRenderFunction<
   )
 }
 
-export const Button = forwardRef(ButtonComponent)
+Button.propTypes = {
+  children: PropTypes.any.isRequired,
+  prefix: PropTypes.any,
+  sufix: PropTypes.any,
+  refButton: PropTypes.any
+}
