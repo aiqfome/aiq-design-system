@@ -158,7 +158,6 @@ export const Button: React.FC<Props> = ({
   sufix,
   ...props
 }) => {
-  console.log(children)
   if (prefix && !children) {
     return (
       <ButtonStyled {...props}>
