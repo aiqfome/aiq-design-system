@@ -7,11 +7,14 @@ export interface Props extends MarginProps {
   name: string
   label?: string
   value: any
+  disabled?: boolean
 }
 
-interface RadioStyled extends DefaultTheme, MarginProps {}
+interface RadioStyled extends DefaultTheme, MarginProps {
+  disabled: boolean
+}
 
-const RadioStyled = styled.label<DefaultTheme>`
+const RadioStyled = styled.label<RadioStyled>`
   ${margin}
 
   display: block;
@@ -24,6 +27,8 @@ const RadioStyled = styled.label<DefaultTheme>`
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+
+  opacity: ${props => (props.disabled ? 0.5 : 1)};
 
   input {
     position: absolute;
@@ -67,11 +72,23 @@ const RadioStyled = styled.label<DefaultTheme>`
   }
 `
 
-export const Radio: React.FC<Props> = ({ name, label, value, ...props }) => {
+export const Radio: React.FC<Props> = ({
+  name,
+  label,
+  value,
+  disabled = false,
+  ...props
+}) => {
   return (
-    <RadioStyled {...props}>
+    <RadioStyled disabled={disabled} {...props}>
       <div>
-        <input type='radio' name={name} value={value} {...props} />
+        <input
+          type='radio'
+          disabled={disabled}
+          name={name}
+          value={value}
+          {...props}
+        />
         <span />
       </div>
 
@@ -84,6 +101,7 @@ Radio.propTypes = {
   name: PropTypes.string.isRequired,
   value: PropTypes.any.isRequired,
   label: PropTypes.string,
+  disabled: PropTypes.bool,
   mx: PropTypes.number,
   my: PropTypes.number,
   m: PropTypes.number

@@ -14,3 +14,9 @@ export const Basic: React.FC = () => (
     <Radio name='radio' value='02' label='Radio 2' />
   </Flex>
 )
+
+export const Disabled: React.FC = () => (
+  <Flex>
+    <Radio mx={10} disabled={true} name='radio' value='01' label='Radio 1' />
+  </Flex>
+)
