@@ -9,5 +9,5 @@ export default {
 
 export const basic: React.FC = () => {
   const itens = ['React', 'CSS', 'PHP', 'HTML']
-  return <Select label='design-system' items={itens} />
+  return <Select label='aiq-design-system' items={itens} />
 }
