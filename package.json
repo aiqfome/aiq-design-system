@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "storybook": "start-storybook -p 9009 -s public",
-    "build-storybook": "build-storybook",
+    "build-storybook": "build-storybook -s public",
     "gen:component": "hygen cafeina component",
     "test": "jest",
     "test:watch": "jest --watch"

@@ -5,7 +5,6 @@ import { margin, MarginProps } from 'styled-system'
 
 export interface Props extends MarginProps {
   name: string
-  label?: string
   value: any
   disabled?: boolean
   checked?: boolean
@@ -80,7 +79,6 @@ const RadioStyled = styled.label<RadioStyled>`
 
 export const Radio: React.FC<Props> = ({
   name,
-  label,
   value,
   disabled = false,
   checked = false,
@@ -98,20 +96,16 @@ export const Radio: React.FC<Props> = ({
 
   return (
     <RadioStyled disabled={disabled} {...props}>
-      <div>
-        <input
-          type='radio'
-          disabled={disabled}
-          name={name}
-          onChange={handleRadioOnChange}
-          checked={isChecked}
-          value={value}
-          {...props}
-        />
-        <span />
-      </div>
-
-      {label}
+      <input
+        type='radio'
+        disabled={disabled}
+        name={name}
+        onChange={handleRadioOnChange}
+        checked={isChecked}
+        value={value}
+        {...props}
+      />
+      <span />
     </RadioStyled>
   )
 }
@@ -119,7 +113,6 @@ export const Radio: React.FC<Props> = ({
 Radio.propTypes = {
   name: PropTypes.string.isRequired,
   value: PropTypes.any.isRequired,
-  label: PropTypes.string,
   disabled: PropTypes.bool,
   checked: PropTypes.bool,
   onChange: PropTypes.func,
