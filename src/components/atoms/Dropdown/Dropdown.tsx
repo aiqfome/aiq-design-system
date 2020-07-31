@@ -18,19 +18,26 @@ export interface Props extends SizeProps, MarginProps, LayoutProps {
   itens: string[]
   opened?: boolean
   onChange?: (item: any) => void
+  disabled?: boolean
 }
 
 const BoxStyled = styled(Box)`
   position: relative;
 `
 
-const DropdownStyled = styled.div<DefaultTheme>`
+interface DropdownStyledProps extends DefaultTheme {
+  disabled?: boolean
+}
+
+const DropdownStyled = styled.div<DropdownStyledProps>`
   ${size}
   ${margin}
   ${layout}
 
+  opacity: ${props => (props.disabled ? 0.5 : 1)};
+
   &:hover{
-    cursor: pointer;
+    cursor: ${props => (props.disabled ? 'not-allowed' : 'pointer')};
   }
 
   border: 1px solid ${props => props.theme.colors.mediumGrey};
@@ -91,23 +98,28 @@ export const Dropdown: React.FC<Props> = ({
   opened,
   itens,
   maxWidth,
+  disabled = false,
   onChange = () => {},
   ...props
 }) => {
   const [isOpen, setIsOpen] = useState(opened)
 
   function handleClickDropdown() {
-    setIsOpen(!isOpen)
+    if (!disabled) {
+      setIsOpen(!isOpen)
+    }
   }
 
   function handleClickItem(item) {
-    setIsOpen(false)
-    onChange(item)
+    if (!disabled) {
+      setIsOpen(false)
+      onChange(item)
+    }
   }
 
   return (
     <BoxStyled maxWidth={maxWidth} {...props}>
-      <DropdownStyled onClick={handleClickDropdown}>
+      <DropdownStyled onClick={handleClickDropdown} disabled={disabled}>
         <span>{label}</span>
         <button type='button'>
           {isOpen ? <MdArrowDropUp size={24} /> : <MdArrowDropDown size={24} />}
@@ -132,5 +144,6 @@ Dropdown.propTypes = {
   opened: PropTypes.bool,
   maxWidth: PropTypes.number,
   width: PropTypes.number,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  disabled: PropTypes.bool
 }
