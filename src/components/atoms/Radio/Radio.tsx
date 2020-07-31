@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import styled, { DefaultTheme } from 'styled-components'
 import { margin, MarginProps } from 'styled-system'
@@ -8,6 +8,8 @@ export interface Props extends MarginProps {
   label?: string
   value: any
   disabled?: boolean
+  checked?: boolean
+  onChange?: (event: any) => void
 }
 
 interface RadioStyled extends DefaultTheme, MarginProps {
@@ -16,6 +18,10 @@ interface RadioStyled extends DefaultTheme, MarginProps {
 
 const RadioStyled = styled.label<RadioStyled>`
   ${margin}
+
+  &:hover {
+    cursor: ${props => (props.disabled ? 'not-allowed' : 'pointer')};
+  }
 
   display: block;
   position: relative;
@@ -77,8 +83,19 @@ export const Radio: React.FC<Props> = ({
   label,
   value,
   disabled = false,
+  checked = false,
+  onChange = () => {
+    // do nothing.
+  },
   ...props
 }) => {
+  const [isChecked, setIsChecked] = useState(checked)
+
+  function handleRadioOnChange(event) {
+    onChange(event)
+    setIsChecked(!isChecked)
+  }
+
   return (
     <RadioStyled disabled={disabled} {...props}>
       <div>
@@ -86,6 +103,8 @@ export const Radio: React.FC<Props> = ({
           type='radio'
           disabled={disabled}
           name={name}
+          onChange={handleRadioOnChange}
+          checked={isChecked}
           value={value}
           {...props}
         />
@@ -102,6 +121,8 @@ Radio.propTypes = {
   value: PropTypes.any.isRequired,
   label: PropTypes.string,
   disabled: PropTypes.bool,
+  checked: PropTypes.bool,
+  onChange: PropTypes.func,
   mx: PropTypes.number,
   my: PropTypes.number,
   m: PropTypes.number
