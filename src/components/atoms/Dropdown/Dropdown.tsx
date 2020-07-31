@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { MdArrowDropDown, MdArrowDropUp } from 'react-icons/md'
 import styled, { DefaultTheme } from 'styled-components'
@@ -13,12 +13,17 @@ import {
 
 import { Box } from '../Box'
 
+type Item = {
+  label: string
+  value: any
+}
 export interface Props extends SizeProps, MarginProps, LayoutProps {
   label: string
-  itens: string[]
+  itens: Item[]
   opened?: boolean
   onChange?: (item: any) => void
   disabled?: boolean
+  selected?: any
 }
 
 const BoxStyled = styled(Box)`
@@ -98,11 +103,22 @@ export const Dropdown: React.FC<Props> = ({
   opened,
   itens,
   maxWidth,
+  selected,
   disabled = false,
-  onChange = () => {},
+  onChange = () => {
+    // do nothing.
+  },
   ...props
 }) => {
   const [isOpen, setIsOpen] = useState(opened)
+  const [itemSelected, setItemSelect] = useState({ value: null, label: '' })
+
+  useEffect(() => {
+    if (selected) {
+      const indexItem = itens.findIndex(item => item.value === selected)
+      if (indexItem) setItemSelect(itens[indexItem])
+    }
+  }, [itens, selected])
 
   function handleClickDropdown() {
     if (!disabled) {
@@ -114,13 +130,14 @@ export const Dropdown: React.FC<Props> = ({
     if (!disabled) {
       setIsOpen(false)
       onChange(item)
+      setItemSelect(item)
     }
   }
 
   return (
     <BoxStyled maxWidth={maxWidth} {...props}>
       <DropdownStyled onClick={handleClickDropdown} disabled={disabled}>
-        <span>{label}</span>
+        <span>{itemSelected.value != null ? itemSelected.label : label}</span>
         <button type='button'>
           {isOpen ? <MdArrowDropUp size={24} /> : <MdArrowDropDown size={24} />}
         </button>
@@ -128,8 +145,8 @@ export const Dropdown: React.FC<Props> = ({
       {isOpen && (
         <ItensStyled maxWidth={maxWidth}>
           {itens.map(item => (
-            <li onClick={() => handleClickItem(item)} key={item}>
-              {item}
+            <li onClick={() => handleClickItem(item)} key={item.value}>
+              {item.label}
             </li>
           ))}
         </ItensStyled>
@@ -141,6 +158,7 @@ export const Dropdown: React.FC<Props> = ({
 Dropdown.propTypes = {
   label: PropTypes.string.isRequired,
   itens: PropTypes.array.isRequired,
+  selected: PropTypes.any,
   opened: PropTypes.bool,
   maxWidth: PropTypes.number,
   width: PropTypes.number,
