@@ -1,8 +1,8 @@
 {
-  "name": "design-system",
+  "name": "aiq-design-system",
   "version": "1.0.0",
   "main": "dist/index.js",
-  "repository": "git@github.com:aiqfome/design-system.git",
+  "repository": "git@github.com:aiqfome/aiq-design-system.git",
   "license": "MIT",
   "scripts": {
     "storybook": "start-storybook -p 9009 -s public",
