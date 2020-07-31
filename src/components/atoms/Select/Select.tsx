@@ -12,7 +12,6 @@ export interface Props {
   label?: string
   items?: string[]
   isOpen?: boolean
-  disabled?: boolean
 }
 
 const Container = styled.div<Props>`
@@ -116,8 +115,7 @@ export const Select: React.FC<Props> = ({ label, items = [], ...props }) => {
 Select.propTypes = {
   label: PropTypes.string,
   items: PropTypes.array,
-  isOpen: PropTypes.bool,
-  disabled: PropTypes.bool
+  isOpen: PropTypes.bool
 }
 
 Select.defaultProps = {
