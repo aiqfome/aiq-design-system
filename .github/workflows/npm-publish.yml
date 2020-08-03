@@ -8,33 +8,7 @@ on:
     types: [created]
 
 jobs:
-  create-pull-request:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Add var git
-        run: git config --local user.email "pedrom.araujo@outlook.com" && git config --local user.name "Pedro Matias de Araújo"
-      - name: Bump version
-        run: npm version patch
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v3
-        with:
-          token: ${{ secrets.GIT_TOKEN }}
-          committer: 'Pedro Matias de Araújo <pedrom.araujo@outlook.com>'
-  approve-pull-request:
-    needs: create-pull-request
-    name: Label when approved
-    runs-on: ubuntu-latest
-    steps:
-    - name: Label when approved
-      uses: pullreminders/label-when-approved-action@master
-      env:
-        APPROVALS: "1"
-        GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
-        ADD_LABEL: "approved"
-        REMOVE_LABEL: "awaiting%20review"
   publish-npm:
-    needs: approve-pull-request
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
