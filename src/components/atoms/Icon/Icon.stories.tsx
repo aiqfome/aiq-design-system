@@ -1,15 +1,17 @@
 import React from 'react'
 import { MdHome } from 'react-icons/md'
+import { withKnobs, text } from '@storybook/addon-knobs'
 
 import { Icon } from './Icon'
 
 export default {
   component: Icon,
-  title: 'atoms/Icon'
+  title: 'atoms/Icon',
+  decorators: [withKnobs]
 }
 
 export const basic: React.FC = () => (
-  <Icon>
+  <Icon cursor={text('Cursor', '')}>
     <MdHome />
   </Icon>
 )

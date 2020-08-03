@@ -1,11 +1,13 @@
 import React from 'react'
+import { withKnobs, text, object, boolean } from '@storybook/addon-knobs'
 
 import { Dropdown } from './Dropdown'
 import { Flex } from '../Flex'
 
 export default {
   component: Dropdown,
-  title: 'atoms/Dropdown'
+  title: 'atoms/Dropdown',
+  decorators: [withKnobs]
 }
 
 export const Basic: React.FC = () => {
@@ -17,7 +19,6 @@ export const Basic: React.FC = () => {
     { label: 'Item 5', value: 5 },
     { label: 'Item 6', value: 6 }
   ]
-  const label = 'Dropdown'
 
   function handleChangeDropdown(item: any) {
     console.log(item)
@@ -26,9 +27,10 @@ export const Basic: React.FC = () => {
   return (
     <Flex variant='fullCentralized'>
       <Dropdown
-        label={label}
+        label={text('label', 'Dropdown')}
+        disabled={boolean('disabled', false)}
+        itens={object('itens', itens)}
         width={240}
-        itens={itens}
         onChange={handleChangeDropdown}
       />
     </Flex>
