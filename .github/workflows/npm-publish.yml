@@ -11,7 +11,9 @@ jobs:
   create-pull-request:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
+      - name: Add var git
+        run: git config --local user.email "pedrom.araujo@outlook.com" && git config --local user.name "Pedro Matias de Araújo"
       - name: Bump version
         run: npm version patch
       - name: Create Pull Request
