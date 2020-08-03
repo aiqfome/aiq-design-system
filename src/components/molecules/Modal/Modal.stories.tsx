@@ -4,10 +4,12 @@ import { Modal } from './Modal'
 import { Text } from '../../atoms/Text'
 import { Button } from '../../atoms/Button'
 import { Flex } from '../../atoms/Flex'
+import { withKnobs, text, object, select } from '@storybook/addon-knobs'
 
 export default {
   component: Modal,
-  title: 'molecules/Modal'
+  title: 'molecules/Modal',
+  decorators: [withKnobs]
 }
 
 export const Basic: React.FC = () => {
@@ -38,11 +40,16 @@ export const Basic: React.FC = () => {
         Show Modal
       </Button>
       <Modal
-        title='Modal'
+        title={text('title', 'Modal')}
         show={open}
+        variant={select(
+          'Variant',
+          { Small: 'small', Medium: 'medium', Big: 'big', Alert: 'alert' },
+          'medium'
+        )}
         onClose={() => setOpen(false)}
-        okButton={okButton}
-        cancelButton={cancelButton}
+        okButton={object('okButton', okButton)}
+        cancelButton={object('cancelButton', cancelButton)}
       >
         <Text>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
