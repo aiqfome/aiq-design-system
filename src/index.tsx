@@ -16,3 +16,5 @@ export { Text } from './components/atoms/Text'
 
 export { LoaderBox } from './components/molecules/LoaderBox'
 export { ToastProvider, useToast } from './components/molecules/Toast'
+
+export { default as themeRosalvo } from './providers/theme'
