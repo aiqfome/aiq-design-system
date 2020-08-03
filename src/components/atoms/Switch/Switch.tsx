@@ -5,6 +5,7 @@ import { space } from 'styled-system'
 
 export interface Props extends DefaultTheme {
   checked?: boolean
+  onChange?(): any
   disabled?: boolean
 }
 
@@ -89,11 +90,17 @@ const SwitchStyled = styled.label`
 
 export const Switch: React.FC<Props> = ({
   checked = false,
-  disabled = false
+  disabled = false,
+  onChange
 }: Props) => {
   return (
     <SwitchStyled>
-      <input type='checkbox' checked={checked} disabled={disabled} />
+      <input
+        type='checkbox'
+        checked={checked}
+        disabled={disabled}
+        onChange={onChange}
+      />
     </SwitchStyled>
   )
 }
