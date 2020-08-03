@@ -1,16 +1,24 @@
 import React from 'react'
+import { withKnobs, boolean } from '@storybook/addon-knobs'
 
 import { Radio } from './Radio'
 import { Flex } from '../Flex'
 
 export default {
   component: Radio,
-  title: 'atoms/Radio'
+  title: 'atoms/Radio',
+  decorators: [withKnobs]
 }
 
 export const Basic: React.FC = () => (
   <Flex>
-    <Radio mx={10} name='radioBasic' value='01' />
+    <Radio
+      disabled={boolean('disabled', false)}
+      checked={boolean('checked', true)}
+      mx={10}
+      name='radioBasic'
+      value='01'
+    />
     <Radio name='radioBasic' value='02' />
   </Flex>
 )
