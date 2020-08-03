@@ -1,4 +1,5 @@
 import React from 'react'
+import { withKnobs, text, select } from '@storybook/addon-knobs'
 
 import { AiOutlineGithub } from 'react-icons/ai'
 import { MdAdd } from 'react-icons/md'
@@ -7,10 +8,26 @@ import { Button } from './Button'
 
 export default {
   component: Button,
-  title: 'atoms/Button'
+  title: 'atoms/Button',
+  decorators: [withKnobs]
 }
 
-export const basic: React.FC = () => <Button>Design System</Button>
+export const basic: React.FC = () => (
+  <Button
+    variant={select(
+      'Variant',
+      { Text: 'text', Outline: 'outlined', Contained: 'contained' },
+      'text'
+    )}
+    palette={select(
+      'palette',
+      { Primary: 'primary', Secondary: 'secondary' },
+      'primary'
+    )}
+  >
+    {text('Label', 'Hello Storybook')}
+  </Button>
+)
 
 export const textPrimary: React.FC = () => (
   <Button palette='primary' variant='contained'>

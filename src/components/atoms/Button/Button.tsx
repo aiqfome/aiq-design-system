@@ -74,6 +74,16 @@ const buttonVariations: { [index: string]: any } = {
           background: ${({ theme }) => theme.colors.primaryMedium};
         }
       `};
+    ${({ palette }) =>
+      palette === 'secondary' &&
+      css`
+        color: ${({ theme }) => theme.colors.white};
+        background: ${({ theme }) => theme.colors.secondary};
+
+        &:hover {
+          background: ${({ theme }) => theme.colors.secondaryMedium};
+        }
+      `};
   `,
   outlined: css<Props>`
     ${({ palette }) =>
@@ -85,6 +95,17 @@ const buttonVariations: { [index: string]: any } = {
 
         & hover: {
           background: ${({ theme }) => theme.colors.primaryLighest};
+        }
+      `}
+    ${({ palette }) =>
+      palette === 'secondary' &&
+      css`
+        border: 1px solid ${({ theme }) => theme.colors.secondary};
+        color: ${({ theme }) => theme.colors.secondary};
+        background: none;
+
+        & hover: {
+          background: ${({ theme }) => theme.colors.secondaryLighest};
         }
       `}
   `,
