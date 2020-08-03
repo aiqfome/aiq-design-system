@@ -1,11 +1,14 @@
 import React, { ReactElement, useState } from 'react'
 
+import { withKnobs, boolean } from '@storybook/addon-knobs'
+
 import { Flex } from '../Flex'
 import { Switch } from './Switch'
 
 export default {
   component: Switch,
-  title: 'atoms/Switch'
+  title: 'atoms/Switch',
+  decorators: [withKnobs]
 }
 
 export const Basic = (): ReactElement => {
@@ -13,7 +16,10 @@ export const Basic = (): ReactElement => {
 
   return (
     <Flex variant='fullCentralized'>
-      <Switch checked={checked} onChange={() => setChecked(!checked)} />
+      <Switch
+        checked={boolean('checked', false)}
+        onChange={() => setChecked(!checked)}
+      />
     </Flex>
   )
 }
