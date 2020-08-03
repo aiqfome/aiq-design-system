@@ -1,12 +1,15 @@
 import React from 'react'
 
 import { ToastProvider, useToast } from './index'
+import { withKnobs, text, object, select } from '@storybook/addon-knobs'
+
 import { Flex } from '../../atoms/Flex'
 import { Button } from '../../atoms/Button'
 
 export default {
   component: ToastProvider,
-  title: 'molecules/Toast'
+  title: 'molecules/Toast',
+  decorators: [withKnobs]
 }
 
 export const basic: React.FC = () => {
@@ -15,8 +18,13 @@ export const basic: React.FC = () => {
 
     function showToast() {
       addToast({
-        title: 'Hi ✌️',
-        description: 'I am a toast'
+        title: text('title', 'Hi ✌️'),
+        description: text('description', 'I am a toast'),
+        type: select(
+          'type',
+          { Info: 'info', Success: 'success', Error: 'error' },
+          'text'
+        )
       })
     }
 
