@@ -9,6 +9,8 @@ import { Text } from '../../atoms/Text'
 export interface Props {
   title: string
   variant?: 'big' | 'medium' | 'small'
+  show?: boolean
+  onClose?: () => void
   children?: any
   okButton?: {
     label: string
@@ -23,17 +25,29 @@ export interface Props {
 }
 
 const modalVariants: { [index: string]: any } = {
-  big: css``,
+  big: css`
+    padding: 37px 24px 24px 24px;
+    max-width: 1020px;
+  `,
   medium: css`
     padding: 37px 24px 24px 24px;
-    max-width: 522px;
+    max-width: 1020px;
   `,
-  alert: css``
+  small: css`
+    padding: 37px 24px 24px 24px;
+    max-width: 680px;
+  `
 }
 
 interface ModalStyledProps extends DefaultTheme {
   variant?: string
 }
+
+const BackgroundModal = styled(Flex)`
+  position: fixed;
+  width: 100%;
+  background: ${({ theme }) => theme.colors.black}30;
+`
 
 const ModalStyled = styled.div<ModalStyledProps>`
   display: flex;
@@ -43,6 +57,7 @@ const ModalStyled = styled.div<ModalStyledProps>`
   box-shadow: 0px 2px 6px #0000001a;
   border: 1px solid #dedede;
   border-radius: 12px;
+  background: ${({ theme }) => theme.colors.white};
   width: 100%;
 
   ${({ variant }) => modalVariants[variant || 'medium']}
@@ -59,36 +74,66 @@ const defaultButton = {
 export const Modal: React.FC<Props> = ({
   title,
   children,
+  show = false,
+  onClose = () => {
+    // do nothing.
+  },
   okButton = defaultButton,
   variant = 'medium',
   cancelButton = defaultButton
 }) => {
-  return (
-    <ModalStyled variant={variant}>
-      <Text
-        color='primary'
-        fontSize='xlarge'
-        fontWeight='semiBold'
-        marginBottom={44}
-      >
-        {title}
-      </Text>
-      <Flex flex={1} maxWidth={435}>
-        {children}
-      </Flex>
-      <Flex justifyContent='space-between' marginTop={44} width='100%'>
-        {cancelButton.visible && (
-          <Button palette='primary' variant='contained'>
-            {cancelButton.label}
-          </Button>
-        )}
-        {okButton.visible && (
-          <Button palette='primary' variant='outlined'>
-            {okButton.label}
-          </Button>
-        )}
-      </Flex>
-    </ModalStyled>
+  function handleOk() {
+    okButton.function()
+    onClose()
+  }
+
+  function handleCancel() {
+    cancelButton.function()
+    onClose()
+  }
+
+  function handleClickOutSide({ target }) {
+    if (target.className.includes('background-modal')) {
+      onClose()
+    }
+  }
+
+  return show ? (
+    <BackgroundModal
+      className='background-modal'
+      variant='fullCentralized'
+      onClick={handleClickOutSide}
+    >
+      <ModalStyled variant={variant}>
+        <Text
+          color='primary'
+          fontSize='xlarge'
+          fontWeight='semiBold'
+          marginBottom={44}
+        >
+          {title}
+        </Text>
+        <Flex flex={1}>{children}</Flex>
+        <Flex justifyContent='space-between' marginTop={44} width='100%'>
+          {cancelButton.visible && (
+            <Button
+              onClick={handleCancel}
+              palette='primary'
+              variant='contained'
+            >
+              {cancelButton.label}
+            </Button>
+          )}
+          {okButton.visible && (
+            <Button onClick={handleOk} palette='primary' variant='outlined'>
+              {okButton.label}
+            </Button>
+          )}
+        </Flex>
+      </ModalStyled>
+    </BackgroundModal>
+  ) : (
+    <Flex />
   )
 }
 
@@ -97,5 +142,7 @@ Modal.propTypes = {
   variant: PropTypes.oneOf(['big', 'medium', 'small']),
   children: PropTypes.node,
   okButton: PropTypes.any,
+  show: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
   cancelButton: PropTypes.any
 }
