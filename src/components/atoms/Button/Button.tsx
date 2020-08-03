@@ -225,5 +225,6 @@ Button.propTypes = {
   children: PropTypes.any,
   prefix: PropTypes.any,
   sufix: PropTypes.any,
-  refButton: PropTypes.any
+  refButton: PropTypes.any,
+  fontWeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 }

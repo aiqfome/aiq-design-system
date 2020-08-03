@@ -8,7 +8,7 @@ import { Text } from '../../atoms/Text'
 
 export interface Props {
   title: string
-  variant?: 'big' | 'medium' | 'small'
+  variant?: 'big' | 'medium' | 'small' | 'alert'
   show?: boolean
   onClose?: () => void
   children?: any
@@ -36,6 +36,11 @@ const modalVariants: { [index: string]: any } = {
   small: css`
     padding: 37px 24px 24px 24px;
     max-width: 680px;
+  `,
+  alert: css`
+    padding: 30px 24px 22px 30px;
+    max-width: 362px;
+    align-items: flex-start;
   `
 }
 
@@ -109,27 +114,49 @@ export const Modal: React.FC<Props> = ({
           color='primary'
           fontSize='xlarge'
           fontWeight='semiBold'
-          marginBottom={44}
+          marginBottom={variant !== 'alert' ? '44px' : '15px'}
         >
           {title}
         </Text>
         <Flex flex={1}>{children}</Flex>
-        <Flex justifyContent='space-between' marginTop={44} width='100%'>
-          {cancelButton.visible && (
-            <Button
-              onClick={handleCancel}
-              palette='primary'
-              variant='contained'
-            >
-              {cancelButton.label}
-            </Button>
-          )}
-          {okButton.visible && (
-            <Button onClick={handleOk} palette='primary' variant='outlined'>
-              {okButton.label}
-            </Button>
-          )}
-        </Flex>
+
+        {variant !== 'alert' ? (
+          <Flex justifyContent='space-between' marginTop={44} width='100%'>
+            {cancelButton.visible && (
+              <Button
+                fontWeight='medium'
+                onClick={handleCancel}
+                palette='primary'
+                variant='contained'
+              >
+                {cancelButton.label}
+              </Button>
+            )}
+            {okButton.visible && (
+              <Button
+                onClick={handleOk}
+                fontWeight='medium'
+                palette='primary'
+                variant='outlined'
+              >
+                {okButton.label}
+              </Button>
+            )}
+          </Flex>
+        ) : (
+          <Flex justifyContent='flex-end' marginTop={26} width='100%'>
+            {cancelButton.visible && (
+              <Button onClick={handleCancel} marginRight={48} palette='primary'>
+                {cancelButton.label}
+              </Button>
+            )}
+            {okButton.visible && (
+              <Button onClick={handleOk} palette='primary'>
+                {okButton.label}
+              </Button>
+            )}
+          </Flex>
+        )}
       </ModalStyled>
     </BackgroundModal>
   ) : (
@@ -139,7 +166,7 @@ export const Modal: React.FC<Props> = ({
 
 Modal.propTypes = {
   title: PropTypes.string.isRequired,
-  variant: PropTypes.oneOf(['big', 'medium', 'small']),
+  variant: PropTypes.oneOf(['big', 'medium', 'small', 'alert']),
   children: PropTypes.node,
   okButton: PropTypes.any,
   show: PropTypes.bool.isRequired,
