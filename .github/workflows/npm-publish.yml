@@ -21,7 +21,6 @@ jobs:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
 
   publish-gpr:
-    needs: publish-npm
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -31,4 +30,18 @@ jobs:
           registry-url: https://npm.pkg.github.com/
       - run: npm publish
         env:
-          NODE_AUTH_TOKEN: ${{secrets.GIT_TOKEN}}
+          NODE_AUTH_TOKEN: ${{ secrets.GIT_TOKEN }}
+
+  create-pull-request:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Add var git
+        run: git config --local user.email "pedrom.araujo@outlook.com" && git config --local user.name "Pedro Matias de Araújo"
+      - name: Bump version
+        run: npm version patch
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ secrets.GIT_TOKEN }}
+          committer: 'Pedro Matias de Araújo <pedrom.araujo@outlook.com>'
