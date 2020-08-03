@@ -4,7 +4,7 @@ import { LoaderBox } from './LoaderBox'
 
 export default {
   component: LoaderBox,
-  title: 'atoms/LoaderBox'
+  title: 'molecules/LoaderBox'
 }
 
 export const basic: React.FC = () => <LoaderBox />
