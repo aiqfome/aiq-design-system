@@ -1,16 +1,23 @@
 import React, { useState } from 'react'
-
+import { withKnobs, text, boolean } from '@storybook/addon-knobs'
 import { Checkbox } from './Checkbox'
 
 export default {
   component: Checkbox,
-  title: 'atoms/Checkbox'
+  title: 'atoms/Checkbox',
+  decorators: [withKnobs]
 }
 
 export const Basic: React.FC = () => {
   const [checked, setChecked] = useState(false)
 
-  return <Checkbox onClick={() => setChecked(!checked)} checked={checked} />
+  return (
+    <Checkbox
+      onClick={() => setChecked(!checked)}
+      checked={boolean('checked', false)}
+      disabled={boolean('disabled', false)}
+    />
+  )
 }
 
 export const Checked: React.FC = () => {
