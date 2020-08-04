@@ -5,12 +5,15 @@ import {ThemeProvider} from 'styled-components';
 import GlobalStyles from '../src/global/styles';
 import theme from '../src/providers/theme';
 
+import '../src/providers/initializeReactDate';
+import ReactDatesOverrides from '../src/providers/react_dates_overrides'
 import themeStorybook from './theme';
 
 function withTheme(storyFn) {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
+      <ReactDatesOverrides/>
       {storyFn()}
     </ThemeProvider>
   );
