@@ -8,7 +8,9 @@ import {
   fontSize,
   FontSizeProps,
   fontWeight,
-  FontWeightProps
+  FontWeightProps,
+  border,
+  BorderProps
 } from 'styled-system'
 
 export interface Props
@@ -16,7 +18,8 @@ export interface Props
     DefaultTheme,
     LayoutProps,
     FontSizeProps,
-    FontWeightProps {
+    FontWeightProps,
+    BorderProps {
   variant?: 'auto' | 'centralized' | 'fullCentralized'
   justifyContent?: string
   alignItems?: string
@@ -24,6 +27,7 @@ export interface Props
   height?: string
   padding?: string
   backgroundColor?: string
+  border?: string
   fullHeight?: boolean
   flex?: number
 }
@@ -46,6 +50,7 @@ export const Flex = styled.div<Props>`
   ${layout}
   ${fontSize}
   ${fontWeight}
+  ${border}
 
   display: flex;
   justify-content: ${props => props.justifyContent};
