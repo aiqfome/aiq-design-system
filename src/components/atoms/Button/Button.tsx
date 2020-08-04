@@ -179,7 +179,7 @@ export const ButtonStyled = styled.button<Props>`
   ${({ fullWidth }) =>
     fullWidth &&
     css`
-      flex: 1;
+      width: 100%;
     `}
 
   ${({ variant }) => buttonVariations[variant || 'text']}
