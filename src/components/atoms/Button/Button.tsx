@@ -26,22 +26,17 @@ export interface Props
   prefix?: any
   sufix?: any
   refButton?: any
-  variant?:
-    | 'text'
-    | 'contained'
-    | 'outlined'
-    | 'neutral'
-    | 'fab'
-    | 'fabWithText'
-  palette?: string
+  variantType?: string
+  variant?: 'text' | 'contained' | 'outlined' | 'fab'
+  palette?: 'primary' | 'secondary' | 'neutral'
   onClick?: any
+  fullWidth?: boolean
 }
 
 const buttonVariations: { [index: string]: any } = {
   text: css<Props>`
     border: none;
     background: none;
-    color: ${({ theme }) => theme.colors.darkGrey};
     padding: 0;
 
     &:hover {
@@ -58,6 +53,11 @@ const buttonVariations: { [index: string]: any } = {
       palette === 'secondary' &&
       css`
         color: ${({ theme }) => theme.colors.secondary};
+      `}
+    ${({ palette }) =>
+      palette === 'neutral' &&
+      css`
+        color: ${({ theme }) => theme.colors.almosBlack};
       `}
   `,
   contained: css<Props>`
@@ -84,8 +84,15 @@ const buttonVariations: { [index: string]: any } = {
           background: ${({ theme }) => theme.colors.secondaryMedium};
         }
       `};
+    ${({ palette }) =>
+      palette === 'neutral' &&
+      css`
+        color: ${({ theme }) => theme.colors.almosBlack};
+      `}
   `,
   outlined: css<Props>`
+    font-weight: ${({ theme }) => theme.fontWeights.semiBold};
+
     ${({ palette }) =>
       palette === 'primary' &&
       css`
@@ -93,7 +100,7 @@ const buttonVariations: { [index: string]: any } = {
         color: ${({ theme }) => theme.colors.primary};
         background: none;
 
-        & hover: {
+        &:hover {
           background: ${({ theme }) => theme.colors.primaryLighest};
         }
       `}
@@ -104,51 +111,52 @@ const buttonVariations: { [index: string]: any } = {
         color: ${({ theme }) => theme.colors.secondary};
         background: none;
 
-        & hover: {
-          background: ${({ theme }) => theme.colors.secondaryLighest};
+        &:hover {
+          background-color: ${({ theme }) => theme.colors.secondaryLighest};
+        }
+      `}
+    ${({ palette }) =>
+      palette === 'neutral' &&
+      css`
+        border: 1px solid ${({ theme }) => theme.colors.almostBlack};
+        color: ${({ theme }) => theme.colors.almostBlack};
+        background: none;
+
+        &:hover {
+          background-color: ${({ theme }) => theme.colors.lightGrey};
         }
       `}
   `,
-  neutral: css`
-    background: ${({ theme }) => theme.colors.white};
-    color: ${({ theme }) => theme.colors.black};
-    border: 1px solid ${({ theme }) => theme.colors.mediumGrey};
-  `,
   fab: css<Props>`
-    border-radius: 28px;
+    border-radius: 24px;
     border: none;
-    height: 56px;
-    max-height: none;
-    width: 56px;
-
     color: ${({ theme }) => theme.colors.white};
+    padding: 14px 21px;
+    font-weight: ${({ theme }) => theme.fontWeights.semiBold};
+
+    ${({ variantType }) =>
+      variantType === 'icon' &&
+      css`
+        border-radius: 50%;
+        padding: 0;
+        min-height: 50px;
+        min-width: 50px;
+      `}
     ${({ palette }) =>
       palette === 'primary' &&
       css`
         background: ${({ theme }) => theme.colors.primary};
       `}
-
     ${({ palette }) =>
       palette === 'secondary' &&
       css`
         background: ${({ theme }) => theme.colors.secondary};
       `}
-  `,
-  fabWithText: css<Props>`
-    border-radius: 21px;
-    border: none;
-    padding: 14px 18px;
-    color: ${({ theme }) => theme.colors.white};
     ${({ palette }) =>
-      palette === 'primary' &&
+      palette === 'neutral' &&
       css`
-        background: ${({ theme }) => theme.colors.primary};
-      `}
-
-    ${({ palette }) =>
-      palette === 'secondary' &&
-      css`
-        background: ${({ theme }) => theme.colors.secondary};
+        color: ${({ theme }) => theme.colors.almostBlack};
+        background: ${({ theme }) => theme.colors.white};
       `}
   `
 }
@@ -166,10 +174,15 @@ export const ButtonStyled = styled.button<Props>`
   justify-content: center;
   padding: 10px 20px;
   max-height: 42px;
+  cursor: pointer;
+
+  ${({ fullWidth }) =>
+    fullWidth &&
+    css`
+      flex: 1;
+    `}
 
   ${({ variant }) => buttonVariations[variant || 'text']}
-
-  cursor: pointer;
 `
 
 export const Button: React.FC<Props> = ({
@@ -178,14 +191,6 @@ export const Button: React.FC<Props> = ({
   sufix,
   ...props
 }) => {
-  if (prefix && !children) {
-    return (
-      <ButtonStyled {...props}>
-        <Icon cursor='pointer'>{prefix}</Icon>
-      </ButtonStyled>
-    )
-  }
-
   if (prefix) {
     return (
       <ButtonStyled {...props}>
