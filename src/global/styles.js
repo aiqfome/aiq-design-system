@@ -9,7 +9,7 @@ export default createGlobalStyle`
   }
 
   body {
-    background: ${props => props.theme.colors.lightGrey};
+    background: ${props => props.theme.colors.white};
     font-family: 'Work Sans', sans-serif;
     font-size: ${props => props.theme.fontSizes.default};
     color: ${props => props.theme.colors.almostBlack};
@@ -21,4 +21,4 @@ export default createGlobalStyle`
     cursor: pointer;
     font-family: 'Work Sans', sans-serif;
   }
-`;
+`
