@@ -16,5 +16,8 @@ export { Text } from './components/atoms/Text'
 
 export { LoaderBox } from './components/molecules/LoaderBox'
 export { ToastProvider, useToast } from './components/molecules/Toast'
+export { DatePickerRange } from './components/molecules/DatePickerRange'
+export { DatePickerSingle } from './components/molecules/DatePickerSingle'
 
 export { default as themeRosalvo } from './providers/theme'
+export { default as styleReactDatesOverrides } from './providers/styleReactDatesOverrides'

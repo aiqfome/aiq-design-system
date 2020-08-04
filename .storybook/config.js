@@ -6,7 +6,7 @@ import GlobalStyles from '../src/global/styles';
 import theme from '../src/providers/theme';
 
 import '../src/providers/initializeReactDate';
-import ReactDatesOverrides from '../src/providers/react_dates_overrides'
+import ReactDatesOverrides from '../src/providers/styleReactDatesOverrides'
 import themeStorybook from './theme';
 
 function withTheme(storyFn) {
