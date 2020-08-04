@@ -1,94 +1,207 @@
-import React from 'react'
-import { withKnobs, text, select } from '@storybook/addon-knobs'
+import React, { ReactElement } from 'react'
+import { withKnobs, text, select, boolean } from '@storybook/addon-knobs'
 
-import { AiOutlineGithub } from 'react-icons/ai'
-import { MdAdd } from 'react-icons/md'
+import { FaHamburger } from 'react-icons/fa'
 
 import { Button } from './Button'
+import { Flex } from '../Flex'
 
 export default {
   component: Button,
   title: 'atoms/Button',
-  decorators: [withKnobs]
+  decorators: [withKnobs as any]
 }
 
-export const basic: React.FC = () => (
-  <Button
-    variant={select(
-      'Variant',
-      { Text: 'text', Outline: 'outlined', Contained: 'contained' },
-      'text'
-    )}
-    palette={select(
-      'palette',
-      { Primary: 'primary', Secondary: 'secondary' },
-      'primary'
-    )}
-  >
-    {text('Label', 'Hello Storybook')}
-  </Button>
+export const Text: React.FC = (): ReactElement => (
+  <Flex variant='fullCentralized'>
+    <Button
+      variant='text'
+      palette={select(
+        'Palette',
+        {
+          Primary: 'primary',
+          Secondary: 'secondary',
+          Neutral: 'neutral'
+        },
+        'primary'
+      )}
+    >
+      {text('Label', 'aiqfome!')}
+    </Button>
+  </Flex>
 )
 
-export const textPrimary: React.FC = () => (
-  <Button palette='primary' variant='contained'>
-    Design System
-  </Button>
+export const Contained: React.FC = (): ReactElement => (
+  <Flex variant='fullCentralized'>
+    <Flex
+      variant='centralized'
+      height='200px'
+      width='400px'
+      border='1px solid lightGrey'
+    >
+      <Button
+        fullWidth={boolean('Full Width', false)}
+        variant='contained'
+        palette={select(
+          'Palette',
+          {
+            Primary: 'primary',
+            Secondary: 'secondary',
+            Neutral: 'neutral'
+          },
+          'primary'
+        )}
+      >
+        {text('Label', 'aiqfome!')}
+      </Button>
+    </Flex>
+  </Flex>
 )
 
-export const textSecondary: React.FC = () => (
-  <Button palette='secondary' variant='text'>
-    Design System
-  </Button>
+export const Outlined: React.FC = (): ReactElement => (
+  <Flex variant='fullCentralized'>
+    <Flex
+      variant='centralized'
+      height='200px'
+      width='400px'
+      border='1px solid lightGrey'
+    >
+      <Button
+        variant='outlined'
+        fullWidth={boolean('Full Width', false)}
+        palette={select(
+          'Palette',
+          {
+            Primary: 'primary',
+            Secondary: 'secondary',
+            Neutral: 'neutral'
+          },
+          'primary'
+        )}
+      >
+        {text('Label', 'aiqfome!')}
+      </Button>
+    </Flex>
+  </Flex>
 )
 
-export const containedPrimary: React.FC = () => (
-  <Button palette='primary' variant='contained'>
-    Design System
-  </Button>
+export const Fab: React.FC = (): ReactElement => (
+  <Flex variant='fullCentralized'>
+    <Flex
+      variant='centralized'
+      height='200px'
+      width='400px'
+      border='1px solid lightGrey'
+    >
+      <Button
+        variant='fab'
+        fullWidth={boolean('Full Width', false)}
+        palette={select(
+          'Palette',
+          {
+            Primary: 'primary',
+            Secondary: 'secondary',
+            Neutral: 'neutral'
+          },
+          'primary'
+        )}
+      >
+        {text('Label', 'aiqfome!')}
+      </Button>
+    </Flex>
+  </Flex>
 )
 
-export const outlinedPrimary: React.FC = () => (
-  <Button palette='primary' variant='outlined'>
-    Design System
-  </Button>
+export const FabIcon: React.FC = (): ReactElement => (
+  <Flex variant='fullCentralized'>
+    <Button
+      variant='fab'
+      variantType='icon'
+      palette={select(
+        'Palette',
+        {
+          Primary: 'primary',
+          Secondary: 'secondary',
+          Neutral: 'neutral'
+        },
+        'primary'
+      )}
+    >
+      <FaHamburger />
+    </Button>
+  </Flex>
 )
 
-export const neutral: React.FC = () => (
-  <Button variant='neutral'>Design System</Button>
+export const Prefix: React.FC = (): ReactElement => (
+  <Flex variant='fullCentralized'>
+    <Flex
+      variant='centralized'
+      height='200px'
+      width='400px'
+      border='1px solid lightGrey'
+    >
+      <Button
+        fullWidth={boolean('Full Width', false)}
+        palette={select(
+          'Palette',
+          {
+            Primary: 'primary',
+            Secondary: 'secondary',
+            Neutral: 'neutral'
+          },
+          'primary'
+        )}
+        variant={select(
+          'variant',
+          {
+            Text: 'text',
+            Contained: 'contained',
+            Outlined: 'outlined',
+            Fab: 'fab'
+          },
+          'text'
+        )}
+        prefix={<FaHamburger />}
+      >
+        {text('Label', 'aiqfome!')}
+      </Button>
+    </Flex>
+  </Flex>
 )
 
-export const prefix: React.FC = () => (
-  <Button palette='primary' prefix={<AiOutlineGithub />} variant='contained'>
-    Design System
-  </Button>
-)
-
-export const sufix: React.FC = () => (
-  <Button palette='primary' sufix={<AiOutlineGithub />} variant='contained'>
-    Design System
-  </Button>
-)
-
-export const fab: React.FC = () => (
-  <Button palette='primary' variant='fabWithText'>
-    Design System
-  </Button>
-)
-
-export const fabWithPrefix: React.FC = () => (
-  <Button
-    palette='primary'
-    prefix={<MdAdd size={24} color='#FFF' />}
-    variant='fabWithText'
-  >
-    Design System
-  </Button>
-)
-
-export const fabWithOutChildren: React.FC = () => (
-  <Button
-    palette='primary'
-    prefix={<MdAdd size={24} color='#FFF' />}
-    variant='fab'
-  />
+export const Sufix: React.FC = (): ReactElement => (
+  <Flex variant='fullCentralized'>
+    <Flex
+      variant='centralized'
+      height='200px'
+      width='400px'
+      border='1px solid lightGrey'
+    >
+      <Button
+        fullWidth={boolean('Full Width', false)}
+        palette={select(
+          'Palette',
+          {
+            Primary: 'primary',
+            Secondary: 'secondary',
+            Neutral: 'neutral'
+          },
+          'primary'
+        )}
+        variant={select(
+          'variant',
+          {
+            Text: 'text',
+            Contained: 'contained',
+            Outlined: 'outlined',
+            Fab: 'fab'
+          },
+          'text'
+        )}
+        sufix={<FaHamburger />}
+      >
+        {text('Label', 'aiqfome!')}
+      </Button>
+    </Flex>
+  </Flex>
 )
