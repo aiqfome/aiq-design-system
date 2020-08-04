@@ -1,14 +1,11 @@
 import React from 'react'
-import { SingleDatePicker as SingleDatePickerOriginal } from 'react-dates'
+import {
+  SingleDatePicker as SingleDatePickerOriginal,
+  SingleDatePickerShape
+} from 'react-dates'
 import PropTypes from 'prop-types'
 
-export interface Props {
-  id: any
-  date: any
-  focused: any
-  onDateChange: any
-  onFocusChange: any
-}
+export type Props = SingleDatePickerShape
 
 export const DatePickerSingle: React.FC<Props> = ({
   id,
@@ -20,13 +17,13 @@ export const DatePickerSingle: React.FC<Props> = ({
 }) => {
   return (
     <SingleDatePickerOriginal
-      {...props}
       numberOfMonths={1}
       id={id}
       date={date}
       focused={focused}
       onDateChange={onDateChange}
       onFocusChange={onFocusChange}
+      {...props}
     />
   )
 }

@@ -9,7 +9,7 @@ export default {
 }
 
 export const Basic: React.FC = () => {
-  const [focused, setFocused] = useState<string>('startDate')
+  const [focused, setFocused] = useState<'startDate' | 'endDate'>('startDate')
   const [startDate, setStartDate] = useState(moment())
   const [endDate, setEndDate] = useState(moment())
 
@@ -35,7 +35,6 @@ export const Basic: React.FC = () => {
       minimumNights={2}
       startDate={startDate}
       endDate={endDate}
-      renderCalendarInfo={null}
     />
   )
 }

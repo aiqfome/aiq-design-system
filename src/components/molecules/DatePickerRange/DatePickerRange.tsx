@@ -1,8 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { DayPickerRangeController } from 'react-dates'
+import {
+  DayPickerRangeController,
+  DayPickerRangeControllerShape
+} from 'react-dates'
 
-export interface Props {
+export interface Props extends DayPickerRangeControllerShape {
   onDatesChange: (dates: { startDate: any; endDate: any }) => void
   onFocusChange: (string: 'startDate' | 'endDate' | null) => void
   focusedInput: 'startDate' | 'endDate'
