@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
-import SingleDatePicker from './SingleDatePicker'
+import { DatePickerSingle } from './DatePickerSingle'
 import moment from 'moment'
 
 import { Flex } from '../../atoms/Flex'
 
 export default {
-  component: SingleDatePicker,
-  title: 'molecules/SingleDatePicker'
+  component: DatePickerSingle,
+  title: 'molecules/DatePickerSingle'
 }
 
 export const Basic: React.FC = () => {
@@ -23,7 +23,7 @@ export const Basic: React.FC = () => {
 
   return (
     <Flex variant='fullCentralized'>
-      <SingleDatePicker
+      <DatePickerSingle
         id='datapicker'
         date={date}
         focused={focused}

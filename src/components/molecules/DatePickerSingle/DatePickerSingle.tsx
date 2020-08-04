@@ -10,7 +10,7 @@ export interface Props {
   onFocusChange: any
 }
 
-const SingleDatePicker: React.FC<Props> = ({
+export const DatePickerSingle: React.FC<Props> = ({
   id,
   date,
   focused,
@@ -22,7 +22,7 @@ const SingleDatePicker: React.FC<Props> = ({
     <SingleDatePickerOriginal
       {...props}
       numberOfMonths={1}
-      id='date_input'
+      id={id}
       date={date}
       focused={focused}
       onDateChange={onDateChange}
@@ -31,12 +31,10 @@ const SingleDatePicker: React.FC<Props> = ({
   )
 }
 
-SingleDatePicker.propTypes = {
+DatePickerSingle.propTypes = {
   id: PropTypes.any.isRequired,
   date: PropTypes.any.isRequired,
   focused: PropTypes.any.isRequired,
   onDateChange: PropTypes.func.isRequired,
   onFocusChange: PropTypes.func.isRequired
 }
-
-export default SingleDatePicker
