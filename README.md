@@ -16,9 +16,6 @@ A component lib in [React](https://reactjs.org/) developing for [aiqfome](http:/
     <img alt="" src=
   "https://img.shields.io/github/last-commit/aiqfome/aiq-design-system.svg">
   </a>
-  <a aria-label="license" href="https://github.com/aiqfome/aiq-design-system/blob/master/LICENSE">
-    <img src="https://img.shields.io/github/license/aiqfome/aiq-design-system.svg" alt="">
-  </a>
 </p>
 
 [![languages](https://img.shields.io/github/languages/count/aiqfome/aiq-design-system)](https://www.npmjs.com/package/aiq-design-system)
