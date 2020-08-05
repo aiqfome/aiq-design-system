@@ -6,7 +6,23 @@
 
 <div align="center">
 
-A biblioteca de componentes [React](https://reactjs.org/) desenvolvida pelo [aiqfome](http://www.aiqfome.com).
+A component lib in [React](https://reactjs.org/) developing for [aiqfome](http://www.aiqfome.com).
+
+<p align="center">
+  <a aria-label="npm package" href="https://www.npmjs.com/package/aiq-design-system">
+    <img alt="" src="https://img.shields.io/npm/v/aiq-design-system.svg">
+  </a>
+  <a aria-label="contributors graph" href="https://github.com/aiqfome/aiq-design-system/graphs/contributors">
+    <img src="https://img.shields.io/github/contributors/aiqfome/aiq-design-system.svg">
+  </a>
+  <a aria-label="last commit" href="https://github.com/aiqfome/aiq-design-system/commits/master">
+    <img alt="" src=
+  "https://img.shields.io/github/last-commit/aiqfome/aiq-design-system.svg">
+  </a>
+  <a aria-label="license" href="https://github.com/aiqfome/aiq-design-system/blob/master/LICENSE">
+    <img src="https://img.shields.io/github/license/aiqfome/aiq-design-system.svg" alt="">
+  </a>
+</p>
 
 [![languages](https://img.shields.io/github/languages/count/aiqfome/aiq-design-system)](https://www.npmjs.com/package/aiq-design-system)
 [![npm package](https://img.shields.io/npm/v/@material-ui/core/latest.svg)](https://www.npmjs.com/package/aiq-design-system)
@@ -15,7 +31,7 @@ A biblioteca de componentes [React](https://reactjs.org/) desenvolvida pelo [aiq
 
 </div>
 
-## Como instalar
+## How install
 
 ```sh
 yarn add aiq-design-system
@@ -25,9 +41,9 @@ ou
 npm install aiq-design-system
 ```
 
-## Como utilizar
+## How utilize
 
-Uma forma rápida de como usar a lib:
+A quick use for the lib:
 
 ```jsx
 import React from 'react'
@@ -38,7 +54,7 @@ import { Button } from 'aiq-design-system'
 function App() {
   return (
     <Button variant='contained' palette='primary'>
-      Quero pizza!
+      I want Pizza!
     </Button>
   )
 }
@@ -46,11 +62,6 @@ function App() {
 ReactDOM.render(<App />, document.querySelector('#app'))
 ```
 
-Disponibilizamos um sandbox pra uma interação rápida com a nossa lib:
+A sandbox for interation:
 
 [![Edit Button](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/festive-dew-dk509?file=/src/App.js)
-
-## Licença
-
-Esse projeto está sob os termos da
-[Licença MIT](/LICENSE).
