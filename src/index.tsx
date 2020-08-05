@@ -18,7 +18,6 @@ export { LoaderBox } from './components/molecules/LoaderBox'
 export { ToastProvider, useToast } from './components/molecules/Toast'
 export { DatePickerRange } from './components/molecules/DatePickerRange'
 export { DatePickerSingle } from './components/molecules/DatePickerSingle'
-
 export { Tabs, Tab, TabPanel } from './components/molecules/Tab'
 
 export { default as themeDefault } from './providers/theme'
