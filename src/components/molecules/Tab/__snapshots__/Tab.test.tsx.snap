@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`must match with the previous snapshot snapshot renders 1`] = `
+<div
+  className="sc-AxirZ kDXGap"
+>
+  <ul
+    className="sc-AxiKw ikAHLf"
+    onClick={[Function]}
+    value={0}
+  >
+    <li
+      className="sc-AxhCb hvDfRb"
+      onClick={[Function]}
+    >
+      <span
+        className="sc-AxjAm iGRyaZ"
+        cursor="pointer"
+        fontSize={5}
+      >
+        Item One
+      </span>
+    </li>
+    <li
+      className="sc-AxhCb XBoU"
+      onClick={[Function]}
+    >
+      <span
+        className="sc-AxjAm iGRyaZ"
+        cursor="pointer"
+        fontSize={5}
+      >
+        Item Two
+      </span>
+    </li>
+    <li
+      className="sc-AxhCb XBoU"
+      onClick={[Function]}
+    >
+      <span
+        className="sc-AxjAm iGRyaZ"
+        cursor="pointer"
+        fontSize={5}
+      >
+        Item Three
+      </span>
+    </li>
+  </ul>
+  <div
+    className="sc-AxirZ sc-AxhUy dWqLgp"
+  >
+    Item One
+  </div>
+</div>
+`;
