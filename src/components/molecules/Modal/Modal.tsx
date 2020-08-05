@@ -11,6 +11,7 @@ export interface Props {
   variant?: 'big' | 'medium' | 'small' | 'alert'
   show?: boolean
   animation?: boolean
+  zIndex?: number
   onClose?: () => void
   children?: any
   okButton?: {
@@ -47,6 +48,7 @@ const modalVariants: { [index: string]: any } = {
 
 interface BackgroundModalProps extends FlexProps {
   animation?: boolean
+  zIndex?: number
 }
 
 const BackgroundModal = styled(Flex)<BackgroundModalProps>`
@@ -61,7 +63,7 @@ const BackgroundModal = styled(Flex)<BackgroundModalProps>`
 
   &.show {
     opacity: 1;
-    z-index: 2000;
+    z-index: ${({ zIndex }) => zIndex};
   }
 
   ${({ animation }) =>
@@ -163,6 +165,7 @@ const defaultButton = {
 export const Modal: React.FC<Props> = ({
   title,
   children,
+  zIndex = 2000,
   show = false,
   animation = false,
   onClose = () => {
@@ -181,7 +184,6 @@ export const Modal: React.FC<Props> = ({
   function handleOk() {
     okButton.function()
     onClose()
-    // setIsOpen(false)
   }
 
   function handleCancel() {
@@ -200,6 +202,7 @@ export const Modal: React.FC<Props> = ({
       className={`background-modal ${show ? 'show' : 'hide'}`}
       variant='fullCentralized'
       animation={animation}
+      zIndex={zIndex}
       onClick={handleClickOutSide}
     >
       <ModalStyled
@@ -264,6 +267,7 @@ Modal.propTypes = {
   variant: PropTypes.oneOf(['big', 'medium', 'small', 'alert']),
   children: PropTypes.node,
   animation: PropTypes.bool,
+  zIndex: PropTypes.number,
   okButton: PropTypes.any,
   show: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
