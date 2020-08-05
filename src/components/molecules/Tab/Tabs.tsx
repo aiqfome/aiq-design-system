@@ -1,11 +1,23 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled, { DefaultTheme } from 'styled-components'
+import styled, { css, DefaultTheme } from 'styled-components'
 
 export interface Props extends DefaultTheme {
   value?: number
   children?: any
+  variant?: 'default' | 'contained'
   onChange?: (event: any, newValue: any) => void
+}
+
+const tabsVariations: { [index: string]: any } = {
+  default: css`
+    border-bottom: 1px solid #d9d9d9;
+  `,
+  contained: css`
+    background: #f5f5f5;
+    border-radius: 5px;
+    padding: 4px 5px;
+  `
 }
 
 const TabStyled = styled.ul<Props>`
@@ -14,7 +26,8 @@ const TabStyled = styled.ul<Props>`
   flex-direction: row;
   list-style: none;
   margin-bottom: 20px;
-  border-bottom: 1px solid #d9d9d9;
+
+  ${({ variant }) => tabsVariations[variant || 'default']}
 `
 
 export const Tabs: React.FC<Props> = ({
@@ -38,5 +51,10 @@ export const Tabs: React.FC<Props> = ({
 Tabs.propTypes = {
   value: PropTypes.number,
   children: PropTypes.any,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  variant: PropTypes.oneOf(['default', 'contained'])
+}
+
+Tabs.defaultProps = {
+  variant: 'default'
 }
