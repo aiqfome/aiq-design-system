@@ -9,9 +9,6 @@
 A component lib in [React](https://reactjs.org/) developing for [aiqfome](http://www.aiqfome.com).
 
 <p align="center">
-  <a aria-label="npm package" href="https://www.npmjs.com/package/aiq-design-system">
-    <img alt="" src="https://img.shields.io/npm/v/aiq-design-system.svg">
-  </a>
   <a aria-label="contributors graph" href="https://github.com/aiqfome/aiq-design-system/graphs/contributors">
     <img src="https://img.shields.io/github/contributors/aiqfome/aiq-design-system.svg">
   </a>
