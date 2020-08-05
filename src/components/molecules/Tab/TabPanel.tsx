@@ -5,7 +5,7 @@ import styled from 'styled-components'
 
 import { Flex, Props as FlexProps } from '../../atoms/Flex'
 
-export interface Props extends FlexProps {
+export interface TabPanelProps extends FlexProps {
   value: number
   index: number
   children?: any
@@ -13,7 +13,7 @@ export interface Props extends FlexProps {
 
 const TabPanelStyled = styled(Flex)``
 
-export const TabPanel: React.FC<Props> = ({
+export const TabPanel: React.FC<TabPanelProps> = ({
   children,
   value,
   index,

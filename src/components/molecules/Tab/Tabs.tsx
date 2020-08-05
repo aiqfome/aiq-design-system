@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css, DefaultTheme } from 'styled-components'
 
-export interface Props extends DefaultTheme {
+export interface TabsProps extends DefaultTheme {
   value?: number
   children?: any
   variant?: 'default' | 'contained'
@@ -20,7 +20,7 @@ const tabsVariations: { [index: string]: any } = {
   `
 }
 
-const TabStyled = styled.ul<Props>`
+const TabStyled = styled.ul<TabsProps>`
   display: flex;
   width: max-content;
   flex-direction: row;
@@ -30,7 +30,7 @@ const TabStyled = styled.ul<Props>`
   ${({ variant }) => tabsVariations[variant || 'default']}
 `
 
-export const Tabs: React.FC<Props> = ({
+export const Tabs: React.FC<TabsProps> = ({
   children,
   onChange = () => {
     // do nothing.

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { space, SpaceProps } from 'styled-system'
 import styled, { css } from 'styled-components'
 
-export interface Props extends SpaceProps {
+export interface TabProps extends SpaceProps {
   index: number
   children: any
   value?: number
@@ -88,7 +88,7 @@ const TabStyled = styled.li<StyledProps>`
   ${({ variant }) => tabVariations[variant || 'default']}
 `
 
-export const Tab: React.FC<Props> = ({
+export const Tab: React.FC<TabProps> = ({
   children,
   value = 0,
   index,
