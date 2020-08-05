@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://aiqfome.com/" rel="noopener" target="_blank"><img width="150" src="https://www.suafranquia.com/views/sources/images/franquias/logos/271b399b0a004c781779ec805e8d7ab7.png" alt="Material-UI logo"></a></p>
+  <a href="https://aiqfome.com/" rel="noopener" target="_blank"><img width="150" src="https://www.suafranquia.com/views/sources/images/franquias/logos/271b399b0a004c781779ec805e8d7ab7.png" alt="aiqfome logo"></a></p>
 </p>
 
 <h1 align="center">aiq design system</h1>
@@ -25,8 +25,8 @@ A component lib in [React](https://reactjs.org/) developing for [aiqfome](http:/
 </p>
 
 [![languages](https://img.shields.io/github/languages/count/aiqfome/aiq-design-system)](https://www.npmjs.com/package/aiq-design-system)
-[![npm package](https://img.shields.io/npm/v/@material-ui/core/latest.svg)](https://www.npmjs.com/package/aiq-design-system)
-[![npm downloads](https://img.shields.io/npm/dm/@material-ui/core.svg)](https://www.npmjs.com/package/aiq-design-system)
+[![npm package](https://img.shields.io/npm/v/aiq-design-system/latest.svg)](https://www.npmjs.com/package/aiq-design-system)
+[![npm downloads](https://img.shields.io/npm/dm/aiq-design-system.svg)](https://www.npmjs.com/package/aiq-design-system)
 ![Code style](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)
 
 </div>
