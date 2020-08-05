@@ -195,21 +195,6 @@ export const Big: React.FC = () => {
 export const WithOutButtons: React.FC = () => {
   const [open, setOpen] = useState(false)
 
-  const okButton = {
-    label: 'ok',
-    function: () => {
-      console.log('ok')
-    },
-    visible: true
-  }
-  const cancelButton = {
-    label: 'cancel',
-    function: () => {
-      console.log('cancel')
-    },
-    visible: true
-  }
-
   function handleShowModal() {
     setOpen(!open)
   }
@@ -259,6 +244,50 @@ export const Alert: React.FC = () => {
       <Modal
         title='Alert'
         variant='alert'
+        show={open}
+        onClose={() => setOpen(false)}
+        okButton={okButton}
+        cancelButton={cancelButton}
+      >
+        <Text>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor
+        </Text>
+      </Modal>
+    </Flex>
+  )
+}
+
+export const WithAnimation: React.FC = () => {
+  const [open, setOpen] = useState(false)
+
+  const okButton = {
+    label: 'ok',
+    function: () => {
+      console.log('ok')
+    },
+    visible: true
+  }
+  const cancelButton = {
+    label: 'cancel',
+    function: () => {
+      console.log('cancel')
+    },
+    visible: true
+  }
+
+  function handleShowModal() {
+    setOpen(!open)
+  }
+
+  return (
+    <Flex>
+      <Button palette='primary' onClick={handleShowModal} variant='contained'>
+        Show Modal With Animation
+      </Button>
+      <Modal
+        title='Alert'
+        animation={true}
         show={open}
         onClose={() => setOpen(false)}
         okButton={okButton}

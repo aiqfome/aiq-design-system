@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import styled, { DefaultTheme, css } from 'styled-components'
 
-import { Flex } from '../../atoms/Flex'
+import { Flex, Props as FlexProps } from '../../atoms/Flex'
 import { Button } from '../../atoms/Button'
 import { Text } from '../../atoms/Text'
 
@@ -10,6 +10,7 @@ export interface Props {
   title: string
   variant?: 'big' | 'medium' | 'small' | 'alert'
   show?: boolean
+  animation?: boolean
   onClose?: () => void
   children?: any
   okButton?: {
@@ -44,15 +45,57 @@ const modalVariants: { [index: string]: any } = {
   `
 }
 
-interface ModalStyledProps extends DefaultTheme {
-  variant?: string
+interface BackgroundModalProps extends FlexProps {
+  animation?: boolean
 }
 
-const BackgroundModal = styled(Flex)`
+const BackgroundModal = styled(Flex)<BackgroundModalProps>`
   position: fixed;
   width: 100%;
   background: ${({ theme }) => theme.colors.black}30;
+
+  &.hide {
+    z-index: -1;
+    opacity: 0;
+  }
+
+  &.show {
+    opacity: 1;
+    z-index: 2000;
+  }
+
+  ${({ animation }) =>
+    animation &&
+    css`
+      &.hide {
+        animation: hide 0.25s;
+      }
+      @keyframes hide {
+        from {
+          opacity: 1;
+        }
+        to {
+          opacity: 0;
+        }
+      }
+      &.show {
+        animation: show 0.2s;
+      }
+      @keyframes show {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+    `}
 `
+
+interface ModalStyledProps extends DefaultTheme {
+  variant?: string
+  animation?: boolean
+}
 
 const ModalStyled = styled.div<ModalStyledProps>`
   display: flex;
@@ -66,6 +109,47 @@ const ModalStyled = styled.div<ModalStyledProps>`
   width: 100%;
 
   ${({ variant }) => modalVariants[variant || 'medium']}
+
+  &.hide {
+    z-index: -1;
+    opacity: 0;
+  }
+
+  &.show {
+    opacity: 1;
+    z-index: 2000;
+  }
+
+  ${({ animation }) =>
+    animation &&
+    css`
+      &.hide {
+        animation: move-out 0.25s;
+      }
+      @keyframes move-out {
+        from {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        to {
+          opacity: 0;
+          transform: translateY(-60px);
+        }
+      }
+      &.show {
+        animation: move-in 0.2s;
+      }
+      @keyframes move-in {
+        from {
+          opacity: 0;
+          transform: translateY(-60px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    `}
 `
 
 const defaultButton = {
@@ -80,6 +164,7 @@ export const Modal: React.FC<Props> = ({
   title,
   children,
   show = false,
+  animation = false,
   onClose = () => {
     // do nothing.
   },
@@ -87,9 +172,16 @@ export const Modal: React.FC<Props> = ({
   variant = 'medium',
   cancelButton = defaultButton
 }) => {
+  const [isMounted, setIsMounted] = useState(false)
+
+  useEffect(() => {
+    if (show) setIsMounted(show)
+  }, [show])
+
   function handleOk() {
     okButton.function()
     onClose()
+    // setIsOpen(false)
   }
 
   function handleCancel() {
@@ -103,13 +195,18 @@ export const Modal: React.FC<Props> = ({
     }
   }
 
-  return show ? (
+  return isMounted ? (
     <BackgroundModal
-      className='background-modal'
+      className={`background-modal ${show ? 'show' : 'hide'}`}
       variant='fullCentralized'
+      animation={animation}
       onClick={handleClickOutSide}
     >
-      <ModalStyled variant={variant}>
+      <ModalStyled
+        variant={variant}
+        animation={animation}
+        className={`${show ? 'show' : 'hide'}`}
+      >
         <Text
           color='primary'
           fontSize='xlarge'
@@ -159,15 +256,14 @@ export const Modal: React.FC<Props> = ({
         )}
       </ModalStyled>
     </BackgroundModal>
-  ) : (
-    <Flex />
-  )
+  ) : null
 }
 
 Modal.propTypes = {
   title: PropTypes.string.isRequired,
   variant: PropTypes.oneOf(['big', 'medium', 'small', 'alert']),
   children: PropTypes.node,
+  animation: PropTypes.bool,
   okButton: PropTypes.any,
   show: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
