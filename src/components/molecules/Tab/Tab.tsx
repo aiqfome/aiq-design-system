@@ -1,25 +1,32 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { space, SpaceProps } from 'styled-system'
-import { Text } from '../../atoms/Text'
 import styled, { css } from 'styled-components'
 
 export interface Props extends SpaceProps {
-  label?: string
   index: number
-  value: number
-  children?: any
+  children: any
+  value?: number
   active?: boolean
 }
 
-const TabStyled = styled.li<{ active?: boolean }>`
+interface StyledProps {
+  active?: boolean
+}
+
+const TabStyled = styled.li<StyledProps>`
   ${space}
+
   position: relative;
   padding: 8px 16px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
+
+  &:hover {
+    cursor: pointer;
+  }
 
   &::before {
     position: absolute;
@@ -28,10 +35,13 @@ const TabStyled = styled.li<{ active?: boolean }>`
     width: 100%;
     height: 3px;
     border-radius: 3px 3px 0 0;
-
-    ${({ active, theme }) =>
-      active
-        ? css`
+  }
+  ${({ active, theme }) =>
+    active
+      ? css`
+          font-weight: 'medium';
+          color: ${theme.colors.primary};
+          &::before {
             background: ${theme.colors.primary};
             animation: show 0.25s;
             @keyframes show {
@@ -41,50 +51,42 @@ const TabStyled = styled.li<{ active?: boolean }>`
               to {
                 transform: scale(1);
               }
-          `
-        : css`
-            background: transparent;
-          `}
-  }
-
-  &:hover {
-    cursor: pointer;
-  }
-`
-
-const TextStyled = styled(Text)<{ active?: boolean }>`
-  text-align: center;
-
-  ${({ active, theme }) =>
-    active
-      ? css`
-          font-weight: 'medium';
-          color: ${theme.colors.primary};
+            }
+          }
         `
       : css`
           font-weight: 'regular';
           color: ${theme.colors.darkGrey};
+          &::before {
+            background: transparent;
+          }
         `}
 `
 
-export const Tab: React.FC<Props> = ({ label, index, value, ...props }) => {
+export const Tab: React.FC<Props> = ({
+  children,
+  value = 0,
+  index,
+  ...props
+}) => {
+  function handleClick(event) {
+    event.currentTarget.parentNode.setAttribute('data-id', index)
+  }
+
   return (
-    <TabStyled active={value === index} marginRight='8px' {...props}>
-      <TextStyled
-        active={value === index}
-        fontSize={5}
-        id={`tab-item-${index}`}
-        cursor='pointer'
-      >
-        {label}
-      </TextStyled>
+    <TabStyled
+      onClick={handleClick}
+      active={index === value}
+      marginRight='8px'
+      {...props}
+    >
+      {children}
     </TabStyled>
   )
 }
 
 Tab.propTypes = {
-  label: PropTypes.string,
   index: PropTypes.number.isRequired,
-  children: PropTypes.any,
-  value: PropTypes.number.isRequired
+  children: PropTypes.any.isRequired,
+  value: PropTypes.number
 }

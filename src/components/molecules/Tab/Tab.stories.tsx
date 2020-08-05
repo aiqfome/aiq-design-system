@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 
+import { Text } from '../../atoms/Text'
 import { Flex } from '../../atoms/Flex'
 import { Tabs } from './Tabs'
 import { Tab } from './Tab'
@@ -20,12 +21,26 @@ export const Basic: React.FC = () => {
   return (
     <Flex flexDirection='column'>
       <Tabs value={value} onChange={handleChange}>
-        <Tab value={value} label='Item One' index={0} />
-        <Tab value={value} label='Item Two' index={1} />
-        <Tab value={value} label='Item Three' index={2} />
+        <Tab value={value} index={0}>
+          <Text marginRight='14px' fontSize={5} cursor='pointer'>
+            Item One
+          </Text>
+        </Tab>
+        <Tab value={value} index={1}>
+          <Text fontSize={5} cursor='pointer'>
+            Item One
+          </Text>
+        </Tab>
+        <Tab value={value} index={2}>
+          <Text fontSize={5} cursor='pointer'>
+            Item One
+          </Text>
+        </Tab>
       </Tabs>
       <TabPanel value={value} index={0}>
-        Item One
+        <Text fontSize={5} cursor='pointer'>
+          Item One
+        </Text>
       </TabPanel>
       <TabPanel value={value} index={1}>
         Item Two

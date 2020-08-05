@@ -25,8 +25,7 @@ export const Tabs: React.FC<Props> = ({
   ...props
 }) => {
   function handleClick(event) {
-    const idSlitted = event.target.id.split('tab-item-')
-    onChange(event, parseInt(idSlitted[1]))
+    onChange(event, parseInt(event.currentTarget.dataset.id))
   }
 
   return (
