@@ -11,7 +11,7 @@ A component lib in [React](https://reactjs.org/) developing for [aiqfome](http:/
 <p align="center">
   <a href="https://github.com/aiqfome" style="text-decoration:none" target="_blank">
     <img alt="Made by AiqFome" src="https://img.shields.io/badge/made%20by-aiqfome-blueviolet">
-  </a> 
+  </a>
   <a aria-label="contributors graph" href="https://github.com/aiqfome/aiq-design-system/graphs/contributors">
     <img src="https://img.shields.io/github/contributors/aiqfome/aiq-design-system.svg">
   </a>
@@ -37,10 +37,14 @@ A component lib in [React](https://reactjs.org/) developing for [aiqfome](http:/
 ```sh
 yarn add aiq-design-system
 
-ou
+or
 
 npm install aiq-design-system
 ```
+
+## The components
+
+![See all the components in netlify](https://aiq-design-system.netlify.app)
 
 ## How utilize
 
