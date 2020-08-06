@@ -44,7 +44,7 @@ npm install aiq-design-system
 
 ## The components
 
-![See all the components in netlify](https://aiq-design-system.netlify.app)
+[See all the components in netlify](https://aiq-design-system.netlify.app)
 
 ## How utilize
 
