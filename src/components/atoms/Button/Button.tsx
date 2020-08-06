@@ -120,7 +120,7 @@ const buttonVariations: { [index: string]: any } = {
       css`
         border: 1px solid ${({ theme }) => theme.colors.mediumGrey};
         color: ${({ theme }) => theme.colors.almostBlack};
-        background: none;
+        background: ${({ theme }) => theme.colors.white};
 
         &:hover {
           background-color: ${({ theme }) => theme.colors.lightGrey};
