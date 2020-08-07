@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from 'react'
+import React, { ReactElement } from 'react'
 
 import { withKnobs, boolean } from '@storybook/addon-knobs'
 
@@ -12,14 +12,9 @@ export default {
 }
 
 export const Basic = (): ReactElement => {
-  const [checked, setChecked] = useState(false)
-
   return (
     <Flex variant='fullCentralized'>
-      <Switch
-        checked={boolean('checked', false)}
-        onChange={() => setChecked(!checked)}
-      />
+      <Switch checked={boolean('checked', false)} />
     </Flex>
   )
 }
@@ -31,11 +26,9 @@ export const BasicDisabled = (): ReactElement => (
 )
 
 export const Checked = (): ReactElement => {
-  const [checked, setChecked] = useState(true)
-
   return (
     <Flex variant='fullCentralized'>
-      <Switch checked={checked} onChange={() => setChecked(!checked)} />
+      <Switch checked={true} />
     </Flex>
   )
 }
