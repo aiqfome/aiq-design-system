@@ -1,11 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import styled, { DefaultTheme } from 'styled-components'
 import { space } from 'styled-system'
 
 export interface Props extends DefaultTheme {
   checked?: boolean
-  onChange?(): any
   disabled?: boolean
 }
 
@@ -90,16 +89,17 @@ const SwitchStyled = styled.label`
 
 export const Switch: React.FC<Props> = ({
   checked = false,
-  disabled = false,
-  onChange
+  disabled = false
 }: Props) => {
+  const [isChecked, setIsChecked] = useState(checked)
+
   return (
     <SwitchStyled>
       <input
         type='checkbox'
-        checked={checked}
+        checked={isChecked}
         disabled={disabled}
-        onChange={onChange}
+        onChange={() => setIsChecked(!isChecked)}
       />
     </SwitchStyled>
   )
