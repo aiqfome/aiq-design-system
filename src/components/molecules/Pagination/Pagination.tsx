@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md'
 import styled, { css, DefaultTheme } from 'styled-components'
@@ -13,16 +13,17 @@ export interface Props {
   size?: string
   defaultPage?: number
   page?: number
-  onChange?: () => void
+  onChange?: (page: number) => void
 }
 
 interface PaginationStyledProps extends FlexProps, DefaultTheme {
   active?: boolean
+  cursor?: string
 }
 
-const PaginationStyled = styled(Flex)`
+const PaginationStyled = styled(Flex)<PaginationStyledProps>`
   &:hover {
-    cursor: pointer;
+    cursor: ${({ cursor }) => cursor || 'pointer'};
   }
 `
 
@@ -44,7 +45,69 @@ const ItemPageStyled = styled(Flex)<PaginationStyledProps>`
     `}
 `
 
-export const Pagination: React.FC<Props> = ({ count, variant, ...props }) => {
+export const Pagination: React.FC<Props> = ({
+  count,
+  variant,
+  defaultPage = 0,
+  onChange = () => {
+    // do nothing.
+  },
+  ...props
+}) => {
+  const [pages, setPages] = useState<number[]>([])
+  const [pagesToShow, setPagesToShow] = useState<number[]>([])
+  const [currentPage, setCurrentPage] = useState(0)
+
+  const range = (start, end) => {
+    const length = end - start + 1
+    return Array.from({ length }, (_, i) => start + i)
+  }
+
+  useEffect(() => {
+    const newPages = range(0, count - 1)
+    setPages(newPages)
+  }, [count])
+
+  useEffect(() => {
+    setCurrentPage(defaultPage)
+  }, [defaultPage])
+
+  useEffect(() => {
+    let startPage = currentPage - 1
+    let endPage = currentPage + 2
+
+    if (startPage <= 1) {
+      endPage -= startPage - 2
+      startPage = 1
+    }
+
+    if (endPage > count - 2) {
+      startPage = count - 5
+      endPage = count - 1
+    }
+
+    console.log(pages.slice(startPage, endPage))
+    console.log(startPage, endPage)
+    setPagesToShow(pages.slice(startPage, endPage))
+  }, [pages, currentPage])
+
+  function handleClickPage(page) {
+    setCurrentPage(page)
+    onChange(page)
+  }
+
+  function handleClickNextPage() {
+    if (currentPage + 1 < count) {
+      setCurrentPage(currentPage + 1)
+    }
+  }
+
+  function handleClickPrevPage() {
+    if (currentPage > 0) {
+      setCurrentPage(currentPage - 1)
+    }
+  }
+
   return (
     <PaginationStyled
       flexDirection='row'
@@ -53,42 +116,84 @@ export const Pagination: React.FC<Props> = ({ count, variant, ...props }) => {
       variant='auto'
       {...props}
     >
-      <ItemPageStyled alignItems='center' justifyContent='center'>
-        <MdChevronLeft />
-      </ItemPageStyled>
-      <ItemPageStyled alignItems='center' justifyContent='center'>
-        <Text color='almostBlack' fontSize='default' cursor='pointer'>
-          1
-        </Text>
-      </ItemPageStyled>
-      <ItemPageStyled alignItems='center' justifyContent='center'>
-        <Text color='almostBlack' fontSize='default' cursor='pointer'>
-          2
-        </Text>
-      </ItemPageStyled>
-      <ItemPageStyled active alignItems='center' justifyContent='center'>
-        <Text color='almostBlack' fontSize='default' cursor='pointer'>
-          3
-        </Text>
-      </ItemPageStyled>
-      <ItemPageStyled alignItems='center' justifyContent='center'>
-        <Text color='almostBlack' fontSize='default' cursor='pointer'>
-          4
-        </Text>
-      </ItemPageStyled>
-      <ItemPageStyled alignItems='center' justifyContent='center'>
-        <Text color='almostBlack' fontSize='default' cursor='pointer'>
-          5
-        </Text>
-      </ItemPageStyled>
-      <ItemPageStyled alignItems='center' justifyContent='center'>
-        <Text color='almostBlack' fontSize='default' cursor='pointer'>
-          6
-        </Text>
-      </ItemPageStyled>
-      <ItemPageStyled alignItems='center' justifyContent='center'>
-        <MdChevronRight />
-      </ItemPageStyled>
+      {count > 0 && (
+        <>
+          <ItemPageStyled
+            onClick={handleClickPrevPage}
+            alignItems='center'
+            justifyContent='center'
+          >
+            <MdChevronLeft />
+          </ItemPageStyled>
+
+          <ItemPageStyled
+            alignItems='center'
+            active={currentPage === 0}
+            onClick={() => handleClickPage(0)}
+            justifyContent='center'
+          >
+            <Text color='almostBlack' fontSize='default' cursor='pointer'>
+              0
+            </Text>
+          </ItemPageStyled>
+          {currentPage - 2 > 0 && (
+            <ItemPageStyled
+              alignItems='center'
+              cursor='auto'
+              justifyContent='center'
+            >
+              <Text color='almostBlack' fontSize='default'>
+                ...
+              </Text>
+            </ItemPageStyled>
+          )}
+
+          {pagesToShow.map(page => (
+            <ItemPageStyled
+              key={page.toString()}
+              alignItems='center'
+              active={page === currentPage}
+              onClick={() => handleClickPage(page)}
+              justifyContent='center'
+            >
+              <Text color='almostBlack' fontSize='default' cursor='pointer'>
+                {page}
+              </Text>
+            </ItemPageStyled>
+          ))}
+          {currentPage + 3 <= pages[pages.length - 1] && (
+            <ItemPageStyled
+              alignItems='center'
+              cursor='auto'
+              justifyContent='center'
+            >
+              <Text color='almostBlack' fontSize='default'>
+                ...
+              </Text>
+            </ItemPageStyled>
+          )}
+
+          {pages.length > 1 && (
+            <ItemPageStyled
+              alignItems='center'
+              active={currentPage === pages[pages.length - 1]}
+              onClick={() => handleClickPage(pages[pages.length - 1])}
+              justifyContent='center'
+            >
+              <Text color='almostBlack' fontSize='default' cursor='pointer'>
+                {pages[pages.length - 1]}
+              </Text>
+            </ItemPageStyled>
+          )}
+          <ItemPageStyled
+            onClick={handleClickNextPage}
+            alignItems='center'
+            justifyContent='center'
+          >
+            <MdChevronRight />
+          </ItemPageStyled>
+        </>
+      )}
     </PaginationStyled>
   )
 }
