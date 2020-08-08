@@ -22,3 +22,7 @@ export const WithOnePages: React.FC = () => {
 export const Disabled: React.FC = () => {
   return <Pagination disabled count={10} />
 }
+
+export const SmallSize: React.FC = () => {
+  return <Pagination count={10} size='small' />
+}

@@ -10,7 +10,7 @@ export interface Props {
   color?: string
   disabled?: boolean
   variant?: string
-  size?: string
+  size?: 'default' | 'small'
   defaultPage?: number
   page?: number
   onChange?: (page: number) => void
@@ -20,6 +20,18 @@ interface PaginationStyledProps extends FlexProps, DefaultTheme {
   active?: boolean
   cursor?: string
   disabled?: boolean
+  size?: 'default' | 'small'
+}
+
+const sizesVariants: { [index: string]: any } = {
+  default: css`
+    height: 42px;
+    width: 42px;
+  `,
+  small: css`
+    height: 28px;
+    width: 28px;
+  `
 }
 
 const PaginationStyled = styled(Flex)<PaginationStyledProps>`
@@ -38,8 +50,8 @@ const PaginationStyled = styled(Flex)<PaginationStyledProps>`
 `
 
 const ItemPageStyled = styled(Flex)<PaginationStyledProps>`
-  height: 42px;
-  width: 42px;
+  ${({ size }) => sizesVariants[size || 'default']}
+
   border: 1px solid #dedede;
 
   ${({ active, theme }) =>
@@ -58,6 +70,7 @@ const ItemPageStyled = styled(Flex)<PaginationStyledProps>`
 export const Pagination: React.FC<Props> = ({
   count,
   variant,
+  size,
   defaultPage = 0,
   disabled = false,
   onChange = () => {
@@ -133,6 +146,7 @@ export const Pagination: React.FC<Props> = ({
           <ItemPageStyled
             onClick={handleClickPrevPage}
             alignItems='center'
+            size={size}
             justifyContent='center'
           >
             <MdChevronLeft />
@@ -140,6 +154,7 @@ export const Pagination: React.FC<Props> = ({
 
           <ItemPageStyled
             alignItems='center'
+            size={size}
             active={currentPage === 0}
             onClick={() => handleClickPage(0)}
             justifyContent='center'
@@ -151,6 +166,7 @@ export const Pagination: React.FC<Props> = ({
           {currentPage - 2 > 0 && (
             <ItemPageStyled
               alignItems='center'
+              size={size}
               cursor='auto'
               justifyContent='center'
             >
@@ -164,6 +180,7 @@ export const Pagination: React.FC<Props> = ({
             <ItemPageStyled
               key={page.toString()}
               alignItems='center'
+              size={size}
               active={page === currentPage}
               onClick={() => handleClickPage(page)}
               justifyContent='center'
@@ -176,6 +193,7 @@ export const Pagination: React.FC<Props> = ({
           {currentPage + 3 <= pages[pages.length - 1] && (
             <ItemPageStyled
               alignItems='center'
+              size={size}
               cursor='auto'
               justifyContent='center'
             >
@@ -188,6 +206,7 @@ export const Pagination: React.FC<Props> = ({
           {pages.length > 1 && (
             <ItemPageStyled
               alignItems='center'
+              size={size}
               active={currentPage === pages[pages.length - 1]}
               onClick={() => handleClickPage(pages[pages.length - 1])}
               justifyContent='center'
@@ -200,6 +219,7 @@ export const Pagination: React.FC<Props> = ({
           <ItemPageStyled
             onClick={handleClickNextPage}
             alignItems='center'
+            size={size}
             justifyContent='center'
           >
             <MdChevronRight />
@@ -215,7 +235,7 @@ Pagination.propTypes = {
   color: PropTypes.string,
   disabled: PropTypes.bool,
   variant: PropTypes.string,
-  size: PropTypes.string,
+  size: PropTypes.oneOf(['default', 'small']),
   defaultPage: PropTypes.number,
   page: PropTypes.number,
   onChange: PropTypes.func
