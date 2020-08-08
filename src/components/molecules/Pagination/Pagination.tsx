@@ -110,8 +110,6 @@ export const Pagination: React.FC<Props> = ({
       endPage = count - 1
     }
 
-    console.log(pages.slice(startPage, endPage))
-    console.log(startPage, endPage)
     setPagesToShow(pages.slice(startPage, endPage))
   }, [pages, currentPage])
 
