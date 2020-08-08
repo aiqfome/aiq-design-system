@@ -19,9 +19,19 @@ export interface Props {
 interface PaginationStyledProps extends FlexProps, DefaultTheme {
   active?: boolean
   cursor?: string
+  disabled?: boolean
 }
 
 const PaginationStyled = styled(Flex)<PaginationStyledProps>`
+  ${({ disabled }) =>
+    disabled &&
+    css`
+      opacity: 0.5;
+      &:hover {
+        pointer-events: none;
+      }
+    `}
+
   &:hover {
     cursor: ${({ cursor }) => cursor || 'pointer'};
   }
@@ -49,6 +59,7 @@ export const Pagination: React.FC<Props> = ({
   count,
   variant,
   defaultPage = 0,
+  disabled = false,
   onChange = () => {
     // do nothing.
   },
@@ -114,6 +125,7 @@ export const Pagination: React.FC<Props> = ({
       alignItems='center'
       justifyContent='center'
       variant='auto'
+      disabled={disabled}
       {...props}
     >
       {count > 0 && (

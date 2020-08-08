@@ -18,3 +18,7 @@ export const WithZeroPages: React.FC = () => {
 export const WithOnePages: React.FC = () => {
   return <Pagination count={1} />
 }
+
+export const Disabled: React.FC = () => {
+  return <Pagination disabled count={10} />
+}
