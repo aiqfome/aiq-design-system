@@ -10,14 +10,17 @@ import {
   fontSize,
   FontSizeProps,
   fontWeight,
-  FontWeightProps
+  FontWeightProps,
+  border,
+  BorderProps
 } from 'styled-system'
 
 export interface Props
   extends SpaceProps,
     LayoutProps,
     FontSizeProps,
-    FontWeightProps {
+    FontWeightProps,
+    BorderProps {
   color?: string
   children?: any
   refBox?: any
@@ -29,6 +32,7 @@ export const BoxStyled = styled.div`
   ${layout}
   ${fontSize}
   ${fontWeight}
+  ${border}
 `
 
 export const Box: React.FC<Props> = ({ refBox, ...props }) => {
