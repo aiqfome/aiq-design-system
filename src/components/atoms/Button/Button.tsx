@@ -62,7 +62,6 @@ const buttonVariations: { [index: string]: any } = {
   `,
   contained: css<Props>`
     border: none;
-    font-weight: ${({ theme }) => theme.fontWeights.semiBold};
 
     ${({ palette }) =>
       palette === 'primary' &&
@@ -87,12 +86,12 @@ const buttonVariations: { [index: string]: any } = {
     ${({ palette }) =>
       palette === 'neutral' &&
       css`
+        background: ${({ theme }) => theme.colors.white};
         color: ${({ theme }) => theme.colors.almosBlack};
+        border: 1px solid ${({ theme }) => theme.colors.almostBlack};
       `}
   `,
   outlined: css<Props>`
-    font-weight: ${({ theme }) => theme.fontWeights.semiBold};
-
     ${({ palette }) =>
       palette === 'primary' &&
       css`
@@ -132,7 +131,6 @@ const buttonVariations: { [index: string]: any } = {
     border: none;
     color: ${({ theme }) => theme.colors.white};
     padding: 14px 21px;
-    font-weight: ${({ theme }) => theme.fontWeights.semiBold};
 
     ${({ variantType }) =>
       variantType === 'icon' &&
