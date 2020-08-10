@@ -25,6 +25,16 @@ export const Text: React.FC = (): ReactElement => (
         },
         'primary'
       )}
+      fontWeight={select(
+        'Font Weight',
+        {
+          Regular: 'regular',
+          Medium: 'medium',
+          SemiBold: 'semiBold',
+          Bold: 'bold'
+        },
+        'regular'
+      )}
     >
       {text('Label', 'aiqfome!')}
     </Button>
@@ -50,6 +60,16 @@ export const Contained: React.FC = (): ReactElement => (
             Neutral: 'neutral'
           },
           'primary'
+        )}
+        fontWeight={select(
+          'Font Weight',
+          {
+            Regular: 'regular',
+            Medium: 'medium',
+            SemiBold: 'semiBold',
+            Bold: 'bold'
+          },
+          'regular'
         )}
       >
         {text('Label', 'aiqfome!')}
@@ -78,6 +98,16 @@ export const Outlined: React.FC = (): ReactElement => (
           },
           'primary'
         )}
+        fontWeight={select(
+          'Font Weight',
+          {
+            Regular: 'regular',
+            Medium: 'medium',
+            SemiBold: 'semiBold',
+            Bold: 'bold'
+          },
+          'regular'
+        )}
       >
         {text('Label', 'aiqfome!')}
       </Button>
@@ -104,6 +134,16 @@ export const Fab: React.FC = (): ReactElement => (
             Neutral: 'neutral'
           },
           'primary'
+        )}
+        fontWeight={select(
+          'Font Weight',
+          {
+            Regular: 'regular',
+            Medium: 'medium',
+            SemiBold: 'semiBold',
+            Bold: 'bold'
+          },
+          'regular'
         )}
       >
         {text('Label', 'aiqfome!')}
