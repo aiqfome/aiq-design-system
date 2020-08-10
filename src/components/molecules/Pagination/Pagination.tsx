@@ -5,6 +5,7 @@ import styled, { css, DefaultTheme } from 'styled-components'
 
 import { Flex, Props as FlexProps } from '../../atoms/Flex'
 import { Text } from '../../atoms/Text'
+import { Button } from '../../atoms/Button'
 export interface Props {
   count: number
   color?: string
@@ -49,7 +50,7 @@ const PaginationStyled = styled(Flex)<PaginationStyledProps>`
   }
 `
 
-const ItemPageStyled = styled(Flex)<PaginationStyledProps>`
+const ItemPageStyled = styled(Button)<PaginationStyledProps>`
   ${({ size }) => sizesVariants[size || 'default']}
 
   border: 1px solid #dedede;
