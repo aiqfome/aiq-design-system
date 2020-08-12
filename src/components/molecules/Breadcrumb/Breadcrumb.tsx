@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
+import { MdArrowDropDown } from 'react-icons/md'
 
+import { Flex } from '../../atoms/Flex'
 import styled from 'styled-components'
+import { FlexProps } from 'styled-system'
 
 export interface Props {
   children?: any
+  overlay?: any
 }
 
 const BreadcrumbStyled = styled.ul`
@@ -43,12 +47,49 @@ const BreadcrumbItemStyled = styled.li`
   }
 `
 
-export const BreadcrumbItem: React.FC<Props> = ({ children }) => {
+const OverlayStyled = styled(Flex)`
+  position: relative;
+  & > div {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 600ms, visibility 600ms;
+  }
+
+  &:hover > div {
+    visibility: visible;
+    opacity: 1;
+  }
+`
+const OverlayContentStyled = styled(Flex)<FlexProps>`
+  position: absolute;
+  top: 18px;
+  width: max-content;
+  background: #fff;
+  border-radius: 4px;
+  padding: 4px 8px;
+  box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12),
+    0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
+`
+
+export const BreadcrumbItem: React.FC<Props> = ({ overlay, children }) => {
+  if (overlay) {
+    return (
+      <BreadcrumbItemStyled>
+        {children}
+        <OverlayStyled>
+          <MdArrowDropDown />
+          <OverlayContentStyled>{overlay}</OverlayContentStyled>
+        </OverlayStyled>
+      </BreadcrumbItemStyled>
+    )
+  }
+
   return <BreadcrumbItemStyled>{children}</BreadcrumbItemStyled>
 }
 
 BreadcrumbItem.propTypes = {
-  children: PropTypes.any
+  children: PropTypes.any,
+  overlay: PropTypes.any
 }
 
 export const Breadcrumb: React.FC<Props> = ({ children }) => {
