@@ -115,15 +115,15 @@ export const WithTitle: React.FC = () => {
   )
 }
 
-export const SizeColumn: React.FC = () => {
+export const WithScrollbar: React.FC = () => {
   return (
-    <Flex
-      maxWidth='800px'
-      margin='48px'
-      height='400px'
-      backgroundColor='#F5F5F5'
-    >
-      <TableContainer title='BURGUERS'>
+    <Flex variant='fullCentralized' backgroundColor='#F5F5F5'>
+      <TableContainer
+        maxWidth='800px'
+        margin='48px'
+        height='400px'
+        backgroundColor='#F5F5F5'
+      >
         <Table>
           <TableHead>
             <TableRow>

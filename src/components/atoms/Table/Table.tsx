@@ -28,7 +28,7 @@ const styledCommon = css<Props>`
   ${padding}
   ${border}
   ${color}
-  
+
   white-space: ${({ whiteSpace }) => whiteSpace || 'normal'};
 `
 

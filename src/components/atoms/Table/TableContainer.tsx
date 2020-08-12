@@ -3,9 +3,9 @@ import styled, { DefaultTheme } from 'styled-components'
 import PropTypes from 'prop-types'
 
 import { Text } from '../Text'
-import { Flex } from '../Flex'
+import { Flex, Props as FlexProps } from '../Flex'
 
-export interface TableContainerProps extends DefaultTheme {
+export interface TableContainerProps extends FlexProps, DefaultTheme {
   title?: string
   children?: any
 }
@@ -18,6 +18,27 @@ const TableContainerStyled = styled(Flex)<TableContainerProps>`
   width: 100%;
 
   overflow: hidden;
+
+  &:hover {
+    overflow: auto;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: #ffff;
+  }
+
+  &::-webkit-scrollbar {
+    width: 6px;
+    background: #f4f4f4;
+
+    border-radius: 20px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #dad7d7;
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(218, 215, 215, 0.5);
+  }
 `
 
 export const TableContainer: React.FC<TableContainerProps> = ({

@@ -1,0 +1,215 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`must match with the previous snapshot snapshot renders 1`] = `
+<div
+  className="sc-Axmtr cUqKsw"
+>
+  <div
+    className="sc-Axmtr sc-AxmLO fxfHFW"
+    height="400px"
+  >
+    <div
+      className="sc-Axmtr hUiLkw"
+    >
+      <span
+        className="sc-AxheI enFDny"
+        color="almostBlack"
+        fontSize="xxlarge"
+      >
+        BURGUERS
+      </span>
+    </div>
+    <table
+      className="sc-AxjAm dmWQgo"
+    >
+      <thead
+        className="sc-AxirZ hpfTka"
+      >
+        <tr
+          className="sc-AxgMl bKPeDc"
+        >
+          <th
+            className="sc-AxiKw lgMPcv"
+          >
+            cód 
+          </th>
+          <th
+            className="sc-AxiKw lgMPcv"
+          >
+            item
+          </th>
+          <th
+            className="sc-AxiKw cuNvLx"
+          >
+            preço min.
+          </th>
+        </tr>
+      </thead>
+      <tbody
+        className="sc-AxhCb cRybjm"
+      >
+        <tr
+          className="sc-AxgMl bKPeDc"
+        >
+          <td
+            className="sc-AxhUy kUuWvN"
+          >
+            056
+          </td>
+          <td
+            className="sc-AxhUy hHTxxC"
+            width="100%"
+          >
+            Cheeseburguer
+          </td>
+          <td
+            className="sc-AxhUy jvezrj"
+          >
+            R$ 22,00
+          </td>
+        </tr>
+        <tr
+          className="sc-AxgMl bKPeDc"
+        >
+          <td
+            className="sc-AxhUy kUuWvN"
+          >
+            057
+          </td>
+          <td
+            className="sc-AxhUy hHTxxC"
+            width="100%"
+          >
+            Onion Burguer
+          </td>
+          <td
+            className="sc-AxhUy jvezrj"
+          >
+            R$ 22,00
+          </td>
+        </tr>
+        <tr
+          className="sc-AxgMl bKPeDc"
+        >
+          <td
+            className="sc-AxhUy kUuWvN"
+          >
+            058
+          </td>
+          <td
+            className="sc-AxhUy hHTxxC"
+            width="100%"
+          >
+            Australia Burguer
+          </td>
+          <td
+            className="sc-AxhUy jvezrj"
+          >
+            R$ 22,00
+          </td>
+        </tr>
+        <tr
+          className="sc-AxgMl bKPeDc"
+        >
+          <td
+            className="sc-AxhUy kUuWvN"
+          >
+            059
+          </td>
+          <td
+            className="sc-AxhUy hHTxxC"
+            width="100%"
+          >
+            Blumenal Burguer
+          </td>
+          <td
+            className="sc-AxhUy jvezrj"
+          >
+            R$ 22,00
+          </td>
+        </tr>
+        <tr
+          className="sc-AxgMl bKPeDc"
+        >
+          <td
+            className="sc-AxhUy kUuWvN"
+          >
+            060
+          </td>
+          <td
+            className="sc-AxhUy hHTxxC"
+            width="100%"
+          >
+            Cheeseburguer
+          </td>
+          <td
+            className="sc-AxhUy jvezrj"
+          >
+            R$ 22,00
+          </td>
+        </tr>
+        <tr
+          className="sc-AxgMl bKPeDc"
+        >
+          <td
+            className="sc-AxhUy kUuWvN"
+          >
+            061
+          </td>
+          <td
+            className="sc-AxhUy hHTxxC"
+            width="100%"
+          >
+            Onion Burguer
+          </td>
+          <td
+            className="sc-AxhUy jvezrj"
+          >
+            R$ 22,00
+          </td>
+        </tr>
+        <tr
+          className="sc-AxgMl bKPeDc"
+        >
+          <td
+            className="sc-AxhUy kUuWvN"
+          >
+            068
+          </td>
+          <td
+            className="sc-AxhUy hHTxxC"
+            width="100%"
+          >
+            Australia Burguer
+          </td>
+          <td
+            className="sc-AxhUy jvezrj"
+          >
+            R$ 22,00
+          </td>
+        </tr>
+        <tr
+          className="sc-AxgMl bKPeDc"
+        >
+          <td
+            className="sc-AxhUy kUuWvN"
+          >
+            069
+          </td>
+          <td
+            className="sc-AxhUy hHTxxC"
+            width="100%"
+          >
+            Blumenal Burguer
+          </td>
+          <td
+            className="sc-AxhUy jvezrj"
+          >
+            R$ 22,00
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+`;
