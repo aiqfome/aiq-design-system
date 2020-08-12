@@ -36,7 +36,6 @@ export const Table = styled.table<Props>`
   ${styledCommon}
 
   border-collapse: collapse;
-  background: #fff;
   width: 100%;
 `
 

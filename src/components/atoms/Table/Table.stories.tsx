@@ -146,3 +146,28 @@ export const WithScrollbar: React.FC = () => {
     </Flex>
   )
 }
+
+export const OnlyTable: React.FC = () => {
+  return (
+    <Flex variant='fullCentralized' backgroundColor='#F5F5F5'>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCellHead>cód </TableCellHead>
+            <TableCellHead>item</TableCellHead>
+            <TableCellHead whiteSpace='nowrap'>preço min.</TableCellHead>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {itens.map(item => (
+            <TableRow key={item.cod}>
+              <TableCell>{item.cod}</TableCell>
+              <TableCell width='100%'>{item.item}</TableCell>
+              <TableCell whiteSpace='nowrap'>{item.valor}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </Flex>
+  )
+}
