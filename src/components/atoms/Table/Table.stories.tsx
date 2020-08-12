@@ -1,14 +1,15 @@
 import React from 'react'
 
 import {
-  TableContainer,
   Table,
   TableHead,
   TableRow,
   TableCell,
   TableBody,
   TableCellHead
-} from './index'
+} from './Table'
+
+import { TableContainer } from './TableContainer'
 
 import { Flex } from '../Flex'
 
@@ -54,13 +55,40 @@ const itens = [
     valor: 'R$ 22,00'
   },
   {
-    cod: '056',
+    cod: '069',
     item: 'Blumenal Burguer',
     valor: 'R$ 22,00'
   }
 ]
 
 export const Basic: React.FC = () => {
+  return (
+    <Flex variant='fullCentralized' backgroundColor='#F5F5F5'>
+      <TableContainer>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCellHead>cód </TableCellHead>
+              <TableCellHead>item</TableCellHead>
+              <TableCellHead>preço min.</TableCellHead>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {itens.map(item => (
+              <TableRow key={item.cod}>
+                <TableCell>{item.cod}</TableCell>
+                <TableCell>{item.item}</TableCell>
+                <TableCell>{item.valor}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </Flex>
+  )
+}
+
+export const WithTitle: React.FC = () => {
   return (
     <Flex variant='fullCentralized' backgroundColor='#F5F5F5'>
       <TableContainer title='BURGUERS'>
@@ -78,6 +106,38 @@ export const Basic: React.FC = () => {
                 <TableCell>{item.cod}</TableCell>
                 <TableCell>{item.item}</TableCell>
                 <TableCell>{item.valor}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </Flex>
+  )
+}
+
+export const SizeColumn: React.FC = () => {
+  return (
+    <Flex
+      maxWidth='800px'
+      margin='48px'
+      height='400px'
+      backgroundColor='#F5F5F5'
+    >
+      <TableContainer title='BURGUERS'>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCellHead>cód </TableCellHead>
+              <TableCellHead>item</TableCellHead>
+              <TableCellHead whiteSpace='nowrap'>preço min.</TableCellHead>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {itens.map(item => (
+              <TableRow key={item.cod}>
+                <TableCell>{item.cod}</TableCell>
+                <TableCell width='100%'>{item.item}</TableCell>
+                <TableCell whiteSpace='nowrap'>{item.valor}</TableCell>
               </TableRow>
             ))}
           </TableBody>
