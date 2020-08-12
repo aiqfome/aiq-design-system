@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`must match with the previous snapshot snapshot renders 1`] = `
+<ul
+  className="sc-AxirZ iJBhLN"
+>
+  <li
+    className="sc-AxiKw gNSxAH"
+  >
+    <a
+      className="sc-AxheI iBNNrJ"
+      href="#"
+    >
+      início
+    </a>
+  </li>
+  <li
+    className="sc-AxiKw gNSxAH"
+  >
+    <a
+      className="sc-AxheI juDcHF"
+      href="#"
+    >
+      relatório
+    </a>
+  </li>
+  <li
+    className="sc-AxiKw gNSxAH"
+  >
+    <a
+      className="sc-AxheI juDcHF"
+      href="#"
+    >
+      pedidos
+    </a>
+  </li>
+</ul>
+`;
