@@ -19,12 +19,6 @@ export interface Props {
   opened?: boolean
 }
 
-const SidebarStyled = styled(Drawer)`
-  width: 100%;
-  max-width: 340px;
-  box-shadow: 0px 3px 15px #0000001a;
-`
-
 const Itens = styled.ul`
   list-style: none;
   padding: 0;
@@ -37,7 +31,14 @@ export const Sidebar: React.FC<Props> = ({
   ...props
 }) => {
   return (
-    <SidebarStyled variation='left' opened={opened} {...props}>
+    <Drawer
+      width='100%'
+      maxWidth='340px'
+      boxShadow='0px 3px 15px #0000001a'
+      variation='left'
+      opened={opened}
+      {...props}
+    >
       {data && (
         <>
           <Flex padding='24px' alignItems='center'>
@@ -59,7 +60,7 @@ export const Sidebar: React.FC<Props> = ({
           </Itens>
         </>
       )}
-    </SidebarStyled>
+    </Drawer>
   )
 }
 
