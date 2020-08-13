@@ -1,26 +1,28 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css, DefaultTheme } from 'styled-components'
-
+import { space, SpaceProps } from 'styled-system'
 import { Text } from '../Text'
 
-export interface Props {
+export interface Props extends SpaceProps {
   src?: string
   palette?: string
   alt: string
 }
 
 export const AvatarStyled = styled.img<Props>`
+  ${space}
   width: 36px;
   height: 36px;
   border-radius: 5px;
 `
 
-interface ContainerStyledProps extends DefaultTheme {
+interface ContainerStyledProps extends DefaultTheme, SpaceProps {
   palette: string
 }
 
 export const ContainerStyled = styled.div<ContainerStyledProps>`
+  ${space}
   height: 36px;
   width: 36px;
   border-radius: 5px;
@@ -56,7 +58,7 @@ export const Avatar: React.FC<Props> = ({
     return <AvatarStyled src={src} alt={alt} {...props} />
   }
   return (
-    <ContainerStyled palette={palette}>
+    <ContainerStyled palette={palette} {...props}>
       <Text fontWeight='bold' color={palette}>
         {name}
       </Text>

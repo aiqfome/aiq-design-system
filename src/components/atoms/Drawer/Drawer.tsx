@@ -56,10 +56,11 @@ export const DrawerStyled = styled.div<Props>`
 export const Drawer: React.FC<Props> = ({
   opened = false,
   variation = 'right',
-  children
+  children,
+  ...props
 }) => {
   return (
-    <DrawerStyled opened={opened} variation={variation}>
+    <DrawerStyled opened={opened} variation={variation} {...props}>
       {children}
     </DrawerStyled>
   )
