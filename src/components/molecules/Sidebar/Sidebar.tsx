@@ -42,7 +42,7 @@ export const Sidebar: React.FC<Props> = ({
       {data && (
         <>
           <Flex padding='24px' alignItems='center'>
-            <Avatar alt='Juliano' mx='12px' />
+            <Avatar alt={data.user.name} mx='12px' />
             <Flex flexDirection='column'>
               <Text color='almostBlack' fontWeight='semiBold'>
                 {data.user.name}
