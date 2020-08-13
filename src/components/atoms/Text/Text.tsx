@@ -10,7 +10,9 @@ import {
   fontSize,
   FontSizeProps,
   fontWeight,
-  FontWeightProps
+  FontWeightProps,
+  typography,
+  TypographyProps
 } from 'styled-system'
 
 export interface Props
@@ -18,7 +20,8 @@ export interface Props
     SpaceProps,
     LayoutProps,
     FontSizeProps,
-    FontWeightProps {
+    FontWeightProps,
+    TypographyProps {
   cursor?: string
 }
 
@@ -28,6 +31,7 @@ export const Text = styled.span<Props>`
   ${layout}
   ${fontSize}
   ${fontWeight}
+  ${typography}
 
   cursor: ${props => props.cursor || 'auto'};
 `

@@ -165,7 +165,7 @@ export const Input: React.FC<Props> = ({
           <Button
             palette='primary'
             mr={5}
-            onClick={() => setShowPassword(!showPassword)}
+            onClick={e => setShowPassword(!showPassword)}
           >
             {showPassword ? (
               <MdVisibilityOff size={22} />
