@@ -11,6 +11,7 @@ import { Icon } from '../../atoms/Icon'
 const ItemStyled = styled.li`
   &:hover {
     cursor: pointer;
+    background: ${({ theme }) => theme.colors.lightGrey};
   }
   a {
     padding: 16px 24px;
@@ -50,6 +51,10 @@ const SubItens = styled.ul<SubItens>`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+
+    &:hover {
+      background: ${({ theme }) => theme.colors.grey};
+    }
   }
 `
 
@@ -128,8 +133,12 @@ export const Item: React.FC<ItemProps> = ({ item, ...props }) => {
                 <Flex />
               )}
 
-              <Icon size='18px' color='grey'>
-                {isOpen ? <MdExpandLess /> : <MdExpandMore />}
+              <Icon color='grey'>
+                {isOpen ? (
+                  <MdExpandLess size={18} />
+                ) : (
+                  <MdExpandMore size={18} />
+                )}
               </Icon>
             </Flex>
           </Flex>

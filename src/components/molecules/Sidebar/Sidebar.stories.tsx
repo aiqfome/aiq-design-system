@@ -14,69 +14,71 @@ export const Basic: React.FC = () => {
   const sidebarData = {
     user: {
       name: 'juliano',
-      email: 'teste@aiqfome.com'
+      email: 'test@aiqfome.com'
     },
     itens: [
       {
-        icon: <MdHome />,
+        icon: <MdHome size={18} />,
         name: 'dashboard',
         href: '/dashboard'
       },
       {
-        icon: <MdBookmark />,
-        name: 'pedidos',
+        icon: <MdBookmark size={18} />,
+        name: 'bookmark',
         href: '/pedidos'
       },
       {
-        icon: <MdStorage />,
-        name: 'lojas',
+        icon: <MdStorage size={18} />,
+        name: 'store',
         itens: [
           {
-            name: 'gerenciar lojas',
-            href: '/gerenciar_lojas'
+            name: 'Sub Item',
+            href: '/subItem'
           },
           {
-            name: 'adicionar loja',
-            href: '/adicionar_lojas'
+            name: 'Sub Item',
+            href: '/subItem'
           },
           {
-            name: 'lojas prospectas',
-            href: '/gerenciar_lojas',
+            name: 'Sub Item',
+            href: '/subItem',
             badge: 18
           }
         ]
       },
       {
-        icon: <MdStorage />,
-        name: 'lojas',
+        icon: <MdStorage size={18} />,
+        name: 'itens',
         itens: [
           {
-            name: 'gerenciar lojas',
-            href: '/gerenciar_lojas'
+            name: 'Sub Item',
+            href: '/subItem'
           },
           {
-            name: 'adicionar loja',
-            href: '/adicionar_lojas'
+            name: 'Sub Item',
+            href: '/subItem'
           },
           {
-            name: 'lojas prospectas',
-            href: '/gerenciar_lojas'
+            name: 'Sub Item',
+            href: '/subItem'
+          },
+          {
+            name: 'Sub Item',
+            href: '/subItem'
+          },
+          {
+            name: 'Sub Item',
+            href: '/subItem'
+          },
+          {
+            name: 'Sub Item',
+            href: '/subItem'
           }
         ]
       },
       {
-        icon: <MdBookmark />,
-        name: 'pedidos',
-        href: '/pedidos'
-      },
-      {
-        icon: <MdBookmark />,
-        name: 'pedidos',
-        href: '/pedidos'
-      },
-      {
-        icon: <MdBookmark />,
-        name: 'pedidos',
+        icon: <MdBookmark size={18} />,
+        name: 'aiqfome',
         href: 'https://aiqfome.com/',
         type: 'external'
       }

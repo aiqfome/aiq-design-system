@@ -15,11 +15,11 @@ type SidebarData = {
 }
 
 export interface Props {
-  data?: SidebarData
+  data: SidebarData
   opened?: boolean
 }
 
-const SidebarStyled = styled(Drawer)<Props>`
+const SidebarStyled = styled(Drawer)`
   width: 100%;
   max-width: 340px;
   box-shadow: 0px 3px 15px #0000001a;
@@ -64,6 +64,6 @@ export const Sidebar: React.FC<Props> = ({
 }
 
 Sidebar.propTypes = {
-  data: PropTypes.any,
+  data: PropTypes.any.isRequired,
   opened: PropTypes.bool
 }
