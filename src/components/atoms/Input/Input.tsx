@@ -1,4 +1,4 @@
-import React, { useState, InputHTMLAttributes, useCallback } from 'react'
+import React, { useState, InputHTMLAttributes } from 'react'
 import PropTypes from 'prop-types'
 import { MdVisibility, MdVisibilityOff } from 'react-icons/md'
 
@@ -149,15 +149,6 @@ export const Input: React.FC<Props> = ({
 }) => {
   const [showPassword, setShowPassword] = useState(false)
 
-  const handleShowPassword = useCallback(
-    e => {
-      e.preventDefault()
-
-      setShowPassword(!showPassword)
-    },
-    [showPassword]
-  )
-
   if (type === 'password') {
     return (
       <Container {...props}>
@@ -171,7 +162,11 @@ export const Input: React.FC<Props> = ({
           />
           <Text>{label}</Text>
 
-          <Button palette='primary' mr={5} onClick={e => handleShowPassword(e)}>
+          <Button
+            palette='primary'
+            mr={5}
+            onClick={e => setShowPassword(!showPassword)}
+          >
             {showPassword ? (
               <MdVisibilityOff size={22} />
             ) : (
