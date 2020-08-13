@@ -40,7 +40,7 @@ export const Sidebar: React.FC<Props> = ({
     <SidebarStyled variation='left' opened={opened} {...props}>
       {data && (
         <>
-          <Flex padding='24px'>
+          <Flex padding='24px' alignItems='center'>
             <Avatar alt='Juliano' mx='12px' />
             <Flex flexDirection='column'>
               <Text color='almostBlack' fontWeight='semiBold'>
@@ -51,7 +51,7 @@ export const Sidebar: React.FC<Props> = ({
               </Text>
             </Flex>
           </Flex>
-          <Divider width='100%' />
+          <Divider width='100%' marginBottom='16px' />
           <Itens>
             {data.itens.map((item, index) => (
               <Item key={index} item={item} />

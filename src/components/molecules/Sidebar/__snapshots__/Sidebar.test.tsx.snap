@@ -5,7 +5,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
   className="sc-AxjAm jYazFB sc-fzpans eWDhsX"
 >
   <div
-    className="sc-AxhUy dDmHvy"
+    className="sc-AxhUy eMXjax"
   >
     <div
       className="sc-AxhCb jkHhfy"
@@ -38,7 +38,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
     </div>
   </div>
   <hr
-    className="sc-AxgMl tfALA"
+    className="sc-AxgMl hgABVq"
     height="1px"
     width="100%"
   />
