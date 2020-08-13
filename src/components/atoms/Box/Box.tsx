@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import {
   color,
+  ColorProps,
   space,
   SpaceProps,
   layout,
@@ -12,11 +13,15 @@ import {
   fontWeight,
   FontWeightProps,
   border,
-  BorderProps
+  BorderProps,
+  flexbox,
+  FlexboxProps
 } from 'styled-system'
 
 export interface Props
-  extends SpaceProps,
+  extends ColorProps,
+    SpaceProps,
+    FlexboxProps,
     LayoutProps,
     FontSizeProps,
     FontWeightProps,
@@ -27,6 +32,7 @@ export interface Props
 }
 
 export const BoxStyled = styled.div`
+  ${flexbox}
   ${color}
   ${space}
   ${layout}

@@ -1,5 +1,5 @@
 import React from 'react'
-import { withKnobs, text, boolean } from '@storybook/addon-knobs'
+import { withKnobs, text, select, boolean } from '@storybook/addon-knobs'
 import { Input } from './Input'
 import { Button } from '../Button'
 
@@ -9,24 +9,36 @@ export default {
   decorators: [withKnobs]
 }
 
-export const basic: React.FC = () => (
+export const Basic: React.FC = () => (
   <Input
     value={text('value', '')}
     errorForm={boolean('errorForm', false)}
     errorMessage={text('errorMessage', 'message error')}
     label={text('label', 'aiqfome')}
+    type={select(
+      'Type',
+      {
+        Text: 'text',
+        Password: 'password'
+      },
+      'text'
+    )}
   />
 )
 
-export const errorMessage: React.FC = () => (
+export const Password: React.FC = () => (
+  <Input label='Aiqfome' type='password' />
+)
+
+export const ErrorMessage: React.FC = () => (
   <Input label='Aiqfome' errorForm={true} errorMessage='Not Allowed' />
 )
 
-export const withValue: React.FC = () => {
+export const WithValue: React.FC = () => {
   const value = 'hamburger'
   return <Input label='Aiqfome' value={value} />
 }
 
-export const sufix: React.FC = () => (
+export const Sufix: React.FC = () => (
   <Input label='Aiqfome' sufix={<Button mx={10}>Search</Button>} />
 )

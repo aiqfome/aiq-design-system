@@ -8,6 +8,7 @@ import { Flex, Props as FlexProps } from '../Flex'
 export interface Props extends FlexProps {
   cursor?: string
   children?: any
+  color?: string
 }
 
 export const IconStyled = styled(Flex)<Props>`
@@ -25,6 +26,7 @@ export const Icon: React.FC<Props> = ({ children, ...props }) => {
 }
 
 Icon.propTypes = {
+  color: PropTypes.string,
   cursor: PropTypes.string,
   children: PropTypes.any
 }
