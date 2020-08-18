@@ -1,7 +1,10 @@
 import React from 'react'
 import { withKnobs, text, select, boolean } from '@storybook/addon-knobs'
+
+import { MdSearch } from 'react-icons/md'
+
+import { Flex } from '../Flex'
 import { Input } from './Input'
-import { Button } from '../Button'
 
 export default {
   component: Input,
@@ -10,35 +13,69 @@ export default {
 }
 
 export const Basic: React.FC = () => (
-  <Input
-    value={text('value', '')}
-    errorForm={boolean('errorForm', false)}
-    errorMessage={text('errorMessage', 'message error')}
-    label={text('label', 'aiqfome')}
-    type={select(
-      'Type',
-      {
-        Text: 'text',
-        Password: 'password'
-      },
-      'text'
-    )}
-  />
+  <Flex variant='fullCentralized'>
+    <Input
+      value={text('value', '')}
+      errorForm={boolean('errorForm', false)}
+      errorMessage={text('errorMessage', 'message error')}
+      label={text('label', 'aiqfome')}
+      placeholder={text('placeholder', 'duas pizzas é muito')}
+      type={select(
+        'Type',
+        {
+          Text: 'text',
+          Password: 'password'
+        },
+        'text'
+      )}
+    />
+  </Flex>
+)
+
+export const Outlined: React.FC = () => (
+  <Flex variant='fullCentralized'>
+    <Input
+      variant='outlined'
+      value={text('value', '')}
+      errorForm={boolean('errorForm', false)}
+      errorMessage={text('errorMessage', 'message error')}
+      label={text('label', 'aiqfome')}
+      type={select(
+        'Type',
+        {
+          Text: 'text',
+          Password: 'password'
+        },
+        'text'
+      )}
+    />
+  </Flex>
 )
 
 export const Password: React.FC = () => (
-  <Input label='Aiqfome' type='password' />
+  <Flex variant='fullCentralized'>
+    <Input label='Aiqfome' type='password' />
+  </Flex>
 )
 
 export const ErrorMessage: React.FC = () => (
-  <Input label='Aiqfome' errorForm={true} errorMessage='Not Allowed' />
+  <Flex variant='fullCentralized'>
+    <Input label='Aiqfome' errorForm={true} errorMessage='Not Allowed' />
+  </Flex>
 )
 
 export const WithValue: React.FC = () => {
   const value = 'hamburger'
-  return <Input label='Aiqfome' value={value} />
+
+  return (
+    <Flex variant='fullCentralized'>
+      <Input label='Aiqfome' value={value} />
+    </Flex>
+  )
 }
 
 export const Sufix: React.FC = () => (
-  <Input label='Aiqfome' sufix={<Button mx={10}>Search</Button>} />
+  <Flex variant='fullCentralized'>
+    <Input label='Aiqfome' sufix={<MdSearch />} />
+  </Flex>
 )
