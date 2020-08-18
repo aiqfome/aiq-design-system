@@ -31,6 +31,7 @@ export interface Props
   palette?: 'primary' | 'secondary' | 'neutral'
   onClick?: any
   fullWidth?: boolean
+  type?: string
 }
 
 const buttonVariations: { [index: string]: any } = {
@@ -188,15 +189,18 @@ export const Button: React.FC<Props> = ({
   prefix,
   sufix,
   onClick,
+  type,
   ...props
 }) => {
   const handleClick = useCallback(
     e => {
       e.preventDefault()
 
-      onClick()
+      if (type !== 'submit' && onClick) {
+        onClick()
+      }
     },
-    [onClick]
+    [onClick, type]
   )
 
   if (prefix) {
@@ -240,5 +244,6 @@ Button.propTypes = {
   sufix: PropTypes.any,
   refButton: PropTypes.any,
   fontWeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
+  type: PropTypes.string
 }

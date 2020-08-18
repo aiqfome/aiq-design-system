@@ -1,27 +1,32 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import PropTypes from 'prop-types'
-
-import styled from 'styled-components'
 
 import { Divider } from '../../atoms/Divider'
 import { Box } from '../../atoms/Box'
 import { Text } from '../../atoms/Text'
 
-const ContainerStyled = styled(Box)``
+export interface Props {
+  title?: string
+  children?: ReactNode
+}
 
-export const Container: React.FC = ({ title, children }: any) => {
+export const Container: React.FC<Props> = ({ title, children }) => {
   return (
-    <ContainerStyled border='1px solid lightGrey' borderRadius='12px' m={10}>
-      <Box p={10}>
-        <Text color='almostBlack' fontSize='xxlarge'>
-          {title}
-        </Text>
-      </Box>
+    <Box border='1px solid lightGrey' borderRadius='12px' m={10}>
+      {title && (
+        <>
+          <Box p={10}>
+            <Text color='almostBlack' fontSize='xxlarge'>
+              {title}
+            </Text>
+          </Box>
 
-      <Divider />
+          <Divider />
+        </>
+      )}
 
       {children}
-    </ContainerStyled>
+    </Box>
   )
 }
 
