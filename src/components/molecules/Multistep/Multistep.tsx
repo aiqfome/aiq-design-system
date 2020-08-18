@@ -14,6 +14,8 @@ export interface Props {
     component: any
   }[]
   stepCurrent?: number
+  disabledClickStep?: boolean
+  onClickStep?: () => void
 }
 
 const StepButton = styled.button`
@@ -28,6 +30,8 @@ const StepButton = styled.button`
 export const Multistep: React.FC<Props> = ({
   steps,
   stepCurrent = 0,
+  disabledClickStep = 0,
+  onClickStep,
   ...props
 }) => {
   const theme = useContext(ThemeContext)
@@ -40,12 +44,15 @@ export const Multistep: React.FC<Props> = ({
   }, [stepCurrent, steps])
 
   function handleClickStep(newStepActive) {
-    setStepActive(newStepActive)
+    onClickStep && onClickStep()
+    if (!disabledClickStep) {
+      setStepActive(newStepActive)
+    }
   }
 
   return (
-    <Flex flexDirection='column' {...props}>
-      <Flex width='100%'>
+    <Flex width='100%' alignItems='center' flexDirection='column' {...props}>
+      <Flex width='100%' maxWidth='800px'>
         {steps.map((step, index) => (
           <Flex
             key={index}
@@ -109,5 +116,7 @@ export const Multistep: React.FC<Props> = ({
 
 Multistep.propTypes = {
   steps: PropTypes.array.isRequired,
-  stepCurrent: PropTypes.number
+  stepCurrent: PropTypes.number,
+  disabledClickStep: PropTypes.bool,
+  onClickStep: PropTypes.func
 }
