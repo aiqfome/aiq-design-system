@@ -16,12 +16,18 @@ interface ItemProps {
   sidebarOpened: boolean
 }
 
-const ItemStyled = styled.li`
+interface ItemStyledProps {
+  sidebarOpened?: boolean
+}
+
+const ItemStyled = styled.li<ItemStyledProps>`
   /* overflow-x: hidden; */
   position: relative;
   &:hover {
     cursor: pointer;
-    background: ${({ theme }) => theme.colors.lightGrey};
+
+    background: ${({ theme, sidebarOpened }) =>
+      sidebarOpened ? theme.colors.lightGrey : theme.colors.white};
   }
 `
 
@@ -88,6 +94,7 @@ export const Item: React.FC<ItemProps> = ({
 
   return (
     <ItemStyled
+      sidebarOpened={sidebarOpened}
       onMouseEnter={() => !sidebarOpened && setIsOpen(true)}
       onMouseLeave={() => !sidebarOpened && setIsOpen(false)}
       {...props}

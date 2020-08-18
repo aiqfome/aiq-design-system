@@ -81,8 +81,9 @@ const SubItensStyled = styled(Flex)<Props>`
             top: 0;
             right: -240px;
             background: #ffff;
-            border-radius: 4px;
-            box-shadow: 0px 0px 15px #0000001a;
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 4px;
+            box-shadow: 10px 10px 5px -10px #0000001a;
           `
         }
         return css`
