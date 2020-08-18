@@ -10,7 +10,9 @@ import {
   fontWeight,
   FontWeightProps,
   border,
-  BorderProps
+  BorderProps,
+  position,
+  PositionProps
 } from 'styled-system'
 
 export interface Props
@@ -19,6 +21,7 @@ export interface Props
     LayoutProps,
     FontSizeProps,
     FontWeightProps,
+    PositionProps,
     BorderProps {
   variant?: 'auto' | 'centralized' | 'fullCentralized'
   justifyContent?: string
@@ -51,6 +54,7 @@ export const Flex = styled.div<Props>`
   ${fontSize}
   ${fontWeight}
   ${border}
+  ${position}
 
   display: flex;
   justify-content: ${props => props.justifyContent};

@@ -8,81 +8,40 @@ import { Flex } from '../../atoms/Flex'
 import { Link } from '../../atoms/Link'
 import { Icon } from '../../atoms/Icon'
 
-const ItemStyled = styled.li`
-  &:hover {
-    cursor: pointer;
-    background: ${({ theme }) => theme.colors.lightGrey};
-  }
-  a {
-    padding: 16px 24px;
-    display: flex;
-    flex-direction: row;
-  }
-`
-interface SubItens {
-  isOpen: boolean
-}
-
-const SubItens = styled.ul<SubItens>`
-  margin: 0;
-  padding: 0;
-  background: #f6f6f6;
-
-  &.hide {
-    overflow: hidden;
-    max-height: 0;
-    padding-top: 0;
-    padding-bottom: 0;
-    margin-top: 0;
-    margin-bottom: 0;
-    transition: all 0.2s ease;
-    will-change: transform;
-  }
-
-  &.show {
-    max-height: 360px;
-    overflow: hidden;
-    transition: all 0.5s ease;
-    will-change: transform;
-  }
-  a {
-    color: #434343;
-    padding: 12px 24px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-
-    &:hover {
-      background: ${({ theme }) => theme.colors.grey};
-    }
-  }
-`
-
-const Badge = ({ children }) => {
-  return (
-    <Flex
-      backgroundColor='#ff4d4f'
-      variant='centralized'
-      padding='1px 8px'
-      marginRight='16px'
-      borderRadius='12px'
-    >
-      <Text fontSize='small' color='white'>
-        {children}
-      </Text>
-    </Flex>
-  )
-}
-
-Badge.propTypes = {
-  children: PropTypes.any
-}
+import { Badge } from './Badge'
+import { SubItens } from './SubItens'
 
 interface ItemProps {
   item: any
+  sidebarOpened: boolean
 }
 
-export const Item: React.FC<ItemProps> = ({ item, ...props }) => {
+interface ItemStyledProps {
+  sidebarOpened?: boolean
+}
+
+const ItemStyled = styled.li<ItemStyledProps>`
+  /* overflow-x: hidden; */
+  position: relative;
+  &:hover {
+    cursor: pointer;
+
+    background: ${({ theme, sidebarOpened }) =>
+      sidebarOpened ? theme.colors.lightGrey : theme.colors.white};
+  }
+`
+
+const LinkStyled = styled(Link)`
+  padding: 16px 22px;
+  display: flex;
+  flex-direction: row;
+`
+
+export const Item: React.FC<ItemProps> = ({
+  item,
+  sidebarOpened = false,
+  ...props
+}) => {
   const [isOpen, setIsOpen] = useState(false)
 
   function computeBadgeAllItens(iten) {
@@ -92,90 +51,79 @@ export const Item: React.FC<ItemProps> = ({ item, ...props }) => {
         if (subItem.badge) value += subItem.badge
       })
     }
+    if (item.badge) {
+      value += iten.badge
+    }
     return value
   }
 
   const badgeAllItens = useMemo(() => computeBadgeAllItens(item), [item])
 
   function changeVisibilitySubItem() {
-    setIsOpen(!isOpen)
+    if (sidebarOpened) {
+      setIsOpen(!isOpen)
+    }
   }
 
-  if (item.itens && item.itens.length > 0) {
-    return (
-      <ItemStyled {...props}>
-        <Flex flexDirection='column'>
-          <Flex
-            flexDirection='row'
-            alignItems='center'
-            justifyContent='space-between'
-            padding='16px 24px'
-            onClick={changeVisibilitySubItem}
-          >
-            <Flex>
-              <Icon marginRight='18px' color='primary'>
-                {item.icon}
-              </Icon>
-              {isOpen ? (
-                <Text cursor='pointer' color='primary' fontWeight='medium'>
-                  {item.name}
-                </Text>
-              ) : (
-                <Text cursor='pointer' color='darkerGrey'>
-                  {item.name}
-                </Text>
-              )}
-            </Flex>
-            <Flex>
-              {!isOpen && badgeAllItens ? (
-                <Badge>{badgeAllItens}</Badge>
-              ) : (
-                <Flex />
-              )}
-
-              <Icon color='grey'>
-                {isOpen ? (
-                  <MdExpandLess size={18} />
-                ) : (
-                  <MdExpandMore size={18} />
-                )}
-              </Icon>
-            </Flex>
+  const ContentItem = () => (
+    <>
+      <Icon marginRight='22px' color={item.active ? 'primary' : 'grey'}>
+        {item.icon}
+      </Icon>
+      {sidebarOpened && (
+        <Flex
+          flex={1}
+          justifyContent='space-between'
+          onClick={changeVisibilitySubItem}
+        >
+          <Flex flex={1}>
+            <Text cursor='pointer' color='darkerGrey'>
+              {item.name}
+            </Text>
           </Flex>
-          <SubItens className={`${isOpen ? 'show' : 'hide'}`} isOpen={isOpen}>
-            {item.itens.map((subItem, index) => (
-              <li key={index}>
-                <Link
-                  variant={subItem.type ? subItem.type : 'internal'}
-                  href={subItem.href}
-                >
-                  <Text cursor='pointer' fontSize='medium'>
-                    {subItem.name}
-                  </Text>
-                  {subItem.badge && <Badge>{subItem.badge}</Badge>}
-                </Link>
-              </li>
-            ))}
-          </SubItens>
+          {badgeAllItens > 0 && !isOpen && <Badge>{badgeAllItens}</Badge>}
+          {item.itens && (
+            <Icon color='grey'>
+              {isOpen ? <MdExpandLess size={18} /> : <MdExpandMore size={18} />}
+            </Icon>
+          )}
         </Flex>
-      </ItemStyled>
-    )
-  }
+      )}
+    </>
+  )
 
   return (
-    <ItemStyled {...props}>
-      <Link variant={item.type ? item.type : 'internal'} href={item.href}>
-        <Icon marginRight='18px' color='primary'>
-          {item.icon}
-        </Icon>
-        <Text cursor='pointer' color='darkerGrey'>
-          {item.name}
-        </Text>
-      </Link>
+    <ItemStyled
+      sidebarOpened={sidebarOpened}
+      onMouseEnter={() => !sidebarOpened && setIsOpen(true)}
+      onMouseLeave={() => !sidebarOpened && setIsOpen(false)}
+      {...props}
+    >
+      {item.itens && item.itens.length > 0 ? (
+        <Flex
+          flexDirection='row'
+          width='100%'
+          alignItems='center'
+          justifyContent='space-between'
+          padding='16px 22px'
+          onClick={changeVisibilitySubItem}
+        >
+          <ContentItem />
+        </Flex>
+      ) : (
+        <LinkStyled
+          variant={item.type ? item.type : 'internal'}
+          href={item.href}
+        >
+          <ContentItem />
+        </LinkStyled>
+      )}
+      <SubItens item={item} sidebarOpened={sidebarOpened} itemOpened={isOpen} />
     </ItemStyled>
   )
 }
 
 Item.propTypes = {
-  item: PropTypes.any.isRequired
+  item: PropTypes.any.isRequired,
+  sidebarOpened: PropTypes.bool.isRequired
 }
