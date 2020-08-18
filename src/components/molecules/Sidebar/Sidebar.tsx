@@ -2,21 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import { Drawer } from '../../atoms/Drawer'
-import { Avatar } from '../../atoms/Avatar'
-import { Text } from '../../atoms/Text'
 import { Divider } from '../../atoms/Divider'
 import { Flex } from '../../atoms/Flex'
 import { Item } from './Item'
 
-type SidebarData = {
-  user: any
-  itens: any
-}
-
 export interface Props {
-  data: SidebarData
+  data: { itens: any }
   opened?: boolean
+  header?: any
 }
 
 const Itens = styled.ul`
@@ -25,46 +18,49 @@ const Itens = styled.ul`
   margin: 0;
 `
 
+interface SidebarStyledProps {
+  opened?: boolean
+}
+
+const SidebarStyled = styled(Flex)<SidebarStyledProps>`
+  box-shadow: 0px 3px 15px #0000001a;
+  height: 100vh;
+  max-width: ${({ opened }) => (opened ? '340px' : '60px')};
+  transition: all 0.5s ease;
+  will-change: transform;
+`
+
 export const Sidebar: React.FC<Props> = ({
   data,
+  header,
   opened = false,
   ...props
 }) => {
   return (
-    <Drawer
+    <SidebarStyled
       width='100%'
       maxWidth='340px'
-      boxShadow='0px 3px 15px #0000001a'
-      variation='left'
+      flexDirection='column'
       opened={opened}
       {...props}
     >
       {data && (
         <>
-          <Flex padding='24px' alignItems='center'>
-            <Avatar alt={data.user.name} mx='12px' />
-            <Flex flexDirection='column'>
-              <Text color='almostBlack' fontWeight='semiBold'>
-                {data.user.name}
-              </Text>
-              <Text color='darkGrey' fontSize='xsmall'>
-                {data.user.email}
-              </Text>
-            </Flex>
-          </Flex>
+          {header && header}
           <Divider width='100%' marginBottom='16px' />
           <Itens>
             {data.itens.map((item, index) => (
-              <Item key={index} item={item} />
+              <Item sidebarOpened={opened} key={index} item={item} />
             ))}
           </Itens>
         </>
       )}
-    </Drawer>
+    </SidebarStyled>
   )
 }
 
 Sidebar.propTypes = {
   data: PropTypes.any.isRequired,
-  opened: PropTypes.bool
+  opened: PropTypes.bool,
+  header: PropTypes.any
 }
