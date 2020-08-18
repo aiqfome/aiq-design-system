@@ -209,39 +209,46 @@ export const Prefix: React.FC = (): ReactElement => (
   </Flex>
 )
 
-export const Sufix: React.FC = (): ReactElement => (
-  <Flex variant='fullCentralized'>
-    <Flex
-      variant='centralized'
-      height='200px'
-      width='400px'
-      border='1px solid lightGrey'
-    >
-      <Button
-        fullWidth={boolean('Full Width', false)}
-        palette={select(
-          'Palette',
-          {
-            Primary: 'primary',
-            Secondary: 'secondary',
-            Neutral: 'neutral'
-          },
-          'primary'
-        )}
-        variant={select(
-          'variant',
-          {
-            Text: 'text',
-            Contained: 'contained',
-            Outlined: 'outlined',
-            Fab: 'fab'
-          },
-          'text'
-        )}
-        sufix={<FaHamburger />}
+export const ClickAction: React.FC = (): ReactElement => {
+  const handleClick = () => {
+    alert('i really want a pizza')
+  }
+
+  return (
+    <Flex variant='fullCentralized'>
+      <Flex
+        variant='centralized'
+        height='200px'
+        width='400px'
+        border='1px solid lightGrey'
       >
-        {text('Label', 'aiqfome!')}
-      </Button>
+        <Button
+          onClick={() => handleClick()}
+          fullWidth={boolean('Full Width', false)}
+          palette={select(
+            'Palette',
+            {
+              Primary: 'primary',
+              Secondary: 'secondary',
+              Neutral: 'neutral'
+            },
+            'primary'
+          )}
+          variant={select(
+            'variant',
+            {
+              Text: 'text',
+              Contained: 'contained',
+              Outlined: 'outlined',
+              Fab: 'fab'
+            },
+            'contained'
+          )}
+          sufix={<FaHamburger />}
+        >
+          {text('Label', 'click me!')}
+        </Button>
+      </Flex>
     </Flex>
-  </Flex>
-)
+  )
+}
