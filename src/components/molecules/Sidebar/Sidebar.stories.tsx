@@ -29,7 +29,8 @@ const sidebarData = {
     {
       icon: <MdBookmark size={18} />,
       name: 'bookmark',
-      href: '/pedidos'
+      href: '/pedidos',
+      active: true
     },
     {
       icon: <MdStorage size={18} />,
@@ -50,36 +51,36 @@ const sidebarData = {
         }
       ]
     },
-    // {
-    //   icon: <MdStorage size={18} />,
-    //   name: 'itens',
-    //   itens: [
-    //     {
-    //       name: 'Sub Item',
-    //       href: '/subItem'
-    //     },
-    //     {
-    //       name: 'Sub Item',
-    //       href: '/subItem'
-    //     },
-    //     {
-    //       name: 'Sub Item',
-    //       href: '/subItem'
-    //     },
-    //     {
-    //       name: 'Sub Item',
-    //       href: '/subItem'
-    //     },
-    //     {
-    //       name: 'Sub Item',
-    //       href: '/subItem'
-    //     },
-    //     {
-    //       name: 'Sub Item',
-    //       href: '/subItem'
-    //     }
-    //   ]
-    // },
+    {
+      icon: <MdStorage size={18} />,
+      name: 'itens',
+      itens: [
+        {
+          name: 'Sub Item',
+          href: '/subItem'
+        },
+        {
+          name: 'Sub Item',
+          href: '/subItem'
+        },
+        {
+          name: 'Sub Item',
+          href: '/subItem'
+        },
+        {
+          name: 'Sub Item',
+          href: '/subItem'
+        },
+        {
+          name: 'Sub Item',
+          href: '/subItem'
+        },
+        {
+          name: 'Sub Item',
+          href: '/subItem'
+        }
+      ]
+    },
     {
       icon: <MdBookmark size={18} />,
       name: 'aiqfome',

@@ -102,7 +102,11 @@ export const SubItens = ({ item, sidebarOpened, itemOpened }) => {
       itemOpened={itemOpened}
     >
       {!sidebarOpened && (
-        <Text padding='16px' color='darkerGrey'>
+        <Text
+          padding='16px'
+          color={item.active ? 'primary' : 'darkerGrey'}
+          fontWeight={item.active && 'medium'}
+        >
           {item.name}
         </Text>
       )}

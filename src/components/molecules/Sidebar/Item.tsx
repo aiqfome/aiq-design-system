@@ -61,7 +61,7 @@ export const Item: React.FC<ItemProps> = ({
 
   const ContentItem = () => (
     <>
-      <Icon marginRight='22px' color='grey'>
+      <Icon marginRight='22px' color={item.active ? 'primary' : 'grey'}>
         {item.icon}
       </Icon>
       {sidebarOpened && (
