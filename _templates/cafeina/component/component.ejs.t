@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 
 import styled from 'styled-components'
 
-interface Props {}
+export interface Props {}
 
 const <%=h.inflection.camelize(name)%>Styled = styled.div<Props>``
 
