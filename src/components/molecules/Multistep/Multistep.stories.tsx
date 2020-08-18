@@ -1,4 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
+
+import { Flex } from '../../atoms/Flex'
+import { Button } from '../../atoms/Button'
 
 import { Multistep } from './Multistep'
 
@@ -13,11 +16,45 @@ const Step: React.FC = ({ children }) => {
 }
 
 export const Basic: React.FC = () => {
+  const [stepCurrent, setStepCurrent] = useState(0)
+
   const steps = [
     { name: 'StepOne', component: <Step>One</Step> },
     { name: 'StepTwo', component: <Step>Two</Step> },
     { name: 'StepThree', component: <Step>Three</Step> },
     { name: 'StepFour', component: <Step>Four</Step> }
   ]
-  return <Multistep stepActive={0} steps={steps} />
+
+  function handleClickBtnNext() {
+    console.log('+')
+    setStepCurrent(stepCurrent + 1)
+  }
+
+  function handleClickBtnLast() {
+    console.log('-')
+    setStepCurrent(stepCurrent - 1)
+  }
+
+  return (
+    <Flex flexDirection='column'>
+      <Multistep stepCurrent={stepCurrent} steps={steps} />
+      <Flex flexDirection='row' marginTop='16px' variant='centralized'>
+        <Button
+          onClick={handleClickBtnLast}
+          variant='contained'
+          palette='primary'
+          marginRight={'16px'}
+        >
+          Last
+        </Button>
+        <Button
+          onClick={handleClickBtnNext}
+          variant='contained'
+          palette='primary'
+        >
+          Next
+        </Button>
+      </Flex>
+    </Flex>
+  )
 }

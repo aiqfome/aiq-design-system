@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import PropTypes from 'prop-types'
 
 import styled, { ThemeContext } from 'styled-components'
@@ -13,7 +13,7 @@ export interface Props {
     name: string
     component: any
   }[]
-  stepActive: number
+  stepCurrent?: number
 }
 
 const StepButton = styled.button`
@@ -25,11 +25,21 @@ const StepButton = styled.button`
   border: none;
 `
 
-export const Multistep: React.FC<Props> = ({ steps, ...props }) => {
+export const Multistep: React.FC<Props> = ({
+  steps,
+  stepCurrent = 0,
+  ...props
+}) => {
   const theme = useContext(ThemeContext)
-  const [stepActive, setStepActive] = useState(0)
+  const [stepActive, setStepActive] = useState(stepCurrent)
 
-  function changeStepActive(newStepActive) {
+  useEffect(() => {
+    if (stepCurrent >= 0 && stepCurrent < steps.length) {
+      setStepActive(stepCurrent)
+    }
+  }, [stepCurrent, steps])
+
+  function handleClickStep(newStepActive) {
     setStepActive(newStepActive)
   }
 
@@ -44,7 +54,7 @@ export const Multistep: React.FC<Props> = ({ steps, ...props }) => {
             alignItems='center'
             width='100%'
           >
-            <StepButton type='button' onClick={() => changeStepActive(index)}>
+            <StepButton type='button' onClick={() => handleClickStep(index)}>
               <Flex
                 backgroundColor={
                   stepActive >= index
@@ -99,5 +109,5 @@ export const Multistep: React.FC<Props> = ({ steps, ...props }) => {
 
 Multistep.propTypes = {
   steps: PropTypes.array.isRequired,
-  stepActive: PropTypes.number.isRequired
+  stepCurrent: PropTypes.number
 }
