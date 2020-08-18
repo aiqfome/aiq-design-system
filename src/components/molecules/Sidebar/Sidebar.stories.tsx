@@ -101,14 +101,6 @@ const Header = () => {
       alignItems='center'
     >
       <Avatar alt={user.name} mx='12px' />
-      {/* <Flex flexDirection='column'>
-        <Text color='almostBlack' fontWeight='semiBold'>
-          {user.name}
-        </Text>
-        <Text color='darkGrey' fontSize='xsmall'>
-          {user.email}
-        </Text>
-      </Flex> */}
     </Flex>
   )
 }
@@ -122,7 +114,7 @@ export const Basic: React.FC = () => {
           opened={boolean('opened', true)}
           data={sidebarData}
         />
-        <h1>teste</h1>
+        <h1>test</h1>
       </Flex>
     </Router>
   )
