@@ -60,17 +60,9 @@ const SubItensStyled = styled(Flex)<Props>`
       `
     }
     return css<Props>`
-      h3 {
-        padding-top: 16px;
-        color: #434343;
-        padding: 8px 16px;
-        font-size: 16px;
-      }
-
       a {
         font-size: 14px;
         color: #434343;
-        font
         padding: 6px 0px;
         display: flex;
         flex-direction: row;
@@ -83,6 +75,7 @@ const SubItensStyled = styled(Flex)<Props>`
       ${({ itemOpened }) => {
         if (itemOpened) {
           return css`
+            display: flex;
             position: absolute;
             width: 240px;
             top: 0;
@@ -93,8 +86,7 @@ const SubItensStyled = styled(Flex)<Props>`
           `
         }
         return css`
-          max-height: 0;
-          overflow: hidden;
+          display: none;
         `
       }}
     `
@@ -109,7 +101,11 @@ export const SubItens = ({ item, sidebarOpened, itemOpened }) => {
       sidebarOpened={sidebarOpened}
       itemOpened={itemOpened}
     >
-      {!sidebarOpened && <h3>{item.name}</h3>}
+      {!sidebarOpened && (
+        <Text padding='16px' color='darkerGrey'>
+          {item.name}
+        </Text>
+      )}
       {item.itens && (
         <ul>
           {item.itens.map((subItem, index) => (

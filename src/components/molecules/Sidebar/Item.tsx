@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import { MdExpandMore, MdExpandLess } from 'react-icons/md'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 import { Text } from '../../atoms/Text'
 import { Flex } from '../../atoms/Flex'

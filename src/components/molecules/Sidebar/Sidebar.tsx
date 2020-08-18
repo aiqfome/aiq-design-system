@@ -39,6 +39,7 @@ export const Sidebar: React.FC<Props> = ({
   return (
     <SidebarStyled
       width='100%'
+      backgroundColor='#fff'
       maxWidth='340px'
       flexDirection='column'
       opened={opened}

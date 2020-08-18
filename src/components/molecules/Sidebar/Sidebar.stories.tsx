@@ -96,18 +96,18 @@ const Header = () => {
       style={{
         overflowX: 'hidden'
       }}
-      padding='24px'
+      py='8px'
       alignItems='center'
     >
       <Avatar alt={user.name} mx='12px' />
-      <Flex flexDirection='column'>
+      {/* <Flex flexDirection='column'>
         <Text color='almostBlack' fontWeight='semiBold'>
           {user.name}
         </Text>
         <Text color='darkGrey' fontSize='xsmall'>
           {user.email}
         </Text>
-      </Flex>
+      </Flex> */}
     </Flex>
   )
 }
@@ -115,7 +115,7 @@ const Header = () => {
 export const Basic: React.FC = () => {
   return (
     <Router>
-      <Flex justifyContent='row'>
+      <Flex backgroundColor='#E1E1E1' justifyContent='row'>
         <Sidebar
           header={<Header />}
           opened={boolean('opened', true)}
