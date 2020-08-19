@@ -14,7 +14,15 @@ export { Loading } from './components/atoms/Loading'
 export { Radio } from './components/atoms/Radio'
 export { Select } from './components/atoms/Select'
 export { Switch } from './components/atoms/Switch'
-export { Table } from './components/atoms/Table'
+export {
+  TableContainer,
+  Table,
+  TableBody,
+  TableHead,
+  TableRow,
+  TableCellHead,
+  TableCell
+} from './components/atoms/Table'
 export { Text } from './components/atoms/Text'
 
 export { Breadcrumb } from './components/molecules/Breadcrumb'
