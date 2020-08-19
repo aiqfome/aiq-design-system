@@ -13,7 +13,7 @@ import {
 
 import { TableContainer } from './TableContainer'
 
-import { Flex } from '../Flex'
+import { Flex } from '../../atoms/Flex'
 
 describe('must match with the previous snapshot', () => {
   const itens = [

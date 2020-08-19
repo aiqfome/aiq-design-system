@@ -2,8 +2,8 @@ import React from 'react'
 import styled, { DefaultTheme } from 'styled-components'
 import PropTypes from 'prop-types'
 
-import { Text } from '../Text'
-import { Flex, Props as FlexProps } from '../Flex'
+import { Text } from '../../atoms/Text'
+import { Flex, Props as FlexProps } from '../../atoms/Flex'
 
 export interface TableContainerProps extends FlexProps, DefaultTheme {
   title?: string
