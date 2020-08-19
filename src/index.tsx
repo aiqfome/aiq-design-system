@@ -14,15 +14,6 @@ export { Loading } from './components/atoms/Loading'
 export { Radio } from './components/atoms/Radio'
 export { Select } from './components/atoms/Select'
 export { Switch } from './components/atoms/Switch'
-export {
-  TableContainer,
-  Table,
-  TableBody,
-  TableHead,
-  TableRow,
-  TableCellHead,
-  TableCell
-} from './components/atoms/Table'
 export { Text } from './components/atoms/Text'
 
 export { Breadcrumb } from './components/molecules/Breadcrumb'
@@ -34,6 +25,15 @@ export { Pagination } from './components/molecules/Pagination'
 export { Sidebar } from './components/molecules/Sidebar'
 export { Tabs, Tab, TabPanel } from './components/molecules/Tab'
 export { ToastProvider, useToast } from './components/molecules/Toast'
+export {
+  TableContainer,
+  Table,
+  TableBody,
+  TableHead,
+  TableRow,
+  TableCellHead,
+  TableCell
+} from './components/molecules/Table'
 
 export { default as themeDefault } from './providers/theme'
 export { default as styleReactDatesOverrides } from './providers/styleReactDatesOverrides'
