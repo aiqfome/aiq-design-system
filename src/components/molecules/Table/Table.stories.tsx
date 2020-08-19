@@ -11,7 +11,7 @@ import {
 
 import { TableContainer } from './TableContainer'
 
-import { Flex } from '../Flex'
+import { Flex } from '../../atoms/Flex'
 
 export default {
   component: Table,
