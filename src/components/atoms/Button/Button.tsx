@@ -31,7 +31,7 @@ export interface Props
   palette?: 'primary' | 'secondary' | 'neutral'
   onClick?: any
   fullWidth?: boolean
-  type?: string
+  type?: 'button' | 'submit' | 'reset' | undefined
 }
 
 const buttonVariations: { [index: string]: any } = {
@@ -205,7 +205,7 @@ export const Button: React.FC<Props> = ({
 
   if (prefix) {
     return (
-      <ButtonStyled {...props} onClick={e => handleClick(e)}>
+      <ButtonStyled {...props} type={type} onClick={e => handleClick(e)}>
         <Icon cursor='pointer' mr={5}>
           {prefix}
         </Icon>
@@ -218,7 +218,7 @@ export const Button: React.FC<Props> = ({
 
   if (sufix) {
     return (
-      <ButtonStyled {...props} onClick={e => handleClick(e)}>
+      <ButtonStyled {...props} type={type} onClick={e => handleClick(e)}>
         <Text cursor='pointer' fontSize='medium'>
           {children}
         </Text>
@@ -230,7 +230,7 @@ export const Button: React.FC<Props> = ({
   }
 
   return (
-    <ButtonStyled {...props} onClick={e => handleClick(e)}>
+    <ButtonStyled {...props} type={type} onClick={e => handleClick(e)}>
       <Text cursor='pointer' fontSize='medium'>
         {children}
       </Text>
@@ -245,5 +245,5 @@ Button.propTypes = {
   refButton: PropTypes.any,
   fontWeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   onClick: PropTypes.func,
-  type: PropTypes.string
+  type: PropTypes.oneOf(['button', 'submit', 'reset'])
 }
