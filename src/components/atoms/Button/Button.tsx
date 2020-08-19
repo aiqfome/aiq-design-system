@@ -188,24 +188,11 @@ export const Button: React.FC<Props> = ({
   children,
   prefix,
   sufix,
-  onClick,
-  type,
   ...props
 }) => {
-  const handleClick = useCallback(
-    e => {
-      e.preventDefault()
-
-      if (type !== 'submit' && onClick) {
-        onClick()
-      }
-    },
-    [onClick, type]
-  )
-
   if (prefix) {
     return (
-      <ButtonStyled {...props} type={type} onClick={e => handleClick(e)}>
+      <ButtonStyled {...props}>
         <Icon cursor='pointer' mr={5}>
           {prefix}
         </Icon>
@@ -218,7 +205,7 @@ export const Button: React.FC<Props> = ({
 
   if (sufix) {
     return (
-      <ButtonStyled {...props} type={type} onClick={e => handleClick(e)}>
+      <ButtonStyled {...props}>
         <Text cursor='pointer' fontSize='medium'>
           {children}
         </Text>
@@ -230,7 +217,7 @@ export const Button: React.FC<Props> = ({
   }
 
   return (
-    <ButtonStyled {...props} type={type} onClick={e => handleClick(e)}>
+    <ButtonStyled {...props}>
       <Text cursor='pointer' fontSize='medium'>
         {children}
       </Text>
