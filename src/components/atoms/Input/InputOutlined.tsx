@@ -5,9 +5,10 @@ import { MdVisibility, MdVisibilityOff } from 'react-icons/md'
 import styled from 'styled-components'
 import { color, space, layout, fontSize, fontWeight } from 'styled-system'
 
-import { Box } from '../Box'
 import { Button } from '../Button'
 import { Text } from '../Text'
+
+import { InputErrorMessage } from './InputErrorMessage'
 
 export interface Props extends InputHTMLAttributes<HTMLInputElement> {
   name?: string
@@ -175,13 +176,7 @@ export const InputOutlined: React.FC<Props> = ({
           </Button>
         </LabelStyled>
 
-        {errorForm ? (
-          <Text color='darkerGrey' fontSize='medium'>
-            {errorMessage}
-          </Text>
-        ) : (
-          <Box height='20px' />
-        )}
+        <InputErrorMessage errorForm={errorForm} errorMessage={errorMessage} />
       </Container>
     )
   }
@@ -203,13 +198,7 @@ export const InputOutlined: React.FC<Props> = ({
           {sufix}
         </LabelStyled>
 
-        {errorForm ? (
-          <Text color='darkerGrey' fontSize='medium'>
-            {errorMessage}
-          </Text>
-        ) : (
-          <Box height='20px' />
-        )}
+        <InputErrorMessage errorForm={errorForm} errorMessage={errorMessage} />
       </Container>
     )
   }
@@ -229,13 +218,7 @@ export const InputOutlined: React.FC<Props> = ({
         <Text>{label}</Text>
       </LabelStyled>
 
-      {errorForm ? (
-        <Text color='darkerGrey' fontSize='medium'>
-          {errorMessage}
-        </Text>
-      ) : (
-        <Box height='20px' />
-      )}
+      <InputErrorMessage errorForm={errorForm} errorMessage={errorMessage} />
     </Container>
   )
 }

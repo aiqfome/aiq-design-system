@@ -5,10 +5,10 @@ import { MdVisibility, MdVisibilityOff } from 'react-icons/md'
 import styled, { css } from 'styled-components'
 import { space } from 'styled-system'
 
-import { Box } from '../Box'
 import { Button } from '../Button'
 import { Flex } from '../Flex'
-import { Text } from '../Text'
+
+import { InputErrorMessage } from './InputErrorMessage'
 
 export interface Props extends InputHTMLAttributes<HTMLInputElement> {
   name?: string
@@ -117,13 +117,7 @@ export const InputNeutral: React.FC<Props> = ({
           {sufix}
         </ContainerSufix>
 
-        {errorForm ? (
-          <Text color='grey' fontSize='small' mt={2}>
-            {errorMessage}
-          </Text>
-        ) : (
-          <Box height='20px' />
-        )}
+        <InputErrorMessage errorForm={errorForm} errorMessage={errorMessage} />
       </Flex>
     )
   }
@@ -155,13 +149,7 @@ export const InputNeutral: React.FC<Props> = ({
           </Button>
         </ContainerSufix>
 
-        {errorForm ? (
-          <Text color='grey' fontSize='small' mt={2}>
-            {errorMessage}
-          </Text>
-        ) : (
-          <Box height='20px' />
-        )}
+        <InputErrorMessage errorForm={errorForm} errorMessage={errorMessage} />
       </Flex>
     )
   }
@@ -180,13 +168,7 @@ export const InputNeutral: React.FC<Props> = ({
         {...props}
       />
 
-      {errorForm ? (
-        <Text color='grey' fontSize='small' mt={2}>
-          {errorMessage}
-        </Text>
-      ) : (
-        <Box height='20px' />
-      )}
+      <InputErrorMessage errorForm={errorForm} errorMessage={errorMessage} />
     </Flex>
   )
 }
