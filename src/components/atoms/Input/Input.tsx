@@ -16,6 +16,11 @@ export interface Props extends InputHTMLAttributes<HTMLInputElement> {
   prefix?: any
   variant?: string
   placeholder?: string
+
+  backgroundColor?: any
+  border?: any
+  width?: any
+  maxWidth?: any
 }
 
 export const Input: React.FC<Props> = ({
@@ -75,5 +80,10 @@ Input.propTypes = {
   prefix: PropTypes.any,
   value: PropTypes.string,
   variant: PropTypes.string,
-  placeholder: PropTypes.string
+  placeholder: PropTypes.string,
+
+  backgroundColor: PropTypes.any,
+  border: PropTypes.any,
+  width: PropTypes.any,
+  maxWidth: PropTypes.any
 }
