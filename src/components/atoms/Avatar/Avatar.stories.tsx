@@ -9,7 +9,7 @@ export default {
   decorators: [withKnobs]
 }
 
-export const basic: React.FC = () => (
+export const Basic: React.FC = () => (
   <Avatar
     alt={text('Label', 'Avatar')}
     src={text('src', '')}
@@ -21,7 +21,7 @@ export const basic: React.FC = () => (
   />
 )
 
-export const withUrl: React.FC = () => (
+export const WithUrl: React.FC = () => (
   <Avatar
     palette={select(
       'palette',
@@ -33,5 +33,17 @@ export const withUrl: React.FC = () => (
       'https://lh3.googleusercontent.com/rALGk_PU3JMf_5NS5FEYScz9zxgjRBNePvMheCnHIO_lrSs089QcwguwqRVaDLWWAQ'
     )}
     alt={text('alt', 'Avatar')}
+  />
+)
+
+export const Rounded: React.FC = () => (
+  <Avatar
+    palette={select(
+      'palette',
+      { Primary: 'primary', Secondary: 'secondary' },
+      'primary'
+    )}
+    alt={text('alt', 'Avatar')}
+    variant='rounded'
   />
 )
