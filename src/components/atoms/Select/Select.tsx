@@ -12,9 +12,17 @@ export interface Props {
   label?: string
   items?: string[]
   isOpen?: boolean
+  variant?: string
+  prefix?: any
+  placeholder?: string
+
+  backgroundColor?: any
+  border?: any
+  width?: any
+  maxWidth?: any
 }
 
-const Container = styled.div<Props>`
+const Container = styled(Box)<Props>`
   position: relative;
   ul {
     background: ${({ theme }) => theme.colors.white};
@@ -22,7 +30,7 @@ const Container = styled.div<Props>`
     padding: 10px;
     list-style-type: none;
     position: absolute;
-    top: 57px;
+    top: ${({ variant }) => (variant === 'outlined' ? '57px' : '38px')};
     overflow: hidden;
     z-index: 1;
     width: 100%;
@@ -40,14 +48,29 @@ const Container = styled.div<Props>`
   }
 `
 
-const ButtonStyled = styled(Button)`
+const ButtonStyled = styled(Button)<Props>`
   position: absolute;
-  top: 24px;
+  top: ${({ variant }) => (variant === 'outlined' ? '24px' : '12px')};
   right: 14px;
 `
 
-export const Select: React.FC<Props> = ({ label, items = [], ...props }) => {
+export const Select: React.FC<Props> = ({
+  label,
+  variant,
+  items = [],
+  placeholder,
+  prefix,
+  ...props
+}) => {
   const [inputItems, setInputItems] = useState(items)
+
+  const { backgroundColor, border, width, maxWidth } = props
+  const boxStyled = {
+    backgroundColor,
+    border,
+    width,
+    maxWidth
+  }
 
   const {
     isOpen,
@@ -69,7 +92,7 @@ export const Select: React.FC<Props> = ({ label, items = [], ...props }) => {
   })
 
   return (
-    <Container isOpen={isOpen}>
+    <Container isOpen={isOpen} variant={variant} {...props}>
       <ul {...getMenuProps()}>
         {isOpen &&
           inputItems &&
@@ -94,7 +117,11 @@ export const Select: React.FC<Props> = ({ label, items = [], ...props }) => {
           onKeyDown={getInputProps().onKeyDown}
           value={getInputProps().value}
           inputRef={getInputProps().ref}
+          variant={variant}
           label={label}
+          prefix={prefix}
+          placeholder={placeholder}
+          {...boxStyled}
         />
         {inputItems && (
           <ButtonStyled
@@ -115,7 +142,15 @@ export const Select: React.FC<Props> = ({ label, items = [], ...props }) => {
 Select.propTypes = {
   label: PropTypes.string,
   items: PropTypes.array,
-  isOpen: PropTypes.bool
+  isOpen: PropTypes.bool,
+  variant: PropTypes.string,
+  prefix: PropTypes.any,
+  placeholder: PropTypes.string,
+
+  backgroundColor: PropTypes.any,
+  border: PropTypes.any,
+  width: PropTypes.any,
+  maxWidth: PropTypes.any
 }
 
 Select.defaultProps = {

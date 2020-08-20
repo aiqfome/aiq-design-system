@@ -79,3 +79,22 @@ export const Sufix: React.FC = () => (
     <Input label='Aiqfome' sufix={<MdSearch />} />
   </Flex>
 )
+
+export const Prefix: React.FC = () => (
+  <Flex variant='fullCentralized'>
+    <Input label='Aiqfome' prefix={<MdSearch color='#BABCBE' />} />
+  </Flex>
+)
+
+export const Styled: React.FC = () => (
+  <Flex variant='fullCentralized'>
+    <Input
+      width='530px'
+      border='none'
+      placeholder='procure aqui alguma coisa desse painelzão da p*$%#'
+      backgroundColor='#F8F8F8'
+      label='Aiqfome'
+      prefix={<MdSearch color='#BABCBE' />}
+    />
+  </Flex>
+)
