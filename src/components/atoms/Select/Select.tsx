@@ -13,10 +13,16 @@ export interface Props {
   items?: string[]
   isOpen?: boolean
   variant?: string
+  prefix?: any
   placeholder?: string
+
+  backgroundColor?: any
+  border?: any
+  width?: any
+  maxWidth?: any
 }
 
-const Container = styled.div<Props>`
+const Container = styled(Box)<Props>`
   position: relative;
   ul {
     background: ${({ theme }) => theme.colors.white};
@@ -53,9 +59,18 @@ export const Select: React.FC<Props> = ({
   variant,
   items = [],
   placeholder,
+  prefix,
   ...props
 }) => {
   const [inputItems, setInputItems] = useState(items)
+
+  const { backgroundColor, border, width, maxWidth } = props
+  const boxStyled = {
+    backgroundColor,
+    border,
+    width,
+    maxWidth
+  }
 
   const {
     isOpen,
@@ -104,7 +119,9 @@ export const Select: React.FC<Props> = ({
           inputRef={getInputProps().ref}
           variant={variant}
           label={label}
+          prefix={prefix}
           placeholder={placeholder}
+          {...boxStyled}
         />
         {inputItems && (
           <ButtonStyled
@@ -127,7 +144,13 @@ Select.propTypes = {
   items: PropTypes.array,
   isOpen: PropTypes.bool,
   variant: PropTypes.string,
-  placeholder: PropTypes.string
+  prefix: PropTypes.any,
+  placeholder: PropTypes.string,
+
+  backgroundColor: PropTypes.any,
+  border: PropTypes.any,
+  width: PropTypes.any,
+  maxWidth: PropTypes.any
 }
 
 Select.defaultProps = {

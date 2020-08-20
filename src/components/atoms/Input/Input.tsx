@@ -13,6 +13,7 @@ export interface Props extends InputHTMLAttributes<HTMLInputElement> {
   errorMessage?: string
   value?: string
   sufix?: any
+  prefix?: any
   variant?: string
   placeholder?: string
 }
@@ -25,6 +26,7 @@ export const Input: React.FC<Props> = ({
   type = 'text',
   errorMessage,
   sufix,
+  prefix,
   value,
   variant,
   placeholder,
@@ -54,6 +56,7 @@ export const Input: React.FC<Props> = ({
       type={type}
       errorMessage={errorMessage}
       sufix={sufix}
+      prefix={prefix}
       value={value}
       placeholder={placeholder}
       {...props}
@@ -69,6 +72,7 @@ Input.propTypes = {
   type: PropTypes.string,
   errorMessage: PropTypes.string,
   sufix: PropTypes.any,
+  prefix: PropTypes.any,
   value: PropTypes.string,
   variant: PropTypes.string,
   placeholder: PropTypes.string
