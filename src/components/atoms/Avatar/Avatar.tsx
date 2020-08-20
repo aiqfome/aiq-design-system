@@ -8,6 +8,7 @@ export interface Props extends BoxProps {
   src?: string
   palette?: string
   alt: string
+  variant?: 'box' | 'rounded'
 }
 
 export const AvatarStyled = styled.img`
@@ -19,6 +20,7 @@ export const Avatar: React.FC<Props> = ({
   src,
   alt,
   palette = 'primary',
+  variant = 'box',
   ...props
 }) => {
   const [name, setName] = useState('')
@@ -29,13 +31,13 @@ export const Avatar: React.FC<Props> = ({
 
   return (
     <Box
-      width='36px'
-      height='36px'
+      width={variant === 'box' ? '36px' : '32px'}
+      height={variant === 'box' ? '36px' : '32px'}
       display='flex'
       verticalAlign='center'
       alignItems='center'
       justifyContent='center'
-      borderRadius='5px'
+      borderRadius={variant === 'box' ? '5px' : '32px'}
       backgroundColor={src ? 'transparent' : `${palette}Light`}
       {...props}
     >
@@ -53,5 +55,6 @@ export const Avatar: React.FC<Props> = ({
 Avatar.propTypes = {
   src: PropTypes.string,
   palette: PropTypes.string,
-  alt: PropTypes.string.isRequired
+  alt: PropTypes.string.isRequired,
+  variant: PropTypes.oneOf(['box', 'rounded'])
 }

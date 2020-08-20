@@ -8,10 +8,21 @@ export default {
   decorators: [withKnobs]
 }
 
-export const basic: React.FC = () => {
+export const Basic: React.FC = () => {
   const itens = ['React', 'CSS', 'PHP', 'HTML']
   return (
     <Select
+      placeholder={text('label', 'aiq-design-system')}
+      items={object('items', itens)}
+    />
+  )
+}
+
+export const Outlined: React.FC = () => {
+  const itens = ['React', 'CSS', 'PHP', 'HTML']
+  return (
+    <Select
+      variant='outlined'
       label={text('label', 'aiq-design-system')}
       items={object('items', itens)}
     />

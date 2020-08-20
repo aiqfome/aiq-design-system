@@ -3,10 +3,19 @@ import PropTypes from 'prop-types'
 import { MdVisibility, MdVisibilityOff } from 'react-icons/md'
 
 import styled, { css } from 'styled-components'
-import { space } from 'styled-system'
+import {
+  space,
+  layout,
+  LayoutProps,
+  border,
+  BorderProps,
+  color,
+  ColorProps
+} from 'styled-system'
 
 import { Button } from '../Button'
 import { Flex } from '../Flex'
+import { Box } from '../Box'
 
 import { InputErrorMessage } from './InputErrorMessage'
 
@@ -18,16 +27,19 @@ export interface Props extends InputHTMLAttributes<HTMLInputElement> {
   errorMessage?: string
   value?: string
   sufix?: any
+  prefix?: any
   placeholder?: string
-}
 
-export interface PropsContainerSufix {
-  inputSelected?: boolean
-  errorForm?: boolean
+  backgroundColor?: any
+  border?: any
+  width?: any
+  maxWidth?: any
 }
 
 const InputStyled = styled.input<Props>`
   ${space}
+  ${layout}
+  ${color}
 
   padding: 10px 12px;
   border: 1px solid ${({ theme }) => theme.colors.mediumGrey};
@@ -44,7 +56,14 @@ const InputStyled = styled.input<Props>`
     `};
 `
 
-const ContainerSufix = styled.div<PropsContainerSufix>`
+export interface PropsContainerSufix {
+  inputSelected?: boolean
+  errorForm?: boolean
+  onClick?: () => void
+  onBlur?: () => void
+}
+
+const ContainerSufix = styled(Box)<PropsContainerSufix>`
   display: flex;
   align-items: center;
 
@@ -67,23 +86,26 @@ const ContainerSufix = styled.div<PropsContainerSufix>`
     css`
       border-color: ${theme.colors.error};
     `};
+  ${border}
 `
 
 const InputSufixed = styled.input<Props>`
+  ${layout}
+  ${color}
+
   border: none;
 `
 
-const Input: React.FC<Props> = ({ inputRef, value, ...props }) => {
-  const [inputValue, setInputValue] = useState(value)
+const InputPrefixed = styled.input<Props>`
+  ${layout}
+  ${color}
+  
+  border: none;
+  margin-left: 16px;
+`
 
-  return (
-    <InputStyled
-      ref={inputRef}
-      value={inputValue}
-      onChange={e => setInputValue(e.target.value)}
-      {...props}
-    />
-  )
+const Input: React.FC<Props> = ({ inputRef, value, ...props }) => {
+  return <InputStyled value={value} ref={inputRef} name={name} {...props} />
 }
 
 export const InputNeutral: React.FC<Props> = ({
@@ -93,6 +115,7 @@ export const InputNeutral: React.FC<Props> = ({
   errorMessage,
   type = 'text',
   sufix,
+  prefix,
   value,
   placeholder,
   ...props
@@ -100,10 +123,19 @@ export const InputNeutral: React.FC<Props> = ({
   const [inputSelected, setInputSelected] = useState(false)
   const [passwordVisible, setPasswordVisible] = useState(false)
 
+  const { backgroundColor, border, width, maxWidth } = props
+  const boxStyled = {
+    backgroundColor,
+    border,
+    width,
+    maxWidth
+  }
+
   if (sufix) {
     return (
       <Flex flexDirection='column'>
         <ContainerSufix
+          {...boxStyled}
           inputSelected={inputSelected}
           onClick={() => setInputSelected(true)}
           onBlur={() => setInputSelected(false)}
@@ -113,8 +145,33 @@ export const InputNeutral: React.FC<Props> = ({
             placeholder={placeholder}
             type={type}
             value={value}
+            {...props}
           />
           {sufix}
+        </ContainerSufix>
+
+        <InputErrorMessage errorForm={errorForm} errorMessage={errorMessage} />
+      </Flex>
+    )
+  }
+
+  if (prefix) {
+    return (
+      <Flex>
+        <ContainerSufix
+          {...boxStyled}
+          inputSelected={inputSelected}
+          onClick={() => setInputSelected(true)}
+          onBlur={() => setInputSelected(false)}
+        >
+          {prefix}
+          <InputPrefixed
+            ref={inputRef}
+            placeholder={placeholder}
+            type={type}
+            value={value}
+            {...props}
+          />
         </ContainerSufix>
 
         <InputErrorMessage errorForm={errorForm} errorMessage={errorMessage} />
@@ -126,6 +183,7 @@ export const InputNeutral: React.FC<Props> = ({
     return (
       <Flex flexDirection='column'>
         <ContainerSufix
+          {...boxStyled}
           inputSelected={inputSelected}
           onClick={() => setInputSelected(true)}
           onBlur={() => setInputSelected(false)}
@@ -185,6 +243,12 @@ InputNeutral.propTypes = {
   type: PropTypes.string,
   errorMessage: PropTypes.string,
   sufix: PropTypes.any,
+  prefix: PropTypes.any,
   value: PropTypes.string,
-  placeholder: PropTypes.string
+  placeholder: PropTypes.string,
+
+  backgroundColor: PropTypes.any,
+  border: PropTypes.any,
+  width: PropTypes.any,
+  maxWidth: PropTypes.any
 }

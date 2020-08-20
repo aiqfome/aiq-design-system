@@ -13,8 +13,14 @@ export interface Props extends InputHTMLAttributes<HTMLInputElement> {
   errorMessage?: string
   value?: string
   sufix?: any
+  prefix?: any
   variant?: string
   placeholder?: string
+
+  backgroundColor?: any
+  border?: any
+  width?: any
+  maxWidth?: any
 }
 
 export const Input: React.FC<Props> = ({
@@ -25,9 +31,11 @@ export const Input: React.FC<Props> = ({
   type = 'text',
   errorMessage,
   sufix,
+  prefix,
   value,
   variant,
-  placeholder
+  placeholder,
+  ...props
 }) => {
   if (variant === 'outlined') {
     return (
@@ -40,6 +48,7 @@ export const Input: React.FC<Props> = ({
         errorMessage={errorMessage}
         sufix={sufix}
         value={value}
+        {...props}
       />
     )
   }
@@ -52,8 +61,10 @@ export const Input: React.FC<Props> = ({
       type={type}
       errorMessage={errorMessage}
       sufix={sufix}
+      prefix={prefix}
       value={value}
       placeholder={placeholder}
+      {...props}
     />
   )
 }
@@ -66,7 +77,13 @@ Input.propTypes = {
   type: PropTypes.string,
   errorMessage: PropTypes.string,
   sufix: PropTypes.any,
+  prefix: PropTypes.any,
   value: PropTypes.string,
   variant: PropTypes.string,
-  placeholder: PropTypes.string
+  placeholder: PropTypes.string,
+
+  backgroundColor: PropTypes.any,
+  border: PropTypes.any,
+  width: PropTypes.any,
+  maxWidth: PropTypes.any
 }
