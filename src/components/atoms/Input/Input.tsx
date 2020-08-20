@@ -27,7 +27,8 @@ export const Input: React.FC<Props> = ({
   sufix,
   value,
   variant,
-  placeholder
+  placeholder,
+  ...props
 }) => {
   if (variant === 'outlined') {
     return (
@@ -40,6 +41,7 @@ export const Input: React.FC<Props> = ({
         errorMessage={errorMessage}
         sufix={sufix}
         value={value}
+        {...props}
       />
     )
   }
@@ -54,6 +56,7 @@ export const Input: React.FC<Props> = ({
       sufix={sufix}
       value={value}
       placeholder={placeholder}
+      {...props}
     />
   )
 }

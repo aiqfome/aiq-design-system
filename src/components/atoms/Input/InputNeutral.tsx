@@ -74,16 +74,7 @@ const InputSufixed = styled.input<Props>`
 `
 
 const Input: React.FC<Props> = ({ inputRef, value, ...props }) => {
-  const [inputValue, setInputValue] = useState(value)
-
-  return (
-    <InputStyled
-      ref={inputRef}
-      value={inputValue}
-      onChange={e => setInputValue(e.target.value)}
-      {...props}
-    />
-  )
+  return <InputStyled value={value} ref={inputRef} name={name} {...props} />
 }
 
 export const InputNeutral: React.FC<Props> = ({
