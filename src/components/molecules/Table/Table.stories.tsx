@@ -11,7 +11,9 @@ import {
 
 import { TableContainer } from './TableContainer'
 
+import { Text } from '../../atoms/Text'
 import { Flex } from '../../atoms/Flex'
+import { Button } from '../../atoms/Button'
 
 export default {
   component: Table,
@@ -88,10 +90,24 @@ export const Basic: React.FC = () => {
   )
 }
 
-export const WithTitle: React.FC = () => {
+export const WithHeader: React.FC = () => {
+  const header = (
+    <>
+      <Flex flexDirection='row' flex={1}>
+        <Text fontSize='xxlarge' color='almostBlack'>
+          BURGUERS
+        </Text>
+      </Flex>
+
+      <Button palette='primary' variant='contained'>
+        Ver todos
+      </Button>
+    </>
+  )
+
   return (
     <Flex variant='fullCentralized' backgroundColor='#F5F5F5'>
-      <TableContainer title='BURGUERS'>
+      <TableContainer header={header}>
         <Table>
           <TableHead>
             <TableRow>

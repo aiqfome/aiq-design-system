@@ -6,9 +6,15 @@ import { Text } from '../../atoms/Text'
 import { Flex, Props as FlexProps } from '../../atoms/Flex'
 
 export interface TableContainerProps extends FlexProps, DefaultTheme {
-  title?: string
+  header?: any
   children?: any
 }
+
+const HeaderTableContainerStyled = styled(Flex)`
+  margin: -16px -16px 32px;
+  padding: 18px 25px;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.mediumGrey};
+`
 
 const TableContainerStyled = styled(Flex)<TableContainerProps>`
   background: #fff;
@@ -43,17 +49,21 @@ const TableContainerStyled = styled(Flex)<TableContainerProps>`
 
 export const TableContainer: React.FC<TableContainerProps> = ({
   children,
-  title,
+  header,
   ...props
 }) => {
   return (
     <TableContainerStyled flexDirection='column' {...props}>
-      {title && (
-        <Flex marginBottom='32px' marginTop='8px'>
-          <Text fontSize='xxlarge' color='almostBlack' marginLeft='10px'>
-            {title}
-          </Text>
-        </Flex>
+      {header && (
+        <HeaderTableContainerStyled>
+          {typeof header === 'string' ? (
+            <Text fontSize='xxlarge' color='almostBlack'>
+              {header}
+            </Text>
+          ) : (
+            header
+          )}
+        </HeaderTableContainerStyled>
       )}
       {children}
     </TableContainerStyled>
@@ -61,6 +71,6 @@ export const TableContainer: React.FC<TableContainerProps> = ({
 }
 
 TableContainer.propTypes = {
-  title: PropTypes.string,
-  children: PropTypes.any
+  children: PropTypes.any,
+  header: PropTypes.oneOfType([PropTypes.node, PropTypes.string])
 }

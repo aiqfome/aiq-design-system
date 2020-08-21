@@ -67,7 +67,7 @@ describe('must match with the previous snapshot', () => {
           margin='48px'
           height='400px'
           backgroundColor='#F5F5F5'
-          title='BURGUERS'
+          header='BURGUERS'
         >
           <Table>
             <TableHead>
