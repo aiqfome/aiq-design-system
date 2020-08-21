@@ -1,5 +1,5 @@
-import React, { useContext } from 'react'
-import styled, { DefaultTheme, ThemeContext } from 'styled-components'
+import React from 'react'
+import styled, { DefaultTheme } from 'styled-components'
 import PropTypes from 'prop-types'
 
 import { Text } from '../../atoms/Text'
@@ -46,8 +46,6 @@ export const TableContainer: React.FC<TableContainerProps> = ({
   header,
   ...props
 }) => {
-  const theme = useContext(ThemeContext)
-
   return (
     <TableContainerStyled flexDirection='column' {...props}>
       {header && (
@@ -57,7 +55,8 @@ export const TableContainer: React.FC<TableContainerProps> = ({
           mb='32px'
           py='18px'
           px='25px'
-          borderBottom={`1px solid ${theme.colors.mediumGrey}`}
+          borderBottom='1px solid'
+          borderColor='mediumGrey'
         >
           {typeof header === 'string' ? (
             <Text fontSize='xxlarge' color='almostBlack'>
