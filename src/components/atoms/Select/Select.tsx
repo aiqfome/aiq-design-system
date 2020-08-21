@@ -15,6 +15,8 @@ export interface Props {
   variant?: string
   prefix?: any
   placeholder?: string
+  handleSelectedItemChange?: (item: any) => void
+  selectedItem?: any
 
   backgroundColor?: any
   border?: any
@@ -59,6 +61,8 @@ export const Select: React.FC<Props> = ({
   variant,
   items = [],
   placeholder,
+  selectedItem,
+  handleSelectedItemChange,
   prefix,
   ...props
 }) => {
@@ -82,6 +86,8 @@ export const Select: React.FC<Props> = ({
     getItemProps
   } = useCombobox({
     items: inputItems,
+    selectedItem,
+    onSelectedItemChange: handleSelectedItemChange,
     onInputValueChange: ({ inputValue = '' }) => {
       setInputItems(
         items.filter(item =>
@@ -146,6 +152,8 @@ Select.propTypes = {
   variant: PropTypes.string,
   prefix: PropTypes.any,
   placeholder: PropTypes.string,
+  handleSelectedItemChange: PropTypes.func,
+  selectedItem: PropTypes.any,
 
   backgroundColor: PropTypes.any,
   border: PropTypes.any,

@@ -10,8 +10,14 @@ export default {
 
 export const Basic: React.FC = () => {
   const itens = ['React', 'CSS', 'PHP', 'HTML']
+
+  function handleClickItemSelect(item) {
+    console.log(item)
+  }
+
   return (
     <Select
+      handleSelectedItemChange={handleClickItemSelect}
       placeholder={text('label', 'aiq-design-system')}
       items={object('items', itens)}
     />
@@ -20,6 +26,7 @@ export const Basic: React.FC = () => {
 
 export const Outlined: React.FC = () => {
   const itens = ['React', 'CSS', 'PHP', 'HTML']
+
   return (
     <Select
       variant='outlined'
