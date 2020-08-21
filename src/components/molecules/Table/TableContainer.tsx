@@ -1,5 +1,5 @@
-import React from 'react'
-import styled, { DefaultTheme } from 'styled-components'
+import React, { useContext } from 'react'
+import styled, { DefaultTheme, ThemeContext } from 'styled-components'
 import PropTypes from 'prop-types'
 
 import { Text } from '../../atoms/Text'
@@ -9,12 +9,6 @@ export interface TableContainerProps extends FlexProps, DefaultTheme {
   header?: any
   children?: any
 }
-
-const HeaderTableContainerStyled = styled(Flex)`
-  margin: -16px -16px 32px;
-  padding: 18px 25px;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.mediumGrey};
-`
 
 const TableContainerStyled = styled(Flex)<TableContainerProps>`
   background: #fff;
@@ -52,10 +46,19 @@ export const TableContainer: React.FC<TableContainerProps> = ({
   header,
   ...props
 }) => {
+  const theme = useContext(ThemeContext)
+
   return (
     <TableContainerStyled flexDirection='column' {...props}>
       {header && (
-        <HeaderTableContainerStyled>
+        <Flex
+          mt='-16px'
+          mx='-16px'
+          mb='32px'
+          py='18px'
+          px='25px'
+          borderBottom={`1px solid ${theme.colors.mediumGrey}`}
+        >
           {typeof header === 'string' ? (
             <Text fontSize='xxlarge' color='almostBlack'>
               {header}
@@ -63,7 +66,7 @@ export const TableContainer: React.FC<TableContainerProps> = ({
           ) : (
             header
           )}
-        </HeaderTableContainerStyled>
+        </Flex>
       )}
       {children}
     </TableContainerStyled>
