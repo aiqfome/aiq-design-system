@@ -16,6 +16,7 @@ const Itens = styled.ul`
   list-style: none;
   padding: 0;
   margin: 0;
+  overflow-y: auto;
 `
 
 interface SidebarStyledProps {
