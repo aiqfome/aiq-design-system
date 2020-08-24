@@ -16,6 +16,7 @@ const Itens = styled.ul`
   list-style: none;
   padding: 0;
   margin: 0;
+  overflow-y: auto;
 `
 
 interface SidebarStyledProps {
@@ -28,6 +29,7 @@ const SidebarStyled = styled(Flex)<SidebarStyledProps>`
   max-width: ${({ opened }) => (opened ? '340px' : '60px')};
   transition: all 0.5s ease;
   will-change: transform;
+  position: fixed;
 `
 
 export const Sidebar: React.FC<Props> = ({

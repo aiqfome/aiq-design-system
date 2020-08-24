@@ -76,10 +76,10 @@ const SubItensStyled = styled(Flex)<Props>`
         if (itemOpened) {
           return css`
             display: flex;
-            position: absolute;
+            position: fixed;
             width: 240px;
-            top: 0;
-            right: -240px;
+            margin-left: 60px;
+            margin-top: -50px;
             background: #ffff;
             border-top-right-radius: 4px;
             border-bottom-right-radius: 4px;
