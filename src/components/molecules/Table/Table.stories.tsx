@@ -7,7 +7,9 @@ import { TableCell } from './TableCell'
 import { TableBody } from './TableBody'
 import { TableCellHead } from './TableCellHead'
 
+import { Text } from '../../atoms/Text'
 import { Flex } from '../../atoms/Flex'
+import { Button } from '../../atoms/Button'
 
 export default {
   component: Table,
@@ -65,31 +67,6 @@ export const Basic: React.FC = () => {
           <TableCellHead>cód </TableCellHead>
           <TableCellHead>item</TableCellHead>
           <TableCellHead>preço min.</TableCellHead>
-        </TableHead>
-        <TableBody>
-          {itens.map(item => (
-            <TableRow key={item.cod}>
-              <TableCell>{item.cod}</TableCell>
-              <TableCell>{item.item}</TableCell>
-              <TableCell>{item.valor}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </Flex>
-  )
-}
-
-export const WithTitle: React.FC = () => {
-  return (
-    <Flex variant='fullCentralized' backgroundColor='#F5F5F5'>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCellHead>cód </TableCellHead>
-            <TableCellHead>item</TableCellHead>
-            <TableCellHead>preço min.</TableCellHead>
-          </TableRow>
         </TableHead>
         <TableBody>
           {itens.map(item => (

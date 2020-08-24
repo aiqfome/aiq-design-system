@@ -24,6 +24,7 @@ export { Modal } from './components/molecules/Modal'
 export { Pagination } from './components/molecules/Pagination'
 export { Sidebar } from './components/molecules/Sidebar'
 export { Tabs, Tab, TabPanel } from './components/molecules/Tab'
+export { Multistep } from './components/molecules/Multistep'
 export { ToastProvider, useToast } from './components/molecules/Toast'
 export {
   Table,
