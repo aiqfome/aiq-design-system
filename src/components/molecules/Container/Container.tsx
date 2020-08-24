@@ -17,6 +17,7 @@ const StyledContainer: React.FC = ({ children }) => {
       flexDirection='column'
       border='1px solid lightGrey'
       borderRadius='12px'
+      backgroundColor='white'
       m={10}
     >
       {children}
