@@ -1,15 +1,11 @@
 import React from 'react'
 
-import {
-  Table,
-  TableHead,
-  TableRow,
-  TableCell,
-  TableBody,
-  TableCellHead
-} from './Table'
-
-import { TableContainer } from './TableContainer'
+import { Table } from './Table'
+import { TableHead } from './TableHead'
+import { TableRow } from './TableRow'
+import { TableCell } from './TableCell'
+import { TableBody } from './TableBody'
+import { TableCellHead } from './TableCellHead'
 
 import { Text } from '../../atoms/Text'
 import { Flex } from '../../atoms/Flex'
@@ -66,67 +62,22 @@ const itens = [
 export const Basic: React.FC = () => {
   return (
     <Flex variant='fullCentralized' backgroundColor='#F5F5F5'>
-      <TableContainer>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCellHead>cód </TableCellHead>
-              <TableCellHead>item</TableCellHead>
-              <TableCellHead>preço min.</TableCellHead>
+      <Table>
+        <TableHead>
+          <TableCellHead>cód </TableCellHead>
+          <TableCellHead>item</TableCellHead>
+          <TableCellHead>preço min.</TableCellHead>
+        </TableHead>
+        <TableBody>
+          {itens.map(item => (
+            <TableRow key={item.cod}>
+              <TableCell>{item.cod}</TableCell>
+              <TableCell>{item.item}</TableCell>
+              <TableCell>{item.valor}</TableCell>
             </TableRow>
-          </TableHead>
-          <TableBody>
-            {itens.map(item => (
-              <TableRow key={item.cod}>
-                <TableCell>{item.cod}</TableCell>
-                <TableCell>{item.item}</TableCell>
-                <TableCell>{item.valor}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </Flex>
-  )
-}
-
-export const WithHeader: React.FC = () => {
-  const header = (
-    <>
-      <Flex flexDirection='row' flex={1}>
-        <Text fontSize='xxlarge' color='almostBlack'>
-          BURGUERS
-        </Text>
-      </Flex>
-
-      <Button palette='primary' variant='contained'>
-        Ver todos
-      </Button>
-    </>
-  )
-
-  return (
-    <Flex variant='fullCentralized' backgroundColor='#F5F5F5'>
-      <TableContainer header={header}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCellHead>cód </TableCellHead>
-              <TableCellHead>item</TableCellHead>
-              <TableCellHead>preço min.</TableCellHead>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {itens.map(item => (
-              <TableRow key={item.cod}>
-                <TableCell>{item.cod}</TableCell>
-                <TableCell>{item.item}</TableCell>
-                <TableCell>{item.valor}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+          ))}
+        </TableBody>
+      </Table>
     </Flex>
   )
 }
@@ -134,31 +85,24 @@ export const WithHeader: React.FC = () => {
 export const WithScrollbar: React.FC = () => {
   return (
     <Flex variant='fullCentralized' backgroundColor='#F5F5F5'>
-      <TableContainer
-        maxWidth='800px'
-        margin='48px'
-        height='400px'
-        backgroundColor='#F5F5F5'
-      >
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCellHead>cód </TableCellHead>
-              <TableCellHead>item</TableCellHead>
-              <TableCellHead whiteSpace='nowrap'>preço min.</TableCellHead>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCellHead>cód </TableCellHead>
+            <TableCellHead>item</TableCellHead>
+            <TableCellHead>preço min.</TableCellHead>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {itens.map(item => (
+            <TableRow key={item.cod}>
+              <TableCell>{item.cod}</TableCell>
+              <TableCell>{item.item}</TableCell>
+              <TableCell>{item.valor}</TableCell>
             </TableRow>
-          </TableHead>
-          <TableBody>
-            {itens.map(item => (
-              <TableRow key={item.cod}>
-                <TableCell>{item.cod}</TableCell>
-                <TableCell width='100%'>{item.item}</TableCell>
-                <TableCell whiteSpace='nowrap'>{item.valor}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+          ))}
+        </TableBody>
+      </Table>
     </Flex>
   )
 }
@@ -171,15 +115,15 @@ export const OnlyTable: React.FC = () => {
           <TableRow>
             <TableCellHead>cód </TableCellHead>
             <TableCellHead>item</TableCellHead>
-            <TableCellHead whiteSpace='nowrap'>preço min.</TableCellHead>
+            <TableCellHead>preço min.</TableCellHead>
           </TableRow>
         </TableHead>
         <TableBody>
           {itens.map(item => (
             <TableRow key={item.cod}>
               <TableCell>{item.cod}</TableCell>
-              <TableCell width='100%'>{item.item}</TableCell>
-              <TableCell whiteSpace='nowrap'>{item.valor}</TableCell>
+              <TableCell>{item.item}</TableCell>
+              <TableCell>{item.valor}</TableCell>
             </TableRow>
           ))}
         </TableBody>

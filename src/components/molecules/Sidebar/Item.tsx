@@ -21,7 +21,6 @@ interface ItemStyledProps {
 }
 
 const ItemStyled = styled.li<ItemStyledProps>`
-  /* overflow-x: hidden; */
   position: relative;
   &:hover {
     cursor: pointer;
