@@ -11,7 +11,7 @@ export interface Props {
   color?: string
   disabled?: boolean
   variant?: string
-  size?: 'default' | 'small'
+  size?: 'default' | 'small' | 'large'
   defaultPage?: number
   page?: number
   onChange?: (page: number) => void
@@ -21,13 +21,17 @@ interface PaginationStyledProps extends FlexProps, DefaultTheme {
   active?: boolean
   cursor?: string
   disabled?: boolean
-  size?: 'default' | 'small'
+  size?: 'default' | 'small' | 'large'
 }
 
 const sizesVariants: { [index: string]: any } = {
-  default: css`
+  large: css`
     height: 42px;
     width: 42px;
+  `,
+  default: css`
+    height: 34px;
+    width: 34px;
   `,
   small: css`
     height: 28px;
@@ -43,24 +47,44 @@ const PaginationStyled = styled(Flex)<PaginationStyledProps>`
       &:hover {
         pointer-events: none;
       }
-    `}
 
-  &:hover {
-    cursor: ${({ cursor }) => cursor || 'pointer'};
-  }
+      & > Button,
+      & span {
+        cursor: not-allowed !important;
+      }
+    `}
 `
 
 const ItemPageStyled = styled(Button)<PaginationStyledProps>`
   ${({ size }) => sizesVariants[size || 'default']}
 
   border: 1px solid #dedede;
+  border-radius: 0;
+
+  &:first-child {
+    border-radius: 3px 0 0 3px;
+  }
+
+  &:last-child {
+    border-radius: 0 3px 3px 0;
+  }
+
+  &:hover {
+    outline: none;
+    text-decoration: none;
+  }
+
+  cursor: ${({ cursor }) => cursor || 'pointer'};
+
+  & span {
+    cursor: ${({ cursor }) => cursor || 'pointer'};
+  }
 
   ${({ active, theme }) =>
     active &&
     css`
       background: ${theme.colors.primary};
       border: 1px solid ${theme.colors.primary};
-      transform: scale(1.1);
 
       span {
         color: ${theme.colors.white};
@@ -143,30 +167,31 @@ export const Pagination: React.FC<Props> = ({
       {count > 0 && (
         <>
           <ItemPageStyled
-            onClick={handleClickPrevPage}
-            alignItems='center'
             size={size}
+            alignItems='center'
             justifyContent='center'
+            cursor={currentPage === 0 ? 'not-allowed' : ''}
+            onClick={disabled ? undefined : handleClickPrevPage}
           >
             <MdChevronLeft />
           </ItemPageStyled>
 
           <ItemPageStyled
-            alignItems='center'
             size={size}
-            active={currentPage === 0}
-            onClick={() => handleClickPage(0)}
+            alignItems='center'
             justifyContent='center'
+            active={currentPage === 0}
+            onClick={disabled ? undefined : () => handleClickPage(0)}
           >
-            <Text color='almostBlack' fontSize='default' cursor='pointer'>
+            <Text color='almostBlack' fontSize='default'>
               0
             </Text>
           </ItemPageStyled>
           {currentPage - 2 > 0 && (
             <ItemPageStyled
-              alignItems='center'
               size={size}
               cursor='auto'
+              alignItems='center'
               justifyContent='center'
             >
               <Text color='almostBlack' fontSize='default'>
@@ -177,23 +202,23 @@ export const Pagination: React.FC<Props> = ({
 
           {pagesToShow.map(page => (
             <ItemPageStyled
-              key={page.toString()}
-              alignItems='center'
               size={size}
-              active={page === currentPage}
-              onClick={() => handleClickPage(page)}
+              alignItems='center'
+              key={page.toString()}
               justifyContent='center'
+              active={page === currentPage}
+              onClick={disabled ? undefined : () => handleClickPage(page)}
             >
-              <Text color='almostBlack' fontSize='default' cursor='pointer'>
+              <Text color='almostBlack' fontSize='default'>
                 {page}
               </Text>
             </ItemPageStyled>
           ))}
           {currentPage + 3 <= pages[pages.length - 1] && (
             <ItemPageStyled
-              alignItems='center'
               size={size}
               cursor='auto'
+              alignItems='center'
               justifyContent='center'
             >
               <Text color='almostBlack' fontSize='default'>
@@ -204,22 +229,29 @@ export const Pagination: React.FC<Props> = ({
 
           {pages.length > 1 && (
             <ItemPageStyled
-              alignItems='center'
               size={size}
-              active={currentPage === pages[pages.length - 1]}
-              onClick={() => handleClickPage(pages[pages.length - 1])}
+              alignItems='center'
               justifyContent='center'
+              active={currentPage === pages[pages.length - 1]}
+              onClick={
+                disabled
+                  ? undefined
+                  : () => handleClickPage(pages[pages.length - 1])
+              }
             >
-              <Text color='almostBlack' fontSize='default' cursor='pointer'>
+              <Text color='almostBlack' fontSize='default'>
                 {pages[pages.length - 1]}
               </Text>
             </ItemPageStyled>
           )}
           <ItemPageStyled
-            onClick={handleClickNextPage}
-            alignItems='center'
             size={size}
+            alignItems='center'
             justifyContent='center'
+            onClick={disabled ? undefined : handleClickNextPage}
+            cursor={
+              currentPage === pages[pages.length - 1] ? 'not-allowed' : ''
+            }
           >
             <MdChevronRight />
           </ItemPageStyled>
