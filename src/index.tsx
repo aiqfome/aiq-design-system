@@ -26,7 +26,6 @@ export { Sidebar } from './components/molecules/Sidebar'
 export { Tabs, Tab, TabPanel } from './components/molecules/Tab'
 export { ToastProvider, useToast } from './components/molecules/Toast'
 export {
-  TableContainer,
   Table,
   TableBody,
   TableHead,
