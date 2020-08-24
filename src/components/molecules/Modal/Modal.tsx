@@ -53,6 +53,8 @@ interface BackgroundModalProps extends FlexProps {
 
 const BackgroundModal = styled(Flex)<BackgroundModalProps>`
   position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
   background: ${({ theme }) => theme.colors.black}30;
 
@@ -94,12 +96,12 @@ const BackgroundModal = styled(Flex)<BackgroundModalProps>`
     `}
 `
 
-interface ModalStyledProps extends DefaultTheme {
-  variant?: string
+interface ModalStyledProps extends DefaultTheme, FlexProps {
+  variantModal?: string
   animation?: boolean
 }
 
-const ModalStyled = styled.div<ModalStyledProps>`
+const ModalStyled = styled(Flex)<ModalStyledProps>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -110,7 +112,7 @@ const ModalStyled = styled.div<ModalStyledProps>`
   background: ${({ theme }) => theme.colors.white};
   width: 100%;
 
-  ${({ variant }) => modalVariants[variant || 'medium']}
+  ${({ variantModal }) => modalVariants[variantModal || 'medium']}
 
   &.hide {
     z-index: -1;
@@ -173,7 +175,8 @@ export const Modal: React.FC<Props> = ({
   },
   okButton = defaultButton,
   variant = 'medium',
-  cancelButton = defaultButton
+  cancelButton = defaultButton,
+  ...props
 }) => {
   const [isMounted, setIsMounted] = useState(false)
 
@@ -192,7 +195,7 @@ export const Modal: React.FC<Props> = ({
   }
 
   function handleClickOutSide({ target }) {
-    if (target.className.includes('background-modal')) {
+    if (target.className && target.className.includes('background-modal')) {
       onClose()
     }
   }
@@ -206,9 +209,10 @@ export const Modal: React.FC<Props> = ({
       onClick={handleClickOutSide}
     >
       <ModalStyled
-        variant={variant}
+        variantModal={variant}
         animation={animation}
         className={`${show ? 'show' : 'hide'}`}
+        {...props}
       >
         <Text
           color='primary'
@@ -218,7 +222,9 @@ export const Modal: React.FC<Props> = ({
         >
           {title}
         </Text>
-        <Flex flex={1}>{children}</Flex>
+        <Flex flex={1} width='100%'>
+          {children}
+        </Flex>
 
         {variant !== 'alert' ? (
           <Flex justifyContent='space-between' marginTop={44} width='100%'>
