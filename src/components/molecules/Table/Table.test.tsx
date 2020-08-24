@@ -2,16 +2,12 @@ import React from 'react'
 
 import { render } from '../../utils/test/render'
 
-import {
-  Table,
-  TableHead,
-  TableRow,
-  TableCell,
-  TableBody,
-  TableCellHead
-} from './Table'
-
-import { TableContainer } from './TableContainer'
+import { Table } from './Table'
+import { TableHead } from './TableHead'
+import { TableRow } from './TableRow'
+import { TableCell } from './TableCell'
+import { TableBody } from './TableBody'
+import { TableCellHead } from './TableCellHead'
 
 import { Flex } from '../../atoms/Flex'
 
@@ -62,32 +58,24 @@ describe('must match with the previous snapshot', () => {
   test('snapshot renders', () => {
     const component = render(
       <Flex variant='fullCentralized' backgroundColor='#F5F5F5'>
-        <TableContainer
-          maxWidth='800px'
-          margin='48px'
-          height='400px'
-          backgroundColor='#F5F5F5'
-          title='BURGUERS'
-        >
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCellHead>cód </TableCellHead>
-                <TableCellHead>item</TableCellHead>
-                <TableCellHead whiteSpace='nowrap'>preço min.</TableCellHead>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCellHead>cód </TableCellHead>
+              <TableCellHead>item</TableCellHead>
+              <TableCellHead>preço min.</TableCellHead>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {itens.map(item => (
+              <TableRow key={item.cod}>
+                <TableCell>{item.cod}</TableCell>
+                <TableCell>{item.item}</TableCell>
+                <TableCell>{item.valor}</TableCell>
               </TableRow>
-            </TableHead>
-            <TableBody>
-              {itens.map(item => (
-                <TableRow key={item.cod}>
-                  <TableCell>{item.cod}</TableCell>
-                  <TableCell width='100%'>{item.item}</TableCell>
-                  <TableCell whiteSpace='nowrap'>{item.valor}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+            ))}
+          </TableBody>
+        </Table>
       </Flex>
     )
     const tree = component.toJSON()

@@ -1,2 +1,6 @@
 export * from './Table'
-export * from './TableContainer'
+export * from './TableHead'
+export * from './TableCellHead'
+export * from './TableBody'
+export * from './TableCell'
+export * from './TableRow'
