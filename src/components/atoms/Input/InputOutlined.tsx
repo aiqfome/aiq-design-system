@@ -45,7 +45,7 @@ const LabelStyled = styled.label<Props>`
         errorForm ? theme.colors.error : theme.colors.mediumGrey};
     border-top-color: transparent;
     border-radius: 4px;
-    padding: 15px 13px 15px;
+    padding: 9px 13px 9px;
     caret-color: ${({ theme }) => theme.colors.almostBlack};
     color: ${({ theme }) => theme.colors.almostBlack};
     width: 100%;
@@ -63,7 +63,7 @@ const LabelStyled = styled.label<Props>`
 
     &:not(:focus):placeholder-shown + span {
       font-size: inherit;
-      line-height: 68px;
+      line-height: 53px;
     }
 
     &:focus {
@@ -204,7 +204,7 @@ export const InputOutlined: React.FC<Props> = ({
   }
 
   return (
-    <Container>
+    <Container {...props}>
       <LabelStyled errorForm={errorForm}>
         <input
           {...props}
