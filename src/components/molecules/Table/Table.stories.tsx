@@ -7,9 +7,8 @@ import { TableCell } from './TableCell'
 import { TableBody } from './TableBody'
 import { TableCellHead } from './TableCellHead'
 
-import { Text } from '../../atoms/Text'
 import { Flex } from '../../atoms/Flex'
-import { Button } from '../../atoms/Button'
+import { Container } from '../Container'
 
 export default {
   component: Table,
@@ -104,6 +103,31 @@ export const WithScrollbar: React.FC = () => {
         </TableBody>
       </Table>
     </Flex>
+  )
+}
+
+export const WithContainer: React.FC = () => {
+  return (
+    <Container title='My Table!'>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCellHead>cód </TableCellHead>
+            <TableCellHead>item</TableCellHead>
+            <TableCellHead>preço min.</TableCellHead>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {itens.map(item => (
+            <TableRow key={item.cod}>
+              <TableCell>{item.cod}</TableCell>
+              <TableCell>{item.item}</TableCell>
+              <TableCell>{item.valor}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </Container>
   )
 }
 

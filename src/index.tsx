@@ -17,6 +17,7 @@ export { Switch } from './components/atoms/Switch'
 export { Text } from './components/atoms/Text'
 
 export { Breadcrumb } from './components/molecules/Breadcrumb'
+export { Container } from './components/molecules/Container'
 export { DatePickerRange } from './components/molecules/DatePickerRange'
 export { DatePickerSingle } from './components/molecules/DatePickerSingle'
 export { LoaderBox } from './components/molecules/LoaderBox'
