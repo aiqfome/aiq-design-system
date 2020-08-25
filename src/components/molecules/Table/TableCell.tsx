@@ -13,7 +13,6 @@ export interface TableCellProps {
 const TableCellStyled = styled(Flex)`
   padding: 0 10px;
   font-size: medium;
-  justify-content: start;
 `
 
 export const TableCell: React.FC<TableCellProps> = ({

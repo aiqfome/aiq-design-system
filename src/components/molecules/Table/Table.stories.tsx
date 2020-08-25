@@ -5,7 +5,6 @@ import { TableHead } from './TableHead'
 import { TableRow } from './TableRow'
 import { TableCell } from './TableCell'
 import { TableBody } from './TableBody'
-import { TableCellHead } from './TableCellHead'
 
 import { Flex } from '../../atoms/Flex'
 import { Container } from '../Container'
@@ -63,9 +62,9 @@ export const Basic: React.FC = () => {
     <Flex variant='fullCentralized' backgroundColor='#F5F5F5'>
       <Table>
         <TableHead>
-          <TableCellHead>cód </TableCellHead>
-          <TableCellHead flex={1}>item</TableCellHead>
-          <TableCellHead>preço min.</TableCellHead>
+          <TableCell>cód </TableCell>
+          <TableCell flex={1}>item</TableCell>
+          <TableCell>preço min.</TableCell>
         </TableHead>
         <TableBody>
           {itens.map(item => (
@@ -87,9 +86,9 @@ export const WithScrollbar: React.FC = () => {
       <Table>
         <TableHead>
           <TableRow>
-            <TableCellHead>cód </TableCellHead>
-            <TableCellHead>item</TableCellHead>
-            <TableCellHead>preço min.</TableCellHead>
+            <TableCell>cód </TableCell>
+            <TableCell>item</TableCell>
+            <TableCell>preço min.</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -112,9 +111,9 @@ export const WithContainer: React.FC = () => {
       <Table>
         <TableHead>
           <TableRow>
-            <TableCellHead>cód </TableCellHead>
-            <TableCellHead>item</TableCellHead>
-            <TableCellHead>preço min.</TableCellHead>
+            <TableCell>cód </TableCell>
+            <TableCell>item</TableCell>
+            <TableCell>preço min.</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -137,9 +136,9 @@ export const OnlyTable: React.FC = () => {
       <Table>
         <TableHead>
           <TableRow>
-            <TableCellHead>cód </TableCellHead>
-            <TableCellHead>item</TableCellHead>
-            <TableCellHead>preço min.</TableCellHead>
+            <TableCell>cód </TableCell>
+            <TableCell>item</TableCell>
+            <TableCell>preço min.</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
