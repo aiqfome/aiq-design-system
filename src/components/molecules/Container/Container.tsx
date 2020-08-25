@@ -11,7 +11,7 @@ export interface Props {
   children?: ReactNode
 }
 
-const StyledContainer: React.FC = ({ children }) => {
+const StyledContainer: React.FC = ({ children, ...props }) => {
   return (
     <Flex
       flexDirection='column'
@@ -19,6 +19,7 @@ const StyledContainer: React.FC = ({ children }) => {
       borderRadius='12px'
       backgroundColor='white'
       m={10}
+      {...props}
     >
       {children}
     </Flex>
