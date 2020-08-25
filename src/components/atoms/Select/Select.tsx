@@ -6,7 +6,7 @@ import { IoIosArrowDown } from 'react-icons/io'
 
 import { Box } from '../Box'
 import { Input } from '../Input'
-import { Button } from '../Button'
+import { Button, Props as ButtonProps } from '../Button'
 
 export interface Props {
   label?: string
@@ -50,9 +50,14 @@ const Container = styled(Box)<Props>`
   }
 `
 
-const ButtonStyled = styled(Button)<Props>`
+interface ButtonStyledProps extends ButtonProps {
+  variantSelect?: any
+}
+
+const ButtonStyled = styled(Button)<ButtonStyledProps>`
   position: absolute;
-  top: ${({ variant }) => (variant === 'outlined' ? '24px' : '12px')};
+  top: ${({ variantSelect }) =>
+    variantSelect === 'outlined' ? '18px' : '12px'};
   right: 14px;
 `
 
@@ -133,6 +138,7 @@ export const Select: React.FC<Props> = ({
           <ButtonStyled
             palette='primary'
             mr={5}
+            variantSelect={variant}
             refButton={getToggleButtonProps().ref}
             onClick={getToggleButtonProps().onClick}
             aria-label='toggle menu'
