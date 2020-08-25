@@ -3,14 +3,24 @@ import PropTypes from 'prop-types'
 import { MdVisibility, MdVisibilityOff } from 'react-icons/md'
 
 import styled from 'styled-components'
-import { color, space, layout, fontSize, fontWeight } from 'styled-system'
+import {
+  color,
+  space,
+  SpaceProps,
+  layout,
+  fontSize,
+  fontWeight
+} from 'styled-system'
 
 import { Button } from '../Button'
 import { Text } from '../Text'
+import { Box } from '../Box'
 
 import { InputErrorMessage } from './InputErrorMessage'
 
-export interface Props extends InputHTMLAttributes<HTMLInputElement> {
+export interface Props
+  extends InputHTMLAttributes<HTMLInputElement>,
+    SpaceProps {
   name?: string
   inputRef?: any
   label?: string
@@ -19,9 +29,12 @@ export interface Props extends InputHTMLAttributes<HTMLInputElement> {
   errorMessage?: string
   value?: string
   sufix?: any
+
+  maxWidth?: number | string
+  backgroundColor?: number | string
 }
 
-const Container = styled.div`
+const Container = styled(Box)`
   ${color}
   ${space}
   ${layout}
@@ -146,13 +159,25 @@ export const InputOutlined: React.FC<Props> = ({
   errorMessage,
   sufix,
   value,
+  backgroundColor,
+  maxWidth,
+  marginRight,
+  marginLeft,
+
   ...props
 }) => {
   const [showPassword, setShowPassword] = useState(false)
 
+  const styledContainer = {
+    backgroundColor,
+    maxWidth,
+    marginRight,
+    marginLeft
+  }
+
   if (type === 'password') {
     return (
-      <Container {...props}>
+      <Container {...styledContainer} {...props}>
         <LabelStyled errorForm={errorForm}>
           <input
             {...props}
@@ -183,7 +208,7 @@ export const InputOutlined: React.FC<Props> = ({
 
   if (sufix) {
     return (
-      <Container {...props}>
+      <Container {...styledContainer} {...props}>
         <LabelStyled errorForm={errorForm}>
           <input
             {...props}
@@ -204,7 +229,7 @@ export const InputOutlined: React.FC<Props> = ({
   }
 
   return (
-    <Container {...props}>
+    <Container {...styledContainer} {...props}>
       <LabelStyled errorForm={errorForm}>
         <input
           {...props}
@@ -231,5 +256,10 @@ InputOutlined.propTypes = {
   type: PropTypes.string,
   errorMessage: PropTypes.string,
   sufix: PropTypes.any,
-  value: PropTypes.string
+  value: PropTypes.string,
+
+  backgroundColor: PropTypes.any,
+  maxWidth: PropTypes.any,
+  marginLeft: PropTypes.any,
+  marginRight: PropTypes.any
 }
