@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import styled, { DefaultTheme, css } from 'styled-components'
-
+import { layout } from 'styled-system'
 import { Flex, Props as FlexProps } from '../../atoms/Flex'
 import { Button } from '../../atoms/Button'
 import { Text } from '../../atoms/Text'
@@ -114,6 +114,8 @@ const ModalStyled = styled(Flex)<ModalStyledProps>`
 
   ${({ variantModal }) => modalVariants[variantModal || 'medium']}
 
+  ${layout}
+
   &.hide {
     z-index: -1;
     opacity: 0;
@@ -218,7 +220,7 @@ export const Modal: React.FC<Props> = ({
           color='primary'
           fontSize='xlarge'
           fontWeight='semiBold'
-          marginBottom={variant !== 'alert' ? '44px' : '15px'}
+          marginBottom={variant !== 'alert' ? '30px' : '15px'}
         >
           {title}
         </Text>
@@ -233,7 +235,7 @@ export const Modal: React.FC<Props> = ({
                 fontWeight='medium'
                 onClick={handleCancel}
                 palette='primary'
-                variant='contained'
+                variant='outlined'
               >
                 {cancelButton.label}
               </Button>
@@ -243,7 +245,7 @@ export const Modal: React.FC<Props> = ({
                 onClick={handleOk}
                 fontWeight='medium'
                 palette='primary'
-                variant='outlined'
+                variant='contained'
               >
                 {okButton.label}
               </Button>

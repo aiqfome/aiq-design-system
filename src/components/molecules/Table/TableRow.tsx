@@ -15,6 +15,7 @@ const TableRowStyled = styled(Flex)<TableRowProps>`
   padding: 20px 0;
   cursor: pointer;
   border-bottom: 1px solid ${({ theme }) => theme.colors.mediumGrey};
+  flex: 1;
 
   &:last-child {
     border-bottom: none;

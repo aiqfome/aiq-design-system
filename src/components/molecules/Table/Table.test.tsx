@@ -7,7 +7,6 @@ import { TableHead } from './TableHead'
 import { TableRow } from './TableRow'
 import { TableCell } from './TableCell'
 import { TableBody } from './TableBody'
-import { TableCellHead } from './TableCellHead'
 
 import { Flex } from '../../atoms/Flex'
 
@@ -61,9 +60,9 @@ describe('must match with the previous snapshot', () => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCellHead>cód </TableCellHead>
-              <TableCellHead>item</TableCellHead>
-              <TableCellHead>preço min.</TableCellHead>
+              <TableCell>cód </TableCell>
+              <TableCell>item</TableCell>
+              <TableCell>preço min.</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { DefaultTheme } from 'styled-components'
-
+import { layout, space } from 'styled-system'
 export interface Props extends DefaultTheme {
   checked?: boolean
   disabled?: boolean
@@ -9,6 +9,12 @@ export interface Props extends DefaultTheme {
 }
 
 const CheckboxStyled = styled.div<Props>`
+  ${layout}
+  ${space}
+  
+  position: relative;
+  width: 21px;
+  height: 21px;
   opacity: ${props => (props.disabled ? 0.5 : 1)};
 
   :hover {
@@ -73,7 +79,11 @@ export const Checkbox: React.FC<Props> = ({
   }
 
   return (
-    <CheckboxStyled disabled={disabled} onClick={handleClickCheckbox}>
+    <CheckboxStyled
+      disabled={disabled}
+      onClick={handleClickCheckbox}
+      {...props}
+    >
       <input type='Checkbox' checked={checked} disabled={disabled} {...props} />
       <span />
     </CheckboxStyled>
