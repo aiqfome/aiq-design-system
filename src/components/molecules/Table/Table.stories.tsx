@@ -64,14 +64,14 @@ export const Basic: React.FC = () => {
       <Table>
         <TableHead>
           <TableCellHead>cód </TableCellHead>
-          <TableCellHead>item</TableCellHead>
+          <TableCellHead flex={1}>item</TableCellHead>
           <TableCellHead>preço min.</TableCellHead>
         </TableHead>
         <TableBody>
           {itens.map(item => (
-            <TableRow key={item.cod}>
+            <TableRow key={item.cod} hoverable>
               <TableCell>{item.cod}</TableCell>
-              <TableCell>{item.item}</TableCell>
+              <TableCell flex={1}>{item.item}</TableCell>
               <TableCell>{item.valor}</TableCell>
             </TableRow>
           ))}

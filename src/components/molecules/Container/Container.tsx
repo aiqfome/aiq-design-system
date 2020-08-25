@@ -11,7 +11,7 @@ export interface Props {
   children?: ReactNode
 }
 
-const StyledContainer: React.FC = ({ children }) => {
+const StyledContainer: React.FC = ({ children, ...props }) => {
   return (
     <Flex
       flexDirection='column'
@@ -19,16 +19,22 @@ const StyledContainer: React.FC = ({ children }) => {
       borderRadius='12px'
       backgroundColor='white'
       m={10}
+      {...props}
     >
       {children}
     </Flex>
   )
 }
 
-export const Container: React.FC<Props> = ({ title, header, children }) => {
+export const Container: React.FC<Props> = ({
+  title,
+  header,
+  children,
+  ...props
+}) => {
   if (title) {
     return (
-      <StyledContainer>
+      <StyledContainer {...props}>
         <Text color='almostBlack' fontSize='xxlarge' p={10}>
           {title}
         </Text>
@@ -42,7 +48,7 @@ export const Container: React.FC<Props> = ({ title, header, children }) => {
 
   if (header) {
     return (
-      <StyledContainer>
+      <StyledContainer {...props}>
         {header}
 
         <Divider />
@@ -52,7 +58,7 @@ export const Container: React.FC<Props> = ({ title, header, children }) => {
     )
   }
 
-  return <StyledContainer>{children}</StyledContainer>
+  return <StyledContainer {...props}>{children}</StyledContainer>
 }
 
 StyledContainer.propTypes = {
