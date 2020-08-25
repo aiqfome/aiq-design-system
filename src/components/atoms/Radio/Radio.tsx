@@ -50,7 +50,7 @@ const RadioStyled = styled.label<RadioStyled>`
     height: 20px;
     width: 20px;
     border-radius: 50%;
-    border: 2px solid #eb2f96;
+    border: 2px solid ${({ theme }) => theme.colors.primary};
   }
 
   input:checked ~ span {
@@ -73,7 +73,7 @@ const RadioStyled = styled.label<RadioStyled>`
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background-color: #eb2f96;
+    background-color: ${({ theme }) => theme.colors.primary};
   }
 `
 
