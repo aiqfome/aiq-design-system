@@ -9,6 +9,7 @@ export interface Props extends MarginProps {
   disabled?: boolean
   checked?: boolean
   onChange?: (event: any) => void
+  onClick?: (event: any) => void
 }
 
 interface RadioStyled extends DefaultTheme, MarginProps {
@@ -85,6 +86,9 @@ export const Radio: React.FC<Props> = ({
   onChange = () => {
     // do nothing.
   },
+  onClick = () => {
+    // do nothing.
+  },
   ...props
 }) => {
   const [isChecked, setIsChecked] = useState(checked)
@@ -101,6 +105,7 @@ export const Radio: React.FC<Props> = ({
         disabled={disabled}
         name={name}
         onChange={handleRadioOnChange}
+        onClick={onClick}
         checked={isChecked}
         value={value}
         {...props}
@@ -116,6 +121,7 @@ Radio.propTypes = {
   disabled: PropTypes.bool,
   checked: PropTypes.bool,
   onChange: PropTypes.func,
+  onClick: PropTypes.func,
   mx: PropTypes.number,
   my: PropTypes.number,
   m: PropTypes.number
