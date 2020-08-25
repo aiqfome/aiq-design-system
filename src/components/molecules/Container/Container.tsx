@@ -25,10 +25,15 @@ const StyledContainer: React.FC = ({ children }) => {
   )
 }
 
-export const Container: React.FC<Props> = ({ title, header, children }) => {
+export const Container: React.FC<Props> = ({
+  title,
+  header,
+  children,
+  ...props
+}) => {
   if (title) {
     return (
-      <StyledContainer>
+      <StyledContainer {...props}>
         <Text color='almostBlack' fontSize='xxlarge' p={10}>
           {title}
         </Text>
@@ -42,7 +47,7 @@ export const Container: React.FC<Props> = ({ title, header, children }) => {
 
   if (header) {
     return (
-      <StyledContainer>
+      <StyledContainer {...props}>
         {header}
 
         <Divider />
@@ -52,7 +57,7 @@ export const Container: React.FC<Props> = ({ title, header, children }) => {
     )
   }
 
-  return <StyledContainer>{children}</StyledContainer>
+  return <StyledContainer {...props}>{children}</StyledContainer>
 }
 
 StyledContainer.propTypes = {
