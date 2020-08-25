@@ -9,6 +9,7 @@ export interface Props extends MarginProps {
   disabled?: boolean
   checked?: boolean
   onChange?: (event: any) => void
+  onClick?: (event: any) => void
 }
 
 interface RadioStyled extends DefaultTheme, MarginProps {
@@ -50,7 +51,7 @@ const RadioStyled = styled.label<RadioStyled>`
     height: 20px;
     width: 20px;
     border-radius: 50%;
-    border: 2px solid #eb2f96;
+    border: 2px solid ${({ theme }) => theme.colors.primary};
   }
 
   input:checked ~ span {
@@ -73,7 +74,7 @@ const RadioStyled = styled.label<RadioStyled>`
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background-color: #eb2f96;
+    background-color: ${({ theme }) => theme.colors.primary};
   }
 `
 
@@ -83,6 +84,9 @@ export const Radio: React.FC<Props> = ({
   disabled = false,
   checked = false,
   onChange = () => {
+    // do nothing.
+  },
+  onClick = () => {
     // do nothing.
   },
   ...props
@@ -101,6 +105,7 @@ export const Radio: React.FC<Props> = ({
         disabled={disabled}
         name={name}
         onChange={handleRadioOnChange}
+        onClick={onClick}
         checked={isChecked}
         value={value}
         {...props}
@@ -116,6 +121,7 @@ Radio.propTypes = {
   disabled: PropTypes.bool,
   checked: PropTypes.bool,
   onChange: PropTypes.func,
+  onClick: PropTypes.func,
   mx: PropTypes.number,
   my: PropTypes.number,
   m: PropTypes.number

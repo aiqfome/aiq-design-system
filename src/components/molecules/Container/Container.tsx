@@ -35,7 +35,7 @@ export const Container: React.FC<Props> = ({
   if (title) {
     return (
       <StyledContainer {...props}>
-        <Text color='almostBlack' fontSize='xxlarge' p={10}>
+        <Text color='almostBlack' fontWeight='medium' fontSize='xxlarge' p={10}>
           {title}
         </Text>
 
