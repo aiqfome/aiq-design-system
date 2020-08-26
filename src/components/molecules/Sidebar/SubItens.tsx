@@ -1,11 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
-import { MdKeyboardArrowRight } from 'react-icons/md'
 import { Text } from '../../atoms/Text'
 import { Flex } from '../../atoms/Flex'
 import { Link } from '../../atoms/Link'
-import { Icon } from '../../atoms/Icon'
 
 import { Badge } from './Badge'
 
@@ -20,7 +18,6 @@ const SubItensStyled = styled(Flex)<Props>`
     margin: 0;
     padding: 0;
     list-style: none;
-    padding-bottom: 24px;
   }
 
   ${({ sidebarOpened }) => {
@@ -59,6 +56,7 @@ const SubItensStyled = styled(Flex)<Props>`
         }
       `
     }
+
     return css<Props>`
       a {
         font-size: 14px;
@@ -68,7 +66,7 @@ const SubItensStyled = styled(Flex)<Props>`
         flex-direction: row;
         justify-content: space-between;
         &:hover {
-          background: ${({ theme }) => theme.colors.grey};
+          background: ${({ theme }) => theme.colors.lightGrey};
         }
       }
 
@@ -83,7 +81,7 @@ const SubItensStyled = styled(Flex)<Props>`
             background: #ffff;
             border-top-right-radius: 4px;
             border-bottom-right-radius: 4px;
-            box-shadow: 10px 10px 5px -10px #0000001a;
+            box-shadow: 2px 3px 4px #00000029;
           `
         }
         return css`
@@ -103,11 +101,7 @@ export const SubItens = ({ item, sidebarOpened, itemOpened }) => {
       itemOpened={itemOpened}
     >
       {!sidebarOpened && (
-        <Text
-          padding='16px'
-          color={item.active ? 'primary' : 'darkerGrey'}
-          fontWeight={item.active && 'medium'}
-        >
+        <Text color='primary' mx={6} mt={6} mb={4} fontWeight='semiBold'>
           {item.name}
         </Text>
       )}
@@ -119,14 +113,15 @@ export const SubItens = ({ item, sidebarOpened, itemOpened }) => {
                 variant={subItem.type ? subItem.type : 'internal'}
                 href={subItem.href}
               >
-                <Flex>
-                  <Icon paddingLeft='16px' marginRight='8px'>
-                    <MdKeyboardArrowRight />
-                  </Icon>
-                  <Text cursor='pointer' fontSize='medium'>
-                    {subItem.name}
-                  </Text>
-                </Flex>
+                <Text
+                  cursor='pointer'
+                  fontSize='medium'
+                  color='darkGrey'
+                  px={6}
+                  my={2}
+                >
+                  {subItem.name}
+                </Text>
 
                 {subItem.badge && <Badge>{subItem.badge}</Badge>}
               </Link>
