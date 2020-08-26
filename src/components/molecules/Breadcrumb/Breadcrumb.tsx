@@ -1,12 +1,25 @@
-import React, { useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-import { MdArrowDropDown } from 'react-icons/md'
-
-import { Flex } from '../../atoms/Flex'
 import styled from 'styled-components'
 import { FlexProps } from 'styled-system'
+import { MdArrowDropDown, MdHome } from 'react-icons/md'
+
+import { Flex } from '../../atoms/Flex'
+import { Link } from '../../atoms/Link'
+import { Text } from '../../atoms/Text'
+import { Icon } from '../../atoms/Icon'
 
 export interface Props {
+  routes: {
+    icon?: any
+    name?: any
+    path?: string
+    overlay?: any
+  }[]
+  showHome?: boolean
+}
+
+export interface PropsItem {
   children?: any
   overlay?: any
 }
@@ -60,6 +73,7 @@ const OverlayStyled = styled(Flex)`
     opacity: 1;
   }
 `
+
 const OverlayContentStyled = styled(Flex)<FlexProps>`
   position: absolute;
   top: 18px;
@@ -71,13 +85,14 @@ const OverlayContentStyled = styled(Flex)<FlexProps>`
     0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
 `
 
-export const BreadcrumbItem: React.FC<Props> = ({ overlay, children }) => {
+const BreadcrumbItem: React.FC<PropsItem> = ({ overlay, children }) => {
   if (overlay) {
     return (
       <BreadcrumbItemStyled>
-        {children}
         <OverlayStyled>
+          {children}
           <MdArrowDropDown />
+
           <OverlayContentStyled>{overlay}</OverlayContentStyled>
         </OverlayStyled>
       </BreadcrumbItemStyled>
@@ -92,10 +107,56 @@ BreadcrumbItem.propTypes = {
   overlay: PropTypes.any
 }
 
-export const Breadcrumb: React.FC<Props> = ({ children }) => {
-  return <BreadcrumbStyled>{children}</BreadcrumbStyled>
+export const Breadcrumb: React.FC<Props> = ({ showHome, routes }) => {
+  let crumbs: any[] = []
+
+  if (showHome) {
+    crumbs = [
+      {
+        icon: <MdHome />,
+        name: 'inicio',
+        path: '/'
+      }
+    ]
+  }
+
+  crumbs = crumbs.concat(routes).filter(r => r.name || r.icon)
+
+  return (
+    <BreadcrumbStyled>
+      {crumbs.length &&
+        crumbs.map(crumb => (
+          <BreadcrumbItem
+            overlay={crumb.overlay}
+            key={crumb.path || crumb.name}
+          >
+            {crumb.path ? (
+              <Link ml={crumb.icon ? '5px' : '0'} href={crumb.path}>
+                <Flex>
+                  <Icon mr='5px'>{crumb.icon}</Icon>
+                  {crumb.name}
+                </Flex>
+              </Link>
+            ) : (
+              <>
+                {crumb.icon}
+                <Text ml={crumb.icon ? '5px' : '0'} cursor='default'>
+                  {crumb.name}
+                </Text>
+              </>
+            )}
+          </BreadcrumbItem>
+        ))}
+    </BreadcrumbStyled>
+  )
+}
+
+Breadcrumb.defaultProps = {
+  routes: [],
+  showHome: true
 }
 
 Breadcrumb.propTypes = {
-  children: PropTypes.any
+  showHome: PropTypes.bool,
+  routes: PropTypes.array.isRequired
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 import { MdHome, MdWork } from 'react-icons/md'
 
-import { Breadcrumb, BreadcrumbItem } from './Breadcrumb'
+import { Breadcrumb } from './Breadcrumb'
 import { Link } from '../../atoms/Link'
 import { Flex } from '../../atoms/Flex'
 import { Text } from '../../atoms/Text'
@@ -12,20 +12,18 @@ export default {
 }
 
 export const Basic: React.FC = () => (
-  <Breadcrumb>
-    <BreadcrumbItem>
-      <MdHome />
-      <Link marginLeft='5px' href='#'>
-        início
-      </Link>
-    </BreadcrumbItem>
-    <BreadcrumbItem>
-      <Link href='#'>relatório</Link>
-    </BreadcrumbItem>
-    <BreadcrumbItem>
-      <Link href='#'>pedidos</Link>
-    </BreadcrumbItem>
-  </Breadcrumb>
+  <Breadcrumb
+    routes={[
+      {
+        path: '#',
+        name: 'relatório'
+      },
+      {
+        path: '#',
+        name: 'pedidos'
+      }
+    ]}
+  />
 )
 
 export const Overlay: React.FC = () => {
@@ -41,38 +39,42 @@ export const Overlay: React.FC = () => {
   )
 
   return (
-    <Breadcrumb>
-      <BreadcrumbItem>
-        <MdHome />
-        <Link marginLeft='5px' href='#'>
-          início
-        </Link>
-      </BreadcrumbItem>
-      <BreadcrumbItem overlay={menu}>
-        <Link href='#'>relatório</Link>
-      </BreadcrumbItem>
-      <BreadcrumbItem>
-        <Link href='#'>pedidos</Link>
-      </BreadcrumbItem>
-    </Breadcrumb>
+    <Breadcrumb
+      routes={[
+        {
+          path: '#',
+          overlay: menu,
+          name: 'relatório'
+        },
+        {
+          path: '#',
+          name: 'pedidos'
+        }
+      ]}
+    />
   )
 }
 
 export const WithIcons: React.FC = () => {
   return (
-    <Breadcrumb>
-      <BreadcrumbItem>
-        <MdHome />
-      </BreadcrumbItem>
-      <BreadcrumbItem>
-        <MdWork />
-      </BreadcrumbItem>
-      <BreadcrumbItem>
-        <Link href='#'>pedidos</Link>
-      </BreadcrumbItem>
-      <BreadcrumbItem>
-        <Text>Teste</Text>
-      </BreadcrumbItem>
-    </Breadcrumb>
+    <Breadcrumb
+      showHome={false}
+      routes={[
+        {
+          icon: <MdHome />
+        },
+        {
+          icon: <MdWork />,
+          name: 'áreas'
+        },
+        {
+          path: '#',
+          name: 'pedidos'
+        },
+        {
+          name: <Text>Teste</Text>
+        }
+      ]}
+    />
   )
 }
