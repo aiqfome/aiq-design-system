@@ -1,7 +1,9 @@
 import React, { useState, useMemo } from 'react'
 import PropTypes from 'prop-types'
+
+import styled, { css } from 'styled-components'
+
 import { MdExpandMore, MdExpandLess } from 'react-icons/md'
-import styled from 'styled-components'
 
 import { Text } from '../../atoms/Text'
 import { Flex } from '../../atoms/Flex'
@@ -22,8 +24,18 @@ interface ItemStyledProps {
 
 const ItemStyled = styled.li<ItemStyledProps>`
   position: relative;
+  transition: 0.3ms;
+
   &:hover {
     cursor: pointer;
+
+    ${({ theme, sidebarOpened }) =>
+      !sidebarOpened &&
+      css`
+        svg {
+          color: ${theme.colors.primary};
+        }
+      `};
 
     background: ${({ theme, sidebarOpened }) =>
       sidebarOpened ? theme.colors.lightGrey : theme.colors.white};
@@ -43,16 +55,19 @@ export const Item: React.FC<ItemProps> = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false)
 
-  function computeBadgeAllItens(iten) {
+  function computeBadgeAllItens(item) {
     let value = 0
-    if (iten.itens) {
-      iten.itens.forEach(subItem => {
+
+    if (item.itens) {
+      item.itens.forEach(subItem => {
         if (subItem.badge) value += subItem.badge
       })
     }
+
     if (item.badge) {
-      value += iten.badge
+      value += item.badge
     }
+
     return value
   }
 
@@ -66,9 +81,10 @@ export const Item: React.FC<ItemProps> = ({
 
   const ContentItem = () => (
     <>
-      <Icon marginRight='22px' color={item.active ? 'primary' : 'grey'}>
+      <Icon marginRight='22px' color={sidebarOpened ? 'primary' : 'grey'}>
         {item.icon}
       </Icon>
+
       {sidebarOpened && (
         <Flex
           flex={1}
@@ -80,7 +96,9 @@ export const Item: React.FC<ItemProps> = ({
               {item.name}
             </Text>
           </Flex>
+
           {badgeAllItens > 0 && !isOpen && <Badge>{badgeAllItens}</Badge>}
+
           {item.itens && (
             <Icon color='grey'>
               {isOpen ? <MdExpandLess size={18} /> : <MdExpandMore size={18} />}
