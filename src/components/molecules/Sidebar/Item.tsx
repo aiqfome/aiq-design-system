@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react'
 import PropTypes from 'prop-types'
-
+import { useLocation } from 'react-router-dom'
 import styled, { css } from 'styled-components'
 
 import { MdExpandMore, MdExpandLess } from 'react-icons/md'
@@ -20,11 +20,20 @@ interface ItemProps {
 
 interface ItemStyledProps {
   sidebarOpened?: boolean
+  active?: boolean
 }
 
 const ItemStyled = styled.li<ItemStyledProps>`
   position: relative;
   transition: 0.3ms;
+
+  ${({ theme, active }) =>
+    active &&
+    css`
+      svg {
+        color: ${theme.colors.primary};
+      }
+    `}
 
   &:hover {
     cursor: pointer;
@@ -54,6 +63,7 @@ export const Item: React.FC<ItemProps> = ({
   ...props
 }) => {
   const [isOpen, setIsOpen] = useState(false)
+  const location = useLocation()
 
   function computeBadgeAllItens(item) {
     let value = 0
@@ -77,6 +87,22 @@ export const Item: React.FC<ItemProps> = ({
     if (sidebarOpened) {
       setIsOpen(!isOpen)
     }
+  }
+
+  function isItemActive() {
+    let active = false
+    if (item.href) {
+      active = location.pathname.includes(item.href)
+      if (item.exact) active = location.pathname === item.href
+    }
+    item.itens &&
+      item.itens.forEach(subItem => {
+        if (!active) {
+          active = location.pathname.includes(subItem.href)
+          if (item.exact) active = location.pathname === subItem.href
+        }
+      })
+    return active
   }
 
   const ContentItem = () => (
@@ -111,6 +137,7 @@ export const Item: React.FC<ItemProps> = ({
 
   return (
     <ItemStyled
+      active={isItemActive()}
       sidebarOpened={sidebarOpened}
       onMouseEnter={() => !sidebarOpened && setIsOpen(true)}
       onMouseLeave={() => !sidebarOpened && setIsOpen(false)}
