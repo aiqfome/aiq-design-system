@@ -15,6 +15,10 @@ export const Basic: React.FC = () => (
   <Breadcrumb
     routes={[
       {
+        name: 'início',
+        icon: <MdHome />
+      },
+      {
         path: '#',
         name: 'relatório'
       },
@@ -42,6 +46,10 @@ export const Overlay: React.FC = () => {
     <Breadcrumb
       routes={[
         {
+          name: 'início',
+          icon: <MdHome />
+        },
+        {
           path: '#',
           overlay: menu,
           name: 'relatório'
@@ -58,7 +66,6 @@ export const Overlay: React.FC = () => {
 export const WithIcons: React.FC = () => {
   return (
     <Breadcrumb
-      showHome={false}
       routes={[
         {
           icon: <MdHome />
