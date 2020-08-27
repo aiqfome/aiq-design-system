@@ -16,7 +16,6 @@ export interface Props {
     path?: string
     overlay?: any
   }[]
-  showHome?: boolean
 }
 
 export interface PropsItem {
@@ -107,20 +106,8 @@ BreadcrumbItem.propTypes = {
   overlay: PropTypes.any
 }
 
-export const Breadcrumb: React.FC<Props> = ({ showHome, routes }) => {
-  let crumbs: any[] = []
-
-  if (showHome) {
-    crumbs = [
-      {
-        icon: <MdHome />,
-        name: 'inicio',
-        path: '/'
-      }
-    ]
-  }
-
-  crumbs = crumbs.concat(routes).filter(r => r.name || r.icon)
+export const Breadcrumb: React.FC<Props> = ({ routes }) => {
+  const crumbs: any[] = routes.filter(r => r.name || r.icon)
 
   return (
     <BreadcrumbStyled>
@@ -152,11 +139,9 @@ export const Breadcrumb: React.FC<Props> = ({ showHome, routes }) => {
 }
 
 Breadcrumb.defaultProps = {
-  routes: [],
-  showHome: true
+  routes: []
 }
 
 Breadcrumb.propTypes = {
-  showHome: PropTypes.bool,
   routes: PropTypes.array.isRequired
 }
