@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { MdHome } from 'react-icons/md'
+
 import { Breadcrumb } from './Breadcrumb'
 
 import { render } from '../../utils/test/render'
@@ -9,6 +11,11 @@ describe('must match with the previous snapshot', () => {
     const component = render(
       <Breadcrumb
         routes={[
+          {
+            path: '/',
+            name: 'início',
+            icon: <MdHome />
+          },
           {
             path: '#',
             name: 'relatório'
