@@ -1,7 +1,6 @@
 import React, { ReactElement } from 'react'
 
 import { Flex } from '../Flex'
-import { Box } from '../Box'
 
 import { MultiSelect } from './MultiSelect'
 
@@ -22,10 +21,16 @@ const items = [
   { value: 8, label: 'New York' }
 ]
 
+const filters = [
+  { allItems: true, label: 'todas as cidades' },
+  { items: [0, 1, 2, 3, 4], label: 'unidades próprias' },
+  { clear: true, label: 'limpar cidades selecionadas' }
+]
+
 export const Basic: React.FC = (): ReactElement => {
   return (
     <Flex variant='fullCentralized'>
-      <MultiSelect maxWidth='250px' items={items} />
+      <MultiSelect maxWidth='250px' filters={filters} items={items} />
     </Flex>
   )
 }

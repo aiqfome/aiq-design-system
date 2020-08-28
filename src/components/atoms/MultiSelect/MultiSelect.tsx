@@ -13,6 +13,12 @@ import { Button } from '../Button'
 
 export interface Props {
   maxWidth?: number | string
+  filters?: {
+    label: string
+    allItems?: boolean
+    clear?: boolean
+    items?: number[]
+  }[]
   items: {
     value: any
     label: string
@@ -74,8 +80,12 @@ const SelectedItem = styled(Text)`
   white-space: nowrap;
 `
 
-export const MultiSelect: React.FC<Props> = ({ items, maxWidth, ...props }) => {
-  const [inputItems, setInputItems] = useState(items)
+export const MultiSelect: React.FC<Props> = ({
+  items,
+  maxWidth,
+  filters = [],
+  ...props
+}) => {
   const [inputValue, setInputValue] = useState<string | undefined>('')
 
   const {
@@ -87,7 +97,7 @@ export const MultiSelect: React.FC<Props> = ({ items, maxWidth, ...props }) => {
   } = useMultipleSelection({ initialSelectedItems: [items[0], items[1]] })
 
   const getFilteredItems = () =>
-    inputItems.filter(
+    items.filter(
       item =>
         inputValue !== undefined &&
         selectedItems.indexOf(item) < 0 &&
@@ -106,7 +116,6 @@ export const MultiSelect: React.FC<Props> = ({ items, maxWidth, ...props }) => {
     items: getFilteredItems(),
     stateReducer: (state, actionAndChanges) => {
       const { changes, type } = actionAndChanges
-      console.log(type, changes)
       switch (type) {
         case useCombobox.stateChangeTypes.InputKeyDownEnter:
         case useCombobox.stateChangeTypes.ItemClick:
@@ -118,7 +127,6 @@ export const MultiSelect: React.FC<Props> = ({ items, maxWidth, ...props }) => {
       return changes
     },
     onStateChange: ({ inputValue: value, type, selectedItem }) => {
-      console.log(selectedItem)
       switch (type) {
         case useCombobox.stateChangeTypes.InputChange:
           setInputValue(value)
@@ -136,6 +144,24 @@ export const MultiSelect: React.FC<Props> = ({ items, maxWidth, ...props }) => {
       }
     }
   })
+
+  function filterItems(filter) {
+    if (filter.clear) {
+      selectedItems.forEach(item => {
+        removeSelectedItem(item)
+      })
+    }
+    if (filter.allItems) {
+      items.forEach(item => {
+        addSelectedItem(item)
+      })
+    }
+    if (filter.items) {
+      filter.items.forEach((_, index) => {
+        addSelectedItem(items[index])
+      })
+    }
+  }
 
   return (
     <MultiSelectStyled maxWidth={maxWidth} {...props}>
@@ -201,15 +227,11 @@ export const MultiSelect: React.FC<Props> = ({ items, maxWidth, ...props }) => {
         border='1px solid #dedede'
       >
         <ul>
-          <li>
-            <Text cursor='pointer'>todas as cidades</Text>
-          </li>
-          <li>
-            <Text cursor='pointer'>unidades próprias</Text>
-          </li>
-          <li>
-            <Text cursor='pointer'>limpar cidades selecionadas</Text>
-          </li>
+          {filters.map((filter, index) => (
+            <li key={`filter-${index}`} onClick={() => filterItems(filter)}>
+              <Text cursor='pointer'>{filter.label}</Text>
+            </li>
+          ))}
         </ul>
         <Divider mx={5} my={4} />
         <Itens>
@@ -233,5 +255,6 @@ export const MultiSelect: React.FC<Props> = ({ items, maxWidth, ...props }) => {
 
 MultiSelect.propTypes = {
   items: PropTypes.array.isRequired,
-  maxWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  maxWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  filters: PropTypes.array
 }
