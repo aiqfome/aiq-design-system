@@ -2,7 +2,7 @@ import React, { useState, InputHTMLAttributes } from 'react'
 import PropTypes from 'prop-types'
 import { MdVisibility, MdVisibilityOff } from 'react-icons/md'
 
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import {
   color,
   space,
@@ -63,11 +63,11 @@ const LabelStyled = styled.label<Props>`
     color: ${({ theme }) => theme.colors.almostBlack};
     width: 100%;
     height: inherit;
-    background-color: transparent;
     box-shadow: none;
     line-height: inherit;
     transition: border 0.2s, box-shadow 0.2s;
-    background: white;
+    background: ${({ theme, disabled }) =>
+      disabled ? theme.colors.error : theme.colors.lightGrey};
 
     &:not(:focus):placeholder-shown {
       border-top-color: ${({ theme, errorForm }) =>
