@@ -52,14 +52,14 @@ export const Multistep: React.FC<Props> = ({
 
   return (
     <Flex width='100%' alignItems='center' flexDirection='column' {...props}>
-      <Flex width='100%' maxWidth='800px'>
+      <Flex width='100%'>
         {steps.map((step, index) => (
           <Flex
             key={index}
             marginBottom='32px'
             flexDirection='row'
             alignItems='center'
-            width='100%'
+            width={index === steps.length - 1 ? '80px' : '100%'}
           >
             <StepButton type='button' onClick={() => handleClickStep(index)}>
               <Flex
@@ -92,6 +92,7 @@ export const Multistep: React.FC<Props> = ({
                 {step.name}
               </Text>
             </StepButton>
+
             {steps.length - 1 > index && (
               <Divider
                 color={
