@@ -52,6 +52,27 @@ export const Outlined: React.FC = () => (
   </Flex>
 )
 
+export const Disabled: React.FC = () => (
+  <Flex variant='fullCentralized'>
+    <Input
+      value={text('value', '')}
+      errorForm={boolean('errorForm', false)}
+      errorMessage={text('errorMessage', 'message error')}
+      label={text('label', 'aiqfome')}
+      placeholder={text('placeholder', 'duas pizzas é muito')}
+      disabled
+      variant={select(
+        'Variant',
+        {
+          Outlined: 'outlined',
+          Default: 'default'
+        },
+        'outlined'
+      )}
+    />
+  </Flex>
+)
+
 export const Password: React.FC = () => (
   <Flex variant='fullCentralized'>
     <Input label='Aiqfome' type='password' />
