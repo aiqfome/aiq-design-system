@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
 import styled from 'styled-components'
 import { MdClose } from 'react-icons/md'
+import { useCombobox, useMultipleSelection } from 'downshift'
 
 import { Flex } from '../Flex'
 import { Box } from '../Box'
@@ -12,7 +13,7 @@ import { Button } from '../Button'
 
 export interface Props {
   maxWidth?: number | string
-  itens: {
+  items: {
     value: any
     label: string
   }[]
@@ -27,10 +28,20 @@ const MultiSelectStyled = styled(Box)`
   }
 `
 
-const Overflow = styled(Flex)`
+const ContainerInput = styled(Box)`
+  /* overflow: hidden; */
+`
+
+interface OverflowProps {
+  isOpen?: boolean
+}
+
+const Overflow = styled(Flex)<OverflowProps>`
   position: absolute;
   width: 100%;
   border-top: none;
+
+  display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
 
   ul {
     padding: 0;
@@ -52,50 +63,138 @@ const Overflow = styled(Flex)`
 const Itens = styled(Box)`
   max-height: 250px;
   overflow: auto;
+
+  .highlighted {
+    background: ${({ theme }) => theme.colors.primary};
+    color: ${({ theme }) => theme.colors.white};
+  }
 `
 
-export const MultiSelect: React.FC<Props> = ({ itens, maxWidth, ...props }) => {
+const SelectedItem = styled(Text)`
+  white-space: nowrap;
+`
+
+export const MultiSelect: React.FC<Props> = ({ items, maxWidth, ...props }) => {
+  const [inputItems, setInputItems] = useState(items)
+  const [inputValue, setInputValue] = useState<string | undefined>('')
+
+  const {
+    getSelectedItemProps,
+    getDropdownProps,
+    addSelectedItem,
+    removeSelectedItem,
+    selectedItems
+  } = useMultipleSelection({ initialSelectedItems: [items[0], items[1]] })
+
+  const getFilteredItems = () =>
+    inputItems.filter(
+      item =>
+        inputValue !== undefined &&
+        selectedItems.indexOf(item) < 0 &&
+        item.label.toLowerCase().startsWith(inputValue.toLowerCase())
+    )
+  const {
+    isOpen,
+    getMenuProps,
+    getInputProps,
+    getComboboxProps,
+    highlightedIndex,
+    getItemProps,
+    openMenu
+  } = useCombobox({
+    itemToString: item => (item ? '' : ''),
+    items: getFilteredItems(),
+    stateReducer: (state, actionAndChanges) => {
+      const { changes, type } = actionAndChanges
+      console.log(type, changes)
+      switch (type) {
+        case useCombobox.stateChangeTypes.InputKeyDownEnter:
+        case useCombobox.stateChangeTypes.ItemClick:
+          return {
+            ...changes,
+            isOpen: true // keep the menu open after selection.
+          }
+      }
+      return changes
+    },
+    onStateChange: ({ inputValue: value, type, selectedItem }) => {
+      console.log(selectedItem)
+      switch (type) {
+        case useCombobox.stateChangeTypes.InputChange:
+          setInputValue(value)
+          break
+        case useCombobox.stateChangeTypes.InputKeyDownEnter:
+        case useCombobox.stateChangeTypes.ItemClick:
+        case useCombobox.stateChangeTypes.InputBlur:
+          if (selectedItem) {
+            setInputValue('')
+            addSelectedItem(selectedItem)
+          }
+          break
+        default:
+          break
+      }
+    }
+  })
+
   return (
     <MultiSelectStyled maxWidth={maxWidth} {...props}>
-      <Flex
+      <ContainerInput
         backgroundColor='white'
         borderRadius={4}
+        display='flex'
+        flexDirection='row'
         py={3}
         px={5}
         border='1px solid #dedede'
+        refBox={getComboboxProps().ref}
       >
-        <Flex
-          py={2}
-          px={4}
-          mr={3}
-          display='flex'
-          flexDirection='row'
-          alignItems='center'
-          backgroundColor='primary'
-          borderRadius='3px'
-        >
-          <Text cursor='pointer' color='white'>
-            Maringa/PR
-          </Text>
-          <Button ml={6}>
-            <MdClose color='#fff' />
-          </Button>
-        </Flex>
-        <Flex
-          py={2}
-          px={4}
-          display='flex'
-          flexDirection='row'
-          alignItems='center'
-          backgroundColor='primary'
-          borderRadius='3px'
-        >
-          <Text cursor='pointer' color='white'>
-            +3
-          </Text>
-        </Flex>
-      </Flex>
+        {selectedItems.map((selectedItem, index) => (
+          <Flex
+            py={2}
+            key={`selected-item-${index}`}
+            px={4}
+            mr={3}
+            display='flex'
+            flexDirection='row'
+            alignItems='center'
+            backgroundColor='primary'
+            borderRadius='3px'
+          >
+            <SelectedItem
+              {...getSelectedItemProps({ selectedItem, index })}
+              cursor='pointer'
+              color='white'
+            >
+              {selectedItem.label}
+            </SelectedItem>
+            <Button
+              onClick={e => {
+                e.stopPropagation()
+                removeSelectedItem(selectedItem)
+              }}
+              ml={6}
+            >
+              <MdClose color='#fff' />
+            </Button>
+          </Flex>
+        ))}
+
+        <input
+          {...getInputProps(
+            getDropdownProps({
+              preventKeyAction: isOpen,
+              onFocus: () => {
+                if (!isOpen) {
+                  openMenu()
+                }
+              }
+            })
+          )}
+        />
+      </ContainerInput>
       <Overflow
+        isOpen={isOpen}
         py={7}
         flexDirection='column'
         backgroundColor='white'
@@ -114,10 +213,17 @@ export const MultiSelect: React.FC<Props> = ({ itens, maxWidth, ...props }) => {
         </ul>
         <Divider mx={5} my={4} />
         <Itens>
-          <ul>
-            {itens.map(item => (
-              <li key={item.value}>{item.label}</li>
-            ))}
+          <ul {...getMenuProps()}>
+            {isOpen &&
+              getFilteredItems().map((item, index) => (
+                <li
+                  className={highlightedIndex === index ? 'highlighted' : ''}
+                  key={`${item}${index}`}
+                  {...getItemProps({ item, index })}
+                >
+                  {item.label}
+                </li>
+              ))}
           </ul>
         </Itens>
       </Overflow>
@@ -126,6 +232,6 @@ export const MultiSelect: React.FC<Props> = ({ itens, maxWidth, ...props }) => {
 }
 
 MultiSelect.propTypes = {
-  itens: PropTypes.array.isRequired,
+  items: PropTypes.array.isRequired,
   maxWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 }

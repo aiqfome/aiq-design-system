@@ -36,6 +36,7 @@ export interface Props
   border?: string
   fullHeight?: boolean
   flex?: number
+  color?: any
 }
 
 const flexVariations: { [index: string]: any } = {

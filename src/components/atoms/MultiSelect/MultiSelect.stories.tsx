@@ -10,7 +10,7 @@ export default {
   title: 'atoms/MultiSelect'
 }
 
-const itens = [
+const items = [
   { value: 0, label: 'Maringá' },
   { value: 1, label: 'Guarapuava' },
   { value: 2, label: 'São Paulo' },
@@ -25,7 +25,7 @@ const itens = [
 export const Basic: React.FC = (): ReactElement => {
   return (
     <Flex variant='fullCentralized'>
-      <MultiSelect maxWidth='250px' itens={itens} />
+      <MultiSelect maxWidth='250px' items={items} />
     </Flex>
   )
 }
