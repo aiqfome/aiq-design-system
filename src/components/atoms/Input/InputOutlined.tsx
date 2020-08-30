@@ -44,7 +44,7 @@ const Container = styled(Box)`
 
 const LabelStyled = styled.label<Props>`
   position: relative;
-  padding-top: 6px;
+  min-height: 50px;
   line-height: 1.5;
   overflow: hidden;
   display: flex;
