@@ -13,6 +13,7 @@ export { Link } from './components/atoms/Link'
 export { Loading } from './components/atoms/Loading'
 export { Radio } from './components/atoms/Radio'
 export { Select } from './components/atoms/Select'
+export { MultiSelect } from './components/atoms/MultiSelect'
 export { Switch } from './components/atoms/Switch'
 export { Text } from './components/atoms/Text'
 
