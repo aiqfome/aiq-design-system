@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import PropTypes from 'prop-types'
 
 import styled from 'styled-components'
@@ -11,6 +11,11 @@ import { Text } from '../Text'
 import { Divider } from '../Divider'
 import { Button } from '../Button'
 
+type Item = {
+  value: any
+  label: string
+}
+
 export interface Props {
   maxWidth?: number | string
   filters?: {
@@ -19,10 +24,9 @@ export interface Props {
     clear?: boolean
     items?: number[]
   }[]
-  items: {
-    value: any
-    label: string
-  }[]
+  onChange?: (event: any) => void
+  value?: Item[]
+  items: Item[]
 }
 
 const MultiSelectStyled = styled(Box)`
@@ -34,8 +38,15 @@ const MultiSelectStyled = styled(Box)`
   }
 `
 
-const ContainerInput = styled(Box)`
-  /* overflow: hidden; */
+interface ContainerInputProps {
+  onClick: () => void
+}
+
+const ContainerInput = styled(Box)<ContainerInputProps>`
+  input {
+    background: none;
+    border: none;
+  }
 `
 
 interface OverflowProps {
@@ -84,6 +95,8 @@ export const MultiSelect: React.FC<Props> = ({
   items,
   maxWidth,
   filters = [],
+  onChange,
+  value = [],
   ...props
 }) => {
   const [inputValue, setInputValue] = useState<string | undefined>('')
@@ -94,7 +107,12 @@ export const MultiSelect: React.FC<Props> = ({
     addSelectedItem,
     removeSelectedItem,
     selectedItems
-  } = useMultipleSelection({ initialSelectedItems: [items[0], items[1]] })
+  } = useMultipleSelection({
+    initialSelectedItems: value,
+    onSelectedItemsChange: event => {
+      onChange && onChange(event)
+    }
+  })
 
   const getFilteredItems = () =>
     items.filter(
@@ -163,6 +181,10 @@ export const MultiSelect: React.FC<Props> = ({
     }
   }
 
+  console.log(getInputProps())
+  const inputRef = getInputProps().ref()
+  console.log(inputRef)
+
   return (
     <MultiSelectStyled maxWidth={maxWidth} {...props}>
       <ContainerInput
@@ -170,6 +192,7 @@ export const MultiSelect: React.FC<Props> = ({
         borderRadius={4}
         display='flex'
         flexDirection='row'
+        onClick={() => inputRef.focus()}
         py={3}
         px={5}
         border='1px solid #dedede'
@@ -188,8 +211,8 @@ export const MultiSelect: React.FC<Props> = ({
             borderRadius='3px'
           >
             <SelectedItem
+              ref={inputRef}
               {...getSelectedItemProps({ selectedItem, index })}
-              cursor='pointer'
               color='white'
             >
               {selectedItem.label}
@@ -256,5 +279,7 @@ export const MultiSelect: React.FC<Props> = ({
 MultiSelect.propTypes = {
   items: PropTypes.array.isRequired,
   maxWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  filters: PropTypes.array
+  filters: PropTypes.array,
+  onChange: PropTypes.func,
+  value: PropTypes.array
 }
