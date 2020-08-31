@@ -15,6 +15,7 @@ export { Radio } from './components/atoms/Radio'
 export { Select } from './components/atoms/Select'
 export { Switch } from './components/atoms/Switch'
 export { Text } from './components/atoms/Text'
+export { Tooltip } from './components/atoms/Tooltip'
 
 export { Breadcrumb } from './components/molecules/Breadcrumb'
 export { Container } from './components/molecules/Container'
