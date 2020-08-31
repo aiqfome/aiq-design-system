@@ -32,6 +32,7 @@ export interface Props
   color?: string
   children?: any
   refBox?: any
+  className?: string
 }
 
 export const BoxStyled = styled.div`
