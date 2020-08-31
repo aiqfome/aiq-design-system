@@ -30,9 +30,6 @@ export interface Props {
 }
 
 const MultiSelectStyled = styled(Box)`
-  position: relative;
-  width: 100%;
-
   &:hover {
     cursor: text;
   }
@@ -119,35 +116,16 @@ export const MultiSelect: React.FC<Props> = ({
 }) => {
   const [inputValue, setInputValue] = useState<string | undefined>('')
 
-  const {
-    getSelectedItemProps,
-    getDropdownProps,
-    addSelectedItem,
-    removeSelectedItem,
-    selectedItems
-  } = useMultipleSelection({
+  const inputRef = useRef(document.createElement('input'))
+
+  const propsMultipleSelection = useMultipleSelection({
     initialSelectedItems: value,
     onSelectedItemsChange: event => {
       onChange && onChange(event)
     }
   })
 
-  const getFilteredItems = () =>
-    items.filter(
-      item =>
-        inputValue !== undefined &&
-        selectedItems.indexOf(item) < 0 &&
-        item.label.toLowerCase().startsWith(inputValue.toLowerCase())
-    )
-  const {
-    isOpen,
-    getMenuProps,
-    getInputProps,
-    getComboboxProps,
-    highlightedIndex,
-    getItemProps,
-    openMenu
-  } = useCombobox({
+  const propsCombobox = useCombobox({
     itemToString: item => (item ? '' : ''),
     items: getFilteredItems(),
     stateReducer: (state, actionAndChanges) => {
@@ -157,7 +135,7 @@ export const MultiSelect: React.FC<Props> = ({
         case useCombobox.stateChangeTypes.ItemClick:
           return {
             ...changes,
-            isOpen: true // keep the menu open after selection.
+            isOpen: true
           }
       }
       return changes
@@ -172,37 +150,42 @@ export const MultiSelect: React.FC<Props> = ({
         case useCombobox.stateChangeTypes.InputBlur:
           if (selectedItem) {
             setInputValue('')
-            addSelectedItem(selectedItem)
+            propsMultipleSelection.addSelectedItem(selectedItem)
           }
-          break
-        default:
           break
       }
     }
   })
 
+  function getFilteredItems() {
+    return items.filter(
+      item =>
+        inputValue !== undefined &&
+        propsMultipleSelection.selectedItems.indexOf(item) < 0 &&
+        item.label.toLowerCase().startsWith(inputValue.toLowerCase())
+    )
+  }
+
   function filterItems(filter) {
     if (filter.clear) {
-      selectedItems.forEach(item => {
-        removeSelectedItem(item)
+      propsMultipleSelection.selectedItems.forEach(item => {
+        propsMultipleSelection.removeSelectedItem(item)
       })
     }
     if (filter.allItems) {
       items.forEach(item => {
-        addSelectedItem(item)
+        propsMultipleSelection.addSelectedItem(item)
       })
     }
     if (filter.items) {
       filter.items.forEach((_, index) => {
-        addSelectedItem(items[index])
+        propsMultipleSelection.addSelectedItem(items[index])
       })
     }
   }
 
-  const inputRef = useRef(document.createElement('input'))
-
   return (
-    <MultiSelectStyled maxWidth={maxWidth} {...props}>
+    <MultiSelectStyled position='relative' maxWidth={maxWidth} {...props}>
       <ContainerInput
         backgroundColor='white'
         borderRadius={4}
@@ -215,9 +198,9 @@ export const MultiSelect: React.FC<Props> = ({
         pb={0}
         px={5}
         border='1px solid #dedede'
-        refBox={getComboboxProps().ref}
+        refBox={propsCombobox.getComboboxProps().ref}
       >
-        {selectedItems.map((selectedItem, index) => (
+        {propsMultipleSelection.selectedItems.map((selectedItem, index) => (
           <Flex
             py={2}
             key={`selected-item-${index}`}
@@ -231,7 +214,10 @@ export const MultiSelect: React.FC<Props> = ({
             borderRadius='3px'
           >
             <SelectedItem
-              {...getSelectedItemProps({ selectedItem, index })}
+              {...propsMultipleSelection.getSelectedItemProps({
+                selectedItem,
+                index
+              })}
               color='white'
             >
               {selectedItem.label}
@@ -239,7 +225,7 @@ export const MultiSelect: React.FC<Props> = ({
             <Button
               onClick={e => {
                 e.stopPropagation()
-                removeSelectedItem(selectedItem)
+                propsMultipleSelection.removeSelectedItem(selectedItem)
               }}
               ml={6}
             >
@@ -250,13 +236,13 @@ export const MultiSelect: React.FC<Props> = ({
 
         <input
           type='text'
-          {...getInputProps(
-            getDropdownProps({
+          {...propsCombobox.getInputProps(
+            propsMultipleSelection.getDropdownProps({
               ref: inputRef,
-              preventKeyAction: isOpen,
+              preventKeyAction: propsCombobox.isOpen,
               onFocus: () => {
-                if (!isOpen) {
-                  openMenu()
+                if (!propsCombobox.isOpen) {
+                  propsCombobox.openMenu()
                 }
               }
             })
@@ -264,7 +250,7 @@ export const MultiSelect: React.FC<Props> = ({
         />
       </ContainerInput>
       <Overflow
-        isOpen={isOpen}
+        isOpen={propsCombobox.isOpen}
         py={7}
         flexDirection='column'
         backgroundColor='white'
@@ -279,13 +265,17 @@ export const MultiSelect: React.FC<Props> = ({
         </ul>
         <Divider mx={5} my={4} />
         <Itens>
-          <ul {...getMenuProps()}>
-            {isOpen &&
+          <ul {...propsCombobox.getMenuProps()}>
+            {propsCombobox.isOpen &&
               getFilteredItems().map((item, index) => (
                 <li
-                  className={highlightedIndex === index ? 'highlighted' : ''}
+                  className={
+                    propsCombobox.highlightedIndex === index
+                      ? 'highlighted'
+                      : ''
+                  }
                   key={`${item}${index}`}
-                  {...getItemProps({ item, index })}
+                  {...propsCombobox.getItemProps({ item, index })}
                 >
                   {item.label}
                 </li>

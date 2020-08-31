@@ -5,6 +5,8 @@ import {
   color,
   ColorProps,
   space,
+  position,
+  PositionProps,
   SpaceProps,
   layout,
   LayoutProps,
@@ -25,6 +27,7 @@ export interface Props
     LayoutProps,
     FontSizeProps,
     FontWeightProps,
+    PositionProps,
     BorderProps {
   color?: string
   children?: any
@@ -39,6 +42,7 @@ export const BoxStyled = styled.div`
   ${fontSize}
   ${fontWeight}
   ${border}
+  ${position}
 `
 
 export const Box: React.FC<Props> = ({ refBox, ...props }) => {
