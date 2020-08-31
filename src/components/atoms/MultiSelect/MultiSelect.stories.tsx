@@ -28,7 +28,7 @@ const filters = [
 ]
 
 export const Basic: React.FC = (): ReactElement => {
-  const [selectedItens, setSelectedItens] = useState([items[1]])
+  const [selectedItens, setSelectedItens] = useState([items[0]])
 
   function handleChangeMultiSelect(event) {
     console.log(event)

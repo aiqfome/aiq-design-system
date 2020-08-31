@@ -45,11 +45,25 @@ interface ContainerInputProps {
 const ContainerInput = styled(Box)<ContainerInputProps>`
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  overflow: auto;
 
   input {
     background: none;
     border: none;
+    margin-bottom: 6px;
+  }
+
+  &::-webkit-scrollbar {
+    height: 5px;
+  }
+
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.3);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    outline: 1px solid slategrey;
   }
 `
 
@@ -197,7 +211,8 @@ export const MultiSelect: React.FC<Props> = ({
         onClick={() => {
           inputRef.current.focus()
         }}
-        py={3}
+        pt={3}
+        pb={0}
         px={5}
         border='1px solid #dedede'
         refBox={getComboboxProps().ref}
