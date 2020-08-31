@@ -30,8 +30,8 @@ const tooltipVariations = {
     right: 105%;
   `,
   'right-bottom': css`
-    top: 50%;
-    left: 105%;
+    top: 100%;
+    left: 80%;
   `
 }
 
@@ -40,7 +40,7 @@ const TooltipStyled = styled(Box)<Props>`
   display: inline-block;
 
   &:hover {
-    cursor: pointer;
+    cursor: auto;
   }
 
   .tooltip {
