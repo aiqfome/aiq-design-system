@@ -44,6 +44,7 @@ const Container = styled(Box)`
 
 const LabelStyled = styled.label<Props>`
   position: relative;
+  top: -6px;
   padding-top: 6px;
   line-height: 1.5;
   overflow: hidden;
@@ -67,7 +68,7 @@ const LabelStyled = styled.label<Props>`
     line-height: inherit;
     transition: border 0.2s, box-shadow 0.2s;
     background: ${({ theme, disabled }) =>
-      disabled ? theme.colors.error : theme.colors.lightGrey};
+      disabled ? theme.colors.lightGrey : theme.colors.white};
 
     &:not(:focus):placeholder-shown {
       border-top-color: ${({ theme, errorForm }) =>
