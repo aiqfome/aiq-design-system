@@ -43,7 +43,7 @@ const TooltipStyled = styled(Box)<Props>`
     cursor: pointer;
   }
 
-  .tooltip-text {
+  .tooltip {
     visibility: hidden;
     white-space: nowrap;
     background-color: #fff;
@@ -62,19 +62,17 @@ const TooltipStyled = styled(Box)<Props>`
   }
 
   /* Show the tooltip text when you mouse over the tooltip container */
-  &:hover .tooltip-text {
+  &:hover .tooltip {
     visibility: visible;
   }
 `
-
-const BodyTooltip = styled(Box)``
 
 export const Tooltip: React.FC<Props> = ({ body, children, ...props }) => {
   return (
     <TooltipStyled {...props}>
       {children}
 
-      <Box className='tooltip-text'>{body}</Box>
+      <Box className='tooltip'>{body}</Box>
     </TooltipStyled>
   )
 }
