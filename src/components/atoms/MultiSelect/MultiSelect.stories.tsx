@@ -28,7 +28,7 @@ const filters = [
 ]
 
 export const Basic: React.FC = (): ReactElement => {
-  const [selectedItens, setSelectedItens] = useState([])
+  const [selectedItens, setSelectedItens] = useState([items[1]])
 
   function handleChangeMultiSelect(event) {
     console.log(event)
@@ -37,7 +37,7 @@ export const Basic: React.FC = (): ReactElement => {
   return (
     <Flex variant='fullCentralized'>
       <MultiSelect
-        maxWidth='250px'
+        maxWidth='480px'
         value={selectedItens}
         onChange={handleChangeMultiSelect}
         filters={filters}

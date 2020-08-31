@@ -43,6 +43,10 @@ interface ContainerInputProps {
 }
 
 const ContainerInput = styled(Box)<ContainerInputProps>`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
   input {
     background: none;
     border: none;
@@ -181,9 +185,7 @@ export const MultiSelect: React.FC<Props> = ({
     }
   }
 
-  console.log(getInputProps())
-  const inputRef = getInputProps().ref()
-  console.log(inputRef)
+  const inputRef = useRef(document.createElement('input'))
 
   return (
     <MultiSelectStyled maxWidth={maxWidth} {...props}>
@@ -192,7 +194,9 @@ export const MultiSelect: React.FC<Props> = ({
         borderRadius={4}
         display='flex'
         flexDirection='row'
-        onClick={() => inputRef.focus()}
+        onClick={() => {
+          inputRef.current.focus()
+        }}
         py={3}
         px={5}
         border='1px solid #dedede'
@@ -204,6 +208,7 @@ export const MultiSelect: React.FC<Props> = ({
             key={`selected-item-${index}`}
             px={4}
             mr={3}
+            mb={3}
             display='flex'
             flexDirection='row'
             alignItems='center'
@@ -211,7 +216,6 @@ export const MultiSelect: React.FC<Props> = ({
             borderRadius='3px'
           >
             <SelectedItem
-              ref={inputRef}
               {...getSelectedItemProps({ selectedItem, index })}
               color='white'
             >
@@ -230,8 +234,10 @@ export const MultiSelect: React.FC<Props> = ({
         ))}
 
         <input
+          type='text'
           {...getInputProps(
             getDropdownProps({
+              ref: inputRef,
               preventKeyAction: isOpen,
               onFocus: () => {
                 if (!isOpen) {
