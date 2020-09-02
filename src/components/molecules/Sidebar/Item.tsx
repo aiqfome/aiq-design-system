@@ -105,45 +105,9 @@ export const Item: React.FC<ItemProps> = ({
     return active
   }
 
-  const ContentItem = () => (
-    <>
-      <Icon marginRight='22px' color={sidebarOpened ? 'primary' : 'grey'}>
-        {item.icon}
-      </Icon>
-
-      {sidebarOpened && (
-        <Flex
-          flex={1}
-          justifyContent='space-between'
-          onClick={changeVisibilitySubItem}
-        >
-          <Flex flex={1}>
-            <Text cursor='pointer' color='darkerGrey'>
-              {item.name}
-            </Text>
-          </Flex>
-
-          {badgeAllItens > 0 && !isOpen && <Badge count={badgeAllItens} />}
-
-          {item.itens && (
-            <Icon color='grey'>
-              {isOpen ? <MdExpandLess size={18} /> : <MdExpandMore size={18} />}
-            </Icon>
-          )}
-        </Flex>
-      )}
-    </>
-  )
-
-  return (
-    <ItemStyled
-      active={isItemActive()}
-      sidebarOpened={sidebarOpened}
-      onMouseEnter={() => !sidebarOpened && setIsOpen(true)}
-      onMouseLeave={() => !sidebarOpened && setIsOpen(false)}
-      {...props}
-    >
-      {item.itens && item.itens.length > 0 ? (
+  const ItemWrapper = ({ children }) => {
+    if (item.itens && item.itens.length > 0) {
+      return (
         <Flex
           flexDirection='row'
           width='100%'
@@ -152,16 +116,72 @@ export const Item: React.FC<ItemProps> = ({
           padding='16px 22px'
           onClick={changeVisibilitySubItem}
         >
-          <ContentItem />
+          {children}
         </Flex>
-      ) : (
-        <LinkStyled
-          variant={item.type ? item.type : 'internal'}
-          href={item.href}
+      )
+    }
+    if (item.callback) {
+      return (
+        <Flex
+          flexDirection='row'
+          width='100%'
+          alignItems='center'
+          justifyContent='space-between'
+          padding='16px 22px'
+          onClick={item.callback}
         >
-          <ContentItem />
-        </LinkStyled>
-      )}
+          {children}
+        </Flex>
+      )
+    }
+    return (
+      <LinkStyled variant={item.type ? item.type : 'internal'} href={item.href}>
+        {children}
+      </LinkStyled>
+    )
+  }
+  ItemWrapper.propTypes = {
+    children: PropTypes.any
+  }
+
+  return (
+    <ItemStyled
+      active={isItemActive()}
+      sidebarOpened={sidebarOpened}
+      onMouseEnter={() => !sidebarOpened && setIsOpen(true)}
+      onMouseLeave={() => !sidebarOpened && setIsOpen(false)}
+    >
+      <ItemWrapper>
+        <Icon marginRight='22px' color={sidebarOpened ? 'primary' : 'grey'}>
+          {item.icon}
+        </Icon>
+
+        {sidebarOpened && (
+          <Flex
+            flex={1}
+            justifyContent='space-between'
+            onClick={changeVisibilitySubItem}
+          >
+            <Flex flex={1}>
+              <Text cursor='pointer' color='darkerGrey'>
+                {item.name}
+              </Text>
+            </Flex>
+
+            {badgeAllItens > 0 && !isOpen && <Badge count={badgeAllItens} />}
+
+            {item.itens && (
+              <Icon color='grey'>
+                {isOpen ? (
+                  <MdExpandLess size={18} />
+                ) : (
+                  <MdExpandMore size={18} />
+                )}
+              </Icon>
+            )}
+          </Flex>
+        )}
+      </ItemWrapper>
       <SubItens item={item} sidebarOpened={sidebarOpened} itemOpened={isOpen} />
     </ItemStyled>
   )

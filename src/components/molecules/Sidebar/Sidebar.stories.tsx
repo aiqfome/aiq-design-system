@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { MdHome, MdBookmark, MdStorage } from 'react-icons/md'
+import React from 'react'
+import { MdHome, MdBookmark, MdStorage, MdExitToApp } from 'react-icons/md'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { Sidebar } from './Sidebar'
 import { withKnobs, boolean } from '@storybook/addon-knobs'
@@ -86,6 +86,13 @@ const sidebarData = {
       name: 'aiqfome',
       href: 'https://aiqfome.com/',
       type: 'external'
+    },
+    {
+      icon: <MdExitToApp size={18} />,
+      name: 'sair',
+      callback: () => {
+        console.log('logout')
+      }
     }
   ]
 }
