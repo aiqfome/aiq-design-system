@@ -171,7 +171,7 @@ export const Item: React.FC<ItemProps> = ({
             {badgeAllItens > 0 && !isOpen && <Badge count={badgeAllItens} />}
 
             {item.itens && (
-              <Icon color='grey'>
+              <Icon color='primary'>
                 {isOpen ? (
                   <MdExpandLess size={18} />
                 ) : (
