@@ -2,6 +2,7 @@ import React from 'react'
 import { withKnobs, text, number, select } from '@storybook/addon-knobs'
 
 import { Text } from './Text'
+import { Flex } from '../Flex'
 
 export default {
   component: Text,
@@ -22,4 +23,10 @@ export const basic: React.FC = () => (
 
 export const cursor: React.FC = () => (
   <Text cursor='pointer'>Design System</Text>
+)
+
+export const WhiteSpace: React.FC = () => (
+  <Flex width='50px' border='1px solid black'>
+    <Text whiteSpace='nowrap'>Design System</Text>
+  </Flex>
 )
