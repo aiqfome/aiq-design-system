@@ -76,6 +76,9 @@ const badgeVariations: { [index: string]: any } = {
 const BadgeStyled = styled(Text)<Props>`
   ${({ variant }) => badgeVariations[variant || 'default']}
 
+  display: inline-flex;
+  align-items: center;
+
   ${color}
   ${space}
   ${border}
@@ -87,7 +90,7 @@ const BadgeStyled = styled(Text)<Props>`
 
 const getCounter = (value, overflow) => {
   if (value) {
-    if (overflow && value > overflow) {
+    if (overflow && !isNaN(value) && value > overflow) {
       return (
         <Tooltip body={value} variant='right-bottom'>{`${overflow}+`}</Tooltip>
       )

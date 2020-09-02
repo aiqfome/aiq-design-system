@@ -4,8 +4,7 @@ import styled, { css } from 'styled-components'
 import { Text } from '../../atoms/Text'
 import { Flex } from '../../atoms/Flex'
 import { Link } from '../../atoms/Link'
-
-import { Badge } from './Badge'
+import { Badge } from '../../atoms/Badge'
 
 interface Props {
   item?: any
@@ -123,7 +122,7 @@ export const SubItens = ({ item, sidebarOpened, itemOpened }) => {
                   {subItem.name}
                 </Text>
 
-                {subItem.badge && <Badge>{subItem.badge}</Badge>}
+                {subItem.badge && <Badge count={subItem.badge} />}
               </Link>
             </li>
           ))}

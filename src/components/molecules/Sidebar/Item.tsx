@@ -9,8 +9,8 @@ import { Text } from '../../atoms/Text'
 import { Flex } from '../../atoms/Flex'
 import { Link } from '../../atoms/Link'
 import { Icon } from '../../atoms/Icon'
+import { Badge } from '../../atoms/Badge'
 
-import { Badge } from './Badge'
 import { SubItens } from './SubItens'
 
 interface ItemProps {
@@ -123,7 +123,7 @@ export const Item: React.FC<ItemProps> = ({
             </Text>
           </Flex>
 
-          {badgeAllItens > 0 && !isOpen && <Badge>{badgeAllItens}</Badge>}
+          {badgeAllItens > 0 && !isOpen && <Badge count={badgeAllItens} />}
 
           {item.itens && (
             <Icon color='grey'>
