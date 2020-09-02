@@ -71,6 +71,8 @@ const tabVariations: { [index: string]: any } = {
             border-radius: 5px 5px 0 0;
             border: 1px solid ${theme.colors.mediumGrey};
             border-bottom: 0px;
+            color: ${theme.colors.primary};
+            font-weight: ${theme.fontWeights.medium};
           `
         : css`
             font-weight: ${theme.fontWeights.regular};

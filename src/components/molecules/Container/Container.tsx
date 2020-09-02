@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from 'react'
+import React, { ReactNode } from 'react'
 import PropTypes from 'prop-types'
 
 import { Divider } from '../../atoms/Divider'
@@ -8,6 +8,7 @@ import { Tabs, Tab } from '../Tab'
 
 interface TabProps {
   content: any
+  index: number
   value?: number
   active?: boolean
   variant?: 'default' | 'contained' | 'card'
@@ -84,31 +85,27 @@ const ContainerWrapper: React.FC<Props> = ({
 
 export const Container: React.FC<Props> = ({
   children,
+  tabIndex,
   tabs = [],
   onChangeTab,
   ...props
 }) => {
-  const [tabIndex, setTabIndex] = useState(0)
-
-  const onChange = (event, index) => {
-    if (onChangeTab) {
-      onChangeTab(event, index)
-    }
-
-    setTabIndex(index)
-  }
-
   return (
     <>
       {tabs.length && (
-        <Tabs variant='card' mx='10px' value={tabIndex} onChange={onChange}>
+        <Tabs
+          mx='10px'
+          variant='card'
+          value={tabIndex || 0}
+          onChange={onChangeTab}
+        >
           {tabs.map((tab, index) => (
             <Tab
               {...tab}
-              key={index}
-              index={index}
               variant='card'
               value={tabIndex}
+              key={tab.index || index}
+              index={tab.index || index}
             >
               {tab.content}
             </Tab>
@@ -134,6 +131,7 @@ Container.propTypes = {
   header: PropTypes.node,
   title: PropTypes.string,
   children: PropTypes.node,
+  tabIndex: PropTypes.number,
   onChangeTab: PropTypes.func
 }
 
