@@ -36,7 +36,7 @@ const SubItensStyled = styled(Flex)<Props>`
         }
 
         &.show {
-          max-height: 360px;
+          max-height: 100vh;
           overflow: hidden;
           transition: all 0.5s ease;
           will-change: transform;
