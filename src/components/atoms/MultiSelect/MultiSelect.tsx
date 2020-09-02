@@ -43,6 +43,7 @@ const ContainerInput = styled(Box)<ContainerInputProps>`
   display: flex;
   flex-direction: row;
   overflow: auto;
+  min-height: 39px;
 
   input {
     background: none;
