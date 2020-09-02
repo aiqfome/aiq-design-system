@@ -1,4 +1,5 @@
 export { Avatar } from './components/atoms/Avatar'
+export { Badge } from './components/atoms/Badge'
 export { Box } from './components/atoms/Box'
 export { Button } from './components/atoms/Button'
 export { Checkbox } from './components/atoms/Checkbox'
