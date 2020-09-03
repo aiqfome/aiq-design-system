@@ -92,7 +92,7 @@ export const Container: React.FC<Props> = ({
 }) => {
   return (
     <>
-      {tabs.length && (
+      {tabs.length > 0 && (
         <Tabs
           mx='10px'
           variant='card'
