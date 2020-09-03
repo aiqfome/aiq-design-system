@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
@@ -38,6 +38,17 @@ export const Sidebar: React.FC<Props> = ({
   opened = false,
   ...props
 }) => {
+  const [scrollTop, setScrollTop] = useState(0)
+  useEffect(() => {
+    function listenWhenSidebarScroll(event) {
+      setScrollTop(event.target.scrollTop)
+    }
+
+    document
+      .querySelectorAll('#teste')[0]
+      .addEventListener('scroll', listenWhenSidebarScroll)
+  }, [])
+
   return (
     <SidebarStyled
       width='100%'
@@ -51,9 +62,14 @@ export const Sidebar: React.FC<Props> = ({
         <>
           {header && header}
           <Divider width='100%' marginBottom='16px' />
-          <Itens>
+          <Itens id='teste'>
             {data.itens.map((item, index) => (
-              <Item sidebarOpened={opened} key={index} item={item} />
+              <Item
+                scrollTop={scrollTop}
+                sidebarOpened={opened}
+                key={index}
+                item={item}
+              />
             ))}
           </Itens>
         </>

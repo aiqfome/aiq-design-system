@@ -15,6 +15,7 @@ import { SubItens } from './SubItens'
 
 interface ItemProps {
   item: any
+  scrollTop?: number
   sidebarOpened: boolean
 }
 
@@ -60,6 +61,7 @@ const LinkStyled = styled(Link)`
 export const Item: React.FC<ItemProps> = ({
   item,
   sidebarOpened = false,
+  scrollTop,
   ...props
 }) => {
   const [isOpen, setIsOpen] = useState(false)
@@ -182,7 +184,12 @@ export const Item: React.FC<ItemProps> = ({
           </Flex>
         )}
       </ItemWrapper>
-      <SubItens item={item} sidebarOpened={sidebarOpened} itemOpened={isOpen} />
+      <SubItens
+        item={item}
+        scrollTop={scrollTop}
+        sidebarOpened={sidebarOpened}
+        itemOpened={isOpen}
+      />
     </ItemStyled>
   )
 }
