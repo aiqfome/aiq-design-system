@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
-import { withKnobs, boolean } from '@storybook/addon-knobs'
+import { withKnobs, boolean, text } from '@storybook/addon-knobs'
+
+import { Flex } from '../Flex'
 import { Checkbox } from './Checkbox'
 
 export default {
@@ -12,29 +14,43 @@ export const Basic: React.FC = () => {
   const [checked, setChecked] = useState(false)
 
   return (
-    <Checkbox
-      onClick={() => setChecked(!checked)}
-      checked={boolean('checked', false)}
-      disabled={boolean('disabled', false)}
-    />
+    <Flex variant='fullCentralized'>
+      <Checkbox
+        onClick={() => setChecked(!checked)}
+        checked={boolean('checked', false)}
+        disabled={boolean('disabled', false)}
+        label={text('text', 'Aiqfome')}
+      />
+    </Flex>
   )
 }
 
 export const Checked: React.FC = () => {
   const [checked, setChecked] = useState(true)
 
-  return <Checkbox onClick={() => setChecked(!checked)} checked={checked} />
+  return (
+    <Flex variant='fullCentralized'>
+      <Checkbox
+        onClick={() => setChecked(!checked)}
+        checked={checked}
+        label={text('text', 'Aiqfome')}
+      />
+    </Flex>
+  )
 }
 
 export const Disabled: React.FC = () => {
   const [checked, setChecked] = useState(false)
 
   return (
-    <Checkbox
-      onClick={() => setChecked(!checked)}
-      disabled={true}
-      checked={checked}
-    />
+    <Flex variant='fullCentralized'>
+      <Checkbox
+        onClick={() => setChecked(!checked)}
+        disabled={true}
+        checked={checked}
+        label={text('text', 'Aiqfome')}
+      />
+    </Flex>
   )
 }
 
@@ -42,10 +58,13 @@ export const DisabledChecked: React.FC = () => {
   const [checked, setChecked] = useState(true)
 
   return (
-    <Checkbox
-      onClick={() => setChecked(!checked)}
-      disabled={true}
-      checked={checked}
-    />
+    <Flex variant='fullCentralized'>
+      <Checkbox
+        onClick={() => setChecked(!checked)}
+        disabled={true}
+        checked={checked}
+        label={text('text', 'Aiqfome')}
+      />
+    </Flex>
   )
 }
