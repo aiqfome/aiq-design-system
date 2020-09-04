@@ -33,6 +33,60 @@ const sidebarData = {
       active: true
     },
     {
+      icon: <MdBookmark size={18} />,
+      name: 'bookmark',
+      href: '/pedidos',
+      active: true
+    },
+    {
+      icon: <MdBookmark size={18} />,
+      name: 'bookmark',
+      href: '/pedidos',
+      active: true
+    },
+    {
+      icon: <MdBookmark size={18} />,
+      name: 'bookmark',
+      href: '/pedidos',
+      active: true
+    },
+    {
+      icon: <MdBookmark size={18} />,
+      name: 'bookmark',
+      href: '/pedidos',
+      active: true
+    },
+    {
+      icon: <MdBookmark size={18} />,
+      name: 'bookmark',
+      href: '/pedidos',
+      active: true
+    },
+    {
+      icon: <MdBookmark size={18} />,
+      name: 'bookmark',
+      href: '/pedidos',
+      active: true
+    },
+    {
+      icon: <MdBookmark size={18} />,
+      name: 'bookmark',
+      href: '/pedidos',
+      active: true
+    },
+    {
+      icon: <MdBookmark size={18} />,
+      name: 'bookmark',
+      href: '/pedidos',
+      active: true
+    },
+    {
+      icon: <MdBookmark size={18} />,
+      name: 'bookmark',
+      href: '/pedidos',
+      active: true
+    },
+    {
       icon: <MdStorage size={18} />,
       name: 'store',
       itens: [
