@@ -10,7 +10,7 @@ interface Props {
   item?: any
   itemOpened?: boolean
   sidebarOpened?: boolean
-  scrollTop?: any
+  heightScrolledToTop?: number
 }
 
 const SubItensStyled = styled(Flex)<Props>`
@@ -70,14 +70,14 @@ const SubItensStyled = styled(Flex)<Props>`
         }
       }
 
-      ${({ itemOpened, scrollTop }) => {
+      ${({ itemOpened, heightScrolledToTop }) => {
         if (itemOpened) {
           return css`
             display: flex;
             position: fixed;
             width: 240px;
             margin-left: 55px;
-            margin-top: calc((50px + ${scrollTop}px) * -1);
+            margin-top: calc((50px + ${heightScrolledToTop}px) * -1);
             background: #ffff;
             border-top-right-radius: 4px;
             border-bottom-right-radius: 4px;
@@ -92,10 +92,15 @@ const SubItensStyled = styled(Flex)<Props>`
   }}
 `
 
-export const SubItens = ({ item, sidebarOpened, itemOpened, scrollTop }) => {
+export const SubItens = ({
+  item,
+  sidebarOpened,
+  itemOpened,
+  heightScrolledToTop = 0
+}) => {
   return (
     <SubItensStyled
-      scrollTop={scrollTop}
+      heightScrolledToTop={heightScrolledToTop}
       flexDirection='column'
       className={`${itemOpened ? 'show' : 'hide'}`}
       sidebarOpened={sidebarOpened}
@@ -137,5 +142,6 @@ export const SubItens = ({ item, sidebarOpened, itemOpened, scrollTop }) => {
 SubItens.propTypes = {
   item: PropTypes.any,
   itemOpened: PropTypes.bool,
-  sidebarOpened: PropTypes.bool
+  sidebarOpened: PropTypes.bool,
+  heightScrolledToTop: PropTypes.number
 }

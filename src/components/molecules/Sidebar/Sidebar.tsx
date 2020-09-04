@@ -60,10 +60,11 @@ export const Sidebar: React.FC<Props> = ({
     function listenWhenSidebarScroll(event) {
       setHeightScrolledToTop(event.target.scrollTop)
     }
-
-    document
-      .querySelectorAll('#teste')[0]
-      .addEventListener('scroll', listenWhenSidebarScroll)
+    const elementItensSidebar = document.querySelectorAll('#itens-sidebar')[0]
+    elementItensSidebar.addEventListener('scroll', listenWhenSidebarScroll)
+    return () => {
+      elementItensSidebar.removeEventListener('scroll', listenWhenSidebarScroll)
+    }
   }, [])
 
   return (
@@ -79,10 +80,10 @@ export const Sidebar: React.FC<Props> = ({
         <>
           {header && header}
           <Divider width='100%' marginBottom='16px' />
-          <Itens id='teste'>
+          <Itens id='itens-sidebar'>
             {data.itens.map((item, index) => (
               <Item
-                scrollTop={heightScrolledToTop}
+                heightScrolledToTop={heightScrolledToTop}
                 sidebarOpened={opened}
                 key={index}
                 item={item}
