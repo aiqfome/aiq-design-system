@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
@@ -17,6 +17,23 @@ const Itens = styled.ul`
   padding: 0;
   margin: 0;
   overflow-y: auto;
+  direction: ltr;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: #ebebeb;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: ${({ theme }) => theme.colors.primaryLight};
+  }
 `
 
 interface SidebarStyledProps {
@@ -38,6 +55,18 @@ export const Sidebar: React.FC<Props> = ({
   opened = false,
   ...props
 }) => {
+  const [heightScrolledToTop, setHeightScrolledToTop] = useState(0)
+  useEffect(() => {
+    function listenWhenSidebarScroll(event) {
+      setHeightScrolledToTop(event.target.scrollTop)
+    }
+    const elementItensSidebar = document.querySelectorAll('#itens-sidebar')[0]
+    elementItensSidebar.addEventListener('scroll', listenWhenSidebarScroll)
+    return () => {
+      elementItensSidebar.removeEventListener('scroll', listenWhenSidebarScroll)
+    }
+  }, [])
+
   return (
     <SidebarStyled
       width='100%'
@@ -51,9 +80,14 @@ export const Sidebar: React.FC<Props> = ({
         <>
           {header && header}
           <Divider width='100%' marginBottom='16px' />
-          <Itens>
+          <Itens id='itens-sidebar'>
             {data.itens.map((item, index) => (
-              <Item sidebarOpened={opened} key={index} item={item} />
+              <Item
+                heightScrolledToTop={heightScrolledToTop}
+                sidebarOpened={opened}
+                key={index}
+                item={item}
+              />
             ))}
           </Itens>
         </>
