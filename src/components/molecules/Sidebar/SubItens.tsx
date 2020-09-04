@@ -76,7 +76,7 @@ const SubItensStyled = styled(Flex)<Props>`
             display: flex;
             position: fixed;
             width: 240px;
-            margin-left: 60px;
+            margin-left: 55px;
             margin-top: calc((50px + ${scrollTop}px) * -1);
             background: #ffff;
             border-top-right-radius: 4px;

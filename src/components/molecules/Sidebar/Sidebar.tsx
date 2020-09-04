@@ -17,6 +17,23 @@ const Itens = styled.ul`
   padding: 0;
   margin: 0;
   overflow-y: auto;
+  direction: ltr;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: #ebebeb;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: ${({ theme }) => theme.colors.primaryLight};
+  }
 `
 
 interface SidebarStyledProps {
@@ -38,10 +55,10 @@ export const Sidebar: React.FC<Props> = ({
   opened = false,
   ...props
 }) => {
-  const [scrollTop, setScrollTop] = useState(0)
+  const [heightScrolledToTop, setHeightScrolledToTop] = useState(0)
   useEffect(() => {
     function listenWhenSidebarScroll(event) {
-      setScrollTop(event.target.scrollTop)
+      setHeightScrolledToTop(event.target.scrollTop)
     }
 
     document
@@ -65,7 +82,7 @@ export const Sidebar: React.FC<Props> = ({
           <Itens id='teste'>
             {data.itens.map((item, index) => (
               <Item
-                scrollTop={scrollTop}
+                scrollTop={heightScrolledToTop}
                 sidebarOpened={opened}
                 key={index}
                 item={item}
