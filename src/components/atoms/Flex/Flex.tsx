@@ -54,7 +54,6 @@ const flexVariations: { [index: string]: any } = {
 
 export const Flex = styled.div<Props>`
   ${space}
-  ${layout}
   ${fontSize}
   ${fontWeight}
   ${border}
@@ -76,6 +75,8 @@ export const Flex = styled.div<Props>`
     css`
       height: 100vh;
     `}
+
+  ${layout}
 `
 
 Flex.propTypes = {
