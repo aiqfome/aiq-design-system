@@ -1,11 +1,18 @@
-import React from 'react'
+import React, { useMemo, useState } from 'react'
 import PropTypes from 'prop-types'
+
 import styled, { DefaultTheme } from 'styled-components'
 import { layout, space } from 'styled-system'
+
+import { Flex } from '../Flex'
+import { Text } from '../Text'
+
 export interface Props extends DefaultTheme {
   checked?: boolean
   disabled?: boolean
   onClick?: any
+  name?: string
+  label?: string
 }
 
 const CheckboxStyled = styled.div<Props>`
@@ -70,28 +77,58 @@ export const Checkbox: React.FC<Props> = ({
   checked,
   disabled,
   onClick,
+  name,
+  label,
   ...props
 }) => {
+  const [isChecked, setIsChecked] = useState(checked)
+
   function handleClickCheckbox() {
     if (!disabled) {
-      onClick()
+      setIsChecked(checked => !checked)
+
+      onClick && onClick()
     }
   }
 
+  const textColor = useMemo(() => {
+    if (disabled) {
+      return 'mediumGrey'
+    }
+
+    return 'almostBlack'
+  }, [disabled])
+
   return (
-    <CheckboxStyled
-      disabled={disabled}
-      onClick={handleClickCheckbox}
-      {...props}
-    >
-      <input type='Checkbox' checked={checked} disabled={disabled} {...props} />
-      <span />
-    </CheckboxStyled>
+    <Flex>
+      <CheckboxStyled
+        disabled={disabled}
+        onClick={handleClickCheckbox}
+        {...props}
+      >
+        <input
+          name={name}
+          type='Checkbox'
+          checked={isChecked}
+          disabled={disabled}
+          {...props}
+        />
+        <span />
+      </CheckboxStyled>
+
+      {label && (
+        <Text ml={5} color={textColor}>
+          {label}
+        </Text>
+      )}
+    </Flex>
   )
 }
 
 Checkbox.propTypes = {
   checked: PropTypes.bool,
   disabled: PropTypes.bool,
-  onClick: PropTypes.any
+  onClick: PropTypes.any,
+  name: PropTypes.string,
+  label: PropTypes.string
 }
