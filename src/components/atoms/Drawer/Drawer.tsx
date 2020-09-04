@@ -22,7 +22,7 @@ const drawerVariations: { [index: string]: any } = {
     ${({ opened }) =>
       !opened &&
       css`
-        transform: translateX(500px);
+        transform: translateX(100%);
       `}
   `,
   left: css<Props>`
@@ -37,7 +37,7 @@ const drawerVariations: { [index: string]: any } = {
     ${({ opened }) =>
       !opened &&
       css`
-        transform: translateX(-340px);
+        transform: translateX(-100%);
       `}
   `
 }
@@ -49,6 +49,7 @@ export const DrawerStyled = styled.div<Props>`
   border: 1px solid ${props => props.theme.colors.mediumGrey};
   position: fixed;
   top: 0;
+  overflow: auto;
   height: 100vh;
   z-index: 2000;
   transition: transform 0.8s;

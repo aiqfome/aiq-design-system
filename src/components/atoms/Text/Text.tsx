@@ -23,6 +23,7 @@ export interface Props
     FontWeightProps,
     TypographyProps {
   cursor?: string
+  whiteSpace?: 'nowrap' | 'normal' | 'pre'
 }
 
 export const Text = styled.span<Props>`
@@ -34,8 +35,10 @@ export const Text = styled.span<Props>`
   ${typography}
 
   cursor: ${props => props.cursor || 'auto'};
+  white-space: ${props => props.whiteSpace || 'normal'};
 `
 
 Text.propTypes = {
-  cursor: PropTypes.string
+  cursor: PropTypes.string,
+  whiteSpace: PropTypes.oneOf(['nowrap', 'normal', 'pre'])
 }

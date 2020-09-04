@@ -1,6 +1,8 @@
 import styled, { css, DefaultTheme } from 'styled-components'
 import PropTypes from 'prop-types'
 import {
+  color,
+  ColorProps,
   space,
   SpaceProps,
   layout,
@@ -22,6 +24,7 @@ export interface Props
     FontSizeProps,
     FontWeightProps,
     PositionProps,
+    ColorProps,
     BorderProps {
   variant?: 'auto' | 'centralized' | 'fullCentralized'
   justifyContent?: string
@@ -33,6 +36,7 @@ export interface Props
   border?: string
   fullHeight?: boolean
   flex?: number
+  color?: any
 }
 
 const flexVariations: { [index: string]: any } = {
@@ -50,11 +54,11 @@ const flexVariations: { [index: string]: any } = {
 
 export const Flex = styled.div<Props>`
   ${space}
-  ${layout}
   ${fontSize}
   ${fontWeight}
   ${border}
   ${position}
+  ${color}
 
   display: flex;
   justify-content: ${props => props.justifyContent};
@@ -62,7 +66,6 @@ export const Flex = styled.div<Props>`
   flex-direction: ${props => props.flexDirection};
   height: ${props => props.height};
   padding: ${props => props.padding};
-  background-color: ${props => props.backgroundColor};
   flex: ${props => props.flex};
   
   ${({ variant }) => flexVariations[variant || 'auto']}
@@ -72,6 +75,8 @@ export const Flex = styled.div<Props>`
     css`
       height: 100vh;
     `}
+
+  ${layout}
 `
 
 Flex.propTypes = {

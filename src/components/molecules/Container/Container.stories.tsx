@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react'
+import React, { ReactElement, useState } from 'react'
 
 import { Button } from '../../atoms/Button'
 import { Flex } from '../../atoms/Flex'
@@ -6,6 +6,7 @@ import { Input } from '../../atoms/Input'
 import { Text } from '../../atoms/Text'
 
 import { Container } from './Container'
+import { TabPanel } from '../Tab'
 
 export default {
   component: Container,
@@ -49,6 +50,41 @@ export const WithHeader: React.FC = (): ReactElement => {
       <Flex variant='centralized' p={15}>
         <Text>my content (:</Text>
       </Flex>
+    </Container>
+  )
+}
+
+export const WithTabs: React.FC = (): ReactElement => {
+  const [tabIndex, setTabIndex] = useState(0)
+
+  const tabs = [
+    {
+      index: 0,
+      content: 'pizza'
+    },
+    {
+      index: 1,
+      content: 'burguer'
+    }
+  ]
+
+  const onChange = (_, index) => {
+    setTabIndex(index)
+  }
+
+  return (
+    <Container tabs={tabs} tabIndex={tabIndex} onChangeTab={onChange}>
+      <TabPanel value={tabIndex} index={0}>
+        <Flex variant='centralized' flex={1} p={15}>
+          <Text>aqui tem pizza</Text>
+        </Flex>
+      </TabPanel>
+
+      <TabPanel value={tabIndex} index={1}>
+        <Flex variant='centralized' flex={1} p={15}>
+          <Text>aqui tem vários burguers</Text>
+        </Flex>
+      </TabPanel>
     </Container>
   )
 }
