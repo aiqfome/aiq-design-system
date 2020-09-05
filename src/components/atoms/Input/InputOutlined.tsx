@@ -2,7 +2,7 @@ import React, { useState, InputHTMLAttributes } from 'react'
 import PropTypes from 'prop-types'
 import { MdVisibility, MdVisibilityOff } from 'react-icons/md'
 
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import {
   color,
   space,
@@ -44,7 +44,7 @@ const Container = styled(Box)`
 
 const LabelStyled = styled.label<Props>`
   position: relative;
-  top: -6px;
+  top: -3px;
   padding-top: 6px;
   line-height: 1.5;
   overflow: hidden;
@@ -52,6 +52,7 @@ const LabelStyled = styled.label<Props>`
   align-items: center;
 
   & > input {
+    max-height: 37px;
     box-sizing: border-box;
     margin: 0;
     border: solid 1px
@@ -202,7 +203,7 @@ export const InputOutlined: React.FC<Props> = ({
           </Button>
         </LabelStyled>
 
-        <InputErrorMessage errorForm={errorForm} errorMessage={errorMessage} />
+        {errorForm && <InputErrorMessage errorMessage={errorMessage} />}
       </Container>
     )
   }
@@ -224,7 +225,7 @@ export const InputOutlined: React.FC<Props> = ({
           {sufix}
         </LabelStyled>
 
-        <InputErrorMessage errorForm={errorForm} errorMessage={errorMessage} />
+        {errorForm && <InputErrorMessage errorMessage={errorMessage} />}
       </Container>
     )
   }
@@ -244,7 +245,7 @@ export const InputOutlined: React.FC<Props> = ({
         <Text>{label}</Text>
       </LabelStyled>
 
-      <InputErrorMessage errorForm={errorForm} errorMessage={errorMessage} />
+      {errorForm && <InputErrorMessage errorMessage={errorMessage} />}
     </Container>
   )
 }
