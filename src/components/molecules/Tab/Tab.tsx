@@ -8,12 +8,12 @@ export interface TabProps extends SpaceProps {
   children: any
   value?: number
   active?: boolean
-  variant?: 'default' | 'contained'
+  variant?: 'default' | 'contained' | 'card'
 }
 
 interface StyledProps {
   active?: boolean
-  variant?: 'default' | 'contained'
+  variant?: 'default' | 'contained' | 'card'
 }
 
 const tabVariations: { [index: string]: any } = {
@@ -55,6 +55,24 @@ const tabVariations: { [index: string]: any } = {
             background: ${theme.colors.white};
             border-radius: 5px;
             border: 1px solid ${theme.colors.mediumGrey};
+          `
+        : css`
+            font-weight: ${theme.fontWeights.regular};
+            color: ${theme.colors.darkGrey};
+          `}
+  `,
+  card: css<StyledProps>`
+    padding: 10px 17px;
+    ${({ active, theme }) =>
+      active
+        ? css`
+            color: ${theme.colors.almostBlack};
+            background: ${theme.colors.white};
+            border-radius: 5px 5px 0 0;
+            border: 1px solid ${theme.colors.mediumGrey};
+            border-bottom: 0px;
+            color: ${theme.colors.primary};
+            font-weight: ${theme.fontWeights.medium};
           `
         : css`
             font-weight: ${theme.fontWeights.regular};
@@ -109,7 +127,7 @@ Tab.propTypes = {
   index: PropTypes.number.isRequired,
   children: PropTypes.any.isRequired,
   value: PropTypes.number,
-  variant: PropTypes.oneOf(['default', 'contained'])
+  variant: PropTypes.oneOf(['default', 'contained', 'card'])
 }
 
 Tab.defaultProps = {

@@ -1,11 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { SpaceProps, space } from 'styled-system'
 import styled, { css, DefaultTheme } from 'styled-components'
 
-export interface TabsProps extends DefaultTheme {
+export interface TabsProps extends SpaceProps, DefaultTheme {
   value?: number
   children?: any
-  variant?: 'default' | 'contained'
+  variant?: 'default' | 'contained' | 'card'
   onChange?: (event: any, newValue: any) => void
 }
 
@@ -17,6 +18,9 @@ const tabsVariations: { [index: string]: any } = {
     background: #f5f5f5;
     border-radius: 5px;
     padding: 4px 5px;
+  `,
+  card: css`
+    margin-bottom: 0px;
   `
 }
 
@@ -26,6 +30,8 @@ const TabStyled = styled.ul<TabsProps>`
   flex-direction: row;
   list-style: none;
   margin-bottom: 20px;
+
+  ${space}
 
   ${({ variant }) => tabsVariations[variant || 'default']}
 `
@@ -52,7 +58,7 @@ Tabs.propTypes = {
   value: PropTypes.number,
   children: PropTypes.any,
   onChange: PropTypes.func,
-  variant: PropTypes.oneOf(['default', 'contained'])
+  variant: PropTypes.oneOf(['default', 'contained', 'card'])
 }
 
 Tabs.defaultProps = {
