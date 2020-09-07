@@ -3,15 +3,7 @@ import PropTypes from 'prop-types'
 import { MdVisibility, MdVisibilityOff } from 'react-icons/md'
 
 import styled, { css } from 'styled-components'
-import {
-  space,
-  layout,
-  LayoutProps,
-  border,
-  BorderProps,
-  color,
-  ColorProps
-} from 'styled-system'
+import { space, layout, border, color } from 'styled-system'
 
 import { Button } from '../Button'
 import { Flex } from '../Flex'
@@ -150,7 +142,7 @@ export const InputNeutral: React.FC<Props> = ({
           {sufix}
         </ContainerSufix>
 
-        <InputErrorMessage errorForm={errorForm} errorMessage={errorMessage} />
+        {errorForm && <InputErrorMessage errorMessage={errorMessage} />}
       </Flex>
     )
   }
@@ -174,7 +166,7 @@ export const InputNeutral: React.FC<Props> = ({
           />
         </ContainerSufix>
 
-        <InputErrorMessage errorForm={errorForm} errorMessage={errorMessage} />
+        {errorForm && <InputErrorMessage errorMessage={errorMessage} />}
       </Flex>
     )
   }
@@ -207,7 +199,7 @@ export const InputNeutral: React.FC<Props> = ({
           </Button>
         </ContainerSufix>
 
-        <InputErrorMessage errorForm={errorForm} errorMessage={errorMessage} />
+        {errorForm && <InputErrorMessage errorMessage={errorMessage} />}
       </Flex>
     )
   }
@@ -226,7 +218,7 @@ export const InputNeutral: React.FC<Props> = ({
         {...props}
       />
 
-      <InputErrorMessage errorForm={errorForm} errorMessage={errorMessage} />
+      {errorForm && <InputErrorMessage errorMessage={errorMessage} />}
     </Flex>
   )
 }
