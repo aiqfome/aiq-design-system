@@ -40,7 +40,7 @@ const StyledContainer: React.FC<Props> = ({
       flexDirection='column'
       backgroundColor='white'
       border='1px solid lightGrey'
-      m={tabs.length ? '-1px 10px 10px' : '10px'}
+      mt={tabs.length && '-1px'}
       {...props}
     >
       {children}
@@ -94,7 +94,7 @@ export const Container: React.FC<Props> = ({
     <>
       {tabs.length > 0 && (
         <Tabs
-          mx='10px'
+          mr='10px'
           variant='card'
           value={tabIndex || 0}
           onChange={onChangeTab}
