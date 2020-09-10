@@ -20,7 +20,7 @@ export const Basic: React.FC = () => {
 
   return (
     <Flex flexDirection='column'>
-      <Tabs value={value} onChange={handleChange}>
+      <Tabs value={value} onChange={handleChange} width='100%'>
         <Tab value={value} index={0}>
           <Text fontSize={5} cursor='pointer'>
             Item One

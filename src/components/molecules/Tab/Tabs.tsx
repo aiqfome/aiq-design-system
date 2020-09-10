@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { SpaceProps, space } from 'styled-system'
+import { SpaceProps, space, LayoutProps, layout } from 'styled-system'
 import styled, { css, DefaultTheme } from 'styled-components'
 
-export interface TabsProps extends SpaceProps, DefaultTheme {
+export interface TabsProps extends SpaceProps, LayoutProps, DefaultTheme {
   value?: number
   children?: any
   variant?: 'default' | 'contained' | 'card'
@@ -32,6 +32,7 @@ const TabStyled = styled.ul<TabsProps>`
   margin-bottom: 20px;
 
   ${space}
+  ${layout}
 
   ${({ variant }) => tabsVariations[variant || 'default']}
 `
