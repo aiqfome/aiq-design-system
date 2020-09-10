@@ -49,7 +49,6 @@ const TooltipStyled = styled(Box)<Props>`
     background-color: #fff;
     color: ${({ theme }) => theme.colors.almostBlack};
     text-align: center;
-    padding: 5px 10px;
     border-radius: 4px;
 
     /* Position the tooltip text - see examples below! */
