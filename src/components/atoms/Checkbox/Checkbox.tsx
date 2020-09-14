@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import React, { useMemo, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 
 import styled, { DefaultTheme } from 'styled-components'
@@ -81,15 +81,19 @@ export const Checkbox: React.FC<Props> = ({
   label,
   ...props
 }) => {
-  const [isChecked, setIsChecked] = useState(checked)
+  const [isChecked, setIsChecked] = useState(false)
 
   function handleClickCheckbox() {
     if (!disabled) {
-      setIsChecked(checked => !checked)
+      onClick && onClick(!checked)
 
-      onClick && onClick()
+      setIsChecked(checked => !checked)
     }
   }
+
+  useEffect(() => {
+    setIsChecked(checked || false)
+  }, [checked])
 
   const textColor = useMemo(() => {
     if (disabled) {
