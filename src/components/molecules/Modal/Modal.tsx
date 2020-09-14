@@ -224,9 +224,8 @@ export const Modal: React.FC<Props> = ({
         >
           {title}
         </Text>
-        <Flex flex={1} width='100%'>
-          {children}
-        </Flex>
+
+        {children}
 
         {variant !== 'alert' ? (
           <Flex justifyContent='space-between' marginTop={44} width='100%'>
