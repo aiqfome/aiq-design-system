@@ -73,6 +73,10 @@ const tabVariations: { [index: string]: any } = {
             border-bottom: 0px;
             color: ${theme.colors.primary};
             font-weight: ${theme.fontWeights.medium};
+
+            &::before {
+              background: ${theme.colors.white};
+            }
           `
         : css`
             font-weight: ${theme.fontWeights.regular};
