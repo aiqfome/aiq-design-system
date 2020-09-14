@@ -49,19 +49,14 @@ const TooltipStyled = styled(Box)<Props>`
     background-color: #fff;
     color: ${({ theme }) => theme.colors.almostBlack};
     text-align: center;
-    padding: 5px 10px;
     border-radius: 4px;
-
-    /* Position the tooltip text - see examples below! */
     position: absolute;
     z-index: 1;
-    margin-left: 5px;
     box-shadow: 0px 3px 6px #00000029;
 
     ${({ variant }) => tooltipVariations[variant || 'right']}
   }
 
-  /* Show the tooltip text when you mouse over the tooltip container */
   &:hover .tooltip {
     visibility: visible;
   }
