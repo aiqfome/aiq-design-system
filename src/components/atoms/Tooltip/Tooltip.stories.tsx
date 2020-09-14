@@ -37,6 +37,22 @@ export const Variants: React.FC = (): ReactElement => {
       <Tooltip mx={10} variant='right-bottom' body="I'm hungry">
         <Text cursor='pointer'>Right-Bottom</Text>
       </Tooltip>
+      <Tooltip mx={10} variant='left-bottom' body="I'm hungry">
+        <Text cursor='pointer'>Left-Bottom</Text>
+      </Tooltip>
+    </Flex>
+  )
+}
+
+export const Types: React.FC = (): ReactElement => {
+  return (
+    <Flex variant='fullCentralized'>
+      <Tooltip mx={10} type='default' body="I'm hungry">
+        <Text cursor='pointer'>Default</Text>
+      </Tooltip>
+      <Tooltip mx={10} type='balloon' variant='bottom' body="I'm hungry">
+        <Text cursor='pointer'>Balloon</Text>
+      </Tooltip>
     </Flex>
   )
 }
