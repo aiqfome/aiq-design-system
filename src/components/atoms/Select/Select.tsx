@@ -32,7 +32,7 @@ const Container = styled(Box)<Props>`
     padding: 10px;
     list-style-type: none;
     position: absolute;
-    top: ${({ variant }) => (variant === 'outlined' ? '57px' : '38px')};
+    top: ${({ variant }) => (variant === 'outlined' ? '39px' : '38px')};
     overflow: hidden;
     z-index: 1;
     width: 100%;
@@ -57,7 +57,7 @@ interface ButtonStyledProps extends ButtonProps {
 const ButtonStyled = styled(Button)<ButtonStyledProps>`
   position: absolute;
   top: ${({ variantSelect }) =>
-    variantSelect === 'outlined' ? '18px' : '12px'};
+    variantSelect === 'outlined' ? '15px' : '12px'};
   right: 14px;
 `
 
