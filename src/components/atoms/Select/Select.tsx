@@ -12,7 +12,7 @@ export interface Props {
   label?: string
   items?: string[]
   isOpen?: boolean
-  variant?: string
+  variant?: 'outlined'
   prefix?: any
   placeholder?: string
   handleSelectedItemChange?: (item: any) => void
@@ -155,7 +155,7 @@ Select.propTypes = {
   label: PropTypes.string,
   items: PropTypes.array,
   isOpen: PropTypes.bool,
-  variant: PropTypes.string,
+  variant: PropTypes.oneOf(['outlined']),
   prefix: PropTypes.any,
   placeholder: PropTypes.string,
   handleSelectedItemChange: PropTypes.func,
