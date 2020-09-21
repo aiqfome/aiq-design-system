@@ -10,7 +10,7 @@ export interface Props {
   count?: number
   color?: string
   disabled?: boolean
-  variant?: 'default' | 'noTotal'
+  variant?: 'default' | 'noCount'
   size?: 'default' | 'small' | 'large'
   defaultPage?: number
   page?: number
@@ -152,7 +152,7 @@ export const Pagination: React.FC<Props> = ({
   }, [pages, count, variant, currentPage])
 
   function handleClickPage(page) {
-    if (page > 0 && (variant === 'noTotal' || (count && page <= count))) {
+    if (page > 0 && (variant === 'noCount' || (count && page <= count))) {
       setCurrentPage(page)
       onChange(page)
     }
@@ -265,7 +265,7 @@ export const Pagination: React.FC<Props> = ({
         </>
       )}
 
-      {variant === 'noTotal' && (
+      {variant === 'noCount' && (
         <>
           <ItemPageStyled
             size={size}
@@ -350,5 +350,5 @@ Pagination.propTypes = {
   disabled: PropTypes.bool,
   defaultPage: PropTypes.number,
   size: PropTypes.oneOf(['default', 'small']),
-  variant: PropTypes.oneOf(['default', 'noTotal'])
+  variant: PropTypes.oneOf(['default', 'noCount'])
 }
