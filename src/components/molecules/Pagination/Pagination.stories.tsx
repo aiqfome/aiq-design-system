@@ -46,7 +46,7 @@ export const Variants: React.FC = () => {
   return (
     <>
       <Flex variant='centralized' mb='20px'>
-        <Pagination variant='noTotal' size='large' />
+        <Pagination variant='noCount' size='large' />
       </Flex>
 
       <Flex variant='centralized'>
