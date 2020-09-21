@@ -32,11 +32,25 @@ export const Sizes: React.FC = () => {
       </Flex>
 
       <Flex mb='20px' variant='centralized'>
-        <Pagination count={10} size='default' />
+        <Pagination count={10000} size='default' />
       </Flex>
 
       <Flex variant='centralized'>
         <Pagination count={10} size='large' />
+      </Flex>
+    </>
+  )
+}
+
+export const Variants: React.FC = () => {
+  return (
+    <>
+      <Flex variant='centralized' mb='20px'>
+        <Pagination variant='noTotal' size='large' />
+      </Flex>
+
+      <Flex variant='centralized'>
+        <Pagination count={100} size='large' />
       </Flex>
     </>
   )
