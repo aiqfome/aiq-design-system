@@ -10,6 +10,7 @@ import { DatePickerSingle } from './DatePickerSingle'
 export interface Props {
   variant?: 'single' | 'range'
   value: Array<Moment>
+  name?: string
   onChange: (startDate, endDate?: any) => void
 }
 
@@ -29,5 +30,6 @@ export const DatePicker: React.FC<Props> = ({
 DatePicker.propTypes = {
   variant: PropTypes.oneOf(['single', 'range']),
   value: PropTypes.array.isRequired,
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
+  name: PropTypes.string
 }

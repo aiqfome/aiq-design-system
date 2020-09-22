@@ -18,6 +18,7 @@ import { MdArrowDropDown } from 'react-icons/md'
 
 export interface Props {
   value: Array<Moment>
+  name?: string
   onChange: (startDate, endDate) => void
 }
 
@@ -37,6 +38,7 @@ const ButtonDatePicker = styled(Flex)`
 export const DatePickerRange: React.FC<Props> = ({
   value = [moment(), moment()],
   onChange,
+  name,
   ...props
 }) => {
   const [startDate, setStarDate] = useState(value[0])
@@ -65,6 +67,7 @@ export const DatePickerRange: React.FC<Props> = ({
         onClick={() => setShowDatePicker(!showDatePicker)}
         alignItems='center'
         px='12px'
+        backgroundColor='#fff'
         py='10px'
         maxHeight='39px'
         justifyContent='space-between'
@@ -100,5 +103,6 @@ export const DatePickerRange: React.FC<Props> = ({
 
 DatePickerRange.propTypes = {
   value: PropTypes.array.isRequired,
+  name: PropTypes.string,
   onChange: PropTypes.func.isRequired
 }

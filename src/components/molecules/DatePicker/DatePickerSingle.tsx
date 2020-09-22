@@ -18,6 +18,7 @@ export interface Props {
   variant?: 'single' | 'range'
   value: Array<Moment>
   onChange: (date) => void
+  name?: string
 }
 
 const DatePickerWrapper = styled(Flex)`
@@ -35,16 +36,17 @@ const ButtonDatePicker = styled(Flex)`
 
 export const DatePickerSingle: React.FC<Props> = ({
   value = [moment()],
+  name,
   onChange,
   ...props
 }) => {
   moment.locale('pt-BR')
-  const [date, setDate] = useState(new Date())
+  const [date, setDate] = useState(value)
   const [showDatePicker, setShowDatePicker] = useState(false)
   const [focused, setFocused] = useState(false)
 
   function onDateChange(date) {
-    setDate(date)
+    setDate([date])
     onChange(date)
   }
 
@@ -64,10 +66,11 @@ export const DatePickerSingle: React.FC<Props> = ({
         justifyContent='space-between'
         width='100%'
         maxWidth='200px'
+        backgroundColor='#fff'
         border='1px solid #dedede'
         borderRadius='4px'
       >
-        <Text mr='16px' cursor='pointer'>{`${moment(date).format(
+        <Text mr='16px' cursor='pointer'>{`${moment(date[0]).format(
           'DD/MMMM/YYYY'
         )}`}</Text>
         <Icon>
@@ -81,7 +84,7 @@ export const DatePickerSingle: React.FC<Props> = ({
             onDateChange={onDateChange}
             onFocusChange={onFocusChange}
             focused={focused}
-            date={null}
+            date={date[0]}
           />
         </DatePickerWrapper>
       )}
@@ -91,5 +94,6 @@ export const DatePickerSingle: React.FC<Props> = ({
 
 DatePickerSingle.propTypes = {
   value: PropTypes.array.isRequired,
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
+  name: PropTypes.string
 }
