@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import {
   color,
   ColorProps,
@@ -34,7 +34,11 @@ export const Text = styled.span<Props>`
   ${fontWeight}
   ${typography}
 
-  cursor: ${props => props.cursor || 'auto'};
+  ${({ cursor }) =>
+    cursor &&
+    css`
+      cursor: ${cursor};
+    `};
   white-space: ${props => props.whiteSpace || 'normal'};
 `
 
