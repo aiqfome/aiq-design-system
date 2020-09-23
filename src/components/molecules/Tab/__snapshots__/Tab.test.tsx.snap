@@ -14,7 +14,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
       onClick={[Function]}
     >
       <span
-        className="sc-AxjAm irKiRW"
+        className="sc-AxjAm AAKmN"
         cursor="pointer"
         fontSize={5}
       >
@@ -26,7 +26,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
       onClick={[Function]}
     >
       <span
-        className="sc-AxjAm irKiRW"
+        className="sc-AxjAm AAKmN"
         cursor="pointer"
         fontSize={5}
       >
@@ -38,7 +38,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
       onClick={[Function]}
     >
       <span
-        className="sc-AxjAm irKiRW"
+        className="sc-AxjAm AAKmN"
         cursor="pointer"
         fontSize={5}
       >

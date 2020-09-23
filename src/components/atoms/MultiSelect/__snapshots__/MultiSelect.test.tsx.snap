@@ -20,7 +20,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
           display="flex"
         >
           <span
-            className="sc-AxiKw sc-fzokOt cHUZhR"
+            className="sc-AxiKw sc-fzokOt cVcXDe"
             color="white"
             onClick={[Function]}
             onKeyDown={[Function]}
@@ -33,7 +33,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
             onClick={[Function]}
           >
             <span
-              className="sc-AxiKw hPZfdt"
+              className="sc-AxiKw gjPZme"
               cursor="pointer"
               fontSize="medium"
             >
@@ -83,7 +83,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
           onClick={[Function]}
         >
           <span
-            className="sc-AxiKw jZQGPR"
+            className="sc-AxiKw heDoSu"
             cursor="pointer"
           >
             todas as cidades
@@ -93,7 +93,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
           onClick={[Function]}
         >
           <span
-            className="sc-AxiKw jZQGPR"
+            className="sc-AxiKw heDoSu"
             cursor="pointer"
           >
             unidades próprias
@@ -103,7 +103,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
           onClick={[Function]}
         >
           <span
-            className="sc-AxiKw jZQGPR"
+            className="sc-AxiKw heDoSu"
             cursor="pointer"
           >
             limpar cidades selecionadas

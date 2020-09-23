@@ -31,7 +31,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
       onClick={[Function]}
     >
       <span
-        className="sc-AxhCb cDHKfF"
+        className="sc-AxhCb iVPPkG"
         cursor="pointer"
         fontSize="medium"
       >

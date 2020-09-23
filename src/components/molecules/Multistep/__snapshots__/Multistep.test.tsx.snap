@@ -24,7 +24,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
           width="24px"
         >
           <span
-            className="sc-AxjAm bDxsOZ"
+            className="sc-AxjAm dtPdDu"
             color="white"
             cursor="pointer"
           >
@@ -32,7 +32,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
           </span>
         </div>
         <span
-          className="sc-AxjAm bRFhBd"
+          className="sc-AxjAm bFhDvG"
           color="#eb2f96"
           cursor="pointer"
           fontSize="medium"
@@ -62,7 +62,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
           width="24px"
         >
           <span
-            className="sc-AxjAm bDxsOZ"
+            className="sc-AxjAm dtPdDu"
             color="white"
             cursor="pointer"
           >
@@ -70,7 +70,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
           </span>
         </div>
         <span
-          className="sc-AxjAm dSDkyY"
+          className="sc-AxjAm crNFlD"
           color="#dedede"
           cursor="pointer"
           fontSize="medium"
@@ -100,7 +100,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
           width="24px"
         >
           <span
-            className="sc-AxjAm bDxsOZ"
+            className="sc-AxjAm dtPdDu"
             color="white"
             cursor="pointer"
           >
@@ -108,7 +108,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
           </span>
         </div>
         <span
-          className="sc-AxjAm dSDkyY"
+          className="sc-AxjAm crNFlD"
           color="#dedede"
           cursor="pointer"
           fontSize="medium"
@@ -138,7 +138,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
           width="24px"
         >
           <span
-            className="sc-AxjAm bDxsOZ"
+            className="sc-AxjAm dtPdDu"
             color="white"
             cursor="pointer"
           >
@@ -146,7 +146,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
           </span>
         </div>
         <span
-          className="sc-AxjAm dSDkyY"
+          className="sc-AxjAm crNFlD"
           color="#dedede"
           cursor="pointer"
           fontSize="medium"

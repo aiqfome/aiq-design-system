@@ -6,12 +6,12 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
   disabled={false}
 >
   <button
-    className="sc-AxhCb jGTOcA sc-AxgMl kIrobP"
+    className="sc-AxhCb jGTOcA sc-AxgMl kAQFoy"
     cursor="not-allowed"
     onClick={[Function]}
   >
     <span
-      className="sc-AxirZ gJAMvN"
+      className="sc-AxirZ cuGRia"
       cursor="pointer"
       fontSize="medium"
     >
@@ -36,30 +36,30 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
     </span>
   </button>
   <button
-    className="sc-AxhCb jGTOcA sc-AxgMl juQuOe"
+    className="sc-AxhCb jGTOcA sc-AxgMl etdRWP"
     onClick={[Function]}
   >
     <span
-      className="sc-AxirZ gJAMvN"
+      className="sc-AxirZ cuGRia"
       cursor="pointer"
       fontSize="medium"
     >
       <span
-        className="sc-AxirZ eSkqeu"
+        className="sc-AxirZ dNjvtV"
         color="almostBlack"
         fontSize="default"
       >
-        0
+        1
       </span>
     </span>
   </button>
   <button
-    className="sc-AxhCb jGTOcA sc-AxgMl hiEFkL"
+    className="sc-AxhCb jGTOcA sc-AxgMl klYcia"
     cursor=""
     onClick={[Function]}
   >
     <span
-      className="sc-AxirZ gJAMvN"
+      className="sc-AxirZ cuGRia"
       cursor="pointer"
       fontSize="medium"
     >
