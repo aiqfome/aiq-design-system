@@ -2,214 +2,191 @@
 
 exports[`must match with the previous snapshot snapshot renders 1`] = `
 <div
-  className="sc-Axmtr cUqKsw"
+  className="sc-AxirZ XzdKC"
 >
   <div
-    className="sc-Axmtr sc-AxmLO fxfHFW"
-    height="400px"
+    className="sc-AxjAm ehAurf"
+    width={1}
   >
     <div
-      className="sc-Axmtr hUiLkw"
+      className="sc-AxirZ dYYKhl"
     >
-      <span
-        className="sc-AxheI enFDny"
-        color="almostBlack"
-        fontSize="xxlarge"
+      <div
+        className="sc-AxirZ sc-AxiKw jxILrY"
       >
-        BURGUERS
-      </span>
+        <div
+          className="sc-AxirZ sc-AxhCb hwGoHS"
+        >
+          cód 
+        </div>
+        <div
+          className="sc-AxirZ sc-AxhCb hwGoHS"
+        >
+          item
+        </div>
+        <div
+          className="sc-AxirZ sc-AxhCb hwGoHS"
+        >
+          preço min.
+        </div>
+      </div>
     </div>
-    <table
-      className="sc-AxjAm dmWQgo"
+    <div
+      className="sc-AxirZ cdhGFS"
     >
-      <thead
-        className="sc-AxirZ hpfTka"
+      <div
+        className="sc-AxirZ sc-AxiKw jxILrY"
       >
-        <tr
-          className="sc-AxgMl bKPeDc"
+        <div
+          className="sc-AxirZ sc-AxhCb hwGoHS"
         >
-          <th
-            className="sc-AxiKw lgMPcv"
-          >
-            cód 
-          </th>
-          <th
-            className="sc-AxiKw lgMPcv"
-          >
-            item
-          </th>
-          <th
-            className="sc-AxiKw cuNvLx"
-          >
-            preço min.
-          </th>
-        </tr>
-      </thead>
-      <tbody
-        className="sc-AxhCb cRybjm"
+          056
+        </div>
+        <div
+          className="sc-AxirZ sc-AxhCb hwGoHS"
+        >
+          Cheeseburguer
+        </div>
+        <div
+          className="sc-AxirZ sc-AxhCb hwGoHS"
+        >
+          R$ 22,00
+        </div>
+      </div>
+      <div
+        className="sc-AxirZ sc-AxiKw jxILrY"
       >
-        <tr
-          className="sc-AxgMl bKPeDc"
+        <div
+          className="sc-AxirZ sc-AxhCb hwGoHS"
         >
-          <td
-            className="sc-AxhUy kUuWvN"
-          >
-            056
-          </td>
-          <td
-            className="sc-AxhUy hHTxxC"
-            width="100%"
-          >
-            Cheeseburguer
-          </td>
-          <td
-            className="sc-AxhUy jvezrj"
-          >
-            R$ 22,00
-          </td>
-        </tr>
-        <tr
-          className="sc-AxgMl bKPeDc"
+          057
+        </div>
+        <div
+          className="sc-AxirZ sc-AxhCb hwGoHS"
         >
-          <td
-            className="sc-AxhUy kUuWvN"
-          >
-            057
-          </td>
-          <td
-            className="sc-AxhUy hHTxxC"
-            width="100%"
-          >
-            Onion Burguer
-          </td>
-          <td
-            className="sc-AxhUy jvezrj"
-          >
-            R$ 22,00
-          </td>
-        </tr>
-        <tr
-          className="sc-AxgMl bKPeDc"
+          Onion Burguer
+        </div>
+        <div
+          className="sc-AxirZ sc-AxhCb hwGoHS"
         >
-          <td
-            className="sc-AxhUy kUuWvN"
-          >
-            058
-          </td>
-          <td
-            className="sc-AxhUy hHTxxC"
-            width="100%"
-          >
-            Australia Burguer
-          </td>
-          <td
-            className="sc-AxhUy jvezrj"
-          >
-            R$ 22,00
-          </td>
-        </tr>
-        <tr
-          className="sc-AxgMl bKPeDc"
+          R$ 22,00
+        </div>
+      </div>
+      <div
+        className="sc-AxirZ sc-AxiKw jxILrY"
+      >
+        <div
+          className="sc-AxirZ sc-AxhCb hwGoHS"
         >
-          <td
-            className="sc-AxhUy kUuWvN"
-          >
-            059
-          </td>
-          <td
-            className="sc-AxhUy hHTxxC"
-            width="100%"
-          >
-            Blumenal Burguer
-          </td>
-          <td
-            className="sc-AxhUy jvezrj"
-          >
-            R$ 22,00
-          </td>
-        </tr>
-        <tr
-          className="sc-AxgMl bKPeDc"
+          058
+        </div>
+        <div
+          className="sc-AxirZ sc-AxhCb hwGoHS"
         >
-          <td
-            className="sc-AxhUy kUuWvN"
-          >
-            060
-          </td>
-          <td
-            className="sc-AxhUy hHTxxC"
-            width="100%"
-          >
-            Cheeseburguer
-          </td>
-          <td
-            className="sc-AxhUy jvezrj"
-          >
-            R$ 22,00
-          </td>
-        </tr>
-        <tr
-          className="sc-AxgMl bKPeDc"
+          Australia Burguer
+        </div>
+        <div
+          className="sc-AxirZ sc-AxhCb hwGoHS"
         >
-          <td
-            className="sc-AxhUy kUuWvN"
-          >
-            061
-          </td>
-          <td
-            className="sc-AxhUy hHTxxC"
-            width="100%"
-          >
-            Onion Burguer
-          </td>
-          <td
-            className="sc-AxhUy jvezrj"
-          >
-            R$ 22,00
-          </td>
-        </tr>
-        <tr
-          className="sc-AxgMl bKPeDc"
+          R$ 22,00
+        </div>
+      </div>
+      <div
+        className="sc-AxirZ sc-AxiKw jxILrY"
+      >
+        <div
+          className="sc-AxirZ sc-AxhCb hwGoHS"
         >
-          <td
-            className="sc-AxhUy kUuWvN"
-          >
-            068
-          </td>
-          <td
-            className="sc-AxhUy hHTxxC"
-            width="100%"
-          >
-            Australia Burguer
-          </td>
-          <td
-            className="sc-AxhUy jvezrj"
-          >
-            R$ 22,00
-          </td>
-        </tr>
-        <tr
-          className="sc-AxgMl bKPeDc"
+          059
+        </div>
+        <div
+          className="sc-AxirZ sc-AxhCb hwGoHS"
         >
-          <td
-            className="sc-AxhUy kUuWvN"
-          >
-            069
-          </td>
-          <td
-            className="sc-AxhUy hHTxxC"
-            width="100%"
-          >
-            Blumenal Burguer
-          </td>
-          <td
-            className="sc-AxhUy jvezrj"
-          >
-            R$ 22,00
-          </td>
-        </tr>
-      </tbody>
-    </table>
+          Blumenal Burguer
+        </div>
+        <div
+          className="sc-AxirZ sc-AxhCb hwGoHS"
+        >
+          R$ 22,00
+        </div>
+      </div>
+      <div
+        className="sc-AxirZ sc-AxiKw jxILrY"
+      >
+        <div
+          className="sc-AxirZ sc-AxhCb hwGoHS"
+        >
+          060
+        </div>
+        <div
+          className="sc-AxirZ sc-AxhCb hwGoHS"
+        >
+          Cheeseburguer
+        </div>
+        <div
+          className="sc-AxirZ sc-AxhCb hwGoHS"
+        >
+          R$ 22,00
+        </div>
+      </div>
+      <div
+        className="sc-AxirZ sc-AxiKw jxILrY"
+      >
+        <div
+          className="sc-AxirZ sc-AxhCb hwGoHS"
+        >
+          061
+        </div>
+        <div
+          className="sc-AxirZ sc-AxhCb hwGoHS"
+        >
+          Onion Burguer
+        </div>
+        <div
+          className="sc-AxirZ sc-AxhCb hwGoHS"
+        >
+          R$ 22,00
+        </div>
+      </div>
+      <div
+        className="sc-AxirZ sc-AxiKw jxILrY"
+      >
+        <div
+          className="sc-AxirZ sc-AxhCb hwGoHS"
+        >
+          068
+        </div>
+        <div
+          className="sc-AxirZ sc-AxhCb hwGoHS"
+        >
+          Australia Burguer
+        </div>
+        <div
+          className="sc-AxirZ sc-AxhCb hwGoHS"
+        >
+          R$ 22,00
+        </div>
+      </div>
+      <div
+        className="sc-AxirZ sc-AxiKw jxILrY"
+      >
+        <div
+          className="sc-AxirZ sc-AxhCb hwGoHS"
+        >
+          069
+        </div>
+        <div
+          className="sc-AxirZ sc-AxhCb hwGoHS"
+        >
+          Blumenal Burguer
+        </div>
+        <div
+          className="sc-AxirZ sc-AxhCb hwGoHS"
+        >
+          R$ 22,00
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 `;

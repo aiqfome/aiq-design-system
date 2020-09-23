@@ -2,11 +2,12 @@
 
 exports[`must match with the previous snapshot snapshot renders 1`] = `
 <div
-  className="sc-AxjAm ioNhfr"
+  className="sc-AxjAm jsxybJ"
   height="100vh"
 >
   <svg
-    className="sc-AxirZ dJZKpa"
+    className="sc-AxirZ btBluu"
+    size="medium"
     viewBox="25 25 50 50"
   >
     <circle

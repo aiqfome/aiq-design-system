@@ -44,7 +44,7 @@ const badgeVariations: { [index: string]: any } = {
     margin-right: 16px;
     border-radius: 12px;
     width: fit-content;
-    font-size: ${({ theme }) => theme.fontSizes.small || '14px'};
+    font-size: 14px;
   `,
   label: css<Props>`
     color: #fff;

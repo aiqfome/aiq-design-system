@@ -7,6 +7,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
   <input
     checked={false}
     disabled={false}
+    onChange={[Function]}
     type="checkbox"
   />
 </label>

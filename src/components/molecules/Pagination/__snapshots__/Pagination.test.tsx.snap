@@ -2,67 +2,86 @@
 
 exports[`must match with the previous snapshot snapshot renders 1`] = `
 <div
-  className="sc-AxjAm sc-AxiKw crRdaW"
+  className="sc-AxjAm sc-AxhUy fkyrdw"
   disabled={false}
 >
-  <div
-    className="sc-AxjAm sc-AxhCb gvCYbo"
-    onClick={[Function]}
-  >
-    <svg
-      fill="currentColor"
-      height="1em"
-      stroke="currentColor"
-      strokeWidth="0"
-      style={
-        Object {
-          "color": undefined,
-        }
-      }
-      viewBox="0 0 24 24"
-      width="1em"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"
-      />
-    </svg>
-  </div>
-  <div
-    className="sc-AxjAm sc-AxhCb AFJtF"
+  <button
+    className="sc-AxhCb jGTOcA sc-AxgMl kIrobP"
+    cursor="not-allowed"
     onClick={[Function]}
   >
     <span
-      className="sc-AxirZ bWSDyT"
-      color="almostBlack"
+      className="sc-AxirZ gJAMvN"
       cursor="pointer"
-      fontSize="default"
+      fontSize="medium"
     >
-      0
+      <svg
+        fill="currentColor"
+        height="1em"
+        stroke="currentColor"
+        strokeWidth="0"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+        viewBox="0 0 24 24"
+        width="1em"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"
+        />
+      </svg>
     </span>
-  </div>
-  <div
-    className="sc-AxjAm sc-AxhCb gvCYbo"
+  </button>
+  <button
+    className="sc-AxhCb jGTOcA sc-AxgMl juQuOe"
     onClick={[Function]}
   >
-    <svg
-      fill="currentColor"
-      height="1em"
-      stroke="currentColor"
-      strokeWidth="0"
-      style={
-        Object {
-          "color": undefined,
-        }
-      }
-      viewBox="0 0 24 24"
-      width="1em"
-      xmlns="http://www.w3.org/2000/svg"
+    <span
+      className="sc-AxirZ gJAMvN"
+      cursor="pointer"
+      fontSize="medium"
     >
-      <path
-        d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
-      />
-    </svg>
-  </div>
+      <span
+        className="sc-AxirZ eSkqeu"
+        color="almostBlack"
+        fontSize="default"
+      >
+        0
+      </span>
+    </span>
+  </button>
+  <button
+    className="sc-AxhCb jGTOcA sc-AxgMl hiEFkL"
+    cursor=""
+    onClick={[Function]}
+  >
+    <span
+      className="sc-AxirZ gJAMvN"
+      cursor="pointer"
+      fontSize="medium"
+    >
+      <svg
+        fill="currentColor"
+        height="1em"
+        stroke="currentColor"
+        strokeWidth="0"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+        viewBox="0 0 24 24"
+        width="1em"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
+        />
+      </svg>
+    </span>
+  </button>
 </div>
 `;
