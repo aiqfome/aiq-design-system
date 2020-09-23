@@ -1,18 +1,41 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
+import { space } from 'styled-system'
+
+export interface Props {
+  size?: 'small' | 'medium' | 'large' | undefined
+}
+
+const loadingSizes: { [index: string]: any } = {
+  small: css`
+    width: 15px;
+    height: 15px;
+  `,
+  medium: css`
+    width: 15px;
+    height: 15px;
+  `,
+  large: css`
+    width: 15px;
+    height: 15px;
+  `
+}
 
 const LoadingSpinner = styled.svg.attrs({
   viewBox: '25 25 50 50',
   children: <circle cx='50' cy='50' r='20' />
-})`
-  width: 25px;
+})<Props>`
+  ${space}
+  ${({ size }) => loadingSizes[size || 'medium']}
+
   transform-origin: center;
   animation: rotate 2s linear infinite;
 
   circle {
     fill: none;
-    stroke: green;
+    stroke: ${({ theme }) => theme.colors.primary};
     stroke-width: 4;
     stroke-dasharray: 1, 200;
     stroke-dashoffset: 0;
@@ -40,6 +63,10 @@ const LoadingSpinner = styled.svg.attrs({
   }
 `
 
-export const Loading: React.FC = () => {
-  return <LoadingSpinner />
+export const Loading: React.FC<Props> = ({ size = 'medium' }) => {
+  return <LoadingSpinner size={size} />
+}
+
+Loading.propTypes = {
+  size: PropTypes.oneOf(['small', 'medium', 'large'])
 }

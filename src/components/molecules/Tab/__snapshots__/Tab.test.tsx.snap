@@ -2,10 +2,10 @@
 
 exports[`must match with the previous snapshot snapshot renders 1`] = `
 <div
-  className="sc-AxirZ kDXGap"
+  className="sc-AxirZ cdhGFS"
 >
   <ul
-    className="sc-AxiKw ikAHLf"
+    className="sc-AxiKw ldaejd"
     onClick={[Function]}
     value={0}
   >
@@ -14,7 +14,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
       onClick={[Function]}
     >
       <span
-        className="sc-AxjAm iGRyaZ"
+        className="sc-AxjAm AAKmN"
         cursor="pointer"
         fontSize={5}
       >
@@ -26,7 +26,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
       onClick={[Function]}
     >
       <span
-        className="sc-AxjAm iGRyaZ"
+        className="sc-AxjAm AAKmN"
         cursor="pointer"
         fontSize={5}
       >
@@ -38,7 +38,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
       onClick={[Function]}
     >
       <span
-        className="sc-AxjAm iGRyaZ"
+        className="sc-AxjAm AAKmN"
         cursor="pointer"
         fontSize={5}
       >
@@ -47,7 +47,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
     </li>
   </ul>
   <div
-    className="sc-AxirZ sc-AxhUy dWqLgp"
+    className="sc-AxirZ sc-AxhUy eKcfrf"
   >
     Item One
   </div>

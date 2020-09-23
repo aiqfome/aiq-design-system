@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { FlexProps } from 'styled-system'
-import { MdArrowDropDown, MdHome } from 'react-icons/md'
+import { MdArrowDropDown } from 'react-icons/md'
 
 import { Flex } from '../../atoms/Flex'
 import { Link } from '../../atoms/Link'
@@ -112,11 +112,8 @@ export const Breadcrumb: React.FC<Props> = ({ routes }) => {
   return (
     <BreadcrumbStyled>
       {crumbs.length &&
-        crumbs.map(crumb => (
-          <BreadcrumbItem
-            overlay={crumb.overlay}
-            key={crumb.path || crumb.name}
-          >
+        crumbs.map((crumb, index) => (
+          <BreadcrumbItem overlay={crumb.overlay} key={index}>
             {crumb.path ? (
               <Link ml={crumb.icon ? '5px' : '0'} href={crumb.path}>
                 <Flex>

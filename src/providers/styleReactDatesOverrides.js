@@ -1,4 +1,4 @@
-import { createGlobalStyle, DefaultTheme } from 'styled-components'
+import { createGlobalStyle } from 'styled-components'
 
 export default createGlobalStyle`
   .CalendarDay__selected_span {

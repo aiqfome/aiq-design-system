@@ -1,0 +1,130 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`must match with the previous snapshot snapshot renders 1`] = `
+<div
+  className="sc-AxjAm gqOzdO"
+>
+  <div
+    className="sc-AxirZ jsRqNF sc-fzplWN LmPil"
+  >
+    <div
+      className="sc-AxirZ dqBDKM sc-fznyAO bqyZnM"
+      display="flex"
+      onClick={[Function]}
+    >
+      <div
+        className="sc-AxjAm gRZNnv"
+      >
+        <div
+          className="sc-AxjAm khQdjW"
+          display="flex"
+        >
+          <span
+            className="sc-AxiKw sc-fzokOt cVcXDe"
+            color="white"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            tabIndex={-1}
+          >
+            Maringá
+          </span>
+          <button
+            className="sc-AxgMl hzzrVt"
+            onClick={[Function]}
+          >
+            <span
+              className="sc-AxiKw gjPZme"
+              cursor="pointer"
+              fontSize="medium"
+            >
+              <svg
+                color="#fff"
+                fill="currentColor"
+                height="1em"
+                stroke="currentColor"
+                strokeWidth="0"
+                style={
+                  Object {
+                    "color": "#fff",
+                  }
+                }
+                viewBox="0 0 24 24"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                />
+              </svg>
+            </span>
+          </button>
+        </div>
+        <input
+          aria-autocomplete="list"
+          aria-controls="downshift-1-menu"
+          aria-labelledby="downshift-1-label"
+          autoComplete="off"
+          id="downshift-0-input"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          type="text"
+          value=""
+        />
+      </div>
+    </div>
+    <div
+      className="sc-AxjAm sc-fznKkj eJjBBM"
+    >
+      <ul>
+        <li
+          onClick={[Function]}
+        >
+          <span
+            className="sc-AxiKw heDoSu"
+            cursor="pointer"
+          >
+            todas as cidades
+          </span>
+        </li>
+        <li
+          onClick={[Function]}
+        >
+          <span
+            className="sc-AxiKw heDoSu"
+            cursor="pointer"
+          >
+            unidades próprias
+          </span>
+        </li>
+        <li
+          onClick={[Function]}
+        >
+          <span
+            className="sc-AxiKw heDoSu"
+            cursor="pointer"
+          >
+            limpar cidades selecionadas
+          </span>
+        </li>
+      </ul>
+      <hr
+        className="sc-AxhCb kYcVnP"
+        height="1px"
+      />
+      <div
+        className="sc-AxirZ RoPcv sc-fznZeY kBIupy"
+      >
+        <ul
+          aria-labelledby="downshift-1-label"
+          id="downshift-1-menu"
+          onMouseLeave={[Function]}
+          role="listbox"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
