@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { withKnobs, text, object } from '@storybook/addon-knobs'
 import { Select } from './Select'
+import { Flex } from '../Flex'
 
 export default {
   component: Select,
@@ -33,5 +34,30 @@ export const Outlined: React.FC = () => {
       label={text('label', 'aiq-design-system')}
       items={object('items', itens)}
     />
+  )
+}
+
+export const AutocompleteFalse: React.FC = () => {
+  const itens = ['React', 'CSS', 'PHP', 'HTML']
+  const [selectedItem, setSelectedItem] = useState(itens[0])
+  return (
+    <Flex variant='fullCentralized'>
+      <Select
+        mr='32px'
+        autoComplete={false}
+        variant='outlined'
+        label={text('label', 'aiq-design-system')}
+        items={object('items', itens)}
+      />
+      <Select
+        autoComplete={false}
+        selectedItem={selectedItem}
+        handleSelectedItemChange={({ selectedItem }) =>
+          setSelectedItem(selectedItem)
+        }
+        label={text('label', 'aiq-design-system')}
+        items={object('items', itens)}
+      />
+    </Flex>
   )
 }
