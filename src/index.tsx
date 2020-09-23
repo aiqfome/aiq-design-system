@@ -14,7 +14,6 @@ export { Link } from './components/atoms/Link'
 export { Loading } from './components/atoms/Loading'
 export { Radio } from './components/atoms/Radio'
 export { Select } from './components/atoms/Select'
-export { MultiSelect } from './components/atoms/MultiSelect'
 export { Switch } from './components/atoms/Switch'
 export { Text } from './components/atoms/Text'
 export { Tooltip } from './components/atoms/Tooltip'
@@ -29,6 +28,7 @@ export { Sidebar } from './components/molecules/Sidebar'
 export { Tabs, Tab, TabPanel } from './components/molecules/Tab'
 export { Multistep } from './components/molecules/Multistep'
 export { ToastProvider, useToast } from './components/molecules/Toast'
+export { MultiSelect } from './components/molecules/MultiSelect'
 export {
   Table,
   TableBody,

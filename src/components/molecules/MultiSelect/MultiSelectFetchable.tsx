@@ -5,12 +5,12 @@ import styled from 'styled-components'
 import { MdClose } from 'react-icons/md'
 import { useCombobox, useMultipleSelection } from 'downshift'
 
-import { Flex } from '../Flex'
-import { Box } from '../Box'
-import { Text } from '../Text'
-import { Divider } from '../Divider'
-import { Button } from '../Button'
-import { Loading } from '../Loading'
+import { Flex } from '../../atoms/Flex'
+import { Box } from '../../atoms/Box'
+import { Text } from '../../atoms/Text'
+import { Divider } from '../../atoms/Divider'
+import { Button } from '../../atoms/Button'
+import { Loading } from '../../atoms/Loading'
 
 type Item = {
   id: any
@@ -29,7 +29,6 @@ export interface Props {
   value?: Item[]
   items: Item[]
   isLoading?: boolean
-  isFetchable?: boolean
 }
 
 const MultiSelectStyled = styled(Box)`
@@ -48,7 +47,7 @@ const ContainerInput = styled(Box)<ContainerInputProps>`
   overflow: auto;
   align-items: center;
   padding: 4px 10px;
-  justify-content: 'space-between';
+  justify-content: space-between;
 
   input {
     background: none;
@@ -112,7 +111,7 @@ const SelectedItem = styled(Text)`
   white-space: nowrap;
 `
 
-export const MultiSelectStatic: React.FC<Props> = ({
+export const MultiSelectFetchable: React.FC<Props> = ({
   items,
   maxWidth,
   filters = [],
@@ -126,10 +125,7 @@ export const MultiSelectStatic: React.FC<Props> = ({
   const inputRef = useRef(document.createElement('input'))
 
   const propsMultipleSelection = useMultipleSelection({
-    initialSelectedItems: value,
-    onSelectedItemsChange: event => {
-      onChange && onChange(event)
-    }
+    initialSelectedItems: value
   })
 
   const propsCombobox = useCombobox({
@@ -151,6 +147,7 @@ export const MultiSelectStatic: React.FC<Props> = ({
       switch (type) {
         case useCombobox.stateChangeTypes.InputChange:
           setInputValue(value)
+          onChange(value)
           break
         case useCombobox.stateChangeTypes.InputKeyDownEnter:
         case useCombobox.stateChangeTypes.ItemClick:
@@ -282,7 +279,8 @@ export const MultiSelectStatic: React.FC<Props> = ({
         <Itens>
           <ul {...propsCombobox.getMenuProps()}>
             {propsCombobox.isOpen &&
-              getFilteredItems().map((item, index) => (
+              items &&
+              items.map((item, index) => (
                 <li
                   className={
                     propsCombobox.highlightedIndex === index
@@ -302,7 +300,7 @@ export const MultiSelectStatic: React.FC<Props> = ({
   )
 }
 
-MultiSelectStatic.propTypes = {
+MultiSelectFetchable.propTypes = {
   items: PropTypes.array.isRequired,
   maxWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   filters: PropTypes.array,

@@ -5,12 +5,11 @@ import styled from 'styled-components'
 import { MdClose } from 'react-icons/md'
 import { useCombobox, useMultipleSelection } from 'downshift'
 
-import { Flex } from '../Flex'
-import { Box } from '../Box'
-import { Text } from '../Text'
-import { Divider } from '../Divider'
-import { Button } from '../Button'
-import { Loading } from '../Loading'
+import { Flex } from '../../atoms/Flex'
+import { Box } from '../../atoms/Box'
+import { Text } from '../../atoms/Text'
+import { Divider } from '../../atoms/Divider'
+import { Button } from '../../atoms/Button'
 
 type Item = {
   id: any
@@ -29,6 +28,7 @@ export interface Props {
   value?: Item[]
   items: Item[]
   isLoading?: boolean
+  isFetchable?: boolean
 }
 
 const MultiSelectStyled = styled(Box)`
@@ -111,13 +111,12 @@ const SelectedItem = styled(Text)`
   white-space: nowrap;
 `
 
-export const MultiSelectFetchable: React.FC<Props> = ({
+export const MultiSelectStatic: React.FC<Props> = ({
   items,
   maxWidth,
   filters = [],
   onChange,
   value = [],
-  isLoading = false,
   ...props
 }) => {
   const [inputValue, setInputValue] = useState<string | undefined>('')
@@ -125,7 +124,10 @@ export const MultiSelectFetchable: React.FC<Props> = ({
   const inputRef = useRef(document.createElement('input'))
 
   const propsMultipleSelection = useMultipleSelection({
-    initialSelectedItems: value
+    initialSelectedItems: value,
+    onSelectedItemsChange: event => {
+      onChange && onChange(event)
+    }
   })
 
   const propsCombobox = useCombobox({
@@ -147,7 +149,6 @@ export const MultiSelectFetchable: React.FC<Props> = ({
       switch (type) {
         case useCombobox.stateChangeTypes.InputChange:
           setInputValue(value)
-          onChange(value)
           break
         case useCombobox.stateChangeTypes.InputKeyDownEnter:
         case useCombobox.stateChangeTypes.ItemClick:
@@ -204,58 +205,54 @@ export const MultiSelectFetchable: React.FC<Props> = ({
         border='1px solid #dedede'
         refBox={propsCombobox.getComboboxProps().ref}
       >
-        <Flex>
-          {propsMultipleSelection.selectedItems.map((selectedItem, index) => (
-            <Flex
-              py={2}
-              key={`selected-item-${index}`}
-              px={4}
-              mr={3}
-              display='flex'
-              flexDirection='row'
-              alignItems='center'
-              backgroundColor='primary'
-              borderRadius='3px'
+        {propsMultipleSelection.selectedItems.map((selectedItem, index) => (
+          <Flex
+            py={2}
+            key={`selected-item-${index}`}
+            px={4}
+            mr={3}
+            display='flex'
+            flexDirection='row'
+            alignItems='center'
+            backgroundColor='primary'
+            borderRadius='3px'
+          >
+            <SelectedItem
+              {...propsMultipleSelection.getSelectedItemProps({
+                selectedItem,
+                index
+              })}
+              color='white'
             >
-              <SelectedItem
-                {...propsMultipleSelection.getSelectedItemProps({
-                  selectedItem,
-                  index
-                })}
-                color='white'
-              >
-                {selectedItem.name}
-              </SelectedItem>
+              {selectedItem.name}
+            </SelectedItem>
 
-              <Button
-                onClick={e => {
-                  e.stopPropagation()
-                  propsMultipleSelection.removeSelectedItem(selectedItem)
-                }}
-                ml={6}
-              >
-                <MdClose color='#fff' />
-              </Button>
-            </Flex>
-          ))}
+            <Button
+              onClick={e => {
+                e.stopPropagation()
+                propsMultipleSelection.removeSelectedItem(selectedItem)
+              }}
+              ml={6}
+            >
+              <MdClose color='#fff' />
+            </Button>
+          </Flex>
+        ))}
 
-          <input
-            type='text'
-            {...propsCombobox.getInputProps(
-              propsMultipleSelection.getDropdownProps({
-                ref: inputRef,
-                preventKeyAction: propsCombobox.isOpen,
-                onFocus: () => {
-                  if (!propsCombobox.isOpen) {
-                    propsCombobox.openMenu()
-                  }
+        <input
+          type='text'
+          {...propsCombobox.getInputProps(
+            propsMultipleSelection.getDropdownProps({
+              ref: inputRef,
+              preventKeyAction: propsCombobox.isOpen,
+              onFocus: () => {
+                if (!propsCombobox.isOpen) {
+                  propsCombobox.openMenu()
                 }
-              })
-            )}
-          />
-        </Flex>
-
-        {isLoading && <Loading size='small' />}
+              }
+            })
+          )}
+        />
       </ContainerInput>
 
       <Overflow
@@ -279,8 +276,7 @@ export const MultiSelectFetchable: React.FC<Props> = ({
         <Itens>
           <ul {...propsCombobox.getMenuProps()}>
             {propsCombobox.isOpen &&
-              items &&
-              items.map((item, index) => (
+              getFilteredItems().map((item, index) => (
                 <li
                   className={
                     propsCombobox.highlightedIndex === index
@@ -300,7 +296,7 @@ export const MultiSelectFetchable: React.FC<Props> = ({
   )
 }
 
-MultiSelectFetchable.propTypes = {
+MultiSelectStatic.propTypes = {
   items: PropTypes.array.isRequired,
   maxWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   filters: PropTypes.array,
