@@ -56,6 +56,7 @@ export const AutocompleteFalse: React.FC = () => {
       />
       <Select
         selectedItem={selectedItem}
+        autoComplete={false}
         handleSelectedItemChange={({ selectedItem }) =>
           setSelectedItem(selectedItem)
         }
