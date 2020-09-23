@@ -10,21 +10,21 @@ export default {
 }
 
 const items = [
-  { value: 0, label: 'Maringá' },
-  { value: 1, label: 'Guarapuava' },
-  { value: 2, label: 'São Paulo' },
-  { value: 3, label: 'Curitiba' },
-  { value: 4, label: 'Cruzeiro do Sul' },
-  { value: 5, label: 'Pato Branco' },
-  { value: 6, label: 'Prudentópolis' },
-  { value: 7, label: 'Campo Mourão' },
-  { value: 8, label: 'New York' }
+  { id: 0, name: 'Maringá' },
+  { id: 1, name: 'Guarapuava' },
+  { id: 2, name: 'São Paulo' },
+  { id: 3, name: 'Curitiba' },
+  { id: 4, name: 'Cruzeiro do Sul' },
+  { id: 5, name: 'Pato Branco' },
+  { id: 6, name: 'Prudentópolis' },
+  { id: 7, name: 'Campo Mourão' },
+  { id: 8, name: 'New York' }
 ]
 
 const filters = [
-  { allItems: true, label: 'todas as cidades' },
-  { items: [0, 1, 2, 3, 4], label: 'unidades próprias' },
-  { clear: true, label: 'limpar cidades selecionadas' }
+  { allItems: true, name: 'todas as cidades' },
+  { items: [0, 1, 2, 3, 4], name: 'unidades próprias' },
+  { clear: true, name: 'limpar cidades selecionadas' }
 ]
 
 export const Basic: React.FC = (): ReactElement => {
@@ -42,6 +42,7 @@ export const Basic: React.FC = (): ReactElement => {
         onChange={handleChangeMultiSelect}
         filters={filters}
         items={items}
+        isLoading={false}
       />
     </Flex>
   )
