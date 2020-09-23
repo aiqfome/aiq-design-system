@@ -124,6 +124,7 @@ export const Select: React.FC<Props> = ({
       <Box refBox={getComboboxProps().ref}>
         <Input
           onChange={getInputProps().onChange}
+          onClick={getToggleButtonProps().onClick}
           onBlur={getInputProps().onBlur}
           onKeyDown={getInputProps().onKeyDown}
           value={getInputProps().value}
@@ -140,7 +141,6 @@ export const Select: React.FC<Props> = ({
             mr={5}
             variantSelect={variant}
             refButton={getToggleButtonProps().ref}
-            onClick={getToggleButtonProps().onClick}
             aria-label='toggle menu'
           >
             <IoIosArrowDown />
