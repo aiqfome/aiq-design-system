@@ -38,7 +38,12 @@ export const Outlined: React.FC = () => {
 }
 
 export const AutocompleteFalse: React.FC = () => {
-  const itens = ['React', 'CSS', 'PHP', 'HTML']
+  const itens = [
+    { label: 'React', value: 1 },
+    { label: 'CSS', value: 2 },
+    { label: 'PHP', value: 3 },
+    { label: 'HTML', value: 4 }
+  ]
   const [selectedItem, setSelectedItem] = useState(itens[0])
   return (
     <Flex variant='fullCentralized'>
@@ -50,7 +55,6 @@ export const AutocompleteFalse: React.FC = () => {
         items={object('items', itens)}
       />
       <Select
-        autoComplete={false}
         selectedItem={selectedItem}
         handleSelectedItemChange={({ selectedItem }) =>
           setSelectedItem(selectedItem)

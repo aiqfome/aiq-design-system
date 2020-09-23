@@ -10,7 +10,7 @@ import { Button, Props as ButtonProps } from '../Button'
 
 export interface Props extends BoxPros {
   label?: string
-  items?: string[]
+  items?: Array<string | { value: any; label: any }>
   isOpen?: boolean
   variant?: 'outlined'
   prefix?: any
@@ -103,17 +103,17 @@ export const Select: React.FC<Props> = ({
     openMenu,
     getItemProps
   } = useCombobox({
-    onSelectedItemChange: changes => {
-      handleSelectedItemChange(changes)
-    },
+    onSelectedItemChange: handleSelectedItemChange,
     items: inputItems,
     selectedItem,
+    itemToString: item => (typeof item === 'string' ? item : item.label),
     onInputValueChange: ({ inputValue = '' }) => {
       if (autoComplete) {
         setInputItems(
-          items.filter(item =>
-            item.toLowerCase().startsWith(inputValue.toLowerCase())
-          )
+          items.filter(item => {
+            const label = typeof item === 'string' ? item : item.label
+            return label.toLowerCase().startsWith(inputValue.toLowerCase())
+          })
         )
       }
     }
@@ -133,11 +133,11 @@ export const Select: React.FC<Props> = ({
           inputItems.length > 0 &&
           inputItems.map((item, index) => (
             <Item
-              key={`${item}${index}`}
+              key={`${index}`}
               highlighted={highlightedIndex === index}
               {...getItemProps({ item, index })}
             >
-              {item}
+              {typeof item === 'string' ? item : item.label}
             </Item>
           ))}
       </ul>
