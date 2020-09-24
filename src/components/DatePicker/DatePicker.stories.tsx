@@ -8,7 +8,7 @@ import { DatePicker } from './DatePicker'
 
 export default {
   component: DatePicker,
-  title: 'DatePicker'
+  title: 'molecules/DatePicker'
 }
 
 export const Basic: React.FC = () => {

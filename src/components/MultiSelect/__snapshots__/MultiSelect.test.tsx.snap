@@ -13,67 +13,63 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
       onClick={[Function]}
     >
       <div
-        className="sc-AxjAm gRZNnv"
+        className="sc-AxjAm khQdjW"
+        display="flex"
       >
-        <div
-          className="sc-AxjAm khQdjW"
-          display="flex"
+        <span
+          className="sc-AxiKw sc-fzokOt cVcXDe"
+          color="white"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          tabIndex={-1}
+        >
+          Maringá
+        </span>
+        <button
+          className="sc-AxgMl hzzrVt"
+          onClick={[Function]}
         >
           <span
-            className="sc-AxiKw sc-fzokOt cVcXDe"
-            color="white"
-            onClick={[Function]}
-            onKeyDown={[Function]}
-            tabIndex={-1}
+            className="sc-AxiKw gjPZme"
+            cursor="pointer"
+            fontSize="medium"
           >
-            Maringá
-          </span>
-          <button
-            className="sc-AxgMl hzzrVt"
-            onClick={[Function]}
-          >
-            <span
-              className="sc-AxiKw gjPZme"
-              cursor="pointer"
-              fontSize="medium"
-            >
-              <svg
-                color="#fff"
-                fill="currentColor"
-                height="1em"
-                stroke="currentColor"
-                strokeWidth="0"
-                style={
-                  Object {
-                    "color": "#fff",
-                  }
+            <svg
+              color="#fff"
+              fill="currentColor"
+              height="1em"
+              stroke="currentColor"
+              strokeWidth="0"
+              style={
+                Object {
+                  "color": "#fff",
                 }
-                viewBox="0 0 24 24"
-                width="1em"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
-                />
-              </svg>
-            </span>
-          </button>
-        </div>
-        <input
-          aria-autocomplete="list"
-          aria-controls="downshift-1-menu"
-          aria-labelledby="downshift-1-label"
-          autoComplete="off"
-          id="downshift-0-input"
-          onBlur={[Function]}
-          onChange={[Function]}
-          onClick={[Function]}
-          onFocus={[Function]}
-          onKeyDown={[Function]}
-          type="text"
-          value=""
-        />
+              }
+              viewBox="0 0 24 24"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+              />
+            </svg>
+          </span>
+        </button>
       </div>
+      <input
+        aria-autocomplete="list"
+        aria-controls="downshift-1-menu"
+        aria-labelledby="downshift-1-label"
+        autoComplete="off"
+        id="downshift-0-input"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        type="text"
+        value=""
+      />
     </div>
     <div
       className="sc-AxjAm sc-fznKkj eJjBBM"
