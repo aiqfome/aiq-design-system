@@ -1,5 +1,5 @@
 ---
-to: src/components/<%=h.inflection.pluralize(category)%>/<%=h.inflection.camelize(name)%>/<%=h.inflection.camelize(name)%>.tsx
+to: src/components/<%=h.inflection.camelize(name)%>/<%=h.inflection.camelize(name)%>.tsx
 ---
 import React from 'react'
 import PropTypes from 'prop-types'
