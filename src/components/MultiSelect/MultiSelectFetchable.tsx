@@ -5,12 +5,12 @@ import styled from 'styled-components'
 import { MdClose } from 'react-icons/md'
 import { useCombobox, useMultipleSelection } from 'downshift'
 
-import { Flex } from '../../atoms/Flex'
-import { Box } from '../../atoms/Box'
-import { Text } from '../../atoms/Text'
-import { Divider } from '../../atoms/Divider'
-import { Button } from '../../atoms/Button'
-import { Loading } from '../../atoms/Loading'
+import { Flex } from '../Flex'
+import { Box } from '../Box'
+import { Text } from '../Text'
+import { Divider } from '../Divider'
+import { Button } from '../Button'
+import { Loading } from '../Loading'
 
 type Item = {
   id: any

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import moment from 'moment'
 
-import { Flex } from '../../atoms/Flex'
+import { Flex } from '../Flex'
 
 import { DatePicker } from './DatePicker'
 

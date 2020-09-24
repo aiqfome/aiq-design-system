@@ -8,9 +8,9 @@ import styled from 'styled-components'
 
 import { DayPickerSingleDateController } from 'react-dates'
 
-import { Flex } from '../../atoms/Flex'
-import { Icon } from '../../atoms/Icon'
-import { Text } from '../../atoms/Text'
+import { Flex } from '../Flex'
+import { Icon } from '../Icon'
+import { Text } from '../Text'
 
 import { MdArrowDropDown } from 'react-icons/md'
 

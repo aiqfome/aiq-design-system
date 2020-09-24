@@ -1,6 +1,6 @@
 import React, { ReactElement, useState } from 'react'
 
-import { Flex } from '../../atoms/Flex'
+import { Flex } from '../Flex'
 
 import { MultiSelect } from './MultiSelect'
 
