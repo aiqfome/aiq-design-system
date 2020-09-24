@@ -2,7 +2,7 @@
 
 exports[`must match with the previous snapshot snapshot renders 1`] = `
 <div
-  className="sc-AxjAm giuoCA sc-fzpans cxiaVe"
+  className="sc-AxjAm giuoCA sc-fzpans fJzagG"
 >
   <ul
     aria-labelledby="downshift-1-label"
@@ -20,14 +20,16 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
         className="sc-Axmtr lRNal"
         onBlur={[Function]}
         onChange={[Function]}
+        onClick={[Function]}
         onKeyDown={[Function]}
+        readOnly={false}
         type="text"
         value=""
       />
     </div>
     <button
       aria-label="toggle menu"
-      className="sc-AxhUy izzhmx sc-fzplWN eefKqq"
+      className="sc-AxhUy izzhmx sc-fznyAO iCMCtW"
       onClick={[Function]}
     >
       <span
