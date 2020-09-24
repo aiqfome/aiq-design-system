@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`must match with the previous snapshot snapshot renders 1`] = `
+<div
+  className="sc-AxjAm sc-AxhCb hgfsAj"
+  height="200px"
+  onClick={[Function]}
+  onDragEnd={[Function]}
+  onDragEnter={[Function]}
+  onDragLeave={[Function]}
+  onDragOver={[Function]}
+  onDrop={[Function]}
+>
+  <input
+    className="sc-AxhUy gVUOgS"
+    onChange={[Function]}
+    type="file"
+  />
+  <div
+    className="sc-AxjAm iXyWxn"
+  >
+    <div
+      className="sc-AxjAm sc-AxiKw iFPVIh"
+      color="grey"
+    >
+      <svg
+        fill="currentColor"
+        height={48}
+        size={48}
+        stroke="currentColor"
+        strokeWidth="0"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+        viewBox="0 0 24 24"
+        width={48}
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"
+        />
+      </svg>
+    </div>
+    <span
+      className="sc-AxirZ dGxRKB"
+      color="grey"
+    >
+      arraste e solte a imagem aqui
+    </span>
+    <span
+      className="sc-AxirZ dGxRKB"
+      color="grey"
+    >
+      ou clique para escolher
+    </span>
+    <span
+      className="sc-AxirZ lgiviY"
+      color="red"
+      fontWeight="medium"
+    />
+    <div
+      className="sc-AxjAm gRZNnv"
+    />
+  </div>
+</div>
+`;
