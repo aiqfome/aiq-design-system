@@ -131,7 +131,6 @@ export const DropFile: React.FC<Props> = ({
       onChange && onChange(file)
       const reader = new FileReader()
 
-      console.log()
       reader.onload = e => {
         if (e.target) {
           setImage(e.target.result)
