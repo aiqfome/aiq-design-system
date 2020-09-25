@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`must match with the previous snapshot snapshot renders 1`] = `
+<div
+  className="sc-AxjAm hgoUZd"
+>
+  <input
+    className="sc-Axmtr lRNal"
+    type="text"
+  >
+    <span
+      className="sc-AxiKw bBViMC"
+    >
+      Input component!
+    </span>
+  </input>
+</div>
+`;

@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`must match with the previous snapshot snapshot renders 1`] = `
+<a
+  className="sc-AxirZ eDRNSw"
+  href="https://aiqfome.com/"
+>
+  <span
+    className="sc-AxiKw bBViMC"
+  >
+    Link!
+  </span>
+</a>
+`;

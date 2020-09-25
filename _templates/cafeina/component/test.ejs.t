@@ -1,5 +1,5 @@
 ---
-to: src/components/<%=h.inflection.pluralize(category)%>/<%=h.inflection.camelize(name)%>/<%=h.inflection.camelize(name)%>.test.tsx
+to: src/components/<%=h.inflection.camelize(name)%>/<%=h.inflection.camelize(name)%>.test.tsx
 ---
 import React from 'react'
 import renderer from 'react-test-renderer'

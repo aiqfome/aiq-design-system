@@ -1,0 +1,192 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`must match with the previous snapshot snapshot renders 1`] = `
+<div
+  className="sc-AxirZ XzdKC"
+>
+  <div
+    className="sc-AxjAm ehAurf"
+    width={1}
+  >
+    <div
+      className="sc-AxirZ dYYKhl"
+    >
+      <div
+        className="sc-AxirZ sc-AxiKw jxILrY"
+      >
+        <div
+          className="sc-AxirZ sc-AxhCb hwGoHS"
+        >
+          cód 
+        </div>
+        <div
+          className="sc-AxirZ sc-AxhCb hwGoHS"
+        >
+          item
+        </div>
+        <div
+          className="sc-AxirZ sc-AxhCb hwGoHS"
+        >
+          preço min.
+        </div>
+      </div>
+    </div>
+    <div
+      className="sc-AxirZ cdhGFS"
+    >
+      <div
+        className="sc-AxirZ sc-AxiKw jxILrY"
+      >
+        <div
+          className="sc-AxirZ sc-AxhCb hwGoHS"
+        >
+          056
+        </div>
+        <div
+          className="sc-AxirZ sc-AxhCb hwGoHS"
+        >
+          Cheeseburguer
+        </div>
+        <div
+          className="sc-AxirZ sc-AxhCb hwGoHS"
+        >
+          R$ 22,00
+        </div>
+      </div>
+      <div
+        className="sc-AxirZ sc-AxiKw jxILrY"
+      >
+        <div
+          className="sc-AxirZ sc-AxhCb hwGoHS"
+        >
+          057
+        </div>
+        <div
+          className="sc-AxirZ sc-AxhCb hwGoHS"
+        >
+          Onion Burguer
+        </div>
+        <div
+          className="sc-AxirZ sc-AxhCb hwGoHS"
+        >
+          R$ 22,00
+        </div>
+      </div>
+      <div
+        className="sc-AxirZ sc-AxiKw jxILrY"
+      >
+        <div
+          className="sc-AxirZ sc-AxhCb hwGoHS"
+        >
+          058
+        </div>
+        <div
+          className="sc-AxirZ sc-AxhCb hwGoHS"
+        >
+          Australia Burguer
+        </div>
+        <div
+          className="sc-AxirZ sc-AxhCb hwGoHS"
+        >
+          R$ 22,00
+        </div>
+      </div>
+      <div
+        className="sc-AxirZ sc-AxiKw jxILrY"
+      >
+        <div
+          className="sc-AxirZ sc-AxhCb hwGoHS"
+        >
+          059
+        </div>
+        <div
+          className="sc-AxirZ sc-AxhCb hwGoHS"
+        >
+          Blumenal Burguer
+        </div>
+        <div
+          className="sc-AxirZ sc-AxhCb hwGoHS"
+        >
+          R$ 22,00
+        </div>
+      </div>
+      <div
+        className="sc-AxirZ sc-AxiKw jxILrY"
+      >
+        <div
+          className="sc-AxirZ sc-AxhCb hwGoHS"
+        >
+          060
+        </div>
+        <div
+          className="sc-AxirZ sc-AxhCb hwGoHS"
+        >
+          Cheeseburguer
+        </div>
+        <div
+          className="sc-AxirZ sc-AxhCb hwGoHS"
+        >
+          R$ 22,00
+        </div>
+      </div>
+      <div
+        className="sc-AxirZ sc-AxiKw jxILrY"
+      >
+        <div
+          className="sc-AxirZ sc-AxhCb hwGoHS"
+        >
+          061
+        </div>
+        <div
+          className="sc-AxirZ sc-AxhCb hwGoHS"
+        >
+          Onion Burguer
+        </div>
+        <div
+          className="sc-AxirZ sc-AxhCb hwGoHS"
+        >
+          R$ 22,00
+        </div>
+      </div>
+      <div
+        className="sc-AxirZ sc-AxiKw jxILrY"
+      >
+        <div
+          className="sc-AxirZ sc-AxhCb hwGoHS"
+        >
+          068
+        </div>
+        <div
+          className="sc-AxirZ sc-AxhCb hwGoHS"
+        >
+          Australia Burguer
+        </div>
+        <div
+          className="sc-AxirZ sc-AxhCb hwGoHS"
+        >
+          R$ 22,00
+        </div>
+      </div>
+      <div
+        className="sc-AxirZ sc-AxiKw jxILrY"
+      >
+        <div
+          className="sc-AxirZ sc-AxhCb hwGoHS"
+        >
+          069
+        </div>
+        <div
+          className="sc-AxirZ sc-AxhCb hwGoHS"
+        >
+          Blumenal Burguer
+        </div>
+        <div
+          className="sc-AxirZ sc-AxhCb hwGoHS"
+        >
+          R$ 22,00
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
