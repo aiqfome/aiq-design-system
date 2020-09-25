@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { Text } from '../../atoms/Text'
@@ -9,8 +9,10 @@ import { Badge } from '../../atoms/Badge'
 interface Props {
   item?: any
   itemOpened?: boolean
+  distanceTop?: number
   sidebarOpened?: boolean
   heightScrolledToTop?: number
+  typeSubmenu?: 'default' | 'bottom' | 'top'
 }
 
 const SubItensStyled = styled(Flex)<Props>`
@@ -37,7 +39,6 @@ const SubItensStyled = styled(Flex)<Props>`
         }
 
         &.show {
-          max-height: 100vh;
           overflow: hidden;
           transition: all 0.5s ease;
           will-change: transform;
@@ -70,20 +71,71 @@ const SubItensStyled = styled(Flex)<Props>`
         }
       }
 
-      ${({ itemOpened, heightScrolledToTop }) => {
+      ${({
+        theme,
+        itemOpened,
+        distanceTop,
+        typeSubmenu,
+        heightScrolledToTop
+      }) => {
         if (itemOpened) {
           return css`
-            display: flex;
+            display: none;
             position: fixed;
             width: 240px;
             margin-left: 55px;
-            margin-top: calc((50px + ${heightScrolledToTop}px) * -1);
             background: #ffff;
             border-top-right-radius: 4px;
             border-bottom-right-radius: 4px;
             box-shadow: 2px 3px 4px #00000029;
+
+            ${
+              typeSubmenu === 'default' &&
+              `
+              margin-top: calc((50px + ${heightScrolledToTop}px) * -1);
+            `
+            }
+
+            ${
+              typeSubmenu === 'bottom' &&
+              `
+              position: absolute;
+              top: ${distanceTop}px;
+            `
+            }
+
+            ${
+              typeSubmenu === 'top' &&
+              `
+              position: absolute;
+              top: 0px;
+              height: 100vh;
+
+              ul {
+                overflow-x: hidden;
+                overflow-y: scroll;
+              }
+
+              ul::-webkit-scrollbar {
+                width: 5px;
+              }
+
+              ul::-webkit-scrollbar-track {
+                background-color: #ebebeb;
+                -webkit-border-radius: 10px;
+                border-radius: 10px;
+              }
+
+              ul::-webkit-scrollbar-thumb {
+                -webkit-border-radius: 10px;
+                border-radius: 10px;
+                background: ${theme.colors.primaryLight};
+              }
+            `
+            }
           `
         }
+
         return css`
           display: none;
         `
@@ -91,15 +143,40 @@ const SubItensStyled = styled(Flex)<Props>`
     `
   }}
 `
-
-export const SubItens = ({
+export const SubItens: React.FC<Props> = ({
   item,
   sidebarOpened,
   itemOpened,
   heightScrolledToTop = 0
 }) => {
+  const [ref, setRef] = useState<HTMLDivElement | null>(null)
+  const [typeSubmenu, setTypeSubmenu] = useState<'default' | 'bottom' | 'top'>(
+    'default'
+  )
+  const [distanceTop, setDistanceTop] = useState(0)
+
+  useEffect(() => {
+    if (ref !== null) {
+      const { offsetTop, offsetHeight } = ref
+      const isOverflowBottom = window.innerHeight - offsetTop <= offsetHeight
+
+      if (window.innerHeight - offsetHeight < 0) {
+        setTypeSubmenu('top')
+      } else if (isOverflowBottom) {
+        setDistanceTop(window.innerHeight - offsetHeight)
+        setTypeSubmenu('bottom')
+      } else {
+        setDistanceTop(0)
+        setTypeSubmenu('default')
+      }
+    }
+  }, [ref, itemOpened])
+
   return (
     <SubItensStyled
+      distanceTop={distanceTop}
+      typeSubmenu={typeSubmenu}
+      ref={el => setRef(el || null)}
       heightScrolledToTop={heightScrolledToTop}
       flexDirection='column'
       className={`${itemOpened ? 'show' : 'hide'}`}

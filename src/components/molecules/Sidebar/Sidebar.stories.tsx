@@ -180,6 +180,10 @@ const sidebarData = {
         {
           name: 'Sub Item',
           href: '/subItem'
+        },
+        {
+          name: 'Sub Item END',
+          href: '/subItem'
         }
       ]
     },
