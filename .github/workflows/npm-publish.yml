@@ -1,32 +1,46 @@
 name: npm-publish
 
 on:
-  release:
-    types: [created]
+  push:
+    branches:
+      - master
 
-jobs:
-  npm-publish:
-    name: npm-publish
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+  jobs:
+    publish:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v1
 
-      - name: Set up node.js
-        uses: actions/setup-node@v1
-        with:
-          node-version: 12
-          registry-url: https://registry.npmjs.org/
+        - uses: actions/setup-node@v1
+          with:
+            node-version: 10
 
-      - name: Set up project
-        run: npm install
+        - run: yarn
 
-      - name: Build
-        run: yarn build
+        - run: yarn test
 
-      - name: Publish
-        run: npm publish
+        - name: version
+          run: |
+            git config user.name $GITHUB_ACTOR
+            git config user.email gh-actions-${GITHUB_ACTOR}@github.com
+            npm version patch
+            git push origin master
 
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        - run: yarn build
+
+        - uses: JS-DevTools/npm-publish@v1
+          with:
+            token: ${{ secrets.NPM_TOKEN }}
+            check-version: true
+
+        - name: Create Release
+          id: create_release
+          uses: actions/create-release@v1
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          with:
+            tag_name: ${{ github.ref }}
+            release_name: Release ${{ github.ref }}
+            body: ${{ github.ref }}
+            draft: false
+            prerelease: false
