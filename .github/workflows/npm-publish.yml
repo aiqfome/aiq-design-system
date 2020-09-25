@@ -23,8 +23,8 @@ jobs:
 
       - name: create version
         run: |
-          git config user.name $GITHUB_ACTOR
-          git config user.email gh-actions-${GITHUB_ACTOR}@github.com
+          git config user.name felipe
+          git config user.email felipecesarmaccari@gmail.com
           npm version patch
           git push origin master
 
