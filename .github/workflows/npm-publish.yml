@@ -5,42 +5,46 @@ on:
     branches:
       - master
 
-  jobs:
-    publish:
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v1
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
 
-        - uses: actions/setup-node@v1
-          with:
-            node-version: 10
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 10
+      
+      - name: install dependencies
+        run: yarn
 
-        - run: yarn
+      - name: run tests
+        run: yarn test
 
-        - run: yarn test
+      - name: create version
+        run: |
+          git config user.name $GITHUB_ACTOR
+          git config user.email gh-actions-${GITHUB_ACTOR}@github.com
+          npm version patch
+          git push origin master
 
-        - name: version
-          run: |
-            git config user.name $GITHUB_ACTOR
-            git config user.email gh-actions-${GITHUB_ACTOR}@github.com
-            npm version patch
-            git push origin master
+      - name: create version
+        run: yarn build
 
-        - run: yarn build
-
-        - uses: JS-DevTools/npm-publish@v1
+      - name: publish version
+        uses: JS-DevTools/npm-publish@v1
           with:
             token: ${{ secrets.NPM_TOKEN }}
             check-version: true
 
-        - name: Create Release
-          id: create_release
-          uses: actions/create-release@v1
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          with:
-            tag_name: ${{ github.ref }}
-            release_name: Release ${{ github.ref }}
-            body: ${{ github.ref }}
-            draft: false
-            prerelease: false
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: ${{ github.ref }}
+          draft: false
+          prerelease: false
