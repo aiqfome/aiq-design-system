@@ -22,11 +22,21 @@ interface ItemProps {
 interface ItemStyledProps {
   sidebarOpened?: boolean
   active?: boolean
+  isOpen?: boolean
 }
 
 const ItemStyled = styled.li<ItemStyledProps>`
-  position: relative;
   transition: 0.3ms;
+
+  ${({ isOpen }) => {
+    if (isOpen) {
+      return css`
+        &:hover div {
+          display: flex !important;
+        }
+      `
+    }
+  }}
 
   ${({ theme, active }) =>
     active &&
@@ -61,8 +71,7 @@ const LinkStyled = styled(Link)`
 export const Item: React.FC<ItemProps> = ({
   item,
   sidebarOpened = false,
-  heightScrolledToTop,
-  ...props
+  heightScrolledToTop
 }) => {
   const [isOpen, setIsOpen] = useState(false)
   const location = useLocation()
@@ -148,6 +157,7 @@ export const Item: React.FC<ItemProps> = ({
 
   return (
     <ItemStyled
+      isOpen={isOpen}
       active={isItemActive()}
       sidebarOpened={sidebarOpened}
       onMouseEnter={() => !sidebarOpened && setIsOpen(true)}
@@ -184,6 +194,7 @@ export const Item: React.FC<ItemProps> = ({
           </Flex>
         )}
       </ItemWrapper>
+
       <SubItens
         item={item}
         heightScrolledToTop={heightScrolledToTop}
