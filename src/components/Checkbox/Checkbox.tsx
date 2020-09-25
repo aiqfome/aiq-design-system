@@ -10,7 +10,8 @@ import { Text } from '../Text'
 export interface Props extends DefaultTheme {
   checked?: boolean
   disabled?: boolean
-  onClick?: any
+  onClick?: (e: any) => void
+  onChange?: (e: any) => void
   name?: string
   label?: string
 }
@@ -77,6 +78,9 @@ export const Checkbox: React.FC<Props> = ({
   checked,
   disabled,
   onClick,
+  onChange = (e: any) => {
+    // do nothing
+  },
   name,
   label,
   ...props
@@ -113,6 +117,7 @@ export const Checkbox: React.FC<Props> = ({
         <input
           name={name}
           type='Checkbox'
+          onChange={onChange}
           checked={isChecked}
           disabled={disabled}
           {...props}
@@ -132,7 +137,8 @@ export const Checkbox: React.FC<Props> = ({
 Checkbox.propTypes = {
   checked: PropTypes.bool,
   disabled: PropTypes.bool,
-  onClick: PropTypes.any,
+  onClick: PropTypes.func,
+  onChange: PropTypes.func,
   name: PropTypes.string,
   label: PropTypes.string
 }
