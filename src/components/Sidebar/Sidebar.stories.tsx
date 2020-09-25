@@ -6,7 +6,6 @@ import { withKnobs, boolean } from '@storybook/addon-knobs'
 
 import { Flex } from '../Flex'
 import { Avatar } from '../Avatar'
-import { Text } from '../Text'
 
 export default {
   component: Sidebar,
