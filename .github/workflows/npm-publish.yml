@@ -9,24 +9,27 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-      - uses: actions/setup-node@v1
+      - name: Set up node.js
+        uses: actions/setup-node@v1
         with:
-          node-version: 10
+          node-version: 12
+          registry-url: https://registry.npmjs.org/
+
+      - name: version
+        run: |
+          git config user.name $GITHUB_ACTOR
+          git config user.email gh-actions-${GITHUB_ACTOR}@github.com
+          npm version patch
+          git push origin master
 
       - name: install dependencies
         run: yarn
 
       - name: run tests
         run: yarn test
-
-      - name: create version
-        run: |
-          git config user.name felipe
-          git config user.email felipecesarmaccari@gmail.com
-          npm version patch
-          git push origin master
 
       - name: create version
         run: yarn build
