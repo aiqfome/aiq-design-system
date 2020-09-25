@@ -19,6 +19,7 @@ jobs:
           registry-url: https://registry.npmjs.org/
 
       - name: version
+        id: create_version
         run: |
           git config user.name $GITHUB_ACTOR
           git config user.email gh-actions-${GITHUB_ACTOR}@github.com
@@ -46,9 +47,9 @@ jobs:
         id: create_release
         uses: actions/create-release@v1
         with:
-          tag_name: ${{ steps.version.outputs.version }}
-          release_name: ${{ steps.version.outputs.version }}
-          body: ${{ steps.version.outputs.version }}
+          tag_name: ${{ steps.create_version.outputs.version }}
+          release_name: ${{ steps.create_version.outputs.version }}
+          body: ${{ steps.create_version.outputs.version }}
           draft: false
           prerelease: false
 
