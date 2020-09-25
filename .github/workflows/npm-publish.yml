@@ -9,19 +9,22 @@ jobs:
     name: npm-publish
     runs-on: ubuntu-latest
     steps:
-      - name: checkout repository
+      - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: set up node.js
+      - name: Set up node.js
         uses: actions/setup-node@v1
         with:
           node-version: 12
           registry-url: https://registry.npmjs.org/
 
-      - name: run tests
+      - name: Set up project
+        run: yarn
+
+      - name: Run tests
         run: yarn test
 
-      - name: publish branch
+      - name: Publish branch
         run: yarn build && yarn publish
 
         env:
