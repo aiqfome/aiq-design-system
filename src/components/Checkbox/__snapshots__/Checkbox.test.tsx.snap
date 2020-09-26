@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`must match with the previous snapshot snapshot renders 1`] = `
+<label
+  className="sc-AxjAm hkOyki"
+>
+  <input
+    className="sc-AxirZ eRnVJk"
+    type="checkbox"
+  />
+  <div
+    className="sc-AxiKw cwLquZ"
+  >
+    <svg
+      className="sc-AxhCb cfxuFI"
+      viewBox="0 0 24 24"
+    >
+      <polyline
+        points="20 6 9 17 4 12"
+      />
+    </svg>
+  </div>
+</label>
+`;
