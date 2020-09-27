@@ -30,6 +30,7 @@ export interface Props {
   items: Item[]
   isLoading?: boolean
   itemLimit?: number
+  placeholder?: string
 }
 
 const MultiSelectStyled = styled(Box)`
@@ -54,6 +55,7 @@ const ContainerInput = styled(Box)<ContainerInputProps>`
     background: none;
     border: none;
     height: 25px;
+    flex: 1;
   }
 
   &::-webkit-scrollbar {
@@ -120,6 +122,7 @@ export const MultiSelectFetchable: React.FC<Props> = ({
   value = [],
   isLoading = false,
   itemLimit = 2,
+  placeholder,
   ...props
 }) => {
   const inputRef = useRef(document.createElement('input'))
@@ -190,7 +193,7 @@ export const MultiSelectFetchable: React.FC<Props> = ({
         border='1px solid #dedede'
         refBox={propsCombobox.getComboboxProps().ref}
       >
-        <Flex overflow='hidden'>
+        <Flex overflow='hidden' flex={1}>
           {propsMultipleSelection.selectedItems
             .slice(0, itemLimit)
             .map((selectedItem, index) => (
@@ -245,6 +248,7 @@ export const MultiSelectFetchable: React.FC<Props> = ({
           )}
 
           <input
+            placeholder={placeholder}
             type='text'
             {...propsCombobox.getInputProps(
               propsMultipleSelection.getDropdownProps({
@@ -312,5 +316,6 @@ MultiSelectFetchable.propTypes = {
   onChange: PropTypes.func,
   value: PropTypes.array,
   isLoading: PropTypes.bool,
-  itemLimit: PropTypes.number
+  itemLimit: PropTypes.number,
+  placeholder: PropTypes.string
 }
