@@ -15,7 +15,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
     id="itens-sidebar"
   >
     <li
-      className="sc-fzoLsD fNmdDG"
+      className="sc-fzoLsD gSVrNH"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
@@ -66,11 +66,11 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
         </div>
       </a>
       <div
-        className="sc-AxjAm sc-fzozJi hZDKrp hide"
+        className="sc-AxjAm sc-fzozJi fBHEQz hide"
       />
     </li>
     <li
-      className="sc-fzoLsD fNmdDG"
+      className="sc-fzoLsD gSVrNH"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
@@ -121,11 +121,11 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
         </div>
       </a>
       <div
-        className="sc-AxjAm sc-fzozJi hZDKrp hide"
+        className="sc-AxjAm sc-fzozJi fBHEQz hide"
       />
     </li>
     <li
-      className="sc-fzoLsD fNmdDG"
+      className="sc-fzoLsD gSVrNH"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
@@ -205,7 +205,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
         </div>
       </div>
       <div
-        className="sc-AxjAm sc-fzozJi hZDKrp hide"
+        className="sc-AxjAm sc-fzozJi fBHEQz hide"
       >
         <ul>
           <li>
@@ -265,7 +265,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
       </div>
     </li>
     <li
-      className="sc-fzoLsD fNmdDG"
+      className="sc-fzoLsD gSVrNH"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
@@ -340,7 +340,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
         </div>
       </div>
       <div
-        className="sc-AxjAm sc-fzozJi hZDKrp hide"
+        className="sc-AxjAm sc-fzozJi fBHEQz hide"
       >
         <ul>
           <li>
@@ -443,7 +443,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
       </div>
     </li>
     <li
-      className="sc-fzoLsD fNmdDG"
+      className="sc-fzoLsD gSVrNH"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
@@ -493,7 +493,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
         </div>
       </a>
       <div
-        className="sc-AxjAm sc-fzozJi hZDKrp hide"
+        className="sc-AxjAm sc-fzozJi fBHEQz hide"
       />
     </li>
   </ul>

@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from 'react'
+import React, { ReactElement } from 'react'
 
 import { Flex } from '../Flex'
 
@@ -28,8 +28,6 @@ const filters = [
 ]
 
 export const Basic: React.FC = (): ReactElement => {
-  const [selectedItens, setSelectedItens] = useState([items[0]])
-
   function handleChangeMultiSelect(event) {
     console.log(event)
   }
@@ -37,8 +35,8 @@ export const Basic: React.FC = (): ReactElement => {
   return (
     <Flex variant='fullCentralized'>
       <MultiSelect
-        maxWidth='480px'
-        value={selectedItens}
+        maxWidth='800px'
+        value={[items[0]]}
         onChange={handleChangeMultiSelect}
         filters={filters}
         items={items}
