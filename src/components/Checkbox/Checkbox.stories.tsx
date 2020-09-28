@@ -13,13 +13,18 @@ export default {
 export const Basic: React.FC = () => {
   const [checked, setChecked] = useState(false)
 
+  function handleOnChangeChange(event) {
+    setChecked(event.target.checked)
+  }
+
   return (
     <Flex variant='fullCentralized'>
       <Checkbox
-        onClick={() => setChecked(!checked)}
-        checked={boolean('checked', false)}
+        onChange={handleOnChangeChange}
+        checked={checked}
         disabled={boolean('disabled', false)}
         label={text('text', 'Aiqfome')}
+        labelColor='primary'
       />
     </Flex>
   )
@@ -31,7 +36,7 @@ export const Checked: React.FC = () => {
   return (
     <Flex variant='fullCentralized'>
       <Checkbox
-        onClick={() => setChecked(!checked)}
+        onChange={event => setChecked(event.target.checked)}
         checked={checked}
         label={text('text', 'Aiqfome')}
       />
@@ -45,7 +50,7 @@ export const Disabled: React.FC = () => {
   return (
     <Flex variant='fullCentralized'>
       <Checkbox
-        onClick={() => setChecked(!checked)}
+        onChange={event => setChecked(event.target.checked)}
         disabled={true}
         checked={checked}
         label={text('text', 'Aiqfome')}
@@ -60,7 +65,7 @@ export const DisabledChecked: React.FC = () => {
   return (
     <Flex variant='fullCentralized'>
       <Checkbox
-        onClick={() => setChecked(!checked)}
+        onChange={event => setChecked(event.target.checked)}
         disabled={true}
         checked={checked}
         label={text('text', 'Aiqfome')}

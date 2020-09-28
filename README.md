@@ -67,6 +67,6 @@ function App() {
 ReactDOM.render(<App />, document.querySelector('#app'))
 ```
 
-A sandbox for interation:
+A sandbox for interaction:
 
 [![Edit Button](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/festive-dew-dk509?file=/src/App.js)
