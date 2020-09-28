@@ -1,11 +1,12 @@
 import React from 'react'
-import renderer from 'react-test-renderer'
+
+import { render } from '../utils/test/render'
 
 import { TimePicker } from './TimePicker'
 
 describe('must match with the previous snapshot', () => {
   test('snapshot renders', () => {
-    const component = renderer.create(
+    const component = render(
       <TimePicker
         onChange={value => console.log(value)}
         placeholder='aiqfome'
