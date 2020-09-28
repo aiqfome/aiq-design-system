@@ -22,6 +22,7 @@ export interface Props {
   items: Item[]
   isLoading?: boolean
   isFetchable?: boolean
+  placeholder?: string
 }
 
 export const MultiSelect: React.FC<Props> = ({
