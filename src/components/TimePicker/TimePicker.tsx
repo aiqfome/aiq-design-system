@@ -32,7 +32,8 @@ export const TimePicker: React.FC<Props> = ({
   maxWidth,
   onChange = (e: any) => {
     // do nothing
-  }
+  },
+  ...props
 }) => {
   const [showPicker, setShowPicker] = useState(false)
   const [inputValue, setInputValue] = useState(value || '')
@@ -93,6 +94,7 @@ export const TimePicker: React.FC<Props> = ({
       maxWidth={maxWidth}
       onMouseEnter={() => setShowPicker(true)}
       onMouseLeave={() => setShowPicker(false)}
+      {...props}
     >
       <Input
         value={inputValue}

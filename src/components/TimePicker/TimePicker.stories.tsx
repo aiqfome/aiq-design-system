@@ -14,7 +14,7 @@ export const Basic: React.FC = (): ReactElement => (
     <TimePicker
       onChange={value => console.log(value)}
       placeholder='aiqfome'
-      maxWidth='120px'
+      maxWidth='100px'
       value='12:30'
     />
   </Flex>
