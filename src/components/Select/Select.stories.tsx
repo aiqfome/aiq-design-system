@@ -3,6 +3,8 @@ import { withKnobs, text, object } from '@storybook/addon-knobs'
 import { Select } from './Select'
 import { Flex } from '../Flex'
 
+import { MdSearch } from 'react-icons/md'
+
 export default {
   component: Select,
   title: 'Select',
@@ -62,6 +64,36 @@ export const AutocompleteFalse: React.FC = () => {
         }
         label={text('label', 'aiq-design-system')}
         items={object('items', itens)}
+      />
+    </Flex>
+  )
+}
+
+export const WithSufix: React.FC = () => {
+  const itens = [
+    { label: 'React', value: 1 },
+    { label: 'CSS', value: 2 },
+    { label: 'PHP', value: 3 },
+    { label: 'HTML', value: 4 }
+  ]
+  const [selectedItem, setSelectedItem] = useState(itens[0])
+  return (
+    <Flex variant='fullCentralized'>
+      <Select
+        mr='32px'
+        variant='outlined'
+        label={text('label', 'aiq-design-system')}
+        items={object('items', itens)}
+        sufix={<MdSearch />}
+      />
+      <Select
+        selectedItem={selectedItem}
+        handleSelectedItemChange={({ selectedItem }) =>
+          setSelectedItem(selectedItem)
+        }
+        label={text('label', 'aiq-design-system')}
+        items={object('items', itens)}
+        sufix={<MdSearch />}
       />
     </Flex>
   )

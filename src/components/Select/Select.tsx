@@ -18,6 +18,7 @@ export interface Props extends BoxPros {
   handleSelectedItemChange?: (item: any) => void
   selectedItem?: any
   autoComplete?: boolean
+  sufix?: any
 }
 
 const Container = styled(Box)<Props>`
@@ -66,7 +67,7 @@ interface ButtonStyledProps extends ButtonProps {
 const ButtonStyled = styled(Button)<ButtonStyledProps>`
   position: absolute;
   top: ${({ variantSelect }) =>
-    variantSelect === 'outlined' ? '15px' : '12px'};
+    variantSelect === 'outlined' ? '13px' : '12px'};
   right: 14px;
 `
 
@@ -77,6 +78,7 @@ export const Select: React.FC<Props> = ({
   placeholder,
   selectedItem,
   autoComplete = true,
+  sufix,
   handleSelectedItemChange = () => {
     // do nothing.
   },
@@ -166,7 +168,7 @@ export const Select: React.FC<Props> = ({
             refButton={getToggleButtonProps().ref}
             aria-label='toggle menu'
           >
-            <IoIosArrowDown />
+            {sufix || <IoIosArrowDown />}
           </ButtonStyled>
         )}
       </Box>
@@ -187,7 +189,8 @@ Select.propTypes = {
   backgroundColor: PropTypes.any,
   border: PropTypes.any,
   width: PropTypes.any,
-  maxWidth: PropTypes.any
+  maxWidth: PropTypes.any,
+  sufix: PropTypes.any
 }
 
 Select.defaultProps = {
