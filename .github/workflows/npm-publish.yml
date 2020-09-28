@@ -1,26 +1,58 @@
 name: npm-publish
+
 on:
   push:
     branches:
       - master
+
 jobs:
-  npm-publish:
-    name: npm-publish
+  publish:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@master
-      - name: Set up Node.js
-        uses: actions/setup-node@master
+        uses: actions/checkout@v2
+
+      - name: Set up node.js
+        uses: actions/setup-node@v1
         with:
-          node-version: 10.0.0
-      - name: Publish if version has been updated
-        uses: pascalgn/npm-publish-action@06e0830ea83eea10ed4a62654eeaedafb8bf50fc
+          node-version: 12
+          registry-url: https://registry.npmjs.org/
+
+      - name: version
+        id: create_version
+        run: |
+          git config user.name $GITHUB_ACTOR
+          git config user.email gh-actions-${GITHUB_ACTOR}@github.com
+          npm version patch
+          git push origin master
+          content=`cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[",]//g'`
+          echo "::set-output name=version::$content"
+
+      - name: install dependencies
+        run: yarn
+
+      - name: run tests
+        run: yarn test
+
+      - name: create version
+        run: yarn build
+
+      - name: publish version
+        uses: JS-DevTools/npm-publish@v1
         with:
-          tag_name: 'v%s'
-          tag_message: 'v%s'
-          commit_pattern: "^Release (\\S+)"
-          workspace: '.'
+          token: ${{ secrets.NPM_TOKEN }}
+          check-version: true
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        with:
+          tag_name: ${{ steps.create_version.outputs.version }}
+          release_name: ${{ steps.create_version.outputs.version }}
+          body: ${{ steps.create_version.outputs.version }}
+          draft: false
+          prerelease: false
+
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

@@ -1,144 +1,85 @@
-import React, { useMemo, useEffect, useState } from 'react'
+import React, { InputHTMLAttributes } from 'react'
 import PropTypes from 'prop-types'
 
 import styled, { DefaultTheme } from 'styled-components'
-import { layout, space } from 'styled-system'
+import { color } from 'styled-system'
 
-import { Flex } from '../Flex'
-import { Text } from '../Text'
-
-export interface Props extends DefaultTheme {
-  checked?: boolean
-  disabled?: boolean
-  onClick?: (e: any) => void
-  onChange?: (e: any) => void
-  name?: string
+export interface Props
+  extends DefaultTheme,
+    InputHTMLAttributes<HTMLInputElement> {
   label?: string
+  labelColor?: string
+  style?: any
 }
 
-const CheckboxStyled = styled.div<Props>`
-  ${layout}
-  ${space}
-  
-  position: relative;
-  width: 21px;
-  height: 21px;
-  opacity: ${props => (props.disabled ? 0.5 : 1)};
+const Label = styled.label<Props>`
+  ${color}
 
-  :hover {
-    cursor: ${props => (props.disabled ? 'not-allowed' : 'pointer')};
+  display: flex;
+  align-items: center;
+
+  opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
+`
+
+const HiddenCheckbox = styled.input<Props>`
+  border: 0;
+  display: none;
+`
+
+const BoxCheckbox = styled.div<Props>`
+  display: inline-block;
+  margin-right: 12px;
+  width: 16px;
+  height: 16px;
+  border-radius: 2px;
+  border: 2px solid ${({ theme }) => theme.colors.primary};
+  background: ${({ checked, theme }) =>
+    checked ? theme.colors.primary : 'transparent'};
+  transition: all 0.2s;
+
+  ${HiddenCheckbox}:focus + & {
+    box-shadow: 0 0 0 3px ${({ theme }) => theme.colors.primary};
   }
+`
 
-  input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
-  }
-
-  span {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 18px;
-    width: 18px;
-    border-radius: 2px;
-    border: 2px solid ${({ theme }) => theme.colors.primary};
-
-    &:after {
-      content: '';
-      position: absolute;
-      display: none;
-    }
-  }
-
-  input:checked ~ span {
-    background-color: ${({ theme }) => theme.colors.primary};
-  }
-
-  input:checked ~ span:after {
-    display: block;
-  }
-
-  span:after {
-    left: 4px;
-    top: 1px;
-    width: 4px;
-    height: 10px;
-    border: solid #fff;
-    border-width: 0 2px 2px 0;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
-  }
+const Icon = styled.svg<Props>`
+  display: ${({ checked }) => (checked ? 'block' : 'none')};
+  fill: none;
+  stroke: white;
+  stroke-width: 4px;
+  transition: all 0.2s;
 `
 
 export const Checkbox: React.FC<Props> = ({
   checked,
-  disabled,
-  onClick,
-  onChange = (e: any) => {
-    // do nothing
-  },
-  name,
   label,
+  style,
+  labelColor,
+  disabled,
   ...props
 }) => {
-  const [isChecked, setIsChecked] = useState(false)
-
-  function handleClickCheckbox() {
-    if (!disabled) {
-      onClick && onClick(!checked)
-
-      setIsChecked(checked => !checked)
-    }
-  }
-
-  useEffect(() => {
-    setIsChecked(checked || false)
-  }, [checked])
-
-  const textColor = useMemo(() => {
-    if (disabled) {
-      return 'mediumGrey'
-    }
-
-    return 'almostBlack'
-  }, [disabled])
-
   return (
-    <Flex>
-      <CheckboxStyled
+    <Label color={labelColor} style={style} disabled={disabled}>
+      <HiddenCheckbox
         disabled={disabled}
-        onClick={handleClickCheckbox}
+        type='checkbox'
+        checked={checked}
         {...props}
-      >
-        <input
-          name={name}
-          type='Checkbox'
-          onChange={onChange}
-          checked={isChecked}
-          disabled={disabled}
-          {...props}
-        />
-        <span />
-      </CheckboxStyled>
-
-      {label && (
-        <Text ml={5} color={textColor}>
-          {label}
-        </Text>
-      )}
-    </Flex>
+      />
+      <BoxCheckbox checked={checked}>
+        <Icon viewBox='0 0 24 24' checked={checked}>
+          <polyline points='20 6 9 17 4 12' />
+        </Icon>
+      </BoxCheckbox>
+      {label}
+    </Label>
   )
 }
 
 Checkbox.propTypes = {
   checked: PropTypes.bool,
-  disabled: PropTypes.bool,
-  onClick: PropTypes.func,
-  onChange: PropTypes.func,
-  name: PropTypes.string,
-  label: PropTypes.string
+  label: PropTypes.string,
+  labelColor: PropTypes.string,
+  style: PropTypes.any,
+  disabled: PropTypes.bool
 }
