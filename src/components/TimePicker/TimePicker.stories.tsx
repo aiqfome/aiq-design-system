@@ -11,6 +11,17 @@ export default {
 
 export const Basic: React.FC = (): ReactElement => (
   <Flex variant='fullCentralized'>
-    <TimePicker placeholder='timepicker' maxWidth='120px' />
+    <TimePicker
+      onChange={value => console.log(value)}
+      placeholder='aiqfome'
+      maxWidth='120px'
+      value='12:30'
+    />
+  </Flex>
+)
+
+export const Outlined: React.FC = (): ReactElement => (
+  <Flex variant='fullCentralized'>
+    <TimePicker variant='outlined' label='aiqfome' maxWidth='120px' />
   </Flex>
 )

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import PropTypes from 'prop-types'
 
@@ -14,6 +14,8 @@ interface Props {
   max: number
   min: number
   label: string
+  value: number
+  onChange?: (value: any) => void
 }
 
 interface ButtonProps {
@@ -26,12 +28,25 @@ const Button = styled(Icon)<ButtonProps>`
   }
 `
 
-export const TimeUnity: React.FC<Props> = ({ max, min, label }) => {
+export const TimeUnity: React.FC<Props> = ({
+  max,
+  min,
+  label,
+  value,
+  onChange = () => {
+    // do nothing.
+  }
+}) => {
   const [number, setNumber] = useState(0)
+
+  useEffect(() => {
+    setNumber(value)
+  }, [value])
 
   function upNumber() {
     if (max > number) {
       setNumber(number + 1)
+      onChange(('00' + (number + 1)).slice(-2))
     } else {
       setNumber(min)
     }
@@ -40,6 +55,7 @@ export const TimeUnity: React.FC<Props> = ({ max, min, label }) => {
   function downNumber() {
     if (min < number) {
       setNumber(number - 1)
+      onChange(('00' + (number - 1)).slice(-2))
     } else {
       setNumber(max)
     }
@@ -66,5 +82,7 @@ export const TimeUnity: React.FC<Props> = ({ max, min, label }) => {
 TimeUnity.propTypes = {
   max: PropTypes.number.isRequired,
   min: PropTypes.number.isRequired,
-  label: PropTypes.string.isRequired
+  label: PropTypes.string.isRequired,
+  value: PropTypes.number.isRequired,
+  onChange: PropTypes.func
 }
