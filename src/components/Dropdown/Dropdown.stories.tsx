@@ -4,7 +4,7 @@ import { withKnobs, text, object, boolean } from '@storybook/addon-knobs'
 import { Dropdown } from './Dropdown'
 import { Flex } from '../Flex'
 
-import brazil from '../../assets/flags/brazil.svg'
+import brazil from '../../assets/flags/brasil.svg'
 import chile from '../../assets/flags/chile.svg'
 import paraguay from '../../assets/flags/paraguay.svg'
 import uruguay from '../../assets/flags/uruguay.svg'

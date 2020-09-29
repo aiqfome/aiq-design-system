@@ -5,7 +5,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
   className="sc-AxhCb dAYizN"
 >
   <div
-    className="sc-AxjAm giuoCA sc-AxirZ hZIdjN"
+    className="sc-AxjAm kIbrzl sc-AxirZ hZIdjN"
   >
     <span
       className="sc-AxiKw heDoSu"
@@ -14,7 +14,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
       Hamburguer
     </span>
     <div
-      className="sc-AxjAm giuoCA tooltip"
+      className="sc-AxjAm kIbrzl tooltip"
     >
       I'm hungry
     </div>
