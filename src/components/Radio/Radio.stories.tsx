@@ -46,3 +46,10 @@ export const CheckedDisabled: React.FC = () => (
     />
   </Flex>
 )
+
+export const Label: React.FC = () => (
+  <Flex>
+    <Radio mx={10} checked={true} label='aiq' name='radio' value='aiq' />
+    <Radio mx={10} checked={false} label='fome' name='radio' value='fome' />
+  </Flex>
+)

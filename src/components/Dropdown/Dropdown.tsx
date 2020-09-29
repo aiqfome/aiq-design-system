@@ -14,7 +14,7 @@ import {
 import { Box } from '../Box'
 
 type Item = {
-  label: string
+  label: any
   value: any
 }
 export interface Props extends SizeProps, MarginProps, LayoutProps {
