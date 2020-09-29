@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useRef } from 'react'
 import PropTypes from 'prop-types'
 
 import styled from 'styled-components'
@@ -29,6 +29,8 @@ export interface Props {
   value?: Item[]
   items: Item[]
   isLoading?: boolean
+  itemLimit?: number
+  placeholder?: string
 }
 
 const MultiSelectStyled = styled(Box)`
@@ -53,6 +55,7 @@ const ContainerInput = styled(Box)<ContainerInputProps>`
     background: none;
     border: none;
     height: 25px;
+    flex: 1;
   }
 
   &::-webkit-scrollbar {
@@ -118,10 +121,10 @@ export const MultiSelectFetchable: React.FC<Props> = ({
   onChange,
   value = [],
   isLoading = false,
+  itemLimit = 2,
+  placeholder,
   ...props
 }) => {
-  const [inputValue, setInputValue] = useState<string | undefined>('')
-
   const inputRef = useRef(document.createElement('input'))
 
   const propsMultipleSelection = useMultipleSelection({
@@ -130,7 +133,7 @@ export const MultiSelectFetchable: React.FC<Props> = ({
 
   const propsCombobox = useCombobox({
     itemToString: item => (item ? '' : ''),
-    items: getFilteredItems(),
+    items,
     stateReducer: (state, actionAndChanges) => {
       const { changes, type } = actionAndChanges
       switch (type) {
@@ -146,32 +149,18 @@ export const MultiSelectFetchable: React.FC<Props> = ({
     onStateChange: ({ inputValue: value, type, selectedItem }) => {
       switch (type) {
         case useCombobox.stateChangeTypes.InputChange:
-          setInputValue(value)
           onChange(value)
           break
         case useCombobox.stateChangeTypes.InputKeyDownEnter:
         case useCombobox.stateChangeTypes.ItemClick:
         case useCombobox.stateChangeTypes.InputBlur:
           if (selectedItem) {
-            setInputValue('')
             propsMultipleSelection.addSelectedItem(selectedItem)
           }
           break
       }
     }
   })
-
-  function getFilteredItems() {
-    return (
-      items &&
-      items.filter(
-        item =>
-          inputValue !== undefined &&
-          propsMultipleSelection.selectedItems.indexOf(item) < 0 &&
-          item.name.toLowerCase().startsWith(inputValue.toLowerCase())
-      )
-    )
-  }
 
   function filterItems(filter) {
     if (filter.clear) {
@@ -204,11 +193,46 @@ export const MultiSelectFetchable: React.FC<Props> = ({
         border='1px solid #dedede'
         refBox={propsCombobox.getComboboxProps().ref}
       >
-        <Flex>
-          {propsMultipleSelection.selectedItems.map((selectedItem, index) => (
+        <Flex overflow='hidden' flex={1}>
+          {propsMultipleSelection.selectedItems
+            .slice(0, itemLimit)
+            .map((selectedItem, index) => (
+              <Flex
+                py={2}
+                key={`selected-item-${index}`}
+                px={4}
+                mr={3}
+                display='flex'
+                flexDirection='row'
+                alignItems='center'
+                backgroundColor='primary'
+                borderRadius='3px'
+              >
+                <SelectedItem
+                  {...propsMultipleSelection.getSelectedItemProps({
+                    selectedItem,
+                    index
+                  })}
+                  color='white'
+                >
+                  {selectedItem.name}
+                </SelectedItem>
+
+                <Button
+                  onClick={e => {
+                    e.stopPropagation()
+                    propsMultipleSelection.removeSelectedItem(selectedItem)
+                  }}
+                  ml={6}
+                >
+                  <MdClose color='#fff' />
+                </Button>
+              </Flex>
+            ))}
+
+          {propsMultipleSelection.selectedItems.length > itemLimit && (
             <Flex
               py={2}
-              key={`selected-item-${index}`}
               px={4}
               mr={3}
               display='flex'
@@ -217,29 +241,14 @@ export const MultiSelectFetchable: React.FC<Props> = ({
               backgroundColor='primary'
               borderRadius='3px'
             >
-              <SelectedItem
-                {...propsMultipleSelection.getSelectedItemProps({
-                  selectedItem,
-                  index
-                })}
-                color='white'
-              >
-                {selectedItem.name}
-              </SelectedItem>
-
-              <Button
-                onClick={e => {
-                  e.stopPropagation()
-                  propsMultipleSelection.removeSelectedItem(selectedItem)
-                }}
-                ml={6}
-              >
-                <MdClose color='#fff' />
-              </Button>
+              <Text color='white'>
+                {`+${propsMultipleSelection.selectedItems.length - itemLimit}`}
+              </Text>
             </Flex>
-          ))}
+          )}
 
           <input
+            placeholder={placeholder}
             type='text'
             {...propsCombobox.getInputProps(
               propsMultipleSelection.getDropdownProps({
@@ -306,5 +315,7 @@ MultiSelectFetchable.propTypes = {
   filters: PropTypes.array,
   onChange: PropTypes.func,
   value: PropTypes.array,
-  isLoading: PropTypes.bool
+  isLoading: PropTypes.bool,
+  itemLimit: PropTypes.number,
+  placeholder: PropTypes.string
 }

@@ -1,15 +1,23 @@
-import React, { useState } from 'react'
+import React, { InputHTMLAttributes } from 'react'
+
 import PropTypes from 'prop-types'
+
 import styled, { DefaultTheme } from 'styled-components'
+
 import { margin, MarginProps } from 'styled-system'
 
-export interface Props extends MarginProps {
+import { Text } from '../Text'
+import { Box } from '../Box'
+
+export interface Props
+  extends MarginProps,
+    InputHTMLAttributes<HTMLInputElement> {
   name: string
   value: any
   disabled?: boolean
+  label?: string
   checked?: boolean
   onChange?: (event: any) => void
-  onClick?: (event: any) => void
 }
 
 interface RadioStyled extends DefaultTheme, MarginProps {
@@ -22,17 +30,12 @@ const RadioStyled = styled.label<RadioStyled>`
   &:hover {
     cursor: ${props => (props.disabled ? 'not-allowed' : 'pointer')};
   }
-
-  display: block;
+  min-height: 21px;
+  display: flex;
+  align-items: center;
   position: relative;
   padding-left: 35px;
-  margin-bottom: 12px;
   cursor: pointer;
-  font-size: 22px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
 
   opacity: ${props => (props.disabled ? 0.5 : 1)};
 
@@ -44,7 +47,7 @@ const RadioStyled = styled.label<RadioStyled>`
     width: 0;
   }
 
-  span {
+  div {
     position: absolute;
     top: 0;
     left: 0;
@@ -54,21 +57,21 @@ const RadioStyled = styled.label<RadioStyled>`
     border: 2px solid ${({ theme }) => theme.colors.primary};
   }
 
-  input:checked ~ span {
+  input:checked ~ div {
     background-color: #fff;
   }
 
-  span:after {
+  div:after {
     content: '';
     position: absolute;
     display: none;
   }
 
-  input:checked ~ span:after {
+  input:checked ~ div:after {
     display: block;
   }
 
-  span:after {
+  div:after {
     top: 3px;
     left: 3px;
     width: 10px;
@@ -83,34 +86,40 @@ export const Radio: React.FC<Props> = ({
   value,
   disabled = false,
   checked = false,
+  label,
   onChange = () => {
     // do nothing.
   },
-  onClick = () => {
-    // do nothing.
-  },
+  className,
+  mx,
+  my,
+  m,
+  mr,
+  ml,
   ...props
 }) => {
-  const [isChecked, setIsChecked] = useState(checked)
-
-  function handleRadioOnChange(event) {
-    onChange(event)
-    setIsChecked(!isChecked)
-  }
-
   return (
-    <RadioStyled disabled={disabled} {...props}>
+    <RadioStyled
+      mx={mx}
+      my={my}
+      m={m}
+      mr={mr}
+      ml={ml}
+      className={className}
+      disabled={disabled}
+    >
       <input
         type='radio'
         disabled={disabled}
         name={name}
-        onChange={handleRadioOnChange}
-        onClick={onClick}
-        checked={isChecked}
+        onChange={onChange}
+        checked={checked}
         value={value}
         {...props}
       />
-      <span />
+      <Box />
+
+      {label && <Text>{label}</Text>}
     </RadioStyled>
   )
 }
@@ -121,8 +130,11 @@ Radio.propTypes = {
   disabled: PropTypes.bool,
   checked: PropTypes.bool,
   onChange: PropTypes.func,
-  onClick: PropTypes.func,
-  mx: PropTypes.number,
-  my: PropTypes.number,
-  m: PropTypes.number
+  label: PropTypes.string,
+  className: PropTypes.string,
+  mx: PropTypes.any,
+  my: PropTypes.any,
+  m: PropTypes.any,
+  mr: PropTypes.any,
+  ml: PropTypes.any
 }

@@ -4,6 +4,11 @@ import { withKnobs, text, object, boolean } from '@storybook/addon-knobs'
 import { Dropdown } from './Dropdown'
 import { Flex } from '../Flex'
 
+import brazil from '../../assets/flags/brazil.svg'
+import chile from '../../assets/flags/chile.svg'
+import paraguay from '../../assets/flags/paraguay.svg'
+import uruguay from '../../assets/flags/uruguay.svg'
+
 export default {
   component: Dropdown,
   title: 'Dropdown',
@@ -114,6 +119,43 @@ export const Selected: React.FC = () => {
         selected={2}
         label={label}
         width={240}
+        itens={itens}
+        onChange={handleChangeDropdown}
+      />
+    </Flex>
+  )
+}
+
+export const WithImages: React.FC = () => {
+  const itens = [
+    {
+      label: <img width='24px' height='24px' src={brazil} />,
+      value: 1
+    },
+    {
+      label: <img src={chile} width='24px' height='24px' />,
+      value: 2
+    },
+    {
+      label: <img src={paraguay} width='24px' height='24px' />,
+      value: 3
+    },
+    {
+      label: <img src={uruguay} width='24px' height='24px' />,
+      value: 4
+    }
+  ]
+  const label = 'Dropdown'
+
+  function handleChangeDropdown(item: any) {
+    console.log(item)
+  }
+
+  return (
+    <Flex variant='fullCentralized'>
+      <Dropdown
+        selected={2}
+        label={label}
         itens={itens}
         onChange={handleChangeDropdown}
       />

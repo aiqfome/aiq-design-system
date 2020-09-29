@@ -29,6 +29,7 @@ export interface Props {
   items: Item[]
   isLoading?: boolean
   isFetchable?: boolean
+  itemLimit?: number
 }
 
 const MultiSelectStyled = styled(Box)`
@@ -117,6 +118,7 @@ export const MultiSelectStatic: React.FC<Props> = ({
   filters = [],
   onChange,
   value = [],
+  itemLimit = 2,
   ...props
 }) => {
   const [inputValue, setInputValue] = useState<string | undefined>('')
@@ -205,10 +207,45 @@ export const MultiSelectStatic: React.FC<Props> = ({
         border='1px solid #dedede'
         refBox={propsCombobox.getComboboxProps().ref}
       >
-        {propsMultipleSelection.selectedItems.map((selectedItem, index) => (
+        {propsMultipleSelection.selectedItems
+          .slice(0, itemLimit)
+          .map((selectedItem, index) => (
+            <Flex
+              py={2}
+              key={`selected-item-${index}`}
+              px={4}
+              mr={3}
+              display='flex'
+              flexDirection='row'
+              alignItems='center'
+              backgroundColor='primary'
+              borderRadius='3px'
+            >
+              <SelectedItem
+                {...propsMultipleSelection.getSelectedItemProps({
+                  selectedItem,
+                  index
+                })}
+                color='white'
+              >
+                {selectedItem.name}
+              </SelectedItem>
+
+              <Button
+                onClick={e => {
+                  e.stopPropagation()
+                  propsMultipleSelection.removeSelectedItem(selectedItem)
+                }}
+                ml={6}
+              >
+                <MdClose color='#fff' />
+              </Button>
+            </Flex>
+          ))}
+
+        {propsMultipleSelection.selectedItems.length > itemLimit && (
           <Flex
             py={2}
-            key={`selected-item-${index}`}
             px={4}
             mr={3}
             display='flex'
@@ -217,27 +254,11 @@ export const MultiSelectStatic: React.FC<Props> = ({
             backgroundColor='primary'
             borderRadius='3px'
           >
-            <SelectedItem
-              {...propsMultipleSelection.getSelectedItemProps({
-                selectedItem,
-                index
-              })}
-              color='white'
-            >
-              {selectedItem.name}
-            </SelectedItem>
-
-            <Button
-              onClick={e => {
-                e.stopPropagation()
-                propsMultipleSelection.removeSelectedItem(selectedItem)
-              }}
-              ml={6}
-            >
-              <MdClose color='#fff' />
-            </Button>
+            <Text color='white'>
+              {`+${propsMultipleSelection.selectedItems.length - itemLimit}`}
+            </Text>
           </Flex>
-        ))}
+        )}
 
         <input
           type='text'
@@ -302,5 +323,6 @@ MultiSelectStatic.propTypes = {
   filters: PropTypes.array,
   onChange: PropTypes.func,
   value: PropTypes.array,
-  isLoading: PropTypes.bool
+  isLoading: PropTypes.bool,
+  itemLimit: PropTypes.number
 }
