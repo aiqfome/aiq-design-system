@@ -16,6 +16,8 @@ import {
   FontWeightProps,
   border,
   BorderProps,
+  boxShadow,
+  BoxShadowProps,
   flexbox,
   FlexboxProps
 } from 'styled-system'
@@ -28,7 +30,8 @@ export interface Props
     FontSizeProps,
     FontWeightProps,
     PositionProps,
-    BorderProps {
+    BorderProps,
+    BoxShadowProps {
   color?: string
   children?: any
   refBox?: any
@@ -44,6 +47,7 @@ export const BoxStyled = styled.div`
   ${fontWeight}
   ${border}
   ${position}
+  ${boxShadow}
 `
 
 export const Box: React.FC<Props> = ({ refBox, ...props }) => {
