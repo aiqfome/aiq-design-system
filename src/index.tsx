@@ -16,6 +16,7 @@ export { Loading } from './components/Loading'
 export { Radio } from './components/Radio'
 export { Select } from './components/Select'
 export { Switch } from './components/Switch'
+export { TimePicker } from './components/TimePicker'
 export { Text } from './components/Text'
 export { Tooltip } from './components/Tooltip'
 
