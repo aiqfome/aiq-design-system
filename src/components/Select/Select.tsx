@@ -16,6 +16,7 @@ export interface Props extends BoxPros {
   prefix?: any
   placeholder?: string
   handleSelectedItemChange?: (item: any) => void
+  onChangeTextInput?: (text: string) => void
   selectedItem?: any
   autoComplete?: boolean
   sufix?: any
@@ -82,6 +83,9 @@ export const Select: React.FC<Props> = ({
   handleSelectedItemChange = () => {
     // do nothing.
   },
+  onChangeTextInput = () => {
+    // do nothing.
+  },
   prefix,
   ...props
 }) => {
@@ -111,6 +115,7 @@ export const Select: React.FC<Props> = ({
     itemToString: item => (typeof item === 'string' ? item : item.label),
     onInputValueChange: ({ inputValue = '' }) => {
       if (autoComplete) {
+        onChangeTextInput(inputValue)
         setInputItems(
           items.filter(item => {
             const label = typeof item === 'string' ? item : item.label
@@ -161,6 +166,7 @@ export const Select: React.FC<Props> = ({
         />
         {inputItems && (
           <ButtonStyled
+            type='button'
             palette='primary'
             mr={5}
             variantSelect={variant}
@@ -184,6 +190,7 @@ Select.propTypes = {
   prefix: PropTypes.any,
   placeholder: PropTypes.string,
   handleSelectedItemChange: PropTypes.func,
+  onChangeTextInput: PropTypes.func,
   selectedItem: PropTypes.any,
   autoComplete: PropTypes.bool,
   backgroundColor: PropTypes.any,

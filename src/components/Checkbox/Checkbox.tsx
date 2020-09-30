@@ -33,9 +33,14 @@ const BoxCheckbox = styled.div<Props>`
   height: 16px;
   border-radius: 2px;
   border: 2px solid ${({ theme }) => theme.colors.primary};
-  background: ${({ checked, theme }) =>
-    checked ? theme.colors.primary : 'transparent'};
+
   transition: all 0.2s;
+
+  background: transparent;
+
+  ${HiddenCheckbox}:checked + & {
+    background: ${({ theme }) => theme.colors.primary};
+  }
 
   ${HiddenCheckbox}:focus + & {
     box-shadow: 0 0 0 3px ${({ theme }) => theme.colors.primary};
@@ -43,38 +48,39 @@ const BoxCheckbox = styled.div<Props>`
 `
 
 const Icon = styled.svg<Props>`
-  display: ${({ checked }) => (checked ? 'block' : 'none')};
+  display: none;
   fill: none;
   stroke: white;
   stroke-width: 4px;
   transition: all 0.2s;
+
+  ${HiddenCheckbox}:checked ~ div >  & {
+    display: block;
+  }
 `
 
-export const Checkbox: React.FC<Props> = ({
-  checked,
-  label,
-  style,
-  labelColor,
-  disabled,
-  ...props
-}) => {
-  return (
-    <Label color={labelColor} style={style} disabled={disabled}>
-      <HiddenCheckbox
-        disabled={disabled}
-        type='checkbox'
-        checked={checked}
-        {...props}
-      />
-      <BoxCheckbox checked={checked}>
-        <Icon viewBox='0 0 24 24' checked={checked}>
-          <polyline points='20 6 9 17 4 12' />
-        </Icon>
-      </BoxCheckbox>
-      {label}
-    </Label>
-  )
-}
+export const Checkbox = React.forwardRef<HTMLInputElement, Props>(
+  ({ label, style, labelColor, disabled, ...props }, ref) => {
+    return (
+      <Label color={labelColor} style={style} disabled={disabled}>
+        <HiddenCheckbox
+          disabled={disabled}
+          type='checkbox'
+          ref={ref}
+          {...props}
+        />
+        <BoxCheckbox>
+          <Icon viewBox='0 0 24 24'>
+            <polyline points='20 6 9 17 4 12' />
+          </Icon>
+        </BoxCheckbox>
+        {label}
+      </Label>
+    )
+  }
+)
+
+Checkbox.displayName = 'Checkbox'
 
 Checkbox.propTypes = {
   checked: PropTypes.bool,

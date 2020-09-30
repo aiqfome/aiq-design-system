@@ -161,7 +161,7 @@ Dropdown.propTypes = {
   selected: PropTypes.any,
   opened: PropTypes.bool,
   maxWidth: PropTypes.number,
-  width: PropTypes.number,
+  width: PropTypes.any,
   onChange: PropTypes.func,
   disabled: PropTypes.bool
 }
