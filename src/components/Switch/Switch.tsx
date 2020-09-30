@@ -8,6 +8,7 @@ export interface Props
     InputHTMLAttributes<HTMLInputElement> {
   checked?: boolean
   disabled?: boolean
+  className?: string
   variant?: 'default' | 'small'
 }
 
@@ -118,20 +119,20 @@ const SwitchStyled = styled.label<Props>`
   }
 `
 
-export const Switch: React.FC<Props> = ({
-  checked = false,
-  variant = 'default',
-  className,
-  ...props
-}: Props) => {
-  return (
-    <SwitchStyled className={className} variant={variant}>
-      <input type='checkbox' checked={checked} {...props} />
-    </SwitchStyled>
-  )
-}
+export const Switch = React.forwardRef<HTMLInputElement, Props>(
+  ({ variant = 'default', className, ...props }, ref) => {
+    return (
+      <SwitchStyled className={className} variant={variant}>
+        <input ref={ref} type='checkbox' {...props} />
+      </SwitchStyled>
+    )
+  }
+)
+
+Switch.displayName = 'Switch'
 
 Switch.propTypes = {
   checked: PropTypes.bool,
-  variant: PropTypes.oneOf(['default', 'small'])
+  variant: PropTypes.oneOf(['default', 'small']),
+  className: PropTypes.string
 }

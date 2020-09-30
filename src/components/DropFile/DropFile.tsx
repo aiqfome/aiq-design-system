@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 
 import PropTypes from 'prop-types'
 
@@ -24,6 +24,7 @@ export interface Props {
   onChange?: (e: any) => void
   value?: any
   initImage?: string
+  name?: string
   translate?: TypeTranslate
 
   width?: number | string
@@ -78,152 +79,165 @@ const Image = styled.img`
   position: absolute;
 `
 
-export const DropFile: React.FC<Props> = ({
-  translate = translateDefault,
-  dataMaxSize = 2048,
-  initImage,
-  onChange,
-  ...props
-}) => {
-  const [isDragover, setIsDragover] = useState(false)
-  const [image, setImage] = useState<any>()
-  const [typeError, setTypeError] = useState<null | string>()
+export const DropFile = React.forwardRef<HTMLInputElement, Props>(
+  (
+    {
+      translate = translateDefault,
+      dataMaxSize = 2048,
+      initImage,
+      name,
+      onChange,
+      ...props
+    },
+    ref
+  ) => {
+    const [isDragover, setIsDragover] = useState(false)
+    const [image, setImage] = useState<any>()
+    const [typeError, setTypeError] = useState<null | string>()
 
-  const inputRef = useRef(document.createElement('input'))
+    const inputRef = useRef(document.createElement('input'))
 
-  function handleDropFiles(e) {
-    e.preventDefault()
-    e.stopPropagation()
-    setIsDragover(false)
+    function handleDropFiles(e) {
+      e.preventDefault()
+      e.stopPropagation()
+      setIsDragover(false)
 
-    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      inputRef.current.files = e.dataTransfer.files
+      if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+        onChange && onChange(e.dataTransfer.files)
+        inputRef.current.files = e.dataTransfer.files
 
-      setImageByFile(e.dataTransfer.files[0])
+        setImageByFile(e.dataTransfer.files[0])
+      }
     }
-  }
 
-  function handleClickBox() {
-    inputRef.current.click()
-  }
-
-  function removeDragover(e) {
-    e.preventDefault()
-    e.stopPropagation()
-    setIsDragover(false)
-  }
-
-  function addDragover(e) {
-    e.preventDefault()
-    e.stopPropagation()
-    setIsDragover(true)
-  }
-
-  function handleChangeImage(e) {
-    const input = e.target
-    if (input.files && input.files[0]) {
-      setImageByFile(input.files[0])
+    function handleClickBox() {
+      inputRef.current.click()
     }
-  }
 
-  function setImageByFile(file) {
-    if (verifySize(file) && verifyType(file)) {
-      onChange && onChange(file)
-      const reader = new FileReader()
+    function removeDragover(e) {
+      e.preventDefault()
+      e.stopPropagation()
+      setIsDragover(false)
+    }
 
-      reader.onload = e => {
-        if (e.target) {
-          setImage(e.target.result)
+    function addDragover(e) {
+      e.preventDefault()
+      e.stopPropagation()
+      setIsDragover(true)
+    }
+
+    function handleChangeImage(e) {
+      const input = e.target
+      onChange && onChange(input.files)
+      if (input.files && input.files[0]) {
+        setImageByFile(input.files[0])
+      }
+    }
+
+    function setImageByFile(file) {
+      if (verifySize(file) && verifyType(file)) {
+        const reader = new FileReader()
+
+        reader.onload = e => {
+          if (e.target) {
+            setImage(e.target.result)
+          }
         }
+
+        reader.readAsDataURL(file) // convert to base64 string
+        return
+      }
+      setImage(null)
+    }
+
+    function verifySize(file) {
+      const kbytes = file.size / 1000
+      if (kbytes < dataMaxSize) {
+        setTypeError(null)
+        return true
+      }
+      setTypeError('size')
+      return false
+    }
+
+    function verifyType(file) {
+      if (file.type === 'image/jpeg' || file.type === 'image/png') {
+        setTypeError(null)
+        return true
+      }
+      setTypeError('type')
+      return false
+    }
+
+    function getErrorMessage() {
+      if (typeError === 'type') {
+        return translate.errorType
       }
 
-      reader.readAsDataURL(file) // convert to base64 string
-      return
-    }
-    setImage(null)
-  }
-
-  function verifySize(file) {
-    const kbytes = file.size / 1000
-    if (kbytes < dataMaxSize) {
-      setTypeError(null)
-      return true
-    }
-    setTypeError('size')
-    return false
-  }
-
-  function verifyType(file) {
-    if (file.type === 'image/jpeg' || file.type === 'image/png') {
-      setTypeError(null)
-      return true
-    }
-    setTypeError('type')
-    return false
-  }
-
-  function getErrorMessage() {
-    if (typeError === 'type') {
-      return translate.errorType
+      if (typeError === 'size') {
+        return translate.errorSize
+      }
+      return null
     }
 
-    if (typeError === 'size') {
-      return translate.errorSize
+    const ImageFile: React.FC = () => {
+      if (initImage && !image && !isDragover) {
+        return (
+          <Image height='200px' width='100%' src={initImage} alt='your image' />
+        )
+      }
+      if (image && !isDragover) {
+        return (
+          <Image height='200px' width='100%' src={image} alt='your image' />
+        )
+      }
+      return <Flex />
     }
-    return null
-  }
 
-  const ImageFile: React.FC = () => {
-    if (initImage && !image && !isDragover) {
-      return (
-        <Image height='200px' width='100%' src={initImage} alt='your image' />
-      )
-    }
-    if (image && !isDragover) {
-      return <Image height='200px' width='100%' src={image} alt='your image' />
-    }
-    return <Flex />
-  }
-
-  return (
-    <Container
-      error={typeError}
-      isDragover={isDragover}
-      onDragOver={addDragover}
-      onDragEnter={addDragover}
-      onDragLeave={removeDragover}
-      onDragEnd={removeDragover}
-      onDrop={handleDropFiles}
-      onClick={handleClickBox}
-      height='200px'
-      variant='centralized'
-      borderRadius={6}
-      {...props}
-    >
-      <InputFile
-        onChange={handleChangeImage}
-        ref={inputRef}
-        type='file'
+    return (
+      <Container
+        error={typeError}
+        isDragover={isDragover}
+        onDragOver={addDragover}
+        onDragEnter={addDragover}
+        onDragLeave={removeDragover}
+        onDragEnd={removeDragover}
+        onDrop={handleDropFiles}
+        onClick={handleClickBox}
+        height='200px'
+        variant='centralized'
+        borderRadius={6}
         {...props}
-      />
-      <Flex flexDirection='column' variant='centralized'>
-        <Icon color='grey' mb={'12px'}>
-          <MdFileUpload size={48} />
-        </Icon>
-        <Text color='grey'>{translate.message.row1}</Text>
-        <Text color='grey'>{translate.message.row2}</Text>
-        <Text mt={4} color='red' fontWeight='medium'>
-          {getErrorMessage()}
-        </Text>
-        <ImageFile />
-      </Flex>
-    </Container>
-  )
-}
+      >
+        <InputFile
+          name={name}
+          onChange={handleChangeImage}
+          ref={inputRef}
+          type='file'
+          {...props}
+        />
+        <Flex flexDirection='column' variant='centralized'>
+          <Icon color='grey' mb={'12px'}>
+            <MdFileUpload size={48} />
+          </Icon>
+          <Text color='grey'>{translate.message.row1}</Text>
+          <Text color='grey'>{translate.message.row2}</Text>
+          <Text mt={4} color='red' fontWeight='medium'>
+            {getErrorMessage()}
+          </Text>
+          <ImageFile />
+        </Flex>
+      </Container>
+    )
+  }
+)
+
+DropFile.displayName = 'DropFile'
 
 DropFile.propTypes = {
   dataMaxSize: PropTypes.number,
   translate: PropTypes.any,
   onChange: PropTypes.func,
-  initImage: PropTypes.string
+  initImage: PropTypes.string,
+  name: PropTypes.string
 }
