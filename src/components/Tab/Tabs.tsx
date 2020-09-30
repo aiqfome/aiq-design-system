@@ -178,7 +178,7 @@ export const Tabs: React.FC<TabsProps> = ({
         </Flex>
       </FlexStyled>
 
-      <Flex px='12px'>{extra}</Flex>
+      {extra && <Flex px='12px'>{extra}</Flex>}
     </TabStyled>
   )
 }
