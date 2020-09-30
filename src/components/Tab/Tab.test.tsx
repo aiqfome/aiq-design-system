@@ -17,7 +17,7 @@ export const TabContent: React.FC = () => {
 
   return (
     <Flex flexDirection='column'>
-      <Tabs value={value} onChange={handleChange}>
+      <Tabs onChange={handleChange}>
         <Tab value={value} index={0}>
           <Text fontSize={5} cursor='pointer'>
             Item One
