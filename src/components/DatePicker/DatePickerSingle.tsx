@@ -16,9 +16,12 @@ import { MdArrowDropDown } from 'react-icons/md'
 
 export interface Props {
   variant?: 'single' | 'range'
-  value: Array<Moment>
+  value?: Array<Moment>
   onChange: (date) => void
   name?: string
+  errorMessage?: string
+  errorForm?: boolean
+  placeholder?: string
 }
 
 const DatePickerWrapper = styled(Flex)`
@@ -34,13 +37,24 @@ const ButtonDatePicker = styled(Flex)`
   }
 `
 
+const PlaceHolderText = styled(Text)`
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+`
+
 export const DatePickerSingle: React.FC<Props> = ({
   value = [moment()],
   name,
   onChange,
+  errorMessage,
+  errorForm,
+  placeholder,
   ...props
 }) => {
   moment.locale('pt-BR')
+  const [isChangeValue, setIsChangeValue] = useState(false)
   const [date, setDate] = useState(value)
   const [showDatePicker, setShowDatePicker] = useState(false)
   const [focused, setFocused] = useState(false)
@@ -48,6 +62,7 @@ export const DatePickerSingle: React.FC<Props> = ({
   function onDateChange(date) {
     setDate([date])
     onChange(date)
+    setIsChangeValue(true)
   }
 
   function onFocusChange() {
@@ -56,27 +71,38 @@ export const DatePickerSingle: React.FC<Props> = ({
   }
 
   return (
-    <Flex position='relative'>
+    <Flex position='relative' flexDirection='column'>
       <ButtonDatePicker
         onClick={() => setShowDatePicker(!showDatePicker)}
         alignItems='center'
         px='12px'
         py='10px'
-        maxHeight='39px'
+        maxHeight='37px'
         justifyContent='space-between'
         width='100%'
-        maxWidth='200px'
+        maxWidth='250px'
         backgroundColor='#fff'
-        border='1px solid #dedede'
+        border={errorForm ? '1px solid #DE4E51' : '1px solid #dedede'}
         borderRadius='4px'
       >
-        <Text mr='16px' cursor='pointer'>{`${moment(date[0]).format(
-          'DD/MMMM/YYYY'
-        )}`}</Text>
+        {isChangeValue || !placeholder ? (
+          <Text fontSize='small' cursor='pointer'>
+            {`${moment(date[0]).format('DD/MMMM/YYYY')}`}
+          </Text>
+        ) : (
+          <PlaceHolderText color='#bfbfbf' cursor='pointer'>
+            {placeholder}
+          </PlaceHolderText>
+        )}
         <Icon>
           <MdArrowDropDown size={28} />
         </Icon>
       </ButtonDatePicker>
+      {errorForm && (
+        <Text color='grey' fontSize='small' mt={2}>
+          {errorMessage}
+        </Text>
+      )}
       {showDatePicker && (
         <DatePickerWrapper>
           <DayPickerSingleDateController
@@ -93,7 +119,10 @@ export const DatePickerSingle: React.FC<Props> = ({
 }
 
 DatePickerSingle.propTypes = {
-  value: PropTypes.array.isRequired,
+  value: PropTypes.array,
   onChange: PropTypes.func.isRequired,
-  name: PropTypes.string
+  name: PropTypes.string,
+  errorMessage: PropTypes.string,
+  errorForm: PropTypes.bool,
+  placeholder: PropTypes.string
 }

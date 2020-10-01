@@ -16,6 +16,8 @@ export interface Props {
   variant?: 'outlined' | 'default'
   onChange?: (e: any) => void
   maxWidth?: string | number
+  errorForm?: boolean
+  errorMessage?: string
 }
 
 interface PickerProps {
@@ -34,6 +36,8 @@ export const TimePicker = React.forwardRef(
       variant,
       maxWidth,
       name,
+      errorMessage,
+      errorForm,
       onChange = (e: any) => {
         // do nothing
       },
@@ -108,6 +112,8 @@ export const TimePicker = React.forwardRef(
           name={name}
           placeholder={placeholder}
           label={label}
+          errorMessage={errorMessage}
+          errorForm={errorForm}
           onChange={handleInputOnChange}
           inputRef={ref}
         />
@@ -117,6 +123,7 @@ export const TimePicker = React.forwardRef(
             maxWidth={maxWidth}
             position='absolute'
             top='38px'
+            zIndex={1}
             border='1px solid #dedede'
             boxShadow='0px 3px 6px #00000017'
             borderRadius='8px'
@@ -154,5 +161,7 @@ TimePicker.propTypes = {
   placeholder: PropTypes.string,
   label: PropTypes.string,
   name: PropTypes.string,
-  maxWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  maxWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  errorForm: PropTypes.bool,
+  errorMessage: PropTypes.string
 }
