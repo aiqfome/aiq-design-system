@@ -9,6 +9,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
     className="sc-AxhCb jGTOcA sc-AxgMl kAQFoy"
     cursor="not-allowed"
     onClick={[Function]}
+    type="button"
   >
     <span
       className="sc-AxirZ cuGRia"
@@ -38,6 +39,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
   <button
     className="sc-AxhCb jGTOcA sc-AxgMl etdRWP"
     onClick={[Function]}
+    type="button"
   >
     <span
       className="sc-AxirZ cuGRia"
@@ -57,6 +59,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
     className="sc-AxhCb jGTOcA sc-AxgMl klYcia"
     cursor=""
     onClick={[Function]}
+    type="button"
   >
     <span
       className="sc-AxirZ cuGRia"

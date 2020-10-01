@@ -188,11 +188,12 @@ export const Button: React.FC<Props> = ({
   children,
   prefix,
   sufix,
+  type = 'button',
   ...props
 }) => {
   if (prefix) {
     return (
-      <ButtonStyled {...props}>
+      <ButtonStyled type={type} {...props}>
         <Icon cursor='pointer' mr={5}>
           {prefix}
         </Icon>
@@ -205,7 +206,7 @@ export const Button: React.FC<Props> = ({
 
   if (sufix) {
     return (
-      <ButtonStyled {...props}>
+      <ButtonStyled type={type} {...props}>
         <Text cursor='pointer' fontSize='medium'>
           {children}
         </Text>
@@ -217,7 +218,7 @@ export const Button: React.FC<Props> = ({
   }
 
   return (
-    <ButtonStyled {...props}>
+    <ButtonStyled type={type} {...props}>
       <Text cursor='pointer' fontSize='medium'>
         {children}
       </Text>

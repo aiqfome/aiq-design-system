@@ -5,49 +5,57 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
   className="sc-AxirZ cdhGFS"
 >
   <ul
-    className="sc-AxiKw ldaejd"
-    onClick={[Function]}
-    value={0}
+    className="sc-AxiKw hLaluO"
   >
-    <li
-      className="sc-AxhCb hvDfRb"
-      onClick={[Function]}
+    <div
+      className="sc-AxirZ sc-AxhCb ieIjnR"
     >
-      <span
-        className="sc-AxjAm AAKmN"
-        cursor="pointer"
-        fontSize={5}
+      <div
+        className="sc-AxirZ iuzSdO"
+        onClick={[Function]}
+        overflow="hidden"
       >
-        Item One
-      </span>
-    </li>
-    <li
-      className="sc-AxhCb XBoU"
-      onClick={[Function]}
-    >
-      <span
-        className="sc-AxjAm AAKmN"
-        cursor="pointer"
-        fontSize={5}
-      >
-        Item Two
-      </span>
-    </li>
-    <li
-      className="sc-AxhCb XBoU"
-      onClick={[Function]}
-    >
-      <span
-        className="sc-AxjAm AAKmN"
-        cursor="pointer"
-        fontSize={5}
-      >
-        Item Three
-      </span>
-    </li>
+        <li
+          className="sc-AxhUy GNxuG"
+          onClick={[Function]}
+        >
+          <span
+            className="sc-AxjAm AAKmN"
+            cursor="pointer"
+            fontSize={5}
+          >
+            Item One
+          </span>
+        </li>
+        <li
+          className="sc-AxhUy cCSGKR"
+          onClick={[Function]}
+        >
+          <span
+            className="sc-AxjAm AAKmN"
+            cursor="pointer"
+            fontSize={5}
+          >
+            Item Two
+          </span>
+        </li>
+        <li
+          className="sc-AxhUy cCSGKR"
+          onClick={[Function]}
+        >
+          <span
+            className="sc-AxjAm AAKmN"
+            cursor="pointer"
+            fontSize={5}
+          >
+            Item Three
+          </span>
+        </li>
+      </div>
+    </div>
   </ul>
   <div
-    className="sc-AxirZ sc-AxhUy eKcfrf"
+    className="sc-AxirZ sc-AxgMl gzSqtV"
   >
     Item One
   </div>
