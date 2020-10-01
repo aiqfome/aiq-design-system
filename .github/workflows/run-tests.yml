@@ -1,7 +1,6 @@
 name: run-tests
 
-on:
-  pull-request:
+on: pull-request
 
 jobs:
   publish:
