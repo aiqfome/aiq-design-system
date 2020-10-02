@@ -1,12 +1,8 @@
 import React from 'react'
 
 import { Table } from './Table'
-import { TableHead } from './TableHead'
-import { TableRow } from './TableRow'
-import { TableCell } from './TableCell'
-import { TableBody } from './TableBody'
-
 import { Flex } from '../Flex'
+import { Badge } from '../Badge'
 import { Container } from '../Container'
 
 export default {
@@ -14,93 +10,110 @@ export default {
   title: 'Table'
 }
 
-const itens = [
+const renderBadge = value => {
+  return (
+    <Badge variant='label' backgroundColor='primary'>
+      {value}
+    </Badge>
+  )
+}
+
+const data = [
   {
-    cod: '056',
-    item: 'Cheeseburguer',
-    valor: 'R$ 22,00'
+    firstName: 'Joe',
+    lastName: 'Dae',
+    age: '20',
+    friends: '0',
+    place: 'casa da mãe joana',
+    job: 'desenvolvedor'
   },
   {
-    cod: '057',
-    item: 'Onion Burguer',
-    valor: 'R$ 22,00'
+    firstName: 'Tom',
+    lastName: 'Tompson',
+    age: '40',
+    friends: '1000',
+    place: 'não sabemos com certeza',
+    job: 'contador'
   },
   {
-    cod: '058',
-    item: 'Australia Burguer',
-    valor: 'R$ 22,00'
+    firstName: 'Max',
+    lastName: 'Maximun',
+    age: '24',
+    friends: '200',
+    place: 'não sei, qualquer lugar',
+    job: 'design'
+  }
+]
+
+const columns = [
+  {
+    name: 'nome', // text/name of column
+    accessor: 'firstName' // used as index in data array
   },
   {
-    cod: '059',
-    item: 'Blumenal Burguer',
-    valor: 'R$ 22,00'
+    name: 'sobrenome',
+    accessor: 'lastName'
   },
   {
-    cod: '060',
-    item: 'Cheeseburguer',
-    valor: 'R$ 22,00'
+    name: 'idade',
+    align: 'center',
+    accessor: 'age',
+    renderCell: renderBadge // special render to data value (value, rowValues) => newValue
   },
   {
-    cod: '061',
-    item: 'Onion Burguer',
-    valor: 'R$ 22,00'
+    name: 'amigos',
+    align: 'center', // used for text-align ('left', 'center', 'right', 'justify')
+    accessor: 'friends'
   },
   {
-    cod: '068',
-    item: 'Australia Burguer',
-    valor: 'R$ 22,00'
+    name: 'lugar preferido',
+    width: '150px', // you can use other size props (maxWidth, minWidth, etc..)
+    wrap: true, // used to add (...) and wrap text based on width
+    accessor: 'place'
   },
   {
-    cod: '069',
-    item: 'Blumenal Burguer',
-    valor: 'R$ 22,00'
+    name: 'cargo',
+    align: 'center',
+    accessor: 'job'
   }
 ]
 
 export const Basic: React.FC = () => {
   return (
-    <Flex variant='fullCentralized' backgroundColor='#F5F5F5'>
-      <Table>
-        <TableHead>
-          <TableCell>cód </TableCell>
-          <TableCell flex={1}>item</TableCell>
-          <TableCell>preço min.</TableCell>
-        </TableHead>
-        <TableBody>
-          {itens.map(item => (
-            <TableRow key={item.cod} hoverable>
-              <TableCell>{item.cod}</TableCell>
-              <TableCell flex={1}>{item.item}</TableCell>
-              <TableCell>{item.valor}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+    <Flex variant='fullCentralized' backgroundColor='#FFF'>
+      <Table hoverable={false} data={data} columns={columns} />
     </Flex>
   )
 }
 
-export const WithScrollbar: React.FC = () => {
+export const WithScroll: React.FC = () => {
   return (
-    <Flex variant='fullCentralized' backgroundColor='#F5F5F5'>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>cód </TableCell>
-            <TableCell>item</TableCell>
-            <TableCell>preço min.</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {itens.map(item => (
-            <TableRow key={item.cod}>
-              <TableCell>{item.cod}</TableCell>
-              <TableCell>{item.item}</TableCell>
-              <TableCell>{item.valor}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+    <Flex variant='fullCentralized' backgroundColor='#FFF'>
+      <Table scroll='1000px' data={data} columns={columns} />
+    </Flex>
+  )
+}
+
+export const WithExpandedRow: React.FC = () => {
+  return (
+    <Flex variant='fullCentralized' backgroundColor='#FFF'>
+      <Table
+        data={data}
+        columns={columns}
+        expandedRowRender={row => `eu amo ser ${row.job}`}
+      />
+    </Flex>
+  )
+}
+
+export const WithClickAction: React.FC = () => {
+  return (
+    <Flex variant='fullCentralized' backgroundColor='#FFF'>
+      <Table
+        data={data}
+        columns={columns}
+        onClickRow={row => console.log('todas as infos da row:', row)}
+      />
     </Flex>
   )
 }
@@ -108,49 +121,9 @@ export const WithScrollbar: React.FC = () => {
 export const WithContainer: React.FC = () => {
   return (
     <Container title='My Table!'>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>cód </TableCell>
-            <TableCell>item</TableCell>
-            <TableCell>preço min.</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {itens.map(item => (
-            <TableRow key={item.cod}>
-              <TableCell>{item.cod}</TableCell>
-              <TableCell>{item.item}</TableCell>
-              <TableCell>{item.valor}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+      <Flex flex={1} flexDirection='column' m='24px'>
+        <Table data={data} columns={columns} />
+      </Flex>
     </Container>
-  )
-}
-
-export const OnlyTable: React.FC = () => {
-  return (
-    <Flex variant='fullCentralized' backgroundColor='#F5F5F5'>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>cód </TableCell>
-            <TableCell>item</TableCell>
-            <TableCell>preço min.</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {itens.map(item => (
-            <TableRow key={item.cod}>
-              <TableCell>{item.cod}</TableCell>
-              <TableCell>{item.item}</TableCell>
-              <TableCell>{item.valor}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </Flex>
   )
 }

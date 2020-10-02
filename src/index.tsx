@@ -31,13 +31,7 @@ export { Tabs, Tab, TabPanel } from './components/Tab'
 export { Multistep } from './components/Multistep'
 export { ToastProvider, useToast } from './components/Toast'
 export { MultiSelect } from './components/MultiSelect'
-export {
-  Table,
-  TableBody,
-  TableHead,
-  TableRow,
-  TableCell
-} from './components/Table'
+export { Table } from './components/Table'
 
 export { default as themeDefault } from './providers/theme'
 export { default as styleReactDatesOverrides } from './providers/styleReactDatesOverrides'

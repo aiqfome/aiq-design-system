@@ -3,29 +3,36 @@ import PropTypes from 'prop-types'
 
 import styled, { css } from 'styled-components'
 
-import { Flex } from '../Flex'
-
 export interface TableRowProps {
-  hoverable?: boolean
+  expanded?: boolean
   children: ReactNode
+  hoverable?: boolean
+  hasAction?: boolean
 }
 
-const TableRowStyled = styled(Flex)<TableRowProps>`
-  justify-content: space-between;
-  padding: 20px 0;
-  cursor: pointer;
+const TableRowStyled = styled.tr<TableRowProps>`
+  cursor: default;
+  vertical-align: baseline;
   border-bottom: 1px solid ${({ theme }) => theme.colors.mediumGrey};
-  flex: 1;
 
-  &:last-child {
-    border-bottom: none;
-  }
+  ${({ hasAction }) =>
+    hasAction &&
+    css`
+      cursor: pointer;
+    `}
 
-  ${({ hoverable, theme }) =>
+  ${({ expanded }) =>
+    expanded &&
+    css`
+      cursor: default;
+      background-color: ${({ theme }) => theme.colors.lightGrey};
+    `}
+
+  ${({ hoverable }) =>
     hoverable &&
     css`
       &:hover {
-        background: ${theme.colors.lightGrey};
+        background-color: ${({ theme }) => theme.colors.lightGrey};
       }
     `}
 `
@@ -42,7 +49,13 @@ export const TableRow: React.FC<TableRowProps> = ({
   )
 }
 
+TableRow.defaultProps = {
+  hoverable: true
+}
+
 TableRow.propTypes = {
+  expanded: PropTypes.bool,
   children: PropTypes.node,
+  hasAction: PropTypes.bool,
   hoverable: PropTypes.bool
 }

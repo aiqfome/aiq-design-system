@@ -3,8 +3,6 @@ import PropTypes from 'prop-types'
 import {
   space,
   SpaceProps,
-  border,
-  BorderProps,
   color,
   ColorProps,
   layout,
