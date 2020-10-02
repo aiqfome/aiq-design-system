@@ -73,7 +73,12 @@ export const WithTabs: React.FC = (): ReactElement => {
   }
 
   return (
-    <Container tabs={tabs} tabIndex={tabIndex} onChangeTab={onChange}>
+    <Container
+      tabs={tabs}
+      tabIndex={tabIndex}
+      onChangeTab={onChange}
+      tabsExtra='conteúdo extra'
+    >
       <TabPanel value={tabIndex} index={0}>
         <Flex variant='centralized' flex={1} p={15}>
           <Text>aqui tem pizza</Text>

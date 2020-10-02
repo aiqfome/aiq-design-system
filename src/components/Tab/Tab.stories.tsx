@@ -20,7 +20,7 @@ export const Basic: React.FC = () => {
 
   return (
     <Flex flexDirection='column'>
-      <Tabs value={value} onChange={handleChange} width='100%'>
+      <Tabs onChange={handleChange} extra='teste' width='100%'>
         <Tab value={value} index={0}>
           <Text fontSize={5} cursor='pointer'>
             Item One
@@ -29,6 +29,26 @@ export const Basic: React.FC = () => {
         <Tab value={value} index={1}>
           <Text fontSize={5} cursor='pointer'>
             Item Two
+          </Text>
+        </Tab>
+        <Tab value={value} index={2}>
+          <Text fontSize={5} cursor='pointer'>
+            Item Three
+          </Text>
+        </Tab>
+        <Tab value={value} index={2}>
+          <Text fontSize={5} cursor='pointer'>
+            Item Three
+          </Text>
+        </Tab>
+        <Tab value={value} index={2}>
+          <Text fontSize={5} cursor='pointer'>
+            Item Three
+          </Text>
+        </Tab>
+        <Tab value={value} index={2}>
+          <Text fontSize={5} cursor='pointer'>
+            Item Three
           </Text>
         </Tab>
         <Tab value={value} index={2}>
@@ -59,7 +79,7 @@ export const Contained: React.FC = () => {
 
   return (
     <Flex flexDirection='column'>
-      <Tabs variant='contained' value={value} onChange={handleChange}>
+      <Tabs variant='contained' onChange={handleChange}>
         <Tab variant='contained' value={value} index={0}>
           <Text fontSize={2} cursor='pointer'>
             Item One
