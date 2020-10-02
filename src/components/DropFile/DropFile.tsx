@@ -29,6 +29,8 @@ export interface Props {
 
   width?: number | string
   maxWidth?: number | string
+  errorMessage?: string
+  errorForm?: boolean
 }
 
 const translateDefault = {
@@ -86,6 +88,8 @@ export const DropFile = React.forwardRef<HTMLInputElement, Props>(
       dataMaxSize = 2048,
       initImage,
       name,
+      errorMessage,
+      errorForm,
       onChange,
       ...props
     },
@@ -177,6 +181,9 @@ export const DropFile = React.forwardRef<HTMLInputElement, Props>(
       if (typeError === 'size') {
         return translate.errorSize
       }
+      if (errorForm) {
+        return errorMessage
+      }
       return null
     }
 
@@ -196,7 +203,7 @@ export const DropFile = React.forwardRef<HTMLInputElement, Props>(
 
     return (
       <Container
-        error={typeError}
+        error={typeError || errorForm}
         isDragover={isDragover}
         onDragOver={addDragover}
         onDragEnter={addDragover}
@@ -239,5 +246,7 @@ DropFile.propTypes = {
   translate: PropTypes.any,
   onChange: PropTypes.func,
   initImage: PropTypes.string,
+  errorMessage: PropTypes.string,
+  errorForm: PropTypes.bool,
   name: PropTypes.string
 }

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import moment from 'moment'
+import moment, { Moment } from 'moment'
 
 import { Flex } from '../Flex'
 
@@ -48,6 +48,74 @@ export const Variants: React.FC = () => {
         variant='single'
         value={valueDatePicker}
         onChange={handleChangeDatePicker}
+      />
+    </Flex>
+  )
+}
+
+export const PlaceHolder: React.FC = () => {
+  const [valueDatePicker, setValueDatePicker] = useState<Array<Moment>>()
+
+  function handleChangeDatePicker(startDate, endDate) {
+    setValueDatePicker([startDate, endDate])
+  }
+
+  return (
+    <Flex
+      flexDirection='row'
+      variant='fullCentralized'
+      justifyContent='space-between'
+    >
+      <Flex mr={16}>
+        <DatePicker
+          variant='range'
+          placeholder='Houston, we have a problem'
+          value={valueDatePicker}
+          onChange={handleChangeDatePicker}
+        />
+      </Flex>
+
+      <DatePicker
+        variant='single'
+        placeholder='Aiqfome'
+        value={valueDatePicker}
+        onChange={handleChangeDatePicker}
+      />
+    </Flex>
+  )
+}
+
+export const Error: React.FC = () => {
+  const [valueDatePicker, setValueDatePicker] = useState<Array<Moment>>()
+
+  function handleChangeDatePicker(startDate, endDate) {
+    setValueDatePicker([startDate, endDate])
+  }
+
+  return (
+    <Flex
+      flexDirection='row'
+      variant='fullCentralized'
+      justifyContent='space-between'
+    >
+      <Flex mr={16}>
+        <DatePicker
+          variant='range'
+          placeholder='Aiqfome'
+          value={valueDatePicker}
+          onChange={handleChangeDatePicker}
+          errorForm={true}
+          errorMessage='Houston, we have a problem'
+        />
+      </Flex>
+
+      <DatePicker
+        variant='single'
+        placeholder='Aiqfome'
+        value={valueDatePicker}
+        onChange={handleChangeDatePicker}
+        errorForm={true}
+        errorMessage='Houston, we have a problem'
       />
     </Flex>
   )

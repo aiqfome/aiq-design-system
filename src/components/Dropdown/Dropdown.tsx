@@ -47,7 +47,7 @@ const DropdownStyled = styled.div<DropdownStyledProps>`
 
   border: 1px solid ${props => props.theme.colors.mediumGrey};
   color: ${props => props.theme.colors.almostBlack};
-  padding: 7px 5px 6px 16px;
+  padding: 5px 5px 5px 16px;
   border-radius: 4px;
   background: ${props => props.theme.colors.white};
   font-size: ${props => props.theme.fontSizes[3]};
@@ -135,7 +135,7 @@ export const Dropdown: React.FC<Props> = ({
   }
 
   return (
-    <BoxStyled maxWidth={maxWidth} {...props}>
+    <BoxStyled maxHeight='37px' maxWidth={maxWidth} {...props}>
       <DropdownStyled onClick={handleClickDropdown} disabled={disabled}>
         <span>{itemSelected.value != null ? itemSelected.label : label}</span>
         <button type='button'>

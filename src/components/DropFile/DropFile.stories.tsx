@@ -53,3 +53,22 @@ export const InitImage: React.FC = (): ReactElement => {
     </Flex>
   )
 }
+
+export const Error: React.FC = (): ReactElement => {
+  function handleOnChangeFile(e) {
+    console.log(e)
+  }
+
+  return (
+    <Flex variant='fullCentralized'>
+      <DropFile
+        dataMaxSize={5000}
+        onChange={handleOnChangeFile}
+        maxWidth='680px'
+        width='100%'
+        errorForm={true}
+        errorMessage='Houston, we have a problem'
+      />
+    </Flex>
+  )
+}
