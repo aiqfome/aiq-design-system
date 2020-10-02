@@ -20,6 +20,8 @@ export interface Props extends BoxPros {
   selectedItem?: any
   autoComplete?: boolean
   sufix?: any
+  errorMessage?: string
+  errorForm?: boolean
 }
 
 const Container = styled(Box)<Props>`
@@ -80,6 +82,8 @@ export const Select: React.FC<Props> = ({
   selectedItem,
   autoComplete = true,
   sufix,
+  errorMessage,
+  errorForm,
   handleSelectedItemChange = () => {
     // do nothing.
   },
@@ -159,6 +163,8 @@ export const Select: React.FC<Props> = ({
           inputRef={getInputProps().ref}
           variant={variant}
           label={label}
+          errorMessage={errorMessage}
+          errorForm={errorForm}
           readOnly={!autoComplete}
           prefix={prefix}
           placeholder={placeholder}
@@ -197,7 +203,9 @@ Select.propTypes = {
   border: PropTypes.any,
   width: PropTypes.any,
   maxWidth: PropTypes.any,
-  sufix: PropTypes.any
+  sufix: PropTypes.any,
+  errorForm: PropTypes.bool,
+  errorMessage: PropTypes.string
 }
 
 Select.defaultProps = {

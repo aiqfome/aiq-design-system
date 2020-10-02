@@ -1,33 +1,60 @@
 import React, { ReactNode } from 'react'
 import PropTypes from 'prop-types'
 
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
+import {
+  space,
+  layout,
+  typography,
+  ColorProps,
+  SpaceProps,
+  LayoutProps,
+  TypographyProps
+} from 'styled-system'
 
-import { Flex } from '../Flex'
-
-export interface TableCellProps {
-  flex?: number
+export interface Props {
+  colspan?: number
   children: ReactNode
+  wrap?: boolean | undefined | null
 }
 
-const TableCellStyled = styled(Flex)`
-  padding: 0 10px;
+export interface TableCellProps
+  extends SpaceProps,
+    ColorProps,
+    LayoutProps,
+    TypographyProps {
+  children: ReactNode
+  wrap?: boolean | undefined | null
+}
+
+const TableCellStyled = styled.td<TableCellProps>`
+  padding: 12px 10px;
   font-size: medium;
+
+  ${({ wrap }) =>
+    wrap &&
+    css`
+      display: block;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    `}
+
+  ${layout}
+  ${space}
+  ${typography}
 `
 
-export const TableCell: React.FC<TableCellProps> = ({
-  children,
-  flex,
-  ...props
-}) => {
+export const TableCell: React.FC<Props> = ({ children, colspan, ...props }) => {
   return (
-    <TableCellStyled flex={flex} {...props}>
+    <TableCellStyled colSpan={colspan} {...props}>
       {children}
     </TableCellStyled>
   )
 }
 
 TableCell.propTypes = {
+  wrap: PropTypes.bool,
   children: PropTypes.node,
-  flex: PropTypes.number
+  colspan: PropTypes.number
 }

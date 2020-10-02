@@ -60,6 +60,7 @@
     "react-icons": "^3.10.0",
     "react-router-dom": "^5.2.0",
     "react-spring": "^8.0.27",
+    "react-table": "^7.5.1",
     "styled-components": "^5.1.1",
     "styled-system": "^5.1.5",
     "uuidv4": "^6.2.0"
