@@ -21,7 +21,7 @@ export interface Props {
 const Container = styled.div<Props>`
   display: ${({ messages }) =>
     messages && messages.length > 0 ? 'block' : 'none'};
-  position: absolute;
+  position: fixed;
   right: 0;
   bottom: 0;
   padding: 30px;
