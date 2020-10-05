@@ -31,6 +31,7 @@ export interface Props
   palette?: 'primary' | 'secondary' | 'neutral'
   onClick?: any
   fullWidth?: boolean
+  disabled?: boolean
   type?: 'button' | 'submit' | 'reset' | undefined
 }
 
@@ -175,6 +176,17 @@ export const ButtonStyled = styled.button<Props>`
   max-height: 42px;
   cursor: pointer;
 
+  ${({ disabled }) =>
+    disabled &&
+    css`
+      opacity: 0.5;
+
+      &:hover {
+        cursor: not-allowed;
+      }
+    `}
+
+
   ${({ fullWidth }) =>
     fullWidth &&
     css`
@@ -197,9 +209,7 @@ export const Button: React.FC<Props> = ({
         <Icon cursor='pointer' mr={5}>
           {prefix}
         </Icon>
-        <Text cursor='pointer' fontSize='medium'>
-          {children}
-        </Text>
+        <Text fontSize='medium'>{children}</Text>
       </ButtonStyled>
     )
   }
@@ -207,9 +217,7 @@ export const Button: React.FC<Props> = ({
   if (sufix) {
     return (
       <ButtonStyled type={type} {...props}>
-        <Text cursor='pointer' fontSize='medium'>
-          {children}
-        </Text>
+        <Text fontSize='medium'>{children}</Text>
         <Icon cursor='pointer' ml={5}>
           {sufix}
         </Icon>
@@ -219,9 +227,7 @@ export const Button: React.FC<Props> = ({
 
   return (
     <ButtonStyled type={type} {...props}>
-      <Text cursor='pointer' fontSize='medium'>
-        {children}
-      </Text>
+      <Text fontSize='medium'>{children}</Text>
     </ButtonStyled>
   )
 }
@@ -231,6 +237,7 @@ Button.propTypes = {
   prefix: PropTypes.any,
   sufix: PropTypes.any,
   refButton: PropTypes.any,
+  disabled: PropTypes.bool,
   fontWeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   onClick: PropTypes.func,
   type: PropTypes.oneOf(['button', 'submit', 'reset'])

@@ -26,13 +26,12 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
           Maringá
         </span>
         <button
-          className="sc-AxgMl hzzrVt"
+          className="sc-AxgMl eCVHmM"
           onClick={[Function]}
           type="button"
         >
           <span
-            className="sc-AxiKw gjPZme"
-            cursor="pointer"
+            className="sc-AxiKw dAUdLG"
             fontSize="medium"
           >
             <svg
