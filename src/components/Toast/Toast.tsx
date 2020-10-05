@@ -42,7 +42,7 @@ export const Toast: React.FC<Props> = ({ messages }) => {
   return (
     <Container messages={messages}>
       {messagesWithTransitions.map(({ item, key, props }) => (
-        <ToastContent key={key} message={item} style={props} />
+        <ToastContent key={key} message={item} {...props} />
       ))}
     </Container>
   )

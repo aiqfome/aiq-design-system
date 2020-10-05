@@ -1,7 +1,7 @@
 import React, { useContext, useCallback, createContext, useState } from 'react'
 import PropTypes from 'prop-types'
 
-import { uuid } from 'uuidv4'
+import { v4 as uuidv4 } from 'uuid'
 
 import { Toast, Message } from './Toast'
 
@@ -27,7 +27,7 @@ export const ToastProvider: React.FC<Props> = ({ children }) => {
   const [messages, setMessages] = useState<Message | any>([])
 
   const addToast = useCallback(({ type, title, description, fixed }) => {
-    const id = uuid()
+    const id = uuidv4()
 
     const toast = {
       id,
@@ -39,7 +39,6 @@ export const ToastProvider: React.FC<Props> = ({ children }) => {
 
     setMessages(messages => [...messages, toast])
   }, [])
-
   const removeToast = useCallback(id => {
     setMessages(messages => messages.filter(message => message.id !== id))
   }, [])
