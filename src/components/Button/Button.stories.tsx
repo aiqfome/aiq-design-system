@@ -78,6 +78,45 @@ export const Contained: React.FC = (): ReactElement => (
   </Flex>
 )
 
+export const Disabled: React.FC = (): ReactElement => (
+  <Flex variant='fullCentralized'>
+    <Flex
+      variant='centralized'
+      height='200px'
+      width='400px'
+      border='1px solid lightGrey'
+    >
+      <Button
+        fullWidth={boolean('Full Width', false)}
+        variant='contained'
+        mx={6}
+        disabled={true}
+        palette={'primary'}
+      >
+        contained
+      </Button>
+      <Button
+        fullWidth={boolean('Full Width', false)}
+        variant='outlined'
+        mx={6}
+        disabled={true}
+        palette={'primary'}
+      >
+        outlined
+      </Button>
+      <Button
+        fullWidth={boolean('Full Width', false)}
+        variant='fab'
+        mx={6}
+        disabled={true}
+        palette={'primary'}
+      >
+        fab
+      </Button>
+    </Flex>
+  </Flex>
+)
+
 export const Outlined: React.FC = (): ReactElement => (
   <Flex variant='fullCentralized'>
     <Flex
