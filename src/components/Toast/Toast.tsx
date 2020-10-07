@@ -21,7 +21,7 @@ export interface Props {
 const Container = styled.div<Props>`
   display: ${({ messages }) =>
     messages && messages.length > 0 ? 'block' : 'none'};
-  position: absolute;
+  position: fixed;
   right: 0;
   bottom: 0;
   padding: 30px;
@@ -42,7 +42,7 @@ export const Toast: React.FC<Props> = ({ messages }) => {
   return (
     <Container messages={messages}>
       {messagesWithTransitions.map(({ item, key, props }) => (
-        <ToastContent key={key} message={item} style={props} />
+        <ToastContent key={key} message={item} {...props} />
       ))}
     </Container>
   )
