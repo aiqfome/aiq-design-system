@@ -81,48 +81,56 @@ const RadioStyled = styled.label<RadioStyled>`
   }
 `
 
-export const Radio: React.FC<Props> = ({
-  name,
-  value,
-  disabled = false,
-  checked = false,
-  label,
-  onChange = () => {
-    // do nothing.
-  },
-  className,
-  mx,
-  my,
-  m,
-  mr,
-  ml,
-  ...props
-}) => {
-  return (
-    <RadioStyled
-      mx={mx}
-      my={my}
-      m={m}
-      mr={mr}
-      ml={ml}
-      className={className}
-      disabled={disabled}
-    >
-      <input
-        type='radio'
+export const Radio = React.forwardRef<HTMLInputElement, Props>(
+  (
+    {
+      name,
+      value,
+      disabled = false,
+      checked = false,
+      label,
+      onChange = () => {
+        // do nothing.
+      },
+      className,
+      mx,
+      my,
+      m,
+      mr,
+      ml,
+      ...props
+    },
+    ref
+  ) => {
+    return (
+      <RadioStyled
+        mx={mx}
+        my={my}
+        m={m}
+        mr={mr}
+        ml={ml}
+        className={className}
         disabled={disabled}
-        name={name}
-        onChange={onChange}
-        checked={checked}
-        value={value}
-        {...props}
-      />
-      <Box />
+      >
+        <input
+          ref={ref}
+          type='radio'
+          disabled={disabled}
+          name={name}
+          onChange={onChange}
+          checked={checked}
+          value={value}
+          {...props}
+        />
+        <Box />
 
-      {label && <Text>{label}</Text>}
-    </RadioStyled>
-  )
-}
+        {label && <Text>{label}</Text>}
+      </RadioStyled>
+    )
+  }
+)
+
+Radio.displayName = 'Radio'
 
 Radio.propTypes = {
   name: PropTypes.string.isRequired,
