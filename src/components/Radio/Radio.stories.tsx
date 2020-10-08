@@ -53,3 +53,24 @@ export const Label: React.FC = () => (
     <Radio mx={10} checked={false} label='fome' name='radio' value='fome' />
   </Flex>
 )
+
+export const Sizes: React.FC = () => (
+  <Flex>
+    <Radio
+      mx={10}
+      variant='default'
+      label='default'
+      checked={true}
+      name='radio1'
+      value='default'
+    />
+    <Radio
+      mx={10}
+      checked={true}
+      variant='small'
+      label='small'
+      name='radio2'
+      value='small'
+    />
+  </Flex>
+)

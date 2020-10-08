@@ -2,7 +2,7 @@ import React, { InputHTMLAttributes } from 'react'
 
 import PropTypes from 'prop-types'
 
-import styled, { DefaultTheme } from 'styled-components'
+import styled, { DefaultTheme, css } from 'styled-components'
 
 import { margin, MarginProps } from 'styled-system'
 
@@ -14,14 +14,49 @@ export interface Props
     InputHTMLAttributes<HTMLInputElement> {
   name: string
   value: any
+  variant?: 'default' | 'small'
   disabled?: boolean
   label?: string
   checked?: boolean
   onChange?: (event: any) => void
 }
 
+const radioVariations: { [index: string]: any } = {
+  default: css`
+    min-height: 21px;
+    padding-left: 35px;
+    div {
+      height: 20px;
+      width: 20px;
+    }
+
+    div:after {
+      top: 3px;
+      left: 3px;
+      width: 10px;
+      height: 10px;
+    }
+  `,
+  small: css`
+    min-height: 17px;
+    padding-left: 28px;
+    div {
+      height: 16px;
+      width: 16px;
+    }
+
+    div:after {
+      top: 2px;
+      left: 2px;
+      width: 8px;
+      height: 8px;
+    }
+  `
+}
+
 interface RadioStyled extends DefaultTheme, MarginProps {
   disabled: boolean
+  variant?: 'default' | 'small'
 }
 
 const RadioStyled = styled.label<RadioStyled>`
@@ -30,11 +65,9 @@ const RadioStyled = styled.label<RadioStyled>`
   &:hover {
     cursor: ${props => (props.disabled ? 'not-allowed' : 'pointer')};
   }
-  min-height: 21px;
   display: flex;
   align-items: center;
   position: relative;
-  padding-left: 35px;
   cursor: pointer;
 
   opacity: ${props => (props.disabled ? 0.5 : 1)};
@@ -51,8 +84,6 @@ const RadioStyled = styled.label<RadioStyled>`
     position: absolute;
     top: 0;
     left: 0;
-    height: 20px;
-    width: 20px;
     border-radius: 50%;
     border: 2px solid ${({ theme }) => theme.colors.primary};
   }
@@ -72,13 +103,11 @@ const RadioStyled = styled.label<RadioStyled>`
   }
 
   div:after {
-    top: 3px;
-    left: 3px;
-    width: 10px;
-    height: 10px;
     border-radius: 50%;
     background-color: ${({ theme }) => theme.colors.primary};
   }
+
+  ${({ variant }) => radioVariations[variant || 'default']}
 `
 
 export const Radio = React.forwardRef<HTMLInputElement, Props>(
@@ -89,6 +118,7 @@ export const Radio = React.forwardRef<HTMLInputElement, Props>(
       disabled = false,
       checked = false,
       label,
+      variant = 'default',
       onChange = () => {
         // do nothing.
       },
@@ -106,6 +136,7 @@ export const Radio = React.forwardRef<HTMLInputElement, Props>(
       <RadioStyled
         mx={mx}
         my={my}
+        variant={variant}
         m={m}
         mr={mr}
         ml={ml}
@@ -140,6 +171,7 @@ Radio.propTypes = {
   onChange: PropTypes.func,
   label: PropTypes.string,
   className: PropTypes.string,
+  variant: PropTypes.oneOf(['small', 'default']),
   mx: PropTypes.any,
   my: PropTypes.any,
   m: PropTypes.any,
