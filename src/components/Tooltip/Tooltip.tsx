@@ -1,6 +1,8 @@
 import React, { ReactNode } from 'react'
 import PropTypes from 'prop-types'
 
+import { position } from 'styled-system'
+
 import styled, { css } from 'styled-components'
 import { Box, Props as BoxProps } from '../Box'
 
@@ -119,6 +121,8 @@ const TooltipStyled = styled(Box)<Props>`
     ${({ variant }) => tooltipVariations[variant || 'right']}
 
     ${({ type }) => typesVariants[type || 'default']}
+
+    ${position}
   }
 
   &:hover .tooltip {
