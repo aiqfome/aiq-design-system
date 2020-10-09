@@ -93,9 +93,9 @@ export const Container: React.FC<Props> = ({
   ...props
 }) => {
   return (
-    <Flex flex={1} flexDirection='column'>
+    <Flex flex={1} flexDirection='column' {...props}>
       {tabs.length > 0 && (
-        <Tabs extra={tabsExtra} mr='10px' variant='card' onChange={onChangeTab}>
+        <Tabs mr='10px' pr='15px' extra={tabsExtra} onChange={onChangeTab}>
           {tabs.map((tab, index) => (
             <Tab
               {...tab}
@@ -110,7 +110,7 @@ export const Container: React.FC<Props> = ({
         </Tabs>
       )}
 
-      <ContainerWrapper tabIndex={tabIndex} tabs={tabs} {...props}>
+      <ContainerWrapper tabIndex={tabIndex} tabs={tabs}>
         {children}
       </ContainerWrapper>
     </Flex>

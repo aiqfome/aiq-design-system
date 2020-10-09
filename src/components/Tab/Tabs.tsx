@@ -9,33 +9,37 @@ export interface TabsProps extends SpaceProps, LayoutProps, DefaultTheme {
   extra?: any
   children?: any
   isMobile?: boolean
-  variant?: 'default' | 'contained' | 'card'
+  variant?: 'default' | 'contained'
   scrollPosition?: 'left' | 'middle' | 'right'
   onChange?: (event: any, newValue: any) => void
 }
 
 const tabsVariations: { [index: string]: any } = {
   default: css`
-    border-bottom: 1px solid #d9d9d9;
+    &::before {
+      position: absolute;
+      content: '';
+      bottom: 0px;
+      width: 100%;
+      height: 1px;
+      background: #d9d9d9;
+    }
   `,
   contained: css`
     background: #f5f5f5;
     border-radius: 5px;
     padding: 4px 5px;
-  `,
-  card: css`
-    margin-bottom: 0px;
   `
 }
 
 const TabStyled = styled.ul<TabsProps>`
   display: flex;
-  width: max-content;
   flex-direction: row;
   list-style: none;
   margin-bottom: 20px;
   align-items: center;
   width: 100%;
+  position: relative;
 
   ${space}
   ${layout}
@@ -187,7 +191,7 @@ Tabs.propTypes = {
   extra: PropTypes.any,
   children: PropTypes.any,
   onChange: PropTypes.func,
-  variant: PropTypes.oneOf(['default', 'contained', 'card'])
+  variant: PropTypes.oneOf(['default', 'contained'])
 }
 
 Tabs.defaultProps = {

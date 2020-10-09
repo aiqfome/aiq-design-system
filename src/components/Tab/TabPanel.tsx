@@ -11,7 +11,9 @@ export interface TabPanelProps extends FlexProps {
   children?: any
 }
 
-const TabPanelStyled = styled(Flex)``
+const TabPanelStyled = styled(Flex)`
+  display: block;
+`
 
 export const TabPanel: React.FC<TabPanelProps> = ({
   children,

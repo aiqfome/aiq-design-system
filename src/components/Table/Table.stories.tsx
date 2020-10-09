@@ -10,7 +10,7 @@ export default {
   title: 'Table'
 }
 
-const renderBadge = value => {
+const renderBadge = (value, row) => {
   return (
     <Badge variant='label' backgroundColor='primary'>
       {value}
@@ -41,7 +41,8 @@ const data = [
     age: '24',
     friends: '200',
     place: 'não sei, qualquer lugar',
-    job: 'design'
+    job: 'design',
+    teste: 'teste'
   }
 ]
 
