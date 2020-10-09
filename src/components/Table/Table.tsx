@@ -72,11 +72,11 @@ const FlexWrapper = styled(Flex)<FlexProps>`
 `
 
 export const Table: React.FC<TableProps> = ({
-  data,
   scroll,
-  columns,
   hoverable,
+  data = [],
   onClickRow,
+  columns = [],
   expandedRowRender,
   ...props
 }) => {
