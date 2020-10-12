@@ -19,6 +19,7 @@ const tabsVariations: { [index: string]: any } = {
     &::before {
       position: absolute;
       content: '';
+      left: 0px;
       bottom: 0px;
       width: 100%;
       height: 1px;
