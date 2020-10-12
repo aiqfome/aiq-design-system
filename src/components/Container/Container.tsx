@@ -97,7 +97,13 @@ export const Container: React.FC<Props> = ({
   return (
     <Flex flex={1} flexDirection='column' {...containerProps}>
       {tabs.length > 0 && (
-        <Tabs mr='10px' pr='15px' extra={tabsExtra} onChange={onChangeTab}>
+        <Tabs
+          mr='10px'
+          pr='15px'
+          variant='card'
+          extra={tabsExtra}
+          onChange={onChangeTab}
+        >
           {tabs.map((tab, index) => (
             <Tab
               {...tab}

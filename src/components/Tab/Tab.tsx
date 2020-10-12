@@ -93,6 +93,7 @@ const TabStyled = styled.li<StyledProps>`
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  min-width: max-content;
 
   &:hover {
     cursor: pointer;
