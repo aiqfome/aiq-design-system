@@ -34,8 +34,7 @@
     "@typescript-eslint/no-explicit-any": "off",
     "react-hooks/exhaustive-deps": "warn",
     "no-use-before-define": "off",
-    "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
-    "import/prefer-default-export": "off"
+    "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }]
   },
   "settings": {
     "import/resolver": {
