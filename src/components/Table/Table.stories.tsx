@@ -10,7 +10,7 @@ export default {
   title: 'Table'
 }
 
-const renderBadge = (value, row) => {
+const renderBadge = value => {
   return (
     <Badge variant='label' backgroundColor='primary'>
       {value}

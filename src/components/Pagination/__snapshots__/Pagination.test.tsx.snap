@@ -2,7 +2,7 @@
 
 exports[`must match with the previous snapshot snapshot renders 1`] = `
 <div
-  className="sc-AxjAm sc-AxhUy jAtOKP"
+  className="sc-AxjAm kBzQYq sc-AxhUy kfcrcv"
   disabled={false}
 >
   <button

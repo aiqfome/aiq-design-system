@@ -9,8 +9,6 @@ import { TableRow } from './TableRow'
 import { TableHead } from './TableHead'
 import { TableCell } from './TableCell'
 
-import { Flex } from '../Flex'
-
 export interface TableProps {
   scroll?: string
   data: Array<any>
@@ -36,7 +34,7 @@ const TableStyled = styled.table<TableProps>`
     `};
 `
 
-const FlexWrapper = styled(Flex)<FlexProps>`
+const FlexWrapper = styled.div<FlexProps>`
   flex: 1;
   display: block;
   max-width: 100%;

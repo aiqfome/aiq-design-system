@@ -35,3 +35,5 @@ export { Table } from './components/Table'
 
 export { default as themeDefault } from './providers/theme'
 export { default as styleReactDatesOverrides } from './providers/styleReactDatesOverrides'
+
+export { ThemeProvider } from './providers'

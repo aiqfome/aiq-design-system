@@ -20,6 +20,7 @@ export interface Props {
   tabIndex?: number
   header?: ReactNode
   children?: ReactNode
+  containerProps?: any
   tabsExtra?: ReactNode
   onChangeTab?: (event: any, newValue: any) => void
 }
@@ -90,12 +91,19 @@ export const Container: React.FC<Props> = ({
   tabs = [],
   tabsExtra,
   onChangeTab,
+  containerProps,
   ...props
 }) => {
   return (
-    <Flex flex={1} flexDirection='column' {...props}>
+    <Flex flex={1} flexDirection='column' {...containerProps}>
       {tabs.length > 0 && (
-        <Tabs mr='10px' pr='15px' extra={tabsExtra} onChange={onChangeTab}>
+        <Tabs
+          mr='10px'
+          pr='15px'
+          variant='card'
+          extra={tabsExtra}
+          onChange={onChangeTab}
+        >
           {tabs.map((tab, index) => (
             <Tab
               {...tab}
@@ -110,7 +118,7 @@ export const Container: React.FC<Props> = ({
         </Tabs>
       )}
 
-      <ContainerWrapper tabIndex={tabIndex} tabs={tabs}>
+      <ContainerWrapper tabIndex={tabIndex} tabs={tabs} {...props}>
         {children}
       </ContainerWrapper>
     </Flex>
@@ -130,7 +138,8 @@ Container.propTypes = {
   tabsExtra: PropTypes.any,
   children: PropTypes.node,
   tabIndex: PropTypes.number,
-  onChangeTab: PropTypes.func
+  onChangeTab: PropTypes.func,
+  containerProps: PropTypes.object
 }
 
 ContainerWrapper.propTypes = {
