@@ -5,6 +5,7 @@ import { FaHamburger } from 'react-icons/fa'
 
 import { Button } from './Button'
 import { Flex } from '../Flex'
+import { Icon } from '../Icon'
 
 export default {
   component: Button,
@@ -112,6 +113,33 @@ export const Disabled: React.FC = (): ReactElement => (
         palette={'primary'}
       >
         fab
+      </Button>
+    </Flex>
+  </Flex>
+)
+
+export const IconButton: React.FC = (): ReactElement => (
+  <Flex variant='fullCentralized'>
+    <Flex
+      variant='centralized'
+      height='200px'
+      width='400px'
+      border='1px solid lightGrey'
+    >
+      <Button variant='icon' mx={6}>
+        <Icon color='primary'>
+          <FaHamburger size={40} />
+        </Icon>
+      </Button>
+      <Button variant='icon' mx={6}>
+        <Icon>
+          <FaHamburger size={30} />
+        </Icon>
+      </Button>
+      <Button variant='icon' mx={6}>
+        <Icon color='primary'>
+          <FaHamburger size={20} />
+        </Icon>
       </Button>
     </Flex>
   </Flex>
