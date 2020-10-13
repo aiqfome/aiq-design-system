@@ -8,6 +8,7 @@ import { Flex } from '../Flex'
 export interface TabsProps extends SpaceProps, LayoutProps, DefaultTheme {
   extra?: any
   children?: any
+  wrapperProps?: any
   isMobile?: boolean
   variant?: 'default' | 'contained' | 'card'
   scrollPosition?: 'left' | 'middle' | 'right'
@@ -123,6 +124,7 @@ const FlexStyled = styled.div<TabsProps>`
 export const Tabs: React.FC<TabsProps> = ({
   extra,
   children,
+  wrapperProps,
   onChange = () => {
     // do nothing.
   },
@@ -174,8 +176,12 @@ export const Tabs: React.FC<TabsProps> = ({
   }
 
   return (
-    <TabStyled {...props}>
-      <FlexStyled isMobile={isMobile} scrollPosition={scrollPosition}>
+    <TabStyled {...wrapperProps}>
+      <FlexStyled
+        isMobile={isMobile}
+        scrollPosition={scrollPosition}
+        {...props}
+      >
         <Flex
           flex={1}
           overflow='hidden'
@@ -196,6 +202,7 @@ Tabs.propTypes = {
   extra: PropTypes.any,
   children: PropTypes.any,
   onChange: PropTypes.func,
+  wrapperProps: PropTypes.object,
   variant: PropTypes.oneOf(['default', 'contained', 'card'])
 }
 

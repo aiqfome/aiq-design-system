@@ -38,7 +38,6 @@ export interface Props
   fullHeight?: boolean
   children?: any
   className?: string
-  ref?: (e: any) => void
   onClick?: (e: any) => void
   onDragOver?: (e: any) => void
   onDragEnter?: (e: any) => void
@@ -84,13 +83,17 @@ const FlexStyled = styled.div<Props>`
   ${layout}
 `
 
-export const Flex: React.FC<Props> = ({ children, color, ...props }) => {
-  return (
-    <FlexStyled color={color} {...props}>
-      {children}
-    </FlexStyled>
-  )
-}
+export const Flex = React.forwardRef<HTMLInputElement, Props>(
+  ({ children, color, ...props }, ref) => {
+    return (
+      <FlexStyled ref={ref} color={color} {...props}>
+        {children}
+      </FlexStyled>
+    )
+  }
+)
+
+Flex.displayName = 'Flex'
 
 Flex.propTypes = {
   ref: PropTypes.func,
