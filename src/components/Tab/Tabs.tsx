@@ -52,7 +52,7 @@ const TabStyled = styled.ul<TabsProps>`
   ${({ variant }) => tabsVariations[variant || 'default']}
 `
 
-const FlexStyled = styled.div<TabsProps>`
+const FlexStyled = styled(Flex)<TabsProps>`
   position: relative;
   display: flex;
   flex: 1;
@@ -176,11 +176,11 @@ export const Tabs: React.FC<TabsProps> = ({
   }
 
   return (
-    <TabStyled {...wrapperProps}>
+    <TabStyled {...props}>
       <FlexStyled
         isMobile={isMobile}
         scrollPosition={scrollPosition}
-        {...props}
+        {...wrapperProps}
       >
         <Flex
           flex={1}
