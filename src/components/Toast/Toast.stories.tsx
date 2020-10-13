@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { ToastProvider, useToast } from './index'
-import { withKnobs, text, object, select } from '@storybook/addon-knobs'
+import { withKnobs, text, select } from '@storybook/addon-knobs'
 
 import { Flex } from '../Flex'
 import { Button } from '../Button'

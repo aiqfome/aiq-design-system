@@ -7,10 +7,10 @@ import { Toast, Message } from './Toast'
 
 const ToastContext = createContext({
   addToast: (message: any): any => {
-    throw new Error('useToast must be used within a ToastProvider')
+    throw new Error(`useToast must be used within a ToastProvider: ${message}`)
   },
   removeToast: (id: string): any => {
-    throw new Error('useToast must be used within a ToastProvider')
+    throw new Error(`useToast must be used within a ToastProvider: ${id}`)
   }
 })
 
@@ -51,7 +51,7 @@ export const ToastProvider: React.FC<Props> = ({ children }) => {
   )
 }
 
-export const useToast = () => {
+export const useToast = (): ContextProps => {
   const context = useContext(ToastContext)
 
   if (!context) {

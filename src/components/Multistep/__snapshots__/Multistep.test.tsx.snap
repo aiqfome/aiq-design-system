@@ -2,15 +2,15 @@
 
 exports[`must match with the previous snapshot snapshot renders 1`] = `
 <div
-  className="sc-AxirZ fhKzcO"
+  className="sc-AxirZ iMFWeG"
   width="100%"
 >
   <div
-    className="sc-AxirZ eFnBWn"
+    className="sc-AxirZ CbvbW"
     width="100%"
   >
     <div
-      className="sc-AxirZ hPefSO"
+      className="sc-AxirZ jxjRm"
       width="100%"
     >
       <button
@@ -19,7 +19,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
         type="button"
       >
         <div
-          className="sc-AxirZ jyZUrM"
+          className="sc-AxirZ kdlIRv"
           height="24px"
           width="24px"
         >
@@ -48,7 +48,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
       />
     </div>
     <div
-      className="sc-AxirZ hPefSO"
+      className="sc-AxirZ jxjRm"
       width="100%"
     >
       <button
@@ -57,7 +57,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
         type="button"
       >
         <div
-          className="sc-AxirZ jNQcZl"
+          className="sc-AxirZ hQpqTi"
           height="24px"
           width="24px"
         >
@@ -86,7 +86,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
       />
     </div>
     <div
-      className="sc-AxirZ hPefSO"
+      className="sc-AxirZ jxjRm"
       width="100%"
     >
       <button
@@ -95,7 +95,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
         type="button"
       >
         <div
-          className="sc-AxirZ jNQcZl"
+          className="sc-AxirZ hQpqTi"
           height="24px"
           width="24px"
         >
@@ -124,7 +124,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
       />
     </div>
     <div
-      className="sc-AxirZ hTwegK"
+      className="sc-AxirZ ePZlZG"
       width="80px"
     >
       <button
@@ -133,7 +133,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
         type="button"
       >
         <div
-          className="sc-AxirZ jNQcZl"
+          className="sc-AxirZ hQpqTi"
           height="24px"
           width="24px"
         >
