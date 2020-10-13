@@ -46,7 +46,6 @@ const PlaceHolderText = styled(Text)`
 
 export const DatePickerSingle: React.FC<Props> = ({
   value = [moment()],
-  name,
   onChange,
   errorMessage,
   errorForm,

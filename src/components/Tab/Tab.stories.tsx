@@ -108,3 +108,42 @@ export const Contained: React.FC = () => {
     </Flex>
   )
 }
+
+export const Card: React.FC = () => {
+  const [value, setValue] = useState(0)
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue)
+  }
+
+  return (
+    <Flex flexDirection='column'>
+      <Tabs onChange={handleChange}>
+        <Tab variant='card' value={value} index={0}>
+          <Text fontSize={2} cursor='pointer'>
+            Item One
+          </Text>
+        </Tab>
+        <Tab variant='card' value={value} index={1}>
+          <Text fontSize={2} cursor='pointer'>
+            Item Two
+          </Text>
+        </Tab>
+        <Tab variant='card' value={value} index={2}>
+          <Text fontSize={2} cursor='pointer'>
+            Item Three
+          </Text>
+        </Tab>
+      </Tabs>
+      <TabPanel value={value} index={0}>
+        Item One
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        Item Two
+      </TabPanel>
+      <TabPanel value={value} index={2}>
+        Item Three
+      </TabPanel>
+    </Flex>
+  )
+}

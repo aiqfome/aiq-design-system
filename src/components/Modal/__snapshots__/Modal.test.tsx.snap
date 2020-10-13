@@ -2,12 +2,7 @@
 
 exports[`must match with the previous snapshot snapshot renders 1`] = `
 <div
-  className="sc-AxjAm hTbHNe"
->
-  <span
-    className="sc-AxirZ bGDsjS"
-  >
-    Flex component!
-  </span>
-</div>
+  className="sc-AxhUy hQuupq"
+  display="none"
+/>
 `;

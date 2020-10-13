@@ -8,6 +8,7 @@ import { Flex } from '../Flex'
 export interface TabsProps extends SpaceProps, LayoutProps, DefaultTheme {
   extra?: any
   children?: any
+  wrapperProps?: any
   isMobile?: boolean
   variant?: 'default' | 'contained' | 'card'
   scrollPosition?: 'left' | 'middle' | 'right'
@@ -16,7 +17,15 @@ export interface TabsProps extends SpaceProps, LayoutProps, DefaultTheme {
 
 const tabsVariations: { [index: string]: any } = {
   default: css`
-    border-bottom: 1px solid #d9d9d9;
+    &::before {
+      position: absolute;
+      content: '';
+      left: 0px;
+      bottom: 0px;
+      width: 100%;
+      height: 1px;
+      background: #d9d9d9;
+    }
   `,
   contained: css`
     background: #f5f5f5;
@@ -24,18 +33,18 @@ const tabsVariations: { [index: string]: any } = {
     padding: 4px 5px;
   `,
   card: css`
-    margin-bottom: 0px;
+    margin-bottom: 0;
   `
 }
 
 const TabStyled = styled.ul<TabsProps>`
   display: flex;
-  width: max-content;
   flex-direction: row;
   list-style: none;
   margin-bottom: 20px;
   align-items: center;
   width: 100%;
+  position: relative;
 
   ${space}
   ${layout}
@@ -45,6 +54,7 @@ const TabStyled = styled.ul<TabsProps>`
 
 const FlexStyled = styled(Flex)<TabsProps>`
   position: relative;
+  display: flex;
   flex: 1;
   overflow: hidden;
 
@@ -114,6 +124,7 @@ const FlexStyled = styled(Flex)<TabsProps>`
 export const Tabs: React.FC<TabsProps> = ({
   extra,
   children,
+  wrapperProps,
   onChange = () => {
     // do nothing.
   },
@@ -166,7 +177,11 @@ export const Tabs: React.FC<TabsProps> = ({
 
   return (
     <TabStyled {...props}>
-      <FlexStyled isMobile={isMobile} scrollPosition={scrollPosition}>
+      <FlexStyled
+        isMobile={isMobile}
+        scrollPosition={scrollPosition}
+        {...wrapperProps}
+      >
         <Flex
           flex={1}
           overflow='hidden'
@@ -187,6 +202,7 @@ Tabs.propTypes = {
   extra: PropTypes.any,
   children: PropTypes.any,
   onChange: PropTypes.func,
+  wrapperProps: PropTypes.object,
   variant: PropTypes.oneOf(['default', 'contained', 'card'])
 }
 

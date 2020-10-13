@@ -39,7 +39,7 @@ export const TimePicker = React.forwardRef(
       errorMessage,
       errorForm,
       onChange = (e: any) => {
-        // do nothing
+        console.log('input:', e)
       },
       ...props
     },
@@ -49,8 +49,10 @@ export const TimePicker = React.forwardRef(
     const [inputValue, setInputValue] = useState(value || '')
 
     useEffect(() => {
-      onChange(inputValue)
-    }, [inputValue])
+      if (onChange) {
+        onChange(inputValue)
+      }
+    }, [inputValue, onChange])
 
     function applyMask(value) {
       return value

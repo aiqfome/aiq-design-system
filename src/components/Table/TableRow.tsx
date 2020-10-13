@@ -12,7 +12,7 @@ export interface TableRowProps {
 
 const TableRowStyled = styled.tr<TableRowProps>`
   cursor: default;
-  vertical-align: baseline;
+  vertical-align: middle;
   border-bottom: 1px solid ${({ theme }) => theme.colors.mediumGrey};
 
   ${({ hasAction }) =>

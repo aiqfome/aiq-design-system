@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import PropTypes from 'prop-types'
 import styled, { DefaultTheme, css } from 'styled-components'
 import { layout } from 'styled-system'
 import { Flex, Props as FlexProps } from '../Flex'
 import { Button } from '../Button'
 import { Text } from '../Text'
+import { Box } from '../Box'
 
 export interface Props {
   title: string
@@ -202,71 +204,80 @@ export const Modal: React.FC<Props> = ({
     }
   }
 
-  return isMounted ? (
-    <BackgroundModal
-      className={`background-modal ${show ? 'show' : 'hide'}`}
-      variant='fullCentralized'
-      animation={animation}
-      zIndex={zIndex}
-      onClick={handleClickOutSide}
-    >
-      <ModalStyled
-        variantModal={variant}
+  if (isMounted) {
+    return createPortal(
+      <BackgroundModal
+        className={`background-modal ${show ? 'show' : 'hide'}`}
+        variant='fullCentralized'
         animation={animation}
-        className={`${show ? 'show' : 'hide'}`}
-        {...props}
+        zIndex={zIndex}
+        onClick={handleClickOutSide}
       >
-        <Text
-          color='primary'
-          fontSize='xlarge'
-          fontWeight='semiBold'
-          marginBottom={variant !== 'alert' ? '30px' : '15px'}
+        <ModalStyled
+          variantModal={variant}
+          animation={animation}
+          className={`${show ? 'show' : 'hide'}`}
+          {...props}
         >
-          {title}
-        </Text>
+          <Text
+            color='primary'
+            fontSize='xlarge'
+            fontWeight='semiBold'
+            marginBottom={variant !== 'alert' ? '30px' : '15px'}
+          >
+            {title}
+          </Text>
 
-        {children}
+          {children}
 
-        {variant !== 'alert' ? (
-          <Flex justifyContent='space-between' marginTop={44} width='100%'>
-            {cancelButton.visible && (
-              <Button
-                fontWeight='medium'
-                onClick={handleCancel}
-                palette='primary'
-                variant='outlined'
-              >
-                {cancelButton.label}
-              </Button>
-            )}
-            {okButton.visible && (
-              <Button
-                onClick={handleOk}
-                fontWeight='medium'
-                palette='primary'
-                variant='contained'
-              >
-                {okButton.label}
-              </Button>
-            )}
-          </Flex>
-        ) : (
-          <Flex justifyContent='flex-end' marginTop={26} width='100%'>
-            {cancelButton.visible && (
-              <Button onClick={handleCancel} marginRight={48} palette='primary'>
-                {cancelButton.label}
-              </Button>
-            )}
-            {okButton.visible && (
-              <Button onClick={handleOk} palette='primary'>
-                {okButton.label}
-              </Button>
-            )}
-          </Flex>
-        )}
-      </ModalStyled>
-    </BackgroundModal>
-  ) : null
+          {variant !== 'alert' ? (
+            <Flex justifyContent='space-between' marginTop={44} width='100%'>
+              {cancelButton.visible && (
+                <Button
+                  fontWeight='medium'
+                  onClick={handleCancel}
+                  palette='primary'
+                  variant='outlined'
+                >
+                  {cancelButton.label}
+                </Button>
+              )}
+              {okButton.visible && (
+                <Button
+                  onClick={handleOk}
+                  fontWeight='medium'
+                  palette='primary'
+                  variant='contained'
+                >
+                  {okButton.label}
+                </Button>
+              )}
+            </Flex>
+          ) : (
+            <Flex justifyContent='flex-end' marginTop={26} width='100%'>
+              {cancelButton.visible && (
+                <Button
+                  onClick={handleCancel}
+                  marginRight={48}
+                  palette='primary'
+                >
+                  {cancelButton.label}
+                </Button>
+              )}
+              {okButton.visible && (
+                <Button onClick={handleOk} palette='primary'>
+                  {okButton.label}
+                </Button>
+              )}
+            </Flex>
+          )}
+        </ModalStyled>
+      </BackgroundModal>,
+      document.querySelector('#modal-root')
+    )
+  }
+
+  return <Box display='none'></Box>
 }
 
 Modal.propTypes = {

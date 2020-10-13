@@ -41,7 +41,8 @@ const data = [
     age: '24',
     friends: '200',
     place: 'não sei, qualquer lugar',
-    job: 'design'
+    job: 'design',
+    teste: 'teste'
   }
 ]
 
