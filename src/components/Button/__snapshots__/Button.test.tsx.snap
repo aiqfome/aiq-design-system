@@ -6,11 +6,11 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
   type="button"
 >
   <span
-    className="sc-AxiKw dAUdLG"
+    className="sc-dlnjPT dwbEJR"
     fontSize="medium"
   >
     <span
-      className="sc-AxiKw bBViMC"
+      className="sc-dlnjPT ljXqAF"
     >
       Button component!
     </span>

@@ -118,6 +118,7 @@ export const DatePickerRange: React.FC<Props> = ({
       {showDatePicker && (
         <DatePickerWrapper>
           <DayPickerRangeController
+            initialVisibleMonth={() => moment()}
             {...props}
             numberOfMonths={2}
             onDatesChange={onDatesChange}
