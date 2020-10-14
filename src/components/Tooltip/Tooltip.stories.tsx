@@ -77,7 +77,11 @@ export const TooltipInBottom: React.FC = (): ReactElement => {
           Left- Left- Left- Left- Left- Left-Bottom
         </Button>
       </Tooltip>
-      <Tooltip mx={10} variant='bottom' left={-0} body='Bottom Bottom Bottom'>
+      <Tooltip
+        mx={10}
+        variant='bottom'
+        body='Bottom Bottom Bottom Bottom Bottom Bottom'
+      >
         <Button variant='outlined' palette='primary'>
           Bottom Bottom Bottom Bottom Bottom Bottom
         </Button>
