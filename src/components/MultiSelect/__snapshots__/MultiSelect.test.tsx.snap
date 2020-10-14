@@ -26,7 +26,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
           Maringá
         </span>
         <button
-          className="sc-jSFkmK jSaBqS"
+          className="sc-jSFkmK bmLjtn"
           onClick={[Function]}
           type="button"
         >

@@ -29,7 +29,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
     </div>
     <button
       aria-label="toggle menu"
-      className="sc-eCApGN ivzzbM sc-ksluoS jKuzhN"
+      className="sc-eCApGN kPNuSF sc-ksluoS jKuzhN"
       onClick={[Function]}
       type="button"
     >
