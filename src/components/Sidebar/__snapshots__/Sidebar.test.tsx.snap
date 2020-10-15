@@ -174,8 +174,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
             </span>
           </div>
           <span
-            className="sc-AxiKw sc-AxmLO hJqGOu"
-            color="#262626"
+          className="sc-AxiKw sc-AxmLO IyyHK"
           >
             18
           </span>
@@ -256,8 +255,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
                 Sub Item
               </span>
               <span
-                className="sc-AxiKw sc-AxmLO hJqGOu"
-                color="#262626"
+                className="sc-AxiKw sc-AxmLO IyyHK"
               >
                 18
               </span>
