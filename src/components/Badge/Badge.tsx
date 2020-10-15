@@ -33,7 +33,7 @@ export interface Props
   children?: ReactNode
   statusColor?: string
   overflowCount?: number
-  variant?: 'label' | 'default' | 'status'
+  variant?: 'label' | 'default'
 }
 
 const badgeVariations: { [index: string]: any } = {
@@ -52,20 +52,6 @@ const badgeVariations: { [index: string]: any } = {
     font-size: 14px;
     width: fit-content;
     font-weight: ${({ theme }) => theme.fontWeights.medium};
-  `,
-  status: css<Props>`
-    cursor: pointer;
-
-    &::before {
-      content: '';
-      display: inline-block;
-      width: 8px;
-      height: 8px;
-      margin-right: 10px;
-      border-radius: 50%;
-      background-color: ${({ statusColor, theme }) =>
-        statusColor ? theme.colors[statusColor] : '#dedede'};
-    }
   `
 }
 
@@ -104,14 +90,6 @@ export const Badge: React.FC<Props> = ({
   overflowCount,
   ...props
 }) => {
-  if (variant === 'status') {
-    return (
-      <BadgeStyled variant={variant} {...props}>
-        {children}
-      </BadgeStyled>
-    )
-  }
-
   return (
     <BadgeStyled variant={variant} {...props}>
       {getCounter(count, overflowCount) || children}
@@ -124,7 +102,7 @@ Badge.propTypes = {
   children: PropTypes.node,
   statusColor: PropTypes.string,
   overflowCount: PropTypes.number,
-  variant: PropTypes.oneOf(['label', 'default', 'status'])
+  variant: PropTypes.oneOf(['label', 'default'])
 }
 
 Badge.defaultProps = {
