@@ -2,7 +2,7 @@
 
 exports[`must match with the previous snapshot snapshot renders 1`] = `
 <label
-  className="sc-dlnjPT jsOZTw"
+  className="sc-AxiKw kXsHqP"
   disabled={false}
 >
   <input
@@ -14,7 +14,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
     value={true}
   />
   <div
-    className="sc-gtssRu csfvaJ"
+    className="sc-AxirZ ksioAa"
   />
 </label>
 `;

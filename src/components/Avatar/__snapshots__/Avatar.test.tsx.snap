@@ -2,13 +2,13 @@
 
 exports[`must match with the previous snapshot snapshot renders 1`] = `
 <div
-  className="sc-gtssRu bhpCDw"
+  className="sc-AxirZ eGmxmb"
   display="flex"
   height="36px"
   width="36px"
 >
   <span
-    className="sc-bdnylx jXQYcY"
+    className="sc-AxjAm gdbfbt"
     color="primary"
     fontWeight="bold"
   >
