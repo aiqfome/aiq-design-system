@@ -71,7 +71,6 @@ const FlexStyled = styled.div<Props>`
   ${flex}
 
   display: flex;
-  
   ${({ variant }) => flexVariations[variant || 'auto']}
 
   ${({ fullHeight }) =>
@@ -83,7 +82,7 @@ const FlexStyled = styled.div<Props>`
   ${layout}
 `
 
-export const Flex = React.forwardRef<HTMLInputElement, Props>(
+export const Flex = React.forwardRef<HTMLDivElement, Props>(
   ({ children, color, ...props }, ref) => {
     return (
       <FlexStyled ref={ref} color={color} {...props}>
@@ -96,7 +95,6 @@ export const Flex = React.forwardRef<HTMLInputElement, Props>(
 Flex.displayName = 'Flex'
 
 Flex.propTypes = {
-  ref: PropTypes.func,
   color: PropTypes.string,
   onClick: PropTypes.func,
   children: PropTypes.node

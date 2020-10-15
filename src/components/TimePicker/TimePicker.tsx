@@ -124,6 +124,7 @@ export const TimePicker = React.forwardRef(
             top='38px'
             backgroundColor='#fff'
             zIndex={1}
+            backgroundColor='#fff'
             border='1px solid #dedede'
             boxShadow='0px 3px 6px #00000017'
             borderRadius='8px'

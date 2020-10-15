@@ -3,7 +3,7 @@
 exports[`must match with the previous snapshot snapshot renders 1`] = `
 Array [
   <div
-    className="sc-hKFyIo gZHCxg"
+    className="sc-hKFyIo kbttzU"
   >
     Toast component!
   </div>,

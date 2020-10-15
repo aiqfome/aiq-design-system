@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { SpaceProps, space, LayoutProps, layout } from 'styled-system'
 import styled, { css, DefaultTheme } from 'styled-components'
@@ -131,34 +131,41 @@ export const Tabs: React.FC<TabsProps> = ({
   ...props
 }) => {
   const [isMobile, setIsMobile] = useState(false)
-  const [ref, setRef] = useState<HTMLDivElement | null>(null)
   const [scrollPosition, setScrollPosition] = useState<
     'left' | 'middle' | 'right'
   >('left')
 
+  const refFlex = useRef(document.createElement('div'))
+
   useEffect(() => {
     const handleResize = () => {
-      if (ref && ref.scrollWidth !== ref.clientWidth) {
+      if (
+        refFlex.current &&
+        refFlex.current.scrollWidth !== refFlex.current.clientWidth
+      ) {
         setIsMobile(true)
       } else {
         setIsMobile(false)
       }
     }
 
-    if (ref) {
+    if (refFlex) {
       handleResize()
       window.addEventListener('resize', handleResize)
     }
-  }, [ref])
+  }, [refFlex])
 
   useEffect(() => {
     const handleScroll = e => {
-      if (ref && isMobile) {
-        ref.scrollLeft += e.deltaY
+      if (refFlex && isMobile) {
+        refFlex.current.scrollLeft += e.deltaY
 
-        if (ref.scrollLeft === 0) {
+        if (refFlex.current.scrollLeft === 0) {
           setScrollPosition('left')
-        } else if (ref.offsetWidth + ref.scrollLeft === ref.scrollWidth) {
+        } else if (
+          refFlex.current.offsetWidth + refFlex.current.scrollLeft ===
+          refFlex.current.scrollWidth
+        ) {
           setScrollPosition('right')
         } else {
           setScrollPosition('middle')
@@ -166,10 +173,10 @@ export const Tabs: React.FC<TabsProps> = ({
       }
     }
 
-    if (ref) {
-      ref.addEventListener('wheel', handleScroll)
+    if (refFlex) {
+      refFlex.current.addEventListener('wheel', handleScroll)
     }
-  }, [ref, isMobile])
+  }, [refFlex, isMobile])
 
   function handleClick(event) {
     onChange(event, parseInt(event.currentTarget.dataset.id))
@@ -187,7 +194,7 @@ export const Tabs: React.FC<TabsProps> = ({
           overflow='hidden'
           position='relative'
           onClick={handleClick}
-          ref={el => setRef(el || null)}
+          ref={refFlex}
         >
           {children}
         </Flex>
