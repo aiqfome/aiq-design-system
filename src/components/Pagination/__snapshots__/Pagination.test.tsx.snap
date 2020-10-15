@@ -2,18 +2,17 @@
 
 exports[`must match with the previous snapshot snapshot renders 1`] = `
 <div
-  className="sc-AxjAm sc-AxhUy fkyrdw"
+  className="sc-AxjAm kBzQYq sc-AxhUy kfcrcv"
   disabled={false}
 >
   <button
-    className="sc-AxhCb jGTOcA sc-AxgMl kAQFoy"
+    className="sc-AxhCb kYxFDA sc-AxgMl kAQFoy"
     cursor="not-allowed"
     onClick={[Function]}
     type="button"
   >
     <span
-      className="sc-AxirZ cuGRia"
-      cursor="pointer"
+      className="sc-AxirZ dVQkrm"
       fontSize="medium"
     >
       <svg
@@ -37,13 +36,12 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
     </span>
   </button>
   <button
-    className="sc-AxhCb jGTOcA sc-AxgMl etdRWP"
+    className="sc-AxhCb kYxFDA sc-AxgMl etdRWP"
     onClick={[Function]}
     type="button"
   >
     <span
-      className="sc-AxirZ cuGRia"
-      cursor="pointer"
+      className="sc-AxirZ dVQkrm"
       fontSize="medium"
     >
       <span
@@ -56,14 +54,13 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
     </span>
   </button>
   <button
-    className="sc-AxhCb jGTOcA sc-AxgMl klYcia"
+    className="sc-AxhCb kYxFDA sc-AxgMl klYcia"
     cursor=""
     onClick={[Function]}
     type="button"
   >
     <span
-      className="sc-AxirZ cuGRia"
-      cursor="pointer"
+      className="sc-AxirZ dVQkrm"
       fontSize="medium"
     >
       <svg

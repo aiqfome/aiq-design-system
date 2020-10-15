@@ -3,6 +3,7 @@ import React, { ReactElement } from 'react'
 import { Tooltip } from './Tooltip'
 import { Text } from '../Text'
 import { Flex } from '../Flex'
+import { Button } from '../Button'
 
 export default {
   component: Tooltip,
@@ -39,6 +40,51 @@ export const Variants: React.FC = (): ReactElement => {
       </Tooltip>
       <Tooltip mx={10} variant='left-bottom' body="I'm hungry">
         <Text cursor='pointer'>Left-Bottom</Text>
+      </Tooltip>
+    </Flex>
+  )
+}
+
+export const TooltipInBottom: React.FC = (): ReactElement => {
+  return (
+    <Flex variant='fullCentralized'>
+      <Tooltip mx={10} variant='top' body="I'm hungry">
+        <Button variant='outlined' palette='primary'>
+          Top Top Top Top Top Top
+        </Button>
+      </Tooltip>
+      <Tooltip mx={10} variant='left' body="I'm hungry">
+        <Button variant='outlined' palette='primary'>
+          Left Left Left Left Left Left
+        </Button>
+      </Tooltip>
+      <Tooltip mx={10} variant='right' body="I'm hungry">
+        <Button variant='outlined' palette='primary'>
+          Right Right Right Right Right Right
+        </Button>
+      </Tooltip>
+      <Tooltip mx={10} variant='right-bottom' body="I'm hungry">
+        <Button variant='outlined' palette='primary'>
+          Right- Right- Right- Right- Right- Right-Bottom
+        </Button>
+      </Tooltip>
+      <Tooltip
+        mx={10}
+        variant='left-bottom'
+        body=' Left- Left- Left- Left- Left- Left-Bottom'
+      >
+        <Button variant='outlined' palette='primary'>
+          Left- Left- Left- Left- Left- Left-Bottom
+        </Button>
+      </Tooltip>
+      <Tooltip
+        mx={10}
+        variant='bottom'
+        body='Bottom Bottom Bottom Bottom Bottom Bottom'
+      >
+        <Button variant='outlined' palette='primary'>
+          Bottom Bottom Bottom Bottom Bottom Bottom
+        </Button>
       </Tooltip>
     </Flex>
   )

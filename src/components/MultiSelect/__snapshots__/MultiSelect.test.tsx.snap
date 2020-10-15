@@ -2,7 +2,7 @@
 
 exports[`must match with the previous snapshot snapshot renders 1`] = `
 <div
-  className="sc-AxjAm gqOzdO"
+  className="sc-AxjAm dnaJYL"
 >
   <div
     className="sc-AxirZ iBBnaA sc-fzplWN LmPil"
@@ -13,7 +13,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
       onClick={[Function]}
     >
       <div
-        className="sc-AxjAm khQdjW"
+        className="sc-AxjAm YsXpO"
         display="flex"
       >
         <span
@@ -26,13 +26,12 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
           Maringá
         </span>
         <button
-          className="sc-AxgMl hzzrVt"
+          className="sc-AxgMl kfmCdN"
           onClick={[Function]}
           type="button"
         >
           <span
-            className="sc-AxiKw gjPZme"
-            cursor="pointer"
+            className="sc-AxiKw dAUdLG"
             fontSize="medium"
           >
             <svg
@@ -73,7 +72,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
       />
     </div>
     <div
-      className="sc-AxjAm sc-fznKkj eJjBBM"
+      className="sc-AxjAm jwYwxa sc-fznKkj kJgnVE"
     >
       <ul>
         <li

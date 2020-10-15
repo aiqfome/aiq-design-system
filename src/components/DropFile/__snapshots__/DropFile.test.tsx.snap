@@ -2,7 +2,7 @@
 
 exports[`must match with the previous snapshot snapshot renders 1`] = `
 <div
-  className="sc-AxjAm sc-AxhCb hgfsAj"
+  className="sc-AxjAm diqGie sc-AxhCb drseCN"
   height="200px"
   onClick={[Function]}
   onDragEnd={[Function]}
@@ -17,10 +17,10 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
     type="file"
   />
   <div
-    className="sc-AxjAm iXyWxn"
+    className="sc-AxjAm dnERPQ"
   >
     <div
-      className="sc-AxjAm sc-AxiKw jNunfe"
+      className="sc-AxjAm iQKWTj sc-AxiKw fAUXjI"
       color="grey"
     >
       <svg
@@ -61,7 +61,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
       fontWeight="medium"
     />
     <div
-      className="sc-AxjAm gRZNnv"
+      className="sc-AxjAm hTbHNe"
     />
   </div>
 </div>

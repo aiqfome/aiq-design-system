@@ -6,6 +6,7 @@ import styled, { css, DefaultTheme } from 'styled-components'
 import { Flex, Props as FlexProps } from '../Flex'
 import { Text } from '../Text'
 import { Button } from '../Button'
+
 export interface Props {
   count?: number
   color?: string
@@ -40,6 +41,8 @@ const sizesVariants: { [index: string]: any } = {
 }
 
 const PaginationStyled = styled(Flex)<PaginationStyledProps>`
+  flex-wrap: wrap;
+
   ${({ disabled }) =>
     disabled &&
     css`
@@ -123,18 +126,22 @@ export const Pagination: React.FC<Props> = ({
   }, [defaultPage])
 
   useEffect(() => {
-    let startPage = currentPage - 1
+    let startPage = currentPage - 2
     let endPage = currentPage + 2
 
     if (variant === 'default') {
       if (startPage <= 1) {
-        endPage -= startPage - 2
+        endPage -= startPage - 1
         startPage = 1
       }
 
       if (endPage > count - 2) {
-        startPage = count - 5
+        startPage = count - 5 || 1
         endPage = count - 1
+      }
+
+      if (startPage <= 1) {
+        startPage = 1
       }
 
       setPagesToShow(pages.slice(startPage, endPage))
@@ -192,7 +199,7 @@ export const Pagination: React.FC<Props> = ({
               1
             </Text>
           </ItemPageStyled>
-          {currentPage - 2 > 0 && (
+          {currentPage - 2 > 0 && count > 6 && (
             <ItemPageStyled
               size={size}
               cursor='auto'
@@ -219,7 +226,7 @@ export const Pagination: React.FC<Props> = ({
               </Text>
             </ItemPageStyled>
           ))}
-          {currentPage + 3 <= pages[pages.length - 1] && (
+          {currentPage + 3 < pages[pages.length - 1] && count > 6 && (
             <ItemPageStyled
               size={size}
               cursor='auto'

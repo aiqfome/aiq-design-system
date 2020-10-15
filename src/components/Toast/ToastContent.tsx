@@ -13,12 +13,12 @@ import { useToast } from './ToastProvider'
 import { Message } from './Toast'
 export interface Props {
   type?: 'info' | 'success' | 'error'
-  style?: any
+  className?: any
   message: Message
 }
 
 interface PropsStyledToast {
-  withoutDescription?: boolean
+  description: string
   type: string
 }
 
@@ -81,8 +81,8 @@ const StyledToast = styled(animated.div)<PropsStyledToast>`
     color: inherit;
   }
 
-  ${props =>
-    props.withoutDescription &&
+  ${({ description }) =>
+    !description &&
     css`
       align-items: center;
 
@@ -92,7 +92,7 @@ const StyledToast = styled(animated.div)<PropsStyledToast>`
     `}
 `
 
-export const ToastContent: React.FC<Props> = ({ message, style }) => {
+export const ToastContent: React.FC<Props> = ({ message, className }) => {
   const { removeToast } = useToast()
 
   useEffect(() => {
@@ -110,8 +110,8 @@ export const ToastContent: React.FC<Props> = ({ message, style }) => {
   return (
     <StyledToast
       type={message.type}
-      withoutDescription={!message.description}
-      style={style}
+      description={message.description}
+      className={className}
     >
       {icons[message.type || 'info']}
 
@@ -130,5 +130,5 @@ export const ToastContent: React.FC<Props> = ({ message, style }) => {
 ToastContent.propTypes = {
   type: PropTypes.oneOf(['info', 'success', 'error']),
   message: PropTypes.any,
-  style: PropTypes.string
+  className: PropTypes.string
 }

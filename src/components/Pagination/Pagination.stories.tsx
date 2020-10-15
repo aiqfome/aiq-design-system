@@ -50,7 +50,7 @@ export const Variants: React.FC = () => {
       </Flex>
 
       <Flex variant='centralized'>
-        <Pagination count={100} size='large' />
+        <Pagination count={8} size='large' />
       </Flex>
     </>
   )

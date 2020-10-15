@@ -97,7 +97,7 @@ const InputPrefixed = styled.input<Props>`
 `
 
 const Input: React.FC<Props> = ({ inputRef, value, ...props }) => {
-  return <InputStyled value={value} ref={inputRef} name={name} {...props} />
+  return <InputStyled value={value} ref={inputRef} {...props} />
 }
 
 export const InputNeutral: React.FC<Props> = ({

@@ -27,10 +27,11 @@ export interface Props
   sufix?: any
   refButton?: any
   variantType?: string
-  variant?: 'text' | 'contained' | 'outlined' | 'fab'
+  variant?: 'text' | 'contained' | 'outlined' | 'fab' | 'icon'
   palette?: 'primary' | 'secondary' | 'neutral'
   onClick?: any
   fullWidth?: boolean
+  disabled?: boolean
   type?: 'button' | 'submit' | 'reset' | undefined
 }
 
@@ -101,7 +102,7 @@ const buttonVariations: { [index: string]: any } = {
         background: none;
 
         &:hover {
-          background: ${({ theme }) => theme.colors.primaryLighest};
+          background: ${({ theme }) => theme.colors.primaryLight};
         }
       `}
     ${({ palette }) =>
@@ -112,7 +113,7 @@ const buttonVariations: { [index: string]: any } = {
         background: none;
 
         &:hover {
-          background-color: ${({ theme }) => theme.colors.secondaryLighest};
+          background-color: ${({ theme }) => theme.colors.secondaryDark};
         }
       `}
     ${({ palette }) =>
@@ -157,6 +158,32 @@ const buttonVariations: { [index: string]: any } = {
         color: ${({ theme }) => theme.colors.almostBlack};
         background: ${({ theme }) => theme.colors.white};
       `}
+  `,
+  icon: css`
+    border: none;
+    background: none;
+    padding: 8px;
+    border-radius: 50%;
+
+    background-position: center;
+    transition: background 0.5s;
+
+    &:hover {
+      background: ${({ theme }) => theme.colors.lightGrey}
+        radial-gradient(
+          circle,
+          transparent 1%,
+          ${({ theme }) => theme.colors.lightGrey} 1%
+        )
+        center/15000%;
+    }
+
+    &:active {
+      background-color: ${({ theme }) => theme.colors.grey};
+      background-size: 100%;
+      transition: background 0s;
+      opacity: 0.5;
+    }
   `
 }
 
@@ -175,6 +202,21 @@ export const ButtonStyled = styled.button<Props>`
   max-height: 42px;
   cursor: pointer;
 
+  &:active{
+    opacity: 0.5;
+  }
+
+  ${({ disabled }) =>
+    disabled &&
+    css`
+      opacity: 0.5;
+
+      &:hover {
+        cursor: not-allowed;
+      }
+    `}
+
+
   ${({ fullWidth }) =>
     fullWidth &&
     css`
@@ -188,28 +230,25 @@ export const Button: React.FC<Props> = ({
   children,
   prefix,
   sufix,
+  variant,
   type = 'button',
   ...props
 }) => {
   if (prefix) {
     return (
-      <ButtonStyled type={type} {...props}>
+      <ButtonStyled variant={variant} type={type} {...props}>
         <Icon cursor='pointer' mr={5}>
           {prefix}
         </Icon>
-        <Text cursor='pointer' fontSize='medium'>
-          {children}
-        </Text>
+        <Text fontSize='medium'>{children}</Text>
       </ButtonStyled>
     )
   }
 
   if (sufix) {
     return (
-      <ButtonStyled type={type} {...props}>
-        <Text cursor='pointer' fontSize='medium'>
-          {children}
-        </Text>
+      <ButtonStyled variant={variant} type={type} {...props}>
+        <Text fontSize='medium'>{children}</Text>
         <Icon cursor='pointer' ml={5}>
           {sufix}
         </Icon>
@@ -218,10 +257,8 @@ export const Button: React.FC<Props> = ({
   }
 
   return (
-    <ButtonStyled type={type} {...props}>
-      <Text cursor='pointer' fontSize='medium'>
-        {children}
-      </Text>
+    <ButtonStyled type={type} variant={variant} {...props}>
+      <Text fontSize='medium'>{children}</Text>
     </ButtonStyled>
   )
 }
@@ -231,6 +268,8 @@ Button.propTypes = {
   prefix: PropTypes.any,
   sufix: PropTypes.any,
   refButton: PropTypes.any,
+  variant: PropTypes.oneOf(['text', 'contained', 'outlined', 'fab', 'icon']),
+  disabled: PropTypes.bool,
   fontWeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   onClick: PropTypes.func,
   type: PropTypes.oneOf(['button', 'submit', 'reset'])

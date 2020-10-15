@@ -14,7 +14,10 @@ function withTheme(storyFn) {
     <ThemeProvider theme={theme}>
       <GlobalStyles />
       <ReactDatesOverrides/>
-      {storyFn()}
+      <div id="app-root">
+          {storyFn()}
+      </div>
+      <div id="modal-root"></div>
     </ThemeProvider>
   );
 }

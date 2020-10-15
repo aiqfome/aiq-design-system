@@ -12,13 +12,20 @@ export interface TableRowProps {
 
 const TableRowStyled = styled.tr<TableRowProps>`
   cursor: default;
-  vertical-align: baseline;
+  vertical-align: middle;
   border-bottom: 1px solid ${({ theme }) => theme.colors.mediumGrey};
 
   ${({ hasAction }) =>
     hasAction &&
     css`
-      cursor: pointer;
+      &:hover {
+        cursor: pointer;
+        background: ${({ theme }) => theme.colors.lightGrey};
+      }
+      &:active {
+        background-color: ${({ theme }) => theme.colors.grey};
+        opacity: 0.7;
+      }
     `}
 
   ${({ expanded }) =>

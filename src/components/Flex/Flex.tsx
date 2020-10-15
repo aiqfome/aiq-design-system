@@ -1,3 +1,4 @@
+import React from 'react'
 import styled, { css, DefaultTheme } from 'styled-components'
 import PropTypes from 'prop-types'
 import {
@@ -14,7 +15,11 @@ import {
   border,
   BorderProps,
   position,
-  PositionProps
+  FlexProps,
+  flex,
+  PositionProps,
+  flexbox,
+  FlexboxProps
 } from 'styled-system'
 
 export interface Props
@@ -25,18 +30,21 @@ export interface Props
     FontWeightProps,
     PositionProps,
     ColorProps,
+    FlexProps,
+    FlexboxProps,
     BorderProps {
   variant?: 'auto' | 'centralized' | 'fullCentralized'
-  justifyContent?: string
-  alignItems?: string
-  flexDirection?: string
-  height?: string
-  padding?: string
-  backgroundColor?: string
-  border?: string
+  color?: string
   fullHeight?: boolean
-  flex?: number
-  color?: any
+  children?: any
+  className?: string
+  onClick?: (e: any) => void
+  onDragOver?: (e: any) => void
+  onDragEnter?: (e: any) => void
+  onDragLeave?: (e: any) => void
+  onDragEnd?: (e: any) => void
+  onDrop?: (e: any) => void
+  style?: any
 }
 
 const flexVariations: { [index: string]: any } = {
@@ -52,21 +60,17 @@ const flexVariations: { [index: string]: any } = {
   `
 }
 
-export const Flex = styled.div<Props>`
+const FlexStyled = styled.div<Props>`
   ${space}
   ${fontSize}
   ${fontWeight}
   ${border}
   ${position}
   ${color}
+  ${flexbox}
+  ${flex}
 
   display: flex;
-  justify-content: ${props => props.justifyContent};
-  align-items: ${props => props.alignItems};
-  flex-direction: ${props => props.flexDirection};
-  height: ${props => props.height};
-  padding: ${props => props.padding};
-  flex: ${props => props.flex};
   
   ${({ variant }) => flexVariations[variant || 'auto']}
 
@@ -79,14 +83,21 @@ export const Flex = styled.div<Props>`
   ${layout}
 `
 
+export const Flex = React.forwardRef<HTMLInputElement, Props>(
+  ({ children, color, ...props }, ref) => {
+    return (
+      <FlexStyled ref={ref} color={color} {...props}>
+        {children}
+      </FlexStyled>
+    )
+  }
+)
+
+Flex.displayName = 'Flex'
+
 Flex.propTypes = {
-  variant: PropTypes.oneOf(['auto', 'centralized', 'fullCentralized']),
-  justifyContent: PropTypes.string,
-  alignItems: PropTypes.string,
-  flexDirection: PropTypes.string,
-  height: PropTypes.string,
-  padding: PropTypes.string,
-  backgroundColor: PropTypes.string,
-  fullHeight: PropTypes.bool,
-  flex: PropTypes.number
+  ref: PropTypes.func,
+  color: PropTypes.string,
+  onClick: PropTypes.func,
+  children: PropTypes.node
 }

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 
 import { InputOutlined } from './InputOutlined'
 import { InputNeutral } from './InputNeutral'
+import { InputTags } from './InputTags'
 
 export interface Props extends InputHTMLAttributes<HTMLInputElement> {
   name?: string
@@ -14,7 +15,7 @@ export interface Props extends InputHTMLAttributes<HTMLInputElement> {
   value?: string
   sufix?: any
   prefix?: any
-  variant?: 'outlined' | 'default'
+  variant?: 'outlined' | 'default' | 'tags'
   placeholder?: string
 
   backgroundColor?: any
@@ -53,6 +54,20 @@ export const Input: React.FC<Props> = ({
     )
   }
 
+  if (variant === 'tags') {
+    return (
+      <InputTags
+        name={name}
+        errorForm={errorForm}
+        type={type}
+        errorMessage={errorMessage}
+        value={value}
+        placeholder={placeholder}
+        {...props}
+      />
+    )
+  }
+
   return (
     <InputNeutral
       name={name}
@@ -79,7 +94,7 @@ Input.propTypes = {
   sufix: PropTypes.any,
   prefix: PropTypes.any,
   value: PropTypes.string,
-  variant: PropTypes.oneOf(['outlined', 'default']),
+  variant: PropTypes.oneOf(['outlined', 'default', 'tags']),
   placeholder: PropTypes.string,
 
   backgroundColor: PropTypes.any,

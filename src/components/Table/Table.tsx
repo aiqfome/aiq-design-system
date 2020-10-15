@@ -9,8 +9,6 @@ import { TableRow } from './TableRow'
 import { TableHead } from './TableHead'
 import { TableCell } from './TableCell'
 
-import { Flex } from '../Flex'
-
 export interface TableProps {
   scroll?: string
   data: Array<any>
@@ -36,7 +34,7 @@ const TableStyled = styled.table<TableProps>`
     `};
 `
 
-const FlexWrapper = styled(Flex)<FlexProps>`
+const FlexWrapper = styled.div<FlexProps>`
   flex: 1;
   display: block;
   max-width: 100%;
@@ -72,11 +70,11 @@ const FlexWrapper = styled(Flex)<FlexProps>`
 `
 
 export const Table: React.FC<TableProps> = ({
-  data,
   scroll,
-  columns,
   hoverable,
+  data = [],
   onClickRow,
+  columns = [],
   expandedRowRender,
   ...props
 }) => {
@@ -116,11 +114,13 @@ export const Table: React.FC<TableProps> = ({
         } else {
           setSelectedRows(rows => rows.concat([row.id]))
         }
-      } else if (onClickRow) {
-        onClickRow(row.values)
+      }
+
+      if (onClickRow) {
+        onClickRow(data[row.index])
       }
     },
-    [expandedRowRender, selectedRows, onClickRow]
+    [expandedRowRender, data, selectedRows, onClickRow]
   )
 
   return (
@@ -131,7 +131,7 @@ export const Table: React.FC<TableProps> = ({
     >
       <TableStyled scroll={scroll} {...getTableProps()}>
         <thead>
-          <TableRow>
+          <TableRow hoverable={false}>
             {tableColumns.map(column => (
               <TableHead
                 {...column}
@@ -166,7 +166,10 @@ export const Table: React.FC<TableProps> = ({
                         {...cell.getCellProps()}
                       >
                         {cell.column.renderCell
-                          ? cell.column.renderCell(cell.value, cell.row.values)
+                          ? cell.column.renderCell(
+                              cell.value,
+                              data[cell.row.index]
+                            )
                           : cell.render('Cell')}
                       </TableCell>
                     )

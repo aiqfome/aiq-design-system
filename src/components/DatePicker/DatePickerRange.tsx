@@ -15,7 +15,6 @@ import { Icon } from '../Icon'
 import { Text } from '../Text'
 
 import { MdArrowDropDown } from 'react-icons/md'
-import { PlaceHolder } from './DatePicker.stories'
 
 export interface Props {
   value?: Array<Moment>
@@ -52,7 +51,6 @@ export const DatePickerRange: React.FC<Props> = ({
   errorMessage,
   errorForm,
   placeholder,
-  name,
   ...props
 }) => {
   const [isChangeValue, setIsChangeValue] = useState(false)
@@ -120,6 +118,7 @@ export const DatePickerRange: React.FC<Props> = ({
       {showDatePicker && (
         <DatePickerWrapper>
           <DayPickerRangeController
+            initialVisibleMonth={() => moment()}
             {...props}
             numberOfMonths={2}
             onDatesChange={onDatesChange}

@@ -3,6 +3,7 @@ import { withKnobs, text, select, boolean } from '@storybook/addon-knobs'
 
 import { MdSearch } from 'react-icons/md'
 
+import { Box } from '../Box'
 import { Flex } from '../Flex'
 import { Input } from './Input'
 
@@ -104,6 +105,29 @@ export const Sufix: React.FC = () => (
 export const Prefix: React.FC = () => (
   <Flex variant='fullCentralized'>
     <Input label='Aiqfome' prefix={<MdSearch color='#BABCBE' />} />
+  </Flex>
+)
+
+export const Tags: React.FC = () => (
+  <Flex flexDirection='column' variant='fullCentralized'>
+    <Box maxWidth='600px' width='100%' mb={8}>
+      <Input
+        placeholder='digite o valor e dê enter para criar tags'
+        label='Aiqfome'
+        variant='tags'
+        width='100%'
+      />
+    </Box>
+    <Box maxWidth='600px' width='100%' mb={8}>
+      <Input
+        placeholder='digite o valor e dê enter para criar tags'
+        label='Aiqfome'
+        variant='tags'
+        width='100%'
+        value='10,20'
+        onChange={e => console.log(e.target.value)}
+      />
+    </Box>
   </Flex>
 )
 

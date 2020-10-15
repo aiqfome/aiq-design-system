@@ -22,11 +22,6 @@ export const basic: React.FC = () => (
       { FlexStart: 'flex-start', FlexEnd: 'flex-end', Center: 'center' },
       'flex-start'
     )}
-    flexDirection={select(
-      'flexDirection',
-      { Row: 'row', Column: 'column' },
-      'row'
-    )}
     backgroundColor={text('backgroundColor', '#fff')}
     variant={select(
       'Variant',

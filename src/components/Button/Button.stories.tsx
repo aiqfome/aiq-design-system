@@ -5,6 +5,7 @@ import { FaHamburger } from 'react-icons/fa'
 
 import { Button } from './Button'
 import { Flex } from '../Flex'
+import { Icon } from '../Icon'
 
 export default {
   component: Button,
@@ -73,6 +74,72 @@ export const Contained: React.FC = (): ReactElement => (
         )}
       >
         {text('Label', 'aiqfome!')}
+      </Button>
+    </Flex>
+  </Flex>
+)
+
+export const Disabled: React.FC = (): ReactElement => (
+  <Flex variant='fullCentralized'>
+    <Flex
+      variant='centralized'
+      height='200px'
+      width='400px'
+      border='1px solid lightGrey'
+    >
+      <Button
+        fullWidth={boolean('Full Width', false)}
+        variant='contained'
+        mx={6}
+        disabled={true}
+        palette={'primary'}
+      >
+        contained
+      </Button>
+      <Button
+        fullWidth={boolean('Full Width', false)}
+        variant='outlined'
+        mx={6}
+        disabled={true}
+        palette={'primary'}
+      >
+        outlined
+      </Button>
+      <Button
+        fullWidth={boolean('Full Width', false)}
+        variant='fab'
+        mx={6}
+        disabled={true}
+        palette={'primary'}
+      >
+        fab
+      </Button>
+    </Flex>
+  </Flex>
+)
+
+export const IconButton: React.FC = (): ReactElement => (
+  <Flex variant='fullCentralized'>
+    <Flex
+      variant='centralized'
+      height='200px'
+      width='400px'
+      border='1px solid lightGrey'
+    >
+      <Button variant='icon' mx={6}>
+        <Icon color='primary'>
+          <FaHamburger size={40} />
+        </Icon>
+      </Button>
+      <Button variant='icon' mx={6}>
+        <Icon>
+          <FaHamburger size={30} />
+        </Icon>
+      </Button>
+      <Button variant='icon' mx={6}>
+        <Icon color='primary'>
+          <FaHamburger size={20} />
+        </Icon>
       </Button>
     </Flex>
   </Flex>
