@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
 import styled from 'styled-components'
@@ -48,12 +48,6 @@ export const TimePicker = React.forwardRef(
     const [showPicker, setShowPicker] = useState(false)
     const [inputValue, setInputValue] = useState(value || '')
 
-    useEffect(() => {
-      if (onChange) {
-        onChange(inputValue)
-      }
-    }, [inputValue, onChange])
-
     function applyMask(value) {
       return value
         .replace(/[\D]+/g, '')
@@ -63,6 +57,7 @@ export const TimePicker = React.forwardRef(
 
     function handleInputOnChange(e) {
       setInputValue(applyMask(e.target.value))
+      onChange(applyMask(e.target.value))
     }
 
     function getHour() {
@@ -89,6 +84,7 @@ export const TimePicker = React.forwardRef(
           valueSplited[1] = '00'
         }
         setInputValue(`${valueSplited[0]}:${valueSplited[1]}`)
+        onChange(`${valueSplited[0]}:${valueSplited[1]}`)
       }
     }
 
@@ -97,6 +93,7 @@ export const TimePicker = React.forwardRef(
       if (valueSplited.length > 1) {
         valueSplited[1] = minute
         setInputValue(`${valueSplited[0]}:${valueSplited[1]}`)
+        onChange(`${valueSplited[0]}:${valueSplited[1]}`)
       }
     }
 
@@ -126,6 +123,7 @@ export const TimePicker = React.forwardRef(
             position='absolute'
             top='38px'
             zIndex={1}
+            backgroundColor='#fff'
             border='1px solid #dedede'
             boxShadow='0px 3px 6px #00000017'
             borderRadius='8px'

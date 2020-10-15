@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import PropTypes from 'prop-types'
 
@@ -46,20 +46,27 @@ const PlaceHolderText = styled(Text)`
 `
 
 export const DatePickerRange: React.FC<Props> = ({
-  value = [moment(), moment()],
+  value = null,
   onChange,
   errorMessage,
   errorForm,
   placeholder,
   ...props
 }) => {
-  const [isChangeValue, setIsChangeValue] = useState(false)
-  const [startDate, setStarDate] = useState(value[0])
-  const [endDate, setEndDate] = useState(value[1])
+  const [isChangeValue, setIsChangeValue] = useState(value !== null)
+  const [startDate, setStarDate] = useState(moment())
+  const [endDate, setEndDate] = useState(moment())
   const [focusedInput, setFocusedInput] = useState<
     START_DATE | END_DATE | null
   >(START_DATE)
   const [showDatePicker, setShowDatePicker] = useState(false)
+
+  useEffect(() => {
+    if (value != null && value.length > 1) {
+      setStarDate(value[0])
+      setEndDate(value[1])
+    }
+  }, [value])
 
   function onDatesChange({ startDate, endDate }) {
     setStarDate(startDate)
