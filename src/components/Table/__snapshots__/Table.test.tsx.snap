@@ -2,21 +2,21 @@
 
 exports[`must match with the previous snapshot snapshot renders 1`] = `
 <div
-  className="sc-bdnylx izcdfR"
+  className="sc-AxjAm fTYBBM"
 >
   <div
-    className="sc-jSFkmK liokeG"
+    className="sc-AxgMl cppnVo"
   >
     <table
-      className="sc-eCApGN jcZVBO"
+      className="sc-AxhUy ebcGYy"
       role="table"
     >
       <thead>
         <tr
-          className="sc-gtssRu guLcfq"
+          className="sc-AxirZ fZZzSp"
         >
           <th
-            className="sc-dlnjPT gLLEWb"
+            className="sc-AxiKw cijuVg"
             colSpan={1}
             id="col1"
             role="columnheader"
@@ -25,7 +25,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
             Column 1
           </th>
           <th
-            className="sc-dlnjPT gLLEWb"
+            className="sc-AxiKw cijuVg"
             colSpan={1}
             id="col2"
             role="columnheader"
@@ -39,12 +39,12 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
         role="rowgroup"
       >
         <tr
-          className="sc-gtssRu ecqTxl"
+          className="sc-AxirZ dFrhNG"
           onClick={[Function]}
           role="row"
         >
           <td
-            className="sc-hKFyIo ihUwkE"
+            className="sc-AxhCb jsowzN"
             id="col1"
             role="cell"
             width={150}
@@ -52,7 +52,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
             Hello
           </td>
           <td
-            className="sc-hKFyIo ihUwkE"
+            className="sc-AxhCb jsowzN"
             id="col2"
             role="cell"
             width={150}
@@ -61,12 +61,12 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
           </td>
         </tr>
         <tr
-          className="sc-gtssRu ecqTxl"
+          className="sc-AxirZ dFrhNG"
           onClick={[Function]}
           role="row"
         >
           <td
-            className="sc-hKFyIo ihUwkE"
+            className="sc-AxhCb jsowzN"
             id="col1"
             role="cell"
             width={150}
@@ -74,7 +74,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
             react-table
           </td>
           <td
-            className="sc-hKFyIo ihUwkE"
+            className="sc-AxhCb jsowzN"
             id="col2"
             role="cell"
             width={150}
@@ -83,12 +83,12 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
           </td>
         </tr>
         <tr
-          className="sc-gtssRu ecqTxl"
+          className="sc-AxirZ dFrhNG"
           onClick={[Function]}
           role="row"
         >
           <td
-            className="sc-hKFyIo ihUwkE"
+            className="sc-AxhCb jsowzN"
             id="col1"
             role="cell"
             width={150}
@@ -96,7 +96,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
             whatever
           </td>
           <td
-            className="sc-hKFyIo ihUwkE"
+            className="sc-AxhCb jsowzN"
             id="col2"
             role="cell"
             width={150}

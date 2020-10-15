@@ -2,7 +2,7 @@
 
 exports[`must match with the previous snapshot snapshot renders 1`] = `
 <hr
-  className="sc-gtssRu hFLlLZ"
+  className="sc-AxirZ fwIpkK"
   height="1px"
 />
 `;
