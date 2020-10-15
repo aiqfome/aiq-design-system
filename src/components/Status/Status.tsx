@@ -11,8 +11,6 @@ export interface Props {
 }
 
 const StatusStyled = styled(Text)<Props>`
-  cursor: pointer;
-
   &::before {
     content: '';
     display: inline-block;
