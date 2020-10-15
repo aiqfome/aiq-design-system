@@ -2,22 +2,22 @@
 
 exports[`must match with the previous snapshot snapshot renders 1`] = `
 <div
-  className="sc-AxjAm dnaJYL"
+  className="sc-bdnylx kRxle"
 >
   <div
-    className="sc-AxirZ iBBnaA sc-fzplWN LmPil"
+    className="sc-gtssRu fTARZL sc-iqAbSa cFeHRq"
   >
     <div
-      className="sc-AxirZ hYdxyZ sc-fznyAO bqyZnM"
+      className="sc-gtssRu fMmPTe sc-crzoUp kkqhxT"
       display="flex"
       onClick={[Function]}
     >
       <div
-        className="sc-AxjAm YsXpO"
+        className="sc-bdnylx kJClVT"
         display="flex"
       >
         <span
-          className="sc-AxiKw sc-fzokOt cVcXDe"
+          className="sc-dlnjPT sc-ksluoS liXLca exGkwG"
           color="white"
           onClick={[Function]}
           onKeyDown={[Function]}
@@ -26,12 +26,12 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
           Maringá
         </span>
         <button
-          className="sc-AxgMl eCVHmM"
+          className="sc-jSFkmK keBNwR"
           onClick={[Function]}
           type="button"
         >
           <span
-            className="sc-AxiKw dAUdLG"
+            className="sc-dlnjPT dwbEJR"
             fontSize="medium"
           >
             <svg
@@ -72,14 +72,14 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
       />
     </div>
     <div
-      className="sc-AxjAm jwYwxa sc-fznKkj kJgnVE"
+      className="sc-bdnylx iwcHbD sc-dIsAE lbYQLR"
     >
       <ul>
         <li
           onClick={[Function]}
         >
           <span
-            className="sc-AxiKw heDoSu"
+            className="sc-dlnjPT hFJDnJ"
             cursor="pointer"
           >
             todas as cidades
@@ -89,7 +89,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
           onClick={[Function]}
         >
           <span
-            className="sc-AxiKw heDoSu"
+            className="sc-dlnjPT hFJDnJ"
             cursor="pointer"
           >
             unidades próprias
@@ -99,7 +99,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
           onClick={[Function]}
         >
           <span
-            className="sc-AxiKw heDoSu"
+            className="sc-dlnjPT hFJDnJ"
             cursor="pointer"
           >
             limpar cidades selecionadas
@@ -107,11 +107,11 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
         </li>
       </ul>
       <hr
-        className="sc-AxhCb kYcVnP"
+        className="sc-hKFyIo fpmtJu"
         height="1px"
       />
       <div
-        className="sc-AxirZ ksioAa sc-fznZeY kBIupy"
+        className="sc-gtssRu csfvaJ sc-bqGHjH xSmXf"
       >
         <ul
           aria-labelledby="downshift-1-label"

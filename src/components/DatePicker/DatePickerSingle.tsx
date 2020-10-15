@@ -105,6 +105,7 @@ export const DatePickerSingle: React.FC<Props> = ({
       {showDatePicker && (
         <DatePickerWrapper>
           <DayPickerSingleDateController
+            initialVisibleMonth={() => moment()}
             {...props}
             onDateChange={onDateChange}
             onFocusChange={onFocusChange}

@@ -18,7 +18,14 @@ const TableRowStyled = styled.tr<TableRowProps>`
   ${({ hasAction }) =>
     hasAction &&
     css`
-      cursor: pointer;
+      &:hover {
+        cursor: pointer;
+        background: ${({ theme }) => theme.colors.lightGrey};
+      }
+      &:active {
+        background-color: ${({ theme }) => theme.colors.grey};
+        opacity: 0.7;
+      }
     `}
 
   ${({ expanded }) =>

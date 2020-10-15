@@ -14,15 +14,18 @@ describe('must match with the previous snapshot', () => {
           {
             path: '/',
             name: 'início',
-            icon: <MdHome />
+            icon: <MdHome />,
+            type: 'external'
           },
           {
             path: '#',
-            name: 'relatório'
+            name: 'relatório',
+            type: 'external'
           },
           {
             path: '#',
-            name: 'pedidos'
+            name: 'pedidos',
+            type: 'external'
           }
         ]}
       />

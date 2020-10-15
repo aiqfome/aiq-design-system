@@ -17,8 +17,6 @@ export const IconStyled = styled(Flex)<Props>`
   ${layout}
 
   cursor: ${props => props.cursor};
-
-  align-items: center;
 `
 
 export const Icon: React.FC<Props> = ({ children, ...props }) => {
@@ -29,4 +27,8 @@ Icon.propTypes = {
   color: PropTypes.string,
   cursor: PropTypes.string,
   children: PropTypes.any
+}
+
+Icon.defaultProps = {
+  alignItems: 'center'
 }

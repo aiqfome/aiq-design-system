@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import styled, { css, DefaultTheme } from 'styled-components'
 import {
   color,
+  ColorProps,
   border,
   BorderProps,
   space,
@@ -13,22 +14,21 @@ import {
   fontSize,
   FontSizeProps,
   fontWeight,
-  FontWeightProps,
-  background,
-  BackgroundColorProps
+  FontWeightProps
 } from 'styled-system'
 
 import { Text } from '../Text'
 import { Tooltip } from '../Tooltip'
 
 export interface Props
-  extends DefaultTheme,
+  extends ColorProps,
+    DefaultTheme,
     SpaceProps,
     BorderProps,
     LayoutProps,
     FontSizeProps,
-    FontWeightProps,
-    BackgroundColorProps {
+    FontWeightProps {
+  color?: string
   count?: number
   children?: ReactNode
   statusColor?: string
@@ -38,8 +38,6 @@ export interface Props
 
 const badgeVariations: { [index: string]: any } = {
   default: css<Props>`
-    color: #fff;
-    background-color: #ff4d4f;
     padding: 1px 8px;
     margin-right: 16px;
     border-radius: 12px;
@@ -47,8 +45,6 @@ const badgeVariations: { [index: string]: any } = {
     font-size: 14px;
   `,
   label: css<Props>`
-    color: #fff;
-    background-color: #ff4d4f;
     cursor: pointer;
     text-align: center;
     border-radius: 4px;
@@ -68,7 +64,7 @@ const badgeVariations: { [index: string]: any } = {
       margin-right: 10px;
       border-radius: 50%;
       background-color: ${({ statusColor, theme }) =>
-        statusColor ? theme.colors[statusColor] : '#ff4d4f'};
+        statusColor ? theme.colors[statusColor] : '#dedede'};
     }
   `
 }
@@ -85,7 +81,6 @@ const BadgeStyled = styled(Text)<Props>`
   ${layout}
   ${fontSize}
   ${fontWeight}
-  ${background}
 `
 
 const getCounter = (value, overflow) => {
@@ -124,14 +119,16 @@ export const Badge: React.FC<Props> = ({
   )
 }
 
-Badge.defaultProps = {
-  variant: 'default'
-}
-
 Badge.propTypes = {
   count: PropTypes.number,
   children: PropTypes.node,
   statusColor: PropTypes.string,
   overflowCount: PropTypes.number,
   variant: PropTypes.oneOf(['label', 'default', 'status'])
+}
+
+Badge.defaultProps = {
+  variant: 'default',
+  color: '#262626',
+  backgroundColor: '#dedede'
 }
