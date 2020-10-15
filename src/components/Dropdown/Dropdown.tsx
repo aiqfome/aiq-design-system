@@ -41,7 +41,7 @@ const DropdownStyled = styled.div<DropdownStyledProps>`
 
   opacity: ${props => (props.disabled ? 0.5 : 1)};
 
-  &:hover{
+  &:hover {
     cursor: ${props => (props.disabled ? 'not-allowed' : 'pointer')};
   }
 
@@ -57,17 +57,16 @@ const DropdownStyled = styled.div<DropdownStyledProps>`
   align-items: center;
   justify-content: space-between;
 
-  span{
+  span {
     flex: 1;
   }
 
-  button{
+  button {
     background: none;
     border: none;
     padding: 0;
     height: 24px;
   }
-
 `
 
 interface ItensStyledProps extends DefaultTheme, LayoutProps {}
@@ -116,7 +115,7 @@ export const Dropdown: React.FC<Props> = ({
   useEffect(() => {
     if (selected) {
       const indexItem = itens.findIndex(item => item.value === selected)
-      if (indexItem) setItemSelect(itens[indexItem])
+      if (indexItem > -1) setItemSelect(itens[indexItem])
     }
   }, [itens, selected])
 

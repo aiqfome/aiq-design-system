@@ -14,6 +14,7 @@ export interface Props {
     icon?: any
     name?: any
     path?: string
+    type?: 'internal' | 'external'
     overlay?: any
   }[]
 }
@@ -116,7 +117,11 @@ export const Breadcrumb: React.FC<Props> = ({ routes }) => {
         crumbs.map((crumb, index) => (
           <BreadcrumbItem overlay={crumb.overlay} key={index}>
             {crumb.path ? (
-              <Link ml={crumb.icon ? '5px' : '0'} href={crumb.path}>
+              <Link
+                ml={crumb.icon ? '5px' : '0'}
+                variant={crumb.type || 'internal'}
+                href={crumb.path}
+              >
                 <Flex>
                   <Icon mr='5px'>{crumb.icon}</Icon>
                   {crumb.name}
