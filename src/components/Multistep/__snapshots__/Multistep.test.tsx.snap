@@ -2,15 +2,15 @@
 
 exports[`must match with the previous snapshot snapshot renders 1`] = `
 <div
-  className="sc-gtssRu eKStiB"
+  className="sc-gtssRu ceevEd"
   width="100%"
 >
   <div
-    className="sc-gtssRu gXnjOF"
+    className="sc-gtssRu gkIlZd"
     width="100%"
   >
     <div
-      className="sc-gtssRu uyTGt"
+      className="sc-gtssRu fRCmdh"
       width="100%"
     >
       <button
@@ -19,7 +19,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
         type="button"
       >
         <div
-          className="sc-gtssRu cOVIHw"
+          className="sc-gtssRu fOkiVE"
           height="24px"
           width="24px"
         >
@@ -48,7 +48,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
       />
     </div>
     <div
-      className="sc-gtssRu uyTGt"
+      className="sc-gtssRu fRCmdh"
       width="100%"
     >
       <button
@@ -57,7 +57,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
         type="button"
       >
         <div
-          className="sc-gtssRu cXOZHt"
+          className="sc-gtssRu fRtZXt"
           height="24px"
           width="24px"
         >
@@ -86,7 +86,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
       />
     </div>
     <div
-      className="sc-gtssRu uyTGt"
+      className="sc-gtssRu fRCmdh"
       width="100%"
     >
       <button
@@ -95,7 +95,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
         type="button"
       >
         <div
-          className="sc-gtssRu cXOZHt"
+          className="sc-gtssRu fRtZXt"
           height="24px"
           width="24px"
         >
@@ -124,7 +124,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
       />
     </div>
     <div
-      className="sc-gtssRu fidRnd"
+      className="sc-gtssRu kFhjJR"
       width="80px"
     >
       <button
@@ -133,7 +133,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
         type="button"
       >
         <div
-          className="sc-gtssRu cXOZHt"
+          className="sc-gtssRu fRtZXt"
           height="24px"
           width="24px"
         >
