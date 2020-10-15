@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import React, { ReactNode, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 
 import { position } from 'styled-system'
@@ -11,6 +11,7 @@ export interface Props extends BoxProps {
   body?: any
   variant?: 'top' | 'right' | 'bottom' | 'left' | 'right-bottom' | 'left-bottom'
   type?: 'default' | 'balloon'
+  onMouseOver?: () => void
 }
 
 const tooltipVariations = {
@@ -132,11 +133,27 @@ const TooltipStyled = styled(Box)<Props>`
 `
 
 export const Tooltip: React.FC<Props> = ({ body, children, ...props }) => {
+  const ref = useRef(document.createElement('div'))
+
+  useEffect(() => {
+    fixPositionInWindow()
+  }, [])
+
+  function fixPositionInWindow() {
+    const { right } = ref.current.getBoundingClientRect()
+    if (right > window.innerWidth) {
+      ref.current.style.left = `auto`
+      ref.current.style.right = `-16px`
+    }
+  }
+
   return (
-    <TooltipStyled {...props}>
+    <TooltipStyled onMouseOver={fixPositionInWindow} {...props}>
       {children}
 
-      <Box className='tooltip'>{body}</Box>
+      <Box refBox={ref} className='tooltip'>
+        {body}
+      </Box>
     </TooltipStyled>
   )
 }

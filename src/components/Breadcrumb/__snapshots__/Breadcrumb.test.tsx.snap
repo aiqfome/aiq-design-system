@@ -15,7 +15,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
         className="sc-bdnylx fSUZen"
       >
         <div
-          className="sc-bdnylx fwWMqI sc-eCApGN cSsZQj"
+          className="sc-bdnylx fvVoEw sc-eCApGN zDsfP"
         >
           <svg
             fill="currentColor"
@@ -51,7 +51,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
         className="sc-bdnylx fSUZen"
       >
         <div
-          className="sc-bdnylx fwWMqI sc-eCApGN cSsZQj"
+          className="sc-bdnylx fvVoEw sc-eCApGN zDsfP"
         />
         relatório
       </div>
@@ -68,7 +68,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
         className="sc-bdnylx fSUZen"
       >
         <div
-          className="sc-bdnylx fwWMqI sc-eCApGN cSsZQj"
+          className="sc-bdnylx fvVoEw sc-eCApGN zDsfP"
         />
         pedidos
       </div>
