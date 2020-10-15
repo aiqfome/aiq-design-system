@@ -19,6 +19,7 @@ export { Switch } from './components/Switch'
 export { TimePicker } from './components/TimePicker'
 export { Text } from './components/Text'
 export { Tooltip } from './components/Tooltip'
+export { Status } from './components/Status'
 
 export { Breadcrumb } from './components/Breadcrumb'
 export { Container } from './components/Container'
