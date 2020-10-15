@@ -2,29 +2,29 @@
 
 exports[`must match with the previous snapshot snapshot renders 1`] = `
 <div
-  className="sc-AxirZ jWSaLS"
+  className="sc-gtssRu ceevEd"
   width="100%"
 >
   <div
-    className="sc-AxirZ iRXzOe"
+    className="sc-gtssRu gkIlZd"
     width="100%"
   >
     <div
-      className="sc-AxirZ crPOlC"
+      className="sc-gtssRu fRCmdh"
       width="100%"
     >
       <button
-        className="sc-AxhUy hlpokz"
+        className="sc-eCApGN hjZHXr"
         onClick={[Function]}
         type="button"
       >
         <div
-          className="sc-AxirZ kzhhPT"
+          className="sc-gtssRu fOkiVE"
           height="24px"
           width="24px"
         >
           <span
-            className="sc-AxjAm dtPdDu"
+            className="sc-bdnylx fNIHTr"
             color="white"
             cursor="pointer"
           >
@@ -32,7 +32,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
           </span>
         </div>
         <span
-          className="sc-AxjAm bFhDvG"
+          className="sc-bdnylx hMBpez"
           color="#eb2f96"
           cursor="pointer"
           fontSize="medium"
@@ -42,27 +42,27 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
         </span>
       </button>
       <hr
-        className="sc-AxhCb iSRrbn"
+        className="sc-hKFyIo yhYLO"
         height="1px"
         width="100%"
       />
     </div>
     <div
-      className="sc-AxirZ crPOlC"
+      className="sc-gtssRu fRCmdh"
       width="100%"
     >
       <button
-        className="sc-AxhUy hlpokz"
+        className="sc-eCApGN hjZHXr"
         onClick={[Function]}
         type="button"
       >
         <div
-          className="sc-AxirZ gPpYLi"
+          className="sc-gtssRu fRtZXt"
           height="24px"
           width="24px"
         >
           <span
-            className="sc-AxjAm dtPdDu"
+            className="sc-bdnylx fNIHTr"
             color="white"
             cursor="pointer"
           >
@@ -70,7 +70,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
           </span>
         </div>
         <span
-          className="sc-AxjAm crNFlD"
+          className="sc-bdnylx kkZeom"
           color="#dedede"
           cursor="pointer"
           fontSize="medium"
@@ -80,27 +80,27 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
         </span>
       </button>
       <hr
-        className="sc-AxhCb iSRrbn"
+        className="sc-hKFyIo yhYLO"
         height="1px"
         width="100%"
       />
     </div>
     <div
-      className="sc-AxirZ crPOlC"
+      className="sc-gtssRu fRCmdh"
       width="100%"
     >
       <button
-        className="sc-AxhUy hlpokz"
+        className="sc-eCApGN hjZHXr"
         onClick={[Function]}
         type="button"
       >
         <div
-          className="sc-AxirZ gPpYLi"
+          className="sc-gtssRu fRtZXt"
           height="24px"
           width="24px"
         >
           <span
-            className="sc-AxjAm dtPdDu"
+            className="sc-bdnylx fNIHTr"
             color="white"
             cursor="pointer"
           >
@@ -108,7 +108,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
           </span>
         </div>
         <span
-          className="sc-AxjAm crNFlD"
+          className="sc-bdnylx kkZeom"
           color="#dedede"
           cursor="pointer"
           fontSize="medium"
@@ -118,27 +118,27 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
         </span>
       </button>
       <hr
-        className="sc-AxhCb iSRrbn"
+        className="sc-hKFyIo yhYLO"
         height="1px"
         width="100%"
       />
     </div>
     <div
-      className="sc-AxirZ gYrQtW"
+      className="sc-gtssRu kFhjJR"
       width="80px"
     >
       <button
-        className="sc-AxhUy hlpokz"
+        className="sc-eCApGN hjZHXr"
         onClick={[Function]}
         type="button"
       >
         <div
-          className="sc-AxirZ gPpYLi"
+          className="sc-gtssRu fRtZXt"
           height="24px"
           width="24px"
         >
           <span
-            className="sc-AxjAm dtPdDu"
+            className="sc-bdnylx fNIHTr"
             color="white"
             cursor="pointer"
           >
@@ -146,7 +146,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
           </span>
         </div>
         <span
-          className="sc-AxjAm crNFlD"
+          className="sc-bdnylx kkZeom"
           color="#dedede"
           cursor="pointer"
           fontSize="medium"
@@ -158,7 +158,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
     </div>
   </div>
   <div
-    className="sc-AxiKw fYVse"
+    className="sc-dlnjPT ldnTBd"
   >
     <h1>
       One
