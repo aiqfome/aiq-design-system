@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { Fragment, useCallback, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
@@ -149,9 +149,8 @@ export const Table: React.FC<TableProps> = ({
           {rows.map(row => {
             prepareRow(row)
             return (
-              <>
+              <Fragment key={row.id}>
                 <TableRow
-                  key={row.id}
                   hoverable={hoverable}
                   onClick={() => getRowAction(row)}
                   hasAction={expandedRowRender || onClickRow}
@@ -183,7 +182,7 @@ export const Table: React.FC<TableProps> = ({
                     </TableCell>
                   </TableRow>
                 )}
-              </>
+              </Fragment>
             )
           })}
         </tbody>
