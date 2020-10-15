@@ -2,7 +2,7 @@
 
 exports[`must match with the previous snapshot snapshot renders 1`] = `
 <div
-  className="sc-bdnylx kFqEoX sc-hKFyIo cxlIbw"
+  className="sc-AxjAm jizlfW sc-AxhCb drseCN"
   height="200px"
   onClick={[Function]}
   onDragEnd={[Function]}
@@ -12,15 +12,15 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
   onDrop={[Function]}
 >
   <input
-    className="sc-eCApGN fA-Dehe"
+    className="sc-AxhUy gVUOgS"
     onChange={[Function]}
     type="file"
   />
   <div
-    className="sc-bdnylx hgKHQl"
+    className="sc-AxjAm ieXQMw"
   >
     <div
-      className="sc-bdnylx Bdjge sc-dlnjPT jJuwhT"
+      className="sc-AxjAm hurACr sc-AxiKw igjaRo"
       color="grey"
     >
       <svg
@@ -44,24 +44,24 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
       </svg>
     </div>
     <span
-      className="sc-gtssRu gocbWW"
+      className="sc-AxirZ dGxRKB"
       color="grey"
     >
       arraste e solte a imagem aqui
     </span>
     <span
-      className="sc-gtssRu gocbWW"
+      className="sc-AxirZ dGxRKB"
       color="grey"
     >
       ou clique para escolher
     </span>
     <span
-      className="sc-gtssRu hUTPWP"
+      className="sc-AxirZ lgiviY"
       color="red"
       fontWeight="medium"
     />
     <div
-      className="sc-bdnylx ftODMf"
+      className="sc-AxjAm jdIqiG"
     />
   </div>
 </div>

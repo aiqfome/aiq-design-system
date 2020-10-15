@@ -2,7 +2,7 @@
 
 exports[`must match with the previous snapshot snapshot renders 1`] = `
 <div
-  className="sc-eCApGN dAeHCi"
+  className="sc-AxhUy hQuupq"
   display="none"
 />
 `;
