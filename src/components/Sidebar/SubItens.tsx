@@ -3,11 +3,11 @@ import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
 import { Text } from '../Text'
-import { Flex } from '../Flex'
+import { Flex, Props as FlexProps } from '../Flex'
 import { Link } from '../Link'
 import { Badge } from '../Badge'
 
-interface Props {
+interface Props extends FlexProps {
   item?: any
   itemOpened?: boolean
   distanceTop?: number
@@ -90,24 +90,19 @@ const SubItensStyled = styled(Flex)<Props>`
             border-bottom-right-radius: 4px;
             box-shadow: 2px 3px 4px #00000029;
 
-            ${
-              typeSubmenu === 'default' &&
-              `
-              margin-top: calc((50px + ${heightScrolledToTop}px) * -1);
+            ${typeSubmenu === 'default' &&
             `
-            }
+              margin-top: calc((50px + ${heightScrolledToTop}px) * -1);
+            `}
 
-            ${
-              typeSubmenu === 'bottom' &&
-              `
+            ${typeSubmenu === 'bottom' &&
+            `
               position: absolute;
               top: ${distanceTop}px;
-            `
-            }
+            `}
 
-            ${
-              typeSubmenu === 'top' &&
-              `
+            ${typeSubmenu === 'top' &&
+            `
               position: absolute;
               top: 0px;
               height: 100vh;
@@ -132,8 +127,7 @@ const SubItensStyled = styled(Flex)<Props>`
                 border-radius: 10px;
                 background: ${theme.colors.primaryLight};
               }
-            `
-            }
+            `}
           `
         }
 
