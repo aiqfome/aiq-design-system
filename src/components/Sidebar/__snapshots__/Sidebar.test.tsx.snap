@@ -25,7 +25,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
         onClick={[Function]}
       >
         <div
-          className="sc-AxjAm eJFVfL sc-AxgMl hQTjSH"
+          className="sc-AxjAm gcAijb sc-AxgMl hrwRBb"
           color="primary"
         >
           <svg
@@ -80,7 +80,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
         onClick={[Function]}
       >
         <div
-          className="sc-AxjAm eJFVfL sc-AxgMl hQTjSH"
+          className="sc-AxjAm gcAijb sc-AxgMl hrwRBb"
           color="primary"
         >
           <svg
@@ -135,7 +135,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
         width="100%"
       >
         <div
-          className="sc-AxjAm eJFVfL sc-AxgMl hQTjSH"
+          className="sc-AxjAm gcAijb sc-AxgMl hrwRBb"
           color="primary"
         >
           <svg
@@ -179,7 +179,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
             18
           </span>
           <div
-            className="sc-AxjAm bFGvKJ sc-AxgMl jRzMod"
+            className="sc-AxjAm CWQzB sc-AxgMl dewfvJ"
             color="primary"
           >
             <svg
@@ -275,7 +275,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
         width="100%"
       >
         <div
-          className="sc-AxjAm eJFVfL sc-AxgMl hQTjSH"
+          className="sc-AxjAm gcAijb sc-AxgMl hrwRBb"
           color="primary"
         >
           <svg
@@ -314,7 +314,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
             </span>
           </div>
           <div
-            className="sc-AxjAm bFGvKJ sc-AxgMl jRzMod"
+            className="sc-AxjAm CWQzB sc-AxgMl dewfvJ"
             color="primary"
           >
             <svg
@@ -452,7 +452,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
         href="https://aiqfome.com/"
       >
         <div
-          className="sc-AxjAm eJFVfL sc-AxgMl hQTjSH"
+          className="sc-AxjAm gcAijb sc-AxgMl hrwRBb"
           color="primary"
         >
           <svg
