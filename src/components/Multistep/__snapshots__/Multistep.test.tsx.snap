@@ -2,15 +2,15 @@
 
 exports[`must match with the previous snapshot snapshot renders 1`] = `
 <div
-  className="sc-gtssRu ceevEd"
+  className="sc-gtssRu pXZtv"
   width="100%"
 >
   <div
-    className="sc-gtssRu gkIlZd"
+    className="sc-gtssRu dtimiL"
     width="100%"
   >
     <div
-      className="sc-gtssRu fRCmdh"
+      className="sc-gtssRu cDlvsX"
       width="100%"
     >
       <button
@@ -19,7 +19,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
         type="button"
       >
         <div
-          className="sc-gtssRu fOkiVE"
+          className="sc-gtssRu kDyxTS"
           height="24px"
           width="24px"
         >
@@ -48,7 +48,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
       />
     </div>
     <div
-      className="sc-gtssRu fRCmdh"
+      className="sc-gtssRu cDlvsX"
       width="100%"
     >
       <button
@@ -57,7 +57,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
         type="button"
       >
         <div
-          className="sc-gtssRu fRtZXt"
+          className="sc-gtssRu jlYlvj"
           height="24px"
           width="24px"
         >
@@ -86,7 +86,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
       />
     </div>
     <div
-      className="sc-gtssRu fRCmdh"
+      className="sc-gtssRu cDlvsX"
       width="100%"
     >
       <button
@@ -95,7 +95,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
         type="button"
       >
         <div
-          className="sc-gtssRu fRtZXt"
+          className="sc-gtssRu jlYlvj"
           height="24px"
           width="24px"
         >
@@ -124,7 +124,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
       />
     </div>
     <div
-      className="sc-gtssRu kFhjJR"
+      className="sc-gtssRu cNJJuD"
       width="80px"
     >
       <button
@@ -133,7 +133,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
         type="button"
       >
         <div
-          className="sc-gtssRu fRtZXt"
+          className="sc-gtssRu jlYlvj"
           height="24px"
           width="24px"
         >

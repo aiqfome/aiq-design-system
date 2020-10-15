@@ -2,11 +2,11 @@
 
 exports[`must match with the previous snapshot snapshot renders 1`] = `
 <div
-  className="sc-bdnylx kEgTGf sc-eCApGN gNjMwb"
+  className="sc-bdnylx iGqSXl sc-eCApGN gNjMwb"
   disabled={false}
 >
   <button
-    className="sc-hKFyIo kgKtRh sc-jSFkmK iGgYrg"
+    className="sc-hKFyIo bjrGlD sc-jSFkmK iGgYrg"
     cursor="not-allowed"
     onClick={[Function]}
     type="button"
@@ -36,7 +36,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
     </span>
   </button>
   <button
-    className="sc-hKFyIo kgKtRh sc-jSFkmK iEDKaJ"
+    className="sc-hKFyIo bjrGlD sc-jSFkmK iEDKaJ"
     onClick={[Function]}
     type="button"
   >
@@ -54,7 +54,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
     </span>
   </button>
   <button
-    className="sc-hKFyIo kgKtRh sc-jSFkmK lfQNBo"
+    className="sc-hKFyIo bjrGlD sc-jSFkmK lfQNBo"
     cursor=""
     onClick={[Function]}
     type="button"
