@@ -12,12 +12,9 @@ import {
   TypographyProps
 } from 'styled-system'
 
-export interface Props
-  extends SpaceProps,
-    ColorProps,
-    LayoutProps,
-    TypographyProps {
+export interface Props extends SpaceProps, LayoutProps, TypographyProps {
   children?: any
+  wrap?: any
 }
 
 const TableHeaderStyled = styled.th<Props>`
@@ -39,10 +36,11 @@ const TableHeaderStyled = styled.th<Props>`
   ${typography}
 `
 
-export const TableHead: React.FC = ({ children, ...props }) => {
+export const TableHead: React.FC<Props> = ({ children, wrap, ...props }) => {
   return <TableHeaderStyled {...props}>{children}</TableHeaderStyled>
 }
 
 TableHead.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
+  wrap: PropTypes.any
 }
