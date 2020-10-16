@@ -184,17 +184,14 @@ export const Tabs: React.FC<TabsProps> = ({
 
   return (
     <TabStyled {...props}>
-      <FlexStyled
-        isMobile={isMobile}
-        scrollPosition={scrollPosition}
-        {...wrapperProps}
-      >
+      <FlexStyled isMobile={isMobile} scrollPosition={scrollPosition}>
         <Flex
           flex={1}
+          ref={refFlex}
           overflow='hidden'
           position='relative'
           onClick={handleClick}
-          ref={refFlex}
+          {...wrapperProps}
         >
           {children}
         </Flex>
