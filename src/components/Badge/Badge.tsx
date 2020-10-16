@@ -45,7 +45,6 @@ const badgeVariations: { [index: string]: any } = {
     font-size: 14px;
   `,
   label: css<Props>`
-    cursor: pointer;
     text-align: center;
     border-radius: 4px;
     padding: 5px 10px;

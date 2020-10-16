@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled, { css } from 'styled-components'
 import PropTypes from 'prop-types'
 import { useCombobox } from 'downshift'
@@ -94,6 +94,8 @@ export const Select: React.FC<Props> = ({
   ...props
 }) => {
   const [inputItems, setInputItems] = useState(items)
+
+  useEffect(() => setInputItems(items), [items])
 
   const { backgroundColor, border, width, maxWidth } = props
   const boxStyled = {
