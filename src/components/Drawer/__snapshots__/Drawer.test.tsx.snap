@@ -2,10 +2,10 @@
 
 exports[`must match with the previous snapshot snapshot renders 1`] = `
 <div
-  className="sc-bdnylx dTrXQw"
+  className="sc-AxjAm kBdQRN"
 >
   <span
-    className="sc-gtssRu kUMpil"
+    className="sc-AxirZ bGDsjS"
   >
     Drawer component!
   </span>

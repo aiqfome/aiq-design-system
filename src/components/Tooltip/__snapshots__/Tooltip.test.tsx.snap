@@ -2,20 +2,20 @@
 
 exports[`must match with the previous snapshot snapshot renders 1`] = `
 <div
-  className="sc-hKFyIo jOIBGF"
+  className="sc-AxhCb xqgDB"
 >
   <div
-    className="sc-bdnylx gxDRmI sc-gtssRu fcLWwB"
+    className="sc-AxjAm kIbrzl sc-AxirZ dKLBze"
     onMouseOver={[Function]}
   >
     <span
-      className="sc-dlnjPT hFJDnJ"
+      className="sc-AxiKw heDoSu"
       cursor="pointer"
     >
       Hamburguer
     </span>
     <div
-      className="sc-bdnylx gxDRmI tooltip"
+      className="sc-AxjAm kIbrzl tooltip"
     >
       I'm hungry
     </div>

@@ -2,7 +2,7 @@
 
 exports[`must match with the previous snapshot snapshot renders 1`] = `
 <span
-  className="sc-bdnylx sc-hKFyIo iIiCha bXwEQd"
+  className="sc-AxjAm sc-AxhCb RqETV"
   color="#262626"
 />
 `;
