@@ -64,6 +64,8 @@ const ItemPageStyled = styled(Button)<PaginationStyledProps>`
   padding: 0 8px;
   border: 1px solid #dedede;
   border-radius: 0;
+  justify-content: center;
+  align-items: center;
 
   &:first-child {
     border-radius: 3px 0 0 3px;
@@ -178,8 +180,6 @@ export const Pagination: React.FC<Props> = ({
         <>
           <ItemPageStyled
             size={size}
-            alignItems='center'
-            justifyContent='center'
             cursor={currentPage === 1 ? 'not-allowed' : ''}
             onClick={
               disabled ? undefined : () => handleClickPage(currentPage - 1)
@@ -190,8 +190,6 @@ export const Pagination: React.FC<Props> = ({
 
           <ItemPageStyled
             size={size}
-            alignItems='center'
-            justifyContent='center'
             active={currentPage === 1}
             onClick={disabled ? undefined : () => handleClickPage(1)}
           >
@@ -200,12 +198,7 @@ export const Pagination: React.FC<Props> = ({
             </Text>
           </ItemPageStyled>
           {currentPage - 2 > 0 && count > 6 && (
-            <ItemPageStyled
-              size={size}
-              cursor='auto'
-              alignItems='center'
-              justifyContent='center'
-            >
+            <ItemPageStyled size={size} cursor='auto'>
               <Text color='almostBlack' fontSize='default'>
                 ...
               </Text>
@@ -215,9 +208,7 @@ export const Pagination: React.FC<Props> = ({
           {pagesToShow.map(page => (
             <ItemPageStyled
               size={size}
-              alignItems='center'
               key={page.toString()}
-              justifyContent='center'
               active={page === currentPage}
               onClick={disabled ? undefined : () => handleClickPage(page)}
             >
@@ -227,12 +218,7 @@ export const Pagination: React.FC<Props> = ({
             </ItemPageStyled>
           ))}
           {currentPage + 3 < pages[pages.length - 1] && count > 6 && (
-            <ItemPageStyled
-              size={size}
-              cursor='auto'
-              alignItems='center'
-              justifyContent='center'
-            >
+            <ItemPageStyled size={size} cursor='auto'>
               <Text color='almostBlack' fontSize='default'>
                 ...
               </Text>
@@ -242,8 +228,6 @@ export const Pagination: React.FC<Props> = ({
           {pages.length > 1 && (
             <ItemPageStyled
               size={size}
-              alignItems='center'
-              justifyContent='center'
               active={currentPage === pages[pages.length - 1]}
               onClick={
                 disabled
@@ -258,8 +242,6 @@ export const Pagination: React.FC<Props> = ({
           )}
           <ItemPageStyled
             size={size}
-            alignItems='center'
-            justifyContent='center'
             onClick={
               disabled ? undefined : () => handleClickPage(currentPage + 1)
             }
@@ -276,8 +258,6 @@ export const Pagination: React.FC<Props> = ({
         <>
           <ItemPageStyled
             size={size}
-            alignItems='center'
-            justifyContent='center'
             cursor={currentPage === 1 ? 'not-allowed' : ''}
             onClick={
               disabled ? undefined : () => handleClickPage(currentPage - 1)
@@ -288,8 +268,6 @@ export const Pagination: React.FC<Props> = ({
 
           <ItemPageStyled
             size={size}
-            alignItems='center'
-            justifyContent='center'
             active={currentPage === 1}
             onClick={disabled ? undefined : () => handleClickPage(1)}
           >
@@ -299,12 +277,7 @@ export const Pagination: React.FC<Props> = ({
           </ItemPageStyled>
 
           {currentPage - 2 > 0 && (
-            <ItemPageStyled
-              size={size}
-              cursor='auto'
-              alignItems='center'
-              justifyContent='center'
-            >
+            <ItemPageStyled size={size} cursor='auto'>
               <Text color='almostBlack' fontSize='default'>
                 ...
               </Text>
@@ -314,9 +287,7 @@ export const Pagination: React.FC<Props> = ({
           {pagesToShow.map(page => (
             <ItemPageStyled
               size={size}
-              alignItems='center'
               key={page.toString()}
-              justifyContent='center'
               active={page === currentPage}
               onClick={disabled ? undefined : () => handleClickPage(page)}
             >
@@ -328,8 +299,6 @@ export const Pagination: React.FC<Props> = ({
 
           <ItemPageStyled
             size={size}
-            alignItems='center'
-            justifyContent='center'
             onClick={
               disabled ? undefined : () => handleClickPage(currentPage + 1)
             }
