@@ -2,16 +2,16 @@
 
 exports[`must match with the previous snapshot snapshot renders 1`] = `
 <div
-  className="sc-gtssRu eBuKCe"
+  className="sc-gtssRu kZBqdD"
 >
   <ul
     className="sc-dlnjPT cfWhEs"
   >
     <div
-      className="sc-gtssRu dbvyHO sc-hKFyIo jYZvMs"
+      className="sc-gtssRu feDDrn sc-hKFyIo jYZvMs"
     >
       <div
-        className="sc-gtssRu KSooV"
+        className="sc-gtssRu fHrmfg"
         onClick={[Function]}
         overflow="hidden"
       >
@@ -55,7 +55,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
     </div>
   </ul>
   <div
-    className="sc-gtssRu dbvyHO sc-jSFkmK ehsqFt"
+    className="sc-gtssRu feDDrn sc-jSFkmK ehsqFt"
   >
     Item One
   </div>
