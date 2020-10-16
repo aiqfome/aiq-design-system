@@ -2,30 +2,30 @@
 
 exports[`must match with the previous snapshot snapshot renders 1`] = `
 <div
-  className="sc-AxjAm ehHKgv sc-fznyAO ga-dXXG"
+  className="sc-bdnylx iJzQrS sc-crzoUp dGthiN"
   width="100%"
 >
   <hr
-    className="sc-AxirZ lcUwot"
+    className="sc-gtssRu iReMCa"
     height="1px"
     width="100%"
   />
   <ul
-    className="sc-fzplWN gsbudo"
+    className="sc-iqAbSa gTivKn"
     id="itens-sidebar"
   >
     <li
-      className="sc-fzoLsD gSVrNH"
+      className="sc-jrsJCI gXszzL"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <a
-        className="sc-AxhCb eMREeU sc-fzpans hLMgdB"
+        className="sc-hKFyIo lnXPzF sc-kEqYlL fMZFQE"
         href="/dashboard"
         onClick={[Function]}
       >
         <div
-          className="sc-AxjAm kvulqi sc-AxgMl hrwRBb"
+          className="sc-bdnylx jXVINj sc-jSFkmK gKYeSN"
           color="primary"
         >
           <svg
@@ -49,14 +49,14 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
           </svg>
         </div>
         <div
-          className="sc-AxjAm gRDpUD"
+          className="sc-bdnylx iirJyy"
           onClick={[Function]}
         >
           <div
-            className="sc-AxjAm kjILun"
+            className="sc-bdnylx fpkunC"
           >
             <span
-              className="sc-AxiKw fYlGdG"
+              className="sc-dlnjPT ehZiQN"
               color="darkerGrey"
               cursor="pointer"
             >
@@ -66,21 +66,21 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
         </div>
       </a>
       <div
-        className="sc-AxjAm dOVtOv sc-fzozJi fqopQX hide"
+        className="sc-bdnylx jDchNm sc-pNWxx iUeVWT hide"
       />
     </li>
     <li
-      className="sc-fzoLsD gSVrNH"
+      className="sc-jrsJCI gXszzL"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <a
-        className="sc-AxhCb eMREeU sc-fzpans hLMgdB"
+        className="sc-hKFyIo lnXPzF sc-kEqYlL fMZFQE"
         href="/pedidos"
         onClick={[Function]}
       >
         <div
-          className="sc-AxjAm kvulqi sc-AxgMl hrwRBb"
+          className="sc-bdnylx jXVINj sc-jSFkmK gKYeSN"
           color="primary"
         >
           <svg
@@ -104,14 +104,14 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
           </svg>
         </div>
         <div
-          className="sc-AxjAm gRDpUD"
+          className="sc-bdnylx iirJyy"
           onClick={[Function]}
         >
           <div
-            className="sc-AxjAm kjILun"
+            className="sc-bdnylx fpkunC"
           >
             <span
-              className="sc-AxiKw fYlGdG"
+              className="sc-dlnjPT ehZiQN"
               color="darkerGrey"
               cursor="pointer"
             >
@@ -121,21 +121,21 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
         </div>
       </a>
       <div
-        className="sc-AxjAm dOVtOv sc-fzozJi fqopQX hide"
+        className="sc-bdnylx jDchNm sc-pNWxx iUeVWT hide"
       />
     </li>
     <li
-      className="sc-fzoLsD gSVrNH"
+      className="sc-jrsJCI gXszzL"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-AxjAm iBmZUX"
+        className="sc-bdnylx gaooty"
         onClick={[Function]}
         width="100%"
       >
         <div
-          className="sc-AxjAm kvulqi sc-AxgMl hrwRBb"
+          className="sc-bdnylx jXVINj sc-jSFkmK gKYeSN"
           color="primary"
         >
           <svg
@@ -159,14 +159,14 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
           </svg>
         </div>
         <div
-          className="sc-AxjAm gRDpUD"
+          className="sc-bdnylx iirJyy"
           onClick={[Function]}
         >
           <div
-            className="sc-AxjAm kjILun"
+            className="sc-bdnylx fpkunC"
           >
             <span
-              className="sc-AxiKw fYlGdG"
+              className="sc-dlnjPT ehZiQN"
               color="darkerGrey"
               cursor="pointer"
             >
@@ -174,13 +174,13 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
             </span>
           </div>
           <span
-            className="sc-AxiKw sc-AxmLO hJqGOu"
+            className="sc-dlnjPT sc-fujyUd cqCiFv tOvIi"
             color="#262626"
           >
             18
           </span>
           <div
-            className="sc-AxjAm kuAltw sc-AxgMl dewfvJ"
+            className="sc-bdnylx hpkQLl sc-jSFkmK lmEKfj"
             color="primary"
           >
             <svg
@@ -206,17 +206,17 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
         </div>
       </div>
       <div
-        className="sc-AxjAm dOVtOv sc-fzozJi fqopQX hide"
+        className="sc-bdnylx jDchNm sc-pNWxx iUeVWT hide"
       >
         <ul>
           <li>
             <a
-              className="sc-AxhCb eMREeU"
+              className="sc-hKFyIo lnXPzF"
               href="/subItem"
               onClick={[Function]}
             >
               <span
-                className="sc-AxiKw BfAh"
+                className="sc-dlnjPT ewrAni"
                 color="darkGrey"
                 cursor="pointer"
                 fontSize="medium"
@@ -227,12 +227,12 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
           </li>
           <li>
             <a
-              className="sc-AxhCb eMREeU"
+              className="sc-hKFyIo lnXPzF"
               href="/subItem"
               onClick={[Function]}
             >
               <span
-                className="sc-AxiKw BfAh"
+                className="sc-dlnjPT ewrAni"
                 color="darkGrey"
                 cursor="pointer"
                 fontSize="medium"
@@ -243,12 +243,12 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
           </li>
           <li>
             <a
-              className="sc-AxhCb eMREeU"
+              className="sc-hKFyIo lnXPzF"
               href="/subItem"
               onClick={[Function]}
             >
               <span
-                className="sc-AxiKw BfAh"
+                className="sc-dlnjPT ewrAni"
                 color="darkGrey"
                 cursor="pointer"
                 fontSize="medium"
@@ -256,7 +256,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
                 Sub Item
               </span>
               <span
-                className="sc-AxiKw sc-AxmLO hJqGOu"
+                className="sc-dlnjPT sc-fujyUd cqCiFv tOvIi"
                 color="#262626"
               >
                 18
@@ -267,17 +267,17 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
       </div>
     </li>
     <li
-      className="sc-fzoLsD gSVrNH"
+      className="sc-jrsJCI gXszzL"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <div
-        className="sc-AxjAm iBmZUX"
+        className="sc-bdnylx gaooty"
         onClick={[Function]}
         width="100%"
       >
         <div
-          className="sc-AxjAm kvulqi sc-AxgMl hrwRBb"
+          className="sc-bdnylx jXVINj sc-jSFkmK gKYeSN"
           color="primary"
         >
           <svg
@@ -301,14 +301,14 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
           </svg>
         </div>
         <div
-          className="sc-AxjAm gRDpUD"
+          className="sc-bdnylx iirJyy"
           onClick={[Function]}
         >
           <div
-            className="sc-AxjAm kjILun"
+            className="sc-bdnylx fpkunC"
           >
             <span
-              className="sc-AxiKw fYlGdG"
+              className="sc-dlnjPT ehZiQN"
               color="darkerGrey"
               cursor="pointer"
             >
@@ -316,7 +316,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
             </span>
           </div>
           <div
-            className="sc-AxjAm kuAltw sc-AxgMl dewfvJ"
+            className="sc-bdnylx hpkQLl sc-jSFkmK lmEKfj"
             color="primary"
           >
             <svg
@@ -342,17 +342,17 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
         </div>
       </div>
       <div
-        className="sc-AxjAm dOVtOv sc-fzozJi fqopQX hide"
+        className="sc-bdnylx jDchNm sc-pNWxx iUeVWT hide"
       >
         <ul>
           <li>
             <a
-              className="sc-AxhCb eMREeU"
+              className="sc-hKFyIo lnXPzF"
               href="/subItem"
               onClick={[Function]}
             >
               <span
-                className="sc-AxiKw BfAh"
+                className="sc-dlnjPT ewrAni"
                 color="darkGrey"
                 cursor="pointer"
                 fontSize="medium"
@@ -363,12 +363,12 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
           </li>
           <li>
             <a
-              className="sc-AxhCb eMREeU"
+              className="sc-hKFyIo lnXPzF"
               href="/subItem"
               onClick={[Function]}
             >
               <span
-                className="sc-AxiKw BfAh"
+                className="sc-dlnjPT ewrAni"
                 color="darkGrey"
                 cursor="pointer"
                 fontSize="medium"
@@ -379,12 +379,12 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
           </li>
           <li>
             <a
-              className="sc-AxhCb eMREeU"
+              className="sc-hKFyIo lnXPzF"
               href="/subItem"
               onClick={[Function]}
             >
               <span
-                className="sc-AxiKw BfAh"
+                className="sc-dlnjPT ewrAni"
                 color="darkGrey"
                 cursor="pointer"
                 fontSize="medium"
@@ -395,12 +395,12 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
           </li>
           <li>
             <a
-              className="sc-AxhCb eMREeU"
+              className="sc-hKFyIo lnXPzF"
               href="/subItem"
               onClick={[Function]}
             >
               <span
-                className="sc-AxiKw BfAh"
+                className="sc-dlnjPT ewrAni"
                 color="darkGrey"
                 cursor="pointer"
                 fontSize="medium"
@@ -411,12 +411,12 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
           </li>
           <li>
             <a
-              className="sc-AxhCb eMREeU"
+              className="sc-hKFyIo lnXPzF"
               href="/subItem"
               onClick={[Function]}
             >
               <span
-                className="sc-AxiKw BfAh"
+                className="sc-dlnjPT ewrAni"
                 color="darkGrey"
                 cursor="pointer"
                 fontSize="medium"
@@ -427,12 +427,12 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
           </li>
           <li>
             <a
-              className="sc-AxhCb eMREeU"
+              className="sc-hKFyIo lnXPzF"
               href="/subItem"
               onClick={[Function]}
             >
               <span
-                className="sc-AxiKw BfAh"
+                className="sc-dlnjPT ewrAni"
                 color="darkGrey"
                 cursor="pointer"
                 fontSize="medium"
@@ -445,16 +445,16 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
       </div>
     </li>
     <li
-      className="sc-fzoLsD gSVrNH"
+      className="sc-jrsJCI gXszzL"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
       <a
-        className="sc-AxhUy dzdgDV sc-fzpans hLMgdB"
+        className="sc-eCApGN gHPeBR sc-kEqYlL fMZFQE"
         href="https://aiqfome.com/"
       >
         <div
-          className="sc-AxjAm kvulqi sc-AxgMl hrwRBb"
+          className="sc-bdnylx jXVINj sc-jSFkmK gKYeSN"
           color="primary"
         >
           <svg
@@ -478,14 +478,14 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
           </svg>
         </div>
         <div
-          className="sc-AxjAm gRDpUD"
+          className="sc-bdnylx iirJyy"
           onClick={[Function]}
         >
           <div
-            className="sc-AxjAm kjILun"
+            className="sc-bdnylx fpkunC"
           >
             <span
-              className="sc-AxiKw fYlGdG"
+              className="sc-dlnjPT ehZiQN"
               color="darkerGrey"
               cursor="pointer"
             >
@@ -495,7 +495,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
         </div>
       </a>
       <div
-        className="sc-AxjAm dOVtOv sc-fzozJi fqopQX hide"
+        className="sc-bdnylx jDchNm sc-pNWxx iUeVWT hide"
       />
     </li>
   </ul>
