@@ -24,7 +24,7 @@ export interface TableCellProps
     LayoutProps,
     TypographyProps {
   children: ReactNode
-  wrap?: boolean | undefined | null
+  wrap?: boolean | undefined | null | number
 }
 
 const TableCellStyled = styled.td<TableCellProps>`
@@ -45,9 +45,14 @@ const TableCellStyled = styled.td<TableCellProps>`
   ${typography}
 `
 
-export const TableCell: React.FC<Props> = ({ children, colspan, ...props }) => {
+export const TableCell: React.FC<Props> = ({
+  children,
+  colspan,
+  wrap = false,
+  ...props
+}) => {
   return (
-    <TableCellStyled colSpan={colspan} {...props}>
+    <TableCellStyled wrap={wrap ? 1 : 0} colSpan={colspan} {...props}>
       {children}
     </TableCellStyled>
   )
