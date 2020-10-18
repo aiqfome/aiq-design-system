@@ -98,3 +98,35 @@ export const WithSufix: React.FC = () => {
     </Flex>
   )
 }
+
+export const Loading: React.FC = () => {
+  const itens = [
+    { label: 'React', value: 1 },
+    { label: 'CSS', value: 2 },
+    { label: 'PHP', value: 3 },
+    { label: 'HTML', value: 4 }
+  ]
+  const [selectedItem, setSelectedItem] = useState(itens[0])
+  return (
+    <Flex variant='fullCentralized'>
+      <Select
+        mr='32px'
+        variant='outlined'
+        isLoading={true}
+        label={text('label', 'aiq-design-system')}
+        items={object('items', itens)}
+        sufix={<MdSearch />}
+      />
+      <Select
+        selectedItem={selectedItem}
+        isLoading={true}
+        handleSelectedItemChange={({ selectedItem }) =>
+          setSelectedItem(selectedItem)
+        }
+        label={text('label', 'aiq-design-system')}
+        items={object('items', itens)}
+        sufix={<MdSearch />}
+      />
+    </Flex>
+  )
+}

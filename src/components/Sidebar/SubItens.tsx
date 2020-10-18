@@ -90,19 +90,24 @@ const SubItensStyled = styled(Flex)<Props>`
             border-bottom-right-radius: 4px;
             box-shadow: 2px 3px 4px #00000029;
 
-            ${typeSubmenu === 'default' &&
-            `
+            ${
+              typeSubmenu === 'default' &&
+              `
               margin-top: calc((50px + ${heightScrolledToTop}px) * -1);
-            `}
-
-            ${typeSubmenu === 'bottom' &&
             `
+            }
+
+            ${
+              typeSubmenu === 'bottom' &&
+              `
               position: absolute;
               top: ${distanceTop}px;
-            `}
-
-            ${typeSubmenu === 'top' &&
             `
+            }
+
+            ${
+              typeSubmenu === 'top' &&
+              `
               position: absolute;
               top: 0px;
               height: 100vh;
@@ -127,7 +132,8 @@ const SubItensStyled = styled(Flex)<Props>`
                 border-radius: 10px;
                 background: ${theme.colors.primaryLight};
               }
-            `}
+            `
+            }
           `
         }
 
@@ -201,7 +207,13 @@ export const SubItens: React.FC<Props> = ({
                   {subItem.name}
                 </Text>
 
-                {subItem.badge && <Badge count={subItem.badge} />}
+                {subItem.badge && (
+                  <Badge
+                    backgroundColor='error'
+                    color='white'
+                    count={subItem.badge}
+                  />
+                )}
               </Link>
             </li>
           ))}

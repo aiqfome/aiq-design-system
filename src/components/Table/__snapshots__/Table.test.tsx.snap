@@ -2,7 +2,7 @@
 
 exports[`must match with the previous snapshot snapshot renders 1`] = `
 <div
-  className="sc-bdnylx keWkrb"
+  className="sc-bdnylx wGAno"
 >
   <div
     className="sc-jSFkmK liokeG"
@@ -44,18 +44,20 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
           role="row"
         >
           <td
-            className="sc-hKFyIo ihUwkE"
+            className="sc-hKFyIo cHyMeM"
             id="col1"
             role="cell"
             width={150}
+            wrap={0}
           >
             Hello
           </td>
           <td
-            className="sc-hKFyIo ihUwkE"
+            className="sc-hKFyIo cHyMeM"
             id="col2"
             role="cell"
             width={150}
+            wrap={0}
           >
             World
           </td>
@@ -66,18 +68,20 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
           role="row"
         >
           <td
-            className="sc-hKFyIo ihUwkE"
+            className="sc-hKFyIo cHyMeM"
             id="col1"
             role="cell"
             width={150}
+            wrap={0}
           >
             react-table
           </td>
           <td
-            className="sc-hKFyIo ihUwkE"
+            className="sc-hKFyIo cHyMeM"
             id="col2"
             role="cell"
             width={150}
+            wrap={0}
           >
             rocks
           </td>
@@ -88,18 +92,20 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
           role="row"
         >
           <td
-            className="sc-hKFyIo ihUwkE"
+            className="sc-hKFyIo cHyMeM"
             id="col1"
             role="cell"
             width={150}
+            wrap={0}
           >
             whatever
           </td>
           <td
-            className="sc-hKFyIo ihUwkE"
+            className="sc-hKFyIo cHyMeM"
             id="col2"
             role="cell"
             width={150}
+            wrap={0}
           >
             you want
           </td>

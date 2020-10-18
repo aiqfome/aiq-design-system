@@ -64,6 +64,7 @@ const buttonVariations: { [index: string]: any } = {
   `,
   contained: css<Props>`
     border: none;
+    justify-content: center;
 
     ${({ palette }) =>
       palette === 'primary' &&
@@ -94,6 +95,8 @@ const buttonVariations: { [index: string]: any } = {
       `}
   `,
   outlined: css<Props>`
+    justify-content: center;
+
     ${({ palette }) =>
       palette === 'primary' &&
       css`
@@ -129,6 +132,7 @@ const buttonVariations: { [index: string]: any } = {
       `}
   `,
   fab: css<Props>`
+    justify-content: center;
     border-radius: 24px;
     border: none;
     color: ${({ theme }) => theme.colors.white};
@@ -160,6 +164,7 @@ const buttonVariations: { [index: string]: any } = {
       `}
   `,
   icon: css`
+    justify-content: center;
     border: none;
     background: none;
     padding: 8px;
@@ -197,7 +202,6 @@ export const ButtonStyled = styled.button<Props>`
   border-radius: 5px;
   display: flex;
   align-items: center;
-  justify-content: center;
   padding: 10px 20px;
   max-height: 42px;
   cursor: pointer;

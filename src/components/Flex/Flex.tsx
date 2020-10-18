@@ -19,7 +19,9 @@ import {
   flex,
   PositionProps,
   flexbox,
-  FlexboxProps
+  FlexboxProps,
+  textAlign,
+  TextAlignProps
 } from 'styled-system'
 
 export interface Props
@@ -32,7 +34,8 @@ export interface Props
     ColorProps,
     FlexProps,
     FlexboxProps,
-    BorderProps {
+    BorderProps,
+    TextAlignProps {
   variant?: 'auto' | 'centralized' | 'fullCentralized'
   color?: string
   fullHeight?: boolean
@@ -69,6 +72,7 @@ const FlexStyled = styled.div<Props>`
   ${color}
   ${flexbox}
   ${flex}
+  ${textAlign}
 
   display: flex;
   ${({ variant }) => flexVariations[variant || 'auto']}

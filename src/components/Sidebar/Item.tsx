@@ -180,7 +180,13 @@ export const Item: React.FC<ItemProps> = ({
               </Text>
             </Flex>
 
-            {badgeAllItens > 0 && !isOpen && <Badge count={badgeAllItens} />}
+            {badgeAllItens > 0 && !isOpen && (
+              <Badge
+                backgroundColor='error'
+                color='white'
+                count={badgeAllItens}
+              />
+            )}
 
             {item.itens && (
               <Icon color='primary'>
