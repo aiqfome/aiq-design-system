@@ -2,15 +2,15 @@
 
 exports[`must match with the previous snapshot snapshot renders 1`] = `
 <div
-  className="sc-eCApGN gIxNaa sc-bqGHjH"
+  className="sc-AxhUy fYPWbW sc-fznZeY fLrtke"
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
 >
   <div
-    className="sc-bdnylx jDchNm"
+    className="sc-AxjAm bBCOfl"
   >
     <input
-      className="sc-iCoHVE kTQpRu"
+      className="sc-Axmtr lRNal"
       onChange={[Function]}
       placeholder="aiqfome"
       type="text"

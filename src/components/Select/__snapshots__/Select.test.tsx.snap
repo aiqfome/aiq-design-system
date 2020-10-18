@@ -2,7 +2,7 @@
 
 exports[`must match with the previous snapshot snapshot renders 1`] = `
 <div
-  className="sc-bdnylx gxDRmI sc-bqGHjH bkxNvT"
+  className="sc-AxjAm kIbrzl sc-fznZeY hJezha"
 >
   <ul
     aria-labelledby="downshift-1-label"
@@ -11,13 +11,13 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
     role="listbox"
   />
   <div
-    className="sc-bdnylx gxDRmI"
+    className="sc-AxjAm kIbrzl"
   >
     <div
-      className="sc-gtssRu kZBqdD"
+      className="sc-AxirZ beyXHe"
     >
       <input
-        className="sc-iCoHVE kTQpRu"
+        className="sc-Axmtr lRNal"
         onBlur={[Function]}
         onChange={[Function]}
         onClick={[Function]}
@@ -29,12 +29,12 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
     </div>
     <button
       aria-label="toggle menu"
-      className="sc-eCApGN edxISv sc-hBMVcZ fsIsso"
+      className="sc-AxhUy dFkmfx sc-fzqBZW ivqUyR"
       onClick={[Function]}
       type="button"
     >
       <span
-        className="sc-hKFyIo kaXatz"
+        className="sc-AxhCb jNaZSO"
         fontSize="medium"
       >
         <svg

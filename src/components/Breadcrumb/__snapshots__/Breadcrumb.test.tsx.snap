@@ -2,20 +2,20 @@
 
 exports[`must match with the previous snapshot snapshot renders 1`] = `
 <ul
-  className="sc-jSFkmK jVjRpB"
+  className="sc-AxgMl cUkAtX"
 >
   <li
-    className="sc-gKAblj kIvKWl"
+    className="sc-AxheI ifaXoG"
   >
     <a
-      className="sc-dlnjPT hmOVHb"
+      className="sc-AxiKw fkxMDs"
       href="/"
     >
       <div
-        className="sc-bdnylx iarIOG"
+        className="sc-AxjAm fhxEXt"
       >
         <div
-          className="sc-bdnylx eLUdiZ sc-eCApGN zDsfP"
+          className="sc-AxjAm dGFkRi sc-AxhUy gkbmQr"
         >
           <svg
             fill="currentColor"
@@ -41,34 +41,34 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
     </a>
   </li>
   <li
-    className="sc-gKAblj kIvKWl"
+    className="sc-AxheI ifaXoG"
   >
     <a
-      className="sc-dlnjPT gWQLzK"
+      className="sc-AxiKw cOvksZ"
       href="#"
     >
       <div
-        className="sc-bdnylx iarIOG"
+        className="sc-AxjAm fhxEXt"
       >
         <div
-          className="sc-bdnylx eLUdiZ sc-eCApGN zDsfP"
+          className="sc-AxjAm dGFkRi sc-AxhUy gkbmQr"
         />
         relatório
       </div>
     </a>
   </li>
   <li
-    className="sc-gKAblj kIvKWl"
+    className="sc-AxheI ifaXoG"
   >
     <a
-      className="sc-dlnjPT gWQLzK"
+      className="sc-AxiKw cOvksZ"
       href="#"
     >
       <div
-        className="sc-bdnylx iarIOG"
+        className="sc-AxjAm fhxEXt"
       >
         <div
-          className="sc-bdnylx eLUdiZ sc-eCApGN zDsfP"
+          className="sc-AxjAm dGFkRi sc-AxhUy gkbmQr"
         />
         pedidos
       </div>
