@@ -2,10 +2,10 @@
 
 exports[`must match with the previous snapshot snapshot renders 1`] = `
 <div
-  className="sc-AxjAm idduYh"
+  className="sc-bdnylx fCzWeY"
 >
   <div
-    className="sc-AxjAm TQlGd"
+    className="sc-bdnylx kUgMEM"
   />
 </div>
 `;
