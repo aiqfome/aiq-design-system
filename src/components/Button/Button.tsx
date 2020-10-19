@@ -65,6 +65,7 @@ const buttonVariations: { [index: string]: any } = {
   contained: css<Props>`
     border: none;
     justify-content: center;
+    transition: 0.5s;
 
     ${({ palette }) =>
       palette === 'primary' &&
@@ -96,6 +97,7 @@ const buttonVariations: { [index: string]: any } = {
   `,
   outlined: css<Props>`
     justify-content: center;
+    transition: 0.5s;
 
     ${({ palette }) =>
       palette === 'primary' &&
@@ -106,6 +108,7 @@ const buttonVariations: { [index: string]: any } = {
 
         &:hover {
           background: ${({ theme }) => theme.colors.primaryLight};
+          color: ${({ theme }) => theme.colors.white};
         }
       `}
     ${({ palette }) =>
@@ -137,6 +140,7 @@ const buttonVariations: { [index: string]: any } = {
     border: none;
     color: ${({ theme }) => theme.colors.white};
     padding: 14px 21px;
+    transition: 0.5s;
 
     ${({ variantType }) =>
       variantType === 'icon' &&
@@ -169,6 +173,7 @@ const buttonVariations: { [index: string]: any } = {
     background: none;
     padding: 8px;
     border-radius: 50%;
+    transition: 0.5s;
 
     background-position: center;
     transition: background 0.5s;
@@ -206,7 +211,7 @@ export const ButtonStyled = styled.button<Props>`
   max-height: 42px;
   cursor: pointer;
 
-  &:active{
+  &:active {
     opacity: 0.5;
   }
 
@@ -219,7 +224,6 @@ export const ButtonStyled = styled.button<Props>`
         cursor: not-allowed;
       }
     `}
-
 
   ${({ fullWidth }) =>
     fullWidth &&

@@ -75,7 +75,6 @@ const FlexStyled = styled.div<Props>`
   ${textAlign}
 
   display: flex;
-
   ${({ variant }) => flexVariations[variant || 'auto']}
 
   ${({ fullHeight }) =>
