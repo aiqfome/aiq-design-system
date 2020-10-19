@@ -2,7 +2,7 @@
 
 exports[`must match with the previous snapshot snapshot renders 1`] = `
 <div
-  className="sc-bdnylx kvKXMv"
+  className="sc-bdnylx jKlQcp"
 >
   <div
     className="sc-gtssRu fTARZL sc-iqAbSa cFeHRq"
@@ -13,7 +13,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
       onClick={[Function]}
     >
       <div
-        className="sc-bdnylx fwfqsC"
+        className="sc-bdnylx lkJKfk"
         display="flex"
       >
         <span
@@ -26,7 +26,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
           Maringá
         </span>
         <button
-          className="sc-jSFkmK lgKptN"
+          className="sc-jSFkmK ehnJT"
           onClick={[Function]}
           type="button"
         >
@@ -72,7 +72,7 @@ exports[`must match with the previous snapshot snapshot renders 1`] = `
       />
     </div>
     <div
-      className="sc-bdnylx jnKoTi sc-dIsAE jrCLZb"
+      className="sc-bdnylx GMNIU sc-dIsAE jrCLZb"
     >
       <ul>
         <li
