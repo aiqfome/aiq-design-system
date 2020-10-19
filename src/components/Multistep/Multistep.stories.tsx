@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 
 import { Flex } from '../Flex'
 import { Button } from '../Button'
-
 import { Multistep } from './Multistep'
 
 export default {
@@ -15,15 +14,15 @@ const Step: React.FC = ({ children }) => {
   return <h1>{children}</h1>
 }
 
-const steps = [
-  { name: 'StepOne', component: <Step>One</Step> },
-  { name: 'StepTwo', component: <Step>Two</Step> },
-  { name: 'StepThree', component: <Step>Three</Step> },
-  { name: 'StepFour', component: <Step>Four</Step> }
-]
-
 export const Basic: React.FC = () => {
   const [stepCurrent, setStepCurrent] = useState(0)
+
+  const steps = [
+    { name: 'StepOne', component: <Step>One</Step> },
+    { name: 'StepTwo', component: <Step>Two</Step> },
+    { name: 'StepThree', component: <Step>Three</Step> },
+    { name: 'StepFour', component: <Step>Four</Step> }
+  ]
 
   function handleClickBtnNext() {
     setStepCurrent(stepCurrent + 1)
@@ -59,6 +58,13 @@ export const Basic: React.FC = () => {
 
 export const DisabledClickStep: React.FC = () => {
   const [stepCurrent, setStepCurrent] = useState(0)
+
+  const steps = [
+    { name: 'StepOne', component: <Step>One</Step> },
+    { name: 'StepTwo', component: <Step>Two</Step> },
+    { name: 'StepThree', component: <Step>Three</Step> },
+    { name: 'StepFour', component: <Step>Four</Step> }
+  ]
 
   function handleClickBtnNext() {
     setStepCurrent(stepCurrent + 1)
