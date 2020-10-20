@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import React, { ReactNode, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css, DefaultTheme } from 'styled-components'
 import { layout, LayoutProps, shadow, ShadowProps } from 'styled-system'
@@ -63,6 +63,18 @@ export const Drawer: React.FC<Props> = ({
   children,
   ...props
 }) => {
+  useEffect(() => {
+    if (opened) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'auto'
+    }
+
+    return () => {
+      document.body.style.overflow = 'auto'
+    }
+  }, [opened])
+
   return (
     <DrawerStyled opened={opened} variation={variation} {...props}>
       {children}
