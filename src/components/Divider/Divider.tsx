@@ -22,7 +22,6 @@ const LineStyled = styled.hr<Props>`
   ${space}
   ${color}
   border: none;
-
 `
 
 export const Divider: React.FC<Props> = ({
@@ -33,7 +32,12 @@ export const Divider: React.FC<Props> = ({
 }) => {
   if (children) {
     return (
-      <Flex width='100%' alignItems='center' justifyContent='center'>
+      <Flex
+        data-testid='divider-wrapper'
+        width='100%'
+        alignItems='center'
+        justifyContent='center'
+      >
         <LineStyled height={height} backgroundColor={color} {...props} />
         {children}
         <LineStyled height={height} backgroundColor={color} {...props} />
