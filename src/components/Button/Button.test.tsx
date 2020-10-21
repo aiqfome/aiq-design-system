@@ -2,6 +2,8 @@ import React from 'react'
 
 import { fireEvent } from '@testing-library/react'
 
+import { FaHamburger } from 'react-icons/fa'
+
 import { render } from '../utils/test/render'
 
 import { Button } from './Button'
@@ -100,5 +102,27 @@ describe('Button', () => {
 
     expect(button).toHaveClass('__button-icon')
     expect(button).toHaveClass('__button-icon-primary')
+  })
+
+  it('should have render a sufix when prop sufix exists', () => {
+    const { getByTestId } = render(
+      <Button sufix={<FaHamburger />} variant='icon'>
+        Test
+      </Button>
+    )
+
+    const sufix = getByTestId('button-sufix')
+
+    expect(sufix).toBeTruthy()
+  })
+
+  it('should have render a prefix when prop prefix exists', () => {
+    const { getByTestId } = render(
+      <Button prefix={<FaHamburger />}>Test</Button>
+    )
+
+    const prefix = getByTestId('button-prefix')
+
+    expect(prefix).toBeTruthy()
   })
 })

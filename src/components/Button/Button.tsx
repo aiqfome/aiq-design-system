@@ -236,7 +236,7 @@ export const Button: React.FC<Props> = ({
   if (prefix) {
     return (
       <ButtonStyled className={getClassName()} type={type} {...props}>
-        <Icon cursor='pointer' mr={5}>
+        <Icon data-testid='button-prefix' cursor='pointer' mr={5}>
           {prefix}
         </Icon>
         <Text fontSize='medium'>{children}</Text>
@@ -248,7 +248,7 @@ export const Button: React.FC<Props> = ({
     return (
       <ButtonStyled className={getClassName()} type={type} {...props}>
         <Text fontSize='medium'>{children}</Text>
-        <Icon cursor='pointer' ml={5}>
+        <Icon data-testid='button-sufix' cursor='pointer' ml={5}>
           {sufix}
         </Icon>
       </ButtonStyled>
