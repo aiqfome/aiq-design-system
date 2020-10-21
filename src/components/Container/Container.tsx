@@ -58,8 +58,14 @@ const ContainerWrapper: React.FC<Props> = ({
 }) => {
   if (title) {
     return (
-      <StyledContainer {...props}>
-        <Text color='almostBlack' fontWeight='medium' fontSize='xxlarge' p={10}>
+      <StyledContainer data-testid='container' {...props}>
+        <Text
+          data-testid='container-text'
+          color='almostBlack'
+          fontWeight='medium'
+          fontSize='xxlarge'
+          p={10}
+        >
           {title}
         </Text>
 
@@ -72,7 +78,7 @@ const ContainerWrapper: React.FC<Props> = ({
 
   if (header) {
     return (
-      <StyledContainer {...props}>
+      <StyledContainer data-testid='container' {...props}>
         {header}
 
         <Divider />
@@ -82,7 +88,11 @@ const ContainerWrapper: React.FC<Props> = ({
     )
   }
 
-  return <StyledContainer {...props}>{children}</StyledContainer>
+  return (
+    <StyledContainer data-testid='container' {...props}>
+      {children}
+    </StyledContainer>
+  )
 }
 
 export const Container: React.FC<Props> = ({
@@ -100,6 +110,7 @@ export const Container: React.FC<Props> = ({
         <Tabs
           mr='10px'
           pr='15px'
+          data-testid='container-tab'
           variant='card'
           extra={tabsExtra}
           onChange={onChangeTab}
@@ -107,6 +118,7 @@ export const Container: React.FC<Props> = ({
           {tabs.map((tab, index) => (
             <Tab
               {...tab}
+              data-testid='container-tab-item'
               variant='card'
               value={tabIndex}
               key={tab.index || index}
