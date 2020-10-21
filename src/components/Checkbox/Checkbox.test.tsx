@@ -32,7 +32,7 @@ describe('Checkbox', () => {
     expect(handleOnchange).toHaveBeenCalled()
   })
 
-  it('should have to call onChange when click on checkbox', () => {
+  it('should not have to call onChange when click on checkbox disabled', () => {
     const handleOnchange = jest.fn()
 
     const { getByTestId } = render(
