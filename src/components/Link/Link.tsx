@@ -67,24 +67,17 @@ export const Link: React.FC<Props> = ({
   children,
   ...props
 }) => {
-  if (variant === 'external') {
-    return (
-      <ExternalStyled href={href} {...props}>
-        {children}
-      </ExternalStyled>
-    )
-  }
   if (variant === 'internal') {
     return (
-      <InternalStyled to={href} {...props}>
+      <InternalStyled data-testid='link-internal' to={href} {...props}>
         {children}
       </InternalStyled>
     )
   }
   return (
-    <a href={href} {...props}>
+    <ExternalStyled data-testid='link-external' href={href} {...props}>
       {children}
-    </a>
+    </ExternalStyled>
   )
 }
 
