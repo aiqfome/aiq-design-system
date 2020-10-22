@@ -59,4 +59,50 @@ describe('Dropdown', () => {
     expect(handleOnClick).toBeCalled()
     expect(handleOnClick).toHaveBeenLastCalledWith(itens[0])
   })
+
+  it('should have the same number of items from the itens property ', () => {
+    const itens = [
+      { label: 'item1', value: 1 },
+      { label: 'item2', value: 2 },
+      { label: 'item3', value: 3 },
+      { label: 'item4', value: 4 }
+    ]
+
+    const { container, getByTestId } = render(
+      <Dropdown label='Dropdown' itens={itens} />
+    )
+
+    const dropdown = getByTestId('dropdown')
+    fireEvent.click(dropdown)
+
+    const itemsDropdown = container.querySelectorAll('li')
+    expect(itemsDropdown.length).toBe(4)
+  })
+
+  it('should not can to open when dropdown is disabled  ', () => {
+    const handleOnClick = jest.fn()
+
+    const itens = [
+      { label: 'item1', value: 1 },
+      { label: 'item2', value: 2 },
+      { label: 'item3', value: 3 },
+      { label: 'item4', value: 4 }
+    ]
+
+    const { container, getByTestId } = render(
+      <Dropdown
+        label='Dropdown'
+        onChange={handleOnClick}
+        disabled={true}
+        itens={itens}
+      />
+    )
+
+    const dropdown = getByTestId('dropdown')
+    fireEvent.click(dropdown)
+
+    const itemsDropdown = container.querySelectorAll('li')
+    expect(itemsDropdown.length).toBe(0)
+    expect(handleOnClick).not.toBeCalled()
+  })
 })
