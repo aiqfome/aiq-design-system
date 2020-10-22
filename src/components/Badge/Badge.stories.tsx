@@ -13,6 +13,7 @@ export const Basic: React.FC = (): ReactElement => (
     <Badge count={10} />
     <Badge count={1000} backgroundColor='primary' />
     <Badge>olá</Badge>
+    <Badge count={1000}>olá</Badge>
   </Flex>
 )
 
