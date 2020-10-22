@@ -89,7 +89,7 @@ const FlexStyled = styled.div<Props>`
 export const Flex = React.forwardRef<HTMLDivElement, Props>(
   ({ children, color, ...props }, ref) => {
     return (
-      <FlexStyled ref={ref} color={color} {...props}>
+      <FlexStyled data-testid='flex' ref={ref} color={color} {...props}>
         {children}
       </FlexStyled>
     )
