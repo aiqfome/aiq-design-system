@@ -10,28 +10,25 @@ interface Props extends DefaultTheme {
   active?: boolean
   children?: any
   cursor?: string
+  className?: string
   disabled?: boolean
   size?: 'default' | 'small' | 'large'
   onClick?: () => void
 }
 
-const sizesVariants: { [index: string]: any } = {
-  large: css`
+const ItemPageStyled = styled(Button)<Props>`
+  &.__pagination-size-large {
     height: 42px;
     min-width: 42px;
-  `,
-  default: css`
+  }
+  &.__pagination-size-default {
     height: 34px;
     min-width: 34px;
-  `,
-  small: css`
+  }
+  &.__pagination-size-small {
     height: 28px;
     min-width: 28px;
-  `
-}
-
-const ItemPageStyled = styled(Button)<Props>`
-  ${({ size }) => sizesVariants[size || 'default']}
+  }
 
   padding: 0 8px;
   border: 1px solid #dedede;
@@ -76,7 +73,11 @@ export const PaginationItem: React.FC<Props> = ({
   ...props
 }) => {
   return (
-    <ItemPageStyled size={size} {...props}>
+    <ItemPageStyled
+      className={`__pagination-item __pagination-size-${size}`}
+      size={size}
+      {...props}
+    >
       {children}
     </ItemPageStyled>
   )

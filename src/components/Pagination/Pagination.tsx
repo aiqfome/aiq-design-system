@@ -117,6 +117,7 @@ export const Pagination: React.FC<Props> = ({
       {variant === 'default' && count > 0 && (
         <>
           <PaginationItem
+            data-testid='pagination-item-return'
             size={size}
             cursor={currentPage === 1 ? 'not-allowed' : ''}
             onClick={
@@ -128,6 +129,7 @@ export const Pagination: React.FC<Props> = ({
 
           <PaginationItem
             size={size}
+            data-testid='pagination-item-1'
             active={currentPage === 1}
             onClick={disabled ? undefined : () => handleClickPage(1)}
           >
@@ -145,6 +147,7 @@ export const Pagination: React.FC<Props> = ({
 
           {pagesToShow.map(page => (
             <PaginationItem
+              data-testid={`pagination-item-${page}`}
               size={size}
               key={page.toString()}
               active={page === currentPage}
@@ -166,6 +169,7 @@ export const Pagination: React.FC<Props> = ({
           {pages.length > 1 && (
             <PaginationItem
               size={size}
+              data-testid={`pagination-item-${pages[pages.length - 1]}`}
               active={currentPage === pages[pages.length - 1]}
               onClick={
                 disabled
@@ -179,6 +183,7 @@ export const Pagination: React.FC<Props> = ({
             </PaginationItem>
           )}
           <PaginationItem
+            data-testid='pagination-item-next'
             size={size}
             onClick={
               disabled ? undefined : () => handleClickPage(currentPage + 1)
@@ -196,6 +201,7 @@ export const Pagination: React.FC<Props> = ({
         <>
           <PaginationItem
             size={size}
+            data-testid='pagination-item-noCunt-return'
             cursor={currentPage === 1 ? 'not-allowed' : ''}
             onClick={
               disabled ? undefined : () => handleClickPage(currentPage - 1)
@@ -237,6 +243,7 @@ export const Pagination: React.FC<Props> = ({
 
           <PaginationItem
             size={size}
+            data-testid='pagination-item-noCunt-next'
             onClick={
               disabled ? undefined : () => handleClickPage(currentPage + 1)
             }
