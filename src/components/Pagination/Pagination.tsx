@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md'
-import styled, { css, DefaultTheme } from 'styled-components'
+import styled, { css } from 'styled-components'
 
-import { Flex, Props as FlexProps } from '../Flex'
+import { Flex } from '../Flex'
 import { Text } from '../Text'
-import { Button } from '../Button'
+
+import { PaginationItem } from './PaginationItem'
 
 export interface Props {
   count?: number
@@ -18,29 +19,7 @@ export interface Props {
   onChange?: (page: number) => void
 }
 
-interface PaginationStyledProps extends FlexProps, DefaultTheme {
-  active?: boolean
-  cursor?: string
-  disabled?: boolean
-  size?: 'default' | 'small' | 'large'
-}
-
-const sizesVariants: { [index: string]: any } = {
-  large: css`
-    height: 42px;
-    min-width: 42px;
-  `,
-  default: css`
-    height: 34px;
-    min-width: 34px;
-  `,
-  small: css`
-    height: 28px;
-    min-width: 28px;
-  `
-}
-
-const PaginationStyled = styled(Flex)<PaginationStyledProps>`
+const PaginationStyled = styled(Flex)<Props>`
   flex-wrap: wrap;
 
   ${({ disabled }) =>
@@ -54,46 +33,6 @@ const PaginationStyled = styled(Flex)<PaginationStyledProps>`
       & > Button,
       & span {
         cursor: not-allowed !important;
-      }
-    `}
-`
-
-const ItemPageStyled = styled(Button)<PaginationStyledProps>`
-  ${({ size }) => sizesVariants[size || 'default']}
-
-  padding: 0 8px;
-  border: 1px solid #dedede;
-  border-radius: 0;
-  justify-content: center;
-  align-items: center;
-
-  &:first-child {
-    border-radius: 3px 0 0 3px;
-  }
-
-  &:last-child {
-    border-radius: 0 3px 3px 0;
-  }
-
-  &:hover {
-    outline: none;
-    text-decoration: none;
-  }
-
-  cursor: ${({ cursor }) => cursor || 'pointer'};
-
-  & span {
-    cursor: ${({ cursor }) => cursor || 'pointer'};
-  }
-
-  ${({ active, theme }) =>
-    active &&
-    css`
-      background: ${theme.colors.primary};
-      border: 1px solid ${theme.colors.primary};
-
-      span {
-        color: ${theme.colors.white};
       }
     `}
 `
@@ -169,7 +108,6 @@ export const Pagination: React.FC<Props> = ({
 
   return (
     <PaginationStyled
-      variant='auto'
       alignItems='center'
       flexDirection='row'
       disabled={disabled}
@@ -178,7 +116,7 @@ export const Pagination: React.FC<Props> = ({
     >
       {variant === 'default' && count > 0 && (
         <>
-          <ItemPageStyled
+          <PaginationItem
             size={size}
             cursor={currentPage === 1 ? 'not-allowed' : ''}
             onClick={
@@ -186,9 +124,9 @@ export const Pagination: React.FC<Props> = ({
             }
           >
             <MdChevronLeft />
-          </ItemPageStyled>
+          </PaginationItem>
 
-          <ItemPageStyled
+          <PaginationItem
             size={size}
             active={currentPage === 1}
             onClick={disabled ? undefined : () => handleClickPage(1)}
@@ -196,17 +134,17 @@ export const Pagination: React.FC<Props> = ({
             <Text color='almostBlack' fontSize='default'>
               1
             </Text>
-          </ItemPageStyled>
+          </PaginationItem>
           {currentPage - 2 > 0 && count > 6 && (
-            <ItemPageStyled size={size} cursor='auto'>
+            <PaginationItem size={size} cursor='auto'>
               <Text color='almostBlack' fontSize='default'>
                 ...
               </Text>
-            </ItemPageStyled>
+            </PaginationItem>
           )}
 
           {pagesToShow.map(page => (
-            <ItemPageStyled
+            <PaginationItem
               size={size}
               key={page.toString()}
               active={page === currentPage}
@@ -215,18 +153,18 @@ export const Pagination: React.FC<Props> = ({
               <Text color='almostBlack' fontSize='default'>
                 {page}
               </Text>
-            </ItemPageStyled>
+            </PaginationItem>
           ))}
           {currentPage + 3 < pages[pages.length - 1] && count > 6 && (
-            <ItemPageStyled size={size} cursor='auto'>
+            <PaginationItem size={size} cursor='auto'>
               <Text color='almostBlack' fontSize='default'>
                 ...
               </Text>
-            </ItemPageStyled>
+            </PaginationItem>
           )}
 
           {pages.length > 1 && (
-            <ItemPageStyled
+            <PaginationItem
               size={size}
               active={currentPage === pages[pages.length - 1]}
               onClick={
@@ -238,9 +176,9 @@ export const Pagination: React.FC<Props> = ({
               <Text color='almostBlack' fontSize='default'>
                 {pages[pages.length - 1]}
               </Text>
-            </ItemPageStyled>
+            </PaginationItem>
           )}
-          <ItemPageStyled
+          <PaginationItem
             size={size}
             onClick={
               disabled ? undefined : () => handleClickPage(currentPage + 1)
@@ -250,13 +188,13 @@ export const Pagination: React.FC<Props> = ({
             }
           >
             <MdChevronRight />
-          </ItemPageStyled>
+          </PaginationItem>
         </>
       )}
 
       {variant === 'noCount' && (
         <>
-          <ItemPageStyled
+          <PaginationItem
             size={size}
             cursor={currentPage === 1 ? 'not-allowed' : ''}
             onClick={
@@ -264,9 +202,9 @@ export const Pagination: React.FC<Props> = ({
             }
           >
             <MdChevronLeft />
-          </ItemPageStyled>
+          </PaginationItem>
 
-          <ItemPageStyled
+          <PaginationItem
             size={size}
             active={currentPage === 1}
             onClick={disabled ? undefined : () => handleClickPage(1)}
@@ -274,18 +212,18 @@ export const Pagination: React.FC<Props> = ({
             <Text color='almostBlack' fontSize='default'>
               1
             </Text>
-          </ItemPageStyled>
+          </PaginationItem>
 
           {currentPage - 2 > 0 && (
-            <ItemPageStyled size={size} cursor='auto'>
+            <PaginationItem size={size} cursor='auto'>
               <Text color='almostBlack' fontSize='default'>
                 ...
               </Text>
-            </ItemPageStyled>
+            </PaginationItem>
           )}
 
           {pagesToShow.map(page => (
-            <ItemPageStyled
+            <PaginationItem
               size={size}
               key={page.toString()}
               active={page === currentPage}
@@ -294,10 +232,10 @@ export const Pagination: React.FC<Props> = ({
               <Text color='almostBlack' fontSize='default'>
                 {page}
               </Text>
-            </ItemPageStyled>
+            </PaginationItem>
           ))}
 
-          <ItemPageStyled
+          <PaginationItem
             size={size}
             onClick={
               disabled ? undefined : () => handleClickPage(currentPage + 1)
@@ -307,7 +245,7 @@ export const Pagination: React.FC<Props> = ({
             }
           >
             <MdChevronRight />
-          </ItemPageStyled>
+          </PaginationItem>
         </>
       )}
     </PaginationStyled>
@@ -325,6 +263,6 @@ Pagination.propTypes = {
   onChange: PropTypes.func,
   disabled: PropTypes.bool,
   defaultPage: PropTypes.number,
-  size: PropTypes.oneOf(['default', 'small']),
+  size: PropTypes.oneOf(['default', 'small', 'large']),
   variant: PropTypes.oneOf(['default', 'noCount'])
 }
