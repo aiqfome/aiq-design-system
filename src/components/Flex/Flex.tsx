@@ -1,5 +1,5 @@
 import React from 'react'
-import styled, { css, DefaultTheme } from 'styled-components'
+import styled, { DefaultTheme } from 'styled-components'
 import PropTypes from 'prop-types'
 import {
   color,
@@ -50,20 +50,7 @@ export interface Props
   style?: any
 }
 
-const flexVariations: { [index: string]: any } = {
-  auto: css``,
-  centralized: css`
-    justify-content: center;
-    align-items: center;
-  `,
-  fullCentralized: css`
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  `
-}
-
-const FlexStyled = styled.div<Props>`
+const FlexStyled = styled.div`
   ${space}
   ${fontSize}
   ${fontWeight}
@@ -75,21 +62,40 @@ const FlexStyled = styled.div<Props>`
   ${textAlign}
 
   display: flex;
-  ${({ variant }) => flexVariations[variant || 'auto']}
 
-  ${({ fullHeight }) =>
-    !!fullHeight &&
-    css`
-      height: 100vh;
-    `}
+  &.__flex-variant-centralized{
+    justify-content: center;
+    align-items: center;
+  }
+
+  &.__flex-variant-fullCentralized{
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  &.__flex-fullHeight{
+    height: 100vh;
+  } 
 
   ${layout}
 `
 
 export const Flex = React.forwardRef<HTMLDivElement, Props>(
-  ({ children, color, ...props }, ref) => {
+  (
+    { children, color, variant = 'auto', fullHeight, className, ...props },
+    ref
+  ) => {
     return (
-      <FlexStyled data-testid='flex' ref={ref} color={color} {...props}>
+      <FlexStyled
+        data-testid='flex'
+        className={`${className} __flex-variant-${variant} ${
+          fullHeight && '__flex-fullHeight'
+        }`}
+        ref={ref}
+        color={color}
+        {...props}
+      >
         {children}
       </FlexStyled>
     )
@@ -100,6 +106,9 @@ Flex.displayName = 'Flex'
 
 Flex.propTypes = {
   color: PropTypes.string,
+  variant: PropTypes.oneOf(['auto', 'centralized', 'fullCentralized']),
+  fullHeight: PropTypes.bool,
+  className: PropTypes.string,
   onClick: PropTypes.func,
   children: PropTypes.node
 }

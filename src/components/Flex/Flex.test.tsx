@@ -35,4 +35,36 @@ describe('Flex', () => {
     const div = getByText('Flex!')
     expect(div).toBeTruthy()
   })
+
+  it('should have class __flex-variant-centralized when variant equal centralized', () => {
+    const { getByTestId } = render(<Flex variant='centralized' />)
+
+    const div = getByTestId('flex')
+
+    expect(div).toHaveClass('__flex-variant-centralized')
+  })
+
+  it('should have class __flex-variant-fullCentralized when variant equal fullCentralized', () => {
+    const { getByTestId } = render(<Flex variant='fullCentralized' />)
+
+    const div = getByTestId('flex')
+
+    expect(div).toHaveClass('__flex-variant-fullCentralized')
+  })
+
+  it('should have class __fle-fullHeight when have prop fullHeight', () => {
+    const { getByTestId } = render(<Flex fullHeight={true} />)
+
+    const div = getByTestId('flex')
+
+    expect(div).toHaveClass('__flex-fullHeight')
+  })
+
+  it('should have the same class that was pass to prop', () => {
+    const { getByTestId } = render(<Flex className='test' />)
+
+    const div = getByTestId('flex')
+
+    expect(div).toHaveClass('test')
+  })
 })
