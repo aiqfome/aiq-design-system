@@ -44,3 +44,27 @@ export const fullCentralized: React.FC = () => (
     <Text>Flex!</Text>
   </Flex>
 )
+
+export const flexFullHeight: React.FC = () => (
+  <Flex fullHeight={true}>
+    <Text>Flex!</Text>
+  </Flex>
+)
+
+export const Row: React.FC = () => (
+  <Flex flexDirection='row'>
+    <Text>Flex!</Text>
+    <Text>Flex!</Text>
+    <Text>Flex!</Text>
+    <Text>Flex!</Text>
+  </Flex>
+)
+
+export const Column: React.FC = () => (
+  <Flex flexDirection='column'>
+    <Text>Flex!</Text>
+    <Text>Flex!</Text>
+    <Text>Flex!</Text>
+    <Text>Flex!</Text>
+  </Flex>
+)
