@@ -43,14 +43,17 @@ export const Sizes: React.FC = () => {
 }
 
 export const Variants: React.FC = () => {
+  function onChangePage(page) {
+    console.log(page)
+  }
   return (
     <>
       <Flex variant='centralized' mb='20px'>
-        <Pagination variant='noCount' size='large' />
+        <Pagination variant='noCount' onChange={onChangePage} size='large' />
       </Flex>
 
       <Flex variant='centralized'>
-        <Pagination count={8} size='large' />
+        <Pagination count={8} size='large' onChange={onChangePage} />
       </Flex>
     </>
   )

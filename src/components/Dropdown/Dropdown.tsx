@@ -135,7 +135,11 @@ export const Dropdown: React.FC<Props> = ({
 
   return (
     <BoxStyled maxHeight='37px' maxWidth={maxWidth} {...props}>
-      <DropdownStyled onClick={handleClickDropdown} disabled={disabled}>
+      <DropdownStyled
+        data-testid='dropdown'
+        onClick={handleClickDropdown}
+        disabled={disabled}
+      >
         <span>{itemSelected.value != null ? itemSelected.label : label}</span>
         <button type='button'>
           {isOpen ? <MdArrowDropUp size={24} /> : <MdArrowDropDown size={24} />}
@@ -144,7 +148,11 @@ export const Dropdown: React.FC<Props> = ({
       {isOpen && (
         <ItensStyled maxWidth={maxWidth}>
           {itens.map(item => (
-            <li onClick={() => handleClickItem(item)} key={item.value}>
+            <li
+              data-testid='dropdown-item'
+              onClick={() => handleClickItem(item)}
+              key={item.value}
+            >
               {item.label}
             </li>
           ))}

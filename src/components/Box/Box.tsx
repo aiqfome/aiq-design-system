@@ -51,7 +51,7 @@ export const BoxStyled = styled.div`
 `
 
 export const Box: React.FC<Props> = ({ refBox, ...props }) => {
-  return <BoxStyled ref={refBox} {...props} />
+  return <BoxStyled data-testid='box' ref={refBox} {...props} />
 }
 
 Box.propTypes = {

@@ -31,6 +31,7 @@ export interface Props
   color?: string
   count?: number
   children?: ReactNode
+  className?: string
   statusColor?: string
   overflowCount?: number
   variant?: 'label' | 'default'
@@ -88,6 +89,7 @@ export const Badge: React.FC<Props> = ({
   variant,
   children,
   overflowCount,
+  className,
   ...props
 }) => {
   const findClassName = useCallback(() => {
@@ -101,13 +103,18 @@ export const Badge: React.FC<Props> = ({
   }, [variant])
 
   return (
-    <BadgeStyled data-testid='badge' className={findClassName()} {...props}>
+    <BadgeStyled
+      data-testid='badge'
+      className={`${className} ${findClassName()}`}
+      {...props}
+    >
       {getCounter(count, overflowCount) || children}
     </BadgeStyled>
   )
 }
 
 Badge.propTypes = {
+  className: PropTypes.string,
   count: PropTypes.number,
   children: PropTypes.node,
   statusColor: PropTypes.string,

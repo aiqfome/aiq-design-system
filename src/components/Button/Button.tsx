@@ -32,6 +32,7 @@ export interface Props
   onClick?: any
   fullWidth?: boolean
   disabled?: boolean
+  className?: string
   type?: 'button' | 'submit' | 'reset' | undefined
 }
 
@@ -225,13 +226,14 @@ export const Button: React.FC<Props> = ({
   variant = 'text',
   variantType,
   type = 'button',
+  className,
   ...props
 }) => {
   const getClassName = useCallback(() => {
-    return `__button-${variant} __button-${variant}-${palette} ${
+    return `${className} __button-${variant} __button-${variant}-${palette} ${
       variantType && `__button-${variant}-${variantType}`
     }`
-  }, [])
+  }, [palette, variant, variantType])
 
   if (prefix) {
     return (
@@ -265,6 +267,7 @@ export const Button: React.FC<Props> = ({
 Button.propTypes = {
   children: PropTypes.any,
   prefix: PropTypes.any,
+  className: PropTypes.string,
   sufix: PropTypes.any,
   refButton: PropTypes.any,
   palette: PropTypes.oneOf(['primary', 'secondary', 'neutral']),
