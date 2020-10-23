@@ -41,10 +41,10 @@ export const Outlined: React.FC = () => {
 
 export const AutocompleteFalse: React.FC = () => {
   const itens = [
-    { label: 'React', value: 1 },
-    { label: 'CSS', value: 2 },
-    { label: 'PHP', value: 3 },
-    { label: 'HTML', value: 4 }
+    { name: 'React', id: 1 },
+    { name: 'CSS', id: 2 },
+    { name: 'PHP', id: 3 },
+    { name: 'HTML', id: 4 }
   ]
   const [selectedItem, setSelectedItem] = useState(itens[0])
   return (
@@ -71,10 +71,10 @@ export const AutocompleteFalse: React.FC = () => {
 
 export const WithSufix: React.FC = () => {
   const itens = [
-    { label: 'React', value: 1 },
-    { label: 'CSS', value: 2 },
-    { label: 'PHP', value: 3 },
-    { label: 'HTML', value: 4 }
+    { name: 'React', id: 1 },
+    { name: 'CSS', id: 2 },
+    { name: 'PHP', id: 3 },
+    { name: 'HTML', id: 4 }
   ]
   const [selectedItem, setSelectedItem] = useState(itens[0])
   return (
@@ -101,10 +101,10 @@ export const WithSufix: React.FC = () => {
 
 export const Loading: React.FC = () => {
   const itens = [
-    { label: 'React', value: 1 },
-    { label: 'CSS', value: 2 },
-    { label: 'PHP', value: 3 },
-    { label: 'HTML', value: 4 }
+    { name: 'React', id: 1 },
+    { name: 'CSS', id: 2 },
+    { name: 'PHP', id: 3 },
+    { name: 'HTML', id: 4 }
   ]
   const [selectedItem, setSelectedItem] = useState(itens[0])
   return (

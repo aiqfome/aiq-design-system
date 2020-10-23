@@ -11,7 +11,7 @@ import { Button, Props as ButtonProps } from '../Button'
 
 export interface Props extends BoxPros {
   label?: string
-  items?: Array<string | { value: any; label: any }>
+  items?: Array<string | { id: any; name: any }>
   isOpen?: boolean
   variant?: 'outlined'
   prefix?: any
@@ -128,14 +128,14 @@ export const Select: React.FC<Props> = ({
     onSelectedItemChange: handleSelectedItemChange,
     items: inputItems,
     selectedItem,
-    itemToString: item => (typeof item === 'string' ? item : item.label),
+    itemToString: item => (typeof item === 'string' ? item : item.name),
     onInputValueChange: ({ inputValue = '' }) => {
       if (autoComplete) {
         onChangeTextInput(inputValue)
         setInputItems(
           items.filter(item => {
-            const label = typeof item === 'string' ? item : item.label
-            return label.toLowerCase().startsWith(inputValue.toLowerCase())
+            const name = typeof item === 'string' ? item : item.name
+            return name.toLowerCase().startsWith(inputValue.toLowerCase())
           })
         )
       }
@@ -156,11 +156,11 @@ export const Select: React.FC<Props> = ({
           inputItems.length > 0 &&
           inputItems.map((item, index) => (
             <Item
-              key={`${index}`}
+              key={index}
               highlighted={highlightedIndex === index}
               {...getItemProps({ item, index })}
             >
-              {typeof item === 'string' ? item : item.label}
+              {typeof item === 'string' ? item : item.name}
             </Item>
           ))}
       </ul>
@@ -181,6 +181,7 @@ export const Select: React.FC<Props> = ({
           prefix={prefix}
           placeholder={placeholder}
           {...boxStyled}
+          {...getInputProps()}
         />
         {isLoading && (
           <LoadingBox>
