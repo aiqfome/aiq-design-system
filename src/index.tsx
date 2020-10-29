@@ -1,3 +1,4 @@
+export { Actions } from './components/Actions'
 export { Avatar } from './components/Avatar'
 export { Badge } from './components/Badge'
 export { Breadcrumb } from './components/Breadcrumb'
