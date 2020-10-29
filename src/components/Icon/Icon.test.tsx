@@ -1,18 +1,17 @@
 import React from 'react'
 
-import { Icon } from './Icon'
-import { Text } from '../Text'
-
+import { MdStore } from 'react-icons/md'
 import { render } from '../utils/test/render'
 
-describe('must match with the previous snapshot', () => {
-  test('snapshot renders', () => {
+import { Icon } from '../Icon'
+
+describe('Icon', () => {
+  it('should have to render without crashing', () => {
     const component = render(
-      <Icon>
-        <Text>Icon component!</Text>
+      <Icon color='primary'>
+        <MdStore />
       </Icon>
     )
-    const tree = component.toJSON()
-    expect(tree).toMatchSnapshot()
+    expect(component).toBeTruthy()
   })
 })

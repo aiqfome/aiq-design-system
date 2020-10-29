@@ -62,7 +62,12 @@ const Icon = styled.svg<Props>`
 export const Checkbox = React.forwardRef<HTMLInputElement, Props>(
   ({ label, style, labelColor, disabled, ...props }, ref) => {
     return (
-      <Label color={labelColor} style={style} disabled={disabled}>
+      <Label
+        data-testid='checkbox'
+        color={labelColor}
+        style={style}
+        disabled={disabled}
+      >
         <HiddenCheckbox
           disabled={disabled}
           type='checkbox'

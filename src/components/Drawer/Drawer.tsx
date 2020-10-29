@@ -1,12 +1,17 @@
-import React, { ReactNode } from 'react'
+import React, { ReactNode, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css, DefaultTheme } from 'styled-components'
 import { layout, LayoutProps, shadow, ShadowProps } from 'styled-system'
 
+import { Flex } from '../Flex'
+import { Loading } from '../Loading'
+
 export interface Props extends DefaultTheme, LayoutProps, ShadowProps {
-  variation?: 'right' | 'left'
   opened: boolean
+  loading?: boolean
   children?: ReactNode
+  onClose?: () => void
+  variation?: 'right' | 'left'
 }
 
 const drawerVariations: { [index: string]: any } = {
@@ -42,7 +47,19 @@ const drawerVariations: { [index: string]: any } = {
   `
 }
 
-export const DrawerStyled = styled.div<Props>`  
+const Mask = styled.div`
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.45);
+`
+
+export const DrawerStyled = styled.div<Props>`
+  max-width: 760px;
   ${layout}
   ${shadow}
   background-color: ${props => props.theme.colors.white};
@@ -58,19 +75,50 @@ export const DrawerStyled = styled.div<Props>`
 `
 
 export const Drawer: React.FC<Props> = ({
+  loading = false,
+  onClose,
   opened = false,
   variation = 'right',
   children,
   ...props
 }) => {
+  useEffect(() => {
+    if (opened) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'auto'
+    }
+
+    return () => {
+      document.body.style.overflow = 'auto'
+    }
+  }, [opened])
+
   return (
-    <DrawerStyled opened={opened} variation={variation} {...props}>
-      {children}
-    </DrawerStyled>
+    <>
+      {onClose && opened && <Mask onClick={onClose} />}
+
+      <DrawerStyled opened={opened} variation={variation} {...props}>
+        {loading ? (
+          <Flex
+            flex={1}
+            height='100%'
+            alignItems='center'
+            justifyContent='center'
+          >
+            <Loading />
+          </Flex>
+        ) : (
+          children
+        )}
+      </DrawerStyled>
+    </>
   )
 }
 
 Drawer.propTypes = {
+  loading: PropTypes.bool,
+  onClose: PropTypes.func,
   opened: PropTypes.bool.isRequired,
   variation: PropTypes.oneOf(['right', 'left']),
   children: PropTypes.node

@@ -1,7 +1,7 @@
-import React, { ReactNode } from 'react'
+import React, { ReactNode, useCallback } from 'react'
 import PropTypes from 'prop-types'
 
-import styled, { css, DefaultTheme } from 'styled-components'
+import styled, { DefaultTheme } from 'styled-components'
 import {
   color,
   ColorProps,
@@ -31,32 +31,13 @@ export interface Props
   color?: string
   count?: number
   children?: ReactNode
+  className?: string
   statusColor?: string
   overflowCount?: number
   variant?: 'label' | 'default'
 }
 
-const badgeVariations: { [index: string]: any } = {
-  default: css<Props>`
-    padding: 1px 8px;
-    margin-right: 16px;
-    border-radius: 12px;
-    width: fit-content;
-    font-size: 14px;
-  `,
-  label: css<Props>`
-    text-align: center;
-    border-radius: 4px;
-    padding: 5px 10px;
-    font-size: 14px;
-    width: fit-content;
-    font-weight: ${({ theme }) => theme.fontWeights.medium};
-  `
-}
-
-const BadgeStyled = styled(Text)<Props>`
-  ${({ variant }) => badgeVariations[variant || 'default']}
-
+const BadgeStyled = styled(Text)`
   display: inline-flex;
   align-items: center;
 
@@ -66,13 +47,34 @@ const BadgeStyled = styled(Text)<Props>`
   ${layout}
   ${fontSize}
   ${fontWeight}
+
+  &.__badge-default {
+    padding: 1px 8px;
+    margin-right: 16px;
+    border-radius: 12px;
+    width: fit-content;
+    font-size: 14px;
+  }
+
+  &.__badge-label {
+    text-align: center;
+    border-radius: 4px;
+    padding: 5px 10px;
+    font-size: 14px;
+    width: fit-content;
+    font-weight: ${({ theme }) => theme.fontWeights.medium};
+  }
 `
 
 const getCounter = (value, overflow) => {
   if (value) {
     if (overflow && !isNaN(value) && value > overflow) {
       return (
-        <Tooltip body={value} variant='right-bottom'>{`${overflow}+`}</Tooltip>
+        <Tooltip
+          data-testid='badge-tooltip'
+          body={value}
+          variant='right-bottom'
+        >{`${overflow}+`}</Tooltip>
       )
     }
 
@@ -87,16 +89,32 @@ export const Badge: React.FC<Props> = ({
   variant,
   children,
   overflowCount,
+  className,
   ...props
 }) => {
+  const findClassName = useCallback(() => {
+    switch (variant) {
+      case 'label':
+        return '__badge-label'
+
+      default:
+        return '__badge-default'
+    }
+  }, [variant])
+
   return (
-    <BadgeStyled variant={variant} {...props}>
+    <BadgeStyled
+      data-testid='badge'
+      className={`${className} ${findClassName()}`}
+      {...props}
+    >
       {getCounter(count, overflowCount) || children}
     </BadgeStyled>
   )
 }
 
 Badge.propTypes = {
+  className: PropTypes.string,
   count: PropTypes.number,
   children: PropTypes.node,
   statusColor: PropTypes.string,
