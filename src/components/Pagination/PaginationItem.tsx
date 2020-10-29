@@ -4,8 +4,6 @@ import PropTypes from 'prop-types'
 
 import styled, { css, DefaultTheme } from 'styled-components'
 
-import { Button } from '../Button'
-
 interface Props extends DefaultTheme {
   active?: boolean
   children?: any
@@ -16,7 +14,11 @@ interface Props extends DefaultTheme {
   onClick?: () => void
 }
 
-const ItemPageStyled = styled(Button)<Props>`
+const ItemPageStyled = styled.button<Props>`
+  background: #fff;
+  border: 1px solid #dedede;
+  color: #8c8c8c;
+
   &.__pagination-size-large {
     height: 42px;
     min-width: 42px;
@@ -29,9 +31,21 @@ const ItemPageStyled = styled(Button)<Props>`
     height: 28px;
     min-width: 28px;
   }
+  &.__button-text {
+    padding: 0 8px;
+    border: 1px solid #dedede;
+  }
 
-  padding: 0 8px;
-  border: 1px solid #dedede;
+  ${({ active, theme }) =>
+    active &&
+    css`
+      background: ${theme.colors.primary};
+      border: 1px solid ${theme.colors.primary};
+      span {
+        color: ${theme.colors.white};
+      }
+    `}
+
   border-radius: 0;
   justify-content: center;
   align-items: center;
@@ -54,27 +68,19 @@ const ItemPageStyled = styled(Button)<Props>`
   & span {
     cursor: ${({ cursor }) => cursor || 'pointer'};
   }
-
-  ${({ active, theme }) =>
-    active &&
-    css`
-      background: ${theme.colors.primary};
-      border: 1px solid ${theme.colors.primary};
-
-      span {
-        color: ${theme.colors.white};
-      }
-    `}
 `
 
 export const PaginationItem: React.FC<Props> = ({
   children,
   size = 'default',
+  className,
+  active,
   ...props
 }) => {
   return (
     <ItemPageStyled
-      className={`__pagination-item __pagination-size-${size}`}
+      active={active}
+      className={`${className} __pagination-item __pagination-size-${size}`}
       size={size}
       {...props}
     >
@@ -85,5 +91,7 @@ export const PaginationItem: React.FC<Props> = ({
 
 PaginationItem.propTypes = {
   children: PropTypes.any,
-  size: PropTypes.oneOf(['default', 'small', 'large'])
+  size: PropTypes.oneOf(['default', 'small', 'large']),
+  className: PropTypes.string,
+  active: PropTypes.bool
 }
