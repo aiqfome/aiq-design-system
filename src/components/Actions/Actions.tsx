@@ -141,7 +141,7 @@ export const Actions: React.FC<Props> = ({
       overlayClassName='actions'
       onVisibleChange={setVisible}
     >
-      {child}
+      <div onClick={e => e.stopPropagation()}>{child}</div>
     </RcDropdown>
   )
 }

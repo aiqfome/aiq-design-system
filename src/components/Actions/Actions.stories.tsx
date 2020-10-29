@@ -29,11 +29,7 @@ export const Basic: React.FC = (): ReactElement => {
   return (
     <Flex variant='fullCentralized'>
       <Actions items={items}>
-        <Icon
-          color='primary'
-          fontSize='xlarge'
-          onClick={e => e.stopPropagation()}
-        >
+        <Icon color='primary' fontSize='xlarge'>
           <MdSettings />
         </Icon>
       </Actions>
@@ -45,11 +41,7 @@ export const WithTitle: React.FC = (): ReactElement => {
   return (
     <Flex variant='fullCentralized'>
       <Actions title='MENU:' items={items}>
-        <Icon
-          color='primary'
-          fontSize='xlarge'
-          onClick={e => e.stopPropagation()}
-        >
+        <Icon color='primary' fontSize='xlarge'>
           <MdSettings />
         </Icon>
       </Actions>
@@ -70,11 +62,7 @@ export const WithHeader: React.FC = (): ReactElement => {
           </Flex>
         }
       >
-        <Icon
-          color='primary'
-          fontSize='xlarge'
-          onClick={e => e.stopPropagation()}
-        >
+        <Icon color='primary' fontSize='xlarge'>
           <MdSettings />
         </Icon>
       </Actions>
