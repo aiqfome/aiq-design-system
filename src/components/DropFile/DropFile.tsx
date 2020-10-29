@@ -82,19 +82,16 @@ const Image = styled.img`
 `
 
 export const DropFile = React.forwardRef<HTMLInputElement, Props>(
-  (
-    {
-      translate = translateDefault,
-      dataMaxSize = 2048,
-      initImage,
-      name,
-      errorMessage,
-      errorForm,
-      onChange,
-      ...props
-    },
-    ref
-  ) => {
+  ({
+    translate = translateDefault,
+    dataMaxSize = 2048,
+    initImage,
+    name,
+    errorMessage,
+    errorForm,
+    onChange,
+    ...props
+  }) => {
     const [isDragover, setIsDragover] = useState(false)
     const [image, setImage] = useState<any>()
     const [typeError, setTypeError] = useState<null | string>()

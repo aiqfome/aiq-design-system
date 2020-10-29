@@ -1,13 +1,20 @@
 import React from 'react'
 
-import { Loading } from './Loading'
-
 import { render } from '../utils/test/render'
 
-describe('must match with the previous snapshot', () => {
-  test('snapshot renders', () => {
+import { Loading } from '../Loading'
+
+describe('Loading', () => {
+  it('should have to render without crashing', () => {
     const component = render(<Loading />)
-    const tree = component.toJSON()
-    expect(tree).toMatchSnapshot()
+    expect(component).toBeTruthy()
+  })
+
+  it('should have to render a svg', () => {
+    const { container } = render(<Loading />)
+
+    const svg = container.querySelector('svg')
+
+    expect(svg).toBeInTheDocument()
   })
 })

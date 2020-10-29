@@ -41,10 +41,10 @@ export const Outlined: React.FC = () => {
 
 export const AutocompleteFalse: React.FC = () => {
   const itens = [
-    { label: 'React', value: 1 },
-    { label: 'CSS', value: 2 },
-    { label: 'PHP', value: 3 },
-    { label: 'HTML', value: 4 }
+    { name: 'React', id: 1 },
+    { name: 'CSS', id: 2 },
+    { name: 'PHP', id: 3 },
+    { name: 'HTML', id: 4 }
   ]
   const [selectedItem, setSelectedItem] = useState(itens[0])
   return (
@@ -71,10 +71,10 @@ export const AutocompleteFalse: React.FC = () => {
 
 export const WithSufix: React.FC = () => {
   const itens = [
-    { label: 'React', value: 1 },
-    { label: 'CSS', value: 2 },
-    { label: 'PHP', value: 3 },
-    { label: 'HTML', value: 4 }
+    { name: 'React', id: 1 },
+    { name: 'CSS', id: 2 },
+    { name: 'PHP', id: 3 },
+    { name: 'HTML', id: 4 }
   ]
   const [selectedItem, setSelectedItem] = useState(itens[0])
   return (
@@ -88,6 +88,38 @@ export const WithSufix: React.FC = () => {
       />
       <Select
         selectedItem={selectedItem}
+        handleSelectedItemChange={({ selectedItem }) =>
+          setSelectedItem(selectedItem)
+        }
+        label={text('label', 'aiq-design-system')}
+        items={object('items', itens)}
+        sufix={<MdSearch />}
+      />
+    </Flex>
+  )
+}
+
+export const Loading: React.FC = () => {
+  const itens = [
+    { name: 'React', id: 1 },
+    { name: 'CSS', id: 2 },
+    { name: 'PHP', id: 3 },
+    { name: 'HTML', id: 4 }
+  ]
+  const [selectedItem, setSelectedItem] = useState(itens[0])
+  return (
+    <Flex variant='fullCentralized'>
+      <Select
+        mr='32px'
+        variant='outlined'
+        isLoading={true}
+        label={text('label', 'aiq-design-system')}
+        items={object('items', itens)}
+        sufix={<MdSearch />}
+      />
+      <Select
+        selectedItem={selectedItem}
+        isLoading={true}
         handleSelectedItemChange={({ selectedItem }) =>
           setSelectedItem(selectedItem)
         }

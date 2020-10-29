@@ -153,7 +153,7 @@ export const Table: React.FC<TableProps> = ({
                 <TableRow
                   hoverable={hoverable}
                   onClick={() => getRowAction(row)}
-                  hasAction={expandedRowRender || onClickRow}
+                  hasAction={!!expandedRowRender || !!onClickRow}
                   {...row.getRowProps()}
                 >
                   {row.cells.map(cell => {

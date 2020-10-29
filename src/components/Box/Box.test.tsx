@@ -1,12 +1,17 @@
 import React from 'react'
-import renderer from 'react-test-renderer'
 
-import { Box } from './Box'
+import { render } from '../utils/test/render'
 
-describe('must match with the previous snapshot', () => {
-  test('snapshot renders', () => {
-    const component = renderer.create(<Box />)
-    const tree = component.toJSON()
-    expect(tree).toMatchSnapshot()
+import { Box } from '../Box'
+
+describe('Box', () => {
+  it('should have to render without crashing', () => {
+    const component = render(<Box />)
+    expect(component).toBeTruthy()
+  })
+
+  it('should have contnet when has children', () => {
+    const { getByTestId } = render(<Box>Aiqfome</Box>)
+    expect(getByTestId('box')).toHaveTextContent('Aiqfome')
   })
 })

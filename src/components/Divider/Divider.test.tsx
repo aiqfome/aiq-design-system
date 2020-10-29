@@ -1,12 +1,17 @@
 import React from 'react'
-import renderer from 'react-test-renderer'
 
-import { Divider } from './Divider'
+import { render } from '../utils/test/render'
 
-describe('must match with the previous snapshot', () => {
-  test('snapshot renders', () => {
-    const component = renderer.create(<Divider />)
-    const tree = component.toJSON()
-    expect(tree).toMatchSnapshot()
+import { Divider } from '../Divider'
+
+describe('Divider', () => {
+  it('should have to render without crashing', () => {
+    const component = render(<Divider />)
+    expect(component).toBeTruthy()
+  })
+
+  it('should have a text when has children', () => {
+    const { getByTestId } = render(<Divider>Aiqfome</Divider>)
+    expect(getByTestId('divider-wrapper')).toHaveTextContent('Aiqfome')
   })
 })
