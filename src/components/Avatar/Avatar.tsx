@@ -39,12 +39,13 @@ export const Avatar: React.FC<Props> = ({
       justifyContent='center'
       borderRadius={variant === 'box' ? '5px' : '32px'}
       backgroundColor={src ? 'transparent' : `${palette}Light`}
+      data-testid='box'
       {...props}
     >
       {src ? (
-        <AvatarStyled src={src} alt={alt} />
+        <AvatarStyled data-testid='src' src={src} alt={alt} />
       ) : (
-        <Text fontWeight='bold' color={palette}>
+        <Text data-testid='name' fontWeight='bold' color={palette}>
           {name}
         </Text>
       )}

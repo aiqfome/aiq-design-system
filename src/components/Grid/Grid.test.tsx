@@ -1,18 +1,24 @@
 import React from 'react'
 
-import { Grid } from './Grid'
-import { Text } from '../Text'
-
 import { render } from '../utils/test/render'
 
-describe('must match with the previous snapshot', () => {
-  test('snapshot renders', () => {
-    const component = render(
-      <Grid>
-        <Text>Grid component!</Text>
-      </Grid>
-    )
-    const tree = component.toJSON()
-    expect(tree).toMatchSnapshot()
+import { Grid } from '../Grid'
+
+describe('Grid', () => {
+  it('should have to render without crashing', () => {
+    const component = render(<Grid />)
+    expect(component).toBeTruthy()
+  })
+
+  it('should have to render a div', () => {
+    const { container } = render(<Grid />)
+    const div = container.querySelector('div')
+    expect(div).toBeInTheDocument()
+  })
+
+  it('should have content when has children', () => {
+    const { getByText } = render(<Grid>Flex!</Grid>)
+    const div = getByText('Flex!')
+    expect(div).toBeTruthy()
   })
 })
