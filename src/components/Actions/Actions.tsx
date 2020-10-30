@@ -4,12 +4,12 @@ import PropTypes from 'prop-types'
 import RcDropdown from 'rc-dropdown'
 import styled from 'styled-components'
 
+import Styles from './styles'
 import { Flex } from '../Flex'
 import { Icon } from '../Icon'
 import { Text } from '../Text'
 import { Divider } from '../Divider'
 
-import './index.css'
 import 'rc-dropdown/assets/index.css'
 
 interface Item {
@@ -132,17 +132,21 @@ export const Actions: React.FC<Props> = ({
   }
 
   return (
-    <RcDropdown
-      arrow={arrow}
-      visible={visible}
-      trigger={[trigger]}
-      overlay={getOverlay}
-      placement={placement}
-      overlayClassName='actions'
-      onVisibleChange={setVisible}
-    >
-      <div onClick={e => e.stopPropagation()}>{child}</div>
-    </RcDropdown>
+    <>
+      <Styles />
+
+      <RcDropdown
+        arrow={arrow}
+        visible={visible}
+        trigger={[trigger]}
+        overlay={getOverlay}
+        placement={placement}
+        overlayClassName='actions'
+        onVisibleChange={setVisible}
+      >
+        <div onClick={e => e.stopPropagation()}>{child}</div>
+      </RcDropdown>
+    </>
   )
 }
 
