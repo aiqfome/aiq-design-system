@@ -4,9 +4,9 @@ import PropTypes from 'prop-types'
 import RcDropdown from 'rc-dropdown'
 import styled from 'styled-components'
 
+import Styles from './styles'
 import { Flex } from '../Flex'
 
-import './index.css'
 import 'rc-dropdown/assets/index.css'
 
 type ContentFunc = () => React.ReactElement
@@ -69,15 +69,19 @@ export const Popover: React.FC<Props> = ({
   }
 
   return (
-    <RcDropdown
-      arrow={arrow}
-      trigger={[trigger]}
-      overlay={getOverlay}
-      placement={placement}
-      overlayClassName='popover'
-    >
-      {child}
-    </RcDropdown>
+    <>
+      <Styles />
+
+      <RcDropdown
+        arrow={arrow}
+        trigger={[trigger]}
+        overlay={getOverlay}
+        placement={placement}
+        overlayClassName='popover'
+      >
+        {child}
+      </RcDropdown>
+    </>
   )
 }
 
