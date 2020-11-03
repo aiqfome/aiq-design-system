@@ -25,6 +25,7 @@ export interface Props {
     clear?: boolean
     items?: number[]
   }[]
+  handleSelectedItemChange?: (item: any) => void
   onChange?: any
   value?: Item[]
   items: Item[]
@@ -123,11 +124,15 @@ export const MultiSelectFetchable: React.FC<Props> = ({
   isLoading = false,
   itemLimit = 2,
   placeholder,
+  handleSelectedItemChange = () => {
+    // do nothing.
+  },
   ...props
 }) => {
   const inputRef = useRef(document.createElement('input'))
 
   const propsMultipleSelection = useMultipleSelection({
+    onSelectedItemsChange: handleSelectedItemChange,
     initialSelectedItems: value
   })
 
@@ -317,5 +322,6 @@ MultiSelectFetchable.propTypes = {
   value: PropTypes.array,
   isLoading: PropTypes.bool,
   itemLimit: PropTypes.number,
-  placeholder: PropTypes.string
+  placeholder: PropTypes.string,
+  handleSelectedItemChange: PropTypes.func
 }
