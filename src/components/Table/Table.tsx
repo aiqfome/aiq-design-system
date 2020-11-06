@@ -16,6 +16,7 @@ export interface TableProps {
   hoverable?: boolean
   onClickRow?: (record: any) => any
   expandedRowRender?: (record: any) => any
+  onRowBackground?: (record: any) => string
 }
 
 export interface FlexProps extends SpaceProps, LayoutProps {
@@ -76,6 +77,7 @@ export const Table: React.FC<TableProps> = ({
   onClickRow,
   columns = [],
   expandedRowRender,
+  onRowBackground = () => '',
   ...props
 }) => {
   const {
@@ -146,13 +148,14 @@ export const Table: React.FC<TableProps> = ({
         </thead>
 
         <tbody {...getTableBodyProps()}>
-          {rows.map(row => {
+          {rows.map((row, index) => {
             prepareRow(row)
             return (
-              <Fragment key={row.id}>
+              <Fragment key={row.id || index}>
                 <TableRow
                   hoverable={hoverable}
                   onClick={() => getRowAction(row)}
+                  background={onRowBackground(data[index])}
                   hasAction={!!expandedRowRender || !!onClickRow}
                   {...row.getRowProps()}
                 >
@@ -165,10 +168,7 @@ export const Table: React.FC<TableProps> = ({
                         {...cell.getCellProps()}
                       >
                         {cell.column.renderCell
-                          ? cell.column.renderCell(
-                              cell.value,
-                              data[cell.row.index]
-                            )
+                          ? cell.column.renderCell(cell.value, data[index])
                           : cell.render('Cell')}
                       </TableCell>
                     )
@@ -178,7 +178,7 @@ export const Table: React.FC<TableProps> = ({
                 {expandedRowRender && selectedRows.includes(row.id) && (
                   <TableRow expanded>
                     <TableCell colspan={tableColumns.length}>
-                      {expandedRowRender(row.values)}
+                      {expandedRowRender(data[index])}
                     </TableCell>
                   </TableRow>
                 )}
@@ -195,6 +195,7 @@ Table.propTypes = {
   scroll: PropTypes.string,
   hoverable: PropTypes.bool,
   onClickRow: PropTypes.func,
+  onRowBackground: PropTypes.func,
   data: PropTypes.array.isRequired,
   expandedRowRender: PropTypes.func,
   columns: PropTypes.array.isRequired
