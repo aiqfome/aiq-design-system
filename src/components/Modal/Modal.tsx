@@ -190,7 +190,6 @@ export const Modal: React.FC<Props> = ({
 
   function handleOk() {
     okButton.function()
-    onClose()
   }
 
   function handleCancel() {
@@ -238,6 +237,7 @@ export const Modal: React.FC<Props> = ({
                   onClick={handleCancel}
                   palette='primary'
                   variant='outlined'
+                  {...cancelButton}
                 >
                   {cancelButton.label}
                 </Button>
@@ -248,6 +248,7 @@ export const Modal: React.FC<Props> = ({
                   fontWeight='medium'
                   palette='primary'
                   variant='contained'
+                  {...okButton}
                 >
                   {okButton.label}
                 </Button>
@@ -260,12 +261,13 @@ export const Modal: React.FC<Props> = ({
                   onClick={handleCancel}
                   marginRight={48}
                   palette='primary'
+                  {...cancelButton}
                 >
                   {cancelButton.label}
                 </Button>
               )}
               {okButton.visible && (
-                <Button onClick={handleOk} palette='primary'>
+                <Button onClick={handleOk} palette='primary' {...okButton}>
                   {okButton.label}
                 </Button>
               )}
