@@ -8,12 +8,15 @@ export interface TableRowProps {
   children: ReactNode
   hoverable?: boolean
   hasAction?: boolean
+  background?: string
 }
 
 const TableRowStyled = styled.tr<TableRowProps>`
   cursor: default;
   vertical-align: middle;
   border-bottom: 1px solid ${({ theme }) => theme.colors.mediumGrey};
+  background: ${({ theme, background }) =>
+    theme.colors[background || '']} !important;
 
   ${({ hasAction }) =>
     hasAction &&
@@ -47,10 +50,15 @@ const TableRowStyled = styled.tr<TableRowProps>`
 export const TableRow: React.FC<TableRowProps> = ({
   children,
   hoverable,
+  background,
   ...props
 }) => {
   return (
-    <TableRowStyled hoverable={hoverable} {...props}>
+    <TableRowStyled
+      hoverable={hoverable}
+      background={background || ''}
+      {...props}
+    >
       {children}
     </TableRowStyled>
   )
@@ -64,5 +72,6 @@ TableRow.propTypes = {
   expanded: PropTypes.bool,
   children: PropTypes.node,
   hasAction: PropTypes.bool,
-  hoverable: PropTypes.bool
+  hoverable: PropTypes.bool,
+  background: PropTypes.string
 }
