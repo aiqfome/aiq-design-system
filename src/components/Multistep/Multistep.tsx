@@ -15,7 +15,7 @@ export interface Props {
   }[]
   stepCurrent?: number
   disabledClickStep?: boolean
-  onClickStep?: () => void
+  onClickStep?: (key: any) => void
 }
 
 const StepButton = styled.button`
@@ -44,8 +44,8 @@ export const Multistep: React.FC<Props> = ({
   }, [stepCurrent, steps])
 
   function handleClickStep(newStepActive) {
-    onClickStep && onClickStep()
     if (!disabledClickStep) {
+      onClickStep && onClickStep(newStepActive)
       setStepActive(newStepActive)
     }
   }
