@@ -1,22 +1,21 @@
 import React, { useState, useEffect } from 'react'
-import { createPortal } from 'react-dom'
+
 import PropTypes from 'prop-types'
-import styled, { DefaultTheme, css } from 'styled-components'
 import { layout } from 'styled-system'
-import { Flex, Props as FlexProps } from '../Flex'
-import { Button } from '../Button'
-import { Text } from '../Text'
+import { createPortal } from 'react-dom'
+import styled, { DefaultTheme, css } from 'styled-components'
+
 import { Box } from '../Box'
+import { Text } from '../Text'
+import { Button } from '../Button'
+import { Flex, Props as FlexProps } from '../Flex'
 
 export interface Props {
   title: string
-  form?: any
-  variant?: 'big' | 'medium' | 'small'
   show?: boolean
   animation?: boolean
   zIndex?: number
   onClose?: () => void
-  onSubmit?: () => void
   children?: any
   okButton?: {
     label: string
@@ -30,27 +29,12 @@ export interface Props {
   }
 }
 
-const modalVariants: { [index: string]: any } = {
-  big: css`
-    padding: 37px 24px 24px 24px;
-    max-width: 1020px;
-  `,
-  medium: css`
-    padding: 37px 24px 24px 24px;
-    max-width: 1020px;
-  `,
-  small: css`
-    padding: 37px 24px 24px 24px;
-    max-width: 680px;
-  `
-}
-
-interface BackgroundModalProps extends FlexProps {
+interface BackgroundAlertProps extends FlexProps {
   animation?: boolean
   zIndex?: number
 }
 
-const BackgroundModal = styled(Flex)<BackgroundModalProps>`
+const BackgroundAlert = styled(Flex)<BackgroundAlertProps>`
   position: fixed;
   top: 0;
   left: 0;
@@ -95,23 +79,22 @@ const BackgroundModal = styled(Flex)<BackgroundModalProps>`
     `}
 `
 
-interface ModalStyledProps extends DefaultTheme, FlexProps {
-  variantModal?: string
+interface AlertStyledProps extends DefaultTheme, FlexProps {
   animation?: boolean
 }
 
-const ModalStyled = styled(Flex)<ModalStyledProps>`
+const ModalStyled = styled(Flex)<AlertStyledProps>`
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: space-between;
   box-shadow: 0px 2px 6px #0000001a;
   border: 1px solid #dedede;
   border-radius: 12px;
   background: ${({ theme }) => theme.colors.white};
   width: 100%;
-
-  ${({ variantModal }) => modalVariants[variantModal || 'medium']}
+  padding: 30px 24px 22px 30px;
+  max-width: 362px;
+  align-items: flex-start;
 
   ${layout}
 
@@ -165,20 +148,15 @@ const defaultButton = {
   visible: false
 }
 
-export const Modal: React.FC<Props> = ({
+export const Alert: React.FC<Props> = ({
   title,
   children,
-  show = false,
   zIndex = 2000,
+  show = false,
   animation = false,
   onClose = () => {
     // do nothing.
   },
-  form,
-  onSubmit = () => {
-    // do nothing.
-  },
-  variant = 'medium',
   okButton = defaultButton,
   cancelButton = defaultButton,
   ...props
@@ -193,6 +171,7 @@ export const Modal: React.FC<Props> = ({
     if (e.preventDefault) {
       e.preventDefault()
     }
+
     okButton.function()
   }
 
@@ -208,64 +187,48 @@ export const Modal: React.FC<Props> = ({
 
   if (isMounted) {
     return createPortal(
-      <BackgroundModal
+      <BackgroundAlert
         zIndex={zIndex}
         animation={animation}
         variant='fullCentralized'
         onClick={handleClickOutSide}
         className={`background-modal ${show ? 'show' : 'hide'}`}
       >
-        <form onSubmit={form ? form.handleSubmit(onSubmit) : undefined}>
-          <ModalStyled
-            animation={animation}
-            variantModal={variant}
-            className={`${show ? 'show' : 'hide'}`}
-            {...props}
+        <ModalStyled
+          animation={animation}
+          className={`${show ? 'show' : 'hide'}`}
+          {...props}
+        >
+          <Text
+            color='primary'
+            fontSize='xlarge'
+            marginBottom='30px'
+            fontWeight='semiBold'
           >
-            <Text
-              color='primary'
-              fontSize='xlarge'
-              marginBottom='15px'
-              fontWeight='semiBold'
-            >
-              {title}
-            </Text>
+            {title}
+          </Text>
 
-            {children}
+          {children}
 
-            <Flex justifyContent='space-between' marginTop={44} width='100%'>
-              <Flex flex={1} justifyContent='flex-start'>
-                {cancelButton.visible && (
-                  <Button
-                    palette='primary'
-                    variant='outlined'
-                    fontWeight='medium'
-                    onClick={handleCancel}
-                    {...cancelButton}
-                  >
-                    {cancelButton.label}
-                  </Button>
-                )}
-              </Flex>
+          <Flex justifyContent='flex-end' marginTop={26} width='100%'>
+            {cancelButton.visible && (
+              <Button
+                onClick={handleCancel}
+                marginRight={48}
+                palette='primary'
+              >
+                {cancelButton.label}
+              </Button>
+            )}
 
-              <Flex flex={1} justifyContent='flex-end'>
-                {okButton.visible && (
-                  <Button
-                    palette='primary'
-                    onClick={handleOk}
-                    variant='contained'
-                    fontWeight='medium'
-                    type={form ? 'submit' : 'button'}
-                    {...okButton}
-                  >
-                    {okButton.label}
-                  </Button>
-                )}
-              </Flex>
-            </Flex>
-          </ModalStyled>
-        </form>
-      </BackgroundModal>,
+            {okButton.visible && (
+              <Button onClick={handleOk} palette='primary'>
+                {okButton.label}
+              </Button>
+            )}
+          </Flex>
+        </ModalStyled>
+      </BackgroundAlert>,
       document.querySelector('#modal-root')
     )
   }
@@ -273,16 +236,13 @@ export const Modal: React.FC<Props> = ({
   return <Box display='none'></Box>
 }
 
-Modal.propTypes = {
-  form: PropTypes.object,
-  onSubmit: PropTypes.func,
-  title: PropTypes.string.isRequired,
-  variant: PropTypes.oneOf(['big', 'medium', 'small']),
+Alert.propTypes = {
+  okButton: PropTypes.any,
+  zIndex: PropTypes.number,
   children: PropTypes.node,
   animation: PropTypes.bool,
-  zIndex: PropTypes.number,
-  okButton: PropTypes.any,
+  cancelButton: PropTypes.any,
   show: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
-  cancelButton: PropTypes.any
+  title: PropTypes.string.isRequired,
+  onClose: PropTypes.func.isRequired
 }
