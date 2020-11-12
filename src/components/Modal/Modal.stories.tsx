@@ -45,7 +45,7 @@ export const Basic: React.FC = () => {
         show={open}
         variant={select(
           'Variant',
-          { Small: 'small', Medium: 'medium', Big: 'big', Alert: 'alert' },
+          { Small: 'small', Medium: 'medium', Big: 'big' },
           'medium'
         )}
         onClose={() => setOpen(false)}
