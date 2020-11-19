@@ -81,6 +81,7 @@ const Overflow = styled(Flex)<OverflowProps>`
   position: absolute;
   width: 100%;
   border-top: none;
+  z-index: 99;
 
   display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
 
