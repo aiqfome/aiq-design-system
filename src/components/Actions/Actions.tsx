@@ -16,6 +16,7 @@ import 'rc-dropdown/assets/index.css'
 interface Item {
   action: (event: any) => void
   icon?: React.ReactElement
+  visible?: boolean
   description: React.ReactElement | string
 }
 
@@ -104,29 +105,31 @@ export const Actions: React.FC<Props> = ({
 
           {items &&
             items.length > 0 &&
-            items.map((item, index) => (
-              <MenuItem
-                py={3}
-                px={5}
-                key={index}
-                alignItems='center'
-                onClick={e => {
-                  e.stopPropagation()
-                  setVisible(false)
-                  item.action(e)
-                }}
-              >
-                {item.icon && (
-                  <Icon mr={4} color='primary'>
-                    {item.icon}
-                  </Icon>
-                )}
+            items.map(({ action, visible = true, icon, description }, index) =>
+              visible ? (
+                <MenuItem
+                  py={3}
+                  px={5}
+                  key={index}
+                  alignItems='center'
+                  onClick={e => {
+                    e.stopPropagation()
+                    setVisible(false)
+                    if (action) action(e)
+                  }}
+                >
+                  {icon && (
+                    <Icon mr={4} color='primary'>
+                      {icon}
+                    </Icon>
+                  )}
 
-                <Text fontSize='medium' whiteSpace='nowrap'>
-                  {item.description}
-                </Text>
-              </MenuItem>
-            ))}
+                  <Text fontSize='medium' whiteSpace='nowrap'>
+                    {description}
+                  </Text>
+                </MenuItem>
+              ) : null
+            )}
         </Flex>
       </ActionsStyled>
     )
