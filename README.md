@@ -54,14 +54,17 @@ A quick use for the lib:
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import { Button } from 'aiq-design-system'
+import { Button, Input, Flex, ThemeProvider } from "aiq-design-system";
 
 function App() {
   return (
-    <Button variant='contained' palette='primary'>
-      I want Pizza!
-    </Button>
-  )
+    <ThemeProvider>
+      <Flex p={20} flexDirection="column">
+        <Input variant="outlined" label="I want Pizza!" />
+        <Button variant="contained">aiq</Button>
+      </Flex>
+    </ThemeProvider>
+  );
 }
 
 ReactDOM.render(<App />, document.querySelector('#app'))
@@ -69,4 +72,4 @@ ReactDOM.render(<App />, document.querySelector('#app'))
 
 A sandbox for interaction:
 
-[![Edit Button](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/festive-dew-dk509?file=/src/App.js)
+[![Edit Button](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/aiq-design-system-yhpir?file=/src/App.js)
