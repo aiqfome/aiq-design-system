@@ -38,7 +38,12 @@ export const Basic: React.FC = () => {
 
   return (
     <Flex>
-      <Button palette='primary' onClick={handleShowModal} variant='contained'>
+      <Button
+        data-testid='button-open-alert'
+        palette='primary'
+        onClick={handleShowModal}
+        variant='contained'
+      >
         Show Modal
       </Button>
       <Alert
