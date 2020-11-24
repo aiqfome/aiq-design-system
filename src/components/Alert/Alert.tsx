@@ -188,6 +188,7 @@ export const Alert: React.FC<Props> = ({
   if (isMounted) {
     return createPortal(
       <BackgroundAlert
+        data-testid='overflow-modal-alert'
         zIndex={zIndex}
         animation={animation}
         variant='fullCentralized'
@@ -195,6 +196,7 @@ export const Alert: React.FC<Props> = ({
         className={`background-modal ${show ? 'show' : 'hide'}`}
       >
         <ModalStyled
+          data-testid='modal-alert'
           animation={animation}
           className={`${show ? 'show' : 'hide'}`}
           {...props}
@@ -213,6 +215,7 @@ export const Alert: React.FC<Props> = ({
           <Flex justifyContent='flex-end' marginTop={26} width='100%'>
             {cancelButton.visible && (
               <Button
+                data-testid='modal-alert-btn-cancel'
                 onClick={handleCancel}
                 marginRight={48}
                 palette='primary'
@@ -222,7 +225,11 @@ export const Alert: React.FC<Props> = ({
             )}
 
             {okButton.visible && (
-              <Button onClick={handleOk} palette='primary'>
+              <Button
+                data-testid='modal-alert-btn-ok'
+                onClick={handleOk}
+                palette='primary'
+              >
                 {okButton.label}
               </Button>
             )}
