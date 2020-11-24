@@ -20,9 +20,6 @@ module.exports = {
       ],
     });
     config.resolve.extensions.push('.ts', '.tsx');
-    // config.resolve.alias = {
-    //   foo: path.resolve(__dirname, '../src')
-    // }
     return config;
   },
 };
