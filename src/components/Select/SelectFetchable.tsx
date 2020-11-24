@@ -179,7 +179,6 @@ export const SelectFetchable: React.FC<Props> = ({
           prefix={prefix}
           placeholder={placeholder}
           {...boxStyled}
-          {...getInputProps()}
         />
         {isLoading && (
           <LoadingBox>
