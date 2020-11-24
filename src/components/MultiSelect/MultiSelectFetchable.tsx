@@ -168,18 +168,24 @@ export const MultiSelectFetchable: React.FC<Props> = ({
     }
   })
 
+  function clear() {
+    propsMultipleSelection.selectedItems.forEach(item => {
+      propsMultipleSelection.removeSelectedItem(item)
+    })
+  }
+
   function filterItems(filter) {
     if (filter.clear) {
-      propsMultipleSelection.selectedItems.forEach(item => {
-        propsMultipleSelection.removeSelectedItem(item)
-      })
+      clear()
     }
     if (filter.allItems) {
+      clear()
       items.forEach(item => {
         propsMultipleSelection.addSelectedItem(item)
       })
     }
     if (filter.items) {
+      clear()
       filter.items.forEach((_, index) => {
         propsMultipleSelection.addSelectedItem(items[index])
       })
