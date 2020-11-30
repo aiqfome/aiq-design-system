@@ -39,4 +39,4 @@ export { Pagination } from './components/Pagination'
 export { default as themeDefault } from './providers/theme'
 export { default as styleReactDatesOverrides } from './providers/styleReactDatesOverrides'
 
-export { ThemeProvider } from './providers'
+export { ThemeProvider, useTheme } from './providers'

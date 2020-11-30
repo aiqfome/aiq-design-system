@@ -7,7 +7,7 @@ import { Flex } from '../Flex'
 import { Item } from './Item'
 
 export interface Props {
-  data: { itens: any }
+  data: any
   opened?: boolean
   header?: any
 }
@@ -17,6 +17,7 @@ const Itens = styled.ul`
   padding: 0;
   margin: 0;
   overflow-y: auto;
+  overflow-x: hidden;
   direction: ltr;
 
   &::-webkit-scrollbar {
@@ -76,12 +77,12 @@ export const Sidebar: React.FC<Props> = ({
       opened={opened}
       {...props}
     >
-      {data && (
+      {data.length >= 0 && (
         <>
           {header && header}
           <Divider width='100%' marginBottom='16px' />
           <Itens id='itens-sidebar'>
-            {data.itens.map((item, index) => (
+            {data.map((item, index) => (
               <Item
                 heightScrolledToTop={heightScrolledToTop}
                 sidebarOpened={opened}
