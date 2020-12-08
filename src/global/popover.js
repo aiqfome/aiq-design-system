@@ -55,18 +55,18 @@ export default createGlobalStyle`
   .popover.rc-dropdown-placement-bottomLeft .rc-dropdown-arrow,
   .popover.rc-dropdown-placement-topLeft .rc-dropdown-arrow
   {
-    left: 16px;
+    left: 16px !important;
   }
 
   .popover.rc-dropdown-placement-bottomRight .rc-dropdown-arrow,
   .popover.rc-dropdown-placement-topRight .rc-dropdown-arrow
   {
-    right: 16px;
+    right: 16px !important;
   }
 
   .popover.rc-dropdown-placement-bottomCenter .rc-dropdown-arrow,
   .popover.rc-dropdown-placement-topCenter .rc-dropdown-arrow
   {
-    left: 50%;
+    left: 50% !important;
   }
 `

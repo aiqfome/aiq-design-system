@@ -3,6 +3,8 @@ import React from 'react';
 import {ThemeProvider} from 'styled-components';
 
 import GlobalStyles from '../src/global/styles';
+import PopoverStyles from '../src/global/popover';
+import ActionsStyles from '../src/global/actions';
 import theme from '../src/providers/theme';
 
 import { BrowserRouter } from 'react-router-dom'
@@ -15,7 +17,11 @@ function withTheme(storyFn) {
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
+
         <GlobalStyles />
+        <PopoverStyles />
+        <ActionsStyles />
+
         <ReactDatesOverrides/>
         <div id="app-root">
             {storyFn()}
