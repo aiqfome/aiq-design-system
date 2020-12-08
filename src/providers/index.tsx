@@ -6,6 +6,8 @@ import PropTypes from 'prop-types'
 
 import designTheme from './theme'
 import GlobalStyles from '../global/styles'
+import PopoverStyles from '../global/popover'
+import ActionsStyles from '../global/actions'
 import ReactDatesOverrides from './styleReactDatesOverrides'
 
 export interface Props {
@@ -34,7 +36,10 @@ export const ThemeProvider: React.FC<Props> = ({ children, defaultTheme }) => {
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
       <ThemeProviderStyledComponents theme={theme}>
+        <PopoverStyles />
+        <ActionsStyles />
         <GlobalStyles />
+
         <ReactDatesOverrides />
         {children}
         <div id='modal-root'></div>

@@ -4,8 +4,6 @@ import PropTypes from 'prop-types'
 import RcDropdown from 'rc-dropdown'
 import styled from 'styled-components'
 
-import Styles from './styles'
-
 import { Flex } from '../Flex'
 import { Icon } from '../Icon'
 import { Text } from '../Text'
@@ -23,6 +21,7 @@ interface Item {
 export interface Props {
   items?: Item[]
   arrow?: boolean
+  keepOpen?: boolean
   children?: ReactNode
   title?: React.ReactElement | string
   header?: React.ReactElement | string
@@ -72,6 +71,7 @@ export const Actions: React.FC<Props> = ({
   header,
   children,
   arrow = false,
+  keepOpen = true,
   trigger = 'hover',
   placement = 'bottomRight',
   ...props
@@ -135,10 +135,8 @@ export const Actions: React.FC<Props> = ({
     )
   }
 
-  return (
-    <>
-      <Styles />
-
+  if (keepOpen) {
+    return (
       <RcDropdown
         arrow={arrow}
         visible={visible}
@@ -150,7 +148,19 @@ export const Actions: React.FC<Props> = ({
       >
         <div onClick={e => e.stopPropagation()}>{child}</div>
       </RcDropdown>
-    </>
+    )
+  }
+
+  return (
+    <RcDropdown
+      arrow={arrow}
+      trigger={[trigger]}
+      overlay={getOverlay}
+      placement={placement}
+      overlayClassName='actions'
+    >
+      <div onClick={e => e.stopPropagation()}>{child}</div>
+    </RcDropdown>
   )
 }
 
@@ -160,6 +170,7 @@ Actions.propTypes = {
   header: PropTypes.any,
   items: PropTypes.array,
   children: PropTypes.node,
+  keepOpen: PropTypes.bool,
   trigger: PropTypes.oneOf(['click', 'hover', 'contextMenu']),
   placement: PropTypes.oneOf([
     'topRight',
