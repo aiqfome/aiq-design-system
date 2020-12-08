@@ -1,18 +1,16 @@
-import React, { ReactNode } from 'react'
+import React, { ReactNode, useState } from 'react'
 import PropTypes from 'prop-types'
 
 import RcDropdown from 'rc-dropdown'
 import styled from 'styled-components'
 
-import Styles from './styles'
 import { Flex } from '../Flex'
-
-import 'rc-dropdown/assets/index.css'
 
 type ContentFunc = () => React.ReactElement
 
 export interface Props {
   arrow?: boolean
+  keepOpen?: boolean
   children?: ReactNode
   trigger?: 'click' | 'hover' | 'contextMenu'
   content?: string | React.ReactElement | ContentFunc
@@ -48,10 +46,12 @@ export const Popover: React.FC<Props> = ({
   content,
   children,
   arrow = false,
+  keepOpen = true,
   trigger = 'hover',
   placement = 'bottomCenter',
   ...props
 }) => {
+  const [visible, setVisible] = useState(false)
   const child = React.Children.only(children) as React.ReactElement<any>
 
   const getOverlay = () => {
@@ -68,20 +68,32 @@ export const Popover: React.FC<Props> = ({
     return <PopoverStyled {...props}>{overlayNode}</PopoverStyled>
   }
 
-  return (
-    <>
-      <Styles />
-
+  if (keepOpen) {
+    return (
       <RcDropdown
         arrow={arrow}
+        visible={visible}
         trigger={[trigger]}
         overlay={getOverlay}
         placement={placement}
         overlayClassName='popover'
+        onVisibleChange={setVisible}
       >
         {child}
       </RcDropdown>
-    </>
+    )
+  }
+
+  return (
+    <RcDropdown
+      arrow={arrow}
+      trigger={[trigger]}
+      overlay={getOverlay}
+      placement={placement}
+      overlayClassName='popover'
+    >
+      {child}
+    </RcDropdown>
   )
 }
 
@@ -89,6 +101,7 @@ Popover.propTypes = {
   arrow: PropTypes.bool,
   content: PropTypes.any,
   children: PropTypes.node,
+  keepOpen: PropTypes.bool,
   trigger: PropTypes.oneOf(['click', 'hover', 'contextMenu']),
   placement: PropTypes.oneOf([
     'topRight',
