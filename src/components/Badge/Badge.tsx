@@ -47,6 +47,13 @@ const BadgeStyled = styled(Text)`
     border-radius: 12px;
     width: fit-content;
     font-size: 14px;
+
+    ${color}
+    ${space}
+    ${border}
+    ${layout}
+    ${fontSize}
+    ${fontWeight}
   }
 
   &.__badge-label {
@@ -56,14 +63,14 @@ const BadgeStyled = styled(Text)`
     font-size: 14px;
     width: fit-content;
     font-weight: ${({ theme }) => theme.fontWeights.medium};
-  }
 
-  ${color}
-  ${space}
-  ${border}
-  ${layout}
-  ${fontSize}
-  ${fontWeight}
+    ${color}
+    ${space}
+    ${border}
+    ${layout}
+    ${fontSize}
+    ${fontWeight}
+  }
 `
 
 const getCounter = (value, overflow) => {
