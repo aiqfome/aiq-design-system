@@ -41,13 +41,6 @@ const BadgeStyled = styled(Text)`
   display: inline-flex;
   align-items: center;
 
-  ${color}
-  ${space}
-  ${border}
-  ${layout}
-  ${fontSize}
-  ${fontWeight}
-
   &.__badge-default {
     padding: 1px 8px;
     margin-right: 16px;
@@ -64,6 +57,13 @@ const BadgeStyled = styled(Text)`
     width: fit-content;
     font-weight: ${({ theme }) => theme.fontWeights.medium};
   }
+
+  ${color}
+  ${space}
+  ${border}
+  ${layout}
+  ${fontSize}
+  ${fontWeight}
 `
 
 const getCounter = (value, overflow) => {
