@@ -1,6 +1,7 @@
 import { createGlobalStyle } from 'styled-components'
 
 import 'rc-dropdown/assets/index.css'
+import 'rc-tooltip/assets/bootstrap.css';
 
 export default createGlobalStyle`
   * {
@@ -8,6 +9,10 @@ export default createGlobalStyle`
     padding: 0;
     outline: 0;
     box-sizing: border-box;
+  }
+
+  .rc-dropdown, .rc-tooltip {
+    font-family: unset;
   }
 
   body {

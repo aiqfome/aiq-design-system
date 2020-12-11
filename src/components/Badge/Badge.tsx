@@ -73,7 +73,7 @@ const getCounter = (value, overflow) => {
         <Tooltip
           data-testid='badge-tooltip'
           body={value}
-          variant='right-bottom'
+          variant='bottomRight'
         >{`${overflow}+`}</Tooltip>
       )
     }
