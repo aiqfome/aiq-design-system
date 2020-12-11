@@ -30,12 +30,10 @@ const PopoverStyled = styled(Flex)`
   text-align: left;
   background-color: #fff;
   background-clip: padding-box;
-  border-radius: 10px;
+  border-radius: 4px;
   outline: none;
-  -webkit-box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12),
-    0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
-  box-shadow: 0 3px 6px -4px rgb(0, 0, 0, 0.12),
-    0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
+  -webkit-box-shadow: 0px 3px 6px #00000029;
+  box-shadow: 0px 3px 6px #00000029;
 
   & > * {
     padding: 10px;

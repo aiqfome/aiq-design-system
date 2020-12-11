@@ -41,19 +41,19 @@ const BadgeStyled = styled(Text)`
   display: inline-flex;
   align-items: center;
 
-  ${color}
-  ${space}
-  ${border}
-  ${layout}
-  ${fontSize}
-  ${fontWeight}
-
   &.__badge-default {
     padding: 1px 8px;
     margin-right: 16px;
     border-radius: 12px;
     width: fit-content;
     font-size: 14px;
+
+    ${color}
+    ${space}
+    ${border}
+    ${layout}
+    ${fontSize}
+    ${fontWeight}
   }
 
   &.__badge-label {
@@ -63,18 +63,30 @@ const BadgeStyled = styled(Text)`
     font-size: 14px;
     width: fit-content;
     font-weight: ${({ theme }) => theme.fontWeights.medium};
+
+    ${color}
+    ${space}
+    ${border}
+    ${layout}
+    ${fontSize}
+    ${fontWeight}
   }
+
+  ${color}
+  ${space}
+  ${border}
+  ${layout}
+  ${fontSize}
+  ${fontWeight}
 `
 
 const getCounter = (value, overflow) => {
   if (value) {
     if (overflow && !isNaN(value) && value > overflow) {
       return (
-        <Tooltip
-          data-testid='badge-tooltip'
-          body={value}
-          variant='right-bottom'
-        >{`${overflow}+`}</Tooltip>
+        <Tooltip data-testid='badge-tooltip' body={value} variant='bottomRight'>
+          <span>{`${overflow}+`}</span>
+        </Tooltip>
       )
     }
 

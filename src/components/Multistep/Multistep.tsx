@@ -12,6 +12,7 @@ export interface Props {
   steps: {
     name: string
     component: any
+    icon?: any
   }[]
   stepCurrent?: number
   disabledClickStep?: boolean
@@ -62,23 +63,25 @@ export const Multistep: React.FC<Props> = ({
             width={index === steps.length - 1 ? '80px' : '100%'}
           >
             <StepButton type='button' onClick={() => handleClickStep(index)}>
-              <Flex
-                backgroundColor={
-                  stepActive >= index
-                    ? theme.colors.primary
-                    : theme.colors.mediumGrey
-                }
-                height='24px'
-                width='24px'
-                justifyContent='center'
-                alignItems='center'
-                marginBottom='12px'
-                borderRadius='50px'
-              >
-                <Text cursor='pointer' color='white'>
-                  {index + 1}
-                </Text>
-              </Flex>
+              {step.icon || (
+                <Flex
+                  backgroundColor={
+                    stepActive >= index
+                      ? theme.colors.primary
+                      : theme.colors.mediumGrey
+                  }
+                  height='24px'
+                  width='24px'
+                  justifyContent='center'
+                  alignItems='center'
+                  marginBottom='12px'
+                  borderRadius='50px'
+                >
+                  <Text cursor='pointer' color='white'>
+                    {index + 1}
+                  </Text>
+                </Flex>
+              )}
               <Text
                 fontWeight='medium'
                 fontSize='medium'
