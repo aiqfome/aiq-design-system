@@ -20,15 +20,6 @@ describe('Badge', () => {
     expect(getByTestId('badge')).toHaveTextContent('olá')
   })
 
-  it('should have value content equal to overflowCount, when overflowCount is not null and is less than count', () => {
-    const overflowCount = 50
-    const { getByTestId } = render(
-      <Badge overflowCount={overflowCount} count={500} />
-    )
-    expect(getByTestId('badge')).toHaveTextContent(`${overflowCount}+`)
-    expect(getByTestId('badge-tooltip')).toHaveTextContent(`500`)
-  })
-
   it('should have value content less than overflowCount, when overflowCount is not null and is bigger then count', () => {
     const overflowCount = 500
     const { getByTestId } = render(

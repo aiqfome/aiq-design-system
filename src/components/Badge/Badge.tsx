@@ -70,11 +70,9 @@ const getCounter = (value, overflow) => {
   if (value) {
     if (overflow && !isNaN(value) && value > overflow) {
       return (
-        <Tooltip
-          data-testid='badge-tooltip'
-          body={value}
-          variant='bottomRight'
-        >{`${overflow}+`}</Tooltip>
+        <Tooltip data-testid='badge-tooltip' body={value} variant='bottomRight'>
+          <span>{`${overflow}+`}</span>
+        </Tooltip>
       )
     }
 
