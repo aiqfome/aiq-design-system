@@ -53,7 +53,9 @@ const SubItensStyled = styled(Flex)<Props>`
           justify-content: space-between;
 
           &:hover {
-            background: ${({ theme }) => theme.colors.grey};
+            background: ${({ theme }) => theme.colors.mediumGrey};
+            color: ${({ theme }) => theme.colors.primary};
+            font-weight: 500;
           }
         }
       `
@@ -69,6 +71,8 @@ const SubItensStyled = styled(Flex)<Props>`
         justify-content: space-between;
         &:hover {
           background: ${({ theme }) => theme.colors.lightGrey};
+          color: ${({ theme }) => theme.colors.primary};
+          font-weight: 500;
         }
       }
 
@@ -90,24 +94,19 @@ const SubItensStyled = styled(Flex)<Props>`
             border-bottom-right-radius: 4px;
             box-shadow: 2px 3px 4px #00000029;
 
-            ${
-              typeSubmenu === 'default' &&
-              `
-              margin-top: calc((50px + ${heightScrolledToTop}px) * -1);
+            ${typeSubmenu === 'default' &&
             `
-            }
+              margin-top: calc((50px + ${heightScrolledToTop}px) * -1);
+            `}
 
-            ${
-              typeSubmenu === 'bottom' &&
-              `
+            ${typeSubmenu === 'bottom' &&
+            `
               position: absolute;
               top: ${distanceTop}px;
-            `
-            }
+            `}
 
-            ${
-              typeSubmenu === 'top' &&
-              `
+            ${typeSubmenu === 'top' &&
+            `
               position: absolute;
               top: 0px;
               height: 100vh;
@@ -132,8 +131,7 @@ const SubItensStyled = styled(Flex)<Props>`
                 border-radius: 10px;
                 background: ${theme.colors.primaryLight};
               }
-            `
-            }
+            `}
           `
         }
 
@@ -197,13 +195,7 @@ export const SubItens: React.FC<Props> = ({
                 variant={subItem.type ? subItem.type : 'internal'}
                 href={subItem.href}
               >
-                <Text
-                  cursor='pointer'
-                  fontSize='medium'
-                  color='darkGrey'
-                  px={6}
-                  my={2}
-                >
+                <Text cursor='pointer' fontSize='medium' px={6} my={2}>
                   {subItem.name}
                 </Text>
 
