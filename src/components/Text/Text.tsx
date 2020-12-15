@@ -23,6 +23,7 @@ export interface Props
     FontWeightProps,
     TypographyProps {
   cursor?: string
+  truncate?: boolean
   whiteSpace?: 'nowrap' | 'normal' | 'pre'
 }
 
@@ -34,12 +35,21 @@ export const Text = styled.span<Props>`
   ${fontWeight}
   ${typography}
 
+  white-space: ${props => props.whiteSpace || 'normal'};
+
   ${({ cursor }) =>
     cursor &&
     css`
       cursor: ${cursor};
     `};
-  white-space: ${props => props.whiteSpace || 'normal'};
+
+  ${({ truncate }) =>
+    truncate &&
+    css`
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    `};
 `
 
 Text.propTypes = {
