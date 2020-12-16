@@ -233,7 +233,21 @@ export const Button: React.FC<Props> = ({
     return `${className} __button-${variant} __button-${variant}-${palette} ${
       variantType && `__button-${variant}-${variantType}`
     }`
-  }, [palette, variant, variantType])
+  }, [palette, variant, variantType, className])
+
+  if (sufix && prefix) {
+    return (
+      <ButtonStyled className={getClassName()} type={type} {...props}>
+        <Icon data-testid='button-prefix' cursor='pointer' mr={5}>
+          {prefix}
+        </Icon>
+        <Text fontSize='medium'>{children}</Text>
+        <Icon data-testid='button-sufix' cursor='pointer' ml={5}>
+          {sufix}
+        </Icon>
+      </ButtonStyled>
+    )
+  }
 
   if (prefix) {
     return (
