@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useCallback, memo } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Text } from '../Text'
@@ -16,6 +16,14 @@ export const AvatarStyled = styled.img`
   height: 36px;
 `
 
+const AvatarInitial: React.FC<Props> = memo(({ alt, palette }) => {
+  return (
+    <Text data-testid='name' fontWeight='bold' color={palette}>
+      {alt.substring(0, 1).toUpperCase()}
+    </Text>
+  )
+})
+
 export const Avatar: React.FC<Props> = ({
   src,
   alt,
@@ -23,11 +31,12 @@ export const Avatar: React.FC<Props> = ({
   variant = 'box',
   ...props
 }) => {
-  const [name, setName] = useState('')
-
-  useEffect(() => {
-    setName(alt.substring(0, 1).toUpperCase())
-  }, [alt])
+  const handleSrcError = useCallback(
+    ev =>
+      (ev.target.src =
+        'https://lh3.googleusercontent.com/rALGk_PU3JMf_5NS5FEYScz9zxgjRBNePvMheCnHIO_lrSs089QcwguwqRVaDLWWAQ'),
+    []
+  )
 
   return (
     <Box
@@ -43,11 +52,14 @@ export const Avatar: React.FC<Props> = ({
       {...props}
     >
       {src ? (
-        <AvatarStyled data-testid='src' src={src} alt={alt} />
+        <AvatarStyled
+          data-testid='src'
+          src={src}
+          alt={alt}
+          onError={handleSrcError}
+        />
       ) : (
-        <Text data-testid='name' fontWeight='bold' color={palette}>
-          {name}
-        </Text>
+        <AvatarInitial alt={alt} palette={palette} />
       )}
     </Box>
   )
@@ -58,4 +70,11 @@ Avatar.propTypes = {
   palette: PropTypes.string,
   alt: PropTypes.string.isRequired,
   variant: PropTypes.oneOf(['box', 'rounded'])
+}
+
+AvatarInitial.displayName = 'AvatarInitial'
+
+AvatarInitial.propTypes = {
+  alt: PropTypes.string.isRequired,
+  palette: PropTypes.string
 }
