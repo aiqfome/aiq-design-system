@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react'
 import { withKnobs, text, select, boolean } from '@storybook/addon-knobs'
 
-import { FaHamburger } from 'react-icons/fa'
+import { FaHamburger, FaWater } from 'react-icons/fa'
 
 import { Button } from './Button'
 import { Flex } from '../Flex'
@@ -269,6 +269,44 @@ export const Prefix: React.FC = (): ReactElement => (
           'text'
         )}
         prefix={<FaHamburger />}
+      >
+        {text('Label', 'aiqfome!')}
+      </Button>
+    </Flex>
+  </Flex>
+)
+
+export const PrefixAndSufix: React.FC = (): ReactElement => (
+  <Flex variant='fullCentralized'>
+    <Flex
+      variant='centralized'
+      height='200px'
+      width='400px'
+      border='1px solid lightGrey'
+    >
+      <Button
+        fullWidth={boolean('Full Width', false)}
+        palette={select(
+          'Palette',
+          {
+            Primary: 'primary',
+            Secondary: 'secondary',
+            Neutral: 'neutral'
+          },
+          'primary'
+        )}
+        variant={select(
+          'variant',
+          {
+            Text: 'text',
+            Contained: 'contained',
+            Outlined: 'outlined',
+            Fab: 'fab'
+          },
+          'text'
+        )}
+        prefix={<FaHamburger />}
+        sufix={<FaWater />}
       >
         {text('Label', 'aiqfome!')}
       </Button>
