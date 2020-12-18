@@ -1,6 +1,8 @@
-import React, { useCallback, memo } from 'react'
+import React, { useCallback, useState, memo } from 'react'
 import PropTypes from 'prop-types'
+
 import styled from 'styled-components'
+
 import { Text } from '../Text'
 import { Box, Props as BoxProps } from '../Box'
 
@@ -31,12 +33,9 @@ export const Avatar: React.FC<Props> = ({
   variant = 'box',
   ...props
 }) => {
-  const handleSrcError = useCallback(
-    ev =>
-      (ev.target.src =
-        'https://lh3.googleusercontent.com/rALGk_PU3JMf_5NS5FEYScz9zxgjRBNePvMheCnHIO_lrSs089QcwguwqRVaDLWWAQ'),
-    []
-  )
+  const [useFallback, setUseFallback] = useState(false)
+
+  const handleSrcError = useCallback(() => setUseFallback(true), [])
 
   return (
     <Box
@@ -47,11 +46,11 @@ export const Avatar: React.FC<Props> = ({
       alignItems='center'
       justifyContent='center'
       borderRadius={variant === 'box' ? '5px' : '32px'}
-      backgroundColor={src ? 'transparent' : `${palette}Light`}
+      backgroundColor={src && !useFallback ? 'transparent' : `${palette}Light`}
       data-testid='box'
       {...props}
     >
-      {src ? (
+      {src && !useFallback ? (
         <AvatarStyled
           data-testid='src'
           src={src}
@@ -70,6 +69,10 @@ Avatar.propTypes = {
   palette: PropTypes.string,
   alt: PropTypes.string.isRequired,
   variant: PropTypes.oneOf(['box', 'rounded'])
+}
+
+Avatar.defaultProps = {
+  palette: 'primary'
 }
 
 AvatarInitial.displayName = 'AvatarInitial'
