@@ -101,6 +101,7 @@ export const TimePicker = React.forwardRef(
       <Picker
         position='relative'
         maxWidth={maxWidth}
+        data-testid='timepicker'
         onMouseEnter={() => setShowPicker(true)}
         onMouseLeave={() => setShowPicker(false)}
         {...props}
@@ -128,6 +129,7 @@ export const TimePicker = React.forwardRef(
             boxShadow='0px 3px 6px #00000017'
             borderRadius='8px'
             padding='8px 16px'
+            data-testid='timepicker-open'
           >
             <Flex flexDirection='row' justifyContent='space-between'>
               <TimeUnity

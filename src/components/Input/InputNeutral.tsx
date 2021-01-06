@@ -181,6 +181,7 @@ export const InputNeutral: React.FC<Props> = ({
           onBlur={() => setInputSelected(false)}
         >
           <InputSufixed
+            {...props}
             ref={inputRef}
             placeholder={placeholder}
             type={passwordVisible ? 'text' : 'password'}

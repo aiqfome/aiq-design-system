@@ -75,6 +75,8 @@ export const Sidebar: React.FC<Props> = ({
       maxWidth='340px'
       flexDirection='column'
       opened={opened}
+      data-testid='sidebar'
+      className={opened ? 'show' : 'hidden'}
       {...props}
     >
       {data.length >= 0 && (

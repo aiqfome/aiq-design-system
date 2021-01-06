@@ -60,9 +60,14 @@ export const Multistep: React.FC<Props> = ({
             marginBottom='32px'
             flexDirection='row'
             alignItems='center'
+            data-testid='steps-step'
             width={index === steps.length - 1 ? '80px' : '100%'}
           >
-            <StepButton type='button' onClick={() => handleClickStep(index)}>
+            <StepButton
+              type='button'
+              data-testid='step-button'
+              onClick={() => handleClickStep(index)}
+            >
               {step.icon || (
                 <Flex
                   backgroundColor={

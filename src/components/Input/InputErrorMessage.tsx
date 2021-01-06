@@ -9,7 +9,7 @@ interface Props {
 
 export const InputErrorMessage: React.FC<Props> = ({ errorMessage }: Props) => {
   return (
-    <Text color='grey' fontSize='small' mt={2}>
+    <Text data-testid='input-error' color='grey' fontSize='small' mt={2}>
       {errorMessage}
     </Text>
   )

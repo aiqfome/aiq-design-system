@@ -13,197 +13,190 @@ export default {
   decorators: [withKnobs]
 }
 
-const sidebarData = {
-  user: {
-    name: 'juliano',
-    email: 'test@aiqfome.com'
+const sidebarData = [
+  {
+    icon: <MdHome size={18} />,
+    name: 'dashboard',
+    href: '/dashboard',
+    badge: 1
   },
-  itens: [
-    {
-      icon: <MdHome size={18} />,
-      name: 'dashboard',
-      href: '/dashboard',
-      badge: 1
-    },
-    {
-      icon: <MdBookmark size={18} />,
-      name: 'bookmark',
-      href: '/pedidos',
-      active: true
-    },
-    {
-      icon: <MdBookmark size={18} />,
-      name: 'bookmark',
-      href: '/pedidos',
-      active: true
-    },
-    {
-      icon: <MdBookmark size={18} />,
-      name: 'bookmark',
-      href: '/pedidos',
-      active: true
-    },
-    {
-      icon: <MdBookmark size={18} />,
-      name: 'bookmark',
-      href: '/pedidos',
-      active: true
-    },
-    {
-      icon: <MdBookmark size={18} />,
-      name: 'bookmark',
-      href: '/pedidos',
-      active: true
-    },
-    {
-      icon: <MdBookmark size={18} />,
-      name: 'bookmark',
-      href: '/pedidos',
-      active: true
-    },
-    {
-      icon: <MdBookmark size={18} />,
-      name: 'bookmark',
-      href: '/pedidos',
-      active: true
-    },
-    {
-      icon: <MdBookmark size={18} />,
-      name: 'bookmark',
-      href: '/pedidos',
-      active: true
-    },
-    {
-      icon: <MdBookmark size={18} />,
-      name: 'bookmark',
-      href: '/pedidos',
-      active: true
-    },
-    {
-      icon: <MdBookmark size={18} />,
-      name: 'bookmark',
-      href: '/pedidos',
-      active: true
-    },
-    {
-      icon: <MdStorage size={18} />,
-      name: 'store',
-      itens: [
-        {
-          name: 'Sub Item',
-          href: '/subItem'
-        },
-        {
-          name: 'Sub Item',
-          href: '/subItem'
-        },
-        {
-          name: 'Sub Item',
-          href: '/subItem',
-          badge: 18
-        }
-      ]
-    },
-    {
-      icon: <MdStorage size={18} />,
-      name: 'itens',
-      itens: [
-        {
-          name: 'Sub Item',
-          href: '/subItem'
-        },
-        {
-          name: 'Sub Item',
-          href: '/subItem'
-        },
-        {
-          name: 'Sub Item',
-          href: '/subItem'
-        },
-        {
-          name: 'Sub Item',
-          href: '/subItem'
-        },
-        {
-          name: 'Sub Item',
-          href: '/subItem'
-        },
-        {
-          name: 'Sub Item',
-          href: '/subItem'
-        },
-        {
-          name: 'Sub Item',
-          href: '/subItem'
-        },
-        {
-          name: 'Sub Item',
-          href: '/subItem'
-        },
-        {
-          name: 'Sub Item',
-          href: '/subItem'
-        },
-        {
-          name: 'Sub Item',
-          href: '/subItem'
-        },
-        {
-          name: 'Sub Item',
-          href: '/subItem'
-        },
-        {
-          name: 'Sub Item',
-          href: '/subItem'
-        },
-        {
-          name: 'Sub Item',
-          href: '/subItem'
-        },
-        {
-          name: 'Sub Item',
-          href: '/subItem'
-        },
-        {
-          name: 'Sub Item',
-          href: '/subItem'
-        },
-        {
-          name: 'Sub Item',
-          href: '/subItem'
-        },
-        {
-          name: 'Sub Item',
-          href: '/subItem'
-        },
-        {
-          name: 'Sub Item',
-          href: '/subItem'
-        },
-        {
-          name: 'Sub Item END',
-          href: '/subItem'
-        }
-      ]
-    },
-    {
-      icon: <MdBookmark size={18} />,
-      name: 'aiqfome',
-      href: 'https://aiqfome.com/',
-      type: 'external'
-    },
-    {
-      icon: <MdExitToApp size={18} />,
-      name: 'sair',
-      callback: () => {
-        console.log('logout')
+  {
+    icon: <MdBookmark size={18} />,
+    name: 'bookmark',
+    href: '/pedidos',
+    active: true
+  },
+  {
+    icon: <MdBookmark size={18} />,
+    name: 'bookmark',
+    href: '/pedidos',
+    active: true
+  },
+  {
+    icon: <MdBookmark size={18} />,
+    name: 'bookmark',
+    href: '/pedidos',
+    active: true
+  },
+  {
+    icon: <MdBookmark size={18} />,
+    name: 'bookmark',
+    href: '/pedidos',
+    active: true
+  },
+  {
+    icon: <MdBookmark size={18} />,
+    name: 'bookmark',
+    href: '/pedidos',
+    active: true
+  },
+  {
+    icon: <MdBookmark size={18} />,
+    name: 'bookmark',
+    href: '/pedidos',
+    active: true
+  },
+  {
+    icon: <MdBookmark size={18} />,
+    name: 'bookmark',
+    href: '/pedidos',
+    active: true
+  },
+  {
+    icon: <MdBookmark size={18} />,
+    name: 'bookmark',
+    href: '/pedidos',
+    active: true
+  },
+  {
+    icon: <MdBookmark size={18} />,
+    name: 'bookmark',
+    href: '/pedidos',
+    active: true
+  },
+  {
+    icon: <MdBookmark size={18} />,
+    name: 'bookmark',
+    href: '/pedidos',
+    active: true
+  },
+  {
+    icon: <MdStorage size={18} />,
+    name: 'store',
+    itens: [
+      {
+        name: 'Sub Item',
+        href: '/subItem'
+      },
+      {
+        name: 'Sub Item',
+        href: '/subItem'
+      },
+      {
+        name: 'Sub Item',
+        href: '/subItem',
+        badge: 18
       }
+    ]
+  },
+  {
+    icon: <MdStorage size={18} />,
+    name: 'itens',
+    itens: [
+      {
+        name: 'Sub Item',
+        href: '/subItem'
+      },
+      {
+        name: 'Sub Item',
+        href: '/subItem'
+      },
+      {
+        name: 'Sub Item',
+        href: '/subItem'
+      },
+      {
+        name: 'Sub Item',
+        href: '/subItem'
+      },
+      {
+        name: 'Sub Item',
+        href: '/subItem'
+      },
+      {
+        name: 'Sub Item',
+        href: '/subItem'
+      },
+      {
+        name: 'Sub Item',
+        href: '/subItem'
+      },
+      {
+        name: 'Sub Item',
+        href: '/subItem'
+      },
+      {
+        name: 'Sub Item',
+        href: '/subItem'
+      },
+      {
+        name: 'Sub Item',
+        href: '/subItem'
+      },
+      {
+        name: 'Sub Item',
+        href: '/subItem'
+      },
+      {
+        name: 'Sub Item',
+        href: '/subItem'
+      },
+      {
+        name: 'Sub Item',
+        href: '/subItem'
+      },
+      {
+        name: 'Sub Item',
+        href: '/subItem'
+      },
+      {
+        name: 'Sub Item',
+        href: '/subItem'
+      },
+      {
+        name: 'Sub Item',
+        href: '/subItem'
+      },
+      {
+        name: 'Sub Item',
+        href: '/subItem'
+      },
+      {
+        name: 'Sub Item',
+        href: '/subItem'
+      },
+      {
+        name: 'Sub Item END',
+        href: '/subItem'
+      }
+    ]
+  },
+  {
+    icon: <MdBookmark size={18} />,
+    name: 'aiqfome',
+    href: 'https://aiqfome.com/',
+    type: 'external'
+  },
+  {
+    icon: <MdExitToApp size={18} />,
+    name: 'sair',
+    callback: () => {
+      console.log('logout')
     }
-  ]
-}
+  }
+]
 
 const Header = () => {
-  const user = sidebarData.user
   return (
     <Flex
       style={{
@@ -211,9 +204,7 @@ const Header = () => {
       }}
       py='8px'
       alignItems='center'
-    >
-      <Avatar alt={user.name} mx='12px' />
-    </Flex>
+    />
   )
 }
 

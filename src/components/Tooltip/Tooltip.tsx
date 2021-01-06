@@ -11,14 +11,12 @@ export interface Props {
   children?: ReactNode
   body?: any
   variant?:
-    | 'top'
-    | 'right'
-    | 'bottom'
-    | 'left'
     | 'topLeft'
     | 'topRight'
+    | 'topCenter'
     | 'bottomLeft'
     | 'bottomRight'
+    | 'bottomCenter'
   type?: 'default' | 'balloon'
   onMouseOver?: () => void
 }
@@ -61,10 +59,21 @@ export const Tooltip: React.FC<Props> = ({
   )
 
   const getOverlay = () => (
-    <PopoverStyled flexDirection='column' {...props}>
+    <PopoverStyled
+      flexDirection='column'
+      data-testid='tooltip-content'
+      {...props}
+    >
       {body}
     </PopoverStyled>
   )
+
+  const getTooltipVariant = () => {
+    if (variant === 'bottomCenter') return 'bottom'
+    if (variant === 'topCenter') return 'top'
+
+    return variant
+  }
 
   if (type === 'default') {
     return (
@@ -75,7 +84,7 @@ export const Tooltip: React.FC<Props> = ({
         overlay={getOverlay}
         overlayClassName='popover'
       >
-        {child}
+        <div data-testid='tooltip-child'>{child}</div>
       </RcDropdown>
     )
   }
@@ -83,12 +92,12 @@ export const Tooltip: React.FC<Props> = ({
   return (
     <RcTooltip
       arrowContent
-      placement={variant}
       trigger={['hover']}
       overlayClassName='tooltip'
       overlay={getOverlayBalloon}
+      placement={getTooltipVariant()}
     >
-      {child}
+      <div data-testid='tooltip-child'>{child}</div>
     </RcTooltip>
   )
 }
@@ -98,13 +107,11 @@ Tooltip.propTypes = {
   children: PropTypes.node,
   type: PropTypes.oneOf(['default', 'balloon']),
   variant: PropTypes.oneOf([
-    'left',
-    'right',
-    'top',
-    'bottom',
-    'topLeft',
     'topRight',
+    'topLeft',
+    'topCenter',
     'bottomLeft',
-    'bottomRight'
+    'bottomRight',
+    'bottomCenter'
   ])
 }

@@ -30,6 +30,7 @@ export interface Props {
   isLoading?: boolean
   isFetchable?: boolean
   itemLimit?: number
+  placeholder?: string
 }
 
 const MultiSelectStyled = styled(Box)`
@@ -119,6 +120,7 @@ export const MultiSelectStatic: React.FC<Props> = ({
   filters = [],
   onChange,
   value = [],
+  placeholder,
   itemLimit = 2,
   ...props
 }) => {
@@ -202,7 +204,12 @@ export const MultiSelectStatic: React.FC<Props> = ({
   }
 
   return (
-    <MultiSelectStyled position='relative' maxWidth={maxWidth} {...props}>
+    <MultiSelectStyled
+      position='relative'
+      maxWidth={maxWidth}
+      data-testid='multiselect-static'
+      {...props}
+    >
       <ContainerInput
         backgroundColor='white'
         borderRadius={4}
@@ -227,6 +234,7 @@ export const MultiSelectStatic: React.FC<Props> = ({
               alignItems='center'
               backgroundColor='primary'
               borderRadius='3px'
+              data-testid='select-selected-item'
             >
               <SelectedItem
                 {...propsMultipleSelection.getSelectedItemProps({
@@ -269,6 +277,8 @@ export const MultiSelectStatic: React.FC<Props> = ({
 
         <input
           type='text'
+          placeholder={placeholder}
+          data-testid='select-input'
           {...propsCombobox.getInputProps(
             propsMultipleSelection.getDropdownProps({
               ref: inputRef,
@@ -293,7 +303,11 @@ export const MultiSelectStatic: React.FC<Props> = ({
       >
         <ul>
           {filters.map((filter, index) => (
-            <li key={`filter-${index}`} onClick={() => filterItems(filter)}>
+            <li
+              key={`filter-${index}`}
+              data-testid='select-filter'
+              onClick={() => filterItems(filter)}
+            >
               <Text cursor='pointer'>{filter.name}</Text>
             </li>
           ))}
@@ -312,6 +326,7 @@ export const MultiSelectStatic: React.FC<Props> = ({
                       : ''
                   }
                   key={`${item}${index}`}
+                  data-testid='select-item'
                   {...propsCombobox.getItemProps({ item, index })}
                 >
                   {item.name}
@@ -331,5 +346,6 @@ MultiSelectStatic.propTypes = {
   onChange: PropTypes.func,
   value: PropTypes.array,
   isLoading: PropTypes.bool,
+  placeholder: PropTypes.string,
   itemLimit: PropTypes.number
 }

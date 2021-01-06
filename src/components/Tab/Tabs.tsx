@@ -183,7 +183,7 @@ export const Tabs: React.FC<TabsProps> = ({
   }
 
   return (
-    <TabStyled {...props}>
+    <TabStyled data-testid='tabs' {...props}>
       <FlexStyled isMobile={isMobile} scrollPosition={scrollPosition}>
         <Flex
           flex={1}
@@ -191,6 +191,7 @@ export const Tabs: React.FC<TabsProps> = ({
           overflow='hidden'
           position='relative'
           onClick={handleClick}
+          data-testid='tabs-container'
           {...wrapperProps}
         >
           {children}

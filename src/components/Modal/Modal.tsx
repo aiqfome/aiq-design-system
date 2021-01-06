@@ -213,6 +213,7 @@ export const Modal: React.FC<Props> = ({
         animation={animation}
         variant='fullCentralized'
         onClick={handleClickOutSide}
+        data-testid='modal-container'
         className={`background-modal ${show ? 'show' : 'hide'}`}
       >
         <form onSubmit={form ? form.handleSubmit(onSubmit) : undefined}>
@@ -227,6 +228,7 @@ export const Modal: React.FC<Props> = ({
               fontSize='xlarge'
               marginBottom='15px'
               fontWeight='semiBold'
+              data-testid='modal-title'
             >
               {title}
             </Text>
@@ -241,6 +243,7 @@ export const Modal: React.FC<Props> = ({
                     variant='outlined'
                     fontWeight='medium'
                     onClick={handleCancel}
+                    data-testid='modal-button'
                     {...cancelButton}
                   >
                     {cancelButton.label}
@@ -255,6 +258,7 @@ export const Modal: React.FC<Props> = ({
                     onClick={handleOk}
                     variant='contained'
                     fontWeight='medium'
+                    data-testid='modal-button'
                     type={form ? 'submit' : 'button'}
                     {...okButton}
                   >

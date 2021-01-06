@@ -17,7 +17,7 @@ import { MdArrowDropDown } from 'react-icons/md'
 export interface Props {
   variant?: 'single' | 'range'
   value?: Array<Moment>
-  onChange: (date) => void
+  onChange?: (date) => void
   name?: string
   errorMessage?: string
   errorForm?: boolean
@@ -60,7 +60,7 @@ export const DatePickerSingle: React.FC<Props> = ({
 
   function onDateChange(date) {
     setDate([date])
-    onChange(date)
+    if (onChange) onChange(date)
     setIsChangeValue(true)
   }
 
@@ -70,9 +70,14 @@ export const DatePickerSingle: React.FC<Props> = ({
   }
 
   return (
-    <Flex position='relative' flexDirection='column'>
+    <Flex
+      position='relative'
+      flexDirection='column'
+      data-testid='datepicker-single'
+    >
       <ButtonDatePicker
         onClick={() => setShowDatePicker(!showDatePicker)}
+        data-testid='datepicker-single-input'
         alignItems='center'
         px='12px'
         py='10px'
@@ -89,7 +94,11 @@ export const DatePickerSingle: React.FC<Props> = ({
             {`${moment(date[0]).format('DD/MMMM/YYYY')}`}
           </Text>
         ) : (
-          <PlaceHolderText color='#bfbfbf' cursor='pointer'>
+          <PlaceHolderText
+            color='#bfbfbf'
+            cursor='pointer'
+            data-testid='datepicker-placeholder'
+          >
             {placeholder}
           </PlaceHolderText>
         )}
@@ -98,12 +107,17 @@ export const DatePickerSingle: React.FC<Props> = ({
         </Icon>
       </ButtonDatePicker>
       {errorForm && (
-        <Text color='grey' fontSize='small' mt={2}>
+        <Text
+          mt={2}
+          color='grey'
+          fontSize='small'
+          data-testid='datepicker-error'
+        >
           {errorMessage}
         </Text>
       )}
       {showDatePicker && (
-        <DatePickerWrapper>
+        <DatePickerWrapper data-testid='datepicker-open'>
           <DayPickerSingleDateController
             initialVisibleMonth={() => moment()}
             {...props}

@@ -129,6 +129,7 @@ export const InputTags: React.FC<Props> = ({
       onClick={() => setInputSelected(true)}
       onBlur={() => setInputSelected(false)}
       flexDirection='column'
+      data-testid='input-tags'
       {...boxStyled}
     >
       <input type='hidden' value={tags.toString()} {...props} />

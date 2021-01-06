@@ -40,7 +40,7 @@ export const Toast: React.FC<Props> = ({ messages }) => {
   )
 
   return (
-    <Container messages={messages}>
+    <Container messages={messages} data-testid='toast-container'>
       {messagesWithTransitions.map(({ item, key, props }) => (
         <ToastContent key={key} message={item} {...props} />
       ))}
