@@ -56,6 +56,7 @@ export const TableRow: React.FC<TableRowProps> = ({
   return (
     <TableRowStyled
       hoverable={hoverable}
+      data-testid='table-row'
       background={background || ''}
       {...props}
     >

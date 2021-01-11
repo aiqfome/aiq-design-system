@@ -112,6 +112,7 @@ export const ToastContent: React.FC<Props> = ({ message, className }) => {
       type={message.type}
       description={message.description}
       className={className}
+      data-testid='toast-content'
     >
       {icons[message.type || 'info']}
 

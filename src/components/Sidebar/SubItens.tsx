@@ -178,6 +178,7 @@ export const SubItens: React.FC<Props> = ({
       ref={el => setRef(el || null)}
       heightScrolledToTop={heightScrolledToTop}
       flexDirection='column'
+      data-testid='sidebar-item'
       className={`${itemOpened ? 'show' : 'hide'}`}
       sidebarOpened={sidebarOpened}
       itemOpened={itemOpened}

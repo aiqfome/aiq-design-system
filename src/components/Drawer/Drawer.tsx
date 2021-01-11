@@ -96,9 +96,17 @@ export const Drawer: React.FC<Props> = ({
 
   return (
     <>
-      {onClose && opened && <Mask onClick={onClose} />}
+      {onClose && opened && (
+        <Mask data-testid='drawer-mask' onClick={onClose} />
+      )}
 
-      <DrawerStyled opened={opened} variation={variation} {...props}>
+      <DrawerStyled
+        opened={opened}
+        variation={variation}
+        data-testid='drawer-content'
+        className={opened ? 'drawer-open' : 'drawer-close'}
+        {...props}
+      >
         {loading ? (
           <Flex
             flex={1}

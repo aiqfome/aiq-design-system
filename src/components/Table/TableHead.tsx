@@ -37,7 +37,11 @@ const TableHeaderStyled = styled.th<Props>`
 `
 
 export const TableHead: React.FC<Props> = ({ children, wrap, ...props }) => {
-  return <TableHeaderStyled {...props}>{children}</TableHeaderStyled>
+  return (
+    <TableHeaderStyled data-testid='table-head' {...props}>
+      {children}
+    </TableHeaderStyled>
+  )
 }
 
 TableHead.propTypes = {

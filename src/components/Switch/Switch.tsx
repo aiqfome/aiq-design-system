@@ -122,8 +122,12 @@ const SwitchStyled = styled.label<Props>`
 export const Switch = React.forwardRef<HTMLInputElement, Props>(
   ({ variant = 'default', className, ...props }, ref) => {
     return (
-      <SwitchStyled className={className} variant={variant}>
-        <input ref={ref} type='checkbox' {...props} />
+      <SwitchStyled
+        variant={variant}
+        className={className}
+        data-testid='switch'
+      >
+        <input ref={ref} type='checkbox' data-testid='input' {...props} />
       </SwitchStyled>
     )
   }

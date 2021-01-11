@@ -149,7 +149,12 @@ export const SelectStatic: React.FC<Props> = ({
   }
 
   return (
-    <Container isOpen={isOpen} variant={variant} {...props}>
+    <Container
+      isOpen={isOpen}
+      variant={variant}
+      data-testid='select-static'
+      {...props}
+    >
       <ul {...getMenuProps()}>
         {isOpen &&
           inputItems &&
@@ -157,6 +162,7 @@ export const SelectStatic: React.FC<Props> = ({
           inputItems.map((item, index) => (
             <Item
               key={index}
+              data-testid='select-item'
               highlighted={highlightedIndex === index}
               {...getItemProps({ item, index })}
             >
@@ -180,6 +186,7 @@ export const SelectStatic: React.FC<Props> = ({
           readOnly={!autoComplete}
           prefix={prefix}
           placeholder={placeholder}
+          data-testid='select-input'
           {...boxStyled}
         />
         {isLoading && (

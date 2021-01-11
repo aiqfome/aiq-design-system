@@ -122,7 +122,12 @@ export const Tab: React.FC<TabProps> = ({
   }
 
   return (
-    <TabStyled onClick={handleClick} active={index === value} {...props}>
+    <TabStyled
+      data-testid='tab'
+      onClick={handleClick}
+      active={index === value}
+      {...props}
+    >
       {children}
     </TabStyled>
   )

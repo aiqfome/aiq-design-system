@@ -193,7 +193,12 @@ export const MultiSelectFetchable: React.FC<Props> = ({
   }
 
   return (
-    <MultiSelectStyled position='relative' maxWidth={maxWidth} {...props}>
+    <MultiSelectStyled
+      position='relative'
+      maxWidth={maxWidth}
+      data-testid='multiselect-fechable'
+      {...props}
+    >
       <ContainerInput
         backgroundColor='white'
         borderRadius={4}

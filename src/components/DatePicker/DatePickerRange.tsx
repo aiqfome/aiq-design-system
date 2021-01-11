@@ -22,7 +22,7 @@ export interface Props {
   errorMessage?: string
   errorForm?: boolean
   placeholder?: string
-  onChange: (startDate, endDate) => void
+  onChange?: (startDate, endDate) => void
 }
 
 const DatePickerWrapper = styled(Flex)`
@@ -71,7 +71,7 @@ export const DatePickerRange: React.FC<Props> = ({
   function onDatesChange({ startDate, endDate }) {
     setStarDate(startDate)
     setEndDate(endDate)
-    onChange(startDate, endDate)
+    if (onChange) onChange(startDate, endDate)
     setIsChangeValue(true)
   }
 
@@ -84,10 +84,11 @@ export const DatePickerRange: React.FC<Props> = ({
 
   return (
     <Flex
+      width='100%'
+      maxWidth='250px'
       position='relative'
       flexDirection='column'
-      maxWidth='250px'
-      width='100%'
+      data-testid='datepicker-range'
     >
       <ButtonDatePicker
         onClick={() => setShowDatePicker(!showDatePicker)}
@@ -108,7 +109,11 @@ export const DatePickerRange: React.FC<Props> = ({
             )}`}
           </Text>
         ) : (
-          <PlaceHolderText color='#bfbfbf' cursor='pointer'>
+          <PlaceHolderText
+            color='#bfbfbf'
+            cursor='pointer'
+            data-testid='datepicker-placeholder'
+          >
             {placeholder}
           </PlaceHolderText>
         )}
@@ -118,12 +123,17 @@ export const DatePickerRange: React.FC<Props> = ({
         </Icon>
       </ButtonDatePicker>
       {errorForm && (
-        <Text color='grey' fontSize='small' mt={2}>
+        <Text
+          mt={2}
+          color='grey'
+          fontSize='small'
+          data-testid='datepicker-error'
+        >
           {errorMessage}
         </Text>
       )}
       {showDatePicker && (
-        <DatePickerWrapper>
+        <DatePickerWrapper data-testid='datepicker-open'>
           <DayPickerRangeController
             initialVisibleMonth={() => moment()}
             {...props}
