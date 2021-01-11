@@ -1,14 +1,12 @@
 import React, { useState, useRef } from 'react'
 
 import PropTypes from 'prop-types'
-
 import { MdFileUpload } from 'react-icons/md'
+import styled, { css, DefaultTheme } from 'styled-components'
 
 import { Flex } from '../Flex'
 import { Text } from '../Text'
 import { Icon } from '../Icon'
-
-import styled, { css, DefaultTheme } from 'styled-components'
 
 interface TypeTranslate {
   message: {
@@ -22,7 +20,6 @@ interface TypeTranslate {
 export interface Props {
   dataMaxSize?: number
   onChange?: (e: any) => void
-  value?: any
   initImage?: string
   name?: string
   translate?: TypeTranslate
@@ -190,12 +187,24 @@ export const DropFile = React.forwardRef<HTMLInputElement, Props>(
     const ImageFile: React.FC = () => {
       if (initImage && !image && !isDragover) {
         return (
-          <Image height='200px' width='100%' src={initImage} alt='your image' />
+          <Image
+            width='100%'
+            height='200px'
+            src={initImage}
+            alt='your image'
+            data-testid='dropfile-image'
+          />
         )
       }
       if (image && !isDragover) {
         return (
-          <Image height='200px' width='100%' src={image} alt='your image' />
+          <Image
+            src={image}
+            width='100%'
+            height='200px'
+            alt='your image'
+            data-testid='dropfile-image'
+          />
         )
       }
       return <Flex />
@@ -214,6 +223,7 @@ export const DropFile = React.forwardRef<HTMLInputElement, Props>(
         height='200px'
         variant='centralized'
         borderRadius={6}
+        data-testid='dropfile-container'
         {...props}
       >
         <InputFile
@@ -221,6 +231,7 @@ export const DropFile = React.forwardRef<HTMLInputElement, Props>(
           onChange={handleChangeImage}
           ref={inputRef}
           type='file'
+          data-testid='dropfile-input'
           {...props}
         />
         <Flex flexDirection='column' variant='centralized'>
@@ -229,7 +240,12 @@ export const DropFile = React.forwardRef<HTMLInputElement, Props>(
           </Icon>
           <Text color='grey'>{translate.message.row1}</Text>
           <Text color='grey'>{translate.message.row2}</Text>
-          <Text mt={4} color='red' fontWeight='medium'>
+          <Text
+            mt={4}
+            color='red'
+            fontWeight='medium'
+            data-testid='dropfile-error'
+          >
             {getErrorMessage()}
           </Text>
           <ImageFile />
