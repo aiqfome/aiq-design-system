@@ -1,8 +1,7 @@
 import React from 'react'
 
-import { render } from '../utils/test/render'
-
 import { Divider } from '../Divider'
+import { render } from '../utils/test/render'
 
 describe('Divider', () => {
   it('should have to render without crashing', () => {

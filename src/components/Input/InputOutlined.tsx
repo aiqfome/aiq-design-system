@@ -179,7 +179,11 @@ export const InputOutlined: React.FC<Props> = ({
 
   if (type === 'password') {
     return (
-      <Container {...styledContainer} {...props}>
+      <Container
+        data-testid='input-outlined-password'
+        {...styledContainer}
+        {...props}
+      >
         <LabelStyled errorForm={errorForm}>
           <input
             {...props}
@@ -187,8 +191,9 @@ export const InputOutlined: React.FC<Props> = ({
             type={showPassword ? 'text' : 'password'}
             ref={inputRef}
             name={name}
+            data-testid='input'
           />
-          <Text>{label}</Text>
+          <Text data-testid='input-label'>{label}</Text>
 
           <Button
             palette='primary'
@@ -210,7 +215,11 @@ export const InputOutlined: React.FC<Props> = ({
 
   if (sufix) {
     return (
-      <Container {...styledContainer} {...props}>
+      <Container
+        data-testid='input-outlined-sufix'
+        {...styledContainer}
+        {...props}
+      >
         <LabelStyled errorForm={errorForm}>
           <input
             {...props}
@@ -219,8 +228,9 @@ export const InputOutlined: React.FC<Props> = ({
             value={value}
             ref={inputRef}
             name={name}
+            data-testid='input'
           />
-          <Text>{label}</Text>
+          <Text data-testid='input-label'>{label}</Text>
 
           {sufix}
         </LabelStyled>
@@ -231,7 +241,7 @@ export const InputOutlined: React.FC<Props> = ({
   }
 
   return (
-    <Container {...styledContainer} {...props}>
+    <Container {...styledContainer} {...props} data-testid='input-outlined'>
       <LabelStyled errorForm={errorForm}>
         <input
           {...props}
@@ -241,8 +251,9 @@ export const InputOutlined: React.FC<Props> = ({
           type={type}
           ref={inputRef}
           autoComplete='off'
+          data-testid='input'
         />
-        <Text>{label}</Text>
+        <Text data-testid='input-label'>{label}</Text>
       </LabelStyled>
 
       {errorForm && <InputErrorMessage errorMessage={errorMessage} />}

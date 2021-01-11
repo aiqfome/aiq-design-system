@@ -9,8 +9,6 @@ import { Icon } from '../Icon'
 import { Text } from '../Text'
 import { Divider } from '../Divider'
 
-import 'rc-dropdown/assets/index.css'
-
 interface Item {
   action: (event: any) => void
   icon?: React.ReactElement
@@ -79,7 +77,11 @@ export const Actions: React.FC<Props> = ({
 
   const getOverlay = () => {
     return (
-      <ActionsStyled flexDirection='column' {...props}>
+      <ActionsStyled
+        flexDirection='column'
+        data-testid='actions-content'
+        {...props}
+      >
         {header && (
           <>
             <Flex p='10px' flexDirection='column'>
@@ -144,7 +146,13 @@ export const Actions: React.FC<Props> = ({
         overlayClassName='actions'
         onVisibleChange={setVisible}
       >
-        <div onClick={e => e.stopPropagation()}>{child}</div>
+        <div
+          data-testid='actions-child'
+          onClick={e => e.stopPropagation()}
+          className={visible ? 'show' : 'hidden'}
+        >
+          {child}
+        </div>
       </RcDropdown>
     )
   }

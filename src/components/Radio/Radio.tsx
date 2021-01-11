@@ -1,4 +1,4 @@
-import React, { InputHTMLAttributes } from 'react'
+import React, { InputHTMLAttributes, useEffect, useState } from 'react'
 
 import PropTypes from 'prop-types'
 
@@ -132,6 +132,20 @@ export const Radio = React.forwardRef<HTMLInputElement, Props>(
     },
     ref
   ) => {
+    const [isChecked, setIsChecked] = useState(checked)
+
+    useEffect(() => {
+      setIsChecked(checked)
+    }, [checked])
+
+    const onChangeRadio = e => {
+      if (!disabled) {
+        setIsChecked(!checked)
+
+        if (onChange) onChange(e)
+      }
+    }
+
     return (
       <RadioStyled
         mx={mx}
@@ -142,15 +156,17 @@ export const Radio = React.forwardRef<HTMLInputElement, Props>(
         ml={ml}
         className={className}
         disabled={disabled}
+        data-testid='radio-container'
       >
         <input
           ref={ref}
           type='radio'
           disabled={disabled}
           name={name}
-          onChange={onChange}
-          checked={checked}
+          onChange={onChangeRadio}
+          checked={isChecked}
           value={value}
+          data-testid='radio-input'
           {...props}
         />
         <Box />

@@ -63,7 +63,11 @@ export const Popover: React.FC<Props> = ({
       typeof overlayNode === 'string' ? <span>{overlayNode}</span> : overlayNode
     )
 
-    return <PopoverStyled {...props}>{overlayNode}</PopoverStyled>
+    return (
+      <PopoverStyled data-testid='popover-content' {...props}>
+        {overlayNode}
+      </PopoverStyled>
+    )
   }
 
   if (keepOpen) {
@@ -77,7 +81,12 @@ export const Popover: React.FC<Props> = ({
         overlayClassName='popover'
         onVisibleChange={setVisible}
       >
-        {child}
+        <div
+          data-testid='popover-child'
+          className={visible ? 'show' : 'hidden'}
+        >
+          {child}
+        </div>
       </RcDropdown>
     )
   }

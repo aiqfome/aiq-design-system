@@ -60,7 +60,7 @@ describe('Dropdown', () => {
     expect(handleOnClick).toHaveBeenLastCalledWith(itens[0])
   })
 
-  it('should have the same number of items from the itens property ', () => {
+  it('should have the same number of items from the itens property', () => {
     const itens = [
       { label: 'item1', value: 1 },
       { label: 'item2', value: 2 },
@@ -79,7 +79,7 @@ describe('Dropdown', () => {
     expect(itemsDropdown.length).toBe(4)
   })
 
-  it('should not can to open when dropdown is disabled  ', () => {
+  it('should not can to open when dropdown is disabled', () => {
     const handleOnClick = jest.fn()
 
     const itens = [

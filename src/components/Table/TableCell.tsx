@@ -52,7 +52,12 @@ export const TableCell: React.FC<Props> = ({
   ...props
 }) => {
   return (
-    <TableCellStyled wrap={wrap ? 1 : 0} colSpan={colspan} {...props}>
+    <TableCellStyled
+      colSpan={colspan}
+      wrap={wrap ? 1 : 0}
+      data-testid='table-cell'
+      {...props}
+    >
       {children}
     </TableCellStyled>
   )

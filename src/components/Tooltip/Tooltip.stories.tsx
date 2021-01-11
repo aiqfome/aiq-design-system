@@ -23,24 +23,19 @@ export const Basic: React.FC = (): ReactElement => {
 export const Variants: React.FC = (): ReactElement => {
   return (
     <Flex variant='fullCentralized'>
-      <Tooltip variant='top' body="I'm hungry">
+      <Tooltip variant='topRight' body="I'm hungry">
         <Text mx={10} cursor='pointer'>
-          Top
+          Right-Top
         </Text>
       </Tooltip>
-      <Tooltip variant='bottom' body="I'm hungry">
+      <Tooltip variant='topCenter' body="I'm hungry">
         <Text mx={10} cursor='pointer'>
-          Bottom
+          Center-Top
         </Text>
       </Tooltip>
-      <Tooltip variant='left' body="I'm hungry">
+      <Tooltip variant='topLeft' body="I'm hungry">
         <Text mx={10} cursor='pointer'>
-          Left
-        </Text>
-      </Tooltip>
-      <Tooltip variant='right' body="I'm hungry">
-        <Text mx={10} cursor='pointer'>
-          Right
+          Left-Top
         </Text>
       </Tooltip>
       <Tooltip variant='bottomRight' body="I'm hungry">
@@ -48,53 +43,15 @@ export const Variants: React.FC = (): ReactElement => {
           Right-Bottom
         </Text>
       </Tooltip>
+      <Tooltip variant='bottomCenter' body="I'm hungry">
+        <Text mx={10} cursor='pointer'>
+          Center-Bottom
+        </Text>
+      </Tooltip>
       <Tooltip variant='bottomLeft' body="I'm hungry">
         <Text mx={10} cursor='pointer'>
           Left-Bottom
         </Text>
-      </Tooltip>
-    </Flex>
-  )
-}
-
-export const TooltipInBottom: React.FC = (): ReactElement => {
-  return (
-    <Flex variant='fullCentralized'>
-      <Tooltip variant='top' body="I'm hungry">
-        <Button mx={10} variant='outlined' palette='primary'>
-          Top Top Top Top Top Top
-        </Button>
-      </Tooltip>
-      <Tooltip variant='left' body="I'm hungry">
-        <Button mx={10} variant='outlined' palette='primary'>
-          Left Left Left Left Left Left
-        </Button>
-      </Tooltip>
-      <Tooltip variant='right' body="I'm hungry">
-        <Button mx={10} variant='outlined' palette='primary'>
-          Right Right Right Right Right Right
-        </Button>
-      </Tooltip>
-      <Tooltip variant='bottomRight' body="I'm hungry">
-        <Button mx={10} variant='outlined' palette='primary'>
-          Right- Right- Right- Right- Right- Right-Bottom
-        </Button>
-      </Tooltip>
-      <Tooltip
-        variant='bottomLeft'
-        body=' Left- Left- Left- Left- Left- Left-Bottom'
-      >
-        <Button mx={10} variant='outlined' palette='primary'>
-          Left- Left- Left- Left- Left- Left-Bottom
-        </Button>
-      </Tooltip>
-      <Tooltip
-        variant='bottom'
-        body='Bottom Bottom Bottom Bottom Bottom Bottom'
-      >
-        <Button mx={10} variant='outlined' palette='primary'>
-          Bottom Bottom Bottom Bottom Bottom Bottom
-        </Button>
       </Tooltip>
     </Flex>
   )
@@ -108,7 +65,7 @@ export const Types: React.FC = (): ReactElement => {
           Default
         </Text>
       </Tooltip>
-      <Tooltip type='balloon' variant='bottom' body="I'm hungry">
+      <Tooltip type='balloon' variant='bottomCenter' body="I'm hungry">
         <Text mx={10} cursor='pointer'>
           Balloon
         </Text>

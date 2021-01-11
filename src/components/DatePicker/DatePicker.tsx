@@ -14,26 +14,26 @@ export interface Props {
   errorMessage?: string
   errorForm?: boolean
   placeholder?: string
-  onChange: (startDate, endDate?: any) => void
+  onChange?: (startDate, endDate?: any) => void | undefined
 }
 
 export const DatePicker: React.FC<Props> = ({
-  variant = 'single',
   value,
   onChange,
-  errorMessage,
   errorForm,
   placeholder,
+  errorMessage,
+  variant = 'single',
   ...props
 }) => {
   if (variant === 'range') {
     return (
       <DatePickerRange
-        placeholder={placeholder}
-        errorForm={errorForm}
-        errorMessage={errorMessage}
         value={value}
         onChange={onChange}
+        errorForm={errorForm}
+        placeholder={placeholder}
+        errorMessage={errorMessage}
         {...props}
       />
     )
@@ -41,11 +41,11 @@ export const DatePicker: React.FC<Props> = ({
 
   return (
     <DatePickerSingle
-      placeholder={placeholder}
-      errorForm={errorForm}
-      errorMessage={errorMessage}
       value={value}
       onChange={onChange}
+      errorForm={errorForm}
+      placeholder={placeholder}
+      errorMessage={errorMessage}
       {...props}
     />
   )
