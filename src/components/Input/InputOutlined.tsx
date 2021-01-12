@@ -58,7 +58,8 @@ const LabelStyled = styled.label<Props>`
     border: solid 1px
       ${({ theme, errorForm }) =>
         errorForm ? theme.colors.error : theme.colors.mediumGrey};
-    border-top-color: transparent;
+    border-top-color: ${({ label }) => (label ? 'transparent' : 'interiht')};
+
     border-radius: 4px;
     padding: 9px 13px 9px;
     caret-color: ${({ theme }) => theme.colors.almostBlack};
@@ -111,7 +112,7 @@ const LabelStyled = styled.label<Props>`
       line-height: 15px;
       cursor: text;
       transition: color 0.2s, font-size 0.2s, line-height 0.2s;
-      color: ${({ theme }) => theme.colors.grey};
+      color: ${({ theme }) => theme.colors.almostBlack};
 
       &::before,
       &::after {
@@ -184,7 +185,7 @@ export const InputOutlined: React.FC<Props> = ({
         {...styledContainer}
         {...props}
       >
-        <LabelStyled errorForm={errorForm}>
+        <LabelStyled label={label} errorForm={errorForm}>
           <input
             {...props}
             placeholder=' '
@@ -193,7 +194,7 @@ export const InputOutlined: React.FC<Props> = ({
             name={name}
             data-testid='input'
           />
-          <Text data-testid='input-label'>{label}</Text>
+          {label && <Text data-testid='input-label'>{label}</Text>}
 
           <Button
             palette='primary'
@@ -220,7 +221,7 @@ export const InputOutlined: React.FC<Props> = ({
         {...styledContainer}
         {...props}
       >
-        <LabelStyled errorForm={errorForm}>
+        <LabelStyled label={label} errorForm={errorForm}>
           <input
             {...props}
             placeholder=' '
@@ -230,7 +231,7 @@ export const InputOutlined: React.FC<Props> = ({
             name={name}
             data-testid='input'
           />
-          <Text data-testid='input-label'>{label}</Text>
+          {label && <Text data-testid='input-label'>{label}</Text>}
 
           {sufix}
         </LabelStyled>
@@ -242,7 +243,7 @@ export const InputOutlined: React.FC<Props> = ({
 
   return (
     <Container {...styledContainer} {...props} data-testid='input-outlined'>
-      <LabelStyled errorForm={errorForm}>
+      <LabelStyled label={label} errorForm={errorForm}>
         <input
           {...props}
           value={value}
@@ -253,7 +254,7 @@ export const InputOutlined: React.FC<Props> = ({
           autoComplete='off'
           data-testid='input'
         />
-        <Text data-testid='input-label'>{label}</Text>
+        {label && <Text data-testid='input-label'>{label}</Text>}
       </LabelStyled>
 
       {errorForm && <InputErrorMessage errorMessage={errorMessage} />}
