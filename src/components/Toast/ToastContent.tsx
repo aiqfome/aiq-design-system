@@ -150,7 +150,7 @@ export const ToastContent: React.FC<Props> = ({ message, className }) => {
       setInit(true)
       const timer = setTimeout(() => {
         removeToast(message.id)
-      }, 30000)
+      }, 3000)
 
       return () => {
         clearTimeout(timer)
