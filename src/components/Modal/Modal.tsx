@@ -252,14 +252,25 @@ export const Modal: React.FC<Props> = ({
               </Flex>
 
               <Flex flex={1} justifyContent='flex-end'>
-                {okButton.visible && (
+                {okButton.visible && okButton.function ? (
                   <Button
                     palette='primary'
                     onClick={handleOk}
                     variant='contained'
                     fontWeight='medium'
                     data-testid='modal-button'
-                    type={form ? 'submit' : 'button'}
+                    type='button'
+                    {...okButton}
+                  >
+                    {okButton.label}
+                  </Button>
+                ) : (
+                  <Button
+                    palette='primary'
+                    variant='contained'
+                    fontWeight='medium'
+                    data-testid='modal-button'
+                    type='submit'
                     {...okButton}
                   >
                     {okButton.label}
