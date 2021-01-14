@@ -23,7 +23,7 @@ const Container = styled.div<Props>`
     messages && messages.length > 0 ? 'block' : 'none'};
   position: fixed;
   right: 0;
-  bottom: 0;
+  top: 0;
   padding: 30px;
   overflow: hidden;
 `

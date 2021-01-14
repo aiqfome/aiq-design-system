@@ -50,7 +50,12 @@ export const Popover: React.FC<Props> = ({
   ...props
 }) => {
   const [visible, setVisible] = useState(false)
-  const child = React.Children.only(children) as React.ReactElement<any>
+
+  const child = React.Children.only(
+    <div data-testid='popover-child' className={visible ? 'show' : 'hidden'}>
+      {children}
+    </div>
+  ) as React.ReactElement<any>
 
   const getOverlay = () => {
     let overlayNode
@@ -81,12 +86,7 @@ export const Popover: React.FC<Props> = ({
         overlayClassName='popover'
         onVisibleChange={setVisible}
       >
-        <div
-          data-testid='popover-child'
-          className={visible ? 'show' : 'hidden'}
-        >
-          {child}
-        </div>
+        {child}
       </RcDropdown>
     )
   }
