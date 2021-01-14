@@ -26,16 +26,14 @@ describe('Tooltip', () => {
   })
 
   it('should show tooltip content when trigger is actived', () => {
-    const { getByTestId } = render(
-      <div>
-        <Tooltip body='title'>
-          <div>content</div>
-        </Tooltip>
-      </div>
+    const { getByTestId, container } = render(
+      <Tooltip body='title'>
+        <div>content</div>
+      </Tooltip>
     )
 
-    const tooltipChild = getByTestId('tooltip-child')
-    fireEvent.mouseEnter(tooltipChild)
+    const tooltipChild = container.querySelectorAll('div')
+    fireEvent.mouseEnter(tooltipChild[0])
 
     const tooltipContent = getByTestId('tooltip-content')
     expect(tooltipContent).toBeTruthy()

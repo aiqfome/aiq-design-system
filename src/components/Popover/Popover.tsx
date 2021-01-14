@@ -6,7 +6,7 @@ import styled from 'styled-components'
 
 import { Flex } from '../Flex'
 
-type ContentFunc = () => React.ReactElement
+type ContentFunc = () => React.ReactElement | string
 
 export interface Props {
   arrow?: boolean
@@ -51,11 +51,7 @@ export const Popover: React.FC<Props> = ({
 }) => {
   const [visible, setVisible] = useState(false)
 
-  const child = React.Children.only(
-    <div data-testid='popover-child' className={visible ? 'show' : 'hidden'}>
-      {children}
-    </div>
-  ) as React.ReactElement<any>
+  const child = React.Children.only(children) as React.ReactElement<any>
 
   const getOverlay = () => {
     let overlayNode
@@ -107,8 +103,8 @@ export const Popover: React.FC<Props> = ({
 Popover.propTypes = {
   arrow: PropTypes.bool,
   content: PropTypes.any,
-  children: PropTypes.node,
   keepOpen: PropTypes.bool,
+  children: PropTypes.node.isRequired,
   trigger: PropTypes.oneOf(['click', 'hover', 'contextMenu']),
   placement: PropTypes.oneOf([
     'topRight',

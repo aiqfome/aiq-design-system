@@ -74,15 +74,7 @@ export const Actions: React.FC<Props> = ({
 }) => {
   const [visible, setVisible] = useState(false)
 
-  const child = React.Children.only(
-    <div
-      data-testid='actions-child'
-      onClick={e => e.stopPropagation()}
-      className={visible ? 'show' : 'hidden'}
-    >
-      {children}
-    </div>
-  ) as React.ReactElement<any>
+  const child = React.Children.only(children) as React.ReactElement<any>
 
   const getOverlay = () => {
     return (
@@ -168,7 +160,7 @@ export const Actions: React.FC<Props> = ({
       placement={placement}
       overlayClassName='actions'
     >
-      <div onClick={e => e.stopPropagation()}>{child}</div>
+      {child}
     </RcDropdown>
   )
 }
@@ -178,8 +170,8 @@ Actions.propTypes = {
   arrow: PropTypes.bool,
   header: PropTypes.any,
   items: PropTypes.array,
-  children: PropTypes.node,
   keepOpen: PropTypes.bool,
+  children: PropTypes.node.isRequired,
   trigger: PropTypes.oneOf(['click', 'hover', 'contextMenu']),
   placement: PropTypes.oneOf([
     'topRight',
