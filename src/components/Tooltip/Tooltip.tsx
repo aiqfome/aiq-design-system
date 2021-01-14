@@ -50,7 +50,9 @@ export const Tooltip: React.FC<Props> = ({
   variant = 'bottomLeft',
   ...props
 }) => {
-  const child = React.Children.only(children) as React.ReactElement<any>
+  const child = React.Children.only(
+    <div data-testid='tooltip-child'>{children}</div>
+  ) as React.ReactElement<any>
 
   const getOverlayBalloon = () => (
     <TooltipStyled flexDirection='column' {...props}>
