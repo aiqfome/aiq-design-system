@@ -50,7 +50,9 @@ export const Tooltip: React.FC<Props> = ({
   variant = 'bottomLeft',
   ...props
 }) => {
-  const child = React.Children.only(children) as React.ReactElement<any>
+  const child = React.Children.only(
+    <div data-testid='tooltip-child'>{children}</div>
+  ) as React.ReactElement<any>
 
   const getOverlayBalloon = () => (
     <TooltipStyled flexDirection='column' {...props}>
@@ -84,7 +86,7 @@ export const Tooltip: React.FC<Props> = ({
         overlay={getOverlay}
         overlayClassName='popover'
       >
-        <div data-testid='tooltip-child'>{child}</div>
+        {child}
       </RcDropdown>
     )
   }
@@ -97,7 +99,7 @@ export const Tooltip: React.FC<Props> = ({
       overlay={getOverlayBalloon}
       placement={getTooltipVariant()}
     >
-      <div data-testid='tooltip-child'>{child}</div>
+      {child}
     </RcTooltip>
   )
 }

@@ -72,8 +72,17 @@ export const Actions: React.FC<Props> = ({
   placement = 'bottomRight',
   ...props
 }) => {
-  const child = React.Children.only(children) as React.ReactElement<any>
   const [visible, setVisible] = useState(false)
+
+  const child = React.Children.only(
+    <div
+      data-testid='actions-child'
+      onClick={e => e.stopPropagation()}
+      className={visible ? 'show' : 'hidden'}
+    >
+      {children}
+    </div>
+  ) as React.ReactElement<any>
 
   const getOverlay = () => {
     return (
@@ -146,13 +155,7 @@ export const Actions: React.FC<Props> = ({
         overlayClassName='actions'
         onVisibleChange={setVisible}
       >
-        <div
-          data-testid='actions-child'
-          onClick={e => e.stopPropagation()}
-          className={visible ? 'show' : 'hidden'}
-        >
-          {child}
-        </div>
+        {child}
       </RcDropdown>
     )
   }
