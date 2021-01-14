@@ -77,7 +77,7 @@ const colors = {
 
   // actions
   info: '#2689ff',
-  success: '#5ddb1f',
+  success: '#62dd68',
   warning: '#faad14',
   error: '#ff4d4f',
 

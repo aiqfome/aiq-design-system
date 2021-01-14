@@ -128,6 +128,34 @@ export const error: React.FC = () => {
   )
 }
 
+export const warning: React.FC = () => {
+  const ContentToast: React.FC = () => {
+    const { addToast } = useToast()
+
+    function showToast() {
+      addToast({
+        type: 'warning',
+        title: 'Hi ✌️',
+        description: 'I am a warning toast'
+      })
+    }
+
+    return (
+      <Flex variant='fullCentralized'>
+        <Button palette='primary' variant='contained' onClick={showToast}>
+          Show Toast
+        </Button>
+      </Flex>
+    )
+  }
+
+  return (
+    <ToastProvider>
+      <ContentToast />
+    </ToastProvider>
+  )
+}
+
 export const fixed: React.FC = () => {
   const ContentToast: React.FC = () => {
     const { addToast } = useToast()
