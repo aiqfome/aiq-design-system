@@ -106,7 +106,7 @@ export const Tooltip: React.FC<Props> = ({
 
 Tooltip.propTypes = {
   body: PropTypes.any,
-  children: PropTypes.node,
+  children: PropTypes.node.isRequired,
   type: PropTypes.oneOf(['default', 'balloon']),
   variant: PropTypes.oneOf([
     'topRight',
