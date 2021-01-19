@@ -16,6 +16,7 @@ export interface Props {
   content?: string | React.ReactElement | ContentFunc
   notificationBackgroundColor?: string
   notificationTextColor?: string
+  theme?: any
   placement?:
     | 'topLeft'
     | 'topRight'
@@ -27,13 +28,18 @@ export interface Props {
 
 const GlobalStyle = createGlobalStyle<Props>`
   .popover .rc-dropdown-arrow {
-    color: ${({ notificationTextColor }) => notificationTextColor};
-    border-color: ${({ notificationBackgroundColor, placement }) =>
+    border-color: ${({ notificationBackgroundColor, placement, theme }) =>
       placement === 'topLeft' ||
       placement === 'topRight' ||
       placement === 'topCenter'
-        ? `transparent ${notificationBackgroundColor} ${notificationBackgroundColor} transparent  !important`
-        : `${notificationBackgroundColor} transparent transparent ${notificationBackgroundColor} !important`};
+        ? `transparent ${theme.colors[notificationBackgroundColor || 'white']}${
+            theme.colors[notificationBackgroundColor || 'white']
+          } transparent !important`
+        : `${
+            theme.colors[notificationBackgroundColor || 'white']
+          } transparent transparent ${
+            theme.colors[notificationBackgroundColor || 'white']
+          } !important`};
   }
 `
 
@@ -79,7 +85,12 @@ export const Popover: React.FC<Props> = ({
     )
 
     return (
-      <PopoverStyled data-testid='popover-content' {...props}>
+      <PopoverStyled
+        data-testid='popover-content'
+        backgroundColor={notificationBackgroundColor}
+        color={notificationTextColor}
+        {...props}
+      >
         {overlayNode}
       </PopoverStyled>
     )
