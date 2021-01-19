@@ -212,7 +212,7 @@ export const InputNeutral: React.FC<Props> = ({
   }
 
   return (
-    <Flex flexDirection='column'>
+    <Flex {...props} flexDirection='column'>
       <Input
         name={name}
         inputRef={inputRef}

@@ -29,6 +29,10 @@ export interface Props extends BoxPros {
 const Container = styled(Box)<Props>`
   position: relative;
 
+  input {
+    padding-right: 30px;
+  }
+
   ul {
     box-shadow: 0px 3px 6px #00000029;
     background: ${({ theme }) => theme.colors.white};
@@ -198,7 +202,6 @@ export const SelectStatic: React.FC<Props> = ({
           <ButtonStyled
             type='button'
             palette='primary'
-            mr={5}
             variantSelect={variant}
             onClick={getToggleButtonProps().onClick}
             refButton={getToggleButtonProps().ref}
