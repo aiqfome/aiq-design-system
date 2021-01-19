@@ -30,6 +30,7 @@ const Container = styled(Box)<Props>`
   position: relative;
 
   input {
+    cursor: auto;
     padding-right: 30px;
   }
 
