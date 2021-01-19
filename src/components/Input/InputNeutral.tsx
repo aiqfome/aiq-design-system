@@ -223,6 +223,7 @@ export const InputNeutral: React.FC<Props> = ({
         sufix={sufix}
         value={value}
         {...props}
+        data-testid='input'
       />
 
       {errorForm && <InputErrorMessage errorMessage={errorMessage} />}

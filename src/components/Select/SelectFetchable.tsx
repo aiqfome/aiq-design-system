@@ -189,7 +189,6 @@ export const SelectFetchable: React.FC<Props> = ({
           readOnly={!autoComplete}
           prefix={prefix}
           placeholder={placeholder}
-          data-testid='select-input'
           {...boxStyled}
         />
         {isLoading && (
