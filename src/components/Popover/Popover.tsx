@@ -6,6 +6,8 @@ import styled from 'styled-components'
 
 import { Flex } from '../Flex'
 
+import './style.css'
+
 type ContentFunc = () => React.ReactElement | string
 
 export interface Props {
@@ -14,6 +16,7 @@ export interface Props {
   children?: ReactNode
   trigger?: 'click' | 'hover' | 'contextMenu'
   content?: string | React.ReactElement | ContentFunc
+  backgroundColor?: string
   placement?:
     | 'topLeft'
     | 'topRight'
@@ -26,11 +29,9 @@ export interface Props {
 const PopoverStyled = styled(Flex)`
   position: relative;
   margin: 0;
-  padding: 4px 0;
   text-align: left;
-  background-color: #fff;
   background-clip: padding-box;
-  border-radius: 4px;
+  border-radius: 6px;
   outline: none;
   -webkit-box-shadow: 0px 3px 6px #00000029;
   box-shadow: 0px 3px 6px #00000029;
@@ -47,6 +48,7 @@ export const Popover: React.FC<Props> = ({
   keepOpen = true,
   trigger = 'hover',
   placement = 'bottomCenter',
+  backgroundColor = '#fff',
   ...props
 }) => {
   const [visible, setVisible] = useState(false)
@@ -65,7 +67,11 @@ export const Popover: React.FC<Props> = ({
     )
 
     return (
-      <PopoverStyled data-testid='popover-content' {...props}>
+      <PopoverStyled
+        data-testid='popover-content'
+        backgroundColor={backgroundColor}
+        {...props}
+      >
         {overlayNode}
       </PopoverStyled>
     )
@@ -106,6 +112,7 @@ Popover.propTypes = {
   keepOpen: PropTypes.bool,
   children: PropTypes.node.isRequired,
   trigger: PropTypes.oneOf(['click', 'hover', 'contextMenu']),
+  backgroundColor: PropTypes.string,
   placement: PropTypes.oneOf([
     'topRight',
     'topLeft',
