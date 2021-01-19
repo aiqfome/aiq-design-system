@@ -33,7 +33,13 @@ const InputStyled = styled.input<Props>`
   ${layout}
   ${color}
 
+  &::placeholder {
+    color: ${({ theme }) => theme.colors.grey};
+    font-size: ${({ theme }) => theme.fontSizes.medium};
+  }
+
   padding: 10px 12px;
+  font-family: inherit;
   border: 1px solid ${({ theme }) => theme.colors.mediumGrey};
   border-radius: 4px;
 

@@ -57,6 +57,11 @@ const ContainerInput = styled(Box)<ContainerInputProps>`
     border: none;
     height: 25px;
     flex: 1;
+    font-family: inherit;
+  }
+
+  input::placeholder {
+    font-family: inherit;
   }
 
   &::-webkit-scrollbar {
