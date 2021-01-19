@@ -25,6 +25,7 @@ export interface Props extends BoxPros {
   errorMessage?: string
   errorForm?: boolean
   onChange?: any
+  inputProps?: any
 }
 
 const Container = styled(Box)<Props>`
@@ -108,6 +109,7 @@ export const SelectFetchable: React.FC<Props> = ({
     // do nothing.
   },
   prefix,
+  inputProps,
   ...props
 }) => {
   const [inputItems, setInputItems] = useState(items)
@@ -119,7 +121,8 @@ export const SelectFetchable: React.FC<Props> = ({
     backgroundColor,
     border,
     width,
-    maxWidth
+    maxWidth,
+    ...inputProps
   }
 
   const {
@@ -232,7 +235,8 @@ SelectFetchable.propTypes = {
   isLoading: PropTypes.bool,
   errorForm: PropTypes.bool,
   errorMessage: PropTypes.string,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  inputProps: PropTypes.object
 }
 
 SelectFetchable.defaultProps = {

@@ -29,10 +29,6 @@ export interface Props extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 const InputStyled = styled.input<Props>`
-  ${space}
-  ${layout}
-  ${color}
-
   &::placeholder {
     color: ${({ theme }) => theme.colors.grey};
     font-size: ${({ theme }) => theme.fontSizes.medium};
@@ -42,6 +38,11 @@ const InputStyled = styled.input<Props>`
   font-family: inherit;
   border: 1px solid ${({ theme }) => theme.colors.mediumGrey};
   border-radius: 4px;
+
+  ${space}
+  ${layout}
+  ${color}
+  ${border}
 
   &:focus {
     border-color: ${({ theme }) => theme.colors.primary};

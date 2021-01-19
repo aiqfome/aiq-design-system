@@ -24,6 +24,7 @@ export interface Props extends BoxPros {
   isLoading?: boolean
   errorMessage?: string
   errorForm?: boolean
+  inputProps?: any
 }
 
 const Container = styled(Box)<Props>`
@@ -106,6 +107,7 @@ export const SelectStatic: React.FC<Props> = ({
     // do nothing.
   },
   prefix,
+  inputProps,
   ...props
 }) => {
   const [inputItems, setInputItems] = useState(items)
@@ -117,7 +119,8 @@ export const SelectStatic: React.FC<Props> = ({
     backgroundColor,
     border,
     width,
-    maxWidth
+    maxWidth,
+    ...inputProps
   }
 
   const {
@@ -233,7 +236,8 @@ SelectStatic.propTypes = {
   sufix: PropTypes.any,
   isLoading: PropTypes.bool,
   errorForm: PropTypes.bool,
-  errorMessage: PropTypes.string
+  errorMessage: PropTypes.string,
+  inputProps: PropTypes.object
 }
 
 SelectStatic.defaultProps = {
