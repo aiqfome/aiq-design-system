@@ -2,11 +2,9 @@ import React, { ReactNode, useState } from 'react'
 import PropTypes from 'prop-types'
 
 import RcDropdown from 'rc-dropdown'
-import styled from 'styled-components'
+import styled, { createGlobalStyle } from 'styled-components'
 
 import { Flex } from '../Flex'
-
-import './style.css'
 
 type ContentFunc = () => React.ReactElement | string
 
@@ -16,7 +14,8 @@ export interface Props {
   children?: ReactNode
   trigger?: 'click' | 'hover' | 'contextMenu'
   content?: string | React.ReactElement | ContentFunc
-  backgroundColor?: string
+  notificationBackgroundColor?: string
+  notificationTextColor?: string
   placement?:
     | 'topLeft'
     | 'topRight'
@@ -25,6 +24,18 @@ export interface Props {
     | 'bottomRight'
     | 'bottomCenter'
 }
+
+const GlobalStyle = createGlobalStyle<Props>`
+  .popover .rc-dropdown-arrow {
+    color: ${({ notificationTextColor }) => notificationTextColor};
+    border-color: ${({ notificationBackgroundColor, placement }) =>
+      placement === 'topLeft' ||
+      placement === 'topRight' ||
+      placement === 'topCenter'
+        ? `transparent ${notificationBackgroundColor} ${notificationBackgroundColor} transparent  !important`
+        : `${notificationBackgroundColor} transparent transparent ${notificationBackgroundColor} !important`};
+  }
+`
 
 const PopoverStyled = styled(Flex)`
   position: relative;
@@ -48,7 +59,8 @@ export const Popover: React.FC<Props> = ({
   keepOpen = true,
   trigger = 'hover',
   placement = 'bottomCenter',
-  backgroundColor = '#fff',
+  notificationBackgroundColor = '#fff',
+  notificationTextColor = '#000',
   ...props
 }) => {
   const [visible, setVisible] = useState(false)
@@ -67,11 +79,7 @@ export const Popover: React.FC<Props> = ({
     )
 
     return (
-      <PopoverStyled
-        data-testid='popover-content'
-        backgroundColor={backgroundColor}
-        {...props}
-      >
+      <PopoverStyled data-testid='popover-content' {...props}>
         {overlayNode}
       </PopoverStyled>
     )
@@ -79,30 +87,44 @@ export const Popover: React.FC<Props> = ({
 
   if (keepOpen) {
     return (
-      <RcDropdown
-        arrow={arrow}
-        visible={visible}
-        trigger={[trigger]}
-        overlay={getOverlay}
-        placement={placement}
-        overlayClassName='popover'
-        onVisibleChange={setVisible}
-      >
-        {child}
-      </RcDropdown>
+      <>
+        <GlobalStyle
+          notificationBackgroundColor={notificationBackgroundColor}
+          notificationTextColor={notificationTextColor}
+          placement={placement}
+        />
+        <RcDropdown
+          arrow={arrow}
+          visible={visible}
+          trigger={[trigger]}
+          overlay={getOverlay}
+          placement={placement}
+          overlayClassName='popover'
+          onVisibleChange={setVisible}
+        >
+          {child}
+        </RcDropdown>
+      </>
     )
   }
 
   return (
-    <RcDropdown
-      arrow={arrow}
-      trigger={[trigger]}
-      overlay={getOverlay}
-      placement={placement}
-      overlayClassName='popover'
-    >
-      {child}
-    </RcDropdown>
+    <>
+      <GlobalStyle
+        notificationBackgroundColor={notificationBackgroundColor}
+        notificationTextColor={notificationTextColor}
+        placement={placement}
+      />
+      <RcDropdown
+        arrow={arrow}
+        trigger={[trigger]}
+        overlay={getOverlay}
+        placement={placement}
+        overlayClassName='popover'
+      >
+        {child}
+      </RcDropdown>
+    </>
   )
 }
 
@@ -112,7 +134,8 @@ Popover.propTypes = {
   keepOpen: PropTypes.bool,
   children: PropTypes.node.isRequired,
   trigger: PropTypes.oneOf(['click', 'hover', 'contextMenu']),
-  backgroundColor: PropTypes.string,
+  notificationBackgroundColor: PropTypes.string,
+  notificationTextColor: PropTypes.string,
   placement: PropTypes.oneOf([
     'topRight',
     'topLeft',
