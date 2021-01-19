@@ -24,10 +24,16 @@ export interface Props extends BoxPros {
   isLoading?: boolean
   errorMessage?: string
   errorForm?: boolean
+  inputProps?: any
 }
 
 const Container = styled(Box)<Props>`
   position: relative;
+
+  input {
+    cursor: auto;
+    padding-right: 30px;
+  }
 
   ul {
     box-shadow: 0px 3px 6px #00000029;
@@ -101,6 +107,7 @@ export const SelectStatic: React.FC<Props> = ({
     // do nothing.
   },
   prefix,
+  inputProps,
   ...props
 }) => {
   const [inputItems, setInputItems] = useState(items)
@@ -112,7 +119,8 @@ export const SelectStatic: React.FC<Props> = ({
     backgroundColor,
     border,
     width,
-    maxWidth
+    maxWidth,
+    ...inputProps
   }
 
   const {
@@ -186,7 +194,6 @@ export const SelectStatic: React.FC<Props> = ({
           readOnly={!autoComplete}
           prefix={prefix}
           placeholder={placeholder}
-          data-testid='select-input'
           {...boxStyled}
         />
         {isLoading && (
@@ -198,7 +205,6 @@ export const SelectStatic: React.FC<Props> = ({
           <ButtonStyled
             type='button'
             palette='primary'
-            mr={5}
             variantSelect={variant}
             onClick={getToggleButtonProps().onClick}
             refButton={getToggleButtonProps().ref}
@@ -230,7 +236,8 @@ SelectStatic.propTypes = {
   sufix: PropTypes.any,
   isLoading: PropTypes.bool,
   errorForm: PropTypes.bool,
-  errorMessage: PropTypes.string
+  errorMessage: PropTypes.string,
+  inputProps: PropTypes.object
 }
 
 SelectStatic.defaultProps = {

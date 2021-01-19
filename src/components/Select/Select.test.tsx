@@ -56,7 +56,7 @@ describe('Select', () => {
 
   it('should have the same amount items of the array', () => {
     const { getByTestId, getAllByTestId } = render(<Select items={items} />)
-    const select = getByTestId('select-input')
+    const select = getByTestId('input')
 
     fireEvent.click(select)
     expect(getAllByTestId('select-item').length).toBe(items.length)
@@ -65,7 +65,7 @@ describe('Select', () => {
   it('should open dropdown when click him', () => {
     const { getByTestId, container } = render(<Select items={items} />)
 
-    const select = getByTestId('select-input')
+    const select = getByTestId('input')
     fireEvent.click(select)
 
     const list = container.querySelectorAll('li')
@@ -75,7 +75,7 @@ describe('Select', () => {
   it('should close dropdown when click a item', () => {
     const { getByTestId, container } = render(<Select items={items} />)
 
-    const select = getByTestId('select-input')
+    const select = getByTestId('input')
     fireEvent.click(select)
     let list = container.querySelectorAll('li')
 
@@ -93,7 +93,7 @@ describe('Select', () => {
       <Select items={items} handleSelectedItemChange={handleOnClick} />
     )
 
-    const select = getByTestId('select-input')
+    const select = getByTestId('input')
 
     fireEvent.click(select)
     const list = container.querySelectorAll('li')
@@ -105,7 +105,7 @@ describe('Select', () => {
   it('should have the same amount items of the array after the search', () => {
     const { getByTestId, container } = render(<Select items={items} />)
 
-    fireEvent.change(getByTestId('select-input'), {
+    fireEvent.change(getByTestId('input'), {
       target: { value: 'Maringá' }
     })
 

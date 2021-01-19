@@ -55,6 +55,7 @@ const LabelStyled = styled.label<Props>`
     max-height: 37px;
     box-sizing: border-box;
     margin: 0;
+    font-family: inherit;
     border: solid 1px
       ${({ theme, errorForm }) =>
         errorForm ? theme.colors.error : theme.colors.mediumGrey};
