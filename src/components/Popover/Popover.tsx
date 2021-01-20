@@ -2,7 +2,7 @@ import React, { ReactNode, useState } from 'react'
 import PropTypes from 'prop-types'
 
 import RcDropdown from 'rc-dropdown'
-import styled from 'styled-components'
+import styled, { createGlobalStyle } from 'styled-components'
 
 import { Flex } from '../Flex'
 
@@ -14,6 +14,9 @@ export interface Props {
   children?: ReactNode
   trigger?: 'click' | 'hover' | 'contextMenu'
   content?: string | React.ReactElement | ContentFunc
+  notificationBackgroundColor?: string
+  notificationTextColor?: string
+  theme?: any
   placement?:
     | 'topLeft'
     | 'topRight'
@@ -23,14 +26,29 @@ export interface Props {
     | 'bottomCenter'
 }
 
+const GlobalStyle = createGlobalStyle<Props>`
+  .popover .rc-dropdown-arrow {
+    border-color: ${({ notificationBackgroundColor, placement, theme }) =>
+      placement === 'topLeft' ||
+      placement === 'topRight' ||
+      placement === 'topCenter'
+        ? `transparent ${theme.colors[notificationBackgroundColor || 'white']}${
+            theme.colors[notificationBackgroundColor || 'white']
+          } transparent !important`
+        : `${
+            theme.colors[notificationBackgroundColor || 'white']
+          } transparent transparent ${
+            theme.colors[notificationBackgroundColor || 'white']
+          } !important`};
+  }
+`
+
 const PopoverStyled = styled(Flex)`
   position: relative;
   margin: 0;
-  padding: 4px 0;
   text-align: left;
-  background-color: #fff;
   background-clip: padding-box;
-  border-radius: 4px;
+  border-radius: 6px;
   outline: none;
   -webkit-box-shadow: 0px 3px 6px #00000029;
   box-shadow: 0px 3px 6px #00000029;
@@ -47,6 +65,8 @@ export const Popover: React.FC<Props> = ({
   keepOpen = true,
   trigger = 'hover',
   placement = 'bottomCenter',
+  notificationBackgroundColor = '#fff',
+  notificationTextColor = '#000',
   ...props
 }) => {
   const [visible, setVisible] = useState(false)
@@ -65,7 +85,12 @@ export const Popover: React.FC<Props> = ({
     )
 
     return (
-      <PopoverStyled data-testid='popover-content' {...props}>
+      <PopoverStyled
+        data-testid='popover-content'
+        backgroundColor={notificationBackgroundColor}
+        color={notificationTextColor}
+        {...props}
+      >
         {overlayNode}
       </PopoverStyled>
     )
@@ -73,30 +98,44 @@ export const Popover: React.FC<Props> = ({
 
   if (keepOpen) {
     return (
-      <RcDropdown
-        arrow={arrow}
-        visible={visible}
-        trigger={[trigger]}
-        overlay={getOverlay}
-        placement={placement}
-        overlayClassName='popover'
-        onVisibleChange={setVisible}
-      >
-        {child}
-      </RcDropdown>
+      <>
+        <GlobalStyle
+          notificationBackgroundColor={notificationBackgroundColor}
+          notificationTextColor={notificationTextColor}
+          placement={placement}
+        />
+        <RcDropdown
+          arrow={arrow}
+          visible={visible}
+          trigger={[trigger]}
+          overlay={getOverlay}
+          placement={placement}
+          overlayClassName='popover'
+          onVisibleChange={setVisible}
+        >
+          {child}
+        </RcDropdown>
+      </>
     )
   }
 
   return (
-    <RcDropdown
-      arrow={arrow}
-      trigger={[trigger]}
-      overlay={getOverlay}
-      placement={placement}
-      overlayClassName='popover'
-    >
-      {child}
-    </RcDropdown>
+    <>
+      <GlobalStyle
+        notificationBackgroundColor={notificationBackgroundColor}
+        notificationTextColor={notificationTextColor}
+        placement={placement}
+      />
+      <RcDropdown
+        arrow={arrow}
+        trigger={[trigger]}
+        overlay={getOverlay}
+        placement={placement}
+        overlayClassName='popover'
+      >
+        {child}
+      </RcDropdown>
+    </>
   )
 }
 
@@ -106,6 +145,8 @@ Popover.propTypes = {
   keepOpen: PropTypes.bool,
   children: PropTypes.node.isRequired,
   trigger: PropTypes.oneOf(['click', 'hover', 'contextMenu']),
+  notificationBackgroundColor: PropTypes.string,
+  notificationTextColor: PropTypes.string,
   placement: PropTypes.oneOf([
     'topRight',
     'topLeft',

@@ -36,7 +36,7 @@ describe('TimePicker', () => {
     const content = 'My placeholder'
     const { getByTestId } = render(<TimePicker placeholder={content} />)
 
-    const input = getByTestId('input-container')
+    const input = getByTestId('input')
 
     expect(input).toBeTruthy()
     expect(input).toHaveAttribute('placeholder', 'My placeholder')

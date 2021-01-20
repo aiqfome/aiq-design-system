@@ -28,7 +28,7 @@ describe('Input', () => {
     const content = 'My placeholder'
     const { getByTestId } = render(<Input placeholder={content} />)
 
-    const input = getByTestId('input-container')
+    const input = getByTestId('input')
 
     expect(input).toBeTruthy()
     expect(input).toHaveAttribute('placeholder', 'My placeholder')
@@ -56,7 +56,7 @@ describe('Input', () => {
       <Input value={value} onChange={() => undefined} />
     )
 
-    const input = getByTestId('input-container')
+    const input = getByTestId('input')
 
     expect(input).toBeTruthy()
     expect(input).toHaveAttribute('value', 'test')
@@ -66,7 +66,7 @@ describe('Input', () => {
     const content = 'name-test'
     const { getByTestId } = render(<Input name={content} />)
 
-    const input = getByTestId('input-container')
+    const input = getByTestId('input')
 
     expect(input).toBeTruthy()
     expect(input).toHaveAttribute('name', 'name-test')
@@ -95,7 +95,7 @@ describe('Input', () => {
   it('should render change of value correctly', () => {
     const { getByTestId, container } = render(<Input />)
 
-    fireEvent.change(getByTestId('input-container'), {
+    fireEvent.change(getByTestId('input'), {
       target: { value: 'Good Day' }
     })
     const input = container.querySelector('input')
@@ -106,14 +106,14 @@ describe('Input', () => {
   it('should render change of value correctly with type number', () => {
     const { getByTestId, container } = render(<Input type='number' />)
 
-    fireEvent.change(getByTestId('input-container'), {
+    fireEvent.change(getByTestId('input'), {
       target: { value: 'Good Day' }
     })
     const input = container.querySelector('input')
 
     expect(input?.value).toBe('')
 
-    fireEvent.change(getByTestId('input-container'), {
+    fireEvent.change(getByTestId('input'), {
       target: { value: 444 }
     })
 

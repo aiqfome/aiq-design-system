@@ -49,12 +49,17 @@ const ContainerInput = styled(Box)<ContainerInputProps>`
   overflow: auto;
   align-items: center;
   padding: 4px 10px;
-  justify-content: 'space-between';
+  justify-content: space-between;
 
   input {
     background: none;
     border: none;
     height: 25px;
+    font-family: inherit;
+  }
+
+  input::placeholder {
+    font-family: inherit;
   }
 
   &::-webkit-scrollbar {

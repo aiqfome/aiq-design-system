@@ -29,13 +29,20 @@ export interface Props extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 const InputStyled = styled.input<Props>`
+  &::placeholder {
+    color: ${({ theme }) => theme.colors.grey};
+    font-size: ${({ theme }) => theme.fontSizes.medium};
+  }
+
+  padding: 10px 12px;
+  font-family: inherit;
+  border: 1px solid ${({ theme }) => theme.colors.mediumGrey};
+  border-radius: 4px;
+
   ${space}
   ${layout}
   ${color}
-
-  padding: 10px 12px;
-  border: 1px solid ${({ theme }) => theme.colors.mediumGrey};
-  border-radius: 4px;
+  ${border}
 
   &:focus {
     border-color: ${({ theme }) => theme.colors.primary};
@@ -206,7 +213,7 @@ export const InputNeutral: React.FC<Props> = ({
   }
 
   return (
-    <Flex flexDirection='column'>
+    <Flex {...props} flexDirection='column'>
       <Input
         name={name}
         inputRef={inputRef}
@@ -217,6 +224,7 @@ export const InputNeutral: React.FC<Props> = ({
         sufix={sufix}
         value={value}
         {...props}
+        data-testid='input'
       />
 
       {errorForm && <InputErrorMessage errorMessage={errorMessage} />}
