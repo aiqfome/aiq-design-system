@@ -24,11 +24,10 @@ export interface Props {
 const PopoverStyled = styled(Flex)`
   position: relative;
   margin: 0;
-  padding: 10px;
   text-align: left;
   background-color: #fff;
   background-clip: padding-box;
-  border-radius: 4px;
+  border-radius: 12px;
   outline: none;
   -webkit-box-shadow: 0px 3px 6px #00000029;
   box-shadow: 0px 3px 6px #00000029;
