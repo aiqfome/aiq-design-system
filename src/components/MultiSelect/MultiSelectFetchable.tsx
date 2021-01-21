@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useMemo, useRef } from 'react'
 import PropTypes from 'prop-types'
 
 import styled from 'styled-components'
@@ -142,6 +142,11 @@ export const MultiSelectFetchable: React.FC<Props> = ({
     initialSelectedItems: value
   })
 
+  const selectedItems = useMemo(
+    () => [...new Set([...propsMultipleSelection.selectedItems])],
+    [propsMultipleSelection]
+  )
+
   const propsCombobox = useCombobox({
     itemToString: item => (item ? '' : ''),
     items,
@@ -216,41 +221,39 @@ export const MultiSelectFetchable: React.FC<Props> = ({
         refBox={propsCombobox.getComboboxProps().ref}
       >
         <Flex overflow='hidden' flex={1}>
-          {propsMultipleSelection.selectedItems
-            .slice(0, itemLimit)
-            .map((selectedItem, index) => (
-              <Flex
-                py={2}
-                key={`selected-item-${index}`}
-                px={4}
-                mr={3}
-                display='flex'
-                flexDirection='row'
-                alignItems='center'
-                backgroundColor='primary'
-                borderRadius='3px'
+          {selectedItems.slice(0, itemLimit).map((selectedItem, index) => (
+            <Flex
+              py={2}
+              key={`selected-item-${index}`}
+              px={4}
+              mr={3}
+              display='flex'
+              flexDirection='row'
+              alignItems='center'
+              backgroundColor='primary'
+              borderRadius='3px'
+            >
+              <SelectedItem
+                {...propsMultipleSelection.getSelectedItemProps({
+                  selectedItem,
+                  index
+                })}
+                color='white'
               >
-                <SelectedItem
-                  {...propsMultipleSelection.getSelectedItemProps({
-                    selectedItem,
-                    index
-                  })}
-                  color='white'
-                >
-                  {selectedItem.name}
-                </SelectedItem>
+                {selectedItem.name}
+              </SelectedItem>
 
-                <Button
-                  onClick={e => {
-                    e.stopPropagation()
-                    propsMultipleSelection.removeSelectedItem(selectedItem)
-                  }}
-                  ml={6}
-                >
-                  <MdClose color='#fff' />
-                </Button>
-              </Flex>
-            ))}
+              <Button
+                onClick={e => {
+                  e.stopPropagation()
+                  propsMultipleSelection.removeSelectedItem(selectedItem)
+                }}
+                ml={6}
+              >
+                <MdClose color='#fff' />
+              </Button>
+            </Flex>
+          ))}
 
           {propsMultipleSelection.selectedItems.length > itemLimit && (
             <Flex
