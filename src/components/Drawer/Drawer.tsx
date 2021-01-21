@@ -27,6 +27,7 @@ const drawerVariations: { [index: string]: any } = {
     ${({ opened }) =>
       !opened &&
       css`
+        display: none;
         transform: translateX(100%);
       `}
   `,
@@ -42,6 +43,7 @@ const drawerVariations: { [index: string]: any } = {
     ${({ opened }) =>
       !opened &&
       css`
+        display: none;
         transform: translateX(-100%);
       `}
   `
@@ -64,10 +66,10 @@ export const DrawerStyled = styled.div<Props>`
   ${shadow}
   background-color: ${props => props.theme.colors.white};
   border: 1px solid ${props => props.theme.colors.mediumGrey};
-  position: fixed;
+  position: absolute;
   top: 0;
   overflow: auto;
-  height: 100vh;
+  height: 100%;
   z-index: 2000;
   transition: transform 0.8s;
 
