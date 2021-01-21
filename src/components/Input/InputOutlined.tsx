@@ -81,6 +81,7 @@ const LabelStyled = styled.label<Props>`
     &:not(:focus):placeholder-shown + span {
       font-size: inherit;
       line-height: 53px;
+      color: ${({ theme }) => theme.colors.grey};
     }
 
     &:focus {
