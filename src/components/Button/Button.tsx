@@ -94,6 +94,7 @@ export const ButtonStyled = styled.button<Props>`
   }
 
   &.__button-contained {
+    text-transform: uppercase;
     border: none;
     justify-content: center;
     transition: 0.5s;
@@ -124,6 +125,7 @@ export const ButtonStyled = styled.button<Props>`
   }
 
   &.__button-outlined {
+    text-transform: uppercase;
     justify-content: center;
     transition: 0.5s;
 
@@ -133,7 +135,7 @@ export const ButtonStyled = styled.button<Props>`
       background: none;
 
       &:hover {
-        background: ${({ theme }) => theme.colors.primaryLight};
+        background: ${({ theme }) => theme.colors.primary};
         color: ${({ theme }) => theme.colors.white};
       }
     }
@@ -160,6 +162,7 @@ export const ButtonStyled = styled.button<Props>`
   }
 
   &.__button-fab {
+    text-transform: uppercase;
     justify-content: center;
     border-radius: 24px;
     border: none;
@@ -189,6 +192,7 @@ export const ButtonStyled = styled.button<Props>`
   }
 
   &.__button-icon {
+    text-transform: uppercase;
     justify-content: center;
     border: none;
     background: none;
