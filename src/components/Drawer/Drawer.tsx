@@ -1,12 +1,26 @@
 import React, { ReactNode, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css, DefaultTheme } from 'styled-components'
-import { layout, LayoutProps, shadow, ShadowProps } from 'styled-system'
+import {
+  layout,
+  shadow,
+  margin,
+  padding,
+  LayoutProps,
+  MarginProps,
+  ShadowProps,
+  PaddingProps
+} from 'styled-system'
 
 import { Flex } from '../Flex'
 import { Loading } from '../Loading'
 
-export interface Props extends DefaultTheme, LayoutProps, ShadowProps {
+export interface Props
+  extends DefaultTheme,
+    LayoutProps,
+    ShadowProps,
+    MarginProps,
+    PaddingProps {
   opened: boolean
   loading?: boolean
   children?: ReactNode
@@ -68,10 +82,13 @@ export const DrawerStyled = styled.div<Props>`
   border: 1px solid ${props => props.theme.colors.mediumGrey};
   position: absolute;
   top: 0;
-  overflow: auto;
   height: 100%;
   z-index: 2000;
   transition: transform 0.8s;
+  ${layout}
+  ${shadow}
+  ${margin}
+  ${padding}
 
   ${({ variation }) => drawerVariations[variation || 'right']}
 `
@@ -109,18 +126,20 @@ export const Drawer: React.FC<Props> = ({
         className={opened ? 'drawer-open' : 'drawer-close'}
         {...props}
       >
-        {loading ? (
-          <Flex
-            flex={1}
-            height='100%'
-            alignItems='center'
-            justifyContent='center'
-          >
-            <Loading />
-          </Flex>
-        ) : (
-          children
-        )}
+        <Flex overflow='auto' height='100%' flexDirection='column'>
+          {loading ? (
+            <Flex
+              flex={1}
+              height='100%'
+              alignItems='center'
+              justifyContent='center'
+            >
+              <Loading />
+            </Flex>
+          ) : (
+            children
+          )}
+        </Flex>
       </DrawerStyled>
     </>
   )
