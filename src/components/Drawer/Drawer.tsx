@@ -126,7 +126,7 @@ export const Drawer: React.FC<Props> = ({
         className={opened ? 'drawer-open' : 'drawer-close'}
         {...props}
       >
-        <Flex overflow='auto' height='100%'>
+        <Flex overflow='auto' height='100%' flexDirection='column'>
           {loading ? (
             <Flex
               flex={1}
