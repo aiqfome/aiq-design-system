@@ -39,7 +39,7 @@ export const TimePicker = React.forwardRef(
       errorMessage,
       errorForm,
       onChange = (e: any) => {
-        // nothing
+        console.log('input:', e)
       },
       ...props
     },
