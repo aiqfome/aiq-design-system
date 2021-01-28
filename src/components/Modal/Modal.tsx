@@ -220,7 +220,7 @@ export const Modal: React.FC<Props> = ({
           <ModalStyled
             animation={animation}
             variantModal={variant}
-            className={`${show ? 'show' : 'hide'}`}
+            className={show ? 'show' : 'hide'}
             {...props}
           >
             <Text
