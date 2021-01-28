@@ -80,7 +80,7 @@ export const DrawerStyled = styled.div<Props>`
   ${shadow}
   background-color: ${props => props.theme.colors.white};
   border: 1px solid ${props => props.theme.colors.mediumGrey};
-  position: absolute;
+  position: fixed;
   top: 0;
   height: 100%;
   z-index: 2000;
