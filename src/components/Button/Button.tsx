@@ -5,6 +5,8 @@ import {
   color,
   space,
   SpaceProps,
+  border,
+  BorderProps,
   layout,
   LayoutProps,
   fontSize,
@@ -20,6 +22,7 @@ export interface Props
   extends DefaultTheme,
     SpaceProps,
     LayoutProps,
+    BorderProps,
     FontSizeProps,
     FontWeightProps {
   children?: ReactNode
@@ -37,18 +40,19 @@ export interface Props
 }
 
 export const ButtonStyled = styled.button<Props>`
-  ${color}
-  ${space}
-  ${layout}
-  ${fontSize}
-  ${fontWeight}
-
   border-radius: 5px;
   display: flex;
   align-items: center;
   padding: 10px 20px;
   max-height: 42px;
   cursor: pointer;
+
+  ${color}
+  ${space}
+  ${border}
+  ${layout}
+  ${fontSize}
+  ${fontWeight}
 
   &:active {
     opacity: 0.5;
