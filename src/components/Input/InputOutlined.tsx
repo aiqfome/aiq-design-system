@@ -147,7 +147,8 @@ const LabelStyled = styled.label<Props>`
     }
   }
 
-  button {
+  & > button,
+  & > div.sufix {
     right: 0;
     position: absolute;
     background: none;
@@ -235,7 +236,7 @@ export const InputOutlined: React.FC<Props> = ({
           />
           {label && <Text data-testid='input-label'>{label}</Text>}
 
-          {sufix}
+          {sufix && <div className='sufix'>{sufix}</div>}
         </LabelStyled>
 
         {errorForm && <InputErrorMessage errorMessage={errorMessage} />}
