@@ -150,6 +150,7 @@ const LabelStyled = styled.label<Props>`
   & > button,
   & > div.sufix {
     right: 0;
+    margin-right: 5px;
     position: absolute;
     background: none;
     border: none;
@@ -201,7 +202,6 @@ export const InputOutlined: React.FC<Props> = ({
 
           <Button
             palette='primary'
-            mr={5}
             onClick={() => setShowPassword(!showPassword)}
           >
             {showPassword ? (

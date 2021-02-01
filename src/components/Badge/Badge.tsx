@@ -81,7 +81,7 @@ const BadgeStyled = styled(Text)`
 `
 
 const getCounter = (value, overflow) => {
-  if (value) {
+  if (value >= 0) {
     if (overflow && !isNaN(value) && value > overflow) {
       return (
         <Tooltip data-testid='badge-tooltip' body={value} variant='bottomRight'>
@@ -90,7 +90,7 @@ const getCounter = (value, overflow) => {
       )
     }
 
-    return value
+    return value.toString()
   }
 
   return ''
