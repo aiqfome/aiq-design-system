@@ -2,7 +2,7 @@ import React, { useState, InputHTMLAttributes } from 'react'
 import PropTypes from 'prop-types'
 import { MdVisibility, MdVisibilityOff } from 'react-icons/md'
 
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import {
   color,
   space,
@@ -22,6 +22,7 @@ export interface Props
   extends InputHTMLAttributes<HTMLInputElement>,
     SpaceProps {
   name?: string
+  placeholder?: string
   inputRef?: any
   label?: string
   errorForm?: boolean
@@ -73,16 +74,21 @@ const LabelStyled = styled.label<Props>`
     background: ${({ theme, disabled }) =>
       disabled ? theme.colors.lightGrey : theme.colors.white};
 
-    &:not(:focus):placeholder-shown {
-      border-top-color: ${({ theme, errorForm }) =>
-        errorForm ? theme.colors.error : theme.colors.mediumGrey};
-    }
+    ${({ placeholder, theme, errorForm }) =>
+      (placeholder === ' ' || placeholder === '') &&
+      css`
+        &:not(:focus):placeholder-shown {
+          border-top-color: ${errorForm
+            ? theme.colors.error
+            : theme.colors.mediumGrey};
+        }
 
-    &:not(:focus):placeholder-shown + span {
-      font-size: inherit;
-      line-height: 53px;
-      color: ${({ theme }) => theme.colors.grey};
-    }
+        &:not(:focus):placeholder-shown + span {
+          font-size: inherit;
+          line-height: 53px;
+          color: ${theme.colors.grey};
+        }
+      `};
 
     &:focus {
       border-color: ${({ theme }) => theme.colors.primary};
@@ -161,6 +167,7 @@ export const InputOutlined: React.FC<Props> = ({
   name,
   inputRef,
   label,
+  placeholder = ' ',
   errorForm,
   type = 'text',
   errorMessage,
@@ -170,7 +177,6 @@ export const InputOutlined: React.FC<Props> = ({
   maxWidth,
   marginRight,
   marginLeft,
-
   ...props
 }) => {
   const [showPassword, setShowPassword] = useState(false)
@@ -227,7 +233,7 @@ export const InputOutlined: React.FC<Props> = ({
         <LabelStyled label={label} errorForm={errorForm}>
           <input
             {...props}
-            placeholder=' '
+            placeholder={' '}
             type={type}
             value={value}
             ref={inputRef}
@@ -246,11 +252,15 @@ export const InputOutlined: React.FC<Props> = ({
 
   return (
     <Container {...styledContainer} {...props} data-testid='input-outlined'>
-      <LabelStyled label={label} errorForm={errorForm}>
+      <LabelStyled
+        label={label}
+        errorForm={errorForm}
+        placeholder={placeholder}
+      >
         <input
           {...props}
           value={value}
-          placeholder=' '
+          placeholder={placeholder}
           name={name}
           type={type}
           ref={inputRef}
@@ -274,7 +284,7 @@ InputOutlined.propTypes = {
   errorMessage: PropTypes.string,
   sufix: PropTypes.any,
   value: PropTypes.string,
-
+  placeholder: PropTypes.string,
   backgroundColor: PropTypes.any,
   maxWidth: PropTypes.any,
   marginLeft: PropTypes.any,
