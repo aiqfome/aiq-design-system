@@ -209,7 +209,6 @@ export const Modal: React.FC<Props> = ({
   }
 
   function handleClickOutSide({ target }) {
-    console.log(9999999, target)
     if (target.className && target.className.includes('background-modal')) {
       onClose()
     }
