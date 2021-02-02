@@ -50,6 +50,7 @@ export const Input: React.FC<Props> = ({
         sufix={sufix}
         value={value}
         data-testid='input-container'
+        placeholder={placeholder}
         {...props}
       />
     )

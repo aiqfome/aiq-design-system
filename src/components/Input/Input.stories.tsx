@@ -40,6 +40,7 @@ export const Outlined: React.FC = () => (
       value={text('value', '')}
       errorForm={boolean('errorForm', false)}
       errorMessage={text('errorMessage', 'message error')}
+      placeholder={text('placeholder', 'duas pizzas é muito')}
       label={text('label', 'aiqfome')}
       type={select(
         'Type',
