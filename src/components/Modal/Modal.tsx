@@ -11,6 +11,7 @@ import { Box } from '../Box'
 export interface Props {
   title: string
   form?: any
+  formProps?: any
   variant?: 'big' | 'medium' | 'small'
   show?: boolean
   animation?: boolean
@@ -100,6 +101,11 @@ interface ModalStyledProps extends DefaultTheme, FlexProps {
   animation?: boolean
 }
 
+const FormStyled = styled.form<ModalStyledProps>`
+  display: flex;
+  flex: 1;
+`
+
 const ModalStyled = styled(Flex)<ModalStyledProps>`
   display: flex;
   flex-direction: column;
@@ -110,6 +116,7 @@ const ModalStyled = styled(Flex)<ModalStyledProps>`
   border-radius: 12px;
   background: ${({ theme }) => theme.colors.white};
   width: 100%;
+  margin: auto;
 
   ${({ variantModal }) => modalVariants[variantModal || 'medium']}
 
@@ -171,6 +178,7 @@ export const Modal: React.FC<Props> = ({
   show = false,
   zIndex = 2000,
   animation = false,
+  formProps,
   onClose = () => {
     // do nothing.
   },
@@ -201,6 +209,7 @@ export const Modal: React.FC<Props> = ({
   }
 
   function handleClickOutSide({ target }) {
+    console.log(9999999, target)
     if (target.className && target.className.includes('background-modal')) {
       onClose()
     }
@@ -216,7 +225,11 @@ export const Modal: React.FC<Props> = ({
         data-testid='modal-container'
         className={`background-modal ${show ? 'show' : 'hide'}`}
       >
-        <form onSubmit={form ? form.handleSubmit(onSubmit) : undefined}>
+        <FormStyled
+          {...formProps}
+          className='background-modal'
+          onSubmit={form ? form.handleSubmit(onSubmit) : undefined}
+        >
           <ModalStyled
             animation={animation}
             variantModal={variant}
@@ -279,7 +292,7 @@ export const Modal: React.FC<Props> = ({
               </Flex>
             </Flex>
           </ModalStyled>
-        </form>
+        </FormStyled>
       </BackgroundModal>,
       document.querySelector('#modal-root')
     )
@@ -299,5 +312,6 @@ Modal.propTypes = {
   okButton: PropTypes.any,
   show: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
-  cancelButton: PropTypes.any
+  cancelButton: PropTypes.any,
+  formProps: PropTypes.object
 }
