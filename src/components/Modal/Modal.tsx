@@ -12,6 +12,7 @@ export interface Props {
   title: string
   form?: any
   formProps?: any
+  buttonsProps?: any
   variant?: 'big' | 'medium' | 'small'
   show?: boolean
   animation?: boolean
@@ -179,6 +180,7 @@ export const Modal: React.FC<Props> = ({
   zIndex = 2000,
   animation = false,
   formProps,
+  buttonsProps,
   onClose = () => {
     // do nothing.
   },
@@ -247,7 +249,12 @@ export const Modal: React.FC<Props> = ({
 
             {children}
 
-            <Flex justifyContent='space-between' marginTop={44} width='100%'>
+            <Flex
+              width='100%'
+              marginTop={44}
+              justifyContent='space-between'
+              {...buttonsProps}
+            >
               <Flex flex={1} justifyContent='flex-start'>
                 {cancelButton.visible && (
                   <Button
@@ -312,5 +319,6 @@ Modal.propTypes = {
   show: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   cancelButton: PropTypes.any,
-  formProps: PropTypes.object
+  formProps: PropTypes.object,
+  buttonsProps: PropTypes.object
 }

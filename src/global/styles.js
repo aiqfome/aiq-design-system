@@ -13,6 +13,7 @@ export default createGlobalStyle`
 
   .rc-dropdown, .rc-tooltip {
     font-family: unset;
+    z-index: 9999;
   }
 
   body {
