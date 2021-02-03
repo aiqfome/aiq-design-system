@@ -56,12 +56,13 @@ export const Multistep: React.FC<Props> = ({
       <Flex width='100%'>
         {steps.map((step, index) => (
           <Flex
+            mb='32px'
             key={index}
-            marginBottom='32px'
             flexDirection='row'
             alignItems='center'
             data-testid='steps-step'
             width={index === steps.length - 1 ? '80px' : '100%'}
+            {...step}
           >
             <StepButton
               type='button'

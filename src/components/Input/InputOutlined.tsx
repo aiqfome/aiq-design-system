@@ -233,7 +233,7 @@ export const InputOutlined: React.FC<Props> = ({
         <LabelStyled label={label} errorForm={errorForm}>
           <input
             {...props}
-            placeholder={' '}
+            placeholder={placeholder}
             type={type}
             value={value}
             ref={inputRef}
