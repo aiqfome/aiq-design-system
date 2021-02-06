@@ -17,6 +17,7 @@ export interface Props {
   content?: string | React.ReactElement | ContentFunc
   notificationBackgroundColor?: string
   notificationTextColor?: string
+  onVisibleChange?: (visible: boolean) => void
   theme?: any
   placement?:
     | 'topLeft'
@@ -64,8 +65,9 @@ export const Popover: React.FC<Props> = ({
   children,
   arrow = false,
   keepOpen = true,
-  isVisible = false,
+  onVisibleChange,
   trigger = 'hover',
+  isVisible = false,
   placement = 'bottomCenter',
   notificationBackgroundColor = '#fff',
   notificationTextColor = '#000',
@@ -73,11 +75,14 @@ export const Popover: React.FC<Props> = ({
 }) => {
   const [visible, setVisible] = useState(isVisible)
 
+  useEffect(() => setVisible(isVisible), [isVisible])
+
   const child = React.Children.only(children) as React.ReactElement<any>
 
-  useEffect(() => {
-    setVisible(isVisible)
-  }, [isVisible])
+  const onChangeVisibility = value => {
+    if (onVisibleChange) onVisibleChange(value)
+    setVisible(value)
+  }
 
   const getOverlay = () => {
     let overlayNode
@@ -117,7 +122,7 @@ export const Popover: React.FC<Props> = ({
           overlay={getOverlay}
           placement={placement}
           overlayClassName='popover'
-          onVisibleChange={setVisible}
+          onVisibleChange={onChangeVisibility}
         >
           {child}
         </RcDropdown>
@@ -154,6 +159,7 @@ Popover.propTypes = {
   trigger: PropTypes.oneOf(['click', 'hover', 'contextMenu']),
   notificationBackgroundColor: PropTypes.string,
   notificationTextColor: PropTypes.string,
+  onVisibleChange: PropTypes.func,
   placement: PropTypes.oneOf([
     'topRight',
     'topLeft',
