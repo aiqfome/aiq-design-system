@@ -12,6 +12,7 @@ import { TableCell } from './TableCell'
 export interface TableProps {
   scroll?: string
   data: Array<any>
+  onHoverRow?: any
   columns: Array<any>
   hoverable?: boolean
   onClickRow?: (record: any) => any
@@ -43,6 +44,7 @@ const FlexWrapper = styled.div<FlexProps>`
   overflow-x: ${({ showScroll }) => (showScroll ? 'scroll' : 'hidden')};
 
   &::-webkit-scrollbar {
+    width: 9px;
     height: 5px;
     padding-top: 5px;
   }
@@ -77,6 +79,7 @@ export const Table: React.FC<TableProps> = ({
   onClickRow,
   columns = [],
   expandedRowRender,
+  onHoverRow = () => '',
   onRowBackground = () => '',
   ...props
 }) => {
@@ -156,7 +159,9 @@ export const Table: React.FC<TableProps> = ({
                   hoverable={hoverable}
                   onClick={() => getRowAction(row)}
                   background={onRowBackground(data[index])}
+                  onMouseOut={() => onHoverRow(data[index])}
                   hasAction={!!expandedRowRender || !!onClickRow}
+                  onMouseOver={() => onHoverRow(data[index], true)}
                   {...row.getRowProps()}
                 >
                   {row.cells.map(cell => {
@@ -195,6 +200,7 @@ Table.propTypes = {
   scroll: PropTypes.string,
   hoverable: PropTypes.bool,
   onClickRow: PropTypes.func,
+  onHoverRow: PropTypes.func,
   onRowBackground: PropTypes.func,
   data: PropTypes.array.isRequired,
   expandedRowRender: PropTypes.func,

@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from 'react'
+import React, { ReactNode, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 
 import RcDropdown from 'rc-dropdown'
@@ -11,11 +11,13 @@ type ContentFunc = () => React.ReactElement | string
 export interface Props {
   arrow?: boolean
   keepOpen?: boolean
+  isVisible?: boolean
   children?: ReactNode
   trigger?: 'click' | 'hover' | 'contextMenu'
   content?: string | React.ReactElement | ContentFunc
   notificationBackgroundColor?: string
   notificationTextColor?: string
+  onVisibleChange?: (visible: boolean) => void
   theme?: any
   placement?:
     | 'topLeft'
@@ -63,15 +65,24 @@ export const Popover: React.FC<Props> = ({
   children,
   arrow = false,
   keepOpen = true,
+  onVisibleChange,
   trigger = 'hover',
+  isVisible = false,
   placement = 'bottomCenter',
   notificationBackgroundColor = '#fff',
   notificationTextColor = '#000',
   ...props
 }) => {
-  const [visible, setVisible] = useState(false)
+  const [visible, setVisible] = useState(isVisible)
+
+  useEffect(() => setVisible(isVisible), [isVisible])
 
   const child = React.Children.only(children) as React.ReactElement<any>
+
+  const onChangeVisibility = value => {
+    if (onVisibleChange) onVisibleChange(value)
+    setVisible(value)
+  }
 
   const getOverlay = () => {
     let overlayNode
@@ -111,7 +122,7 @@ export const Popover: React.FC<Props> = ({
           overlay={getOverlay}
           placement={placement}
           overlayClassName='popover'
-          onVisibleChange={setVisible}
+          onVisibleChange={onChangeVisibility}
         >
           {child}
         </RcDropdown>
@@ -143,10 +154,12 @@ Popover.propTypes = {
   arrow: PropTypes.bool,
   content: PropTypes.any,
   keepOpen: PropTypes.bool,
+  isVisible: PropTypes.bool,
   children: PropTypes.node.isRequired,
   trigger: PropTypes.oneOf(['click', 'hover', 'contextMenu']),
   notificationBackgroundColor: PropTypes.string,
   notificationTextColor: PropTypes.string,
+  onVisibleChange: PropTypes.func,
   placement: PropTypes.oneOf([
     'topRight',
     'topLeft',
