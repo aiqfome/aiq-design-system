@@ -65,6 +65,7 @@ export const Multistep: React.FC<Props> = ({
             {...step}
           >
             <StepButton
+              {...step}
               type='button'
               data-testid='step-button'
               onClick={() => handleClickStep(index)}

@@ -31,7 +31,7 @@ export interface Props
   refButton?: any
   variantType?: string
   variant?: 'text' | 'contained' | 'outlined' | 'fab' | 'icon'
-  palette?: 'primary' | 'secondary' | 'neutral'
+  palette?: 'primary' | 'error' | 'secondary' | 'neutral'
   onClick?: any
   fullWidth?: boolean
   disabled?: boolean
@@ -88,6 +88,10 @@ export const ButtonStyled = styled.button<Props>`
       color: ${({ theme }) => theme.colors.primary};
     }
 
+    &.__button-text-error {
+      color: ${({ theme }) => theme.colors.error};
+    }
+
     &.__button-text-secondary {
       color: ${({ theme }) => theme.colors.primary};
     }
@@ -109,6 +113,15 @@ export const ButtonStyled = styled.button<Props>`
 
       &:hover {
         background: ${({ theme }) => theme.colors.primaryMedium};
+      }
+    }
+
+    &.__button-contained-error {
+      color: ${({ theme }) => theme.colors.white};
+      background: ${({ theme }) => theme.colors.error};
+
+      &:hover {
+        background: ${({ theme }) => theme.colors.error};
       }
     }
 
@@ -140,6 +153,17 @@ export const ButtonStyled = styled.button<Props>`
 
       &:hover {
         background: ${({ theme }) => theme.colors.primary};
+        color: ${({ theme }) => theme.colors.white};
+      }
+    }
+
+    &.__button-outlined-error {
+      border: 1px solid ${({ theme }) => theme.colors.error};
+      color: ${({ theme }) => theme.colors.error};
+      background: none;
+
+      &:hover {
+        background: ${({ theme }) => theme.colors.error};
         color: ${({ theme }) => theme.colors.white};
       }
     }
@@ -183,6 +207,10 @@ export const ButtonStyled = styled.button<Props>`
 
     &.__button-fab-primary {
       background: ${({ theme }) => theme.colors.primary};
+    }
+
+    &.__button-fab-error {
+      background: ${({ theme }) => theme.colors.error};
     }
 
     &.__button-fab-secondary {
@@ -292,7 +320,7 @@ Button.propTypes = {
   className: PropTypes.string,
   sufix: PropTypes.any,
   refButton: PropTypes.any,
-  palette: PropTypes.oneOf(['primary', 'secondary', 'neutral']),
+  palette: PropTypes.oneOf(['primary', 'error', 'secondary', 'neutral']),
   variantType: PropTypes.string,
   variant: PropTypes.oneOf(['text', 'contained', 'outlined', 'fab', 'icon']),
   disabled: PropTypes.bool,
