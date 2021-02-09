@@ -198,7 +198,7 @@ export const InputOutlined: React.FC<Props> = ({
         <LabelStyled label={label} errorForm={errorForm}>
           <input
             {...props}
-            placeholder=' '
+            placeholder={placeholder}
             type={showPassword ? 'text' : 'password'}
             ref={inputRef}
             name={name}
