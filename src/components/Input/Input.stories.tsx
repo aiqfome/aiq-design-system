@@ -78,6 +78,7 @@ export const Disabled: React.FC = () => (
 export const Password: React.FC = () => (
   <Flex variant='fullCentralized'>
     <Input label='Aiqfome' type='password' />
+    <Input label='Aiqfome' variant='outlined' type='password' />
   </Flex>
 )
 
@@ -100,6 +101,7 @@ export const WithValue: React.FC = () => {
 export const Sufix: React.FC = () => (
   <Flex variant='fullCentralized'>
     <Input label='Aiqfome' sufix={<MdSearch />} />
+    <Input label='Aiqfome' variant='outlined' sufix={<MdSearch />} />
   </Flex>
 )
 
