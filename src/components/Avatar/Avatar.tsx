@@ -9,16 +9,28 @@ import { Box, Props as BoxProps } from '../Box'
 export interface Props extends BoxProps {
   src?: string
   palette?: string
-  alt: string
+  alt?: string
+  size?: string
   variant?: 'box' | 'rounded'
 }
+
+const BoxStyled = styled(Box)<Props>`
+  & > img,
+  & {
+    border-radius: ${({ variant }) => (variant === 'rounded' ? '50%' : '5px')};
+    width: ${({ size }) => size || '36px'};
+    height: ${({ size }) => size || '36px'};
+    object-fit: ${({ variant }) =>
+      variant === 'rounded' ? 'cover' : 'contain'};
+  }
+`
 
 export const AvatarStyled = styled.img`
   width: 36px;
   height: 36px;
 `
 
-const AvatarInitial: React.FC<Props> = memo(({ alt, palette }) => {
+const AvatarInitial: React.FC<Props> = memo(({ alt = '', palette }) => {
   return (
     <Text data-testid='name' fontWeight='bold' color={palette}>
       {alt.substring(0, 1).toUpperCase()}
@@ -38,29 +50,27 @@ export const Avatar: React.FC<Props> = ({
   const handleSrcError = useCallback(() => setUseFallback(true), [])
 
   return (
-    <Box
-      width={variant === 'box' ? '36px' : '32px'}
-      height={variant === 'box' ? '36px' : '32px'}
+    <BoxStyled
       display='flex'
-      verticalAlign='center'
-      alignItems='center'
-      justifyContent='center'
-      borderRadius={variant === 'box' ? '5px' : '32px'}
-      backgroundColor={src && !useFallback ? 'transparent' : `${palette}Light`}
+      variant={variant}
       data-testid='box'
+      alignItems='center'
+      verticalAlign='center'
+      justifyContent='center'
+      backgroundColor={src && !useFallback ? 'transparent' : `${palette}Light`}
       {...props}
     >
       {src && !useFallback ? (
         <AvatarStyled
-          data-testid='src'
           src={src}
           alt={alt}
+          data-testid='src'
           onError={handleSrcError}
         />
       ) : (
         <AvatarInitial alt={alt} palette={palette} />
       )}
-    </Box>
+    </BoxStyled>
   )
 }
 

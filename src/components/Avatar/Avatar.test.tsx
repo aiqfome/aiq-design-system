@@ -22,13 +22,4 @@ describe('Avatar', () => {
     expect(getByTestId('src')).toBeVisible()
     expect(getByTestId('src')).toHaveAttribute('src', url)
   })
-
-  it('should have rounded when variant is equal rounded', () => {
-    const { getByTestId } = render(
-      <Avatar variant='rounded' alt='avatar component!' />
-    )
-
-    expect(getByTestId('box')).toHaveAttribute('width', '32px')
-    expect(getByTestId('box')).toHaveAttribute('width', '32px')
-  })
 })
