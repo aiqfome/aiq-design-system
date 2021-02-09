@@ -167,7 +167,7 @@ export const InputOutlined: React.FC<Props> = ({
   name,
   inputRef,
   label,
-  placeholder = ' ',
+  placeholder = '',
   errorForm,
   type = 'text',
   errorMessage,
