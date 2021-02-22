@@ -50,6 +50,9 @@ const Container = styled(Box)<Props>`
     margin: 0;
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
+    max-height: 300px;
+    overflow-y: scroll;
+    width: inherit;
 
     li {
       cursor: pointer;
