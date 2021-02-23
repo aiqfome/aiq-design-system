@@ -77,15 +77,15 @@ const LabelStyled = styled.label<Props>`
     ${({ placeholder, theme, errorForm }) =>
       (placeholder === ' ' || placeholder === '') &&
       css`
-        &:not(:focus):placeholder-shown {
+        &:not(:focus) {
           border-top-color: ${errorForm
             ? theme.colors.error
             : theme.colors.mediumGrey};
         }
 
-        &:not(:focus):placeholder-shown + span {
+        &:not(:focus) + span {
           font-size: inherit;
-          line-height: 53px;
+          line-height: 53px !important;
           color: ${theme.colors.grey};
         }
       `};
@@ -167,7 +167,7 @@ export const InputOutlined: React.FC<Props> = ({
   name,
   inputRef,
   label,
-  placeholder = ' ',
+  placeholder = '',
   errorForm,
   type = 'text',
   errorMessage,
@@ -195,7 +195,11 @@ export const InputOutlined: React.FC<Props> = ({
         {...styledContainer}
         {...props}
       >
-        <LabelStyled label={label} errorForm={errorForm}>
+        <LabelStyled
+          label={label}
+          errorForm={errorForm}
+          placeholder={placeholder}
+        >
           <input
             {...props}
             placeholder={placeholder}
@@ -230,7 +234,11 @@ export const InputOutlined: React.FC<Props> = ({
         {...styledContainer}
         {...props}
       >
-        <LabelStyled label={label} errorForm={errorForm}>
+        <LabelStyled
+          label={label}
+          errorForm={errorForm}
+          placeholder={placeholder}
+        >
           <input
             {...props}
             placeholder={placeholder}
