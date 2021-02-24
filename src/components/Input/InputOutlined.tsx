@@ -75,21 +75,25 @@ const LabelStyled = styled.label<Props>`
     background: ${({ theme, disabled }) =>
       disabled ? theme.colors.lightGrey : theme.colors.white};
 
-    ${({ placeholder, theme, errorForm }) =>
-      (placeholder === ' ' || placeholder === '') &&
-      css`
-        &:not(:focus) {
-          border-top-color: ${errorForm
-            ? theme.colors.error
-            : theme.colors.mediumGrey};
-        }
+    ${({ placeholder, theme, errorForm }) => {
+      if (placeholder === ' ' || placeholder === '') {
+        return css`
+          &:not(:focus):placeholder-shown {
+            border-top-color: ${errorForm
+              ? theme.colors.error
+              : theme.colors.mediumGrey};
+          }
 
-        &:not(:focus) + span {
-          font-size: inherit;
-          line-height: 53px !important;
-          color: ${theme.colors.grey};
-        }
-      `};
+          &:not(:focus):placeholder-shown + span {
+            font-size: inherit;
+            line-height: 53px !important;
+            color: ${theme.colors.grey};
+          }
+        `
+      }
+
+      return css``
+    }};
 
     &:focus {
       border-color: ${({ theme }) => theme.colors.primary};
@@ -101,16 +105,17 @@ const LabelStyled = styled.label<Props>`
     }
 
     &:focus + span {
-      color: ${({ theme }) => theme.colors.primary};
+      color: ${({ theme }) => theme.colors.primary} !important;
     }
 
     &:focus + span::before,
     &:focus + span::after {
-      border-top-color: ${({ theme }) => theme.colors.primary};
+      border-top-color: ${({ theme }) => theme.colors.primary} !important;
       box-shadow: inset 0 1px ${({ theme }) => theme.colors.primaryLight};
     }
 
-    & + span {
+    & + span,
+    &:focus + span {
       position: absolute;
       top: 0;
       left: 0;
@@ -118,7 +123,7 @@ const LabelStyled = styled.label<Props>`
       width: 100%;
       max-height: 100%;
       font-size: 75%;
-      line-height: 15px;
+      line-height: 15px !important;
       cursor: text;
       transition: color 0.2s, font-size 0.2s, line-height 0.2s;
       color: ${({ theme }) => theme.colors.almostBlack};
@@ -194,17 +199,18 @@ export const InputOutlined: React.FC<Props> = ({
     return (
       <Container
         data-testid='input-outlined-password'
-        {...styledContainer}
         {...containerProps}
+        {...styledContainer}
       >
         <LabelStyled
+          type={type}
           label={label}
           errorForm={errorForm}
-          placeholder={placeholder}
+          placeholder={placeholder || ' '}
         >
           <input
             {...props}
-            placeholder={placeholder}
+            placeholder={placeholder || ' '}
             type={showPassword ? 'text' : 'password'}
             ref={inputRef}
             name={name}
@@ -233,17 +239,17 @@ export const InputOutlined: React.FC<Props> = ({
     return (
       <Container
         data-testid='input-outlined-sufix'
-        {...styledContainer}
         {...containerProps}
+        {...styledContainer}
       >
         <LabelStyled
           label={label}
           errorForm={errorForm}
-          placeholder={placeholder}
+          placeholder={placeholder || ' '}
         >
           <input
             {...props}
-            placeholder={placeholder}
+            placeholder={placeholder || ' '}
             type={type}
             value={value}
             ref={inputRef}
@@ -262,19 +268,19 @@ export const InputOutlined: React.FC<Props> = ({
 
   return (
     <Container
-      {...containerProps}
       {...styledContainer}
+      {...containerProps}
       data-testid='input-outlined'
     >
       <LabelStyled
         label={label}
         errorForm={errorForm}
-        placeholder={placeholder}
+        placeholder={placeholder || ' '}
       >
         <input
           {...props}
           value={value}
-          placeholder={placeholder}
+          placeholder={placeholder || ' '}
           name={name}
           type={type}
           ref={inputRef}

@@ -62,6 +62,14 @@ export const Disabled: React.FC = () => (
       errorMessage={text('errorMessage', 'message error')}
       label={text('label', 'aiqfome')}
       placeholder={text('placeholder', 'duas pizzas é muito')}
+      type={select(
+        'Type',
+        {
+          Text: 'text',
+          Password: 'password'
+        },
+        'text'
+      )}
       disabled
       variant={select(
         'Variant',
