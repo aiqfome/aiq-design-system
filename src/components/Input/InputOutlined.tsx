@@ -30,6 +30,7 @@ export interface Props
   errorMessage?: string
   value?: string
   sufix?: any
+  containerProps?: any
 
   maxWidth?: number | string
   backgroundColor?: number | string
@@ -177,6 +178,7 @@ export const InputOutlined: React.FC<Props> = ({
   maxWidth,
   marginRight,
   marginLeft,
+  containerProps,
   ...props
 }) => {
   const [showPassword, setShowPassword] = useState(false)
@@ -193,7 +195,7 @@ export const InputOutlined: React.FC<Props> = ({
       <Container
         data-testid='input-outlined-password'
         {...styledContainer}
-        {...props}
+        {...containerProps}
       >
         <LabelStyled
           label={label}
@@ -232,7 +234,7 @@ export const InputOutlined: React.FC<Props> = ({
       <Container
         data-testid='input-outlined-sufix'
         {...styledContainer}
-        {...props}
+        {...containerProps}
       >
         <LabelStyled
           label={label}
@@ -259,7 +261,11 @@ export const InputOutlined: React.FC<Props> = ({
   }
 
   return (
-    <Container {...styledContainer} {...props} data-testid='input-outlined'>
+    <Container
+      {...containerProps}
+      {...styledContainer}
+      data-testid='input-outlined'
+    >
       <LabelStyled
         label={label}
         errorForm={errorForm}
@@ -296,5 +302,6 @@ InputOutlined.propTypes = {
   backgroundColor: PropTypes.any,
   maxWidth: PropTypes.any,
   marginLeft: PropTypes.any,
-  marginRight: PropTypes.any
+  marginRight: PropTypes.any,
+  containerProps: PropTypes.any
 }
