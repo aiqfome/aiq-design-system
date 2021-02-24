@@ -16,6 +16,8 @@ export interface Props {
   size?: 'default' | 'small' | 'large'
   defaultPage?: number
   page?: number
+  nextPage?: any
+  prevPage?: any
   onChange?: (page: number) => void
 }
 
@@ -42,6 +44,8 @@ export const Pagination: React.FC<Props> = ({
   variant,
   count = 0,
   defaultPage = 1,
+  nextPage,
+  prevPage,
   disabled = false,
   onChange = () => {
     // do nothing.
@@ -203,9 +207,8 @@ export const Pagination: React.FC<Props> = ({
             size={size}
             data-testid='pagination-item-noCunt-return'
             cursor={currentPage === 1 ? 'not-allowed' : ''}
-            onClick={
-              disabled ? undefined : () => handleClickPage(currentPage - 1)
-            }
+            onClick={() => handleClickPage(currentPage - 1)}
+            disabled={!prevPage}
           >
             <MdChevronLeft />
           </PaginationItem>
@@ -228,28 +231,20 @@ export const Pagination: React.FC<Props> = ({
             </PaginationItem>
           )}
 
-          {pagesToShow.map(page => (
-            <PaginationItem
-              size={size}
-              key={page.toString()}
-              active={page === currentPage}
-              onClick={disabled ? undefined : () => handleClickPage(page)}
-            >
+          {currentPage > 1 && (
+            <PaginationItem size={size} active>
               <Text color='almostBlack' fontSize='default'>
-                {page}
+                {currentPage}
               </Text>
             </PaginationItem>
-          ))}
+          )}
 
           <PaginationItem
             size={size}
             data-testid='pagination-item-noCunt-next'
-            onClick={
-              disabled ? undefined : () => handleClickPage(currentPage + 1)
-            }
-            cursor={
-              currentPage === pages[pages.length - 1] ? 'not-allowed' : ''
-            }
+            onClick={() => handleClickPage(currentPage + 1)}
+            cursor={!nextPage ? 'not-allowed' : ''}
+            disabled={!nextPage}
           >
             <MdChevronRight />
           </PaginationItem>
@@ -271,5 +266,7 @@ Pagination.propTypes = {
   disabled: PropTypes.bool,
   defaultPage: PropTypes.number,
   size: PropTypes.oneOf(['default', 'small', 'large']),
-  variant: PropTypes.oneOf(['default', 'noCount'])
+  variant: PropTypes.oneOf(['default', 'noCount']),
+  nextPage: PropTypes.any,
+  prevPage: PropTypes.any
 }
