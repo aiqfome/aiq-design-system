@@ -21,6 +21,7 @@ export interface Props extends InputHTMLAttributes<HTMLInputElement> {
   sufix?: any
   prefix?: any
   placeholder?: string
+  containerProps?: any
 
   backgroundColor?: any
   border?: any
@@ -117,6 +118,7 @@ export const InputNeutral: React.FC<Props> = ({
   prefix,
   value,
   placeholder,
+  containerProps,
   ...props
 }) => {
   const [inputSelected, setInputSelected] = useState(false)
@@ -132,7 +134,7 @@ export const InputNeutral: React.FC<Props> = ({
 
   if (sufix) {
     return (
-      <Flex flexDirection='column'>
+      <Flex {...containerProps} flexDirection='column'>
         <ContainerSufix
           {...boxStyled}
           inputSelected={inputSelected}
@@ -180,7 +182,7 @@ export const InputNeutral: React.FC<Props> = ({
 
   if (type === 'password') {
     return (
-      <Flex flexDirection='column'>
+      <Flex {...containerProps} flexDirection='column'>
         <ContainerSufix
           {...boxStyled}
           inputSelected={inputSelected}
@@ -213,7 +215,7 @@ export const InputNeutral: React.FC<Props> = ({
   }
 
   return (
-    <Flex flexDirection='column'>
+    <Flex {...containerProps} flexDirection='column'>
       <Input
         name={name}
         inputRef={inputRef}
@@ -247,6 +249,7 @@ InputNeutral.propTypes = {
   prefix: PropTypes.any,
   value: PropTypes.string,
   placeholder: PropTypes.string,
+  containerProps: PropTypes.object,
 
   backgroundColor: PropTypes.any,
   border: PropTypes.any,
