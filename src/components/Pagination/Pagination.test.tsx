@@ -85,23 +85,6 @@ describe('Pagination', () => {
     expect(paginatorItem).toHaveClass('__pagination-size-large')
   })
 
-  it('should have infinite pages when variant is noCount', () => {
-    const handleOnChange = jest.fn()
-
-    const { getByTestId } = render(
-      <Pagination variant='noCount' onChange={handleOnChange} />
-    )
-
-    const itemNext = getByTestId('pagination-item-noCunt-next')
-
-    let index = 0
-    while (index < 100) {
-      index++
-      fireEvent.click(itemNext)
-    }
-    expect(handleOnChange).toHaveBeenLastCalledWith(101)
-  })
-
   it('should not have infinite pages when variant is default', () => {
     const handleOnChange = jest.fn()
 
