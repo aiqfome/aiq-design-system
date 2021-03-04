@@ -2,7 +2,7 @@ import React, { Fragment, useCallback, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
-import { useTable } from 'react-table'
+import { useTable, useSortBy } from 'react-table'
 import { space, layout, SpaceProps, LayoutProps } from 'styled-system'
 
 import { TableRow } from './TableRow'
@@ -89,7 +89,13 @@ export const Table: React.FC<TableProps> = ({
     getTableProps,
     getTableBodyProps,
     columns: tableColumns
-  } = useTable({ columns, data })
+  } = useTable(
+    {
+      columns,
+      data
+    },
+    useSortBy
+  )
 
   const [selectedRows, setSelectedRows] = useState<Array<string>>([])
 
@@ -137,16 +143,35 @@ export const Table: React.FC<TableProps> = ({
       <TableStyled scroll={scroll} {...getTableProps()}>
         <thead>
           <TableRow hoverable={false}>
-            {tableColumns.map(column => (
-              <TableHead
-                {...column}
-                key={column.id}
-                textAlign={column.align || 'left'}
-                {...column.getHeaderProps()}
-              >
-                {column.name ? column.render('name') : column.render('Header')}
-              </TableHead>
-            ))}
+            {tableColumns.map(column => {
+              if (column.sort) {
+                return (
+                  <TableHead
+                    {...column}
+                    key={column.id}
+                    textAlign={column.align || 'left'}
+                    {...column.getHeaderProps(column.getSortByToggleProps())}
+                  >
+                    {column.name
+                      ? column.render('name')
+                      : column.render('Header')}
+                  </TableHead>
+                )
+              }
+
+              return (
+                <TableHead
+                  {...column}
+                  key={column.id}
+                  textAlign={column.align || 'left'}
+                  {...column.getHeaderProps()}
+                >
+                  {column.name
+                    ? column.render('name')
+                    : column.render('Header')}
+                </TableHead>
+              )
+            })}
           </TableRow>
         </thead>
 
