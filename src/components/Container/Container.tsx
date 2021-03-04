@@ -105,7 +105,7 @@ export const Container: React.FC<Props> = ({
   ...props
 }) => {
   return (
-    <Flex flex={1} flexDirection='column' {...containerProps}>
+    <Flex flexDirection='column' {...containerProps}>
       {tabs.length > 0 && (
         <Tabs
           mr='10px'
