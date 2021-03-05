@@ -18,11 +18,13 @@ export default createGlobalStyle`
     transform: rotate(45deg);
   }
 
-  .rc-tooltip-placement-bottomLeft .rc-tooltip-arrow {
+  .rc-tooltip-placement-bottomLeft .rc-tooltip-arrow,
+  .rc-tooltip-placement-topLeft .rc-tooltip-arrow {
     left: 10px;
   }
 
-  .rc-tooltip-placement-bottomRight .rc-tooltip-arrow {
+  .rc-tooltip-placement-bottomRight .rc-tooltip-arrow,
+  .rc-tooltip-placement-topRight .rc-tooltip-arrow {
     right: 10px;
   }
 
