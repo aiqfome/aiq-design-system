@@ -18,6 +18,16 @@ export default createGlobalStyle`
     transform: rotate(45deg);
   }
 
+  .rc-tooltip-placement-bottomLeft .rc-tooltip-arrow,
+  .rc-tooltip-placement-topLeft .rc-tooltip-arrow {
+    left: 10px;
+  }
+
+  .rc-tooltip-placement-bottomRight .rc-tooltip-arrow,
+  .rc-tooltip-placement-topRight .rc-tooltip-arrow {
+    right: 10px;
+  }
+
   .popover.rc-dropdown-show-arrow.rc-dropdown-placement-bottomLeft,
   .popover.rc-dropdown-show-arrow.rc-dropdown-placement-bottomRight,
   .popover.rc-dropdown-show-arrow.rc-dropdown-placement-bottomCenter
