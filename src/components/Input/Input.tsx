@@ -17,6 +17,7 @@ export interface Props extends InputHTMLAttributes<HTMLInputElement> {
   prefix?: any
   variant?: 'outlined' | 'default' | 'tags'
   placeholder?: string
+  containerProps?: any
 
   backgroundColor?: any
   border?: any
@@ -100,6 +101,7 @@ Input.propTypes = {
   value: PropTypes.string,
   variant: PropTypes.oneOf(['outlined', 'default', 'tags']),
   placeholder: PropTypes.string,
+  containerProps: PropTypes.object,
 
   backgroundColor: PropTypes.any,
   border: PropTypes.any,

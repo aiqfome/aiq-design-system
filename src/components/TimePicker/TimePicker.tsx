@@ -18,6 +18,7 @@ export interface Props {
   maxWidth?: string | number
   errorForm?: boolean
   errorMessage?: string
+  sufix?: any
 }
 
 interface PickerProps {
@@ -33,6 +34,7 @@ export const TimePicker = React.forwardRef(
       value,
       placeholder,
       label,
+      sufix,
       variant,
       maxWidth,
       name,
@@ -116,6 +118,7 @@ export const TimePicker = React.forwardRef(
           errorForm={errorForm}
           onChange={handleInputOnChange}
           inputRef={ref}
+          sufix={sufix}
         />
         {showPicker && (
           <Box
@@ -165,5 +168,6 @@ TimePicker.propTypes = {
   name: PropTypes.string,
   maxWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   errorForm: PropTypes.bool,
+  sufix: PropTypes.any,
   errorMessage: PropTypes.string
 }
