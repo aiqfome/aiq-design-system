@@ -11,6 +11,7 @@ export interface Props extends BoxProps {
   palette?: string
   alt?: string
   size?: string
+  fallback?: string
   variant?: 'box' | 'rounded'
 }
 
@@ -41,13 +42,41 @@ const AvatarInitial: React.FC<Props> = memo(({ alt = '', palette }) => {
 export const Avatar: React.FC<Props> = ({
   src,
   alt,
-  palette = 'primary',
+  fallback,
   variant = 'box',
+  palette = 'primary',
   ...props
 }) => {
   const [useFallback, setUseFallback] = useState(false)
+  const [imgFallback, setImgFallback] = useState(fallback)
 
   const handleSrcError = useCallback(() => setUseFallback(true), [])
+
+  const getImage = () => {
+    if (src && !useFallback) {
+      return (
+        <AvatarStyled
+          src={src}
+          alt={alt}
+          data-testid='src'
+          onError={handleSrcError}
+        />
+      )
+    }
+
+    if (imgFallback) {
+      return (
+        <AvatarStyled
+          alt={alt}
+          src={imgFallback}
+          data-testid='src'
+          onError={() => setImgFallback('')}
+        />
+      )
+    }
+
+    return <AvatarInitial alt={alt} palette={palette} />
+  }
 
   return (
     <BoxStyled
@@ -60,22 +89,14 @@ export const Avatar: React.FC<Props> = ({
       backgroundColor={src && !useFallback ? 'transparent' : `${palette}Light`}
       {...props}
     >
-      {src && !useFallback ? (
-        <AvatarStyled
-          src={src}
-          alt={alt}
-          data-testid='src'
-          onError={handleSrcError}
-        />
-      ) : (
-        <AvatarInitial alt={alt} palette={palette} />
-      )}
+      {getImage()}
     </BoxStyled>
   )
 }
 
 Avatar.propTypes = {
   src: PropTypes.string,
+  fallback: PropTypes.string,
   palette: PropTypes.string,
   alt: PropTypes.string.isRequired,
   variant: PropTypes.oneOf(['box', 'rounded'])
