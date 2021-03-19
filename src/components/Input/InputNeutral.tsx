@@ -22,6 +22,7 @@ export interface Props extends InputHTMLAttributes<HTMLInputElement> {
   prefix?: any
   placeholder?: string
   containerProps?: any
+  boxProps?: any
 
   backgroundColor?: any
   border?: any
@@ -124,12 +125,13 @@ export const InputNeutral: React.FC<Props> = ({
   const [inputSelected, setInputSelected] = useState(false)
   const [passwordVisible, setPasswordVisible] = useState(false)
 
-  const { backgroundColor, border, width, maxWidth } = props
+  const { backgroundColor, border, width, maxWidth, boxProps } = props
   const boxStyled = {
     backgroundColor,
     border,
     width,
-    maxWidth
+    maxWidth,
+    ...boxProps
   }
 
   if (sufix) {
@@ -158,7 +160,7 @@ export const InputNeutral: React.FC<Props> = ({
 
   if (prefix) {
     return (
-      <Flex>
+      <Flex {...containerProps}>
         <ContainerSufix
           {...boxStyled}
           inputSelected={inputSelected}
@@ -250,6 +252,7 @@ InputNeutral.propTypes = {
   value: PropTypes.string,
   placeholder: PropTypes.string,
   containerProps: PropTypes.object,
+  boxProps: PropTypes.object,
 
   backgroundColor: PropTypes.any,
   border: PropTypes.any,
