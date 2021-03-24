@@ -1,4 +1,10 @@
-import React, { Fragment, useCallback, useEffect, useState } from 'react'
+import React, {
+  useMemo,
+  Fragment,
+  useState,
+  useEffect,
+  useCallback
+} from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
@@ -15,6 +21,7 @@ export interface TableProps {
   onHoverRow?: any
   columns: Array<any>
   hoverable?: boolean
+  renderExpanded?: boolean
   onClickRow?: (record: any) => any
   expandedRowRender?: (record: any) => any
   onRowBackground?: (record: any) => string
@@ -78,11 +85,26 @@ export const Table: React.FC<TableProps> = ({
   data = [],
   onClickRow,
   columns = [],
+  renderExpanded,
   expandedRowRender,
   onHoverRow = () => '',
   onRowBackground = () => '',
   ...props
 }) => {
+  const renderedData = useMemo(() => {
+    return data.reduce((accumulator, current) => {
+      if (renderExpanded && expandedRowRender && expandedRowRender(current)) {
+        return [
+          ...accumulator,
+          current,
+          { expanded: true, value: expandedRowRender(current) }
+        ]
+      }
+
+      return [...accumulator, current]
+    }, [])
+  }, [data, renderExpanded, expandedRowRender])
+
   const {
     rows,
     prepareRow,
@@ -92,7 +114,7 @@ export const Table: React.FC<TableProps> = ({
   } = useTable(
     {
       columns,
-      data
+      data: renderedData
     },
     useSortBy
   )
@@ -119,7 +141,7 @@ export const Table: React.FC<TableProps> = ({
 
   const getRowAction = useCallback(
     row => {
-      if (expandedRowRender) {
+      if (!renderExpanded && expandedRowRender) {
         if (selectedRows.includes(row.id)) {
           setSelectedRows(rows => rows.filter(r => r !== row.id))
         } else {
@@ -128,10 +150,10 @@ export const Table: React.FC<TableProps> = ({
       }
 
       if (onClickRow) {
-        onClickRow(data[row.index])
+        onClickRow(renderedData[row.index])
       }
     },
-    [expandedRowRender, data, selectedRows, onClickRow]
+    [expandedRowRender, renderExpanded, renderedData, selectedRows, onClickRow]
   )
 
   return (
@@ -180,37 +202,63 @@ export const Table: React.FC<TableProps> = ({
             prepareRow(row)
             return (
               <Fragment key={row.id || index}>
-                <TableRow
-                  hoverable={hoverable}
-                  onClick={() => getRowAction(row)}
-                  background={onRowBackground(data[index])}
-                  onMouseOut={() => onHoverRow(data[index])}
-                  hasAction={!!expandedRowRender || !!onClickRow}
-                  onMouseOver={() => onHoverRow(data[index], true)}
-                  {...row.getRowProps()}
-                >
-                  {row.cells.map(cell => {
-                    return (
-                      <TableCell
-                        {...cell.column}
-                        key={`${row.id}-${cell.value}`}
-                        textAlign={cell.column.align || 'left'}
-                        {...cell.getCellProps()}
-                      >
-                        {cell.column.renderCell
-                          ? cell.column.renderCell(cell.value, data[index])
-                          : cell.render('Cell')}
-                      </TableCell>
-                    )
-                  })}
-                </TableRow>
-
-                {expandedRowRender && selectedRows.includes(row.id) && (
+                {renderExpanded &&
+                expandedRowRender &&
+                renderedData[index].expanded ? (
                   <TableRow expanded>
                     <TableCell colspan={tableColumns.length}>
-                      {expandedRowRender(data[index])}
+                      {renderedData[index].value}
                     </TableCell>
                   </TableRow>
+                ) : (
+                  <>
+                    <TableRow
+                      hoverable={hoverable}
+                      onClick={() => getRowAction(row)}
+                      background={onRowBackground(renderedData[index])}
+                      onMouseOut={() => onHoverRow(renderedData[index])}
+                      onMouseOver={() => onHoverRow(renderedData[index], true)}
+                      hasAction={
+                        (!!expandedRowRender && !renderExpanded) || !!onClickRow
+                      }
+                      className={
+                        renderExpanded &&
+                        expandedRowRender &&
+                        renderedData[index + 1]?.expanded
+                          ? 'expanded-father'
+                          : ''
+                      }
+                      {...row.getRowProps()}
+                    >
+                      {row.cells.map(cell => {
+                        return (
+                          <TableCell
+                            {...cell.column}
+                            key={`${row.id}-${cell.value}`}
+                            textAlign={cell.column.align || 'left'}
+                            {...cell.getCellProps()}
+                          >
+                            {cell.column.renderCell
+                              ? cell.column.renderCell(
+                                  cell.value,
+                                  renderedData[index]
+                                )
+                              : cell.render('Cell')}
+                          </TableCell>
+                        )
+                      })}
+                    </TableRow>
+
+                    {!renderExpanded &&
+                      expandedRowRender &&
+                      selectedRows.includes(row.id) && (
+                        <TableRow expanded>
+                          <TableCell colspan={tableColumns.length}>
+                            {expandedRowRender(renderedData[index])}
+                          </TableCell>
+                        </TableRow>
+                      )}
+                  </>
                 )}
               </Fragment>
             )
@@ -226,6 +274,7 @@ Table.propTypes = {
   hoverable: PropTypes.bool,
   onClickRow: PropTypes.func,
   onHoverRow: PropTypes.func,
+  renderExpanded: PropTypes.bool,
   onRowBackground: PropTypes.func,
   data: PropTypes.array.isRequired,
   expandedRowRender: PropTypes.func,
