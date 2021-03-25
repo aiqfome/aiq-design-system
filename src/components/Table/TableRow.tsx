@@ -5,6 +5,7 @@ import styled, { css } from 'styled-components'
 
 export interface TableRowProps {
   expanded?: boolean
+  className?: string
   children: ReactNode
   hoverable?: boolean
   hasAction?: boolean
@@ -17,6 +18,10 @@ const TableRowStyled = styled.tr<TableRowProps>`
   border-bottom: 1px solid ${({ theme }) => theme.colors.mediumGrey};
   background: ${({ theme, background }) =>
     theme.colors[background || '']} !important;
+
+  &.expanded-father {
+    border-bottom: none;
+  }
 
   ${({ hasAction }) =>
     hasAction &&
