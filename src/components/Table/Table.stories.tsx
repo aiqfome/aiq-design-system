@@ -107,6 +107,20 @@ export const WithExpandedRow: React.FC = () => {
   )
 }
 
+export const WithDefaultExpandedRow: React.FC = () => {
+  return (
+    <Flex variant='fullCentralized' backgroundColor='#FFF'>
+      <Table
+        data={data}
+        renderExpanded
+        columns={columns}
+        onRowBackground={row => (row.age > 21 ? 'lightGrey' : '')}
+        expandedRowRender={row => (row.age > 21 ? `eu amo ser ${row.job}` : '')}
+      />
+    </Flex>
+  )
+}
+
 export const WithClickAction: React.FC = () => {
   return (
     <Flex variant='fullCentralized' backgroundColor='#FFF'>

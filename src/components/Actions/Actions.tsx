@@ -2,7 +2,7 @@ import React, { ReactNode, useState } from 'react'
 import PropTypes from 'prop-types'
 
 import RcDropdown from 'rc-dropdown'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 import { Flex } from '../Flex'
 import { Icon } from '../Icon'
@@ -10,10 +10,11 @@ import { Text } from '../Text'
 import { Divider } from '../Divider'
 
 interface Item {
-  action: (event: any) => void
-  icon?: React.ReactElement
   visible?: boolean
-  description: React.ReactElement | string
+  disabled?: boolean
+  icon?: React.ReactElement
+  action?: (event: any) => void
+  description?: React.ReactElement | string
 }
 
 export interface Props {
@@ -46,15 +47,32 @@ const ActionsStyled = styled(Flex)`
   box-shadow: 0px 3px 6px #00000029;
 `
 
-const MenuItem = styled(Flex)`
-  &:hover {
-    cursor: pointer;
-    background: ${({ theme }) => theme.colors.mediumGrey};
+const MenuItem = styled(Flex)<Item>`
+  ${({ disabled }) => {
+    if (disabled) {
+      return css`
+        &:hover {
+          cursor: not-allowed;
+          background: ${({ theme }) => theme.colors.lightGrey};
 
-    span {
-      cursor: pointer;
+          span {
+            cursor: not-allowed;
+          }
+        }
+      `
     }
-  }
+
+    return css`
+      &:hover {
+        cursor: pointer;
+        background: ${({ theme }) => theme.colors.mediumGrey};
+
+        span {
+          cursor: pointer;
+        }
+      }
+    `
+  }}
 
   &:first-child {
     padding-top: 8px;
@@ -106,30 +124,45 @@ export const Actions: React.FC<Props> = ({
 
           {items &&
             items.length > 0 &&
-            items.map(({ action, visible = true, icon, description }, index) =>
-              visible ? (
-                <MenuItem
-                  py={3}
-                  px={5}
-                  key={index}
-                  alignItems='center'
-                  onClick={e => {
-                    e.stopPropagation()
-                    setVisible(false)
-                    if (action) action(e)
-                  }}
-                >
-                  {icon && (
-                    <Icon mr={4} color='primary'>
-                      {icon}
-                    </Icon>
-                  )}
+            items.map(
+              (
+                {
+                  icon,
+                  action,
+                  description,
+                  visible = true,
+                  disabled = false,
+                  ...itemProps
+                },
+                index
+              ) =>
+                visible ? (
+                  <MenuItem
+                    {...itemProps}
+                    py={3}
+                    px={5}
+                    key={index}
+                    disabled={disabled}
+                    alignItems='center'
+                    onClick={e => {
+                      e.stopPropagation()
+                      if (!disabled) {
+                        setVisible(false)
+                        if (action) action(e)
+                      }
+                    }}
+                  >
+                    {icon && (
+                      <Icon mr={4} color='primary'>
+                        {icon}
+                      </Icon>
+                    )}
 
-                  <Text fontSize='medium' whiteSpace='nowrap'>
-                    {description}
-                  </Text>
-                </MenuItem>
-              ) : null
+                    <Text fontSize='medium' whiteSpace='nowrap'>
+                      {description}
+                    </Text>
+                  </MenuItem>
+                ) : null
             )}
         </Flex>
       </ActionsStyled>
