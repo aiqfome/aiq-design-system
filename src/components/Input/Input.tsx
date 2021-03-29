@@ -6,7 +6,6 @@ import InputMask from 'react-input-mask'
 import { InputOutlined } from './InputOutlined'
 import { InputNeutral } from './InputNeutral'
 import { InputTags } from './InputTags'
-import { Disabled } from '../Button/Button.stories'
 
 export interface Props extends InputHTMLAttributes<HTMLInputElement> {
   name?: string
@@ -43,6 +42,7 @@ export const Input: React.FC<Props> = ({
   placeholder,
   mask,
   onChange,
+  disabled,
   ...props
 }) => {
   if (variant === 'outlined') {
@@ -52,7 +52,7 @@ export const Input: React.FC<Props> = ({
           mask={mask}
           value={value}
           onChange={onChange}
-          disabled={Disabled}
+          disabled={disabled}
         >
           {inputProps => (
             <InputOutlined
@@ -113,7 +113,7 @@ export const Input: React.FC<Props> = ({
         mask={mask}
         value={value}
         onChange={onChange}
-        disabled={Disabled}
+        disabled={disabled}
       >
         {inputProps => (
           <InputNeutral
@@ -171,5 +171,6 @@ Input.propTypes = {
   width: PropTypes.any,
   maxWidth: PropTypes.any,
   mask: PropTypes.string,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  disabled: PropTypes.bool
 }
