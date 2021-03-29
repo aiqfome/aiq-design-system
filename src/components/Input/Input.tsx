@@ -1,9 +1,12 @@
 import React, { InputHTMLAttributes } from 'react'
 import PropTypes from 'prop-types'
 
+import InputMask from 'react-input-mask'
+
 import { InputOutlined } from './InputOutlined'
 import { InputNeutral } from './InputNeutral'
 import { InputTags } from './InputTags'
+import { Disabled } from '../Button/Button.stories'
 
 export interface Props extends InputHTMLAttributes<HTMLInputElement> {
   name?: string
@@ -19,11 +22,11 @@ export interface Props extends InputHTMLAttributes<HTMLInputElement> {
   placeholder?: string
   containerProps?: any
   boxProps?: any
-
   backgroundColor?: any
   border?: any
   width?: any
   maxWidth?: any
+  mask?: string
 }
 
 export const Input: React.FC<Props> = ({
@@ -38,9 +41,38 @@ export const Input: React.FC<Props> = ({
   value,
   variant,
   placeholder,
+  mask,
+  onChange,
   ...props
 }) => {
   if (variant === 'outlined') {
+    if (mask) {
+      return (
+        <InputMask
+          mask={mask}
+          value={value}
+          onChange={onChange}
+          disabled={Disabled}
+        >
+          {inputProps => (
+            <InputOutlined
+              name={name}
+              inputRef={inputRef}
+              label={label}
+              errorForm={errorForm}
+              type={type}
+              errorMessage={errorMessage}
+              sufix={sufix}
+              data-testid='input-container'
+              placeholder={placeholder}
+              {...props}
+              {...inputProps}
+            />
+          )}
+        </InputMask>
+      )
+    }
+
     return (
       <InputOutlined
         name={name}
@@ -70,6 +102,33 @@ export const Input: React.FC<Props> = ({
         data-testid='input-container'
         {...props}
       />
+    )
+  }
+
+  if (mask) {
+    return (
+      <InputMask
+        mask={mask}
+        value={value}
+        onChange={onChange}
+        disabled={Disabled}
+      >
+        {inputProps => (
+          <InputNeutral
+            name={name}
+            inputRef={inputRef}
+            errorForm={errorForm}
+            type={type}
+            errorMessage={errorMessage}
+            sufix={sufix}
+            prefix={prefix}
+            placeholder={placeholder}
+            data-testid='input-container'
+            {...inputProps}
+            {...props}
+          />
+        )}
+      </InputMask>
     )
   }
 
@@ -104,9 +163,10 @@ Input.propTypes = {
   placeholder: PropTypes.string,
   containerProps: PropTypes.object,
   boxProps: PropTypes.object,
-
   backgroundColor: PropTypes.any,
   border: PropTypes.any,
   width: PropTypes.any,
-  maxWidth: PropTypes.any
+  maxWidth: PropTypes.any,
+  mask: PropTypes.string,
+  onChange: PropTypes.func
 }

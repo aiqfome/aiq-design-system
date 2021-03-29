@@ -154,3 +154,23 @@ export const Styled: React.FC = () => (
     />
   </Flex>
 )
+
+export const Masked: React.FC = () => (
+  <Flex variant='fullCentralized'>
+    <Input
+      errorForm={boolean('errorForm', false)}
+      errorMessage={text('errorMessage', 'message error')}
+      label={text('label', 'aiqfome')}
+      mask={text('mask', '999,99')}
+      placeholder={text('placeholder', 'aiqfome')}
+      type={select(
+        'Type',
+        {
+          Text: 'text',
+          Password: 'password'
+        },
+        'text'
+      )}
+    />
+  </Flex>
+)
