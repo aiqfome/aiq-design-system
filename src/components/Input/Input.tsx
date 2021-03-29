@@ -1,6 +1,8 @@
 import React, { InputHTMLAttributes } from 'react'
 import PropTypes from 'prop-types'
 
+import InputMask from 'react-input-mask'
+
 import { InputOutlined } from './InputOutlined'
 import { InputNeutral } from './InputNeutral'
 import { InputTags } from './InputTags'
@@ -19,11 +21,11 @@ export interface Props extends InputHTMLAttributes<HTMLInputElement> {
   placeholder?: string
   containerProps?: any
   boxProps?: any
-
   backgroundColor?: any
   border?: any
   width?: any
   maxWidth?: any
+  mask?: string
 }
 
 export const Input: React.FC<Props> = ({
@@ -38,9 +40,39 @@ export const Input: React.FC<Props> = ({
   value,
   variant,
   placeholder,
+  mask,
+  onChange,
+  disabled,
   ...props
 }) => {
   if (variant === 'outlined') {
+    if (mask) {
+      return (
+        <InputMask
+          mask={mask}
+          value={value}
+          onChange={onChange}
+          disabled={disabled}
+        >
+          {inputProps => (
+            <InputOutlined
+              name={name}
+              inputRef={inputRef}
+              label={label}
+              errorForm={errorForm}
+              type={type}
+              errorMessage={errorMessage}
+              sufix={sufix}
+              data-testid='input-container'
+              placeholder={placeholder}
+              {...props}
+              {...inputProps}
+            />
+          )}
+        </InputMask>
+      )
+    }
+
     return (
       <InputOutlined
         name={name}
@@ -53,6 +85,7 @@ export const Input: React.FC<Props> = ({
         value={value}
         data-testid='input-container'
         placeholder={placeholder}
+        onChange={onChange}
         {...props}
       />
     )
@@ -67,9 +100,37 @@ export const Input: React.FC<Props> = ({
         errorMessage={errorMessage}
         value={value}
         placeholder={placeholder}
+        onChange={onChange}
         data-testid='input-container'
         {...props}
       />
+    )
+  }
+
+  if (mask) {
+    return (
+      <InputMask
+        mask={mask}
+        value={value}
+        onChange={onChange}
+        disabled={disabled}
+      >
+        {inputProps => (
+          <InputNeutral
+            name={name}
+            inputRef={inputRef}
+            errorForm={errorForm}
+            type={type}
+            errorMessage={errorMessage}
+            sufix={sufix}
+            prefix={prefix}
+            placeholder={placeholder}
+            data-testid='input-container'
+            {...inputProps}
+            {...props}
+          />
+        )}
+      </InputMask>
     )
   }
 
@@ -84,6 +145,7 @@ export const Input: React.FC<Props> = ({
       prefix={prefix}
       value={value}
       placeholder={placeholder}
+      onChange={onChange}
       data-testid='input-container'
       {...props}
     />
@@ -104,9 +166,11 @@ Input.propTypes = {
   placeholder: PropTypes.string,
   containerProps: PropTypes.object,
   boxProps: PropTypes.object,
-
   backgroundColor: PropTypes.any,
   border: PropTypes.any,
   width: PropTypes.any,
-  maxWidth: PropTypes.any
+  maxWidth: PropTypes.any,
+  mask: PropTypes.string,
+  onChange: PropTypes.func,
+  disabled: PropTypes.bool
 }
