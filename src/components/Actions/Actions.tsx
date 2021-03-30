@@ -51,9 +51,14 @@ const MenuItem = styled(Flex)<Item>`
   ${({ disabled }) => {
     if (disabled) {
       return css`
+        color: ${({ theme }) => theme.colors.grey};
+
+        svg {
+          opacity: 0.33;
+        }
+
         &:hover {
           cursor: not-allowed;
-          background: ${({ theme }) => theme.colors.lightGrey};
 
           span {
             cursor: not-allowed;
