@@ -4,10 +4,11 @@ import PropTypes from 'prop-types'
 import RcDropdown from 'rc-dropdown'
 import styled, { css } from 'styled-components'
 
+import { Divider } from '../Divider'
 import { Flex } from '../Flex'
 import { Icon } from '../Icon'
+import { Popover } from '../Popover'
 import { Text } from '../Text'
-import { Divider } from '../Divider'
 
 interface Item {
   visible?: boolean
@@ -15,6 +16,7 @@ interface Item {
   icon?: React.ReactElement
   action?: (event: any) => void
   description?: React.ReactElement | string
+  disabledMessage?: string
 }
 
 export interface Props {
@@ -127,21 +129,21 @@ export const Actions: React.FC<Props> = ({
             </Text>
           )}
 
-          {items &&
-            items.length > 0 &&
-            items.map(
-              (
-                {
-                  icon,
-                  action,
-                  description,
-                  visible = true,
-                  disabled = false,
-                  ...itemProps
-                },
-                index
-              ) =>
-                visible ? (
+          {items?.map(
+            (
+              {
+                icon,
+                action,
+                description,
+                visible = true,
+                disabled = false,
+                disabledMessage,
+                ...itemProps
+              },
+              index
+            ) =>
+              visible ? (
+                !disabled ? (
                   <MenuItem
                     {...itemProps}
                     py={3}
@@ -167,8 +169,35 @@ export const Actions: React.FC<Props> = ({
                       {description}
                     </Text>
                   </MenuItem>
-                ) : null
-            )}
+                ) : (
+                  <Popover
+                    placement='bottomLeft'
+                    arrow
+                    content={disabledMessage}
+                    notificationBackgroundColor='almostBlack'
+                    notificationTextColor='white'
+                  >
+                    <MenuItem
+                      py={3}
+                      px={5}
+                      key={index}
+                      disabled={true}
+                      alignItems='center'
+                    >
+                      {icon && (
+                        <Icon mr={4} color='primary'>
+                          {icon}
+                        </Icon>
+                      )}
+
+                      <Text fontSize='medium' whiteSpace='nowrap'>
+                        {description}
+                      </Text>
+                    </MenuItem>
+                  </Popover>
+                )
+              ) : null
+          )}
         </Flex>
       </ActionsStyled>
     )
