@@ -16,6 +16,20 @@ interface Props extends FlexProps {
   typeSubmenu?: 'default' | 'bottom' | 'top'
 }
 
+const LinkStyled = styled(Link)`
+  display: flex;
+  flex-direction: row;
+  margin: 12px 12px 8px;
+  color: ${({ theme }) => theme.colors.primary} !important;
+  font-weight: ${({ theme }) => theme.fontWeights.semiBold} !important;
+
+  &:hover {
+    background: none !important;
+    color: ${({ theme }) => theme.colors.primary} !important;
+    font-weight: ${({ theme }) => theme.fontWeights.semiBold} !important;
+  }
+`
+
 const SubItensStyled = styled(Flex)<Props>`
   ul {
     margin: 0;
@@ -183,11 +197,19 @@ export const SubItens: React.FC<Props> = ({
       sidebarOpened={sidebarOpened}
       itemOpened={itemOpened}
     >
-      {!sidebarOpened && (
-        <Text color='primary' mx={6} mt={6} mb={4} fontWeight='semiBold'>
-          {item.name}
-        </Text>
-      )}
+      {!sidebarOpened &&
+        (item.itens ? (
+          <Text color='primary' mx={6} mt={6} mb={4} fontWeight='semiBold'>
+            {item.name}
+          </Text>
+        ) : (
+          <LinkStyled
+            href={item.href}
+            variant={item.type ? item.type : 'internal'}
+          >
+            {item.name}
+          </LinkStyled>
+        ))}
       {item.itens && (
         <ul>
           {item.itens.map((subItem, index) => (
