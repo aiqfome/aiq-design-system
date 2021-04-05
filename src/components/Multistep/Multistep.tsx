@@ -19,13 +19,33 @@ export interface Props {
   onClickStep?: (key: any) => void
 }
 
-const StepButton = styled.button`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 28px;
-  background: none;
+export interface ButtonProps {
+  disabled?: boolean
+}
+
+const StepButton = styled.button<ButtonProps>`
   border: none;
+  display: flex;
+  background: none;
+  align-items: center;
+  flex-direction: column;
+  min-width: max-content !important;
+
+  cursor: ${({ disabled }) => (disabled ? 'auto' : 'pointer')};
+`
+
+const DividerLeftStyled = styled(Divider)`
+  position: absolute;
+  top: 12px;
+  width: 100%;
+  right: calc(50% + 25px);
+`
+
+const DividerRightStyled = styled(Divider)`
+  position: absolute;
+  top: 12px;
+  width: 100%;
+  left: calc(50% + 25px);
 `
 
 export const Multistep: React.FC<Props> = ({
@@ -56,63 +76,84 @@ export const Multistep: React.FC<Props> = ({
       <Flex width='100%'>
         {steps.map((step, index) => (
           <Flex
+            flex={1}
             mb='32px'
             key={index}
-            flexDirection='row'
+            width='auto'
             alignItems='center'
+            flexDirection='row'
             data-testid='steps-step'
-            width={index === steps.length - 1 ? '80px' : '100%'}
             {...step}
           >
-            <StepButton
-              {...step}
-              type='button'
-              data-testid='step-button'
-              onClick={() => handleClickStep(index)}
+            <Flex
+              width='100%'
+              overflow='hidden'
+              position='relative'
+              justifyContent='center'
             >
-              {step.icon || (
-                <Flex
-                  backgroundColor={
+              {index > 0 && (
+                <DividerLeftStyled
+                  color={
                     stepActive >= index
                       ? theme.colors.primary
                       : theme.colors.mediumGrey
                   }
-                  height='24px'
-                  width='24px'
-                  justifyContent='center'
-                  alignItems='center'
-                  marginBottom='12px'
-                  borderRadius='50px'
-                >
-                  <Text cursor='pointer' color='white'>
-                    {index + 1}
-                  </Text>
-                </Flex>
+                />
               )}
-              <Text
-                fontWeight='medium'
-                fontSize='medium'
-                cursor='pointer'
-                color={
-                  stepActive >= index
-                    ? theme.colors.primary
-                    : theme.colors.mediumGrey
-                }
-              >
-                {step.name}
-              </Text>
-            </StepButton>
 
-            {steps.length - 1 > index && (
-              <Divider
-                color={
-                  stepActive > index
-                    ? theme.colors.primary
-                    : theme.colors.mediumGrey
-                }
-                width='100%'
-              />
-            )}
+              <StepButton
+                {...step}
+                type='button'
+                data-testid='step-button'
+                disabled={!!disabledClickStep}
+                onClick={() => handleClickStep(index)}
+              >
+                {step.icon || (
+                  <Flex
+                    backgroundColor={
+                      stepActive >= index
+                        ? theme.colors.primary
+                        : theme.colors.mediumGrey
+                    }
+                    height='24px'
+                    width='24px'
+                    justifyContent='center'
+                    alignItems='center'
+                    marginBottom='12px'
+                    borderRadius='50px'
+                  >
+                    <Text
+                      color='white'
+                      cursor={disabledClickStep ? 'auto' : 'pointer'}
+                    >
+                      {index + 1}
+                    </Text>
+                  </Flex>
+                )}
+                <Text
+                  fontSize='medium'
+                  fontWeight='medium'
+                  cursor={disabledClickStep ? 'auto' : 'pointer'}
+                  color={
+                    stepActive >= index
+                      ? theme.colors.primary
+                      : theme.colors.mediumGrey
+                  }
+                >
+                  {step.name}
+                </Text>
+              </StepButton>
+
+              {steps.length - 1 > index && (
+                <DividerRightStyled
+                  color={
+                    stepActive > index
+                      ? theme.colors.primary
+                      : theme.colors.mediumGrey
+                  }
+                />
+              )}
+            </Flex>
           </Flex>
         ))}
       </Flex>
