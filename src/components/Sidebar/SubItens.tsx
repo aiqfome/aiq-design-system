@@ -21,11 +21,13 @@ const LinkStyled = styled(Link)`
   flex-direction: row;
   margin: 12px 12px 8px;
   color: ${({ theme }) => theme.colors.primary} !important;
+  font-size: ${({ theme }) => theme.fontSizes.default} !important;
   font-weight: ${({ theme }) => theme.fontWeights.semiBold} !important;
 
   &:hover {
     background: none !important;
     color: ${({ theme }) => theme.colors.primary} !important;
+    font-size: ${({ theme }) => theme.fontSizes.default} !important;
     font-weight: ${({ theme }) => theme.fontWeights.semiBold} !important;
   }
 `
