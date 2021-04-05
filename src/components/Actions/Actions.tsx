@@ -143,7 +143,7 @@ export const Actions: React.FC<Props> = ({
               index
             ) =>
               visible ? (
-                !disabled ? (
+                !disabled || (disabled && !disabledMessage) ? (
                   <MenuItem
                     {...itemProps}
                     py={3}
