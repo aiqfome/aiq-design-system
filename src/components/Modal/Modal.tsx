@@ -255,47 +255,43 @@ export const Modal: React.FC<Props> = ({
               justifyContent='space-between'
               {...buttonsProps}
             >
-              <Flex flex={1} justifyContent='flex-start'>
-                {cancelButton.visible && (
-                  <Button
-                    palette='primary'
-                    variant='outlined'
-                    fontWeight='medium'
-                    onClick={handleCancel}
-                    data-testid='modal-button'
-                    {...cancelButton}
-                  >
-                    {cancelButton.label}
-                  </Button>
-                )}
-              </Flex>
+              {cancelButton.visible && (
+                <Button
+                  palette='primary'
+                  variant='outlined'
+                  fontWeight='medium'
+                  onClick={handleCancel}
+                  data-testid='modal-button'
+                  {...cancelButton}
+                >
+                  {cancelButton.label}
+                </Button>
+              )}
 
-              <Flex flex={1} justifyContent='flex-end'>
-                {okButton.visible && okButton.function ? (
-                  <Button
-                    palette='primary'
-                    onClick={handleOk}
-                    variant='contained'
-                    fontWeight='medium'
-                    data-testid='modal-button'
-                    type='button'
-                    {...okButton}
-                  >
-                    {okButton.label}
-                  </Button>
-                ) : (
-                  <Button
-                    palette='primary'
-                    variant='contained'
-                    fontWeight='medium'
-                    data-testid='modal-button'
-                    type='submit'
-                    {...okButton}
-                  >
-                    {okButton.label}
-                  </Button>
-                )}
-              </Flex>
+              {okButton.visible && okButton.function ? (
+                <Button
+                  palette='primary'
+                  onClick={handleOk}
+                  variant='contained'
+                  fontWeight='medium'
+                  data-testid='modal-button'
+                  type='button'
+                  {...okButton}
+                >
+                  {okButton.label}
+                </Button>
+              ) : (
+                <Button
+                  palette='primary'
+                  variant='contained'
+                  fontWeight='medium'
+                  data-testid='modal-button'
+                  type='submit'
+                  {...okButton}
+                >
+                  {okButton.label}
+                </Button>
+              )}
             </Flex>
           </ModalStyled>
         </FormStyled>
