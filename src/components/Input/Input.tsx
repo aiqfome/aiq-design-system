@@ -66,6 +66,7 @@ export const Input: React.FC<Props> = ({
               sufix={sufix}
               data-testid='input-container'
               placeholder={placeholder}
+              disabled={disabled}
               {...props}
               {...inputProps}
             />
@@ -87,6 +88,7 @@ export const Input: React.FC<Props> = ({
         data-testid='input-container'
         placeholder={placeholder}
         onChange={onChange}
+        disabled={disabled}
         {...props}
       />
     )
@@ -148,6 +150,7 @@ export const Input: React.FC<Props> = ({
       placeholder={placeholder}
       onChange={onChange}
       data-testid='input-container'
+      disabled={disabled}
       {...props}
     />
   )
