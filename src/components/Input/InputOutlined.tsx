@@ -31,6 +31,7 @@ export interface Props
   value?: string
   sufix?: any
   containerProps?: any
+  disabled?: boolean
 
   maxWidth?: number | string
   backgroundColor?: number | string
@@ -184,6 +185,7 @@ export const InputOutlined: React.FC<Props> = ({
   marginRight,
   marginLeft,
   containerProps,
+  disabled,
   ...props
 }) => {
   const [showPassword, setShowPassword] = useState(false)
@@ -206,6 +208,7 @@ export const InputOutlined: React.FC<Props> = ({
           type={type}
           label={label}
           errorForm={errorForm}
+          disabled={disabled}
           placeholder={placeholder || ' '}
         >
           <input
@@ -214,6 +217,7 @@ export const InputOutlined: React.FC<Props> = ({
             type={showPassword ? 'text' : 'password'}
             ref={inputRef}
             name={name}
+            disabled={disabled}
             data-testid='input'
           />
           {label && <Text data-testid='input-label'>{label}</Text>}
@@ -245,6 +249,7 @@ export const InputOutlined: React.FC<Props> = ({
         <LabelStyled
           label={label}
           errorForm={errorForm}
+          disabled={disabled}
           placeholder={placeholder || ' '}
         >
           <input
@@ -254,6 +259,7 @@ export const InputOutlined: React.FC<Props> = ({
             value={value}
             ref={inputRef}
             name={name}
+            disabled={disabled}
             data-testid='input'
           />
           {label && <Text data-testid='input-label'>{label}</Text>}
@@ -275,6 +281,7 @@ export const InputOutlined: React.FC<Props> = ({
       <LabelStyled
         label={label}
         errorForm={errorForm}
+        disabled={disabled}
         placeholder={placeholder || ' '}
       >
         <input
@@ -284,6 +291,7 @@ export const InputOutlined: React.FC<Props> = ({
           name={name}
           type={type}
           ref={inputRef}
+          disabled={disabled}
           autoComplete='off'
           data-testid='input'
         />
@@ -309,5 +317,6 @@ InputOutlined.propTypes = {
   maxWidth: PropTypes.any,
   marginLeft: PropTypes.any,
   marginRight: PropTypes.any,
-  containerProps: PropTypes.any
+  containerProps: PropTypes.any,
+  disabled: PropTypes.bool
 }
