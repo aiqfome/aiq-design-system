@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
 import styled from 'styled-components'
@@ -32,6 +32,8 @@ export interface Props {
   isLoading?: boolean
   itemLimit?: number
   placeholder?: string
+  loadingMessage?: string
+  emptyMessage?: string
 }
 
 const MultiSelectStyled = styled(Box)`
@@ -40,11 +42,7 @@ const MultiSelectStyled = styled(Box)`
   }
 `
 
-interface ContainerInputProps {
-  onClick: () => void
-}
-
-const ContainerInput = styled(Box)<ContainerInputProps>`
+const ContainerInput = styled(Box)`
   display: flex;
   flex-direction: row;
   overflow: auto;
@@ -130,26 +128,43 @@ export const MultiSelectFetchable: React.FC<Props> = ({
   isLoading = false,
   itemLimit = 2,
   placeholder,
+  loadingMessage = 'carregando...',
+  emptyMessage = 'item não encontrado ou já adicionado',
   handleSelectedItemChange = () => {
     // do nothing.
   },
   ...props
 }) => {
-  const inputRef = useRef(document.createElement('input'))
+  const [inputValue, setInputValue] = useState<string>('')
 
-  const propsMultipleSelection = useMultipleSelection({
+  const {
+    getSelectedItemProps,
+    getDropdownProps,
+    addSelectedItem,
+    removeSelectedItem,
+    selectedItems
+  } = useMultipleSelection({
     onSelectedItemsChange: handleSelectedItemChange,
     initialSelectedItems: value
   })
 
-  const selectedItems = useMemo(
-    () => [...new Set([...propsMultipleSelection.selectedItems])],
-    [propsMultipleSelection]
-  )
+  const getFilteredItems = () =>
+    items.filter(item => selectedItems.indexOf(item) < 0)
 
-  const propsCombobox = useCombobox({
+  const {
+    isOpen,
+    getMenuProps,
+    getInputProps,
+    getComboboxProps,
+    highlightedIndex,
+    getItemProps,
+    openMenu
+  } = useCombobox({
+    inputValue,
+    defaultHighlightedIndex: 0,
+    selectedItem: null,
     itemToString: item => (item ? '' : ''),
-    items,
+    items: getFilteredItems(),
     stateReducer: (state, actionAndChanges) => {
       const { changes, type } = actionAndChanges
       switch (type) {
@@ -162,46 +177,50 @@ export const MultiSelectFetchable: React.FC<Props> = ({
       }
       return changes
     },
-    onStateChange: ({ inputValue: value, type, selectedItem }) => {
+    onStateChange: ({ inputValue, type, selectedItem }) => {
       switch (type) {
         case useCombobox.stateChangeTypes.InputChange:
-          onChange(value)
+          onChange(inputValue)
+          setInputValue(inputValue || '')
           break
         case useCombobox.stateChangeTypes.InputKeyDownEnter:
         case useCombobox.stateChangeTypes.ItemClick:
         case useCombobox.stateChangeTypes.InputBlur:
           if (selectedItem) {
-            propsMultipleSelection.addSelectedItem(selectedItem)
+            addSelectedItem(selectedItem)
           }
+          onChange('')
+          setInputValue('')
+          break
+        default:
           break
       }
     }
   })
 
-  function clear() {
-    propsMultipleSelection.selectedItems.forEach(item => {
-      propsMultipleSelection.removeSelectedItem(item)
+  const clear = () => {
+    selectedItems.forEach(item => {
+      removeSelectedItem(item)
     })
   }
 
-  function filterItems(filter) {
+  const filterItems = filter => {
     if (filter.clear) {
       clear()
     }
     if (filter.allItems) {
       clear()
       items.forEach(item => {
-        propsMultipleSelection.addSelectedItem(item)
+        addSelectedItem(item)
       })
     }
     if (filter.items) {
       clear()
       filter.items.forEach((_, index) => {
-        propsMultipleSelection.addSelectedItem(items[index])
+        addSelectedItem(items[index])
       })
     }
   }
-
   return (
     <MultiSelectStyled
       position='relative'
@@ -214,11 +233,8 @@ export const MultiSelectFetchable: React.FC<Props> = ({
         borderRadius={4}
         display='flex'
         flexDirection='row'
-        onClick={() => {
-          inputRef.current.focus()
-        }}
         border='1px solid #dedede'
-        refBox={propsCombobox.getComboboxProps().ref}
+        refBox={getComboboxProps().ref}
       >
         <Flex overflow='hidden' flex={1}>
           {selectedItems.slice(0, itemLimit).map((selectedItem, index) => (
@@ -234,7 +250,7 @@ export const MultiSelectFetchable: React.FC<Props> = ({
               borderRadius='3px'
             >
               <SelectedItem
-                {...propsMultipleSelection.getSelectedItemProps({
+                {...getSelectedItemProps({
                   selectedItem,
                   index
                 })}
@@ -246,7 +262,7 @@ export const MultiSelectFetchable: React.FC<Props> = ({
               <Button
                 onClick={e => {
                   e.stopPropagation()
-                  propsMultipleSelection.removeSelectedItem(selectedItem)
+                  removeSelectedItem(selectedItem)
                 }}
                 ml={6}
               >
@@ -255,7 +271,7 @@ export const MultiSelectFetchable: React.FC<Props> = ({
             </Flex>
           ))}
 
-          {propsMultipleSelection.selectedItems.length > itemLimit && (
+          {selectedItems.length > itemLimit && (
             <Flex
               py={2}
               px={4}
@@ -267,7 +283,7 @@ export const MultiSelectFetchable: React.FC<Props> = ({
               borderRadius='3px'
             >
               <Text color='white'>
-                {`+${propsMultipleSelection.selectedItems.length - itemLimit}`}
+                {`+${selectedItems.length - itemLimit}`}
               </Text>
             </Flex>
           )}
@@ -275,13 +291,12 @@ export const MultiSelectFetchable: React.FC<Props> = ({
           <input
             placeholder={placeholder}
             type='text'
-            {...propsCombobox.getInputProps(
-              propsMultipleSelection.getDropdownProps({
-                ref: inputRef,
-                preventKeyAction: propsCombobox.isOpen,
+            {...getInputProps(
+              getDropdownProps({
+                preventKeyAction: isOpen,
                 onFocus: () => {
-                  if (!propsCombobox.isOpen) {
-                    propsCombobox.openMenu()
+                  if (!isOpen) {
+                    openMenu()
                   }
                 }
               })
@@ -293,7 +308,7 @@ export const MultiSelectFetchable: React.FC<Props> = ({
       </ContainerInput>
 
       <Overflow
-        isOpen={propsCombobox.isOpen}
+        isOpen={isOpen}
         mt={13}
         py={7}
         flexDirection='column'
@@ -307,26 +322,27 @@ export const MultiSelectFetchable: React.FC<Props> = ({
             </li>
           ))}
         </ul>
-
         <Divider mx={5} my={4} />
 
         <Itens>
-          <ul {...propsCombobox.getMenuProps()}>
-            {propsCombobox.isOpen &&
-              items &&
-              items.map((item, index) => (
+          <ul {...getMenuProps()}>
+            {isOpen &&
+              !isLoading &&
+              getFilteredItems().map((item, index) => (
                 <li
-                  className={
-                    propsCombobox.highlightedIndex === index
-                      ? 'highlighted'
-                      : ''
-                  }
+                  className={highlightedIndex === index ? 'highlighted' : ''}
                   key={`${item}${index}`}
-                  {...propsCombobox.getItemProps({ item, index })}
+                  {...getItemProps({ item, index })}
                 >
                   {item.name}
                 </li>
               ))}
+
+            {isOpen && isLoading && <li>{loadingMessage}</li>}
+
+            {isOpen && !isLoading && getFilteredItems().length === 0 && (
+              <li>{emptyMessage}</li>
+            )}
           </ul>
         </Itens>
       </Overflow>
@@ -343,5 +359,7 @@ MultiSelectFetchable.propTypes = {
   isLoading: PropTypes.bool,
   itemLimit: PropTypes.number,
   placeholder: PropTypes.string,
-  handleSelectedItemChange: PropTypes.func
+  handleSelectedItemChange: PropTypes.func,
+  loadingMessage: PropTypes.string,
+  emptyMessage: PropTypes.string
 }
