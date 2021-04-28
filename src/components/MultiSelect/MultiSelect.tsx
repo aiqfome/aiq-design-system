@@ -25,6 +25,8 @@ export interface Props {
   placeholder?: string
   loadingMessage?: string
   emptyMessage?: string
+  errorMessage?: string
+  errorForm?: boolean
 }
 
 export const MultiSelect: React.FC<Props> = ({

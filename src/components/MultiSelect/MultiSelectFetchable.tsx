@@ -11,6 +11,7 @@ import { Text } from '../Text'
 import { Divider } from '../Divider'
 import { Button } from '../Button'
 import { Loading } from '../Loading'
+import { InputErrorMessage } from '../InputErrorMessage'
 
 type Item = {
   id: any
@@ -34,6 +35,12 @@ export interface Props {
   placeholder?: string
   loadingMessage?: string
   emptyMessage?: string
+  errorMessage?: string
+  errorForm?: boolean
+}
+
+interface ContainerInputProps {
+  errorForm?: boolean
 }
 
 const MultiSelectStyled = styled(Box)`
@@ -42,13 +49,17 @@ const MultiSelectStyled = styled(Box)`
   }
 `
 
-const ContainerInput = styled(Box)`
+const ContainerInput = styled(Box)<ContainerInputProps>`
   display: flex;
   flex-direction: row;
   overflow: auto;
   align-items: center;
   padding: 4px 10px;
   justify-content: space-between;
+  border: ${({ errorForm, theme }) =>
+    errorForm
+      ? `1px solid ${theme.colors.error}`
+      : `1px solid ${theme.colors.mediumGrey}`};
 
   input {
     background: none;
@@ -130,6 +141,8 @@ export const MultiSelectFetchable: React.FC<Props> = ({
   placeholder,
   loadingMessage = 'carregando...',
   emptyMessage = 'item não encontrado ou já adicionado',
+  errorForm,
+  errorMessage,
   handleSelectedItemChange = () => {
     // do nothing.
   },
@@ -221,132 +234,137 @@ export const MultiSelectFetchable: React.FC<Props> = ({
       })
     }
   }
+
   return (
-    <MultiSelectStyled
-      position='relative'
-      maxWidth={maxWidth}
-      data-testid='multiselect-fechable'
-      {...props}
-    >
-      <ContainerInput
-        backgroundColor='white'
-        borderRadius={4}
-        display='flex'
-        flexDirection='row'
-        border='1px solid #dedede'
-        refBox={getComboboxProps().ref}
+    <Flex flexDirection='column' flex={1}>
+      <MultiSelectStyled
+        position='relative'
+        maxWidth={maxWidth}
+        data-testid='multiselect-fechable'
+        {...props}
       >
-        <Flex overflow='hidden' flex={1}>
-          {selectedItems.slice(0, itemLimit).map((selectedItem, index) => (
-            <Flex
-              py={2}
-              key={`selected-item-${index}`}
-              px={4}
-              mr={3}
-              display='flex'
-              flexDirection='row'
-              alignItems='center'
-              backgroundColor='primary'
-              borderRadius='3px'
-            >
-              <SelectedItem
-                {...getSelectedItemProps({
-                  selectedItem,
-                  index
-                })}
-                color='white'
+        <ContainerInput
+          backgroundColor='white'
+          borderRadius={4}
+          display='flex'
+          flexDirection='row'
+          errorForm={errorForm}
+          refBox={getComboboxProps().ref}
+        >
+          <Flex overflow='hidden' flex={1}>
+            {selectedItems.slice(0, itemLimit).map((selectedItem, index) => (
+              <Flex
+                py={2}
+                key={`selected-item-${index}`}
+                px={4}
+                mr={3}
+                display='flex'
+                flexDirection='row'
+                alignItems='center'
+                backgroundColor='primary'
+                borderRadius='3px'
               >
-                {selectedItem.name}
-              </SelectedItem>
-
-              <Button
-                onClick={e => {
-                  e.stopPropagation()
-                  removeSelectedItem(selectedItem)
-                }}
-                ml={6}
-              >
-                <MdClose color='#fff' />
-              </Button>
-            </Flex>
-          ))}
-
-          {selectedItems.length > itemLimit && (
-            <Flex
-              py={2}
-              px={4}
-              mr={3}
-              display='flex'
-              flexDirection='row'
-              alignItems='center'
-              backgroundColor='primary'
-              borderRadius='3px'
-            >
-              <Text color='white'>
-                {`+${selectedItems.length - itemLimit}`}
-              </Text>
-            </Flex>
-          )}
-
-          <input
-            placeholder={placeholder}
-            type='text'
-            {...getInputProps(
-              getDropdownProps({
-                preventKeyAction: isOpen,
-                onFocus: () => {
-                  if (!isOpen) {
-                    openMenu()
-                  }
-                }
-              })
-            )}
-          />
-        </Flex>
-
-        {isLoading && <Loading size='small' />}
-      </ContainerInput>
-
-      <Overflow
-        isOpen={isOpen}
-        mt={13}
-        py={7}
-        flexDirection='column'
-        backgroundColor='white'
-        border='1px solid #dedede'
-      >
-        <ul>
-          {filters.map((filter, index) => (
-            <li key={`filter-${index}`} onClick={() => filterItems(filter)}>
-              <Text cursor='pointer'>{filter.name}</Text>
-            </li>
-          ))}
-        </ul>
-        <Divider mx={5} my={4} />
-
-        <Itens>
-          <ul {...getMenuProps()}>
-            {isOpen &&
-              !isLoading &&
-              getFilteredItems().map((item, index) => (
-                <li
-                  className={highlightedIndex === index ? 'highlighted' : ''}
-                  key={`${item}${index}`}
-                  {...getItemProps({ item, index })}
+                <SelectedItem
+                  {...getSelectedItemProps({
+                    selectedItem,
+                    index
+                  })}
+                  color='white'
                 >
-                  {item.name}
-                </li>
-              ))}
+                  {selectedItem.name}
+                </SelectedItem>
 
-            {isOpen && isLoading && <li>{loadingMessage}</li>}
+                <Button
+                  onClick={e => {
+                    e.stopPropagation()
+                    removeSelectedItem(selectedItem)
+                  }}
+                  ml={6}
+                >
+                  <MdClose color='#fff' />
+                </Button>
+              </Flex>
+            ))}
 
-            {isOpen && !isLoading && getFilteredItems().length === 0 && (
-              <li>{emptyMessage}</li>
+            {selectedItems.length > itemLimit && (
+              <Flex
+                py={2}
+                px={4}
+                mr={3}
+                display='flex'
+                flexDirection='row'
+                alignItems='center'
+                backgroundColor='primary'
+                borderRadius='3px'
+              >
+                <Text color='white'>
+                  {`+${selectedItems.length - itemLimit}`}
+                </Text>
+              </Flex>
             )}
+
+            <input
+              placeholder={placeholder}
+              type='text'
+              {...getInputProps(
+                getDropdownProps({
+                  preventKeyAction: isOpen,
+                  onFocus: () => {
+                    if (!isOpen) {
+                      openMenu()
+                    }
+                  }
+                })
+              )}
+            />
+          </Flex>
+
+          {isLoading && <Loading size='small' />}
+        </ContainerInput>
+
+        <Overflow
+          isOpen={isOpen}
+          mt={13}
+          py={7}
+          flexDirection='column'
+          backgroundColor='white'
+          border='1px solid #dedede'
+        >
+          <ul>
+            {filters.map((filter, index) => (
+              <li key={`filter-${index}`} onClick={() => filterItems(filter)}>
+                <Text cursor='pointer'>{filter.name}</Text>
+              </li>
+            ))}
           </ul>
-        </Itens>
-      </Overflow>
-    </MultiSelectStyled>
+          <Divider mx={5} my={4} />
+
+          <Itens>
+            <ul {...getMenuProps()}>
+              {isOpen &&
+                !isLoading &&
+                getFilteredItems().map((item, index) => (
+                  <li
+                    className={highlightedIndex === index ? 'highlighted' : ''}
+                    key={`${item}${index}`}
+                    {...getItemProps({ item, index })}
+                  >
+                    {item.name}
+                  </li>
+                ))}
+
+              {isOpen && isLoading && <li>{loadingMessage}</li>}
+
+              {isOpen && !isLoading && getFilteredItems().length === 0 && (
+                <li>{emptyMessage}</li>
+              )}
+            </ul>
+          </Itens>
+        </Overflow>
+      </MultiSelectStyled>
+
+      {errorForm && <InputErrorMessage errorMessage={errorMessage} />}
+    </Flex>
   )
 }
 
@@ -361,5 +379,7 @@ MultiSelectFetchable.propTypes = {
   placeholder: PropTypes.string,
   handleSelectedItemChange: PropTypes.func,
   loadingMessage: PropTypes.string,
-  emptyMessage: PropTypes.string
+  emptyMessage: PropTypes.string,
+  errorForm: PropTypes.bool,
+  errorMessage: PropTypes.string
 }
