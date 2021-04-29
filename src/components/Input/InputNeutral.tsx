@@ -9,7 +9,7 @@ import { Button } from '../Button'
 import { Flex } from '../Flex'
 import { Box } from '../Box'
 
-import { InputErrorMessage } from './InputErrorMessage'
+import { InputErrorMessage } from '../InputErrorMessage'
 
 export interface Props extends InputHTMLAttributes<HTMLInputElement> {
   name?: string

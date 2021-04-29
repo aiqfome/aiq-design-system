@@ -10,6 +10,7 @@ import { Box } from '../Box'
 import { Text } from '../Text'
 import { Divider } from '../Divider'
 import { Button } from '../Button'
+import { InputErrorMessage } from '../InputErrorMessage'
 
 type Item = {
   id: any
@@ -31,6 +32,8 @@ export interface Props {
   isFetchable?: boolean
   itemLimit?: number
   placeholder?: string
+  errorMessage?: string
+  errorForm?: boolean
 }
 
 const MultiSelectStyled = styled(Box)`
@@ -41,6 +44,7 @@ const MultiSelectStyled = styled(Box)`
 
 interface ContainerInputProps {
   onClick: () => void
+  errorForm?: boolean
 }
 
 const ContainerInput = styled(Box)<ContainerInputProps>`
@@ -50,6 +54,10 @@ const ContainerInput = styled(Box)<ContainerInputProps>`
   align-items: center;
   padding: 4px 10px;
   justify-content: space-between;
+  border: ${({ errorForm, theme }) =>
+    errorForm
+      ? `1px solid ${theme.colors.error}`
+      : `1px solid ${theme.colors.mediumGrey}`};
 
   input {
     background: none;
@@ -127,21 +135,52 @@ export const MultiSelectStatic: React.FC<Props> = ({
   value = [],
   placeholder,
   itemLimit = 2,
+  errorForm,
+  errorMessage,
   ...props
 }) => {
-  const [inputValue, setInputValue] = useState<string | undefined>('')
+  const [inputValue, setInputValue] = useState<string>('')
 
   const inputRef = useRef(document.createElement('input'))
 
-  const propsMultipleSelection = useMultipleSelection({
+  const {
+    getSelectedItemProps,
+    getDropdownProps,
+    addSelectedItem,
+    removeSelectedItem,
+    selectedItems
+  } = useMultipleSelection({
     initialSelectedItems: value,
     onSelectedItemsChange: event => {
       onChange && onChange(event)
     }
   })
 
-  const propsCombobox = useCombobox({
-    itemToString: item => (item ? '' : ''),
+  const getFilteredItems = () =>
+    items.filter(
+      item =>
+        selectedItems.indexOf(item) < 0 &&
+        item.name.toLowerCase().startsWith(inputValue.toLowerCase())
+    )
+
+  const clear = () => {
+    selectedItems.forEach(item => {
+      removeSelectedItem(item)
+    })
+  }
+
+  const {
+    isOpen,
+    getMenuProps,
+    getInputProps,
+    getComboboxProps,
+    highlightedIndex,
+    getItemProps,
+    openMenu
+  } = useCombobox({
+    inputValue,
+    defaultHighlightedIndex: 0,
+    selectedItem: null,
     items: getFilteredItems(),
     stateReducer: (state, actionAndChanges) => {
       const { changes, type } = actionAndChanges
@@ -155,80 +194,63 @@ export const MultiSelectStatic: React.FC<Props> = ({
       }
       return changes
     },
-    onStateChange: ({ inputValue: value, type, selectedItem }) => {
+    onStateChange: ({ inputValue, type, selectedItem }) => {
       switch (type) {
         case useCombobox.stateChangeTypes.InputChange:
-          setInputValue(value)
+          setInputValue(inputValue || '')
           break
         case useCombobox.stateChangeTypes.InputKeyDownEnter:
         case useCombobox.stateChangeTypes.ItemClick:
         case useCombobox.stateChangeTypes.InputBlur:
           if (selectedItem) {
             setInputValue('')
-            propsMultipleSelection.addSelectedItem(selectedItem)
+            addSelectedItem(selectedItem)
           }
+          break
+        default:
           break
       }
     }
   })
 
-  function getFilteredItems() {
-    return (
-      items &&
-      items.filter(
-        item =>
-          inputValue !== undefined &&
-          propsMultipleSelection.selectedItems.indexOf(item) < 0 &&
-          item.name.toLowerCase().startsWith(inputValue.toLowerCase())
-      )
-    )
-  }
-
-  function clear() {
-    propsMultipleSelection.selectedItems.forEach(item => {
-      propsMultipleSelection.removeSelectedItem(item)
-    })
-  }
-
-  function filterItems(filter) {
+  const filterItems = filter => {
     if (filter.clear) {
       clear()
     }
     if (filter.allItems) {
       clear()
       items.forEach(item => {
-        propsMultipleSelection.addSelectedItem(item)
+        addSelectedItem(item)
       })
     }
     if (filter.items) {
       clear()
       filter.items.forEach((_, index) => {
-        propsMultipleSelection.addSelectedItem(items[index])
+        addSelectedItem(items[index])
       })
     }
   }
 
   return (
-    <MultiSelectStyled
-      position='relative'
-      maxWidth={maxWidth}
-      data-testid='multiselect-static'
-      {...props}
-    >
-      <ContainerInput
-        backgroundColor='white'
-        borderRadius={4}
-        display='flex'
-        flexDirection='row'
-        onClick={() => {
-          inputRef.current.focus()
-        }}
-        border='1px solid #dedede'
-        refBox={propsCombobox.getComboboxProps().ref}
+    <Flex flexDirection='column' flex={1}>
+      <MultiSelectStyled
+        position='relative'
+        maxWidth={maxWidth}
+        data-testid='multiselect-static'
+        {...props}
       >
-        {propsMultipleSelection.selectedItems
-          .slice(0, itemLimit)
-          .map((selectedItem, index) => (
+        <ContainerInput
+          backgroundColor='white'
+          borderRadius={4}
+          display='flex'
+          flexDirection='row'
+          errorForm={errorForm}
+          onClick={() => {
+            inputRef.current.focus()
+          }}
+          refBox={getComboboxProps().ref}
+        >
+          {selectedItems.slice(0, itemLimit).map((selectedItem, index) => (
             <Flex
               py={2}
               key={`selected-item-${index}`}
@@ -242,7 +264,7 @@ export const MultiSelectStatic: React.FC<Props> = ({
               data-testid='select-selected-item'
             >
               <SelectedItem
-                {...propsMultipleSelection.getSelectedItemProps({
+                {...getSelectedItemProps({
                   selectedItem,
                   index
                 })}
@@ -254,7 +276,7 @@ export const MultiSelectStatic: React.FC<Props> = ({
               <Button
                 onClick={e => {
                   e.stopPropagation()
-                  propsMultipleSelection.removeSelectedItem(selectedItem)
+                  removeSelectedItem(selectedItem)
                 }}
                 ml={6}
               >
@@ -263,84 +285,83 @@ export const MultiSelectStatic: React.FC<Props> = ({
             </Flex>
           ))}
 
-        {propsMultipleSelection.selectedItems.length > itemLimit && (
-          <Flex
-            py={2}
-            px={4}
-            mr={3}
-            display='flex'
-            flexDirection='row'
-            alignItems='center'
-            backgroundColor='primary'
-            borderRadius='3px'
-          >
-            <Text color='white'>
-              {`+${propsMultipleSelection.selectedItems.length - itemLimit}`}
-            </Text>
-          </Flex>
-        )}
-
-        <input
-          type='text'
-          placeholder={placeholder}
-          data-testid='select-input'
-          {...propsCombobox.getInputProps(
-            propsMultipleSelection.getDropdownProps({
-              ref: inputRef,
-              preventKeyAction: propsCombobox.isOpen,
-              onFocus: () => {
-                if (!propsCombobox.isOpen) {
-                  propsCombobox.openMenu()
-                }
-              }
-            })
-          )}
-        />
-      </ContainerInput>
-
-      <Overflow
-        isOpen={propsCombobox.isOpen}
-        mt={13}
-        py={7}
-        flexDirection='column'
-        backgroundColor='white'
-        border='1px solid #dedede'
-      >
-        <ul>
-          {filters.map((filter, index) => (
-            <li
-              key={`filter-${index}`}
-              data-testid='select-filter'
-              onClick={() => filterItems(filter)}
+          {selectedItems.length > itemLimit && (
+            <Flex
+              py={2}
+              px={4}
+              mr={3}
+              display='flex'
+              flexDirection='row'
+              alignItems='center'
+              backgroundColor='primary'
+              borderRadius='3px'
             >
-              <Text cursor='pointer'>{filter.name}</Text>
-            </li>
-          ))}
-        </ul>
+              <Text color='white'>{`+${
+                selectedItems.length - itemLimit
+              }`}</Text>
+            </Flex>
+          )}
 
-        <Divider mx={5} my={4} />
-
-        <Itens>
-          <ul {...propsCombobox.getMenuProps()}>
-            {propsCombobox.isOpen &&
-              getFilteredItems().map((item, index) => (
-                <li
-                  className={
-                    propsCombobox.highlightedIndex === index
-                      ? 'highlighted'
-                      : ''
+          <input
+            type='text'
+            placeholder={placeholder}
+            data-testid='select-input'
+            {...getInputProps(
+              getDropdownProps({
+                ref: inputRef,
+                preventKeyAction: isOpen,
+                onFocus: () => {
+                  if (!isOpen) {
+                    openMenu()
                   }
-                  key={`${item}${index}`}
-                  data-testid='select-item'
-                  {...propsCombobox.getItemProps({ item, index })}
-                >
-                  {item.name}
-                </li>
-              ))}
+                }
+              })
+            )}
+          />
+        </ContainerInput>
+
+        <Overflow
+          isOpen={isOpen}
+          mt={13}
+          py={7}
+          flexDirection='column'
+          backgroundColor='white'
+          border='1px solid #dedede'
+        >
+          <ul>
+            {filters.map((filter, index) => (
+              <li
+                key={`filter-${index}`}
+                data-testid='select-filter'
+                onClick={() => filterItems(filter)}
+              >
+                <Text cursor='pointer'>{filter.name}</Text>
+              </li>
+            ))}
           </ul>
-        </Itens>
-      </Overflow>
-    </MultiSelectStyled>
+
+          <Divider mx={5} my={4} />
+
+          <Itens>
+            <ul {...getMenuProps()}>
+              {isOpen &&
+                getFilteredItems().map((item, index) => (
+                  <li
+                    className={highlightedIndex === index ? 'highlighted' : ''}
+                    key={`${item}${index}`}
+                    data-testid='select-item'
+                    {...getItemProps({ item, index })}
+                  >
+                    {item.name}
+                  </li>
+                ))}
+            </ul>
+          </Itens>
+        </Overflow>
+      </MultiSelectStyled>
+
+      {errorForm && <InputErrorMessage errorMessage={errorMessage} />}
+    </Flex>
   )
 }
 
@@ -352,5 +373,7 @@ MultiSelectStatic.propTypes = {
   value: PropTypes.array,
   isLoading: PropTypes.bool,
   placeholder: PropTypes.string,
-  itemLimit: PropTypes.number
+  itemLimit: PropTypes.number,
+  errorForm: PropTypes.bool,
+  errorMessage: PropTypes.string
 }

@@ -9,7 +9,7 @@ import { Button } from '../Button'
 import { Box } from '../Box'
 import { Text } from '../Text'
 
-import { InputErrorMessage } from './InputErrorMessage'
+import { InputErrorMessage } from '../InputErrorMessage'
 
 export interface Props {
   name?: string
