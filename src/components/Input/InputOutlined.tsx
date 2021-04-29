@@ -16,7 +16,7 @@ import { Button } from '../Button'
 import { Text } from '../Text'
 import { Box } from '../Box'
 
-import { InputErrorMessage } from './InputErrorMessage'
+import { InputErrorMessage } from '../InputErrorMessage'
 
 export interface Props
   extends InputHTMLAttributes<HTMLInputElement>,

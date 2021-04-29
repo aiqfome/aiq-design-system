@@ -41,6 +41,8 @@ export const Basic: React.FC = (): ReactElement => {
         filters={filters}
         items={items}
         isLoading={false}
+        errorForm={true}
+        errorMessage='deu ruinzão aqui'
       />
     </Flex>
   )
