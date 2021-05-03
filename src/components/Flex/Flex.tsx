@@ -1,5 +1,5 @@
 import React from 'react'
-import styled, { DefaultTheme } from 'styled-components'
+import styled, { DefaultTheme, css } from 'styled-components'
 import PropTypes from 'prop-types'
 import {
   color,
@@ -14,6 +14,7 @@ import {
   FontWeightProps,
   border,
   BorderProps,
+  shadow,
   position,
   FlexProps,
   flex,
@@ -37,6 +38,7 @@ export interface Props
     BorderProps,
     TextAlignProps {
   variant?: 'auto' | 'centralized' | 'fullCentralized'
+  isClickable?: boolean
   color?: string
   fullHeight?: boolean
   children?: any
@@ -50,7 +52,7 @@ export interface Props
   style?: any
 }
 
-const FlexStyled = styled.div`
+const FlexStyled = styled.div<Props>`
   ${space}
   ${fontSize}
   ${fontWeight}
@@ -60,25 +62,35 @@ const FlexStyled = styled.div`
   ${flexbox}
   ${flex}
   ${textAlign}
+  ${shadow}
 
   display: flex;
 
-  &.__flex-variant-centralized{
+  &.__flex-variant-centralized {
     justify-content: center;
     align-items: center;
   }
 
-  &.__flex-variant-fullCentralized{
+  &.__flex-variant-fullCentralized {
     justify-content: center;
     align-items: center;
     height: 100vh;
   }
 
-  &.__flex-fullHeight{
+  &.__flex-fullHeight {
     height: 100vh;
-  } 
+  }
 
   ${layout}
+
+  ${({ isClickable }) =>
+    isClickable &&
+    css`
+      &:active {
+        opacity: 0.5;
+        user-select: none;
+      }
+    `}
 `
 
 export const Flex = React.forwardRef<HTMLDivElement, Props>(
