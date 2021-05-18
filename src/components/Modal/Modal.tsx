@@ -243,6 +243,7 @@ export const Modal: React.FC<Props> = ({
               marginBottom='15px'
               fontWeight='semiBold'
               data-testid='modal-title'
+              textAlign='center'
             >
               {title}
             </Text>
@@ -253,21 +254,9 @@ export const Modal: React.FC<Props> = ({
               width='100%'
               marginTop={44}
               justifyContent='space-between'
+              flexDirection='row-reverse'
               {...buttonsProps}
             >
-              {cancelButton.visible && (
-                <Button
-                  palette='primary'
-                  variant='outlined'
-                  fontWeight='medium'
-                  onClick={handleCancel}
-                  data-testid='modal-button'
-                  {...cancelButton}
-                >
-                  {cancelButton.label}
-                </Button>
-              )}
-
               {okButton.visible && okButton.function ? (
                 <Button
                   palette='primary'
@@ -290,6 +279,19 @@ export const Modal: React.FC<Props> = ({
                   {...okButton}
                 >
                   {okButton.label}
+                </Button>
+              )}
+
+              {cancelButton.visible && (
+                <Button
+                  palette='primary'
+                  variant='outlined'
+                  fontWeight='medium'
+                  onClick={handleCancel}
+                  data-testid='modal-button'
+                  {...cancelButton}
+                >
+                  {cancelButton.label}
                 </Button>
               )}
             </Flex>
