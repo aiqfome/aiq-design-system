@@ -79,6 +79,7 @@ export const ButtonStyled = styled.button<Props>`
     border: none;
     background: none;
     padding: 0;
+    text-align: left;
 
     &:hover {
       text-decoration: underline;
@@ -97,7 +98,7 @@ export const ButtonStyled = styled.button<Props>`
     }
 
     &.__button-text-neutral {
-      color: ${({ theme }) => theme.colors.primary};
+      color: ${({ theme }) => theme.colors.almostBlack};
     }
   }
 
