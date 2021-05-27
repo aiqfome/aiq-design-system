@@ -24,6 +24,7 @@ export interface Props extends BoxProps {
   isFetchable?: boolean
   inputProps?: any
   defaultValue?: any
+  clearOnSelect?: boolean
 }
 
 export const Select: React.FC<Props> = ({ isFetchable, ...props }) => {
