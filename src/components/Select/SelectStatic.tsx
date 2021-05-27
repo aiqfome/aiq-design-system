@@ -25,6 +25,7 @@ export interface Props extends BoxPros {
   errorMessage?: string
   errorForm?: boolean
   inputProps?: any
+  clearOnSelect?: boolean
 }
 
 const Container = styled(Box)<Props>`
@@ -106,6 +107,7 @@ export const SelectStatic: React.FC<Props> = ({
   isLoading,
   errorMessage,
   errorForm,
+  clearOnSelect = false,
   handleSelectedItemChange = () => {
     // do nothing.
   },
@@ -137,7 +139,8 @@ export const SelectStatic: React.FC<Props> = ({
     highlightedIndex,
     getToggleButtonProps,
     openMenu,
-    getItemProps
+    getItemProps,
+    setInputValue
   } = useCombobox({
     onSelectedItemChange: handleSelectedItemChange,
     items: inputItems,
@@ -200,6 +203,12 @@ export const SelectStatic: React.FC<Props> = ({
           readOnly={!autoComplete}
           prefix={prefix}
           placeholder={placeholder}
+          {...getInputProps({
+            onClick: () => {
+              clearOnSelect && setInputValue('')
+              openMenu()
+            }
+          })}
           {...boxStyled}
         />
         {isLoading && (
@@ -243,7 +252,8 @@ SelectStatic.propTypes = {
   isLoading: PropTypes.bool,
   errorForm: PropTypes.bool,
   errorMessage: PropTypes.string,
-  inputProps: PropTypes.object
+  inputProps: PropTypes.object,
+  clearOnSelect: PropTypes.bool
 }
 
 SelectStatic.defaultProps = {
