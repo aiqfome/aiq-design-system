@@ -16,7 +16,7 @@ import { InputErrorMessage } from '../InputErrorMessage'
 type Item = {
   id: any
   name: string
-  select: string
+  select?: string
 }
 
 export interface Props {
