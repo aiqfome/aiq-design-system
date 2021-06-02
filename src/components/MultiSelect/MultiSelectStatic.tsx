@@ -15,6 +15,7 @@ import { InputErrorMessage } from '../InputErrorMessage'
 type Item = {
   id: any
   name: string
+  select: string
 }
 
 export interface Props {
@@ -270,7 +271,7 @@ export const MultiSelectStatic: React.FC<Props> = ({
                 })}
                 color='white'
               >
-                {selectedItem.name}
+                {selectedItem?.select || selectedItem?.name}
               </SelectedItem>
 
               <Button
