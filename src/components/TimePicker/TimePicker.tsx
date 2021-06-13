@@ -3,22 +3,23 @@ import PropTypes from 'prop-types'
 
 import styled from 'styled-components'
 
-import { Input } from '../Input'
 import { Box } from '../Box'
 import { Flex } from '../Flex'
+import { Input } from '../Input'
 import { TimeUnity } from './TimeUnity'
 
 export interface Props {
   value?: any
-  placeholder?: string
+  sufix?: any
   name?: string
   label?: string
-  variant?: 'outlined' | 'default'
-  onChange?: (e: any) => void
-  maxWidth?: string | number
   errorForm?: boolean
+  hasSeconds?: boolean
+  placeholder?: string
   errorMessage?: string
-  sufix?: any
+  maxWidth?: string | number
+  onChange?: (e: any) => void
+  variant?: 'outlined' | 'default'
 }
 
 interface PickerProps {
@@ -31,15 +32,16 @@ const Picker = styled(Box)<PickerProps>``
 export const TimePicker = React.forwardRef(
   <HTMLInputElement, Props>(
     {
+      name,
       value,
-      placeholder,
       label,
       sufix,
       variant,
       maxWidth,
-      name,
-      errorMessage,
       errorForm,
+      hasSeconds,
+      placeholder,
+      errorMessage,
       onChange = (e: any) => {
         console.log('input:', e)
       },
@@ -50,53 +52,92 @@ export const TimePicker = React.forwardRef(
     const [showPicker, setShowPicker] = useState(false)
     const [inputValue, setInputValue] = useState(value || '')
 
-    function applyMask(value) {
+    const applyMask = (value = '') => {
+      if (hasSeconds) {
+        return value
+          .replace(/[\D]+/g, '')
+          .replace(/(\d{2})(\d)/, '$1:$2')
+          .replace(/(\d{2})(\d)/, '$1:$2')
+          .replace(/(:\d{2})\d+?$/, '$1')
+      }
+
       return value
         .replace(/[\D]+/g, '')
         .replace(/(\d{2})(\d)/, '$1:$2')
         .replace(/(:\d{2})\d+?$/, '$1')
     }
 
-    function handleInputOnChange(e) {
-      setInputValue(applyMask(e.target.value))
-      onChange(applyMask(e.target.value))
+    const handleInputOnChange = e => {
+      const { value = '' } = e?.target || {}
+      const valueSplited = applyMask(value).split(':')
+
+      if (valueSplited.length > 0 && valueSplited[0]) {
+        const number = Number(valueSplited[0])
+        if (number > 24) valueSplited[0] = '24'
+      }
+
+      if (valueSplited.length > 1 && valueSplited[1]) {
+        const number = Number(valueSplited[1])
+        if (number > 59) valueSplited[1] = '59'
+      }
+
+      if (valueSplited.length > 2 && valueSplited[2]) {
+        const number = Number(valueSplited[2])
+        if (number > 59) valueSplited[2] = '59'
+      }
+
+      const time = valueSplited.join(':')
+
+      setInputValue(time)
+      onChange(time)
     }
 
-    function getHour() {
+    const getTime = (time = '') => {
       const valueSplited = inputValue.split(':')
-      if (valueSplited.length > 0) {
+
+      if (time === 'hour' && valueSplited.length > 0) {
         return parseInt(valueSplited[0] || 0)
       }
-      return 0
-    }
 
-    function getMin() {
-      const valueSplited = inputValue.split(':')
-      if (valueSplited.length > 1) {
+      if (time === 'min' && valueSplited.length > 1) {
         return parseInt(valueSplited[1] || 0)
       }
+
+      if (time === 'sec' && valueSplited.length > 2) {
+        return parseInt(valueSplited[2] || 0)
+      }
+
       return 0
     }
 
-    function handleOnChangeHour(hour) {
+    const handleOnChangeTime = (time = '', value = '') => {
       const valueSplited = inputValue.split(':')
-      if (valueSplited.length > 0) {
-        valueSplited[0] = hour
-        if (valueSplited.length < 2) {
-          valueSplited[1] = '00'
-        }
-        setInputValue(`${valueSplited[0]}:${valueSplited[1]}`)
-        onChange(`${valueSplited[0]}:${valueSplited[1]}`)
-      }
-    }
+      const newValues = ['00', '00', '00']
 
-    function handleOnChangeMinute(minute) {
-      const valueSplited = inputValue.split(':')
-      if (valueSplited.length > 1) {
-        valueSplited[1] = minute
-        setInputValue(`${valueSplited[0]}:${valueSplited[1]}`)
-        onChange(`${valueSplited[0]}:${valueSplited[1]}`)
+      if (valueSplited.length > 0 && valueSplited[0]) {
+        newValues[0] = valueSplited[0]
       }
+
+      if (valueSplited.length > 1 && valueSplited[1]) {
+        newValues[1] = valueSplited[1]
+      }
+
+      if (valueSplited.length > 2 && valueSplited[2]) {
+        newValues[2] = valueSplited[2]
+      }
+
+      if (time === 'hour') newValues[0] = value
+      if (time === 'min') newValues[1] = value
+      if (time === 'sec') newValues[2] = value
+
+      let formattedValue = `${newValues[0]}:${newValues[1]}`
+
+      if (hasSeconds) {
+        formattedValue = `${newValues[0]}:${newValues[1]}:${newValues[2]}`
+      }
+
+      setInputValue(formattedValue)
+      onChange(formattedValue)
     }
 
     return (
@@ -109,46 +150,58 @@ export const TimePicker = React.forwardRef(
         {...props}
       >
         <Input
-          value={inputValue}
-          variant={variant}
           name={name}
-          placeholder={placeholder}
           label={label}
-          errorMessage={errorMessage}
-          errorForm={errorForm}
-          onChange={handleInputOnChange}
-          inputRef={ref}
           sufix={sufix}
+          inputRef={ref}
+          variant={variant}
+          value={inputValue}
+          errorForm={errorForm}
+          placeholder={placeholder}
+          errorMessage={errorMessage}
+          onChange={handleInputOnChange}
         />
+
         {showPicker && (
           <Box
-            width='100%'
-            maxWidth={maxWidth}
-            position='absolute'
             top='38px'
-            backgroundColor='#fff'
             zIndex={1}
-            border='1px solid #dedede'
-            boxShadow='0px 3px 6px #00000017'
-            borderRadius='8px'
+            width='100%'
             padding='8px 16px'
+            borderRadius='8px'
+            position='absolute'
+            maxWidth={maxWidth}
+            backgroundColor='#fff'
+            border='1px solid #dedede'
             data-testid='timepicker-open'
+            boxShadow='0px 3px 6px #00000017'
           >
             <Flex flexDirection='row' justifyContent='space-between'>
               <TimeUnity
-                value={getHour()}
-                onChange={handleOnChangeHour}
-                label='hora'
+                min={0}
                 max={23}
-                min={0}
+                label='hora'
+                value={getTime('hour')}
+                onChange={value => handleOnChangeTime('hour', value)}
               />
+
               <TimeUnity
-                value={getMin()}
-                onChange={handleOnChangeMinute}
-                label='min'
-                max={59}
                 min={0}
+                max={59}
+                label='min'
+                value={getTime('min')}
+                onChange={value => handleOnChangeTime('min', value)}
               />
+
+              {hasSeconds && (
+                <TimeUnity
+                  min={0}
+                  max={59}
+                  label='segundos'
+                  value={getTime('sec')}
+                  onChange={value => handleOnChangeTime('sec', value)}
+                />
+              )}
             </Flex>
           </Box>
         )}
@@ -161,13 +214,14 @@ TimePicker.displayName = 'TimePicker'
 
 TimePicker.propTypes = {
   value: PropTypes.any,
-  variant: PropTypes.oneOf(['outlined', 'default']),
-  onChange: PropTypes.func,
-  placeholder: PropTypes.string,
-  label: PropTypes.string,
-  name: PropTypes.string,
-  maxWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  errorForm: PropTypes.bool,
   sufix: PropTypes.any,
-  errorMessage: PropTypes.string
+  name: PropTypes.string,
+  label: PropTypes.string,
+  onChange: PropTypes.func,
+  errorForm: PropTypes.bool,
+  hasSeconds: PropTypes.bool,
+  placeholder: PropTypes.string,
+  errorMessage: PropTypes.string,
+  variant: PropTypes.oneOf(['outlined', 'default']),
+  maxWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 }
