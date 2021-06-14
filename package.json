@@ -58,6 +58,7 @@
     "downshift": "^6.0.6",
     "moment": "^2.29.1",
     "rc-dropdown": "^3.2.0",
+    "rc-menu": "^9.0.11",
     "rc-tooltip": "^5.0.1",
     "react-dates": "^21.8.0",
     "react-dom": "^16.13.1",
