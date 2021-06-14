@@ -292,7 +292,7 @@ export const InputOutlined: React.FC<Props> = ({
           type={type}
           ref={inputRef}
           disabled={disabled}
-          autoComplete='off'
+          autoComplete='disabled'
           data-testid='input'
         />
         {label && <Text data-testid='input-label'>{label}</Text>}
