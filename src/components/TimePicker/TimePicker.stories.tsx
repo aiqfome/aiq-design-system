@@ -25,3 +25,9 @@ export const Outlined: React.FC = (): ReactElement => (
     <TimePicker variant='outlined' label='aiqfome' maxWidth='120px' />
   </Flex>
 )
+
+export const HasSeconds: React.FC = (): ReactElement => (
+  <Flex variant='fullCentralized'>
+    <TimePicker hasSeconds label='aiqfome' variant='outlined' />
+  </Flex>
+)
