@@ -31,3 +31,21 @@ export const HasSeconds: React.FC = (): ReactElement => (
     <TimePicker hasSeconds label='aiqfome' variant='outlined' />
   </Flex>
 )
+
+export const TypeMinSec: React.FC = (): ReactElement => (
+  <Flex variant='fullCentralized' flexDirection='column'>
+    <TimePicker type='minSec' label='aiqfome' variant='outlined' />
+
+    <TimePicker
+      type='minSec'
+      label='valor formatado'
+      variant='outlined'
+      getValue={input => {
+        const values = input.split(':')
+        if (values.length < 2) return ''
+
+        return `${values[0]}m ${values[1]}s`
+      }}
+    />
+  </Flex>
+)
