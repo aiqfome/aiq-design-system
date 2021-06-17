@@ -317,6 +317,7 @@ export const MultiSelectFetchable: React.FC<Props> = ({
                   }
                 })
               )}
+              autoComplete='disabled'
             />
           </Flex>
 
