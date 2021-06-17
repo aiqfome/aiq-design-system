@@ -264,7 +264,6 @@ export const InputOutlined: React.FC<Props> = ({
             ref={inputRef}
             name={name}
             disabled={disabled}
-            autoComplete='disabled'
             data-testid='input'
             autoComplete={nativeAutoComplete}
           />
