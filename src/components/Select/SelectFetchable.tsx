@@ -195,6 +195,7 @@ export const SelectFetchable: React.FC<Props> = ({
           readOnly={!autoComplete}
           prefix={prefix}
           placeholder={placeholder}
+          nativeAutoComplete='disabled'
           {...boxStyled}
         />
         {isLoading && (

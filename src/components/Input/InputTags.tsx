@@ -24,6 +24,7 @@ export interface Props {
   border?: any
   width?: any
   maxWidth?: any
+  nativeAutoComplete?: 'on' | 'disabled'
 }
 
 const InputStyled = styled.input<Props>`
@@ -87,6 +88,7 @@ export const InputTags: React.FC<Props> = ({
   maxWidth,
   value,
   onChange,
+  nativeAutoComplete,
   ...props
 }) => {
   const [inputValue, setInputValue] = useState<string>('')
@@ -151,6 +153,7 @@ export const InputTags: React.FC<Props> = ({
         type={type}
         onChange={e => setInputValue(e.target.value)}
         value={inputValue}
+        autoComplete={nativeAutoComplete}
         {...boxStyled}
       />
 
@@ -171,5 +174,6 @@ InputTags.propTypes = {
   backgroundColor: PropTypes.any,
   border: PropTypes.any,
   width: PropTypes.any,
-  maxWidth: PropTypes.any
+  maxWidth: PropTypes.any,
+  nativeAutoComplete: PropTypes.oneOf(['on', 'disabled'])
 }
