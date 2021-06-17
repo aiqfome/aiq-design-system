@@ -318,6 +318,7 @@ export const MultiSelectStatic: React.FC<Props> = ({
                 }
               })
             )}
+            autoComplete='disabled'
           />
         </ContainerInput>
 

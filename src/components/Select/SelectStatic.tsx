@@ -209,6 +209,7 @@ export const SelectStatic: React.FC<Props> = ({
               openMenu()
             }
           })}
+          nativeAutoComplete='disabled'
           {...boxStyled}
         />
         {isLoading && (

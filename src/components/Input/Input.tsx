@@ -27,6 +27,7 @@ export interface Props extends InputHTMLAttributes<HTMLInputElement> {
   width?: any
   maxWidth?: any
   mask?: string
+  nativeAutoComplete?: 'on' | 'disabled'
 }
 
 export const Input: React.FC<Props> = ({
@@ -44,6 +45,7 @@ export const Input: React.FC<Props> = ({
   mask,
   onChange,
   disabled,
+  nativeAutoComplete = 'on',
   ...props
 }) => {
   if (variant === 'outlined') {
@@ -67,6 +69,7 @@ export const Input: React.FC<Props> = ({
               data-testid='input-container'
               placeholder={placeholder}
               disabled={disabled}
+              nativeAutoComplete={nativeAutoComplete}
               {...props}
               {...inputProps}
             />
@@ -89,6 +92,7 @@ export const Input: React.FC<Props> = ({
         placeholder={placeholder}
         onChange={onChange}
         disabled={disabled}
+        nativeAutoComplete={nativeAutoComplete}
         {...props}
       />
     )
@@ -105,6 +109,7 @@ export const Input: React.FC<Props> = ({
         placeholder={placeholder}
         onChange={onChange}
         data-testid='input-container'
+        nativeAutoComplete={nativeAutoComplete}
         {...props}
       />
     )
@@ -129,6 +134,7 @@ export const Input: React.FC<Props> = ({
             prefix={prefix}
             placeholder={placeholder}
             data-testid='input-container'
+            nativeAutoComplete={nativeAutoComplete}
             {...inputProps}
             {...props}
           />
@@ -151,6 +157,7 @@ export const Input: React.FC<Props> = ({
       onChange={onChange}
       data-testid='input-container'
       disabled={disabled}
+      nativeAutoComplete={nativeAutoComplete}
       {...props}
     />
   )
@@ -177,5 +184,6 @@ Input.propTypes = {
   maxWidth: PropTypes.any,
   mask: PropTypes.string,
   onChange: PropTypes.func,
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
+  nativeAutoComplete: PropTypes.oneOf(['on', 'disabled'])
 }

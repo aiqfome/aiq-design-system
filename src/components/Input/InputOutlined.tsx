@@ -35,6 +35,8 @@ export interface Props
 
   maxWidth?: number | string
   backgroundColor?: number | string
+
+  nativeAutoComplete?: 'on' | 'disabled'
 }
 
 const Container = styled(Box)`
@@ -186,6 +188,7 @@ export const InputOutlined: React.FC<Props> = ({
   marginLeft,
   containerProps,
   disabled,
+  nativeAutoComplete,
   ...props
 }) => {
   const [showPassword, setShowPassword] = useState(false)
@@ -219,6 +222,7 @@ export const InputOutlined: React.FC<Props> = ({
             name={name}
             disabled={disabled}
             data-testid='input'
+            autoComplete={nativeAutoComplete}
           />
           {label && <Text data-testid='input-label'>{label}</Text>}
 
@@ -260,7 +264,9 @@ export const InputOutlined: React.FC<Props> = ({
             ref={inputRef}
             name={name}
             disabled={disabled}
+            autoComplete='disabled'
             data-testid='input'
+            autoComplete={nativeAutoComplete}
           />
           {label && <Text data-testid='input-label'>{label}</Text>}
 
@@ -292,8 +298,8 @@ export const InputOutlined: React.FC<Props> = ({
           type={type}
           ref={inputRef}
           disabled={disabled}
-          autoComplete='disabled'
           data-testid='input'
+          autoComplete={nativeAutoComplete}
         />
         {label && <Text data-testid='input-label'>{label}</Text>}
       </LabelStyled>
@@ -318,5 +324,6 @@ InputOutlined.propTypes = {
   marginLeft: PropTypes.any,
   marginRight: PropTypes.any,
   containerProps: PropTypes.any,
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
+  nativeAutoComplete: PropTypes.oneOf(['on', 'disabled'])
 }

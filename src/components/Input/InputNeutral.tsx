@@ -28,6 +28,7 @@ export interface Props extends InputHTMLAttributes<HTMLInputElement> {
   border?: any
   width?: any
   maxWidth?: any
+  nativeAutoComplete?: 'on' | 'disabled'
 }
 
 const InputStyled = styled.input<Props>`
@@ -105,8 +106,20 @@ const InputPrefixed = styled.input<Props>`
   margin-left: 16px;
 `
 
-const Input: React.FC<Props> = ({ inputRef, value, ...props }) => {
-  return <InputStyled value={value} ref={inputRef} {...props} />
+const Input: React.FC<Props> = ({
+  inputRef,
+  value,
+  nativeAutoComplete,
+  ...props
+}) => {
+  return (
+    <InputStyled
+      value={value}
+      ref={inputRef}
+      autoComplete={nativeAutoComplete}
+      {...props}
+    />
+  )
 }
 
 export const InputNeutral: React.FC<Props> = ({
@@ -120,6 +133,7 @@ export const InputNeutral: React.FC<Props> = ({
   value,
   placeholder,
   containerProps,
+  nativeAutoComplete,
   ...props
 }) => {
   const [inputSelected, setInputSelected] = useState(false)
@@ -148,6 +162,7 @@ export const InputNeutral: React.FC<Props> = ({
             placeholder={placeholder}
             type={type}
             value={value}
+            autoComplete={nativeAutoComplete}
             {...props}
           />
           {sufix}
@@ -173,6 +188,7 @@ export const InputNeutral: React.FC<Props> = ({
             placeholder={placeholder}
             type={type}
             value={value}
+            autoComplete={nativeAutoComplete}
             {...props}
           />
         </ContainerSufix>
@@ -197,6 +213,7 @@ export const InputNeutral: React.FC<Props> = ({
             placeholder={placeholder}
             type={passwordVisible ? 'text' : 'password'}
             value={value}
+            autoComplete={nativeAutoComplete}
           />
           <Button
             palette='primary'
@@ -229,6 +246,7 @@ export const InputNeutral: React.FC<Props> = ({
         value={value}
         {...props}
         data-testid='input'
+        nativeAutoComplete={nativeAutoComplete}
       />
 
       {errorForm && <InputErrorMessage errorMessage={errorMessage} />}
@@ -238,7 +256,8 @@ export const InputNeutral: React.FC<Props> = ({
 
 Input.propTypes = {
   inputRef: PropTypes.any,
-  value: PropTypes.string
+  value: PropTypes.string,
+  nativeAutoComplete: PropTypes.oneOf(['on', 'disabled'])
 }
 
 InputNeutral.propTypes = {
@@ -253,6 +272,7 @@ InputNeutral.propTypes = {
   placeholder: PropTypes.string,
   containerProps: PropTypes.object,
   boxProps: PropTypes.object,
+  nativeAutoComplete: PropTypes.oneOf(['on', 'disabled']),
 
   backgroundColor: PropTypes.any,
   border: PropTypes.any,
