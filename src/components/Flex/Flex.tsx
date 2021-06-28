@@ -87,7 +87,7 @@ const FlexStyled = styled.div<Props>`
     isClickable &&
     css`
       &:active {
-        opacity: 0.5;
+        opacity: 0.8;
         user-select: none;
       }
     `}
