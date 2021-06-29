@@ -1,11 +1,11 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
 import styled, { css } from 'styled-components'
 import { space } from 'styled-system'
 
 export interface Props {
-  size?: 'small' | 'medium' | 'large' | undefined
+  size?: 'small' | 'medium' | 'large'
+  color?: string
 }
 
 const loadingSizes: { [index: string]: any } = {
@@ -14,12 +14,12 @@ const loadingSizes: { [index: string]: any } = {
     height: 15px;
   `,
   medium: css`
-    width: 15px;
-    height: 15px;
+    width: 25px;
+    height: 25px;
   `,
   large: css`
-    width: 15px;
-    height: 15px;
+    width: 35px;
+    height: 35px;
   `
 }
 
@@ -35,7 +35,8 @@ const LoadingSpinner = styled.svg.attrs({
 
   circle {
     fill: none;
-    stroke: ${({ theme }) => theme.colors.primary};
+    stroke: ${({ theme, color }) =>
+      color ? theme.colors[color] : theme.colors.primary};
     stroke-width: 4;
     stroke-dasharray: 1, 200;
     stroke-dashoffset: 0;
@@ -63,10 +64,6 @@ const LoadingSpinner = styled.svg.attrs({
   }
 `
 
-export const Loading: React.FC<Props> = ({ size = 'medium' }) => {
-  return <LoadingSpinner size={size} />
-}
-
-Loading.propTypes = {
-  size: PropTypes.oneOf(['small', 'medium', 'large'])
+export const Loading: React.FC<Props> = ({ size, color }) => {
+  return <LoadingSpinner size={size} color={color} />
 }
