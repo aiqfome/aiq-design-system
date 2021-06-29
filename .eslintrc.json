@@ -21,6 +21,7 @@
   "plugins": ["prettier", "react", "@typescript-eslint", "react-hooks"],
   "rules": {
     "prettier/prettier": "error",
+    "react/prop-types": "off",
     "import/extensions": [
       "error",
       "ignorePackages",
