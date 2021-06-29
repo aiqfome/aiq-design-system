@@ -1,9 +1,9 @@
 import React from 'react'
 
 import styled, { css } from 'styled-components'
-import { space } from 'styled-system'
+import { space, SpaceProps } from 'styled-system'
 
-export interface Props {
+export interface Props extends SpaceProps {
   size?: 'small' | 'medium' | 'large'
   color?: string
 }
@@ -28,6 +28,7 @@ const LoadingSpinner = styled.svg.attrs({
   children: <circle cx='50' cy='50' r='20' />
 })<Props>`
   ${space}
+
   ${({ size }) => loadingSizes[size || 'medium']}
 
   transform-origin: center;
