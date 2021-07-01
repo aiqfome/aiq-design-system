@@ -57,6 +57,7 @@ const BackgroundModal = styled(Flex)<BackgroundModalProps>`
   top: 0;
   left: 0;
   width: 100%;
+  overflow: auto;
   background: ${({ theme }) => theme.colors.black}30;
 
   &.hide {
@@ -117,7 +118,7 @@ const ModalStyled = styled(Flex)<ModalStyledProps>`
   border-radius: 12px;
   background: ${({ theme }) => theme.colors.white};
   width: 100%;
-  margin: auto;
+  margin: 20px auto;
 
   ${({ variantModal }) => modalVariants[variantModal || 'medium']}
 
@@ -197,6 +198,18 @@ export const Modal: React.FC<Props> = ({
 
   useEffect(() => {
     if (show) setIsMounted(show)
+  }, [show])
+
+  useEffect(() => {
+    if (show) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'auto'
+    }
+
+    return () => {
+      document.body.style.overflow = 'auto'
+    }
   }, [show])
 
   function handleOk(e) {
