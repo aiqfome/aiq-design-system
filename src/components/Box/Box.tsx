@@ -35,6 +35,7 @@ export interface Props
   color?: string
   children?: any
   refBox?: any
+  onClick?: any
   className?: string
 }
 

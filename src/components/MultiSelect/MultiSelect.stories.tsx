@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react'
+import React, { ReactElement, useState } from 'react'
 
 import { Flex } from '../Flex'
 
@@ -28,20 +28,22 @@ const filters = [
 ]
 
 export const Basic: React.FC = (): ReactElement => {
-  function handleChangeMultiSelect(event) {
-    console.log(event)
+  const [value, setValue] = useState([items[0]])
+
+  function handleChangeMultiSelect({ selectedItems }) {
+    setValue(selectedItems)
   }
 
   return (
     <Flex variant='fullCentralized'>
       <MultiSelect
-        maxWidth='800px'
-        value={[items[0]]}
+        value={value}
         onChange={handleChangeMultiSelect}
         filters={filters}
         items={items}
         isLoading={false}
-        errorForm={true}
+        placeholder='cidades do aiq'
+        errorForm={value.length === 0}
         errorMessage='deu ruinzão aqui'
       />
     </Flex>

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
 
 import styled from 'styled-components'
@@ -31,20 +31,27 @@ export interface Props {
   items: Item[]
   isLoading?: boolean
   isFetchable?: boolean
-  itemLimit?: number
   placeholder?: string
   errorMessage?: string
   errorForm?: boolean
+  isDependent?: boolean
+  emptyMessage?: string
+  dependentMessage?: string
 }
 
 const MultiSelectStyled = styled(Box)`
   &:hover {
     cursor: text;
   }
+
+  & input::placeholder {
+    color: ${({ theme }) => theme.colors.grey};
+    font-size: ${({ theme }) => theme.fontSizes.medium};
+  }
 `
 
 interface ContainerInputProps {
-  onClick: () => void
+  ref?: any
   errorForm?: boolean
 }
 
@@ -54,7 +61,6 @@ const ContainerInput = styled(Box)<ContainerInputProps>`
   overflow: auto;
   align-items: center;
   padding: 4px 10px;
-  justify-content: space-between;
   border: ${({ errorForm, theme }) =>
     errorForm
       ? `1px solid ${theme.colors.error}`
@@ -91,8 +97,8 @@ interface OverflowProps {
 
 const Overflow = styled(Flex)<OverflowProps>`
   position: absolute;
-  width: 100%;
-  border-top: none;
+  min-width: 100%;
+  width: max-content;
   z-index: 99;
 
   display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
@@ -135,27 +141,70 @@ export const MultiSelectStatic: React.FC<Props> = ({
   onChange,
   value = [],
   placeholder,
-  itemLimit = 2,
   errorForm,
   errorMessage,
+  emptyMessage = 'item não encontrado ou já adicionado',
+  isDependent = false,
+  dependentMessage = '',
   ...props
 }) => {
   const [inputValue, setInputValue] = useState<string>('')
+  const [refBadges, setRefBadges] = useState<HTMLDivElement | null>(null)
+  const [itemLimit, setItemLimit] = useState<number | undefined>(undefined)
+  const [refContainer, setRefContainer] = useState<HTMLDivElement | null>(null)
 
   const inputRef = useRef(document.createElement('input'))
 
   const {
     getSelectedItemProps,
     getDropdownProps,
-    addSelectedItem,
-    removeSelectedItem,
-    selectedItems
+    selectedItems = []
   } = useMultipleSelection({
+    selectedItems: value,
     initialSelectedItems: value,
     onSelectedItemsChange: event => {
       onChange && onChange(event)
     }
   })
+
+  useEffect(() => {
+    const resizeListener = () => setItemLimit(undefined)
+
+    window.addEventListener('resize', resizeListener)
+    return () => {
+      window.removeEventListener('resize', resizeListener)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (refBadges !== null && refContainer !== null) {
+      if (selectedItems.length > 1) {
+        const containerSize = refContainer.offsetWidth
+
+        let total = 0
+        let limit = -1
+        ;(refBadges.childNodes as NodeListOf<HTMLDivElement>).forEach(
+          (badge: HTMLDivElement, index) => {
+            total = total + badge?.offsetWidth
+            if (total >= containerSize * 0.9 - 60 && limit === -1) {
+              limit = index
+              return false
+            }
+          }
+        )
+
+        if (containerSize * 0.9 - 60 <= total && !itemLimit && limit >= 0) {
+          if (itemLimit !== limit) setItemLimit(limit)
+        }
+      }
+    }
+  }, [
+    refBadges,
+    itemLimit,
+    refContainer,
+    selectedItems,
+    refContainer?.offsetWidth
+  ])
 
   const getFilteredItems = () =>
     items.filter(
@@ -165,9 +214,8 @@ export const MultiSelectStatic: React.FC<Props> = ({
     )
 
   const clear = () => {
-    selectedItems.forEach(item => {
-      removeSelectedItem(item)
-    })
+    setItemLimit(undefined)
+    onChange({ selectedItems: [] })
   }
 
   const {
@@ -205,7 +253,9 @@ export const MultiSelectStatic: React.FC<Props> = ({
         case useCombobox.stateChangeTypes.InputBlur:
           if (selectedItem) {
             setInputValue('')
-            addSelectedItem(selectedItem)
+            onChange({
+              selectedItems: [...selectedItems, selectedItem]
+            })
           }
           break
         default:
@@ -219,15 +269,13 @@ export const MultiSelectStatic: React.FC<Props> = ({
       clear()
     }
     if (filter.allItems) {
-      clear()
-      items.forEach(item => {
-        addSelectedItem(item)
+      onChange({
+        selectedItems: items
       })
     }
     if (filter.items) {
-      clear()
-      filter.items.forEach((_, index) => {
-        addSelectedItem(items[index])
+      onChange({
+        selectedItems: items.filter((_, i) => filter?.items?.includes(i))
       })
     }
   }
@@ -238,6 +286,7 @@ export const MultiSelectStatic: React.FC<Props> = ({
         position='relative'
         maxWidth={maxWidth}
         data-testid='multiselect-static'
+        onClick={() => inputRef.current.focus()}
         {...props}
       >
         <ContainerInput
@@ -246,67 +295,80 @@ export const MultiSelectStatic: React.FC<Props> = ({
           display='flex'
           flexDirection='row'
           errorForm={errorForm}
-          onClick={() => {
-            inputRef.current.focus()
+          refBox={el => {
+            getComboboxProps()?.ref(el)
+            setRefContainer(el || null)
           }}
-          refBox={getComboboxProps().ref}
         >
-          {selectedItems.slice(0, itemLimit).map((selectedItem, index) => (
-            <Flex
-              py={2}
-              key={`selected-item-${index}`}
-              px={4}
-              mr={3}
-              display='flex'
-              flexDirection='row'
-              alignItems='center'
-              backgroundColor='primary'
-              borderRadius='3px'
-              data-testid='select-selected-item'
-            >
-              <SelectedItem
-                {...getSelectedItemProps({
-                  selectedItem,
-                  index
-                })}
-                color='white'
+          <Flex
+            maxWidth='90%'
+            overflow='hidden'
+            ref={el => setRefBadges(el || null)}
+          >
+            {selectedItems.slice(0, itemLimit).map((selectedItem, index) => (
+              <Flex
+                minWidth={selectedItems.length === 1 ? 0 : undefined}
+                py={2}
+                key={`selected-item-${index}`}
+                px={4}
+                mr={3}
+                display='flex'
+                flexDirection='row'
+                alignItems='center'
+                backgroundColor='primary'
+                borderRadius='3px'
+                data-testid='select-selected-item'
               >
-                {selectedItem?.select || selectedItem?.name}
-              </SelectedItem>
+                <SelectedItem
+                  truncate
+                  {...getSelectedItemProps({
+                    selectedItem,
+                    index
+                  })}
+                  color='white'
+                >
+                  {selectedItem?.select || selectedItem?.name}
+                </SelectedItem>
 
-              <Button
-                onClick={e => {
-                  e.stopPropagation()
-                  removeSelectedItem(selectedItem)
-                }}
-                ml={6}
+                <Button
+                  onClick={e => {
+                    e.stopPropagation()
+                    onChange({
+                      selectedItems: selectedItems.filter(
+                        e => e.id !== selectedItem.id
+                      )
+                    })
+                  }}
+                  ml={6}
+                >
+                  <MdClose color='#fff' />
+                </Button>
+              </Flex>
+            ))}
+
+            {itemLimit !== undefined && selectedItems.length > itemLimit && (
+              <Flex
+                py={2}
+                px={4}
+                mr={3}
+                display='flex'
+                flexDirection='row'
+                alignItems='center'
+                backgroundColor='primary'
+                borderRadius='3px'
               >
-                <MdClose color='#fff' />
-              </Button>
-            </Flex>
-          ))}
-
-          {selectedItems.length > itemLimit && (
-            <Flex
-              py={2}
-              px={4}
-              mr={3}
-              display='flex'
-              flexDirection='row'
-              alignItems='center'
-              backgroundColor='primary'
-              borderRadius='3px'
-            >
-              <Text color='white'>{`+${
-                selectedItems.length - itemLimit
-              }`}</Text>
-            </Flex>
-          )}
+                <Text color='white'>{`+${
+                  selectedItems.length - itemLimit
+                }`}</Text>
+              </Flex>
+            )}
+          </Flex>
 
           <input
             type='text'
             placeholder={placeholder}
             data-testid='select-input'
+            style={{ width: '100%', flex: 1, paddingLeft: '5px' }}
             {...getInputProps(
               getDropdownProps({
                 ref: inputRef,
@@ -330,33 +392,48 @@ export const MultiSelectStatic: React.FC<Props> = ({
           backgroundColor='white'
           border='1px solid #dedede'
         >
-          <ul>
-            {filters.map((filter, index) => (
-              <li
-                key={`filter-${index}`}
-                data-testid='select-filter'
-                onClick={() => filterItems(filter)}
-              >
-                <Text cursor='pointer'>{filter.name}</Text>
-              </li>
-            ))}
-          </ul>
+          {!isDependent && (
+            <>
+              <ul>
+                {filters.map((filter, index) => (
+                  <li
+                    key={`filter-${index}`}
+                    data-testid='select-filter'
+                    onClick={() => filterItems(filter)}
+                  >
+                    <Text cursor='pointer'>{filter.name}</Text>
+                  </li>
+                ))}
+              </ul>
 
-          <Divider mx={5} my={4} />
+              <Divider mx={5} my={4} />
+            </>
+          )}
 
           <Itens>
             <ul {...getMenuProps()}>
               {isOpen &&
+                !isDependent &&
                 getFilteredItems().map((item, index) => (
                   <li
                     className={highlightedIndex === index ? 'highlighted' : ''}
                     key={`${item}${index}`}
                     data-testid='select-item'
                     {...getItemProps({ item, index })}
+                    onClick={e => {
+                      getItemProps({ item, index }).onClick(e)
+                      setItemLimit(undefined)
+                    }}
                   >
                     {item.name}
                   </li>
                 ))}
+
+              {isDependent && <li>{dependentMessage}</li>}
+
+              {isOpen && !isDependent && getFilteredItems().length === 0 && (
+                <li>{emptyMessage}</li>
+              )}
             </ul>
           </Itens>
         </Overflow>
@@ -375,7 +452,9 @@ MultiSelectStatic.propTypes = {
   value: PropTypes.array,
   isLoading: PropTypes.bool,
   placeholder: PropTypes.string,
-  itemLimit: PropTypes.number,
   errorForm: PropTypes.bool,
-  errorMessage: PropTypes.string
+  errorMessage: PropTypes.string,
+  isDependent: PropTypes.bool,
+  emptyMessage: PropTypes.string,
+  dependentMessage: PropTypes.string
 }

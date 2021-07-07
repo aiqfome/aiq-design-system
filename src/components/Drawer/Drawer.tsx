@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect } from 'react'
+import React, { ReactNode, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css, DefaultTheme } from 'styled-components'
 import {
@@ -101,17 +101,20 @@ export const Drawer: React.FC<Props> = ({
   children,
   ...props
 }) => {
+  const [bodyOverflow, setBodyOverflow] = useState(false)
+
   useEffect(() => {
     if (opened) {
       document.body.style.overflow = 'hidden'
+      setBodyOverflow(true)
     } else {
-      document.body.style.overflow = 'auto'
+      if (bodyOverflow) document.body.style.overflow = 'auto'
     }
 
     return () => {
       document.body.style.overflow = 'auto'
     }
-  }, [opened])
+  }, [opened, bodyOverflow])
 
   return (
     <>
