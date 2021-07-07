@@ -10,7 +10,7 @@ export default {
 }
 
 const items = [
-  { id: 0, name: 'Maringá nome granfe demais' },
+  { id: 0, name: 'Maringá' },
   { id: 1, name: 'Guarapuava' },
   { id: 2, name: 'São Paulo' },
   { id: 3, name: 'Curitiba' },
