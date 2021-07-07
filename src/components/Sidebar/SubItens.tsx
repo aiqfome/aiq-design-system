@@ -129,7 +129,7 @@ const SubItensStyled = styled(Flex)<Props>`
 
               ul {
                 overflow-x: hidden;
-                overflow-y: scroll;
+                overflow-y: auto;
               }
 
               ul::-webkit-scrollbar {

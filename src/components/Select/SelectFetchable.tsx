@@ -25,7 +25,11 @@ export interface Props extends BoxPros {
   errorMessage?: string
   errorForm?: boolean
   onChange?: any
+  loadingMessage?: string
+  emptyMessage?: string
   inputProps?: any
+  isDependent?: boolean
+  dependentMessage?: string
 }
 
 const Container = styled(Box)<Props>`
@@ -45,14 +49,14 @@ const Container = styled(Box)<Props>`
     top: ${({ variant }) => (variant === 'outlined' ? '39px' : '38px')};
     overflow: hidden;
     z-index: 1;
-    width: 100%;
+    min-width: 100%;
+    width: max-content;
     padding: 0;
     margin: 0;
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
     max-height: 300px;
-    overflow-y: scroll;
-    width: inherit;
+    overflow-y: auto;
 
     li {
       cursor: pointer;
@@ -105,6 +109,10 @@ export const SelectFetchable: React.FC<Props> = ({
   errorMessage,
   errorForm,
   onChange,
+  isDependent = false,
+  dependentMessage = '',
+  loadingMessage = 'carregando...',
+  emptyMessage = 'item não encontrado',
   handleSelectedItemChange = () => {
     // do nothing.
   },
@@ -136,7 +144,8 @@ export const SelectFetchable: React.FC<Props> = ({
     highlightedIndex,
     getToggleButtonProps,
     openMenu,
-    getItemProps
+    getItemProps,
+    setInputValue
   } = useCombobox({
     onSelectedItemChange: handleSelectedItemChange,
     items: inputItems,
@@ -145,14 +154,22 @@ export const SelectFetchable: React.FC<Props> = ({
     onInputValueChange: ({ inputValue = '' }) => {
       if (autoComplete) {
         onChangeTextInput(inputValue)
-
         onChange(inputValue)
+
+        setInputItems(
+          items.filter(item => {
+            const name = typeof item === 'string' ? item : item.name
+            return name.toLowerCase().startsWith(inputValue.toLowerCase())
+          })
+        )
       }
     }
   })
 
   function handleClickInput() {
+    setInputItems(items)
     if (!isOpen) {
+      setInputValue('')
       openMenu()
     }
   }
@@ -167,6 +184,8 @@ export const SelectFetchable: React.FC<Props> = ({
       <ul {...getMenuProps()}>
         {isOpen &&
           inputItems &&
+          !isLoading &&
+          !isDependent &&
           inputItems.length > 0 &&
           inputItems.map((item, index) => (
             <Item
@@ -178,6 +197,16 @@ export const SelectFetchable: React.FC<Props> = ({
               {typeof item === 'string' ? item : item.name}
             </Item>
           ))}
+
+        {isOpen && isLoading && !isDependent && <Item>{loadingMessage}</Item>}
+
+        {isOpen &&
+          inputItems &&
+          !isLoading &&
+          !isDependent &&
+          inputItems.length === 0 && <Item>{emptyMessage}</Item>}
+
+        {isDependent && <Item>{dependentMessage}</Item>}
       </ul>
 
       <Box refBox={getComboboxProps().ref}>
@@ -240,7 +269,11 @@ SelectFetchable.propTypes = {
   errorForm: PropTypes.bool,
   errorMessage: PropTypes.string,
   onChange: PropTypes.func,
-  inputProps: PropTypes.object
+  inputProps: PropTypes.object,
+  isDependent: PropTypes.bool,
+  dependentMessage: PropTypes.string,
+  emptyMessage: PropTypes.string,
+  loadingMessage: PropTypes.string
 }
 
 SelectFetchable.defaultProps = {

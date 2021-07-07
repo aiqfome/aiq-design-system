@@ -26,6 +26,10 @@ export interface Props extends BoxPros {
   errorForm?: boolean
   inputProps?: any
   clearOnSelect?: boolean
+  loadingMessage?: string
+  emptyMessage?: string
+  isDependent?: boolean
+  dependentMessage?: string
 }
 
 const Container = styled(Box)<Props>`
@@ -46,13 +50,13 @@ const Container = styled(Box)<Props>`
     overflow: hidden;
     z-index: 1;
     min-width: 100%;
+    width: max-content;
     padding: 0;
     margin: 0;
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
     max-height: 300px;
-    overflow-y: scroll;
-    width: inherit;
+    overflow-y: auto;
 
     li {
       cursor: pointer;
@@ -108,6 +112,9 @@ export const SelectStatic: React.FC<Props> = ({
   errorMessage,
   errorForm,
   clearOnSelect = false,
+  isDependent = false,
+  dependentMessage = '',
+  emptyMessage = 'item não encontrado',
   handleSelectedItemChange = () => {
     // do nothing.
   },
@@ -139,6 +146,7 @@ export const SelectStatic: React.FC<Props> = ({
     highlightedIndex,
     getToggleButtonProps,
     openMenu,
+    // selectedItem: currentItem,
     getItemProps,
     setInputValue
   } = useCombobox({
@@ -175,6 +183,7 @@ export const SelectStatic: React.FC<Props> = ({
       <ul {...getMenuProps()}>
         {isOpen &&
           inputItems &&
+          !isDependent &&
           inputItems.length > 0 &&
           inputItems.map((item, index) => (
             <Item
@@ -186,6 +195,12 @@ export const SelectStatic: React.FC<Props> = ({
               {typeof item === 'string' ? item : item.name}
             </Item>
           ))}
+
+        {isDependent && <Item>{dependentMessage}</Item>}
+
+        {isOpen && !isDependent && inputItems && inputItems.length === 0 && (
+          <li>{emptyMessage}</li>
+        )}
       </ul>
 
       <Box refBox={getComboboxProps().ref}>
@@ -206,17 +221,20 @@ export const SelectStatic: React.FC<Props> = ({
           {...getInputProps({
             onClick: () => {
               clearOnSelect && setInputValue('')
+              setInputItems(items)
               openMenu()
             }
           })}
           nativeAutoComplete='disabled'
           {...boxStyled}
         />
+
         {isLoading && (
           <LoadingBox>
             <Loading size='small' />
           </LoadingBox>
         )}
+
         {inputItems && !isLoading && (
           <ButtonStyled
             type='button'
@@ -254,7 +272,10 @@ SelectStatic.propTypes = {
   errorForm: PropTypes.bool,
   errorMessage: PropTypes.string,
   inputProps: PropTypes.object,
-  clearOnSelect: PropTypes.bool
+  clearOnSelect: PropTypes.bool,
+  isDependent: PropTypes.bool,
+  emptyMessage: PropTypes.string,
+  dependentMessage: PropTypes.string
 }
 
 SelectStatic.defaultProps = {

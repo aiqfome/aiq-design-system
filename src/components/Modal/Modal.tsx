@@ -195,6 +195,7 @@ export const Modal: React.FC<Props> = ({
   ...props
 }) => {
   const [isMounted, setIsMounted] = useState(false)
+  const [bodyOverflow, setBodyOverflow] = useState(false)
 
   useEffect(() => {
     if (show) setIsMounted(show)
@@ -203,14 +204,15 @@ export const Modal: React.FC<Props> = ({
   useEffect(() => {
     if (show) {
       document.body.style.overflow = 'hidden'
+      setBodyOverflow(true)
     } else {
-      document.body.style.overflow = 'auto'
+      if (bodyOverflow) document.body.style.overflow = 'auto'
     }
 
     return () => {
       document.body.style.overflow = 'auto'
     }
-  }, [show])
+  }, [show, bodyOverflow])
 
   function handleOk(e) {
     if (e.preventDefault) {
