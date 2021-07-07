@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 
 import styled from 'styled-components'
@@ -32,12 +32,13 @@ export interface Props {
   value?: Item[]
   items: Item[]
   isLoading?: boolean
-  itemLimit?: number
   placeholder?: string
   loadingMessage?: string
   emptyMessage?: string
   errorMessage?: string
   errorForm?: boolean
+  isDependent?: boolean
+  dependentMessage?: string
 }
 
 interface ContainerInputProps {
@@ -48,6 +49,11 @@ const MultiSelectStyled = styled(Box)`
   &:hover {
     cursor: text;
   }
+
+  & input::placeholder {
+    color: ${({ theme }) => theme.colors.grey};
+    font-size: ${({ theme }) => theme.fontSizes.medium};
+  }
 `
 
 const ContainerInput = styled(Box)<ContainerInputProps>`
@@ -56,7 +62,6 @@ const ContainerInput = styled(Box)<ContainerInputProps>`
   overflow: auto;
   align-items: center;
   padding: 4px 10px;
-  justify-content: space-between;
   border: ${({ errorForm, theme }) =>
     errorForm
       ? `1px solid ${theme.colors.error}`
@@ -94,8 +99,8 @@ interface OverflowProps {
 
 const Overflow = styled(Flex)<OverflowProps>`
   position: absolute;
-  width: 100%;
-  border-top: none;
+  min-width: 100%;
+  width: max-content;
   z-index: 99;
 
   display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
@@ -138,28 +143,33 @@ export const MultiSelectFetchable: React.FC<Props> = ({
   onChange,
   value = [],
   isLoading = false,
-  itemLimit = 2,
   placeholder,
   loadingMessage = 'carregando...',
   emptyMessage = 'item não encontrado ou já adicionado',
   errorForm,
   errorMessage,
+  isDependent = false,
+  dependentMessage = '',
   handleSelectedItemChange = () => {
     // do nothing.
   },
   ...props
 }) => {
   const [inputValue, setInputValue] = useState<string>('')
+  const [refBadges, setRefBadges] = useState<HTMLDivElement | null>(null)
+  const [itemLimit, setItemLimit] = useState<number | undefined>(undefined)
+  const [refContainer, setRefContainer] = useState<HTMLDivElement | null>(null)
+
+  const inputRef = useRef(document.createElement('input'))
 
   const {
     getSelectedItemProps,
     getDropdownProps,
-    addSelectedItem,
-    removeSelectedItem,
-    selectedItems
+    selectedItems = []
   } = useMultipleSelection({
-    onSelectedItemsChange: handleSelectedItemChange,
-    initialSelectedItems: value
+    selectedItems: value,
+    initialSelectedItems: value,
+    onSelectedItemsChange: handleSelectedItemChange
   })
 
   const getFilteredItems = () =>
@@ -201,7 +211,9 @@ export const MultiSelectFetchable: React.FC<Props> = ({
         case useCombobox.stateChangeTypes.ItemClick:
         case useCombobox.stateChangeTypes.InputBlur:
           if (selectedItem) {
-            addSelectedItem(selectedItem)
+            handleSelectedItemChange({
+              selectedItems: [...selectedItems, selectedItem]
+            })
           }
           onChange('')
           setInputValue('')
@@ -212,10 +224,48 @@ export const MultiSelectFetchable: React.FC<Props> = ({
     }
   })
 
+  useEffect(() => {
+    const resizeListener = () => setItemLimit(undefined)
+
+    window.addEventListener('resize', resizeListener)
+    return () => {
+      window.removeEventListener('resize', resizeListener)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (refBadges !== null && refContainer !== null) {
+      if (selectedItems.length > 1) {
+        const containerSize = refContainer.offsetWidth
+
+        let total = 0
+        let limit = -1
+        ;(refBadges.childNodes as NodeListOf<HTMLDivElement>).forEach(
+          (badge: HTMLDivElement, index) => {
+            total = total + badge?.offsetWidth
+            if (total >= containerSize * 0.9 - 60 && limit === -1) {
+              limit = index
+              return false
+            }
+          }
+        )
+
+        if (containerSize * 0.9 - 60 <= total && !itemLimit) {
+          if (itemLimit !== limit) setItemLimit(limit)
+        }
+      }
+    }
+  }, [
+    refBadges,
+    itemLimit,
+    refContainer,
+    selectedItems,
+    refContainer?.offsetWidth
+  ])
+
   const clear = () => {
-    selectedItems.forEach(item => {
-      removeSelectedItem(item)
-    })
+    setItemLimit(undefined)
+    handleSelectedItemChange({ selectedItems: [] })
   }
 
   const filterItems = filter => {
@@ -223,15 +273,13 @@ export const MultiSelectFetchable: React.FC<Props> = ({
       clear()
     }
     if (filter.allItems) {
-      clear()
-      items.forEach(item => {
-        addSelectedItem(item)
+      handleSelectedItemChange({
+        selectedItems: items
       })
     }
     if (filter.items) {
-      clear()
-      filter.items.forEach((_, index) => {
-        addSelectedItem(items[index])
+      handleSelectedItemChange({
+        selectedItems: items.filter((_, i) => filter?.items?.includes(i))
       })
     }
   }
@@ -242,6 +290,7 @@ export const MultiSelectFetchable: React.FC<Props> = ({
         position='relative'
         maxWidth={maxWidth}
         data-testid='multiselect-fechable'
+        onClick={() => inputRef.current.focus()}
         {...props}
       >
         <ContainerInput
@@ -250,12 +299,20 @@ export const MultiSelectFetchable: React.FC<Props> = ({
           display='flex'
           flexDirection='row'
           errorForm={errorForm}
-          refBox={getComboboxProps().ref}
+          refBox={el => {
+            getComboboxProps()?.ref(el)
+            setRefContainer(el || null)
+          }}
         >
-          <Flex overflow='hidden' flex={1}>
+          <Flex
+            maxWidth='90%'
+            overflow='hidden'
+            ref={el => setRefBadges(el || null)}
+          >
             {selectedItems.slice(0, itemLimit).map((selectedItem, index) => (
               <Flex
                 py={2}
+                minWidth={selectedItems.length === 1 ? 0 : undefined}
                 key={`selected-item-${index}`}
                 px={4}
                 mr={3}
@@ -266,6 +323,7 @@ export const MultiSelectFetchable: React.FC<Props> = ({
                 borderRadius='3px'
               >
                 <SelectedItem
+                  truncate
                   {...getSelectedItemProps({
                     selectedItem,
                     index
@@ -278,7 +336,11 @@ export const MultiSelectFetchable: React.FC<Props> = ({
                 <Button
                   onClick={e => {
                     e.stopPropagation()
-                    removeSelectedItem(selectedItem)
+                    handleSelectedItemChange({
+                      selectedItems: selectedItems.filter(
+                        e => e.id !== selectedItem.id
+                      )
+                    })
                   }}
                   ml={6}
                 >
@@ -287,7 +349,7 @@ export const MultiSelectFetchable: React.FC<Props> = ({
               </Flex>
             ))}
 
-            {selectedItems.length > itemLimit && (
+            {itemLimit !== undefined && selectedItems.length > itemLimit && (
               <Flex
                 py={2}
                 px={4}
@@ -303,23 +365,25 @@ export const MultiSelectFetchable: React.FC<Props> = ({
                 </Text>
               </Flex>
             )}
-
-            <input
-              placeholder={placeholder}
-              type='text'
-              {...getInputProps(
-                getDropdownProps({
-                  preventKeyAction: isOpen,
-                  onFocus: () => {
-                    if (!isOpen) {
-                      openMenu()
-                    }
-                  }
-                })
-              )}
-              autoComplete='disabled'
-            />
           </Flex>
+
+          <input
+            type='text'
+            placeholder={placeholder}
+            style={{ width: '100%', flex: 1, paddingLeft: '5px' }}
+            {...getInputProps(
+              getDropdownProps({
+                ref: inputRef,
+                preventKeyAction: isOpen,
+                onFocus: () => {
+                  if (!isOpen) {
+                    openMenu()
+                  }
+                }
+              })
+            )}
+            autoComplete='disabled'
+          />
 
           {isLoading && <Loading size='small' />}
         </ContainerInput>
@@ -332,34 +396,49 @@ export const MultiSelectFetchable: React.FC<Props> = ({
           backgroundColor='white'
           border='1px solid #dedede'
         >
-          <ul>
-            {filters.map((filter, index) => (
-              <li key={`filter-${index}`} onClick={() => filterItems(filter)}>
-                <Text cursor='pointer'>{filter.name}</Text>
-              </li>
-            ))}
-          </ul>
-          <Divider mx={5} my={4} />
+          {!isDependent && (
+            <>
+              <ul>
+                {filters.map((filter, index) => (
+                  <li
+                    key={`filter-${index}`}
+                    onClick={() => filterItems(filter)}
+                  >
+                    <Text cursor='pointer'>{filter.name}</Text>
+                  </li>
+                ))}
+              </ul>
+
+              <Divider mx={5} my={4} />
+            </>
+          )}
 
           <Itens>
             <ul {...getMenuProps()}>
               {isOpen &&
+                !isDependent &&
                 !isLoading &&
                 getFilteredItems().map((item, index) => (
                   <li
                     className={highlightedIndex === index ? 'highlighted' : ''}
                     key={`${item}${index}`}
-                    {...getItemProps({ item, index })}
+                    onClick={e => {
+                      getItemProps({ item, index }).onClick(e)
+                      setItemLimit(undefined)
+                    }}
                   >
                     {item.name}
                   </li>
                 ))}
 
-              {isOpen && isLoading && <li>{loadingMessage}</li>}
+              {isDependent && <li>{dependentMessage}</li>}
 
-              {isOpen && !isLoading && getFilteredItems().length === 0 && (
-                <li>{emptyMessage}</li>
-              )}
+              {isOpen && isLoading && !isDependent && <li>{loadingMessage}</li>}
+
+              {isOpen &&
+                !isLoading &&
+                !isDependent &&
+                getFilteredItems().length === 0 && <li>{emptyMessage}</li>}
             </ul>
           </Itens>
         </Overflow>
@@ -377,11 +456,12 @@ MultiSelectFetchable.propTypes = {
   onChange: PropTypes.func,
   value: PropTypes.array,
   isLoading: PropTypes.bool,
-  itemLimit: PropTypes.number,
   placeholder: PropTypes.string,
   handleSelectedItemChange: PropTypes.func,
   loadingMessage: PropTypes.string,
   emptyMessage: PropTypes.string,
   errorForm: PropTypes.bool,
-  errorMessage: PropTypes.string
+  errorMessage: PropTypes.string,
+  isDependent: PropTypes.bool,
+  dependentMessage: PropTypes.string
 }

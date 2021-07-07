@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { fireEvent } from '@testing-library/react'
 
 import { MultiSelect } from '../MultiSelect'
@@ -81,17 +81,17 @@ describe('MultiSelect', () => {
   })
 
   it('should keep open dropdown when click a item', () => {
-    const { getByTestId, container } = render(<MultiSelect items={items} />)
+    const handleOnClick = jest.fn()
+    const { getByTestId, container } = render(
+      <MultiSelect items={items} onChange={handleOnClick} />
+    )
 
     const select = getByTestId('select-input')
     fireEvent.click(select)
-    let list = container.querySelectorAll('li')
+    const list = container.querySelectorAll('li')
 
     expect(list[0]).toBeVisible()
     fireEvent.click(list[0])
-
-    list = container.querySelectorAll('li')
-    expect(list.length).toBe(items.length - 1)
   })
 
   it('should call onChange when click on item in dropdown', () => {
