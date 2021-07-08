@@ -105,14 +105,18 @@ export const Drawer: React.FC<Props> = ({
 
   useEffect(() => {
     if (opened) {
-      document.body.style.overflow = 'hidden'
-      setBodyOverflow(true)
+      if (document.body.style.overflow !== 'hidden') {
+        document.body.style.overflow = 'hidden'
+        setBodyOverflow(true)
+      }
     } else {
       if (bodyOverflow) document.body.style.overflow = 'auto'
     }
 
     return () => {
-      document.body.style.overflow = 'auto'
+      if (bodyOverflow) {
+        document.body.style.overflow = 'auto'
+      }
     }
   }, [opened, bodyOverflow])
 

@@ -149,7 +149,7 @@ export const MultiSelectFetchable: React.FC<Props> = ({
   errorForm,
   errorMessage,
   isDependent = false,
-  dependentMessage = '',
+  dependentMessage = 'este campo tem alguma dependência',
   handleSelectedItemChange = () => {
     // do nothing.
   },
@@ -188,7 +188,7 @@ export const MultiSelectFetchable: React.FC<Props> = ({
     defaultHighlightedIndex: 0,
     selectedItem: null,
     itemToString: item => (item ? '' : ''),
-    items: getFilteredItems(),
+    items: isDependent ? [] : getFilteredItems(),
     stateReducer: (state, actionAndChanges) => {
       const { changes, type } = actionAndChanges
       switch (type) {
