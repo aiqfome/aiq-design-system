@@ -58,6 +58,7 @@ const BackgroundModal = styled(Flex)<BackgroundModalProps>`
   left: 0;
   width: 100%;
   overflow: auto;
+  align-items: baseline;
   background: ${({ theme }) => theme.colors.black}30;
 
   &.hide {
@@ -105,6 +106,7 @@ interface ModalStyledProps extends DefaultTheme, FlexProps {
 
 const FormStyled = styled.form<ModalStyledProps>`
   display: flex;
+  margin: auto;
   flex: 1;
 `
 
@@ -203,14 +205,18 @@ export const Modal: React.FC<Props> = ({
 
   useEffect(() => {
     if (show) {
-      document.body.style.overflow = 'hidden'
-      setBodyOverflow(true)
+      if (document.body.style.overflow !== 'hidden') {
+        document.body.style.overflow = 'hidden'
+        setBodyOverflow(true)
+      }
     } else {
       if (bodyOverflow) document.body.style.overflow = 'auto'
     }
 
     return () => {
-      document.body.style.overflow = 'auto'
+      if (bodyOverflow) {
+        document.body.style.overflow = 'auto'
+      }
     }
   }, [show, bodyOverflow])
 

@@ -110,7 +110,7 @@ export const SelectFetchable: React.FC<Props> = ({
   errorForm,
   onChange,
   isDependent = false,
-  dependentMessage = '',
+  dependentMessage = 'este campo tem alguma dependência',
   loadingMessage = 'carregando...',
   emptyMessage = 'item não encontrado',
   handleSelectedItemChange = () => {
@@ -148,7 +148,7 @@ export const SelectFetchable: React.FC<Props> = ({
     setInputValue
   } = useCombobox({
     onSelectedItemChange: handleSelectedItemChange,
-    items: inputItems,
+    items: isDependent ? [] : inputItems,
     selectedItem,
     itemToString: item => (typeof item === 'string' ? item : item.name),
     onInputValueChange: ({ inputValue = '' }) => {

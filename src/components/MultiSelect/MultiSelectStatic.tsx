@@ -145,7 +145,7 @@ export const MultiSelectStatic: React.FC<Props> = ({
   errorMessage,
   emptyMessage = 'item não encontrado ou já adicionado',
   isDependent = false,
-  dependentMessage = '',
+  dependentMessage = 'este campo tem alguma dependência',
   ...props
 }) => {
   const [inputValue, setInputValue] = useState<string>('')
@@ -230,7 +230,7 @@ export const MultiSelectStatic: React.FC<Props> = ({
     inputValue,
     defaultHighlightedIndex: 0,
     selectedItem: null,
-    items: getFilteredItems(),
+    items: isDependent ? [] : getFilteredItems(),
     stateReducer: (state, actionAndChanges) => {
       const { changes, type } = actionAndChanges
       switch (type) {
