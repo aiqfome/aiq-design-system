@@ -113,7 +113,7 @@ export const SelectStatic: React.FC<Props> = ({
   errorForm,
   clearOnSelect = false,
   isDependent = false,
-  dependentMessage = '',
+  dependentMessage = 'este campo tem alguma dependência',
   emptyMessage = 'item não encontrado',
   handleSelectedItemChange = () => {
     // do nothing.
@@ -146,12 +146,11 @@ export const SelectStatic: React.FC<Props> = ({
     highlightedIndex,
     getToggleButtonProps,
     openMenu,
-    // selectedItem: currentItem,
     getItemProps,
     setInputValue
   } = useCombobox({
     onSelectedItemChange: handleSelectedItemChange,
-    items: inputItems,
+    items: isDependent ? [] : inputItems,
     selectedItem,
     itemToString: item => (typeof item === 'string' ? item : item.name),
     onInputValueChange: ({ inputValue = '' }) => {
