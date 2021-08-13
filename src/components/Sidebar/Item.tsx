@@ -15,7 +15,9 @@ import { SubItens } from './SubItens'
 
 interface ItemProps {
   item: any
+  openItem: boolean
   sidebarOpened: boolean
+  toggleItem?: () => void
   heightScrolledToTop?: number
 }
 
@@ -70,6 +72,8 @@ const LinkStyled = styled(Link)`
 
 export const Item: React.FC<ItemProps> = ({
   item,
+  openItem,
+  toggleItem,
   sidebarOpened = false,
   heightScrolledToTop
 }) => {
@@ -151,6 +155,7 @@ export const Item: React.FC<ItemProps> = ({
       </LinkStyled>
     )
   }
+
   ItemWrapper.propTypes = {
     children: PropTypes.any
   }
@@ -169,18 +174,14 @@ export const Item: React.FC<ItemProps> = ({
         </Icon>
 
         {sidebarOpened && (
-          <Flex
-            flex={1}
-            justifyContent='space-between'
-            onClick={changeVisibilitySubItem}
-          >
+          <Flex flex={1} onClick={toggleItem} justifyContent='space-between'>
             <Flex flex={1}>
               <Text cursor='pointer' color='darkerGrey'>
                 {item.name}
               </Text>
             </Flex>
 
-            {badgeAllItens > 0 && !isOpen && (
+            {badgeAllItens > 0 && !openItem && (
               <Badge
                 backgroundColor='error'
                 color='white'
@@ -190,7 +191,7 @@ export const Item: React.FC<ItemProps> = ({
 
             {item.itens && (
               <Icon color='primary'>
-                {isOpen ? (
+                {openItem ? (
                   <MdExpandLess size={18} />
                 ) : (
                   <MdExpandMore size={18} />
@@ -205,7 +206,7 @@ export const Item: React.FC<ItemProps> = ({
         item={item}
         heightScrolledToTop={heightScrolledToTop}
         sidebarOpened={sidebarOpened}
-        itemOpened={isOpen}
+        itemOpened={sidebarOpened ? openItem : isOpen}
       />
     </ItemStyled>
   )
@@ -213,6 +214,8 @@ export const Item: React.FC<ItemProps> = ({
 
 Item.propTypes = {
   item: PropTypes.any.isRequired,
+  openItem: PropTypes.bool.isRequired,
+  toggleItem: PropTypes.func.isRequired,
   sidebarOpened: PropTypes.bool.isRequired,
   heightScrolledToTop: PropTypes.number
 }
