@@ -12,7 +12,7 @@ export interface Props {
   header?: any
 }
 
-const Itens = styled.ul`
+const Items = styled.ul`
   list-style: none;
   padding: 0;
   margin: 0;
@@ -25,7 +25,7 @@ const Itens = styled.ul`
   }
 
   &::-webkit-scrollbar-track {
-    background-color: #ebebeb;
+    background-color: ${({ theme }) => theme.colors.white};
     -webkit-border-radius: 10px;
     border-radius: 10px;
   }
@@ -33,7 +33,7 @@ const Itens = styled.ul`
   &::-webkit-scrollbar-thumb {
     -webkit-border-radius: 10px;
     border-radius: 10px;
-    background: ${({ theme }) => theme.colors.primaryLight};
+    background: ${({ theme }) => theme.colors.mediumGrey};
   }
 `
 
@@ -56,17 +56,24 @@ export const Sidebar: React.FC<Props> = ({
   opened = false,
   ...props
 }) => {
+  const [openItem, setOpenItem] = useState('')
   const [heightScrolledToTop, setHeightScrolledToTop] = useState(0)
+
   useEffect(() => {
     function listenWhenSidebarScroll(event) {
       setHeightScrolledToTop(event.target.scrollTop)
     }
-    const elementItensSidebar = document.querySelectorAll('#itens-sidebar')[0]
+
+    const elementItensSidebar = document.querySelectorAll('#items-sidebar')[0]
     elementItensSidebar.addEventListener('scroll', listenWhenSidebarScroll)
     return () => {
       elementItensSidebar.removeEventListener('scroll', listenWhenSidebarScroll)
     }
   }, [])
+
+  const toggleItem = (value = '') => {
+    setOpenItem(openItem === value ? '' : value)
+  }
 
   return (
     <SidebarStyled
@@ -82,17 +89,21 @@ export const Sidebar: React.FC<Props> = ({
       {data.length >= 0 && (
         <>
           {header && header}
+
           <Divider width='100%' marginBottom='16px' />
-          <Itens id='itens-sidebar'>
+
+          <Items id='items-sidebar'>
             {data.map((item, index) => (
               <Item
-                heightScrolledToTop={heightScrolledToTop}
-                sidebarOpened={opened}
                 key={index}
                 item={item}
+                sidebarOpened={opened}
+                openItem={openItem === index}
+                toggleItem={() => toggleItem(index)}
+                heightScrolledToTop={heightScrolledToTop}
               />
             ))}
-          </Itens>
+          </Items>
         </>
       )}
     </SidebarStyled>
