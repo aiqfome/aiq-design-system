@@ -137,7 +137,7 @@ const SubItensStyled = styled(Flex)<Props>`
               }
 
               ul::-webkit-scrollbar-track {
-                background-color: #ebebeb;
+                background-color: ${theme.colors.white};
                 -webkit-border-radius: 10px;
                 border-radius: 10px;
               }
@@ -145,7 +145,7 @@ const SubItensStyled = styled(Flex)<Props>`
               ul::-webkit-scrollbar-thumb {
                 -webkit-border-radius: 10px;
                 border-radius: 10px;
-                background: ${theme.colors.primaryLight};
+                background: ${theme.colors.mediumGrey};
               }
             `}
           `
@@ -201,7 +201,14 @@ export const SubItens: React.FC<Props> = ({
     >
       {!sidebarOpened &&
         (item.itens ? (
-          <Text color='primary' mx={6} mt={6} mb={4} fontWeight='semiBold'>
+          <Text
+            mx={6}
+            mt={6}
+            mb={4}
+            cursor='auto'
+            color='primary'
+            fontWeight='semiBold'
+          >
             {item.name}
           </Text>
         ) : (
