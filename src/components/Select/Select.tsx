@@ -8,7 +8,7 @@ import { SelectStatic } from './SelectStatic'
 
 export interface Props extends BoxProps {
   label?: string
-  items?: Array<string | { id: any; name: any }>
+  items?: Array<string | { id: any; name: any; select?: any }>
   isOpen?: boolean
   variant?: 'outlined'
   prefix?: any
