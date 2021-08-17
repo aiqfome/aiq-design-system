@@ -11,7 +11,7 @@ import { Button, Props as ButtonProps } from '../Button'
 
 export interface Props extends BoxPros {
   label?: string
-  items?: Array<string | { id: any; name: any }>
+  items?: Array<string | { id: any; name: any; select?: any }>
   isOpen?: boolean
   variant?: 'outlined'
   prefix?: any
@@ -154,11 +154,12 @@ export const SelectStatic: React.FC<Props> = ({
     selectedItem,
     itemToString: item => (typeof item === 'string' ? item : item.name),
     onInputValueChange: ({ inputValue = '' }) => {
-      if (autoComplete) {
+      if (autoComplete && typeof inputValue === 'string') {
         onChangeTextInput(inputValue)
         setInputItems(
           items.filter(item => {
-            const name = typeof item === 'string' ? item : item.name
+            const name =
+              typeof item === 'string' ? item : item.select || item.name
             return name.toLowerCase().startsWith(inputValue.toLowerCase())
           })
         )

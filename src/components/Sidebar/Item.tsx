@@ -17,7 +17,7 @@ interface ItemProps {
   item: any
   openItem: boolean
   sidebarOpened: boolean
-  toggleItem?: () => void
+  toggleItem: () => void
   heightScrolledToTop?: number
 }
 
@@ -98,9 +98,10 @@ export const Item: React.FC<ItemProps> = ({
 
   const badgeAllItens = useMemo(() => computeBadgeAllItens(item), [item])
 
-  function changeVisibilitySubItem() {
+  const changeVisibilitySubItem = () => {
     if (sidebarOpened) {
-      setIsOpen(!isOpen)
+      setIsOpen(value => !value)
+      toggleItem()
     }
   }
 
@@ -174,7 +175,7 @@ export const Item: React.FC<ItemProps> = ({
         </Icon>
 
         {sidebarOpened && (
-          <Flex flex={1} onClick={toggleItem} justifyContent='space-between'>
+          <Flex flex={1} justifyContent='space-between'>
             <Flex flex={1}>
               <Text cursor='pointer' color='darkerGrey'>
                 {item.name}
