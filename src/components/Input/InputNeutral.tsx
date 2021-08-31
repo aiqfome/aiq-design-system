@@ -106,22 +106,6 @@ const InputPrefixed = styled.input<Props>`
   margin-left: 16px;
 `
 
-const Input: React.FC<Props> = ({
-  inputRef,
-  value,
-  nativeAutoComplete,
-  ...props
-}) => {
-  return (
-    <InputStyled
-      value={value}
-      ref={inputRef}
-      autoComplete={nativeAutoComplete}
-      {...props}
-    />
-  )
-}
-
 export const InputNeutral: React.FC<Props> = ({
   name,
   inputRef,
@@ -158,10 +142,14 @@ export const InputNeutral: React.FC<Props> = ({
           onBlur={() => setInputSelected(false)}
         >
           <InputSufixed
+            name={name}
             ref={inputRef}
             placeholder={placeholder}
             type={type}
             value={value}
+            errorForm={errorForm}
+            errorMessage={errorMessage}
+            data-testid='input'
             autoComplete={nativeAutoComplete}
             {...props}
           />
@@ -184,10 +172,14 @@ export const InputNeutral: React.FC<Props> = ({
         >
           {prefix}
           <InputPrefixed
+            name={name}
             ref={inputRef}
             placeholder={placeholder}
             type={type}
             value={value}
+            errorForm={errorForm}
+            errorMessage={errorMessage}
+            data-testid='input'
             autoComplete={nativeAutoComplete}
             {...props}
           />
@@ -208,12 +200,16 @@ export const InputNeutral: React.FC<Props> = ({
           onBlur={() => setInputSelected(false)}
         >
           <InputSufixed
-            {...props}
+            name={name}
             ref={inputRef}
             placeholder={placeholder}
             type={passwordVisible ? 'text' : 'password'}
             value={value}
+            errorForm={errorForm}
+            errorMessage={errorMessage}
+            data-testid='input'
             autoComplete={nativeAutoComplete}
+            {...props}
           />
           <Button
             palette='primary'
@@ -235,18 +231,18 @@ export const InputNeutral: React.FC<Props> = ({
 
   return (
     <Flex {...containerProps} flexDirection='column'>
-      <Input
+      <InputStyled
         name={name}
-        inputRef={inputRef}
+        ref={inputRef}
         placeholder={placeholder}
-        errorForm={errorForm}
         type={type}
-        errorMessage={errorMessage}
         sufix={sufix}
         value={value}
-        {...props}
+        errorForm={errorForm}
+        errorMessage={errorMessage}
         data-testid='input'
-        nativeAutoComplete={nativeAutoComplete}
+        autoComplete={nativeAutoComplete}
+        {...props}
       />
 
       {errorForm && <InputErrorMessage errorMessage={errorMessage} />}
@@ -254,7 +250,7 @@ export const InputNeutral: React.FC<Props> = ({
   )
 }
 
-Input.propTypes = {
+InputStyled.propTypes = {
   inputRef: PropTypes.any,
   value: PropTypes.string,
   nativeAutoComplete: PropTypes.oneOf(['on', 'disabled'])
