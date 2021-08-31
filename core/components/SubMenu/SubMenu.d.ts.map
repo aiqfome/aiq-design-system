@@ -1,0 +1,1 @@
+{"version":3,"file":"SubMenu.d.ts","sourceRoot":"","sources":["../../../src/components/SubMenu/SubMenu.tsx"],"names":[],"mappings":"AAAA,OAAO,KAAmB,MAAM,OAAO,CAAA;AASvC,MAAM,WAAW,KAAK;IACpB,OAAO,CAAC,EAAE,GAAG,CAAA;IACb,QAAQ,CAAC,EAAE,GAAG,CAAA;IACd,SAAS,CAAC,EAAE,GAAG,CAAA;IACf,YAAY,CAAC,EAAE,GAAG,CAAA;CACnB;AAWD,eAAO,MAAM,OAAO,EAAE,KAAK,CAAC,EAAE,CAAC,KAAK,CAkCnC,CAAA"}

@@ -1,7 +1,6 @@
 node_modules
 storybook-static
 dist
-core
 
 package-lock.json
 .idea/
