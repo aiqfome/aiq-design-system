@@ -31,7 +31,7 @@ export interface Props extends InputHTMLAttributes<HTMLInputElement> {
   nativeAutoComplete?: 'on' | 'disabled'
 }
 
-const InputStyled = styled.input<Props>`
+const InputStyled = styled.input.attrs({ 'data-testid': 'input' })<Props>`
   &::placeholder {
     color: ${({ theme }) => theme.colors.grey};
     font-size: ${({ theme }) => theme.fontSizes.medium};
@@ -149,7 +149,6 @@ export const InputNeutral: React.FC<Props> = ({
             value={value}
             errorForm={errorForm}
             errorMessage={errorMessage}
-            data-testid='input'
             autoComplete={nativeAutoComplete}
             {...props}
           />
@@ -179,7 +178,6 @@ export const InputNeutral: React.FC<Props> = ({
             value={value}
             errorForm={errorForm}
             errorMessage={errorMessage}
-            data-testid='input'
             autoComplete={nativeAutoComplete}
             {...props}
           />
@@ -207,7 +205,6 @@ export const InputNeutral: React.FC<Props> = ({
             value={value}
             errorForm={errorForm}
             errorMessage={errorMessage}
-            data-testid='input'
             autoComplete={nativeAutoComplete}
             {...props}
           />
@@ -240,7 +237,6 @@ export const InputNeutral: React.FC<Props> = ({
         value={value}
         errorForm={errorForm}
         errorMessage={errorMessage}
-        data-testid='input'
         autoComplete={nativeAutoComplete}
         {...props}
       />
