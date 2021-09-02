@@ -7,6 +7,8 @@ import { Box } from '../Box'
 import { Flex } from '../Flex'
 import { Input } from '../Input'
 import { TimeUnity } from './TimeUnity'
+import { useCallback } from 'react'
+import { useEffect } from 'react'
 
 export interface Props {
   value?: any
@@ -20,6 +22,8 @@ export interface Props {
   maxWidth?: string | number
   onChange?: (e: any) => void
   variant?: 'outlined' | 'default'
+  onChangeInput?: (e: any) => void
+  getValue?: (input: any) => string
 }
 
 interface PickerProps {
@@ -38,10 +42,14 @@ export const TimePickerAll = React.forwardRef(
       sufix,
       variant,
       maxWidth,
+      getValue,
       errorForm,
       hasSeconds,
       placeholder,
       errorMessage,
+      onChangeInput = (e: any) => {
+        console.log('input:', e)
+      },
       onChange = (e: any) => {
         console.log('input:', e)
       },
@@ -51,6 +59,10 @@ export const TimePickerAll = React.forwardRef(
   ) => {
     const [showPicker, setShowPicker] = useState(false)
     const [inputValue, setInputValue] = useState(value || '')
+
+    useEffect(() => {
+      setInputValue(value || '')
+    }, [value])
 
     const applyMask = (value = '') => {
       if (hasSeconds) {
@@ -69,6 +81,11 @@ export const TimePickerAll = React.forwardRef(
 
     const handleInputOnChange = e => {
       const { value = '' } = e?.target || {}
+      if (getValue) {
+        onChangeInput(value)
+        return ''
+      }
+
       const valueSplited = applyMask(value).split(':')
 
       if (valueSplited.length > 0 && valueSplited[0]) {
@@ -140,6 +157,12 @@ export const TimePickerAll = React.forwardRef(
       onChange(formattedValue)
     }
 
+    const getInputValue = useCallback(() => {
+      if (getValue) return getValue(inputValue)
+
+      return inputValue
+    }, [inputValue, getValue])
+
     return (
       <Picker
         position='relative'
@@ -155,8 +178,8 @@ export const TimePickerAll = React.forwardRef(
           sufix={sufix}
           inputRef={ref}
           variant={variant}
-          value={inputValue}
           errorForm={errorForm}
+          value={getInputValue()}
           placeholder={placeholder}
           errorMessage={errorMessage}
           onChange={handleInputOnChange}
@@ -218,8 +241,10 @@ TimePickerAll.propTypes = {
   name: PropTypes.string,
   label: PropTypes.string,
   onChange: PropTypes.func,
+  getValue: PropTypes.func,
   errorForm: PropTypes.bool,
   hasSeconds: PropTypes.bool,
+  onChangeInput: PropTypes.func,
   placeholder: PropTypes.string,
   errorMessage: PropTypes.string,
   variant: PropTypes.oneOf(['outlined', 'default']),

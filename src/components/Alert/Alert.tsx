@@ -180,7 +180,10 @@ export const Alert: React.FC<Props> = ({
   }
 
   function handleClickOutSide({ target }) {
-    if (target.className && target.className.includes('background-modal')) {
+    if (
+      typeof target?.className === 'string' &&
+      target.className.includes('background-modal')
+    ) {
       onClose()
     }
   }

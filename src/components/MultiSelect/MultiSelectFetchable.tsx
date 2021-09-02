@@ -26,6 +26,7 @@ export interface Props {
     allItems?: boolean
     clear?: boolean
     items?: number[]
+    onClick?: any
   }[]
   handleSelectedItemChange?: (item: any) => void
   onChange?: any
@@ -402,7 +403,10 @@ export const MultiSelectFetchable: React.FC<Props> = ({
                 {filters.map((filter, index) => (
                   <li
                     key={`filter-${index}`}
-                    onClick={() => filterItems(filter)}
+                    onClick={() => {
+                      if (filter.onClick) filter.onClick(filter)
+                      filterItems(filter)
+                    }}
                   >
                     <Text cursor='pointer'>{filter.name}</Text>
                   </li>
