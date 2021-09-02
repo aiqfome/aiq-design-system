@@ -133,7 +133,7 @@ const ModalStyled = styled(Flex)<ModalStyledProps>`
 
   &.show {
     opacity: 1;
-    z-index: 2000;
+    z-index: 2010;
   }
 
   ${({ animation }) =>
