@@ -17,6 +17,7 @@ export interface Props {
   maxWidth?: string | number
   onChange?: (e: any) => void
   variant?: 'outlined' | 'default'
+  onChangeInput?: (e: any) => void
   getValue?: (input: any) => string
 }
 
@@ -39,6 +40,7 @@ TimePicker.propTypes = {
   errorForm: PropTypes.bool,
   hasSeconds: PropTypes.bool,
   placeholder: PropTypes.string,
+  onChangeInput: PropTypes.func,
   errorMessage: PropTypes.string,
   type: PropTypes.oneOf(['minSec', 'all']),
   variant: PropTypes.oneOf(['outlined', 'default']),
