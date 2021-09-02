@@ -16,6 +16,7 @@ export interface Props {
     allItems?: boolean
     clear?: boolean
     items?: number[]
+    onClick?: any
   }[]
   onChange?: any
   value?: Item[]
