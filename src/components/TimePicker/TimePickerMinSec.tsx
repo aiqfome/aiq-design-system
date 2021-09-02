@@ -7,6 +7,7 @@ import { Box } from '../Box'
 import { Flex } from '../Flex'
 import { Input } from '../Input'
 import { TimeUnity } from './TimeUnity'
+import { useEffect } from 'react'
 
 export interface Props {
   value?: any
@@ -19,6 +20,7 @@ export interface Props {
   maxWidth?: string | number
   onChange?: (e: any) => void
   variant?: 'outlined' | 'default'
+  onChangeInput?: (e: any) => void
   getValue?: (input: any) => string
 }
 
@@ -42,6 +44,9 @@ export const TimePickerMinSec = React.forwardRef(
       errorForm,
       placeholder,
       errorMessage,
+      onChangeInput = (e: any) => {
+        console.log('input:', e)
+      },
       onChange = (e: any) => {
         console.log('input:', e)
       },
@@ -52,6 +57,10 @@ export const TimePickerMinSec = React.forwardRef(
     const [showPicker, setShowPicker] = useState(false)
     const [inputValue, setInputValue] = useState(value || '')
 
+    useEffect(() => {
+      setInputValue(value || '')
+    }, [value])
+
     const applyMask = (value = '') => {
       return value
         .replace(/[\D]+/g, '')
@@ -61,7 +70,10 @@ export const TimePickerMinSec = React.forwardRef(
 
     const handleInputOnChange = e => {
       const { value = '' } = e?.target || {}
-      if (getValue) return ''
+      if (getValue && onChangeInput) {
+        onChangeInput(value)
+        return ''
+      }
 
       const valueSplited = applyMask(value).split(':')
 
@@ -124,8 +136,8 @@ export const TimePickerMinSec = React.forwardRef(
 
     return (
       <Picker
-        position='relative'
         maxWidth={maxWidth}
+        position='relative'
         data-testid='timepicker'
         onMouseEnter={() => setShowPicker(true)}
         onMouseLeave={() => setShowPicker(false)}
@@ -193,6 +205,7 @@ TimePickerMinSec.propTypes = {
   onChange: PropTypes.func,
   errorForm: PropTypes.bool,
   placeholder: PropTypes.string,
+  onChangeInput: PropTypes.func,
   errorMessage: PropTypes.string,
   variant: PropTypes.oneOf(['outlined', 'default']),
   maxWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number])

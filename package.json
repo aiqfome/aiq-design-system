@@ -51,7 +51,7 @@
     "react-test-renderer": "^16.13.1",
     "ts-jest": "^26.4.1",
     "ts-loader": "^8.0.5",
-    "typescript": "^4.0.3"
+    "typescript": "4.2.2"
   },
   "dependencies": {
     "@babel/runtime": "^7.11.2",
@@ -67,6 +67,7 @@
     "react-router-dom": "^5.2.0",
     "react-spring": "^8.0.27",
     "react-table": "^7.6.0",
+    "storybook": "^6.3.7",
     "styled-components": "^5.2.0",
     "styled-system": "^5.1.5",
     "uuid": "^8.3.1"

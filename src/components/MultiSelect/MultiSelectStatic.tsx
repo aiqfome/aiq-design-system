@@ -25,6 +25,7 @@ export interface Props {
     allItems?: boolean
     clear?: boolean
     items?: number[]
+    onClick?: any
   }[]
   onChange?: any
   value?: Item[]
@@ -399,7 +400,11 @@ export const MultiSelectStatic: React.FC<Props> = ({
                   <li
                     key={`filter-${index}`}
                     data-testid='select-filter'
-                    onClick={() => filterItems(filter)}
+                    onClick={() => {
+                      if (filter.onClick) filter.onClick(filter)
+
+                      filterItems(filter)
+                    }}
                   >
                     <Text cursor='pointer'>{filter.name}</Text>
                   </li>

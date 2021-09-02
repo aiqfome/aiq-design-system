@@ -133,7 +133,7 @@ const ModalStyled = styled(Flex)<ModalStyledProps>`
 
   &.show {
     opacity: 1;
-    z-index: 2000;
+    z-index: 2010;
   }
 
   ${({ animation }) =>
@@ -232,7 +232,10 @@ export const Modal: React.FC<Props> = ({
   }
 
   function handleClickOutSide({ target }) {
-    if (target.className && target.className.includes('background-modal')) {
+    if (
+      typeof target?.className === 'string' &&
+      target.className.includes('background-modal')
+    ) {
       onClose()
     }
   }
