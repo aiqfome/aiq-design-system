@@ -1,6 +1,4 @@
-import React, { InputHTMLAttributes, useEffect, useState } from 'react'
-
-import PropTypes from 'prop-types'
+import React, { InputHTMLAttributes } from 'react'
 
 import styled, { DefaultTheme, css } from 'styled-components'
 
@@ -116,36 +114,19 @@ export const Radio = React.forwardRef<HTMLInputElement, Props>(
       name,
       value,
       disabled = false,
-      checked = false,
       label,
       variant = 'default',
-      onChange = () => {
-        // do nothing.
-      },
       className,
       mx,
       my,
       m,
       mr,
       ml,
+      onChange,
       ...props
     },
     ref
   ) => {
-    const [isChecked, setIsChecked] = useState(checked)
-
-    useEffect(() => {
-      setIsChecked(checked)
-    }, [checked])
-
-    const onChangeRadio = e => {
-      if (!disabled) {
-        setIsChecked(!checked)
-
-        if (onChange) onChange(e)
-      }
-    }
-
     return (
       <RadioStyled
         mx={mx}
@@ -163,10 +144,9 @@ export const Radio = React.forwardRef<HTMLInputElement, Props>(
           type='radio'
           disabled={disabled}
           name={name}
-          onChange={onChangeRadio}
-          checked={isChecked}
           value={value}
           data-testid='radio-input'
+          onChange={onChange}
           {...props}
         />
         <Box />
@@ -178,19 +158,3 @@ export const Radio = React.forwardRef<HTMLInputElement, Props>(
 )
 
 Radio.displayName = 'Radio'
-
-Radio.propTypes = {
-  name: PropTypes.string.isRequired,
-  value: PropTypes.any.isRequired,
-  disabled: PropTypes.bool,
-  checked: PropTypes.bool,
-  onChange: PropTypes.func,
-  label: PropTypes.string,
-  className: PropTypes.string,
-  variant: PropTypes.oneOf(['small', 'default']),
-  mx: PropTypes.any,
-  my: PropTypes.any,
-  m: PropTypes.any,
-  mr: PropTypes.any,
-  ml: PropTypes.any
-}
