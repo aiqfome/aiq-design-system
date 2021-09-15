@@ -34,8 +34,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Radio = void 0;
-const react_1 = __importStar(require("react"));
-const prop_types_1 = __importDefault(require("prop-types"));
+const react_1 = __importDefault(require("react"));
 const styled_components_1 = __importStar(require("styled-components"));
 const styled_system_1 = require("styled-system");
 const Text_1 = require("../Text");
@@ -123,38 +122,10 @@ const RadioStyled = styled_components_1.default.label `
   ${({ variant }) => radioVariations[variant || 'default']}
 `;
 exports.Radio = react_1.default.forwardRef((_a, ref) => {
-    var { name, value, disabled = false, checked = false, label, variant = 'default', onChange = () => {
-        // do nothing.
-    }, className, mx, my, m, mr, ml } = _a, props = __rest(_a, ["name", "value", "disabled", "checked", "label", "variant", "onChange", "className", "mx", "my", "m", "mr", "ml"]);
-    const [isChecked, setIsChecked] = react_1.useState(checked);
-    react_1.useEffect(() => {
-        setIsChecked(checked);
-    }, [checked]);
-    const onChangeRadio = e => {
-        if (!disabled) {
-            setIsChecked(!checked);
-            if (onChange)
-                onChange(e);
-        }
-    };
+    var { name, value, disabled = false, label, variant = 'default', className, mx, my, m, mr, ml, onChange } = _a, props = __rest(_a, ["name", "value", "disabled", "label", "variant", "className", "mx", "my", "m", "mr", "ml", "onChange"]);
     return (react_1.default.createElement(RadioStyled, { mx: mx, my: my, variant: variant, m: m, mr: mr, ml: ml, className: className, disabled: disabled, "data-testid": 'radio-container' },
-        react_1.default.createElement("input", Object.assign({ ref: ref, type: 'radio', disabled: disabled, name: name, onChange: onChangeRadio, checked: isChecked, value: value, "data-testid": 'radio-input' }, props)),
+        react_1.default.createElement("input", Object.assign({ ref: ref, type: 'radio', disabled: disabled, name: name, value: value, "data-testid": 'radio-input', onChange: onChange }, props)),
         react_1.default.createElement(Box_1.Box, null),
         label && react_1.default.createElement(Text_1.Text, null, label)));
 });
 exports.Radio.displayName = 'Radio';
-exports.Radio.propTypes = {
-    name: prop_types_1.default.string.isRequired,
-    value: prop_types_1.default.any.isRequired,
-    disabled: prop_types_1.default.bool,
-    checked: prop_types_1.default.bool,
-    onChange: prop_types_1.default.func,
-    label: prop_types_1.default.string,
-    className: prop_types_1.default.string,
-    variant: prop_types_1.default.oneOf(['small', 'default']),
-    mx: prop_types_1.default.any,
-    my: prop_types_1.default.any,
-    m: prop_types_1.default.any,
-    mr: prop_types_1.default.any,
-    ml: prop_types_1.default.any
-};
