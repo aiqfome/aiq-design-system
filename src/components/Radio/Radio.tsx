@@ -114,6 +114,7 @@ export const Radio = React.forwardRef<HTMLInputElement, Props>(
       name,
       value,
       disabled = false,
+      checked = false,
       label,
       variant = 'default',
       className,
@@ -147,6 +148,7 @@ export const Radio = React.forwardRef<HTMLInputElement, Props>(
           value={value}
           data-testid='radio-input'
           onChange={onChange}
+          defaultChecked={checked}
           {...props}
         />
         <Box />
