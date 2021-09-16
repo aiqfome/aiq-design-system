@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { withKnobs, text, select, boolean } from '@storybook/addon-knobs'
 
 import { MdSearch } from 'react-icons/md'
@@ -16,7 +16,6 @@ export default {
 export const Basic: React.FC = () => (
   <Flex variant='fullCentralized'>
     <Input
-      value={text('value', '')}
       errorForm={boolean('errorForm', false)}
       errorMessage={text('errorMessage', 'message error')}
       label={text('label', 'aiqfome')}
@@ -37,7 +36,6 @@ export const Outlined: React.FC = () => (
   <Flex variant='fullCentralized'>
     <Input
       variant='outlined'
-      value={text('value', '')}
       errorForm={boolean('errorForm', false)}
       errorMessage={text('errorMessage', 'message error')}
       placeholder={text('placeholder', 'duas pizzas é muito')}
@@ -57,7 +55,6 @@ export const Outlined: React.FC = () => (
 export const Disabled: React.FC = () => (
   <Flex variant='fullCentralized'>
     <Input
-      value={text('value', '')}
       errorForm={boolean('errorForm', false)}
       errorMessage={text('errorMessage', 'message error')}
       label={text('label', 'aiqfome')}
@@ -97,11 +94,17 @@ export const ErrorMessage: React.FC = () => (
 )
 
 export const WithValue: React.FC = () => {
-  const value = 'hamburger'
+  const [value, setValue] = useState('hamburger')
 
   return (
     <Flex variant='fullCentralized'>
-      <Input label='Aiqfome' value={value} />
+      <Input
+        label='Aiqfome'
+        value={value}
+        onChange={event => {
+          setValue(event.target.value)
+        }}
+      />
     </Flex>
   )
 }
@@ -136,7 +139,6 @@ export const Tags: React.FC = () => (
         variant='tags'
         width='100%'
         value='10,20'
-        onChange={e => console.log(e.target.value)}
       />
     </Box>
   </Flex>

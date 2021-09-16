@@ -122,9 +122,9 @@ const RadioStyled = styled_components_1.default.label `
   ${({ variant }) => radioVariations[variant || 'default']}
 `;
 exports.Radio = react_1.default.forwardRef((_a, ref) => {
-    var { name, value, disabled = false, label, variant = 'default', className, mx, my, m, mr, ml, onChange } = _a, props = __rest(_a, ["name", "value", "disabled", "label", "variant", "className", "mx", "my", "m", "mr", "ml", "onChange"]);
+    var { name, value, disabled = false, checked = false, label, variant = 'default', className, mx, my, m, mr, ml, onChange } = _a, props = __rest(_a, ["name", "value", "disabled", "checked", "label", "variant", "className", "mx", "my", "m", "mr", "ml", "onChange"]);
     return (react_1.default.createElement(RadioStyled, { mx: mx, my: my, variant: variant, m: m, mr: mr, ml: ml, className: className, disabled: disabled, "data-testid": 'radio-container' },
-        react_1.default.createElement("input", Object.assign({ ref: ref, type: 'radio', disabled: disabled, name: name, value: value, "data-testid": 'radio-input', onChange: onChange }, props)),
+        react_1.default.createElement("input", Object.assign({ ref: ref, type: 'radio', disabled: disabled, name: name, value: value, "data-testid": 'radio-input', onChange: onChange, defaultChecked: checked }, props)),
         react_1.default.createElement(Box_1.Box, null),
         label && react_1.default.createElement(Text_1.Text, null, label)));
 });

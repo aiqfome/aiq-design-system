@@ -43,7 +43,7 @@ const Button_1 = require("../Button");
 const Flex_1 = require("../Flex");
 const Box_1 = require("../Box");
 const InputErrorMessage_1 = require("../InputErrorMessage");
-const InputStyled = styled_components_1.default.input `
+const InputStyled = styled_components_1.default.input.attrs({ 'data-testid': 'input' }) `
   &::placeholder {
     color: ${({ theme }) => theme.colors.grey};
     font-size: ${({ theme }) => theme.fontSizes.medium};
@@ -116,7 +116,7 @@ exports.InputNeutral = (_a) => {
     if (sufix) {
         return (react_1.default.createElement(Flex_1.Flex, Object.assign({}, containerProps, { flexDirection: 'column' }),
             react_1.default.createElement(ContainerSufix, Object.assign({}, boxStyled, { inputSelected: inputSelected, onClick: () => setInputSelected(true), onBlur: () => setInputSelected(false) }),
-                react_1.default.createElement(InputSufixed, Object.assign({ name: name, ref: inputRef, placeholder: placeholder, type: type, value: value, errorForm: errorForm, errorMessage: errorMessage, "data-testid": 'input', autoComplete: nativeAutoComplete }, props)),
+                react_1.default.createElement(InputSufixed, Object.assign({ name: name, ref: inputRef, placeholder: placeholder, type: type, value: value, errorForm: errorForm, errorMessage: errorMessage, autoComplete: nativeAutoComplete }, props)),
                 sufix),
             errorForm && react_1.default.createElement(InputErrorMessage_1.InputErrorMessage, { errorMessage: errorMessage })));
     }
@@ -124,18 +124,18 @@ exports.InputNeutral = (_a) => {
         return (react_1.default.createElement(Flex_1.Flex, Object.assign({}, containerProps),
             react_1.default.createElement(ContainerSufix, Object.assign({}, boxStyled, { inputSelected: inputSelected, onClick: () => setInputSelected(true), onBlur: () => setInputSelected(false) }),
                 prefix,
-                react_1.default.createElement(InputPrefixed, Object.assign({ name: name, ref: inputRef, placeholder: placeholder, type: type, value: value, errorForm: errorForm, errorMessage: errorMessage, "data-testid": 'input', autoComplete: nativeAutoComplete }, props))),
+                react_1.default.createElement(InputPrefixed, Object.assign({ name: name, ref: inputRef, placeholder: placeholder, type: type, value: value, errorForm: errorForm, errorMessage: errorMessage, autoComplete: nativeAutoComplete }, props))),
             errorForm && react_1.default.createElement(InputErrorMessage_1.InputErrorMessage, { errorMessage: errorMessage })));
     }
     if (type === 'password') {
         return (react_1.default.createElement(Flex_1.Flex, Object.assign({}, containerProps, { flexDirection: 'column' }),
             react_1.default.createElement(ContainerSufix, Object.assign({}, boxStyled, { inputSelected: inputSelected, onClick: () => setInputSelected(true), onBlur: () => setInputSelected(false) }),
-                react_1.default.createElement(InputSufixed, Object.assign({ name: name, ref: inputRef, placeholder: placeholder, type: passwordVisible ? 'text' : 'password', value: value, errorForm: errorForm, errorMessage: errorMessage, "data-testid": 'input', autoComplete: nativeAutoComplete }, props)),
+                react_1.default.createElement(InputSufixed, Object.assign({ name: name, ref: inputRef, placeholder: placeholder, type: passwordVisible ? 'text' : 'password', value: value, errorForm: errorForm, errorMessage: errorMessage, autoComplete: nativeAutoComplete }, props)),
                 react_1.default.createElement(Button_1.Button, { palette: 'primary', mr: 5, onClick: () => setPasswordVisible(!passwordVisible) }, passwordVisible ? (react_1.default.createElement(md_1.MdVisibilityOff, { size: 22 })) : (react_1.default.createElement(md_1.MdVisibility, { size: 22 })))),
             errorForm && react_1.default.createElement(InputErrorMessage_1.InputErrorMessage, { errorMessage: errorMessage })));
     }
     return (react_1.default.createElement(Flex_1.Flex, Object.assign({}, containerProps, { flexDirection: 'column' }),
-        react_1.default.createElement(InputStyled, Object.assign({ name: name, ref: inputRef, placeholder: placeholder, type: type, sufix: sufix, value: value, errorForm: errorForm, errorMessage: errorMessage, "data-testid": 'input', autoComplete: nativeAutoComplete }, props)),
+        react_1.default.createElement(InputStyled, Object.assign({ name: name, ref: inputRef, placeholder: placeholder, type: type, sufix: sufix, value: value, errorForm: errorForm, errorMessage: errorMessage, autoComplete: nativeAutoComplete }, props)),
         errorForm && react_1.default.createElement(InputErrorMessage_1.InputErrorMessage, { errorMessage: errorMessage })));
 };
 InputStyled.propTypes = {

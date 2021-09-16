@@ -21,14 +21,14 @@ export interface Props {
 }
 
 interface PropsStyledToast {
-  fixed: boolean
+  $fixedToast: boolean
   variation: any
   description: string
 }
 
 interface PropsProgress {
   init: boolean
-  fixed: boolean
+  $fixedToast: boolean
   variation: any
 }
 
@@ -70,7 +70,7 @@ const ProgressStyled = styled.div<PropsProgress>`
   border-radius: 10px 10px 0 0;
   animation-fill-mode: forwards;
   background: ${({ theme }) => theme.colors.primary};
-  animation-name: ${({ fixed }) => (!fixed ? 'progressing' : '')};
+  animation-name: ${({ $fixedToast }) => (!$fixedToast ? 'progressing' : '')};
   background: ${({ variation, theme }) => theme.colors[variation.bar]};
 
   @keyframes progressing {
@@ -96,8 +96,8 @@ const StyledToast = styled(animated.div)<PropsStyledToast>`
   position: relative;
   border-radius: 10px;
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
-  padding: ${({ fixed }) =>
-    !fixed ? '22px 30px 16px 16px' : '16px 30px 16px 16px'};
+  padding: ${({ $fixedToast }) =>
+    !$fixedToast ? '22px 30px 16px 16px' : '16px 30px 16px 16px'};
 
   & + div {
     margin-top: 8px;
@@ -166,14 +166,14 @@ export const ToastContent: React.FC<Props> = ({ message, className }) => {
     <StyledToast
       variation={variation}
       className={className}
-      fixed={!!message.fixed}
+      $fixedToast={!!message.fixed}
       data-testid='toast-content'
       description={message.description}
     >
       <ProgressStyled
         init={init}
         variation={variation}
-        fixed={!!message.fixed}
+        $fixedToast={!!message.fixed}
       />
 
       {variation.icon}

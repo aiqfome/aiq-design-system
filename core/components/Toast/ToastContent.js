@@ -67,7 +67,7 @@ const ProgressStyled = styled_components_1.default.div `
   border-radius: 10px 10px 0 0;
   animation-fill-mode: forwards;
   background: ${({ theme }) => theme.colors.primary};
-  animation-name: ${({ fixed }) => (!fixed ? 'progressing' : '')};
+  animation-name: ${({ $fixedToast }) => (!$fixedToast ? 'progressing' : '')};
   background: ${({ variation, theme }) => theme.colors[variation.bar]};
 
   @keyframes progressing {
@@ -92,7 +92,7 @@ const StyledToast = styled_components_1.default(react_spring_1.animated.div) `
   position: relative;
   border-radius: 10px;
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
-  padding: ${({ fixed }) => !fixed ? '22px 30px 16px 16px' : '16px 30px 16px 16px'};
+  padding: ${({ $fixedToast }) => !$fixedToast ? '22px 30px 16px 16px' : '16px 30px 16px 16px'};
 
   & + div {
     margin-top: 8px;
@@ -151,8 +151,8 @@ exports.ToastContent = ({ message, className }) => {
     const variation = react_1.useMemo(() => toastVariations[message.type] || {}, [
         message.type
     ]);
-    return (react_1.default.createElement(StyledToast, { variation: variation, className: className, fixed: !!message.fixed, "data-testid": 'toast-content', description: message.description },
-        react_1.default.createElement(ProgressStyled, { init: init, variation: variation, fixed: !!message.fixed }),
+    return (react_1.default.createElement(StyledToast, { variation: variation, className: className, "$fixedToast": !!message.fixed, "data-testid": 'toast-content', description: message.description },
+        react_1.default.createElement(ProgressStyled, { init: init, variation: variation, "$fixedToast": !!message.fixed }),
         variation.icon,
         react_1.default.createElement(Box_1.Box, { px: 5 },
             react_1.default.createElement("strong", null, message.title),
