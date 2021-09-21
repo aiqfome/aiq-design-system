@@ -6,7 +6,7 @@ export interface Props extends InputHTMLAttributes<HTMLInputElement> {
     errorForm?: boolean;
     type?: string;
     errorMessage?: string;
-    value?: string;
+    value?: string | number;
     prefix?: any;
     sufix?: any;
     variant?: 'outlined' | 'default';
@@ -21,6 +21,7 @@ export interface Props extends InputHTMLAttributes<HTMLInputElement> {
     marginLeft?: any;
     marginRight?: any;
     nativeAutoComplete?: 'on' | 'disabled';
+    onChange?: any;
 }
 export declare const NeutralInputStyled: import("styled-components").StyledComponent<any, any, object & Props, string | number | symbol>;
 export interface PropsNeutralContainerSufix {

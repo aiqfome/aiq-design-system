@@ -25,7 +25,7 @@ export interface Props extends InputHTMLAttributes<HTMLInputElement> {
   errorForm?: boolean
   type?: string
   errorMessage?: string
-  value?: string
+  value?: string | number
   prefix?: any
   sufix?: any
   variant?: 'outlined' | 'default'
@@ -42,6 +42,8 @@ export interface Props extends InputHTMLAttributes<HTMLInputElement> {
   marginRight?: any
 
   nativeAutoComplete?: 'on' | 'disabled'
+
+  onChange?: any
 }
 
 export const NeutralInputStyled = styled(ReactNumeric)<Props>`
