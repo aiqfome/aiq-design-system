@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { withKnobs, text, boolean } from '@storybook/addon-knobs'
 
 import { Flex } from '../Flex'
@@ -10,13 +10,21 @@ export default {
   decorators: [withKnobs]
 }
 
-export const Basic: React.FC = () => (
-  <Flex variant='fullCentralized'>
-    <InputMoney
-      errorForm={boolean('errorForm', false)}
-      errorMessage={text('errorMessage', 'message error')}
-      label={text('label', 'aiqfome')}
-      placeholder={text('placeholder', 'duas pizzas é muito')}
-    />
-  </Flex>
-)
+export const Basic: React.FC = () => {
+  const [input, setInput] = useState(0)
+
+  return (
+    <Flex variant='fullCentralized'>
+      <InputMoney
+        value={input}
+        errorForm={boolean('errorForm', false)}
+        errorMessage={text('errorMessage', 'message error')}
+        label={text('label', 'aiqfome')}
+        placeholder={text('placeholder', 'duas pizzas é muito')}
+        onChange={(_event, value) => {
+          setInput(value)
+        }}
+      />
+    </Flex>
+  )
+}

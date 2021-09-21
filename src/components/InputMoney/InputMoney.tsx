@@ -9,7 +9,7 @@ export interface Props extends InputHTMLAttributes<HTMLInputElement> {
   errorForm?: boolean
   type?: string
   errorMessage?: string
-  value?: string
+  value?: string | number
   sufix?: any
   prefix?: any
   variant?: 'outlined' | 'default'
@@ -23,6 +23,8 @@ export interface Props extends InputHTMLAttributes<HTMLInputElement> {
   maxWidth?: any
   mask?: string
   nativeAutoComplete?: 'on' | 'disabled'
+
+  onChange?: any
 }
 
 export const InputMoney: React.FC<Props> = props => {
