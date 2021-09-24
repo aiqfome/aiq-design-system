@@ -84,6 +84,7 @@ export const Tooltip: React.FC<Props> = ({
         placement={variant}
         overlay={getOverlay}
         overlayClassName='popover'
+        {...props}
       >
         {child}
       </RcDropdown>
@@ -97,6 +98,7 @@ export const Tooltip: React.FC<Props> = ({
       overlayClassName='tooltip'
       overlay={getOverlayBalloon}
       placement={getTooltipVariant()}
+      {...props}
     >
       {child}
     </RcTooltip>
