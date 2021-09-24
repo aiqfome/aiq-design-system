@@ -180,7 +180,7 @@ export const Modal: React.FC<Props> = ({
   title,
   children,
   show = false,
-  zIndex = 2000,
+  zIndex = 2010,
   animation = false,
   formProps,
   buttonsProps,

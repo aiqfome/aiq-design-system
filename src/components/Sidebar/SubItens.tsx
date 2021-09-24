@@ -9,6 +9,7 @@ import { Badge } from '../Badge'
 
 interface Props extends FlexProps {
   item?: any
+  onClickItem?: any
   itemOpened?: boolean
   distanceTop?: number
   sidebarOpened?: boolean
@@ -162,6 +163,7 @@ export const SubItens: React.FC<Props> = ({
   item,
   sidebarOpened,
   itemOpened,
+  onClickItem,
   heightScrolledToTop = 0
 }) => {
   const [ref, setRef] = useState<HTMLDivElement | null>(null)
@@ -215,6 +217,9 @@ export const SubItens: React.FC<Props> = ({
           <LinkStyled
             href={item.href}
             variant={item.type ? item.type : 'internal'}
+            onClick={() => {
+              if (onClickItem) onClickItem()
+            }}
           >
             {item.name}
           </LinkStyled>
@@ -226,6 +231,9 @@ export const SubItens: React.FC<Props> = ({
               <Link
                 variant={subItem.type ? subItem.type : 'internal'}
                 href={subItem.href}
+                onClick={() => {
+                  if (onClickItem) onClickItem()
+                }}
               >
                 <Text cursor='pointer' fontSize='medium' px={6} my={2}>
                   {subItem.name}
@@ -250,6 +258,7 @@ export const SubItens: React.FC<Props> = ({
 SubItens.propTypes = {
   item: PropTypes.any,
   itemOpened: PropTypes.bool,
+  onClickItem: PropTypes.func,
   sidebarOpened: PropTypes.bool,
   heightScrolledToTop: PropTypes.number
 }

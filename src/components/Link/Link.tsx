@@ -26,6 +26,7 @@ export interface Props
   href: string
   children?: any
   color?: string
+  onClick?: any
 }
 
 export interface StyledProps
