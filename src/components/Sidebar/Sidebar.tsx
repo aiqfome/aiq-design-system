@@ -10,6 +10,7 @@ export interface Props {
   data: any
   opened?: boolean
   header?: any
+  onClickItem?: any
 }
 
 const Items = styled.ul`
@@ -53,6 +54,7 @@ const SidebarStyled = styled(Flex)<SidebarStyledProps>`
 export const Sidebar: React.FC<Props> = ({
   data,
   header,
+  onClickItem,
   opened = false,
   ...props
 }) => {
@@ -98,6 +100,7 @@ export const Sidebar: React.FC<Props> = ({
                 key={index}
                 item={item}
                 sidebarOpened={opened}
+                onClickItem={onClickItem}
                 openItem={openItem === index}
                 toggleItem={() => toggleItem(index)}
                 heightScrolledToTop={heightScrolledToTop}
@@ -111,7 +114,8 @@ export const Sidebar: React.FC<Props> = ({
 }
 
 Sidebar.propTypes = {
-  data: PropTypes.any.isRequired,
+  header: PropTypes.any,
   opened: PropTypes.bool,
-  header: PropTypes.any
+  onClickItem: PropTypes.func,
+  data: PropTypes.any.isRequired
 }

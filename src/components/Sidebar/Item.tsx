@@ -16,6 +16,7 @@ import { SubItens } from './SubItens'
 interface ItemProps {
   item: any
   openItem: boolean
+  onClickItem?: any
   sidebarOpened: boolean
   toggleItem: () => void
   heightScrolledToTop?: number
@@ -74,6 +75,7 @@ export const Item: React.FC<ItemProps> = ({
   item,
   openItem,
   toggleItem,
+  onClickItem,
   sidebarOpened = false,
   heightScrolledToTop
 }) => {
@@ -144,14 +146,23 @@ export const Item: React.FC<ItemProps> = ({
           alignItems='center'
           justifyContent='space-between'
           padding='16px 22px'
-          onClick={item.callback}
+          onClick={() => {
+            if (onClickItem) onClickItem()
+            item.callback()
+          }}
         >
           {children}
         </Flex>
       )
     }
     return (
-      <LinkStyled variant={item.type ? item.type : 'internal'} href={item.href}>
+      <LinkStyled
+        href={item.href}
+        variant={item.type ? item.type : 'internal'}
+        onClick={() => {
+          if (onClickItem) onClickItem()
+        }}
+      >
         {children}
       </LinkStyled>
     )
@@ -205,6 +216,7 @@ export const Item: React.FC<ItemProps> = ({
 
       <SubItens
         item={item}
+        onClickItem={onClickItem}
         heightScrolledToTop={heightScrolledToTop}
         sidebarOpened={sidebarOpened}
         itemOpened={sidebarOpened ? openItem : isOpen}
@@ -214,6 +226,7 @@ export const Item: React.FC<ItemProps> = ({
 }
 
 Item.propTypes = {
+  onClickItem: PropTypes.func,
   item: PropTypes.any.isRequired,
   openItem: PropTypes.bool.isRequired,
   toggleItem: PropTypes.func.isRequired,
