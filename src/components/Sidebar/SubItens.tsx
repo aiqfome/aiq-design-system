@@ -227,7 +227,7 @@ export const SubItens: React.FC<Props> = ({
       {item.itens && (
         <ul>
           {item.itens.map((subItem, index) => (
-            <li key={index}>
+            <li key={index} {...subItem}>
               <Link
                 variant={subItem.type ? subItem.type : 'internal'}
                 href={subItem.href}
