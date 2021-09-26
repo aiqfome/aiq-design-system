@@ -174,6 +174,7 @@ export const Item: React.FC<ItemProps> = ({
 
   return (
     <ItemStyled
+      {...item}
       isOpen={isOpen}
       active={isItemActive()}
       sidebarOpened={sidebarOpened}
