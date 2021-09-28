@@ -6,7 +6,7 @@ export interface Props extends MarginProps, InputHTMLAttributes<HTMLInputElement
     variant?: 'default' | 'small';
     disabled?: boolean;
     label?: string;
-    checked?: boolean;
+    defaultChecked?: boolean;
     onChange?: (event: any) => void;
 }
 export declare const Radio: React.ForwardRefExoticComponent<Props & React.RefAttributes<HTMLInputElement>>;

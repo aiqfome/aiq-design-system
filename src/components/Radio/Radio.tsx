@@ -1,4 +1,9 @@
-import React, { InputHTMLAttributes } from 'react'
+import React, {
+  InputHTMLAttributes,
+  useCallback,
+  useState,
+  useEffect
+} from 'react'
 
 import styled, { DefaultTheme, css } from 'styled-components'
 
@@ -15,7 +20,7 @@ export interface Props
   variant?: 'default' | 'small'
   disabled?: boolean
   label?: string
-  checked?: boolean
+  defaultChecked?: boolean
   onChange?: (event: any) => void
 }
 
@@ -114,7 +119,7 @@ export const Radio = React.forwardRef<HTMLInputElement, Props>(
       name,
       value,
       disabled = false,
-      checked = false,
+      defaultChecked = false,
       label,
       variant = 'default',
       className,
@@ -123,11 +128,26 @@ export const Radio = React.forwardRef<HTMLInputElement, Props>(
       m,
       mr,
       ml,
-      onChange,
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      onChange = () => {},
       ...props
     },
     ref
   ) => {
+    const [checked, setChecked] = useState(defaultChecked)
+
+    const onInputChange = useCallback(
+      (event: any) => {
+        setChecked(!checked)
+        onChange(event)
+      },
+      [checked, onChange]
+    )
+
+    useEffect(() => {
+      setChecked(defaultChecked)
+    }, [defaultChecked])
+
     return (
       <RadioStyled
         mx={mx}
@@ -147,8 +167,8 @@ export const Radio = React.forwardRef<HTMLInputElement, Props>(
           name={name}
           value={value}
           data-testid='radio-input'
-          onChange={onChange}
-          defaultChecked={checked}
+          onChange={onInputChange}
+          checked={checked}
           {...props}
         />
         <Box />
