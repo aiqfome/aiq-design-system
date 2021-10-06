@@ -22,6 +22,7 @@ export interface Props {
   onChange?: (e: any) => void
   initImage?: string
   name?: string
+  onVerifyType?: any
   translate?: TypeTranslate
 
   width?: number | string
@@ -88,6 +89,7 @@ export const DropFile = React.forwardRef<HTMLInputElement, Props>(
       errorMessage,
       errorForm,
       onChange,
+      onVerifyType,
       ...props
     },
     ref
@@ -140,8 +142,8 @@ export const DropFile = React.forwardRef<HTMLInputElement, Props>(
         const reader = new FileReader()
 
         reader.onload = e => {
-          if (e.target) {
-            setImage(e.target.result)
+          if (e?.target) {
+            setImage(e?.target?.result)
           }
         }
 
@@ -162,10 +164,16 @@ export const DropFile = React.forwardRef<HTMLInputElement, Props>(
     }
 
     function verifyType(file) {
-      if (file.type === 'image/jpeg' || file.type === 'image/png') {
+      if (onVerifyType) {
+        if (onVerifyType(file)) {
+          setTypeError(null)
+          return true
+        }
+      } else if (file.type === 'image/jpeg' || file.type === 'image/png') {
         setTypeError(null)
         return true
       }
+
       setTypeError('type')
       return false
     }
@@ -264,5 +272,6 @@ DropFile.propTypes = {
   initImage: PropTypes.string,
   errorMessage: PropTypes.string,
   errorForm: PropTypes.bool,
+  onVerifyType: PropTypes.func,
   name: PropTypes.string
 }
