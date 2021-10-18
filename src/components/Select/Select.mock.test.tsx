@@ -1,7 +1,7 @@
 import React from 'react'
 import { fireEvent } from '@testing-library/react'
 
-import { Select } from '../Select'
+import { Select } from '.'
 import { render } from '../utils/test/render'
 
 const items = [
