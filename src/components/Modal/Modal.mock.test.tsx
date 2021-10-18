@@ -1,7 +1,7 @@
 import { fireEvent } from '@testing-library/react'
 import React from 'react'
 
-import { Modal } from '../Modal'
+import { Modal } from '.'
 import { render } from '../utils/test/render'
 
 describe('Modal', () => {

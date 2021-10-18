@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { SubMenu } from '../SubMenu'
+import { SubMenu } from '.'
 import { render } from '../utils/test/render'
 
 describe('SubMenu', () => {

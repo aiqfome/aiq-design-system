@@ -138,10 +138,12 @@ export const Radio = React.forwardRef<HTMLInputElement, Props>(
 
     const onInputChange = useCallback(
       (event: any) => {
-        setChecked(!checked)
-        onChange(event)
+        if (!disabled) {
+          setChecked(!checked)
+          onChange(event)
+        }
       },
-      [checked, onChange]
+      [disabled, checked, onChange]
     )
 
     useEffect(() => {

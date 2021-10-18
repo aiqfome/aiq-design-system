@@ -1,6 +1,6 @@
 import { addDecorator, addParameters } from '@storybook/react';
 import React from 'react';
-import {ThemeProvider} from 'styled-components';
+import { ThemeProvider } from 'styled-components';
 
 import GlobalStyles from '../src/global/styles';
 import PopoverStyles from '../src/global/popover';
@@ -32,7 +32,6 @@ function withTheme(storyFn) {
     </ThemeProvider>
   );
 }
-
 
 addParameters({
   options: {
