@@ -19,27 +19,22 @@ A component lib in [React](https://reactjs.org/) developing for [Rosalvo](https:
     <img alt="" src=
   "https://img.shields.io/github/last-commit/grandchef/rosalvo-design-system">
   </a>
-  <a aria-label="license" href="https://github.com/grandchef/rosalvo-design-system/blob/master/LICENSE">
-    <img src="https://img.shields.io/github/license/grandchef/rosalvo-design-system" alt="">
-  </a>
 </p>
 
-
-[![npm package](https://img.shields.io/npm/v/rosalvo-design-system/latest)](https://www.npmjs.com/package/rosalvo-design-system)
-[![languages](https://img.shields.io/github/languages/count/grandchef/rosalvo-design-system)](https://www.npmjs.com/package/rosalvo-design-system)
-[![npm downloads](https://img.shields.io/npm/dm/rosalvo-design-system)](https://www.npmjs.com/package/rosalvo-design-system)
+[![npm package](https://img.shields.io/npm/v/@grandchef/rosalvo-design-system/latest)](https://www.npmjs.com/package/@grandchef/rosalvo-design-system)
 ![Code style](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)
+[![license](https://img.shields.io/github/license/grandchef/rosalvo-design-system)](https://github.com/grandchef/rosalvo-design-system/blob/master/LICENSE)
 
 </div>
 
 ## How install
 
 ```sh
-yarn add rosalvo-design-system
+yarn add @grandchef/rosalvo-design-system
 
 or
 
-npm install rosalvo-design-system
+npm install @grandchef/rosalvo-design-system
 ```
 
 ## How utilize
