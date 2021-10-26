@@ -40,17 +40,14 @@ const BackgroundAlert = styled(Flex)<BackgroundAlertProps>`
   left: 0;
   width: 100%;
   background: ${({ theme }) => theme.colors.black}30;
-
   &.hide {
     z-index: -1;
     opacity: 0;
   }
-
   &.show {
     opacity: 1;
     z-index: ${({ zIndex }) => zIndex};
   }
-
   ${({ animation }) =>
     animation &&
     css`
@@ -95,19 +92,15 @@ const ModalStyled = styled(Flex)<AlertStyledProps>`
   padding: 30px 24px 22px 30px;
   max-width: 362px;
   align-items: flex-start;
-
   ${layout}
-
   &.hide {
     z-index: -1;
     opacity: 0;
   }
-
   &.show {
     opacity: 1;
     z-index: 2000;
   }
-
   ${({ animation }) =>
     animation &&
     css`
@@ -180,7 +173,10 @@ export const Alert: React.FC<Props> = ({
   }
 
   function handleClickOutSide({ target }) {
-    if (target.className && target.className.includes('background-modal')) {
+    if (
+      typeof target?.className === 'string' &&
+      target.className.includes('background-modal')
+    ) {
       onClose()
     }
   }
