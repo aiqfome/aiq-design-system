@@ -121,6 +121,26 @@ const FlexStyled = styled(Flex)<TabsProps>`
   }}
 `
 
+const InnerFlex = styled(Flex)<TabsProps>`
+  overflow-y: hidden;
+  overflow-x: auto;
+  position: relative;
+  -webkit-overflow-scrolling: auto;
+
+  span {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+`
+
 export const Tabs: React.FC<TabsProps> = ({
   extra,
   children,
@@ -158,13 +178,16 @@ export const Tabs: React.FC<TabsProps> = ({
   useEffect(() => {
     const handleScroll = e => {
       if (refFlex && isMobile) {
-        refFlex.current.scrollLeft += e.deltaY
+        if (e.type === 'wheel') {
+          refFlex.current.scrollLeft += e.deltaY
+        }
 
         if (refFlex.current.scrollLeft === 0) {
           setScrollPosition('left')
         } else if (
-          refFlex.current.offsetWidth + refFlex.current.scrollLeft ===
-          refFlex.current.scrollWidth
+          Math.floor(
+            refFlex.current.offsetWidth + refFlex.current.scrollLeft
+          ) === refFlex.current.scrollWidth
         ) {
           setScrollPosition('right')
         } else {
@@ -175,6 +198,7 @@ export const Tabs: React.FC<TabsProps> = ({
 
     if (refFlex) {
       refFlex.current.addEventListener('wheel', handleScroll)
+      refFlex.current.addEventListener('touchmove', handleScroll)
     }
   }, [refFlex, isMobile])
 
@@ -185,17 +209,15 @@ export const Tabs: React.FC<TabsProps> = ({
   return (
     <TabStyled data-testid='tabs' {...props}>
       <FlexStyled isMobile={isMobile} scrollPosition={scrollPosition}>
-        <Flex
+        <InnerFlex
           flex={1}
           ref={refFlex}
-          overflow='hidden'
-          position='relative'
           onClick={handleClick}
           data-testid='tabs-container'
           {...wrapperProps}
         >
           {children}
-        </Flex>
+        </InnerFlex>
       </FlexStyled>
 
       {extra && <Flex px='12px'>{extra}</Flex>}
