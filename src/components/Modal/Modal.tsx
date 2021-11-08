@@ -9,7 +9,7 @@ import { Text } from '../Text'
 import { Box } from '../Box'
 
 export interface Props {
-  title: string
+  title?: string
   form?: any
   formProps?: any
   buttonsProps?: any
@@ -177,7 +177,7 @@ const defaultButton = {
 }
 
 export const Modal: React.FC<Props> = ({
-  title,
+  title = '',
   children,
   show = false,
   zIndex = 2010,
@@ -261,16 +261,18 @@ export const Modal: React.FC<Props> = ({
             className={show ? 'show' : 'hide'}
             {...props}
           >
-            <Text
-              color='primary'
-              fontSize='xlarge'
-              marginBottom='15px'
-              fontWeight='semiBold'
-              data-testid='modal-title'
-              textAlign='center'
-            >
-              {title}
-            </Text>
+            {title && (
+              <Text
+                color='primary'
+                fontSize='xlarge'
+                marginBottom='15px'
+                fontWeight='semiBold'
+                data-testid='modal-title'
+                textAlign='center'
+              >
+                {title}
+              </Text>
+            )}
 
             {children}
 
