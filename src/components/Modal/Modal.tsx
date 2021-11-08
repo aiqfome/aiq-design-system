@@ -8,7 +8,7 @@ import { Button } from '../Button'
 import { Text } from '../Text'
 import { Box } from '../Box'
 
-export interface Props {
+export interface Props extends React.HTMLAttributes<HTMLElement> {
   title?: string
   form?: any
   formProps?: any
