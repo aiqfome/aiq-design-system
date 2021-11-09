@@ -26,6 +26,22 @@ export const Basic = (): ReactElement => {
   )
 }
 
+export const BasicSecondary = (): ReactElement => {
+  const [checked, setChecked] = useState(false)
+
+  return (
+    <Flex variant='fullCentralized'>
+      <Switch
+        checked={checked}
+        secondary
+        onChange={e => {
+          setChecked(e.target.checked)
+        }}
+      />
+    </Flex>
+  )
+}
+
 export const BasicDisabled = (): ReactElement => (
   <Flex variant='fullCentralized'>
     <Switch

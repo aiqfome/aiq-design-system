@@ -1,5 +1,4 @@
 import React, { InputHTMLAttributes } from 'react'
-import PropTypes from 'prop-types'
 import styled, { css, DefaultTheme } from 'styled-components'
 import { space } from 'styled-system'
 
@@ -8,6 +7,7 @@ export interface Props
     InputHTMLAttributes<HTMLInputElement> {
   checked?: boolean
   disabled?: boolean
+  secondary?: boolean
   className?: string
   variant?: 'default' | 'small'
 }
@@ -76,7 +76,8 @@ const SwitchStyled = styled.label<Props>`
     }
 
     &:not(:checked):not(:disabled):hover::before {
-      background-color: ${({ theme }) => theme.colors.primaryLight};
+      background-color: ${({ theme, secondary }) =>
+        secondary ? theme.colors.secondaryLight : theme.colors.primaryLight};
     }
 
     &:checked::after {
@@ -84,7 +85,8 @@ const SwitchStyled = styled.label<Props>`
     }
 
     &:checked::before {
-      background-color: ${({ theme }) => theme.colors.primary};
+      background-color: ${({ theme, secondary }) =>
+        secondary ? theme.colors.secondary : theme.colors.primary};
     }
 
     &:disabled {
@@ -107,7 +109,8 @@ const SwitchStyled = styled.label<Props>`
     }
 
     &:disabled:checked:after {
-      background-color: ${({ theme }) => theme.colors.primaryLight};
+      background-color: ${({ theme, secondary }) =>
+        secondary ? theme.colors.secondaryLight : theme.colors.primaryLight};
       box-shadow: none;
     }
 
@@ -120,11 +123,12 @@ const SwitchStyled = styled.label<Props>`
 `
 
 export const Switch = React.forwardRef<HTMLInputElement, Props>(
-  ({ variant = 'default', className, ...props }, ref) => {
+  ({ variant = 'default', className, secondary = false, ...props }, ref) => {
     return (
       <SwitchStyled
         variant={variant}
         className={className}
+        secondary={secondary}
         data-testid='switch'
       >
         <input ref={ref} type='checkbox' data-testid='input' {...props} />
@@ -134,9 +138,3 @@ export const Switch = React.forwardRef<HTMLInputElement, Props>(
 )
 
 Switch.displayName = 'Switch'
-
-Switch.propTypes = {
-  checked: PropTypes.bool,
-  variant: PropTypes.oneOf(['default', 'small']),
-  className: PropTypes.string
-}
