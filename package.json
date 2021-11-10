@@ -1,6 +1,6 @@
 {
   "name": "@grandchef/rosalvo-design-system",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "main": "core/index.js",
   "repository": "git@github.com:grandchef/rosalvo-design-system.git",
   "license": "MIT",
