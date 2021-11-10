@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 
-import PropTypes from 'prop-types'
 import { layout } from 'styled-system'
 import { createPortal } from 'react-dom'
 import styled, { DefaultTheme, css } from 'styled-components'
@@ -215,6 +214,7 @@ export const Alert: React.FC<Props> = ({
                 onClick={handleCancel}
                 marginRight={48}
                 palette='primary'
+                {...cancelButton}
               >
                 {cancelButton.label}
               </Button>
@@ -225,6 +225,7 @@ export const Alert: React.FC<Props> = ({
                 data-testid='modal-alert-btn-ok'
                 onClick={handleOk}
                 palette='primary'
+                {...okButton}
               >
                 {okButton.label}
               </Button>
@@ -237,15 +238,4 @@ export const Alert: React.FC<Props> = ({
   }
 
   return <Box display='none'></Box>
-}
-
-Alert.propTypes = {
-  okButton: PropTypes.any,
-  zIndex: PropTypes.number,
-  children: PropTypes.node,
-  animation: PropTypes.bool,
-  cancelButton: PropTypes.any,
-  show: PropTypes.bool.isRequired,
-  title: PropTypes.string.isRequired,
-  onClose: PropTypes.func.isRequired
 }
