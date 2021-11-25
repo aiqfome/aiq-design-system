@@ -1,6 +1,7 @@
-import React, { ReactNode, useCallback } from 'react'
-import PropTypes from 'prop-types'
+import React, { ReactNode, useCallback, ButtonHTMLAttributes } from 'react'
+
 import styled, { css, DefaultTheme } from 'styled-components'
+
 import {
   color,
   space,
@@ -19,7 +20,8 @@ import { Icon } from '../Icon'
 import { Text } from '../Text'
 
 export interface Props
-  extends DefaultTheme,
+  extends ButtonHTMLAttributes<HTMLButtonElement>,
+    DefaultTheme,
     SpaceProps,
     LayoutProps,
     BorderProps,
@@ -255,77 +257,84 @@ export const ButtonStyled = styled.button<Props>`
   }
 `
 
-export const Button: React.FC<Props> = ({
-  children,
-  prefix,
-  sufix,
-  palette = 'primary',
-  variant = 'text',
-  variantType,
-  type = 'button',
-  className,
-  ...props
-}) => {
-  const getClassName = useCallback(() => {
-    return `${className} __button-${variant} __button-${variant}-${palette} ${
-      variantType && `__button-${variant}-${variantType}`
-    }`
-  }, [palette, variant, variantType, className])
+export const Button = React.forwardRef<HTMLButtonElement, Props>(
+  (
+    {
+      children,
+      prefix,
+      sufix,
+      palette = 'primary',
+      variant = 'text',
+      variantType,
+      type = 'button',
+      className,
+      ...props
+    },
+    ref
+  ) => {
+    const getClassName = useCallback(() => {
+      return `${className} __button-${variant} __button-${variant}-${palette} ${
+        variantType && `__button-${variant}-${variantType}`
+      }`
+    }, [palette, variant, variantType, className])
 
-  if (sufix && prefix) {
+    if (sufix && prefix) {
+      return (
+        <ButtonStyled
+          className={getClassName()}
+          type={type}
+          ref={ref}
+          {...props}
+        >
+          <Icon data-testid='button-prefix' cursor='pointer' mr={5}>
+            {prefix}
+          </Icon>
+          <Text fontSize='medium'>{children}</Text>
+          <Icon data-testid='button-sufix' cursor='pointer' ml={5}>
+            {sufix}
+          </Icon>
+        </ButtonStyled>
+      )
+    }
+
+    if (prefix) {
+      return (
+        <ButtonStyled
+          className={getClassName()}
+          type={type}
+          ref={ref}
+          {...props}
+        >
+          <Icon data-testid='button-prefix' cursor='pointer' mr={5}>
+            {prefix}
+          </Icon>
+          <Text fontSize='medium'>{children}</Text>
+        </ButtonStyled>
+      )
+    }
+
+    if (sufix) {
+      return (
+        <ButtonStyled
+          className={getClassName()}
+          type={type}
+          ref={ref}
+          {...props}
+        >
+          <Text fontSize='medium'>{children}</Text>
+          <Icon data-testid='button-sufix' cursor='pointer' ml={5}>
+            {sufix}
+          </Icon>
+        </ButtonStyled>
+      )
+    }
+
     return (
-      <ButtonStyled className={getClassName()} type={type} {...props}>
-        <Icon data-testid='button-prefix' cursor='pointer' mr={5}>
-          {prefix}
-        </Icon>
+      <ButtonStyled type={type} className={getClassName()} ref={ref} {...props}>
         <Text fontSize='medium'>{children}</Text>
-        <Icon data-testid='button-sufix' cursor='pointer' ml={5}>
-          {sufix}
-        </Icon>
       </ButtonStyled>
     )
   }
+)
 
-  if (prefix) {
-    return (
-      <ButtonStyled className={getClassName()} type={type} {...props}>
-        <Icon data-testid='button-prefix' cursor='pointer' mr={5}>
-          {prefix}
-        </Icon>
-        <Text fontSize='medium'>{children}</Text>
-      </ButtonStyled>
-    )
-  }
-
-  if (sufix) {
-    return (
-      <ButtonStyled className={getClassName()} type={type} {...props}>
-        <Text fontSize='medium'>{children}</Text>
-        <Icon data-testid='button-sufix' cursor='pointer' ml={5}>
-          {sufix}
-        </Icon>
-      </ButtonStyled>
-    )
-  }
-
-  return (
-    <ButtonStyled type={type} className={getClassName()} {...props}>
-      <Text fontSize='medium'>{children}</Text>
-    </ButtonStyled>
-  )
-}
-
-Button.propTypes = {
-  children: PropTypes.any,
-  prefix: PropTypes.any,
-  className: PropTypes.string,
-  sufix: PropTypes.any,
-  refButton: PropTypes.any,
-  palette: PropTypes.oneOf(['primary', 'error', 'secondary', 'neutral']),
-  variantType: PropTypes.string,
-  variant: PropTypes.oneOf(['text', 'contained', 'outlined', 'fab', 'icon']),
-  disabled: PropTypes.bool,
-  fontWeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  onClick: PropTypes.func,
-  type: PropTypes.oneOf(['button', 'submit', 'reset'])
-}
+Button.displayName = 'Button'
