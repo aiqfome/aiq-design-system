@@ -3,6 +3,7 @@ import { fireEvent } from '@testing-library/react'
 
 import { Select } from '.'
 import { render } from '../utils/test/render'
+import { Button } from '../Button'
 
 const items = [
   { id: 0, name: 'Maringá' },
@@ -110,6 +111,19 @@ describe('Select', () => {
     })
 
     const list = container.querySelectorAll('li')
+    expect(list.length).toBe(1)
+  })
+
+  it('should show a button when the item is not found', () => {
+    const { getByTestId, container } = render(
+      <Select items={items} emptyElement={<Button>Adicionar</Button>} />
+    )
+
+    fireEvent.change(getByTestId('input'), {
+      target: { value: 'Paranavaí' }
+    })
+
+    const list = container.querySelectorAll('button')
     expect(list.length).toBe(1)
   })
 })

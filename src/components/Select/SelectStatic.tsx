@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { ReactElement, useEffect, useState } from 'react'
 import styled, { css } from 'styled-components'
 import PropTypes from 'prop-types'
 import { useCombobox } from 'downshift'
@@ -28,6 +28,7 @@ export interface Props extends BoxPros {
   clearOnSelect?: boolean
   loadingMessage?: string
   emptyMessage?: string
+  emptyElement?: ReactElement
   isDependent?: boolean
   dependentMessage?: string
 }
@@ -115,6 +116,7 @@ export const SelectStatic: React.FC<Props> = ({
   isDependent = false,
   dependentMessage = 'este campo tem alguma dependência',
   emptyMessage = 'item não encontrado',
+  emptyElement,
   handleSelectedItemChange = () => {
     // do nothing.
   },
@@ -198,9 +200,22 @@ export const SelectStatic: React.FC<Props> = ({
 
         {isDependent && <Item>{dependentMessage}</Item>}
 
-        {isOpen && !isDependent && inputItems && inputItems.length === 0 && (
-          <li>{emptyMessage}</li>
-        )}
+        {isOpen &&
+          !isDependent &&
+          !emptyElement &&
+          inputItems &&
+          inputItems.length === 0 && <Item>{emptyMessage}</Item>}
+
+        {isOpen &&
+          !isDependent &&
+          emptyElement &&
+          inputItems &&
+          inputItems.length === 0 &&
+          (getInputProps().value ? (
+            <Item>{emptyElement}</Item>
+          ) : (
+            <Item>{emptyMessage}</Item>
+          ))}
       </ul>
 
       <Box refBox={getComboboxProps().ref}>
@@ -275,6 +290,7 @@ SelectStatic.propTypes = {
   clearOnSelect: PropTypes.bool,
   isDependent: PropTypes.bool,
   emptyMessage: PropTypes.string,
+  emptyElement: PropTypes.element,
   dependentMessage: PropTypes.string
 }
 

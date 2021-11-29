@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { withKnobs, text, object } from '@storybook/addon-knobs'
 import { Select } from './Select'
 import { Flex } from '../Flex'
+import { Button } from '../Button'
 
 import { MdSearch } from 'react-icons/md'
 
@@ -125,6 +126,53 @@ export const Loading: React.FC = () => {
         }
         label={text('label', 'aiq-design-system')}
         items={object('items', itens)}
+        sufix={<MdSearch />}
+      />
+    </Flex>
+  )
+}
+
+export const EmptyElement: React.FC = () => {
+  const items = [
+    { name: 'React', id: 1 },
+    { name: 'CSS', id: 2 },
+    { name: 'PHP', id: 3 },
+    { name: 'HTML', id: 4 }
+  ]
+
+  const [newItem, setNewItem] = useState<{ id: number; name: string }>()
+
+  const handleNewItem = (name: string) => {
+    if (!items.some(item => item.name === name)) {
+      const newItem = { id: 5, name }
+      setNewItem(newItem)
+    }
+  }
+
+  const addNewItem = () => {
+    console.log(newItem)
+  }
+
+  const renderAddNew = (
+    <Button onClick={addNewItem}>{`Adicionar o item ${newItem?.name}`}</Button>
+  )
+  return (
+    <Flex variant='fullCentralized'>
+      <Select
+        mr='32px'
+        variant='outlined'
+        emptyElement={renderAddNew}
+        onChangeTextInput={handleNewItem}
+        label={text('label', 'Preenchido')}
+        items={object('items', items)}
+        sufix={<MdSearch />}
+      />
+      <Select
+        variant='outlined'
+        emptyElement={renderAddNew}
+        onChangeTextInput={handleNewItem}
+        label={text('label', 'Vazio')}
+        items={[]}
         sufix={<MdSearch />}
       />
     </Flex>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 import PropTypes from 'prop-types'
 
 import { Props as BoxProps } from '../Box'
@@ -25,6 +25,7 @@ export interface Props extends BoxProps {
   inputProps?: any
   loadingMessage?: string
   emptyMessage?: string
+  emptyElement?: ReactElement
   defaultValue?: any
   clearOnSelect?: boolean
   isDependent?: boolean

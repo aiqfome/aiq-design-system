@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { ReactElement, useEffect, useState } from 'react'
 import styled, { css } from 'styled-components'
 import PropTypes from 'prop-types'
 import { useCombobox } from 'downshift'
@@ -27,6 +27,7 @@ export interface Props extends BoxPros {
   onChange?: any
   loadingMessage?: string
   emptyMessage?: string
+  emptyElement?: ReactElement
   inputProps?: any
   isDependent?: boolean
   dependentMessage?: string
@@ -113,6 +114,7 @@ export const SelectFetchable: React.FC<Props> = ({
   dependentMessage = 'este campo tem alguma dependência',
   loadingMessage = 'carregando...',
   emptyMessage = 'item não encontrado',
+  emptyElement,
   handleSelectedItemChange = () => {
     // do nothing.
   },
@@ -204,7 +206,20 @@ export const SelectFetchable: React.FC<Props> = ({
           inputItems &&
           !isLoading &&
           !isDependent &&
+          !emptyElement &&
           inputItems.length === 0 && <Item>{emptyMessage}</Item>}
+
+        {isOpen &&
+          inputItems &&
+          !isLoading &&
+          !isDependent &&
+          emptyElement &&
+          inputItems.length === 0 &&
+          (getInputProps().value ? (
+            <Item>{emptyElement}</Item>
+          ) : (
+            <Item>{emptyMessage}</Item>
+          ))}
 
         {isDependent && <Item>{dependentMessage}</Item>}
       </ul>
@@ -273,6 +288,7 @@ SelectFetchable.propTypes = {
   isDependent: PropTypes.bool,
   dependentMessage: PropTypes.string,
   emptyMessage: PropTypes.string,
+  emptyElement: PropTypes.element,
   loadingMessage: PropTypes.string
 }
 
