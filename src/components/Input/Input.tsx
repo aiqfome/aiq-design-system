@@ -44,6 +44,11 @@ export const Input: React.FC<Props> = ({
   placeholder,
   mask,
   onChange,
+  onPaste,
+  onMouseDown,
+  onFocus,
+  onBlur,
+  readOnly,
   disabled,
   nativeAutoComplete = 'on',
   ...props
@@ -55,6 +60,11 @@ export const Input: React.FC<Props> = ({
           mask={mask}
           value={value}
           onChange={onChange}
+          onPaste={onPaste}
+          onMouseDown={onMouseDown}
+          onFocus={onFocus}
+          onBlur={onBlur}
+          readOnly={readOnly}
           disabled={disabled}
         >
           {inputProps => (
@@ -91,6 +101,11 @@ export const Input: React.FC<Props> = ({
         data-testid='input-container'
         placeholder={placeholder}
         onChange={onChange}
+        onPaste={onPaste}
+        onMouseDown={onMouseDown}
+        onFocus={onFocus}
+        onBlur={onBlur}
+        readOnly={readOnly}
         disabled={disabled}
         nativeAutoComplete={nativeAutoComplete}
         {...props}
@@ -108,6 +123,11 @@ export const Input: React.FC<Props> = ({
         value={value}
         placeholder={placeholder}
         onChange={onChange}
+        onPaste={onPaste}
+        onMouseDown={onMouseDown}
+        onFocus={onFocus}
+        onBlur={onBlur}
+        readOnly={readOnly}
         data-testid='input-container'
         nativeAutoComplete={nativeAutoComplete}
         {...props}
@@ -121,6 +141,11 @@ export const Input: React.FC<Props> = ({
         mask={mask}
         value={value}
         onChange={onChange}
+        onPaste={onPaste}
+        onMouseDown={onMouseDown}
+        onFocus={onFocus}
+        onBlur={onBlur}
+        readOnly={readOnly}
         disabled={disabled}
       >
         {inputProps => (
@@ -155,6 +180,11 @@ export const Input: React.FC<Props> = ({
       value={value}
       placeholder={placeholder}
       onChange={onChange}
+      onPaste={onPaste}
+      onMouseDown={onMouseDown}
+      onFocus={onFocus}
+      onBlur={onBlur}
+      readOnly={readOnly}
       data-testid='input-container'
       disabled={disabled}
       nativeAutoComplete={nativeAutoComplete}
@@ -184,6 +214,11 @@ Input.propTypes = {
   maxWidth: PropTypes.any,
   mask: PropTypes.string,
   onChange: PropTypes.func,
+  onPaste: PropTypes.func,
+  onMouseDown: PropTypes.func,
+  onFocus: PropTypes.func,
+  onBlur: PropTypes.func,
+  readOnly: PropTypes.bool,
   disabled: PropTypes.bool,
   nativeAutoComplete: PropTypes.oneOf(['on', 'disabled'])
 }

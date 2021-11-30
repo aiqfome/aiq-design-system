@@ -19,6 +19,11 @@ export interface Props {
   value?: string
   placeholder?: string
   onChange?: (value: any) => void
+  onPaste?: (value: any) => void
+  onMouseDown?: (value: any) => void
+  onFocus?: (value: any) => void
+  onBlur?: (value: any) => void
+  readOnly?: boolean
 
   backgroundColor?: any
   border?: any
