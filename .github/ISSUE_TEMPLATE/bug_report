@@ -1,0 +1,74 @@
+name: "Bug Report"
+description: "File a bug report"
+labels: ['bug']
+body:
+  - type: "markdown"
+    attributes:
+      value: |
+        preenche o form aqui pra geral entender melhor esse bug.
+
+        ah, e da uma olhada pra ver se já não tem nenhum tópico aberto com o mesmo assunto!
+
+        tenta manter o mais breve e mais simples possível e bora ver essa ideia 😉
+  - type: "input"
+    id: "description"
+    attributes:
+      label: "descrição"
+      description: "uma breve descrição do bug e onde foi encontrado."
+      placeholder: |
+        quando eu ____, eu esperava que ____ fosse acontecer, mas ____ acabou acontecendo.
+    validations:
+      required: true
+  - type: "input"
+    id: "reproduction"
+    attributes:
+      label: "reprodução"
+      description: |
+        consegue criar uma reprodução pra todos verem do que se trata?
+        
+        recomendamos o CodeSandbox pra demonstração do bug.
+        você pode criar um e colocar o link aqui!
+        
+        temos um template no codesandbox pré configurado (https://codesandbox.io/s/aiq-design-system-yukfc)
+      placeholder: "https://codesandbox.io/s/aiq-design-system-yukfc"
+  - type: "textarea"
+    id: "steps"
+    attributes:
+      label: "como reproduzir"
+      description: |
+        manda aqui um passo a passo pra reproduzir o bug!
+      value: |
+        1. adiciona a lib no projeto '...'
+        2. adiciona um button no layout '...'
+        3. adiciona uma prop xyz no button '...'
+        4. erro acontece
+  - type: "input"
+    id: "lib-version"
+    attributes:
+      label: "versão da lib"
+      description: "qual versão da lib você ta usando no projeto?"
+      placeholder: "0.5.0"
+    validations:
+      required: true
+  - type: "input"
+    id: "browser"
+    attributes:
+      label: "navegador"
+      description: "qual o navegador e versão que o bug aconteceu?"
+      placeholder: "Google Chrome v98"
+  - type: "checkboxes"
+    id: "operating-system"
+    attributes:
+      label: "systema operacional"
+      description: "qual o sistema operacional e versão que o bug aconteceu?"
+      options:
+        - label: "macOS"
+        - label: "Windows"
+        - label: "Linux"
+  - type: "textarea"
+    id: "additional-information"
+    attributes:
+      label: "informações adicionais"
+      description: |
+        alguma informação adicional que ajude a gente a desvendar esse mistério?
+        pode mandar aqui (screenshots, links, etc)
