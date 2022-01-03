@@ -1,0 +1,48 @@
+name: 'Feature Request'
+description: 'mandar uma ideia nova ou melhoria pro projeto!'
+labels: ['to-discuss']
+body:
+  - type: 'markdown'
+    attributes:
+      value: |
+        preenche o form aqui pra geral entender melhor a feature/melhoria.
+
+        ah, e da uma olhada pra ver se já não tem nenhum tópico aberto com o mesmo assunto!
+
+        tenta manter o mais breve e mais simples possível e bora ver essa ideia 😉
+  - type: 'textarea'
+    id: 'description'
+    attributes:
+      label: 'descrição'
+      description: 'descreve aqui qual a ideia principal da feature/melhoria que tu pensou. Pode ser um texto curto de até duas linhas!'
+    validations:
+      required: true
+  - type: 'textarea'
+    id: 'justification'
+    attributes:
+      label: 'justificativa'
+      description: |
+        fala pra nós aqui o porque essa feature é interessante pro nosso projeto!
+    validations:
+      required: true
+  - type: 'textarea'
+    id: 'proposed-solution'
+    attributes:
+      label: 'solução proposta ou API'
+      description: |
+        já tem alguma código desenvolvido ou referências pra essa nova feature? 
+        manda aqui pra gente entender melhor!
+    validations:
+      required: true
+  - type: 'textarea'
+    id: 'alternatives'
+    attributes:
+      label: 'alguma alternativa?'
+      description: |
+        existe alguma alternativa pra criação dessa feature/melhoria?
+  - type: 'textarea'
+    id: 'additional-information'
+    attributes:
+      label: 'informações adicionais'
+      description: |
+        pode deixar aqui informações adicionais pra explicar a ideia (links, screenshots, etc.)
