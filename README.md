@@ -6,33 +6,27 @@
 
 <div align="center">
 
-A component lib in [React](https://reactjs.org/) developing for [aiqfome](http://www.aiqfome.com).
+a biblioteca de componentes para projetos React da galera do [aiqfome](http://www.aiqfome.com).
 
 <p align="center">
-  <a href="https://github.com/aiqfome" style="text-decoration:none" target="_blank">
-    <img alt="Made by AiqFome" src="https://img.shields.io/badge/made%20by-aiqfome-blueviolet">
-  </a>
   <a aria-label="contributors graph" href="https://github.com/aiqfome/aiq-design-system/graphs/contributors">
     <img src="https://img.shields.io/github/contributors/aiqfome/aiq-design-system.svg">
   </a>
-  <a aria-label="last commit" href="https://github.com/aiqfome/aiq-design-system/commits/master">
-    <img alt="" src=
-  "https://img.shields.io/github/last-commit/aiqfome/aiq-design-system.svg">
-  </a>
+  
+  <img alt="Language grade: JavaScript" src="https://img.shields.io/lgtm/grade/javascript/github/aiqfome/aiq-design-system.svg?logo=lgtm&logoWidth=18"/>
+  
   <a aria-label="license" href="https://github.com/aiqfome/aiq-design-system/blob/master/LICENSE">
     <img src="https://img.shields.io/github/license/aiqfome/aiq-design-system.svg" alt="">
   </a>
+  
+  <img alt="NPM Downloads" src="https://img.shields.io/npm/dm/aiq-design-system.svg?style=flat"/>
+  
+  [![npm downloads](https://img.shields.io/npm/dm/aiq-design-system.svg)](https://www.npmjs.com/package/aiq-design-system)
 </p>
-
-
-[![npm package](https://img.shields.io/npm/v/aiq-design-system/latest.svg)](https://www.npmjs.com/package/aiq-design-system)
-[![languages](https://img.shields.io/github/languages/count/aiqfome/aiq-design-system)](https://www.npmjs.com/package/aiq-design-system)
-[![npm downloads](https://img.shields.io/npm/dm/aiq-design-system.svg)](https://www.npmjs.com/package/aiq-design-system)
-![Code style](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)
 
 </div>
 
-## How install
+## como adicionar ao projeto
 
 ```sh
 yarn add aiq-design-system
@@ -42,34 +36,55 @@ or
 npm install aiq-design-system
 ```
 
-## The components
 
-[See all the components](https://5f8f398c11ba7b00229e5606-dlujpbuxgg.chromatic.com/?path=/story/actions--basic)
+## os componentes
 
-## How utilize
+nossos componentes estão nesse [storybook](https://5f8f398c11ba7b00229e5606-dlujpbuxgg.chromatic.com/?path=/story/actions--basic)
 
-A quick use for the lib:
+documentação oficial: **coming soon**
+
+
+
+## configuração básica
+
+pra começar a utilizar os componentes, segue esses passos: 
+
+1 - a gente disponibiliza um wrapper pra você adicionar na aplicação, é o `ThemeProvider` importado da **aiq-design-system**.
 
 ```jsx
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import { Button, Input, Flex, ThemeProvider } from "aiq-design-system";
+import { ThemeProvider } from "aiq-design-system";
 
-function App() {
-  return (
-    <ThemeProvider>
-      <Flex p={20} flexDirection="column">
-        <Input variant="outlined" label="I want Pizza!" />
-        <Button variant="contained">aiq</Button>
-      </Flex>
-    </ThemeProvider>
-  );
+function App({ children }) {
+  return <ThemeProvider>{children}</ThemeProvider>
 }
 
-ReactDOM.render(<App />, document.querySelector('#app'))
 ```
 
-A sandbox for interaction:
+2 - já pode sair utilizando os componentes importados da **aiq-design-system**
 
-[![Edit Button](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/aiq-design-system-yhpir?file=/src/App.js)
+```jsx
+import React from 'react'
+import ReactDOM from 'react-dom'
+
+import { Button, Flex, Input } from "aiq-design-system";
+
+export const AiqComponent() {
+  return (
+    <Flex p={20} flexDirection="column">
+      <Input variant="outlined" label="duas pizzas é muito?" />
+      <Button variant="contained">fazer pedido!</Button>
+    </Flex>
+  )
+}
+
+```
+
+
+## template no codesandbox
+
+temos um template configurado no codesandbox com a lib configurada!
+
+[![Edit Button](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/aiq-design-system-yukfc)
