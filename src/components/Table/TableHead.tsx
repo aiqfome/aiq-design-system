@@ -1,7 +1,7 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
 import styled from 'styled-components'
+
 import {
   space,
   layout,
@@ -41,9 +41,4 @@ export const TableHead: React.FC<Props> = ({ children, ...props }) => {
       {children}
     </TableHeaderStyled>
   )
-}
-
-TableHead.propTypes = {
-  children: PropTypes.node,
-  wrap: PropTypes.any
 }
