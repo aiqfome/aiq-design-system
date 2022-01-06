@@ -90,7 +90,7 @@ export const Sidebar: React.FC<Props> = ({
     >
       {data.length >= 0 && (
         <>
-          {header && header}
+          {header || null}
 
           <Divider width='100%' marginBottom='16px' />
 
