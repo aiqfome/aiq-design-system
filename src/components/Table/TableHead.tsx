@@ -6,7 +6,6 @@ import {
   space,
   layout,
   typography,
-  ColorProps,
   SpaceProps,
   LayoutProps,
   TypographyProps
@@ -36,7 +35,7 @@ const TableHeaderStyled = styled.th<Props>`
   ${typography}
 `
 
-export const TableHead: React.FC<Props> = ({ children, wrap, ...props }) => {
+export const TableHead: React.FC<Props> = ({ children, ...props }) => {
   return (
     <TableHeaderStyled data-testid='table-head' {...props}>
       {children}
