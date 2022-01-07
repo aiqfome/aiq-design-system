@@ -1,7 +1,7 @@
 import React, { ReactNode, useState } from 'react'
-import PropTypes from 'prop-types'
 
 import RcDropdown from 'rc-dropdown'
+
 import styled, { css } from 'styled-components'
 
 import { Divider } from '../Divider'
@@ -143,7 +143,7 @@ export const Actions: React.FC<Props> = ({
               index
             ) =>
               visible ? (
-                !disabled || (disabled && !disabledMessage) ? (
+                !disabled || !disabledMessage ? (
                   <MenuItem
                     {...itemProps}
                     py={3}
@@ -230,22 +230,4 @@ export const Actions: React.FC<Props> = ({
       {child}
     </RcDropdown>
   )
-}
-
-Actions.propTypes = {
-  title: PropTypes.any,
-  arrow: PropTypes.bool,
-  header: PropTypes.any,
-  items: PropTypes.array,
-  keepOpen: PropTypes.bool,
-  children: PropTypes.node.isRequired,
-  trigger: PropTypes.oneOf(['click', 'hover', 'contextMenu']),
-  placement: PropTypes.oneOf([
-    'topRight',
-    'topLeft',
-    'topCenter',
-    'bottomLeft',
-    'bottomRight',
-    'bottomCenter'
-  ])
 }

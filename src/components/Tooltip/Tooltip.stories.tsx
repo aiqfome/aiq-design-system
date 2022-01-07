@@ -3,7 +3,6 @@ import React, { ReactElement } from 'react'
 import { Tooltip } from './Tooltip'
 import { Text } from '../Text'
 import { Flex } from '../Flex'
-import { Button } from '../Button'
 
 export default {
   component: Tooltip,
