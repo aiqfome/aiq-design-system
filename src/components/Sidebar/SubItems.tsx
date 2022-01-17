@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import PropTypes from 'prop-types'
+
 import styled, { css } from 'styled-components'
 
 import { Text } from '../Text'
@@ -33,7 +33,7 @@ const LinkStyled = styled(Link)`
   }
 `
 
-const SubItensStyled = styled(Flex)<Props>`
+const SubItemsStyled = styled(Flex)<Props>`
   ul {
     margin: 0;
     padding: 0;
@@ -159,7 +159,7 @@ const SubItensStyled = styled(Flex)<Props>`
     `
   }}
 `
-export const SubItens: React.FC<Props> = ({
+export const SubItems: React.FC<Props> = ({
   item,
   sidebarOpened,
   itemOpened,
@@ -190,7 +190,7 @@ export const SubItens: React.FC<Props> = ({
   }, [ref, itemOpened])
 
   return (
-    <SubItensStyled
+    <SubItemsStyled
       distanceTop={distanceTop}
       typeSubmenu={typeSubmenu}
       ref={el => setRef(el || null)}
@@ -202,7 +202,7 @@ export const SubItens: React.FC<Props> = ({
       itemOpened={itemOpened}
     >
       {!sidebarOpened &&
-        (item.itens ? (
+        (item.items ? (
           <Text
             mx={6}
             mt={6}
@@ -224,9 +224,9 @@ export const SubItens: React.FC<Props> = ({
             {item.name}
           </LinkStyled>
         ))}
-      {item.itens && (
+      {item.items && (
         <ul>
-          {item.itens.map((subItem, index) => (
+          {item.items.map((subItem, index) => (
             <li key={index} {...subItem}>
               <Link
                 variant={subItem.type ? subItem.type : 'internal'}
@@ -251,14 +251,6 @@ export const SubItens: React.FC<Props> = ({
           ))}
         </ul>
       )}
-    </SubItensStyled>
+    </SubItemsStyled>
   )
-}
-
-SubItens.propTypes = {
-  item: PropTypes.any,
-  itemOpened: PropTypes.bool,
-  onClickItem: PropTypes.func,
-  sidebarOpened: PropTypes.bool,
-  heightScrolledToTop: PropTypes.number
 }

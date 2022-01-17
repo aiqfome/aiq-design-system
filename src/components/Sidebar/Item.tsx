@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, ReactDOM } from 'react'
 import PropTypes from 'prop-types'
 import { useLocation } from 'react-router-dom'
 import styled, { css } from 'styled-components'
@@ -11,10 +11,26 @@ import { Link } from '../Link'
 import { Icon } from '../Icon'
 import { Badge } from '../Badge'
 
-import { SubItens } from './SubItens'
+import { SubItems } from './SubItems'
+
+type SubItemProps = {
+  name: string
+  href: string
+  badge?: number
+}
+
+type ItemObjectProps = {
+  icon: ReactDOM
+  name: string
+  href: string
+  exact?: boolean
+  items: Array<SubItemProps>
+  callback: any
+  type?: 'internal' | 'external'
+}
 
 interface ItemProps {
-  item: any
+  item: ItemObjectProps
   openItem: boolean
   onClickItem?: any
   sidebarOpened: boolean
@@ -85,8 +101,8 @@ export const Item: React.FC<ItemProps> = ({
   function computeBadgeAllItens(item) {
     let value = 0
 
-    if (item.itens) {
-      item.itens.forEach(subItem => {
+    if (item.items) {
+      item.items.forEach(subItem => {
         if (subItem.badge) value += subItem.badge
       })
     }
@@ -113,8 +129,8 @@ export const Item: React.FC<ItemProps> = ({
       active = location.pathname.includes(item.href)
       if (item.exact) active = location.pathname === item.href
     }
-    item.itens &&
-      item.itens.forEach(subItem => {
+    item.items &&
+      item.items.forEach(subItem => {
         if (!active) {
           active = location.pathname.includes(subItem.href)
           if (item.exact) active = location.pathname === subItem.href
@@ -124,7 +140,7 @@ export const Item: React.FC<ItemProps> = ({
   }
 
   const ItemWrapper = ({ children }) => {
-    if (item.itens && item.itens.length > 0) {
+    if (item.items && item.items.length > 0) {
       return (
         <Flex
           flexDirection='row'
@@ -202,7 +218,7 @@ export const Item: React.FC<ItemProps> = ({
               />
             )}
 
-            {item.itens && (
+            {item.items && (
               <Icon color='primary'>
                 {openItem ? (
                   <MdExpandLess size={18} />
@@ -215,7 +231,7 @@ export const Item: React.FC<ItemProps> = ({
         )}
       </ItemWrapper>
 
-      <SubItens
+      <SubItems
         item={item}
         onClickItem={onClickItem}
         heightScrolledToTop={heightScrolledToTop}
