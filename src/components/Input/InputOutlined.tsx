@@ -1,8 +1,9 @@
 import React, { useState, InputHTMLAttributes } from 'react'
-import PropTypes from 'prop-types'
+
 import { MdVisibility, MdVisibilityOff } from 'react-icons/md'
 
 import styled, { css } from 'styled-components'
+
 import {
   color,
   space,
@@ -15,7 +16,6 @@ import {
 import { Button } from '../Button'
 import { Text } from '../Text'
 import { Box } from '../Box'
-
 import { InputErrorMessage } from '../InputErrorMessage'
 
 export interface Props
@@ -269,7 +269,7 @@ export const InputOutlined: React.FC<Props> = ({
           />
           {label && <Text data-testid='input-label'>{label}</Text>}
 
-          {sufix && <div className='sufix'>{sufix}</div>}
+          <Box className='sufix'>{sufix}</Box>
         </LabelStyled>
 
         {errorForm && <InputErrorMessage errorMessage={errorMessage} />}
@@ -306,23 +306,4 @@ export const InputOutlined: React.FC<Props> = ({
       {errorForm && <InputErrorMessage errorMessage={errorMessage} />}
     </Container>
   )
-}
-
-InputOutlined.propTypes = {
-  name: PropTypes.string,
-  inputRef: PropTypes.any,
-  label: PropTypes.string,
-  errorForm: PropTypes.bool,
-  type: PropTypes.string,
-  errorMessage: PropTypes.string,
-  sufix: PropTypes.any,
-  value: PropTypes.string,
-  placeholder: PropTypes.string,
-  backgroundColor: PropTypes.any,
-  maxWidth: PropTypes.any,
-  marginLeft: PropTypes.any,
-  marginRight: PropTypes.any,
-  containerProps: PropTypes.any,
-  disabled: PropTypes.bool,
-  nativeAutoComplete: PropTypes.oneOf(['on', 'disabled'])
 }
