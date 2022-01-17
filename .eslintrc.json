@@ -23,8 +23,7 @@
     "prettier/prettier": "error",
     "react/prop-types": "off",
     "import/extensions": [
-      "error",
-      "ignorePackages",
+      "never",
       {
         "js": "never",
         "ts": "never",

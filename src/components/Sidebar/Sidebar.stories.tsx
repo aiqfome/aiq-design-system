@@ -86,7 +86,7 @@ const sidebarData = [
   {
     icon: <MdStorage size={18} />,
     name: 'store',
-    itens: [
+    items: [
       {
         name: 'Sub Item',
         href: '/subItem'
@@ -105,7 +105,7 @@ const sidebarData = [
   {
     icon: <MdStorage size={18} />,
     name: 'itens',
-    itens: [
+    items: [
       {
         name: 'Sub Item',
         href: '/subItem'
