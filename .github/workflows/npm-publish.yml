@@ -24,7 +24,7 @@ jobs:
           git config user.name $GITHUB_ACTOR
           git config user.email gh-actions-${GITHUB_ACTOR}@github.com
           npm version patch
-          git push origin master
+          git push origin master --force
           content=`cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[",]//g'`
           echo "::set-output name=version::$content"
 
