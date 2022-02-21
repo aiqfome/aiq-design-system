@@ -396,6 +396,7 @@ export const MultiSelectFetchable: React.FC<Props> = ({
           flexDirection='column'
           backgroundColor='white'
           border='1px solid #dedede'
+          {...getMenuProps()}
         >
           {!isDependent && (
             <>
@@ -418,7 +419,7 @@ export const MultiSelectFetchable: React.FC<Props> = ({
           )}
 
           <Itens>
-            <ul {...getMenuProps()}>
+            <ul>
               {isOpen &&
                 !isDependent &&
                 !isLoading &&

@@ -392,6 +392,7 @@ export const MultiSelectStatic: React.FC<Props> = ({
           flexDirection='column'
           backgroundColor='white'
           border='1px solid #dedede'
+          {...getMenuProps()}
         >
           {!isDependent && (
             <>
@@ -416,7 +417,7 @@ export const MultiSelectStatic: React.FC<Props> = ({
           )}
 
           <Itens>
-            <ul {...getMenuProps()}>
+            <ul>
               {isOpen &&
                 !isDependent &&
                 getFilteredItems().map((item, index) => (
