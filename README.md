@@ -38,7 +38,7 @@ npm install aiq-design-system
 
 ## os componentes
 
-nossos componentes estão nesse [storybook](https://621085ba70b9d2003a142b7d-sotgtsiyud.chromatic.com/)
+nossos componentes estão nesse [storybook](https://www.chromatic.com/library?appId=621085ba70b9d2003a142b7d)
 
 documentação oficial: **coming soon**
 
