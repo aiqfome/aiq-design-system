@@ -36,18 +36,15 @@ or
 npm install aiq-design-system
 ```
 
-
 ## os componentes
 
-nossos componentes estão nesse [storybook](https://5f8f398c11ba7b00229e5606-dlujpbuxgg.chromatic.com/?path=/story/actions--basic)
+nossos componentes estão nesse [storybook](https://621085ba70b9d2003a142b7d-sotgtsiyud.chromatic.com/)
 
 documentação oficial: **coming soon**
 
-
-
 ## configuração básica
 
-pra começar a utilizar os componentes, segue esses passos: 
+pra começar a utilizar os componentes, segue esses passos:
 
 1 - a gente disponibiliza um wrapper pra você adicionar na aplicação, é o `ThemeProvider` importado da **aiq-design-system**.
 
@@ -55,12 +52,11 @@ pra começar a utilizar os componentes, segue esses passos:
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import { ThemeProvider } from "aiq-design-system";
+import { ThemeProvider } from 'aiq-design-system'
 
 function App({ children }) {
   return <ThemeProvider>{children}</ThemeProvider>
 }
-
 ```
 
 2 - já pode sair utilizando os componentes importados da **aiq-design-system**
@@ -81,7 +77,6 @@ export const AiqComponent() {
 }
 
 ```
-
 
 ## template no codesandbox
 

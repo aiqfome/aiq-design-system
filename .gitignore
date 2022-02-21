@@ -6,3 +6,4 @@ core
 package-lock.json
 .idea/
 *.log
+.env
