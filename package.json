@@ -10,7 +10,8 @@
     "build-storybook": "build-storybook -s public",
     "gen:component": "hygen cafeina component",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "chromatic": "dotenv chromatic --project-token=%CHROMATIC_PROJECT_TOKEN% --exit-zero-on-changes --auto-accept-changes"
   },
   "devDependencies": {
     "@babel/core": "^7.11.6",
@@ -32,6 +33,7 @@
     "@typescript-eslint/eslint-plugin": "4.0.1",
     "@typescript-eslint/parser": "4.0.1",
     "babel-loader": "^8.1.0",
+    "chromatic": "^6.5.1",
     "eslint": "^7.11.0",
     "eslint-config-prettier": "^6.12.0",
     "eslint-config-standard": "^14.1.1",
@@ -55,6 +57,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.11.2",
+    "dotenv-cli": "^5.0.0",
     "downshift": "^6.0.6",
     "moment": "^2.29.1",
     "rc-dropdown": "^3.2.0",
