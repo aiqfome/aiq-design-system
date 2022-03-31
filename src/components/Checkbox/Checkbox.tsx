@@ -1,11 +1,21 @@
 import React, { InputHTMLAttributes } from 'react'
-import PropTypes from 'prop-types'
 
 import styled, { DefaultTheme } from 'styled-components'
-import { color } from 'styled-system'
+import {
+  color,
+  fontSize,
+  FontSizeProps,
+  fontWeight,
+  FontWeightProps,
+  typography,
+  TypographyProps
+} from 'styled-system'
 
 export interface Props
   extends DefaultTheme,
+    FontSizeProps,
+    FontWeightProps,
+    TypographyProps,
     InputHTMLAttributes<HTMLInputElement> {
   label?: string
   labelColor?: string
@@ -14,6 +24,9 @@ export interface Props
 
 const Label = styled.label<Props>`
   ${color}
+  ${fontSize}
+  ${fontWeight}
+  ${typography}
 
   display: flex;
   align-items: center;
@@ -79,6 +92,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, Props>(
             <polyline points='20 6 9 17 4 12' />
           </Icon>
         </BoxCheckbox>
+
         {label}
       </Label>
     )
@@ -86,11 +100,3 @@ export const Checkbox = React.forwardRef<HTMLInputElement, Props>(
 )
 
 Checkbox.displayName = 'Checkbox'
-
-Checkbox.propTypes = {
-  checked: PropTypes.bool,
-  label: PropTypes.string,
-  labelColor: PropTypes.string,
-  style: PropTypes.any,
-  disabled: PropTypes.bool
-}
