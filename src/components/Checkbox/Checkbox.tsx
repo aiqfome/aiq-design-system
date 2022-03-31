@@ -20,6 +20,7 @@ export interface Props
   label?: string
   labelColor?: string
   style?: any
+  borderColor?: string
 }
 
 const Label = styled.label<Props>`
@@ -45,7 +46,8 @@ const BoxCheckbox = styled.div<Props>`
   width: 16px;
   height: 16px;
   border-radius: 2px;
-  border: 2px solid ${({ theme }) => theme.colors.primary};
+  border: 2px solid
+    ${({ theme, borderColor }) => theme.colors[borderColor || 'primary']};
 
   transition: all 0.2s;
 
@@ -73,7 +75,7 @@ const Icon = styled.svg<Props>`
 `
 
 export const Checkbox = React.forwardRef<HTMLInputElement, Props>(
-  ({ label, style, labelColor, disabled, ...props }, ref) => {
+  ({ label, style, labelColor, disabled, borderColor, ...props }, ref) => {
     return (
       <Label
         data-testid='checkbox'
@@ -87,7 +89,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, Props>(
           ref={ref}
           {...props}
         />
-        <BoxCheckbox>
+        <BoxCheckbox borderColor={borderColor}>
           <Icon viewBox='0 0 24 24'>
             <polyline points='20 6 9 17 4 12' />
           </Icon>
