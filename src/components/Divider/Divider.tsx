@@ -12,10 +12,12 @@ import styled from 'styled-components'
 
 import { Flex } from '../Flex'
 
-export interface Props extends SpaceProps, ColorProps, LayoutProps {
-  children?: any
-  color?: string
-}
+export type Props = SpaceProps &
+  ColorProps &
+  LayoutProps & {
+    children?: any
+    color?: string
+  }
 
 const LineStyled = styled.hr<Props>`
   ${layout}
