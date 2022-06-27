@@ -21,6 +21,7 @@ export type Props = SpaceProps &
   GridProps &
   FontWeightProps & {
     color?: string
+    children?: any
   }
 
 export const GridStyled = styled.div<Props>`
