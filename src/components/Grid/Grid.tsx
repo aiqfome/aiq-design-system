@@ -15,14 +15,14 @@ import {
   FontWeightProps
 } from 'styled-system'
 
-export type Props = SpaceProps &
-  LayoutProps &
-  FontSizeProps &
-  GridProps &
-  FontWeightProps & {
-    color?: string
-    children?: any
-  }
+export interface Props
+  extends SpaceProps,
+    LayoutProps,
+    FontSizeProps,
+    GridProps,
+    FontWeightProps {
+  color?: string
+}
 
 export const GridStyled = styled.div<Props>`
   ${color}
