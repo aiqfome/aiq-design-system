@@ -15,16 +15,17 @@ import {
   TypographyProps
 } from 'styled-system'
 
-export type Props = ColorProps &
-  SpaceProps &
-  LayoutProps &
-  FontSizeProps &
-  FontWeightProps &
-  TypographyProps & {
-    cursor?: string
-    truncate?: boolean
-    whiteSpace?: 'nowrap' | 'normal' | 'pre'
-  }
+export interface Props
+  extends ColorProps,
+    SpaceProps,
+    LayoutProps,
+    FontSizeProps,
+    FontWeightProps,
+    TypographyProps {
+  cursor?: string
+  truncate?: boolean
+  whiteSpace?: 'nowrap' | 'normal' | 'pre'
+}
 
 export const Text = styled.span<Props>`
   ${color}

@@ -9,11 +9,8 @@ export default {
   title: 'Multistep'
 }
 
-export interface Props {
-  children?: any
-}
-
-const Step: React.FC<Props> = ({ children }) => {
+// eslint-disable-next-line react/prop-types
+const Step: React.FC = ({ children }) => {
   return <h1>{children}</h1>
 }
 

@@ -28,32 +28,33 @@ import {
   TextAlignProps
 } from 'styled-system'
 
-export type Props = BackgroundProps &
-  SpaceProps &
-  DefaultTheme &
-  LayoutProps &
-  FontSizeProps &
-  FontWeightProps &
-  PositionProps &
-  ColorProps &
-  FlexProps &
-  FlexboxProps &
-  BorderProps &
-  TextAlignProps & {
-    variant?: 'auto' | 'centralized' | 'fullCentralized'
-    isClickable?: boolean
-    color?: string
-    fullHeight?: boolean
-    children?: any
-    className?: string
-    onClick?: (e: any) => void
-    onDragOver?: (e: any) => void
-    onDragEnter?: (e: any) => void
-    onDragLeave?: (e: any) => void
-    onDragEnd?: (e: any) => void
-    onDrop?: (e: any) => void
-    style?: any
-  }
+export interface Props
+  extends BackgroundProps,
+    SpaceProps,
+    DefaultTheme,
+    LayoutProps,
+    FontSizeProps,
+    FontWeightProps,
+    PositionProps,
+    ColorProps,
+    FlexProps,
+    FlexboxProps,
+    BorderProps,
+    TextAlignProps {
+  variant?: 'auto' | 'centralized' | 'fullCentralized'
+  isClickable?: boolean
+  color?: string
+  fullHeight?: boolean
+  children?: any
+  className?: string
+  onClick?: (e: any) => void
+  onDragOver?: (e: any) => void
+  onDragEnter?: (e: any) => void
+  onDragLeave?: (e: any) => void
+  onDragEnd?: (e: any) => void
+  onDrop?: (e: any) => void
+  style?: any
+}
 
 const FlexStyled = styled.div<Props>`
   ${background}
