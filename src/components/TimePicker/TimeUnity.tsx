@@ -49,6 +49,7 @@ export const TimeUnity: React.FC<Props> = ({
       onChange(('00' + (number + 1)).slice(-2))
     } else {
       setNumber(min)
+      onChange('00')
     }
   }
 
@@ -58,6 +59,7 @@ export const TimeUnity: React.FC<Props> = ({
       onChange(('00' + (number - 1)).slice(-2))
     } else {
       setNumber(max)
+      onChange(max)
     }
   }
 
