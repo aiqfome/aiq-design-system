@@ -229,6 +229,7 @@ export const SubItems: React.FC<Props> = ({
             variant={item.type ? item.type : 'internal'}
             onClick={() => {
               if (onClickItem) onClickItem()
+              if (item.callback) item.callback()
             }}
           >
             {item.name}
