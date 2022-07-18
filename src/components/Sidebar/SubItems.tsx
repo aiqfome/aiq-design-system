@@ -33,6 +33,15 @@ const LinkStyled = styled(Link)`
   }
 `
 
+const CallbackStyled = styled(Flex)`
+  display: flex;
+  flex-direction: row;
+  margin: 12px 12px 8px;
+  color: ${({ theme }) => theme.colors.primary} !important;
+  font-size: ${({ theme }) => theme.fontSizes.default} !important;
+  font-weight: ${({ theme }) => theme.fontWeights.semiBold} !important;
+`
+
 const SubItemsStyled = styled(Flex)<Props>`
   ul {
     margin: 0;
@@ -201,8 +210,7 @@ export const SubItems: React.FC<Props> = ({
       sidebarOpened={sidebarOpened}
       itemOpened={itemOpened}
     >
-      {!sidebarOpened &&
-        (item.items ? (
+      {!sidebarOpened && item.items && (
           <Text
             mx={6}
             mt={6}
@@ -213,9 +221,11 @@ export const SubItems: React.FC<Props> = ({
           >
             {item.name}
           </Text>
-        ) : (
+        )}
+        
+        {!sidebarOpened && !item?.items && item.href && (
           <LinkStyled
-            href={item.href}
+            href={item.href || ''}
             variant={item.type ? item.type : 'internal'}
             onClick={() => {
               if (onClickItem) onClickItem()
@@ -223,7 +233,18 @@ export const SubItems: React.FC<Props> = ({
           >
             {item.name}
           </LinkStyled>
-        ))}
+        )}
+        
+        {!sidebarOpened && !item?.items && item.callback && (
+          <CallbackStyled
+            onClick={() => {
+              if (item.callback) item.callback()
+            }}
+          >
+            {item.name}
+          </CallbackStyled>
+        )}
+
       {item.items && (
         <ul>
           {item.items.map((subItem, index) => (
