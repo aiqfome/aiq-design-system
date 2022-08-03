@@ -6,7 +6,7 @@ import { Props as BoxProps } from '../Box'
 import { SelectFetchable } from './SelectFetchable'
 import { SelectStatic } from './SelectStatic'
 
-export interface Props extends BoxProps {
+export type Props = BoxProps & {
   label?: string
   items?: Array<string | { id: any; name: any; select?: any }>
   isOpen?: boolean

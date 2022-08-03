@@ -11,17 +11,16 @@ import {
   TypographyProps
 } from 'styled-system'
 
-export interface Props
-  extends DefaultTheme,
-    FontSizeProps,
-    FontWeightProps,
-    TypographyProps,
-    InputHTMLAttributes<HTMLInputElement> {
-  label?: string
-  labelColor?: string
-  style?: any
-  borderColor?: string
-}
+export type Props = DefaultTheme &
+  FontSizeProps &
+  FontWeightProps &
+  TypographyProps &
+  InputHTMLAttributes<HTMLInputElement> & {
+    label?: string
+    labelColor?: string
+    style?: any
+    borderColor?: string
+  }
 
 const Label = styled.label<Props>`
   ${color}

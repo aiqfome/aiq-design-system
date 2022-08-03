@@ -5,7 +5,7 @@ import styled from 'styled-components'
 
 import { Flex, Props as FlexProps } from '../Flex'
 
-export interface TabPanelProps extends FlexProps {
+export type TabPanelProps = FlexProps & {
   value: number
   index: number
   children?: any

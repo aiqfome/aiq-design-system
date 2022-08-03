@@ -17,14 +17,17 @@ type Item = {
   label: any
   value: any
 }
-export interface Props extends SizeProps, MarginProps, LayoutProps {
-  label: string
-  itens: Item[]
-  opened?: boolean
-  onChange?: (item: any) => void
-  disabled?: boolean
-  selected?: any
-}
+
+export type Props = SizeProps &
+  MarginProps &
+  LayoutProps & {
+    label: string
+    itens: Item[]
+    opened?: boolean
+    onChange?: (item: any) => void
+    disabled?: boolean
+    selected?: any
+  }
 
 const BoxStyled = styled(Box)`
   position: relative;

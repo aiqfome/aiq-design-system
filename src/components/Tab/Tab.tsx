@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { space, SpaceProps } from 'styled-system'
 import styled, { css } from 'styled-components'
 
-export interface TabProps extends SpaceProps {
+export type TabProps = SpaceProps & {
   index: number
   children: any
   value?: number

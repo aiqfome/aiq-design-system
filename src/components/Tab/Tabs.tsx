@@ -5,15 +5,17 @@ import styled, { css, DefaultTheme } from 'styled-components'
 
 import { Flex } from '../Flex'
 
-export interface TabsProps extends SpaceProps, LayoutProps, DefaultTheme {
-  extra?: any
-  children?: any
-  wrapperProps?: any
-  isMobile?: boolean
-  variant?: 'default' | 'contained' | 'card'
-  scrollPosition?: 'left' | 'middle' | 'right'
-  onChange?: (event: any, newValue: any) => void
-}
+export type TabsProps = SpaceProps &
+  LayoutProps &
+  DefaultTheme & {
+    extra?: any
+    children?: any
+    wrapperProps?: any
+    isMobile?: boolean
+    variant?: 'default' | 'contained' | 'card'
+    scrollPosition?: 'left' | 'middle' | 'right'
+    onChange?: (event: any, newValue: any) => void
+  }
 
 const tabsVariations: { [index: string]: any } = {
   default: css`

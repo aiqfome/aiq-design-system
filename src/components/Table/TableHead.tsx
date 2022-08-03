@@ -11,10 +11,12 @@ import {
   TypographyProps
 } from 'styled-system'
 
-export interface Props extends SpaceProps, LayoutProps, TypographyProps {
-  children?: any
-  wrap?: any
-}
+export type Props = SpaceProps &
+  LayoutProps &
+  TypographyProps & {
+    children?: any
+    wrap?: any
+  }
 
 const TableHeaderStyled = styled.th<Props>`
   flex: 1;

@@ -11,7 +11,7 @@ import { Box } from '../Box'
 
 import { InputErrorMessage } from '../InputErrorMessage'
 
-export interface Props extends InputHTMLAttributes<HTMLInputElement> {
+export type Props = InputHTMLAttributes<HTMLInputElement> & {
   name?: string
   inputRef?: any
   errorForm?: boolean

@@ -18,14 +18,13 @@ export interface Props {
   wrap?: boolean | undefined | null
 }
 
-export interface TableCellProps
-  extends SpaceProps,
-    ColorProps,
-    LayoutProps,
-    TypographyProps {
-  children: ReactNode
-  wrap?: boolean | undefined | null | number
-}
+export type TableCellProps = SpaceProps &
+  ColorProps &
+  LayoutProps &
+  TypographyProps & {
+    children: ReactNode
+    wrap?: boolean | undefined | null | number
+  }
 
 const TableCellStyled = styled.td<TableCellProps>`
   padding: 12px 10px;

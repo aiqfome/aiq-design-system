@@ -5,7 +5,7 @@ import { color, space, layout } from 'styled-system'
 
 import { Flex, Props as FlexProps } from '../Flex'
 
-export interface Props extends FlexProps {
+export type Props = FlexProps & {
   cursor?: string
   children?: any
   color?: string

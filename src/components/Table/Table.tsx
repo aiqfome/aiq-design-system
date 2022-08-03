@@ -27,9 +27,10 @@ export interface TableProps {
   onRowBackground?: (record: any) => string
 }
 
-export interface FlexProps extends SpaceProps, LayoutProps {
-  showScroll: boolean
-}
+export type FlexProps = SpaceProps &
+  LayoutProps & {
+    showScroll: boolean
+  }
 
 const TableStyled = styled.table<TableProps>`
   border-collapse: collapse;

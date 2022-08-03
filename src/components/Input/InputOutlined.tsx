@@ -18,26 +18,25 @@ import { Text } from '../Text'
 import { Box } from '../Box'
 import { InputErrorMessage } from '../InputErrorMessage'
 
-export interface Props
-  extends InputHTMLAttributes<HTMLInputElement>,
-    SpaceProps {
-  name?: string
-  placeholder?: string
-  inputRef?: any
-  label?: string
-  errorForm?: boolean
-  type?: string
-  errorMessage?: string
-  value?: string
-  sufix?: any
-  containerProps?: any
-  disabled?: boolean
+export type Props = InputHTMLAttributes<HTMLInputElement> &
+  SpaceProps & {
+    name?: string
+    placeholder?: string
+    inputRef?: any
+    label?: string
+    errorForm?: boolean
+    type?: string
+    errorMessage?: string
+    value?: string
+    sufix?: any
+    containerProps?: any
+    disabled?: boolean
 
-  maxWidth?: number | string
-  backgroundColor?: number | string
+    maxWidth?: number | string
+    backgroundColor?: number | string
 
-  nativeAutoComplete?: 'on' | 'disabled'
-}
+    nativeAutoComplete?: 'on' | 'disabled'
+  }
 
 const Container = styled(Box)`
   ${color}

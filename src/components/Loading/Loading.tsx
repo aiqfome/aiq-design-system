@@ -3,7 +3,7 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 import { space, SpaceProps } from 'styled-system'
 
-export interface Props extends SpaceProps {
+export type Props = SpaceProps & {
   size?: 'small' | 'medium' | 'large'
   color?: string
 }

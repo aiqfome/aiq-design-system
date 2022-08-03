@@ -9,7 +9,7 @@ import { Input } from '../Input'
 import { Loading } from '../Loading'
 import { Button, Props as ButtonProps } from '../Button'
 
-export interface Props extends BoxPros {
+export type Props = BoxPros & {
   label?: string
   items?: Array<string | { id: any; name: any; select?: any }>
   isOpen?: boolean
