@@ -16,18 +16,17 @@ import {
   FontWeightProps
 } from 'styled-system'
 
-export interface Props
-  extends ColorProps,
-    SpaceProps,
-    LayoutProps,
-    FontSizeProps,
-    FontWeightProps {
-  variant?: 'internal' | 'external'
-  href: string
-  children?: any
-  color?: string
-  onClick?: any
-}
+export type Props = ColorProps &
+  SpaceProps &
+  LayoutProps &
+  FontSizeProps &
+  FontWeightProps & {
+    variant?: 'internal' | 'external'
+    href: string
+    children?: any
+    color?: string
+    onClick?: any
+  }
 
 export interface StyledProps
   extends ColorProps,
@@ -48,9 +47,9 @@ const styledLink = css`
   ${fontSize}
   ${fontWeight}
 
-  text-decoration: none; 
+  text-decoration: none;
 
-  &:hover{
+  &:hover {
     cursor: pointer;
   }
 `

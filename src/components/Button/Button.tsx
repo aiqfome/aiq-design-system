@@ -19,27 +19,26 @@ import {
 import { Icon } from '../Icon'
 import { Text } from '../Text'
 
-export interface Props
-  extends ButtonHTMLAttributes<HTMLButtonElement>,
-    DefaultTheme,
-    SpaceProps,
-    LayoutProps,
-    BorderProps,
-    FontSizeProps,
-    FontWeightProps {
-  children?: ReactNode
-  prefix?: any
-  sufix?: any
-  refButton?: any
-  variantType?: string
-  variant?: 'text' | 'contained' | 'outlined' | 'fab' | 'icon'
-  palette?: 'primary' | 'error' | 'secondary' | 'neutral'
-  onClick?: any
-  fullWidth?: boolean
-  disabled?: boolean
-  className?: string
-  type?: 'button' | 'submit' | 'reset' | undefined
-}
+export type Props = Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'prefix'> &
+  DefaultTheme &
+  SpaceProps &
+  LayoutProps &
+  BorderProps &
+  FontSizeProps &
+  FontWeightProps & {
+    children?: ReactNode
+    prefix?: any
+    sufix?: any
+    refButton?: any
+    variantType?: string
+    variant?: 'text' | 'contained' | 'outlined' | 'fab' | 'icon'
+    palette?: 'primary' | 'error' | 'secondary' | 'neutral'
+    onClick?: any
+    fullWidth?: boolean
+    disabled?: boolean
+    className?: string
+    type?: 'button' | 'submit' | 'reset' | undefined
+  }
 
 export const ButtonStyled = styled.button<Props>`
   border-radius: 5px;

@@ -9,17 +9,16 @@ import { margin, MarginProps } from 'styled-system'
 import { Text } from '../Text'
 import { Box } from '../Box'
 
-export interface Props
-  extends MarginProps,
-    InputHTMLAttributes<HTMLInputElement> {
-  name: string
-  value: any
-  variant?: 'default' | 'small'
-  disabled?: boolean
-  label?: string
-  checked?: boolean
-  onChange?: (event: any) => void
-}
+export type Props = MarginProps &
+  InputHTMLAttributes<HTMLInputElement> & {
+    name: string
+    value: any
+    variant?: 'default' | 'small'
+    disabled?: boolean
+    label?: string
+    checked?: boolean
+    onChange?: (event: any) => void
+  }
 
 const radioVariations: { [index: string]: any } = {
   default: css`

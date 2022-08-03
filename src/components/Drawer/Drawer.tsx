@@ -15,18 +15,17 @@ import {
 import { Flex } from '../Flex'
 import { Loading } from '../Loading'
 
-export interface Props
-  extends DefaultTheme,
-    LayoutProps,
-    ShadowProps,
-    MarginProps,
-    PaddingProps {
-  opened: boolean
-  loading?: boolean
-  children?: ReactNode
-  onClose?: () => void
-  variation?: 'right' | 'left'
-}
+export type Props = DefaultTheme &
+  LayoutProps &
+  ShadowProps &
+  MarginProps &
+  PaddingProps & {
+    opened: boolean
+    loading?: boolean
+    children?: ReactNode
+    onClose?: () => void
+    variation?: 'right' | 'left'
+  }
 
 const drawerVariations: { [index: string]: any } = {
   right: css<Props>`
