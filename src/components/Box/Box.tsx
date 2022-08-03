@@ -25,24 +25,23 @@ import {
   FlexboxProps
 } from 'styled-system'
 
-export interface Props
-  extends BorderProps,
-    BoxShadowProps,
-    BackgroundProps,
-    ColorProps,
-    FlexboxProps,
-    FontSizeProps,
-    FontWeightProps,
-    LayoutProps,
-    PositionProps,
-    SpaceProps {
-  background?: string
-  children?: any
-  className?: string
-  color?: string
-  onClick?: any
-  refBox?: any
-}
+export type Props = BorderProps &
+  BoxShadowProps &
+  BackgroundProps &
+  ColorProps &
+  FlexboxProps &
+  FontSizeProps &
+  FontWeightProps &
+  LayoutProps &
+  PositionProps &
+  SpaceProps & {
+    background?: string
+    children?: any
+    className?: string
+    color?: string
+    onClick?: any
+    refBox?: any
+  }
 
 export const BoxStyled = styled.div`
   ${background}

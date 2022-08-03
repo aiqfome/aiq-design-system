@@ -3,14 +3,13 @@ import PropTypes from 'prop-types'
 import styled, { css, DefaultTheme } from 'styled-components'
 import { space } from 'styled-system'
 
-export interface Props
-  extends DefaultTheme,
-    InputHTMLAttributes<HTMLInputElement> {
-  checked?: boolean
-  disabled?: boolean
-  className?: string
-  variant?: 'default' | 'small'
-}
+export type Props = DefaultTheme &
+  InputHTMLAttributes<HTMLInputElement> & {
+    checked?: boolean
+    disabled?: boolean
+    className?: string
+    variant?: 'default' | 'small'
+  }
 
 const switchVariations: { [index: string]: any } = {
   default: css`
