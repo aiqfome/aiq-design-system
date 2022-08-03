@@ -19,7 +19,7 @@ import {
 import { Icon } from '../Icon'
 import { Text } from '../Text'
 
-export type Props = ButtonHTMLAttributes<HTMLButtonElement> &
+export type Props = Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'prefix'> &
   DefaultTheme &
   SpaceProps &
   LayoutProps &

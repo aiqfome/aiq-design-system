@@ -7,7 +7,7 @@ import { InputOutlined } from './InputOutlined'
 import { InputNeutral } from './InputNeutral'
 import { InputTags } from './InputTags'
 
-export type Props = InputHTMLAttributes<HTMLInputElement> & {
+export type Props = Omit<InputHTMLAttributes<HTMLInputElement>, 'prefix'> & {
   name?: string
   inputRef?: any
   label?: string
