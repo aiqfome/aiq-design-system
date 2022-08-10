@@ -1,5 +1,4 @@
 import React, { InputHTMLAttributes } from 'react'
-import PropTypes from 'prop-types'
 import styled, { css, DefaultTheme } from 'styled-components'
 import { space } from 'styled-system'
 
@@ -133,9 +132,3 @@ export const Switch = React.forwardRef<HTMLInputElement, Props>(
 )
 
 Switch.displayName = 'Switch'
-
-Switch.propTypes = {
-  checked: PropTypes.bool,
-  variant: PropTypes.oneOf(['default', 'small']),
-  className: PropTypes.string
-}

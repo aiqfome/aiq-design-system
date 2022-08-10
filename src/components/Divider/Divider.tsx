@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import {
   space,
   SpaceProps,
@@ -48,10 +47,4 @@ export const Divider: React.FC<Props> = ({
   }
 
   return <LineStyled height={height} backgroundColor={color} {...props} />
-}
-
-Divider.propTypes = {
-  children: PropTypes.any,
-  color: PropTypes.string,
-  height: PropTypes.any
 }

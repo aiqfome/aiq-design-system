@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import PropTypes from 'prop-types'
 import { MdClose } from 'react-icons/md'
 
 import styled, { css } from 'styled-components'
@@ -160,20 +159,4 @@ export const InputTags: React.FC<Props> = ({
       {errorForm && <InputErrorMessage errorMessage={errorMessage} />}
     </ContainerInput>
   )
-}
-
-InputTags.propTypes = {
-  name: PropTypes.string,
-
-  errorForm: PropTypes.bool,
-  type: PropTypes.string,
-  errorMessage: PropTypes.string,
-  value: PropTypes.string,
-  placeholder: PropTypes.string,
-  onChange: PropTypes.func,
-  backgroundColor: PropTypes.any,
-  border: PropTypes.any,
-  width: PropTypes.any,
-  maxWidth: PropTypes.any,
-  nativeAutoComplete: PropTypes.oneOf(['on', 'disabled'])
 }

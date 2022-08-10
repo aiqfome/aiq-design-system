@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
 
-import PropTypes from 'prop-types'
-
 import moment, { Moment } from 'moment'
 
 import styled from 'styled-components'
@@ -130,13 +128,4 @@ export const DatePickerSingle: React.FC<Props> = ({
       )}
     </Flex>
   )
-}
-
-DatePickerSingle.propTypes = {
-  value: PropTypes.array,
-  onChange: PropTypes.func.isRequired,
-  name: PropTypes.string,
-  errorMessage: PropTypes.string,
-  errorForm: PropTypes.bool,
-  placeholder: PropTypes.string
 }

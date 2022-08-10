@@ -1,5 +1,5 @@
 import React, { ReactNode, useEffect, useState } from 'react'
-import PropTypes from 'prop-types'
+
 import styled, { css, DefaultTheme } from 'styled-components'
 import {
   layout,
@@ -149,12 +149,4 @@ export const Drawer: React.FC<Props> = ({
       </DrawerStyled>
     </>
   )
-}
-
-Drawer.propTypes = {
-  loading: PropTypes.bool,
-  onClose: PropTypes.func,
-  opened: PropTypes.bool.isRequired,
-  variation: PropTypes.oneOf(['right', 'left']),
-  children: PropTypes.node
 }

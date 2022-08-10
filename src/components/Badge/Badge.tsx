@@ -1,5 +1,4 @@
 import React, { ReactNode, useCallback } from 'react'
-import PropTypes from 'prop-types'
 
 import styled, { DefaultTheme } from 'styled-components'
 import {
@@ -123,15 +122,6 @@ export const Badge: React.FC<Props> = ({
       {getCounter(count, overflowCount) || children}
     </BadgeStyled>
   )
-}
-
-Badge.propTypes = {
-  className: PropTypes.string,
-  count: PropTypes.number,
-  children: PropTypes.node,
-  statusColor: PropTypes.string,
-  overflowCount: PropTypes.number,
-  variant: PropTypes.oneOf(['label', 'default'])
 }
 
 Badge.defaultProps = {

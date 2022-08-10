@@ -1,5 +1,4 @@
 import React, { useState, useCallback } from 'react'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { FlexProps } from 'styled-system'
 import { MdArrowDropDown } from 'react-icons/md'
@@ -108,9 +107,4 @@ export const BreadcrumbItem: React.FC<PropsItem> = ({
   }
 
   return <BreadcrumbItemStyled {...props}>{children}</BreadcrumbItemStyled>
-}
-
-BreadcrumbItem.propTypes = {
-  children: PropTypes.any,
-  overlay: PropTypes.any
 }

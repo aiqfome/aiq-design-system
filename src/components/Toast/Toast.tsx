@@ -1,6 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-
 import { useTransition } from 'react-spring'
 
 import styled from 'styled-components'
@@ -50,8 +48,4 @@ export const Toast: React.FC<Props> = ({ messages }) => {
       ))}
     </Container>
   )
-}
-
-Toast.propTypes = {
-  messages: PropTypes.array
 }

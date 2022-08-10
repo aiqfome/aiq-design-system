@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link as LinkRouterDom } from 'react-router-dom'
 
-import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import {
   color,
@@ -79,10 +78,4 @@ export const Link: React.FC<Props> = ({
       {children}
     </ExternalStyled>
   )
-}
-
-Link.propTypes = {
-  variant: PropTypes.oneOf(['internal', 'external']),
-  href: PropTypes.string.isRequired,
-  children: PropTypes.any
 }

@@ -1,6 +1,4 @@
 import React, { ReactNode, useEffect, useState } from 'react'
-import PropTypes from 'prop-types'
-
 import RcDropdown from 'rc-dropdown'
 import styled, { createGlobalStyle } from 'styled-components'
 
@@ -148,24 +146,4 @@ export const Popover: React.FC<Props> = ({
       </RcDropdown>
     </>
   )
-}
-
-Popover.propTypes = {
-  arrow: PropTypes.bool,
-  content: PropTypes.any,
-  keepOpen: PropTypes.bool,
-  isVisible: PropTypes.bool,
-  children: PropTypes.node.isRequired,
-  trigger: PropTypes.oneOf(['click', 'hover', 'contextMenu']),
-  notificationBackgroundColor: PropTypes.string,
-  notificationTextColor: PropTypes.string,
-  onVisibleChange: PropTypes.func,
-  placement: PropTypes.oneOf([
-    'topRight',
-    'topLeft',
-    'topCenter',
-    'bottomLeft',
-    'bottomRight',
-    'bottomCenter'
-  ])
 }

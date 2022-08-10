@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react'
 
-import PropTypes from 'prop-types'
-
 import styled from 'styled-components'
 
 import { MdExpandLess, MdExpandMore } from 'react-icons/md'
@@ -79,12 +77,4 @@ export const TimeUnity: React.FC<Props> = ({
       </Text>
     </Flex>
   )
-}
-
-TimeUnity.propTypes = {
-  max: PropTypes.number.isRequired,
-  min: PropTypes.number.isRequired,
-  label: PropTypes.string.isRequired,
-  value: PropTypes.number.isRequired,
-  onChange: PropTypes.func
 }

@@ -1,6 +1,4 @@
 import React, { ReactNode } from 'react'
-import PropTypes from 'prop-types'
-
 import styled from 'styled-components'
 
 import { Text } from '../Text'
@@ -25,9 +23,4 @@ const StatusStyled = styled(Text)<Props>`
 
 export const Status: React.FC<Props> = ({ children, ...props }) => {
   return <StatusStyled {...props}>{children}</StatusStyled>
-}
-
-Status.propTypes = {
-  children: PropTypes.node,
-  statusColor: PropTypes.string
 }

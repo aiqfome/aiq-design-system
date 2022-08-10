@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import styled, { css } from 'styled-components'
-import PropTypes from 'prop-types'
 import { useCombobox } from 'downshift'
 import { IoIosArrowDown } from 'react-icons/io'
 
@@ -248,33 +247,6 @@ export const SelectFetchable: React.FC<Props> = ({
       </Box>
     </Container>
   )
-}
-
-SelectFetchable.propTypes = {
-  label: PropTypes.string,
-  items: PropTypes.array,
-  isOpen: PropTypes.bool,
-  variant: PropTypes.oneOf(['outlined']),
-  prefix: PropTypes.any,
-  placeholder: PropTypes.string,
-  handleSelectedItemChange: PropTypes.func,
-  onChangeTextInput: PropTypes.func,
-  selectedItem: PropTypes.any,
-  autoComplete: PropTypes.bool,
-  backgroundColor: PropTypes.any,
-  border: PropTypes.any,
-  width: PropTypes.any,
-  maxWidth: PropTypes.any,
-  sufix: PropTypes.any,
-  isLoading: PropTypes.bool,
-  errorForm: PropTypes.bool,
-  errorMessage: PropTypes.string,
-  onChange: PropTypes.func,
-  inputProps: PropTypes.object,
-  isDependent: PropTypes.bool,
-  dependentMessage: PropTypes.string,
-  emptyMessage: PropTypes.string,
-  loadingMessage: PropTypes.string
 }
 
 SelectFetchable.defaultProps = {
