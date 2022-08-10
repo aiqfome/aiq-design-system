@@ -17,6 +17,7 @@ export type Props = MarginProps &
     disabled?: boolean
     label?: string
     checked?: boolean
+    theme?: any
     onChange?: (event: any) => void
   }
 
@@ -127,6 +128,7 @@ export const Radio = React.forwardRef<HTMLInputElement, Props>(
       m,
       mr,
       ml,
+      theme,
       ...props
     },
     ref
@@ -156,6 +158,7 @@ export const Radio = React.forwardRef<HTMLInputElement, Props>(
         className={className}
         disabled={disabled}
         data-testid='radio-container'
+        theme={theme}
       >
         <input
           ref={ref}
