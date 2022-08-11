@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo, useState } from 'react'
-import PropTypes from 'prop-types'
 
 import { animated } from 'react-spring'
 import styled, { css } from 'styled-components'
@@ -158,9 +157,10 @@ export const ToastContent: React.FC<Props> = ({ message, className }) => {
     }
   }, [message.fixed, message.id, removeToast])
 
-  const variation = useMemo(() => toastVariations[message.type] || {}, [
-    message.type
-  ])
+  const variation = useMemo(
+    () => toastVariations[message.type] || {},
+    [message.type]
+  )
 
   return (
     <StyledToast
@@ -188,10 +188,4 @@ export const ToastContent: React.FC<Props> = ({ message, className }) => {
       </button>
     </StyledToast>
   )
-}
-
-ToastContent.propTypes = {
-  type: PropTypes.oneOf(['info', 'success', 'error', 'warning']),
-  message: PropTypes.any,
-  className: PropTypes.string
 }

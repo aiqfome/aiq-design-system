@@ -1,5 +1,4 @@
 import React, { InputHTMLAttributes } from 'react'
-import PropTypes from 'prop-types'
 
 import InputMask from 'react-input-mask'
 
@@ -161,29 +160,4 @@ export const Input: React.FC<Props> = ({
       {...props}
     />
   )
-}
-
-Input.propTypes = {
-  name: PropTypes.string,
-  inputRef: PropTypes.any,
-  label: PropTypes.string,
-  errorForm: PropTypes.bool,
-  type: PropTypes.string,
-  errorMessage: PropTypes.string,
-  sufix: PropTypes.any,
-  prefix: PropTypes.any,
-  value: PropTypes.string,
-  variant: PropTypes.oneOf(['outlined', 'default', 'tags']),
-  placeholder: PropTypes.string,
-  containerProps: PropTypes.object,
-
-  boxProps: PropTypes.object,
-  backgroundColor: PropTypes.any,
-  border: PropTypes.any,
-  width: PropTypes.any,
-  maxWidth: PropTypes.any,
-  mask: PropTypes.string,
-  onChange: PropTypes.func,
-  disabled: PropTypes.bool,
-  nativeAutoComplete: PropTypes.oneOf(['on', 'disabled'])
 }

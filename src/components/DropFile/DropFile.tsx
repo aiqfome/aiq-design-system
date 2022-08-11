@@ -1,6 +1,5 @@
 import React, { useState, useRef } from 'react'
 
-import PropTypes from 'prop-types'
 import { MdFileUpload } from 'react-icons/md'
 import styled, { css, DefaultTheme } from 'styled-components'
 
@@ -264,14 +263,3 @@ export const DropFile = React.forwardRef<HTMLInputElement, Props>(
 )
 
 DropFile.displayName = 'DropFile'
-
-DropFile.propTypes = {
-  dataMaxSize: PropTypes.number,
-  translate: PropTypes.any,
-  onChange: PropTypes.func,
-  initImage: PropTypes.string,
-  errorMessage: PropTypes.string,
-  errorForm: PropTypes.bool,
-  onVerifyType: PropTypes.func,
-  name: PropTypes.string
-}

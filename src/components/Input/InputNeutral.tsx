@@ -1,5 +1,4 @@
 import React, { useState, InputHTMLAttributes } from 'react'
-import PropTypes from 'prop-types'
 import { MdVisibility, MdVisibilityOff } from 'react-icons/md'
 
 import styled, { css } from 'styled-components'
@@ -252,30 +251,4 @@ export const InputNeutral: React.FC<Props> = ({
       {errorForm && <InputErrorMessage errorMessage={errorMessage} />}
     </Flex>
   )
-}
-
-Input.propTypes = {
-  inputRef: PropTypes.any,
-  value: PropTypes.string,
-  nativeAutoComplete: PropTypes.oneOf(['on', 'disabled'])
-}
-
-InputNeutral.propTypes = {
-  name: PropTypes.string,
-  inputRef: PropTypes.any,
-  errorForm: PropTypes.bool,
-  type: PropTypes.string,
-  errorMessage: PropTypes.string,
-  sufix: PropTypes.any,
-  prefix: PropTypes.any,
-  value: PropTypes.string,
-  placeholder: PropTypes.string,
-  containerProps: PropTypes.object,
-  boxProps: PropTypes.object,
-  nativeAutoComplete: PropTypes.oneOf(['on', 'disabled']),
-
-  backgroundColor: PropTypes.any,
-  border: PropTypes.any,
-  width: PropTypes.any,
-  maxWidth: PropTypes.any
 }

@@ -1,7 +1,5 @@
 import React from 'react'
 
-import PropTypes from 'prop-types'
-
 import styled, { css, DefaultTheme } from 'styled-components'
 
 interface Props extends DefaultTheme {
@@ -87,11 +85,4 @@ export const PaginationItem: React.FC<Props> = ({
       {children}
     </ItemPageStyled>
   )
-}
-
-PaginationItem.propTypes = {
-  children: PropTypes.any,
-  size: PropTypes.oneOf(['default', 'small', 'large']),
-  className: PropTypes.string,
-  active: PropTypes.bool
 }

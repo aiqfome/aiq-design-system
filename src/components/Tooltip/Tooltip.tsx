@@ -1,5 +1,4 @@
 import React, { ReactNode } from 'react'
-import PropTypes from 'prop-types'
 
 import RcTooltip from 'rc-tooltip'
 import RcDropdown from 'rc-dropdown'
@@ -103,18 +102,4 @@ export const Tooltip: React.FC<Props> = ({
       {child}
     </RcTooltip>
   )
-}
-
-Tooltip.propTypes = {
-  body: PropTypes.any,
-  children: PropTypes.node.isRequired,
-  type: PropTypes.oneOf(['default', 'balloon']),
-  variant: PropTypes.oneOf([
-    'topRight',
-    'topLeft',
-    'topCenter',
-    'bottomLeft',
-    'bottomRight',
-    'bottomCenter'
-  ])
 }

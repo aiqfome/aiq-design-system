@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import PropTypes from 'prop-types'
+
 import styled from 'styled-components'
 
 import { Divider } from '../Divider'
@@ -111,11 +111,4 @@ export const Sidebar: React.FC<Props> = ({
       )}
     </SidebarStyled>
   )
-}
-
-Sidebar.propTypes = {
-  header: PropTypes.any,
-  opened: PropTypes.bool,
-  onClickItem: PropTypes.func,
-  data: PropTypes.any.isRequired
 }

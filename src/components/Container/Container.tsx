@@ -1,5 +1,4 @@
 import React, { ReactNode } from 'react'
-import PropTypes from 'prop-types'
 
 import { Divider } from '../Divider'
 import { Flex } from '../Flex'
@@ -135,28 +134,4 @@ export const Container: React.FC<Props> = ({
       </ContainerWrapper>
     </Flex>
   )
-}
-
-StyledContainer.propTypes = {
-  tabs: PropTypes.array,
-  children: PropTypes.node,
-  tabIndex: PropTypes.number
-}
-
-Container.propTypes = {
-  tabs: PropTypes.array,
-  header: PropTypes.node,
-  title: PropTypes.string,
-  tabsExtra: PropTypes.any,
-  children: PropTypes.node,
-  tabIndex: PropTypes.number,
-  onChangeTab: PropTypes.func,
-  containerProps: PropTypes.object
-}
-
-ContainerWrapper.propTypes = {
-  tabs: PropTypes.array,
-  header: PropTypes.node,
-  title: PropTypes.string,
-  children: PropTypes.node
 }
