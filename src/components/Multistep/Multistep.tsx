@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect } from 'react'
-import PropTypes from 'prop-types'
 
 import styled, { ThemeContext } from 'styled-components'
 
@@ -164,11 +163,4 @@ export const Multistep: React.FC<Props> = ({
       )}
     </Flex>
   )
-}
-
-Multistep.propTypes = {
-  steps: PropTypes.array.isRequired,
-  stepCurrent: PropTypes.number,
-  disabledClickStep: PropTypes.bool,
-  onClickStep: PropTypes.func
 }

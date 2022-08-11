@@ -1,5 +1,4 @@
 import React, { useContext, useCallback, createContext, useState } from 'react'
-import PropTypes from 'prop-types'
 
 import { v4 as uuidv4 } from 'uuid'
 
@@ -59,8 +58,4 @@ export const useToast = (): ContextProps => {
   }
 
   return context
-}
-
-ToastProvider.propTypes = {
-  children: PropTypes.node
 }

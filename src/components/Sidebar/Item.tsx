@@ -1,5 +1,4 @@
 import React, { useState, useMemo, ReactDOM } from 'react'
-import PropTypes from 'prop-types'
 import { useLocation } from 'react-router-dom'
 import styled, { css } from 'styled-components'
 
@@ -184,10 +183,6 @@ export const Item: React.FC<ItemProps> = ({
     )
   }
 
-  ItemWrapper.propTypes = {
-    children: PropTypes.any
-  }
-
   return (
     <ItemStyled
       {...item}
@@ -240,13 +235,4 @@ export const Item: React.FC<ItemProps> = ({
       />
     </ItemStyled>
   )
-}
-
-Item.propTypes = {
-  onClickItem: PropTypes.func,
-  item: PropTypes.any.isRequired,
-  openItem: PropTypes.bool.isRequired,
-  toggleItem: PropTypes.func.isRequired,
-  sidebarOpened: PropTypes.bool.isRequired,
-  heightScrolledToTop: PropTypes.number
 }

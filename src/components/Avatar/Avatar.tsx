@@ -1,5 +1,4 @@
 import React, { useCallback, useState, memo } from 'react'
-import PropTypes from 'prop-types'
 
 import styled from 'styled-components'
 
@@ -94,21 +93,8 @@ export const Avatar: React.FC<Props> = ({
   )
 }
 
-Avatar.propTypes = {
-  src: PropTypes.string,
-  fallback: PropTypes.string,
-  palette: PropTypes.string,
-  alt: PropTypes.string.isRequired,
-  variant: PropTypes.oneOf(['box', 'rounded'])
-}
-
 Avatar.defaultProps = {
   palette: 'primary'
 }
 
 AvatarInitial.displayName = 'AvatarInitial'
-
-AvatarInitial.propTypes = {
-  alt: PropTypes.string.isRequired,
-  palette: PropTypes.string
-}

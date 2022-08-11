@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styled, { css } from 'styled-components'
-import PropTypes from 'prop-types'
+
 import { useCombobox } from 'downshift'
 import { IoIosArrowDown } from 'react-icons/io'
 
@@ -250,32 +250,6 @@ export const SelectStatic: React.FC<Props> = ({
       </Box>
     </Container>
   )
-}
-
-SelectStatic.propTypes = {
-  label: PropTypes.string,
-  items: PropTypes.array,
-  isOpen: PropTypes.bool,
-  variant: PropTypes.oneOf(['outlined']),
-  prefix: PropTypes.any,
-  placeholder: PropTypes.string,
-  handleSelectedItemChange: PropTypes.func,
-  onChangeTextInput: PropTypes.func,
-  selectedItem: PropTypes.any,
-  autoComplete: PropTypes.bool,
-  backgroundColor: PropTypes.any,
-  border: PropTypes.any,
-  width: PropTypes.any,
-  maxWidth: PropTypes.any,
-  sufix: PropTypes.any,
-  isLoading: PropTypes.bool,
-  errorForm: PropTypes.bool,
-  errorMessage: PropTypes.string,
-  inputProps: PropTypes.object,
-  clearOnSelect: PropTypes.bool,
-  isDependent: PropTypes.bool,
-  emptyMessage: PropTypes.string,
-  dependentMessage: PropTypes.string
 }
 
 SelectStatic.defaultProps = {

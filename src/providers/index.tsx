@@ -2,8 +2,6 @@ import React, { createContext, useContext, useState } from 'react'
 
 import { ThemeProvider as ThemeProviderStyledComponents } from 'styled-components'
 
-import PropTypes from 'prop-types'
-
 import designTheme from './theme'
 import GlobalStyles from '../global/styles'
 import PopoverStyles from '../global/popover'
@@ -46,11 +44,6 @@ export const ThemeProvider: React.FC<Props> = ({ children, defaultTheme }) => {
       </ThemeProviderStyledComponents>
     </ThemeContext.Provider>
   )
-}
-
-ThemeProvider.propTypes = {
-  children: PropTypes.any,
-  defaultTheme: PropTypes.any
 }
 
 export const useTheme = (): ContextProps => {

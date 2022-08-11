@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
 
-import PropTypes from 'prop-types'
-
 import Menu from 'rc-menu'
 
 import { Flex } from '../Flex'
@@ -57,11 +55,4 @@ export const SubMenu: React.FC<Props> = ({
       </Menu>
     </Flex>
   )
-}
-
-SubMenu.propTypes = {
-  content: PropTypes.node,
-  children: PropTypes.node,
-  menuProps: PropTypes.object,
-  popoverProps: PropTypes.object
 }

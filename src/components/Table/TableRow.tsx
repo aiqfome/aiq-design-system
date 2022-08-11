@@ -1,5 +1,4 @@
 import React, { ReactNode } from 'react'
-import PropTypes from 'prop-types'
 
 import styled, { css } from 'styled-components'
 
@@ -72,12 +71,4 @@ export const TableRow: React.FC<TableRowProps> = ({
 
 TableRow.defaultProps = {
   hoverable: true
-}
-
-TableRow.propTypes = {
-  expanded: PropTypes.bool,
-  children: PropTypes.node,
-  hasAction: PropTypes.bool,
-  hoverable: PropTypes.bool,
-  background: PropTypes.string
 }

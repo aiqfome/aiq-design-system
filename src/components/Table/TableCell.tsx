@@ -1,5 +1,4 @@
 import React, { ReactNode } from 'react'
-import PropTypes from 'prop-types'
 
 import styled, { css } from 'styled-components'
 import {
@@ -60,10 +59,4 @@ export const TableCell: React.FC<Props> = ({
       {children}
     </TableCellStyled>
   )
-}
-
-TableCell.propTypes = {
-  wrap: PropTypes.bool,
-  children: PropTypes.node,
-  colspan: PropTypes.number
 }

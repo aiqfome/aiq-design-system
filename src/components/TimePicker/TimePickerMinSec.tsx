@@ -1,5 +1,4 @@
 import React, { useCallback, useState } from 'react'
-import PropTypes from 'prop-types'
 
 import styled from 'styled-components'
 
@@ -195,18 +194,3 @@ export const TimePickerMinSec = React.forwardRef(
 )
 
 TimePickerMinSec.displayName = 'TimePickerMinSec'
-
-TimePickerMinSec.propTypes = {
-  value: PropTypes.any,
-  sufix: PropTypes.any,
-  name: PropTypes.string,
-  label: PropTypes.string,
-  getValue: PropTypes.func,
-  onChange: PropTypes.func,
-  errorForm: PropTypes.bool,
-  placeholder: PropTypes.string,
-  onChangeInput: PropTypes.func,
-  errorMessage: PropTypes.string,
-  variant: PropTypes.oneOf(['outlined', 'default']),
-  maxWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-}
