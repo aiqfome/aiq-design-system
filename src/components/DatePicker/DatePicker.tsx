@@ -1,7 +1,5 @@
 import React from 'react'
 
-import PropTypes from 'prop-types'
-
 import { Moment } from 'moment'
 
 import { DatePickerRange } from './DatePickerRange'
@@ -49,14 +47,4 @@ export const DatePicker: React.FC<Props> = ({
       {...props}
     />
   )
-}
-
-DatePicker.propTypes = {
-  variant: PropTypes.oneOf(['single', 'range']),
-  value: PropTypes.array,
-  onChange: PropTypes.func.isRequired,
-  name: PropTypes.string,
-  errorMessage: PropTypes.string,
-  errorForm: PropTypes.bool,
-  placeholder: PropTypes.string
 }

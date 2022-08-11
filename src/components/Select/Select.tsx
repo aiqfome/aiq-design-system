@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
 import { Props as BoxProps } from '../Box'
 
@@ -37,8 +36,4 @@ export const Select: React.FC<Props> = ({ isFetchable, ...props }) => {
   }
 
   return <SelectStatic {...props} />
-}
-
-Select.propTypes = {
-  isFetchable: PropTypes.bool
 }

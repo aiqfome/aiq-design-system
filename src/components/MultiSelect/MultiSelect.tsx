@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
 import { MultiSelectFetchable } from './MultiSelectFetchable'
 import { MultiSelectStatic } from './MultiSelectStatic'
@@ -41,8 +40,4 @@ export const MultiSelect: React.FC<Props> = ({
   }
 
   return <MultiSelectStatic {...props} />
-}
-
-MultiSelect.propTypes = {
-  isFetchable: PropTypes.bool
 }

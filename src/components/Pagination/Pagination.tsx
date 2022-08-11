@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import PropTypes from 'prop-types'
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md'
 import styled, { css } from 'styled-components'
 
@@ -256,17 +255,4 @@ export const Pagination: React.FC<Props> = ({
 
 Pagination.defaultProps = {
   variant: 'default'
-}
-
-Pagination.propTypes = {
-  page: PropTypes.number,
-  count: PropTypes.number,
-  color: PropTypes.string,
-  onChange: PropTypes.func,
-  disabled: PropTypes.bool,
-  defaultPage: PropTypes.number,
-  size: PropTypes.oneOf(['default', 'small', 'large']),
-  variant: PropTypes.oneOf(['default', 'noCount']),
-  nextPage: PropTypes.any,
-  prevPage: PropTypes.any
 }

@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import {
   color,
@@ -50,8 +49,3 @@ export const Text = styled.span<Props>`
       text-overflow: ellipsis;
     `};
 `
-
-Text.propTypes = {
-  cursor: PropTypes.string,
-  whiteSpace: PropTypes.oneOf(['nowrap', 'normal', 'pre'])
-}

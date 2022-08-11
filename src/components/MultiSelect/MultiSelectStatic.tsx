@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from 'react'
-import PropTypes from 'prop-types'
 
 import styled from 'styled-components'
 import { MdClose } from 'react-icons/md'
@@ -448,19 +447,4 @@ export const MultiSelectStatic: React.FC<Props> = ({
       {errorForm && <InputErrorMessage errorMessage={errorMessage} />}
     </Flex>
   )
-}
-
-MultiSelectStatic.propTypes = {
-  items: PropTypes.array.isRequired,
-  maxWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  filters: PropTypes.array,
-  onChange: PropTypes.func,
-  value: PropTypes.array,
-  isLoading: PropTypes.bool,
-  placeholder: PropTypes.string,
-  errorForm: PropTypes.bool,
-  errorMessage: PropTypes.string,
-  isDependent: PropTypes.bool,
-  emptyMessage: PropTypes.string,
-  dependentMessage: PropTypes.string
 }

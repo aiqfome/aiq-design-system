@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { createPortal } from 'react-dom'
-import PropTypes from 'prop-types'
 import styled, { DefaultTheme, css } from 'styled-components'
 import { layout } from 'styled-system'
 import { Flex, Props as FlexProps } from '../Flex'
@@ -281,7 +280,7 @@ export const Modal: React.FC<Props> = ({
               flexDirection='row-reverse'
               {...buttonsProps}
             >
-              {okButton.visible && okButton.function ? (
+              {okButton.visible ? (
                 <Button
                   palette='primary'
                   onClick={handleOk}
@@ -327,20 +326,4 @@ export const Modal: React.FC<Props> = ({
   }
 
   return <Box display='none'></Box>
-}
-
-Modal.propTypes = {
-  form: PropTypes.object,
-  onSubmit: PropTypes.func,
-  title: PropTypes.string.isRequired,
-  variant: PropTypes.oneOf(['big', 'medium', 'small']),
-  children: PropTypes.node,
-  animation: PropTypes.bool,
-  zIndex: PropTypes.number,
-  okButton: PropTypes.any,
-  show: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
-  cancelButton: PropTypes.any,
-  formProps: PropTypes.object,
-  buttonsProps: PropTypes.object
 }

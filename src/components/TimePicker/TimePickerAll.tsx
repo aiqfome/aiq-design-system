@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import PropTypes from 'prop-types'
 
 import styled from 'styled-components'
 
@@ -234,19 +233,3 @@ export const TimePickerAll = React.forwardRef(
 )
 
 TimePickerAll.displayName = 'TimePickerAll'
-
-TimePickerAll.propTypes = {
-  value: PropTypes.any,
-  sufix: PropTypes.any,
-  name: PropTypes.string,
-  label: PropTypes.string,
-  onChange: PropTypes.func,
-  getValue: PropTypes.func,
-  errorForm: PropTypes.bool,
-  hasSeconds: PropTypes.bool,
-  onChangeInput: PropTypes.func,
-  placeholder: PropTypes.string,
-  errorMessage: PropTypes.string,
-  variant: PropTypes.oneOf(['outlined', 'default']),
-  maxWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-}
