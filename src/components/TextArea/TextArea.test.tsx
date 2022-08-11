@@ -14,9 +14,9 @@ describe('TextArea', () => {
     const content = 'My placeholder'
     const { getByTestId } = render(<TextArea placeholder={content} />)
 
-    const input = getByTestId('input')
+    const textarea = getByTestId('textarea')
 
-    expect(input).toBeTruthy()
-    expect(input).toHaveAttribute('placeholder', 'My placeholder')
+    expect(textarea).toBeTruthy()
+    expect(textarea).toHaveAttribute('placeholder', 'My placeholder')
   })
 })

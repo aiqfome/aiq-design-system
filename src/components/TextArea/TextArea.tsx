@@ -3,7 +3,6 @@ import React from 'react'
 import styled from 'styled-components'
 import {
   margin,
-  ColorProps,
   SpaceProps,
   layout,
   LayoutProps,
@@ -43,5 +42,5 @@ const StyledTextArea = styled.textarea<Props>`
   font-size: ${props => props.theme.fontSizes.medium};
 `
 export const TextArea: React.FC<Props> = props => {
-  return <StyledTextArea {...props} />
+  return <StyledTextArea data-testid='textarea' {...props} />
 }
