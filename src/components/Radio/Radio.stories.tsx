@@ -60,7 +60,7 @@ export const Sizes: React.FC = () => (
       mx={10}
       variant='default'
       label='default'
-      checked={true}
+      checked={false}
       name='radio1'
       value='default'
     />
