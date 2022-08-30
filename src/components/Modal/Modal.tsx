@@ -282,29 +282,33 @@ export const Modal: React.FC<Props> = ({
               flexDirection='row-reverse'
               {...buttonsProps}
             >
-              {okButton.visible && okButton.function ? (
-                <Button
-                  palette='primary'
-                  onClick={handleOk}
-                  variant='contained'
-                  fontWeight='medium'
-                  data-testid='modal-button'
-                  type='button'
-                  {...okButton}
-                >
-                  {okButton.label}
-                </Button>
-              ) : (
-                <Button
-                  palette='primary'
-                  variant='contained'
-                  fontWeight='medium'
-                  data-testid='modal-button'
-                  type='submit'
-                  {...okButton}
-                >
-                  {okButton.label}
-                </Button>
+              {okButton.visible && (
+                <>
+                  {okButton.function ? (
+                    <Button
+                      palette='primary'
+                      onClick={handleOk}
+                      variant='contained'
+                      fontWeight='medium'
+                      data-testid='modal-button'
+                      type='button'
+                      {...okButton}
+                    >
+                      {okButton.label}
+                    </Button>
+                  ) : (
+                    <Button
+                      palette='primary'
+                      variant='contained'
+                      fontWeight='medium'
+                      data-testid='modal-button'
+                      type='submit'
+                      {...okButton}
+                    >
+                      {okButton.label}
+                    </Button>
+                  )}
+                </>
               )}
 
               {cancelButton.visible && (
