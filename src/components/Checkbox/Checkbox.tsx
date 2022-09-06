@@ -59,6 +59,8 @@ const BoxCheckbox = styled.div<Props>`
   ${HiddenCheckbox}:focus + & {
     box-shadow: 0 0 0 3px ${({ theme }) => theme.colors.primary};
   }
+
+  flex-shrink: 0;
 `
 
 const Icon = styled.svg<Props>`
