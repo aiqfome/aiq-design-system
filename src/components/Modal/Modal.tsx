@@ -21,8 +21,9 @@ export interface Props {
   children?: any
   okButton?: {
     label: string
-    function: () => void
+    function?: () => void
     visible: boolean
+    disabled?: boolean
   }
   cancelButton?: {
     label: string
@@ -223,7 +224,8 @@ export const Modal: React.FC<Props> = ({
     if (e.preventDefault) {
       e.preventDefault()
     }
-    okButton.function()
+
+    if (okButton.function) okButton.function()
   }
 
   function handleCancel() {
@@ -280,29 +282,33 @@ export const Modal: React.FC<Props> = ({
               flexDirection='row-reverse'
               {...buttonsProps}
             >
-              {okButton.visible ? (
-                <Button
-                  palette='primary'
-                  onClick={handleOk}
-                  variant='contained'
-                  fontWeight='medium'
-                  data-testid='modal-button'
-                  type='button'
-                  {...okButton}
-                >
-                  {okButton.label}
-                </Button>
-              ) : (
-                <Button
-                  palette='primary'
-                  variant='contained'
-                  fontWeight='medium'
-                  data-testid='modal-button'
-                  type='submit'
-                  {...okButton}
-                >
-                  {okButton.label}
-                </Button>
+              {okButton.visible && (
+                <>
+                  {okButton.function ? (
+                    <Button
+                      palette='primary'
+                      onClick={handleOk}
+                      variant='contained'
+                      fontWeight='medium'
+                      data-testid='modal-button'
+                      type='button'
+                      {...okButton}
+                    >
+                      {okButton.label}
+                    </Button>
+                  ) : (
+                    <Button
+                      palette='primary'
+                      variant='contained'
+                      fontWeight='medium'
+                      data-testid='modal-button'
+                      type='submit'
+                      {...okButton}
+                    >
+                      {okButton.label}
+                    </Button>
+                  )}
+                </>
               )}
 
               {cancelButton.visible && (
