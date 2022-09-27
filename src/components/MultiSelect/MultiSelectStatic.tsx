@@ -37,6 +37,7 @@ export interface Props {
   isDependent?: boolean
   emptyMessage?: string
   dependentMessage?: string
+  removable?: boolean
 }
 
 const MultiSelectStyled = styled(Box)`
@@ -167,6 +168,7 @@ export const MultiSelectStatic: React.FC<Props> = ({
   emptyMessage = 'item não encontrado ou já adicionado',
   isDependent = false,
   dependentMessage = 'este campo tem alguma dependência',
+  removable = false,
   ...props
 }) => {
   const [inputValue, setInputValue] = useState<string>('')
@@ -438,7 +440,7 @@ export const MultiSelectStatic: React.FC<Props> = ({
             </>
           )}
 
-          {selectedItems.length > 0 && (
+          {selectedItems.length > 0 && removable && (
             <>
               <CustomText>selecionados</CustomText>
               <SelectedList>
@@ -479,7 +481,7 @@ export const MultiSelectStatic: React.FC<Props> = ({
                     data-testid='select-item'
                     {...getItemProps({ item, index })}
                     onClick={e => {
-                      if (selectedItems.indexOf(item) > -1)
+                      if (selectedItems.indexOf(item) > -1 && removable)
                         onChange({
                           selectedItems: selectedItems.filter(
                             e => e.id !== item.id
