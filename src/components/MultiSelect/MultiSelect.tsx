@@ -29,6 +29,7 @@ export interface Props {
   errorForm?: boolean
   isDependent?: boolean
   dependentMessage?: string
+  removable?: boolean
 }
 
 export const MultiSelect: React.FC<Props> = ({
