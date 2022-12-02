@@ -20,6 +20,18 @@ export const Basic: React.FC = (): ReactElement => (
   </Flex>
 )
 
+export const Disabled: React.FC = (): ReactElement => (
+  <Flex variant='fullCentralized'>
+    <TimePicker
+      onChange={value => console.log(value)}
+      placeholder='aiqfome'
+      maxWidth='100px'
+      value='12:30'
+      disabled={true}
+    />
+  </Flex>
+)
+
 export const Outlined: React.FC = (): ReactElement => (
   <Flex variant='fullCentralized'>
     <TimePicker variant='outlined' label='aiqfome' maxWidth='120px' />
