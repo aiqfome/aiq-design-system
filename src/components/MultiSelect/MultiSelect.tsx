@@ -30,6 +30,7 @@ export interface Props {
   isDependent?: boolean
   dependentMessage?: string
   disabled?: boolean
+  removable?: boolean
 }
 
 export const MultiSelect: React.FC<Props> = ({
