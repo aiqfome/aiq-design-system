@@ -27,7 +27,7 @@ export const Disabled: React.FC = (): ReactElement => (
       placeholder='aiqfome'
       maxWidth='100px'
       value='12:30'
-      disabled={true}
+      disabled
     />
   </Flex>
 )
