@@ -39,6 +39,7 @@ export interface Props {
   errorForm?: boolean
   isDependent?: boolean
   dependentMessage?: string
+  disabled?: boolean
 }
 
 interface ContainerInputProps {
@@ -150,6 +151,7 @@ export const MultiSelectFetchable: React.FC<Props> = ({
   errorMessage,
   isDependent = false,
   dependentMessage = 'este campo tem alguma dependência',
+  disabled,
   handleSelectedItemChange = () => {
     // do nothing.
   },
@@ -319,7 +321,7 @@ export const MultiSelectFetchable: React.FC<Props> = ({
                 display='flex'
                 flexDirection='row'
                 alignItems='center'
-                backgroundColor='primary'
+                backgroundColor={disabled ? 'darkGrey' : 'primary'}
                 borderRadius='3px'
               >
                 <SelectedItem
@@ -334,6 +336,7 @@ export const MultiSelectFetchable: React.FC<Props> = ({
                 </SelectedItem>
 
                 <Button
+                  disabled={disabled}
                   onClick={e => {
                     e.stopPropagation()
                     handleSelectedItemChange({
@@ -368,6 +371,7 @@ export const MultiSelectFetchable: React.FC<Props> = ({
           </Flex>
 
           <input
+            disabled={disabled}
             type='text'
             placeholder={placeholder}
             style={{ width: '100%', flex: 1, paddingLeft: '5px' }}
@@ -389,7 +393,7 @@ export const MultiSelectFetchable: React.FC<Props> = ({
         </ContainerInput>
 
         <Overflow
-          isOpen={isOpen}
+          isOpen={isOpen || !disabled}
           mt={13}
           py={7}
           flexDirection='column'
@@ -422,6 +426,7 @@ export const MultiSelectFetchable: React.FC<Props> = ({
               {isOpen &&
                 !isDependent &&
                 !isLoading &&
+                !disabled &&
                 getFilteredItems().map((item, index) => (
                   <li
                     className={highlightedIndex === index ? 'highlighted' : ''}

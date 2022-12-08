@@ -73,3 +73,28 @@ export const Removable: React.FC = (): ReactElement => {
     </Flex>
   )
 }
+
+export const Disabled: React.FC = (): ReactElement => {
+  const [value, setValue] = useState([items[0]])
+
+  function handleChangeMultiSelect({ selectedItems }) {
+    setValue(selectedItems)
+  }
+
+  return (
+    <Flex variant='fullCentralized'>
+      <MultiSelect
+        value={value}
+        onChange={handleChangeMultiSelect}
+        filters={filters}
+        items={items}
+        isLoading={false}
+        placeholder='cidades do aiq'
+        errorForm={value.length === 0}
+        errorMessage='deu ruinzão aqui'
+        disabled
+      />
+    </Flex>
+  )
+}
+
