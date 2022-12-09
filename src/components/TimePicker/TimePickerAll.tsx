@@ -23,6 +23,7 @@ export interface Props {
   variant?: 'outlined' | 'default'
   onChangeInput?: (e: any) => void
   getValue?: (input: any) => string
+  disabled?: boolean
 }
 
 interface PickerProps {
@@ -46,6 +47,7 @@ export const TimePickerAll = React.forwardRef(
       hasSeconds,
       placeholder,
       errorMessage,
+      disabled,
       onChangeInput = (e: any) => {
         console.log('input:', e)
       },
@@ -182,9 +184,10 @@ export const TimePickerAll = React.forwardRef(
           placeholder={placeholder}
           errorMessage={errorMessage}
           onChange={handleInputOnChange}
+          disabled={disabled}
         />
 
-        {showPicker && (
+        {showPicker && !disabled && (
           <Box
             top='38px'
             zIndex={1}

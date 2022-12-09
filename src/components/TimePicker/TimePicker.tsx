@@ -18,6 +18,7 @@ export interface Props {
   variant?: 'outlined' | 'default'
   onChangeInput?: (e: any) => void
   getValue?: (input: any) => string
+  disabled?: boolean
 }
 
 export const TimePicker: React.FC<Props> = ({ type = 'all', ...props }) => {

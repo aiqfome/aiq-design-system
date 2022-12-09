@@ -29,6 +29,7 @@ export interface Props {
   errorForm?: boolean
   isDependent?: boolean
   dependentMessage?: string
+  disabled?: boolean
   removable?: boolean
 }
 
