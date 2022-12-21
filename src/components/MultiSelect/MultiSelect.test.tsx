@@ -128,4 +128,14 @@ describe('MultiSelect', () => {
     const list = container.querySelectorAll('li')
     expect(list.length).toBe(1)
   })
+
+  it('should be disabled when prop disabled is added', () => {
+    const { getByTestId } = render(
+      <MultiSelect items={items} disabled={true} />
+    )
+
+    const select = getByTestId('select-input')
+
+    expect(select).toBeDisabled()
+  })
 })

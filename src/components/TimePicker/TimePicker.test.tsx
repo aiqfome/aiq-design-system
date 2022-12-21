@@ -51,4 +51,12 @@ describe('TimePicker', () => {
     const dialogBox = getByTestId('timepicker-open')
     expect(dialogBox).toBeTruthy()
   })
+
+  it('should be disabled when the prop disabled is true', () => {
+    const { getByTestId } = render(<TimePicker disabled={true} />)
+
+    const input = getByTestId('input')
+
+    expect(input).toBeDisabled()
+  })
 })

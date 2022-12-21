@@ -119,4 +119,12 @@ describe('Input', () => {
 
     expect(input?.value).toBe('444')
   })
+
+  it('should be disabled when sufix input has disabled prop', () => {
+    const sufix = <div>Sufix</div>
+    const { getByTestId } = render(<Input sufix={sufix} disabled={true} />)
+
+    const inputSufixed = getByTestId('input-container')
+    expect(inputSufixed).toBeDisabled()
+  })
 })

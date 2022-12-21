@@ -37,6 +37,7 @@ export interface Props {
   isDependent?: boolean
   emptyMessage?: string
   dependentMessage?: string
+  disabled?: boolean
   removable?: boolean
 }
 
@@ -168,6 +169,7 @@ export const MultiSelectStatic: React.FC<Props> = ({
   emptyMessage = 'item não encontrado ou já adicionado',
   isDependent = false,
   dependentMessage = 'este campo tem alguma dependência',
+  disabled,
   removable = false,
   ...props
 }) => {
@@ -340,7 +342,7 @@ export const MultiSelectStatic: React.FC<Props> = ({
                 display='flex'
                 flexDirection='row'
                 alignItems='center'
-                backgroundColor='primary'
+                backgroundColor={disabled ? 'darkGrey' : 'primary'}
                 borderRadius='3px'
                 data-testid='select-selected-item'
               >
@@ -356,6 +358,7 @@ export const MultiSelectStatic: React.FC<Props> = ({
                 </SelectedItem>
 
                 <Button
+                  disabled={disabled}
                   onClick={e => {
                     e.stopPropagation()
                     onChange({
@@ -390,6 +393,7 @@ export const MultiSelectStatic: React.FC<Props> = ({
           </Flex>
 
           <input
+            disabled={disabled}
             type='text'
             placeholder={placeholder}
             data-testid='select-input'
@@ -418,7 +422,7 @@ export const MultiSelectStatic: React.FC<Props> = ({
           border='1px solid #dedede'
           {...getMenuProps()}
         >
-          {!isDependent && (
+          {!isDependent && !disabled && (
             <>
               <ul>
                 {filters.map((filter, index) => (
@@ -474,6 +478,7 @@ export const MultiSelectStatic: React.FC<Props> = ({
             <ul>
               {isOpen &&
                 !isDependent &&
+                !disabled &&
                 getFilteredItems().map((item, index) => (
                   <li
                     className={highlightedIndex === index ? 'highlighted' : ''}
