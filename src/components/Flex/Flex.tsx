@@ -31,7 +31,7 @@ import {
 interface GapProps {
   gap?: string
   columnGap?: string
-  rowGap: string
+  rowGap?: string
 }
 
 export type Props = BackgroundProps &
