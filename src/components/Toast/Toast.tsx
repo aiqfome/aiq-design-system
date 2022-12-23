@@ -28,11 +28,12 @@ const Container = styled.div<Props>`
 `
 
 export const Toast: React.FC<Props> = ({ messages }) => {
-  const [messagesWithTransitions] = useTransition(messages, () => ({
+  const messagesWithTransitions = useTransition(messages, {
     from: { right: '-120%', opacity: 0 },
     enter: { right: '0%', opacity: 1 },
-    leave: { right: '-120%', opacity: 0 }
-  }))
+    leave: { right: '-120%', opacity: 0 },
+    key: (item: Message) => item.id
+  })
 
   return (
     <Container
