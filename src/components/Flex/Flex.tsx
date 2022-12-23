@@ -28,6 +28,12 @@ import {
   TextAlignProps
 } from 'styled-system'
 
+interface GapProps {
+  gap?: string
+  columnGap?: string
+  rowGap: string
+}
+
 export type Props = BackgroundProps &
   SpaceProps &
   DefaultTheme &
@@ -39,7 +45,8 @@ export type Props = BackgroundProps &
   FlexProps &
   FlexboxProps &
   BorderProps &
-  TextAlignProps & {
+  TextAlignProps &
+  GapProps & {
     variant?: 'auto' | 'centralized' | 'fullCentralized'
     isClickable?: boolean
     color?: string
@@ -94,6 +101,24 @@ const FlexStyled = styled.div<Props>`
         opacity: 0.8;
         user-select: none;
       }
+    `}
+
+    ${({ gap }) =>
+    gap &&
+    css`
+      gap: ${gap};
+    `}
+
+    ${({ columnGap }) =>
+    columnGap &&
+    css`
+      column-gap: ${columnGap};
+    `}
+
+    ${({ rowGap }) =>
+    rowGap &&
+    css`
+      row-gap: ${rowGap};
     `}
 `
 
