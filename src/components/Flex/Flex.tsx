@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { CSSProperties } from 'react'
 
 import styled, { DefaultTheme, css } from 'styled-components'
 
@@ -28,11 +28,7 @@ import {
   TextAlignProps
 } from 'styled-system'
 
-interface GapProps {
-  gap?: string
-  columnGap?: string
-  rowGap?: string
-}
+type GapProps = Pick<CSSProperties, 'gap' | 'columnGap' | 'rowGap'>
 
 export type Props = BackgroundProps &
   SpaceProps &
