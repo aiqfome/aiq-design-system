@@ -3,6 +3,7 @@ import { fireEvent } from '@testing-library/react'
 
 import { Radio } from '../Radio'
 import { render } from '../utils/test/render'
+import { Flex } from '../Flex'
 
 describe('Radio', () => {
   it('should have to render without crashing', () => {
@@ -20,6 +21,18 @@ describe('Radio', () => {
 
     expect(radio).toBeTruthy()
     expect(radio).toHaveTextContent('My label')
+  })
+
+  it('should render label component when label component is provided', () => {
+    const { getByTestId, getByText } = render(
+      <Radio value='test' name='radio' labelComponent={<Flex>aiqfome</Flex>} />
+    )
+
+    const radio = getByTestId('radio-container')
+    const labelComponent = getByText(/aiqfome/i)
+
+    expect(radio).toBeTruthy()
+    expect(labelComponent).toBeInTheDocument()
   })
 
   it('should render initial value correctly', () => {
