@@ -24,12 +24,12 @@ const radioVariations: { [index: string]: any } = {
   default: css`
     min-height: 21px;
     padding-left: 35px;
-    div {
+    .radio-border {
       height: 20px;
       width: 20px;
     }
 
-    div:after {
+    .radio-border:after {
       top: 3px;
       left: 3px;
       width: 10px;
@@ -39,12 +39,12 @@ const radioVariations: { [index: string]: any } = {
   small: css`
     min-height: 17px;
     padding-left: 28px;
-    div {
+    .radio-border {
       height: 16px;
       width: 16px;
     }
 
-    div:after {
+    .radio-border:after {
       top: 2px;
       left: 2px;
       width: 8px;
