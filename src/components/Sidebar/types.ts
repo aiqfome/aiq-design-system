@@ -9,6 +9,7 @@ type SubItemProps = {
 export type ItemObjectProps = {
     name: string
     
+    badge?: number
     href?: string
     active?: boolean
     icon?: JSX.Element
