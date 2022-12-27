@@ -393,7 +393,7 @@ export const MultiSelectFetchable: React.FC<Props> = ({
         </ContainerInput>
 
         <Overflow
-          isOpen={isOpen || !disabled}
+          isOpen={isOpen && !disabled}
           mt={13}
           py={7}
           flexDirection='column'
