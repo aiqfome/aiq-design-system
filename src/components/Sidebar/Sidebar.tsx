@@ -5,9 +5,10 @@ import styled from 'styled-components'
 import { Divider } from '../Divider'
 import { Flex } from '../Flex'
 import { Item } from './Item'
+import { ItemObjectProps } from './types'
 
 export interface Props {
-  data: any
+  data: ItemObjectProps[]
   opened?: boolean
   header?: any
   onClickItem?: any
@@ -58,7 +59,7 @@ export const Sidebar: React.FC<Props> = ({
   opened = false,
   ...props
 }) => {
-  const [openItem, setOpenItem] = useState('')
+  const [openItem, setOpenItem] = useState<number>()
   const [heightScrolledToTop, setHeightScrolledToTop] = useState(0)
 
   useEffect(() => {
@@ -73,8 +74,8 @@ export const Sidebar: React.FC<Props> = ({
     }
   }, [])
 
-  const toggleItem = (value = '') => {
-    setOpenItem(openItem === value ? '' : value)
+  const toggleItem = (value: number) => {
+    setOpenItem(openItem === value ? undefined : value)
   }
 
   return (
