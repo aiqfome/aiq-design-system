@@ -11,7 +11,7 @@ export interface Props {
   data: ItemObjectProps[]
   opened?: boolean
   header?: any
-  onClickItem?: any
+  onClickItem?: () => void
 }
 
 const Items = styled.ul`

@@ -16,7 +16,7 @@ import { ItemObjectProps } from './types'
 interface ItemProps {
   item: ItemObjectProps
   openItem: boolean
-  onClickItem?: any
+  onClickItem?: () => any
   sidebarOpened: boolean
   toggleItem: () => void
   heightScrolledToTop?: number
