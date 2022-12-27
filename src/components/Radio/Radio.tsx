@@ -14,6 +14,7 @@ export type Props = MarginProps &
     variant?: 'default' | 'small'
     disabled?: boolean
     label?: string
+    labelComponent?: React.ReactNode
     checked?: boolean
     theme?: any
     onChange?: (event: any) => void
@@ -78,7 +79,7 @@ const RadioStyled = styled.label<RadioStyled>`
     width: 0;
   }
 
-  div {
+  .radio-border {
     position: absolute;
     top: 0;
     left: 0;
@@ -86,21 +87,21 @@ const RadioStyled = styled.label<RadioStyled>`
     border: 2px solid ${({ theme }) => theme.colors.primary};
   }
 
-  input:checked ~ div {
+  input:checked ~ .radio-border {
     background-color: #fff;
   }
 
-  div:after {
+  .radio-border:after {
     content: '';
     position: absolute;
     display: none;
   }
 
-  input:checked ~ div:after {
+  input:checked ~ .radio-border:after {
     display: block;
   }
 
-  div:after {
+  .radio-border:after {
     border-radius: 50%;
     background-color: ${({ theme }) => theme.colors.primary};
   }
@@ -116,6 +117,7 @@ export const Radio = React.forwardRef<HTMLInputElement, Props>(
       disabled = false,
       checked = false,
       label,
+      labelComponent,
       variant = 'default',
       onChange = () => {
         // do nothing.
@@ -169,9 +171,10 @@ export const Radio = React.forwardRef<HTMLInputElement, Props>(
           data-testid='radio-input'
           {...props}
         />
-        <Box />
+        <Box className='radio-border' />
 
         {label && <Text>{label}</Text>}
+        {labelComponent && labelComponent}
       </RadioStyled>
     )
   }
