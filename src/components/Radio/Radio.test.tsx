@@ -25,7 +25,7 @@ describe('Radio', () => {
 
   it('should render label component when label component is provided', () => {
     const { getByTestId, getByText } = render(
-      <Radio value='test' name='radio' labelComponent={<Flex>aiqfome</Flex>} />
+      <Radio value='test' name='radio' label={<Flex>aiqfome</Flex>} />
     )
 
     const radio = getByTestId('radio-container')

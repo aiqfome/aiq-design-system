@@ -13,8 +13,7 @@ export type Props = MarginProps &
     value: any
     variant?: 'default' | 'small'
     disabled?: boolean
-    label?: string
-    labelComponent?: React.ReactNode
+    label?: string | React.ReactNode
     checked?: boolean
     theme?: any
     onChange?: (event: any) => void
@@ -117,7 +116,6 @@ export const Radio = React.forwardRef<HTMLInputElement, Props>(
       disabled = false,
       checked = false,
       label,
-      labelComponent,
       variant = 'default',
       onChange = () => {
         // do nothing.
@@ -173,8 +171,7 @@ export const Radio = React.forwardRef<HTMLInputElement, Props>(
         />
         <Box className='radio-border' />
 
-        {label && <Text>{label}</Text>}
-        {labelComponent && labelComponent}
+        {label && label}
       </RadioStyled>
     )
   }

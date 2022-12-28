@@ -59,9 +59,9 @@ export const LabelComponent: React.FC = () => (
     <Radio
       mx={10}
       checked={false}
-      labelComponent={<Flex>aiqfome</Flex>}
+      label={<Flex>aiqfome</Flex>}
       name='radio'
-      value='fome'
+      value='aiq'
     />
   </Flex>
 )
