@@ -39,7 +39,7 @@ export type Props = BorderProps &
     children?: any
     className?: string
     color?: string
-    onClick?: any
+    onClick?: () => void
     refBox?: any
   }
 
