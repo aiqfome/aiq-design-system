@@ -1,19 +1,13 @@
 import React from 'react'
-import { withKnobs, text, select } from '@storybook/addon-knobs'
+
+import { text, select } from '@storybook/addon-knobs'
 
 import { Avatar } from './Avatar'
+import { createPageExport } from '../../utils/storybook'
 
-const listOfProps = ['src', 'alt', 'palette', 'size', 'fallback', 'variant']
+const aiqProps = ['src', 'alt', 'palette', 'size', 'fallback', 'variant']
 
-export default {
-  component: Avatar,
-  title: 'Avatar',
-  decorators: [withKnobs],
-  parameters: {
-    docs: {
-      include: new RegExp(`^(${listOfProps.join('|')})`)
-    }
-  },
+export default createPageExport(Avatar, 'Avatar', aiqProps, {
   argTypes: {
     variant: {
       control: 'radio',
@@ -25,7 +19,7 @@ export default {
     size: '32px',
     palette: 'primary'
   }
-}
+})
 
 export const Basic = args => (
   <Avatar
@@ -75,7 +69,6 @@ export const Rounded = args => (
     {...args}
   />
 )
-
 Rounded.args = {
   variant: 'rounded'
 }
