@@ -254,6 +254,7 @@ export const InputNeutral: React.FC<Props> = ({
         {...props}
         data-testid='input'
         nativeAutoComplete={nativeAutoComplete}
+        disabled={disabled}
       />
 
       {errorForm && <InputErrorMessage errorMessage={errorMessage} />}
