@@ -13,7 +13,7 @@ export type Props = MarginProps &
     value: any
     variant?: 'default' | 'small'
     disabled?: boolean
-    label?: string
+    label?: string | React.ReactNode
     checked?: boolean
     theme?: any
     onChange?: (event: any) => void
@@ -23,12 +23,12 @@ const radioVariations: { [index: string]: any } = {
   default: css`
     min-height: 21px;
     padding-left: 35px;
-    div {
+    .radio-border {
       height: 20px;
       width: 20px;
     }
 
-    div:after {
+    .radio-border:after {
       top: 3px;
       left: 3px;
       width: 10px;
@@ -38,12 +38,12 @@ const radioVariations: { [index: string]: any } = {
   small: css`
     min-height: 17px;
     padding-left: 28px;
-    div {
+    .radio-border {
       height: 16px;
       width: 16px;
     }
 
-    div:after {
+    .radio-border:after {
       top: 2px;
       left: 2px;
       width: 8px;
@@ -78,7 +78,7 @@ const RadioStyled = styled.label<RadioStyled>`
     width: 0;
   }
 
-  div {
+  .radio-border {
     position: absolute;
     top: 0;
     left: 0;
@@ -86,21 +86,21 @@ const RadioStyled = styled.label<RadioStyled>`
     border: 2px solid ${({ theme }) => theme.colors.primary};
   }
 
-  input:checked ~ div {
+  input:checked ~ .radio-border {
     background-color: #fff;
   }
 
-  div:after {
+  .radio-border:after {
     content: '';
     position: absolute;
     display: none;
   }
 
-  input:checked ~ div:after {
+  input:checked ~ .radio-border:after {
     display: block;
   }
 
-  div:after {
+  .radio-border:after {
     border-radius: 50%;
     background-color: ${({ theme }) => theme.colors.primary};
   }
@@ -169,9 +169,9 @@ export const Radio = React.forwardRef<HTMLInputElement, Props>(
           data-testid='radio-input'
           {...props}
         />
-        <Box />
+        <Box className='radio-border' />
 
-        {label && <Text>{label}</Text>}
+        {label && label}
       </RadioStyled>
     )
   }
