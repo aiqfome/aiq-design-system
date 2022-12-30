@@ -9,6 +9,7 @@ import { withKnobs, boolean } from '@storybook/addon-knobs'
 import { Flex } from '../Flex'
 
 import { Sidebar } from './Sidebar'
+import { ItemObjectProps, ItemType } from './types'
 
 export default {
   component: Sidebar,
@@ -16,7 +17,7 @@ export default {
   decorators: [withKnobs]
 }
 
-const sidebarData = [
+const sidebarData: ItemObjectProps[] = [
   {
     icon: <MdHome size={18} />,
     name: 'dashboard',
@@ -188,7 +189,7 @@ const sidebarData = [
     icon: <MdBookmark size={18} />,
     name: 'aiqfome',
     href: 'https://aiqfome.com/',
-    type: 'external'
+    type: 'external' as ItemType
   },
   {
     icon: <MdExitToApp size={18} />,

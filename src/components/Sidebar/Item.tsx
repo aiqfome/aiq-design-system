@@ -11,27 +11,12 @@ import { Icon } from '../Icon'
 import { Badge } from '../Badge'
 
 import { SubItems } from './SubItems'
-
-type SubItemProps = {
-  name: string
-  href: string
-  badge?: number
-}
-
-type ItemObjectProps = {
-  icon: ReactDOM
-  name: string
-  href: string
-  exact?: boolean
-  items: Array<SubItemProps>
-  callback: any
-  type?: 'internal' | 'external'
-}
+import { ItemObjectProps } from './types'
 
 interface ItemProps {
   item: ItemObjectProps
   openItem: boolean
-  onClickItem?: any
+  onClickItem?: () => any
   sidebarOpened: boolean
   toggleItem: () => void
   heightScrolledToTop?: number
@@ -139,7 +124,7 @@ export const Item: React.FC<ItemProps> = ({
   }
 
   const ItemWrapper = ({ children }) => {
-    if (item.items && item.items.length > 0) {
+    if ((item.items && item.items.length > 0) || !item.href) {
       return (
         <Flex
           flexDirection='row'
