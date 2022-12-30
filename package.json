@@ -73,7 +73,6 @@
     "react-table": "^7.6.0",
     "storybook": "^6.5.15",
     "styled-components": "^5.3.5",
-    "styled-system": "^5.1.5",
-    "uuid": "^8.3.1"
+    "styled-system": "^5.1.5"
   }
 }

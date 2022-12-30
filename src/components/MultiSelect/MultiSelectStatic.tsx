@@ -55,6 +55,7 @@ const MultiSelectStyled = styled(Box)`
 interface ContainerInputProps {
   ref?: any
   errorForm?: boolean
+  changeBackgroundColor?: boolean
 }
 
 const ContainerInput = styled(Box)<ContainerInputProps>`
@@ -67,6 +68,9 @@ const ContainerInput = styled(Box)<ContainerInputProps>`
     errorForm
       ? `1px solid ${theme.colors.error}`
       : `1px solid ${theme.colors.mediumGrey}`};
+
+  ${({ changeBackgroundColor, theme }) =>
+    changeBackgroundColor && `background-color: ${theme.colors.lightGrey};`};
 
   input {
     background: none;
@@ -326,6 +330,7 @@ export const MultiSelectStatic: React.FC<Props> = ({
             getComboboxProps()?.ref(el)
             setRefContainer(el || null)
           }}
+          changeBackgroundColor={disabled && selectedItems.length === 0}
         >
           <Flex
             maxWidth='90%'
