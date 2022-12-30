@@ -1,8 +1,7 @@
 import React, { useContext, useCallback, createContext, useState } from 'react'
 
-import { v4 as uuidv4 } from 'uuid'
-
 import { Toast, Message } from './Toast'
+import uniqueId from 'lodash/uniqueId'
 
 const ToastContext = createContext({
   addToast: (message: any): any => {
@@ -26,7 +25,7 @@ export const ToastProvider: React.FC<Props> = ({ children }) => {
   const [messages, setMessages] = useState<Message | any>([])
 
   const addToast = useCallback(({ type, title, description, fixed }) => {
-    const id = uuidv4()
+    const id = uniqueId()
 
     const toast = {
       id,
