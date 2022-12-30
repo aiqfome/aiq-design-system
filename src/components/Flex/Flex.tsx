@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { CSSProperties } from 'react'
 
 import styled, { DefaultTheme, css } from 'styled-components'
 
@@ -28,6 +28,8 @@ import {
   TextAlignProps
 } from 'styled-system'
 
+type GapProps = Pick<CSSProperties, 'gap' | 'columnGap' | 'rowGap'>
+
 export type Props = BackgroundProps &
   SpaceProps &
   DefaultTheme &
@@ -39,7 +41,8 @@ export type Props = BackgroundProps &
   FlexProps &
   FlexboxProps &
   BorderProps &
-  TextAlignProps & {
+  TextAlignProps &
+  GapProps & {
     variant?: 'auto' | 'centralized' | 'fullCentralized'
     isClickable?: boolean
     color?: string
@@ -94,6 +97,24 @@ const FlexStyled = styled.div<Props>`
         opacity: 0.8;
         user-select: none;
       }
+    `}
+
+    ${({ gap }) =>
+    gap &&
+    css`
+      gap: ${gap};
+    `}
+
+    ${({ columnGap }) =>
+    columnGap &&
+    css`
+      column-gap: ${columnGap};
+    `}
+
+    ${({ rowGap }) =>
+    rowGap &&
+    css`
+      row-gap: ${rowGap};
     `}
 `
 
