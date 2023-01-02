@@ -1,15 +1,27 @@
 import React from 'react'
-import { withKnobs, text, select } from '@storybook/addon-knobs'
+
+import { text, select } from '@storybook/addon-knobs'
 
 import { Avatar } from './Avatar'
+import { createPageExport } from '../../utils/storybook'
 
-export default {
-  component: Avatar,
-  title: 'Avatar',
-  decorators: [withKnobs]
-}
+const aiqProps = ['src', 'alt', 'palette', 'size', 'fallback', 'variant']
 
-export const Basic: React.FC = () => (
+export default createPageExport(Avatar, 'Avatar', aiqProps, {
+  argTypes: {
+    variant: {
+      control: 'radio',
+      options: ['box', 'rounded']
+    }
+  },
+  args: {
+    alt: 'Avatar',
+    size: '32px',
+    palette: 'primary'
+  }
+})
+
+export const Basic = args => (
   <Avatar
     alt={text('Label', 'Avatar')}
     src={text('src', '')}
@@ -18,10 +30,14 @@ export const Basic: React.FC = () => (
       { Primary: 'primary', Secondary: 'secondary' },
       'primary'
     )}
+    {...args}
   />
 )
+Basic.args = {
+  variant: 'box'
+}
 
-export const WithUrl: React.FC = () => (
+export const WithUrl = args => (
   <Avatar
     palette={select(
       'palette',
@@ -33,10 +49,15 @@ export const WithUrl: React.FC = () => (
       'https://lh3.googleusercontent.com/rALGk_PU3JMf_5NS5FEYScz9zxgjRBNePvMheCnHIO_lrSs089QcwguwqRVaDLWWAQ'
     )}
     alt={text('alt', 'Avatar')}
+    {...args}
   />
 )
+WithUrl.args = {
+  src: 'https://lh3.googleusercontent.com/rALGk_PU3JMf_5NS5FEYScz9zxgjRBNePvMheCnHIO_lrSs089QcwguwqRVaDLWWAQ',
+  variant: 'box'
+}
 
-export const Rounded: React.FC = () => (
+export const Rounded = args => (
   <Avatar
     palette={select(
       'palette',
@@ -45,5 +66,9 @@ export const Rounded: React.FC = () => (
     )}
     alt={text('alt', 'Avatar')}
     variant='rounded'
+    {...args}
   />
 )
+Rounded.args = {
+  variant: 'rounded'
+}

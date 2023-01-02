@@ -12,8 +12,9 @@ export type Message = {
   description: string
   fixed?: boolean
 }
+
 export interface Props {
-  messages?: Message[]
+  messages: Message[]
 }
 
 const Container = styled.div<Props>`
@@ -27,15 +28,12 @@ const Container = styled.div<Props>`
 `
 
 export const Toast: React.FC<Props> = ({ messages }) => {
-  const messagesWithTransitions = useTransition(
-    messages,
-    message => message.id,
-    {
-      from: { right: '-120%', opacity: 0 },
-      enter: { right: '0%', opacity: 1 },
-      leave: { right: '-120%', opacity: 0 }
-    }
-  )
+  const messagesWithTransitions = useTransition(messages, {
+    from: { right: '-120%', opacity: 0 },
+    enter: { right: '0%', opacity: 1 },
+    leave: { right: '-120%', opacity: 0 },
+    key: (item: Message) => item.id
+  })
 
   return (
     <Container
@@ -43,8 +41,8 @@ export const Toast: React.FC<Props> = ({ messages }) => {
       style={{ zIndex: 9999999 }}
       data-testid='toast-container'
     >
-      {messagesWithTransitions.map(({ item, key, props }) => (
-        <ToastContent key={key} message={item} {...props} />
+      {messagesWithTransitions((props, item) => (
+        <ToastContent message={item} {...props} />
       ))}
     </Container>
   )

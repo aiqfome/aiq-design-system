@@ -54,6 +54,18 @@ export const Label: React.FC = () => (
   </Flex>
 )
 
+export const LabelComponent: React.FC = () => (
+  <Flex>
+    <Radio
+      mx={10}
+      checked={false}
+      label={<Flex>aiqfome</Flex>}
+      name='radio'
+      value='aiq'
+    />
+  </Flex>
+)
+
 export const Sizes: React.FC = () => (
   <Flex>
     <Radio
