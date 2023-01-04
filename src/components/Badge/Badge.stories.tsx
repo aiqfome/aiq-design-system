@@ -2,23 +2,41 @@ import React, { ReactElement } from 'react'
 
 import { Badge } from './Badge'
 import { Flex } from '../Flex'
+import { createPageExport } from '../../utils/storybook'
 
-export default {
-  component: Badge,
-  title: 'Badge'
-}
+const aiqProps = [
+  'color',
+  'count',
+  'children',
+  'className',
+  'statusColor',
+  'overflowCount',
+  'variant'
+]
 
-export const Basic: React.FC = (): ReactElement => (
+export default createPageExport(Badge, 'Badge', aiqProps, {
+  argTypes: {
+    variant: {
+      control: 'radio',
+      options: ['label', 'default']
+    }
+  },
+  args: {
+    variant: 'default'
+  }
+})
+
+export const Basic: React.FC = (args): ReactElement => (
   <Flex flex={1} flexDirection='row'>
-    <Badge count={10} />
-    <Badge count={1000} backgroundColor='primary' />
+    <Badge count={10} {...args} />
+    <Badge count={1000} backgroundColor='primary' {...args} />
     <Badge>olá</Badge>
     <Badge count={1000}>olá</Badge>
   </Flex>
 )
 
-export const BasicWithOverflow: React.FC = (): ReactElement => (
-  <Badge count={1000} overflowCount={99} />
+export const BasicWithOverflow: React.FC = (args): ReactElement => (
+  <Badge count={1000} overflowCount={99} {...args} />
 )
 
 export const Label: React.FC = (): ReactElement => (
