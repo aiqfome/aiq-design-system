@@ -26,22 +26,30 @@ export default createPageExport(Badge, 'Badge', aiqProps, {
   }
 })
 
-export const Basic: React.FC = (args): ReactElement => (
-  <Flex flex={1} flexDirection='row'>
+export const Basic = (args): ReactElement => (
+  <>
     <Badge count={10} {...args} />
     <Badge count={1000} backgroundColor='primary' {...args} />
     <Badge>olá</Badge>
     <Badge count={1000}>olá</Badge>
-  </Flex>
+  </>
 )
+Basic.args = {
+  variant: 'default'
+}
 
-export const BasicWithOverflow: React.FC = (args): ReactElement => (
+export const BasicWithOverflow = (args): ReactElement => (
   <Badge count={1000} overflowCount={99} {...args} />
 )
+BasicWithOverflow.args = {
+  variant: 'default'
+}
 
-export const Label: React.FC = (): ReactElement => (
+export const Label = (args): ReactElement => (
   <Flex flex={1} flexDirection='column'>
-    <Badge variant='label'>burguerzin</Badge>
+    <Badge variant='label' {...args}>
+      burguerzin
+    </Badge>
     <Badge variant='label' backgroundColor='primary'>
       pizza
     </Badge>
@@ -50,3 +58,6 @@ export const Label: React.FC = (): ReactElement => (
     </Badge>
   </Flex>
 )
+Label.args = {
+  variant: 'label'
+}
