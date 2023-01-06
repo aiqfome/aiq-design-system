@@ -11,10 +11,10 @@ import {
 } from '@storybook/addon-docs'
 
 export const createPageExport = (
-  component: React.FC,
+  component: React.FC<any>,
   title: string,
   aiqProps: string[],
-  optionalConfigs: any
+  optionalConfigs: any = {}
 ) => {
   return {
     component,
