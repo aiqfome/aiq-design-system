@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { withKnobs, boolean, text } from '@storybook/addon-knobs'
+import { boolean } from '@storybook/addon-knobs'
 
 import { Flex } from '../Flex'
 import { Checkbox } from './Checkbox'
