@@ -19,24 +19,22 @@ import {
 import { Text } from '../Text'
 import { Tooltip } from '../Tooltip'
 
-export type StyledProps = BorderProps &
+export type Props = BorderProps &
   ColorProps &
   DefaultTheme &
   SpaceProps &
   BorderProps &
   LayoutProps &
   FontSizeProps &
-  FontWeightProps
-
-export type Props = StyledProps & {
-  color?: string
-  count?: number
-  children?: ReactNode
-  className?: string
-  statusColor?: string
-  overflowCount?: number
-  variant?: 'label' | 'default'
-}
+  FontWeightProps & {
+    color?: string
+    count?: number
+    children?: ReactNode
+    className?: string
+    statusColor?: string
+    overflowCount?: number
+    variant?: 'label' | 'default'
+  }
 
 const BadgeStyled = styled(Text)<Props>`
   display: inline-flex;
