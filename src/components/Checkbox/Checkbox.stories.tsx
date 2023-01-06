@@ -4,13 +4,20 @@ import { withKnobs, boolean, text } from '@storybook/addon-knobs'
 import { Flex } from '../Flex'
 import { Checkbox } from './Checkbox'
 
-export default {
-  component: Checkbox,
-  title: 'Checkbox',
-  decorators: [withKnobs]
-}
+import { createPageExport } from '../../utils/storybook'
 
-export const Basic: React.FC = () => {
+const aiqProps = ['label', 'labelColor', 'style', 'borderColor', 'disabled']
+
+export default createPageExport(Checkbox, 'Checkbox', aiqProps, {
+  argTypes: {
+    disabled: { control: 'boolean' }
+  },
+  args: {
+    label: 'Aiqfome'
+  }
+})
+
+export const Basic: React.FC = args => {
   const [checked, setChecked] = useState(false)
 
   function handleOnChangeChange(event) {
@@ -23,14 +30,14 @@ export const Basic: React.FC = () => {
         onChange={handleOnChangeChange}
         checked={checked}
         disabled={boolean('disabled', false)}
-        label={text('text', 'Aiqfome')}
         labelColor='primary'
+        {...args}
       />
     </Flex>
   )
 }
 
-export const Checked: React.FC = () => {
+export const Checked: React.FC = args => {
   const [checked, setChecked] = useState(true)
 
   return (
@@ -38,13 +45,13 @@ export const Checked: React.FC = () => {
       <Checkbox
         onChange={event => setChecked(event.target.checked)}
         checked={checked}
-        label={text('text', 'Aiqfome')}
+        {...args}
       />
     </Flex>
   )
 }
 
-export const Disabled: React.FC = () => {
+export const Disabled: React.FC = args => {
   const [checked, setChecked] = useState(false)
 
   return (
@@ -53,13 +60,13 @@ export const Disabled: React.FC = () => {
         onChange={event => setChecked(event.target.checked)}
         disabled={true}
         checked={checked}
-        label={text('text', 'Aiqfome')}
+        {...args}
       />
     </Flex>
   )
 }
 
-export const DisabledChecked: React.FC = () => {
+export const DisabledChecked: React.FC = args => {
   const [checked, setChecked] = useState(true)
 
   return (
@@ -68,7 +75,7 @@ export const DisabledChecked: React.FC = () => {
         onChange={event => setChecked(event.target.checked)}
         disabled={true}
         checked={checked}
-        label={text('text', 'Aiqfome')}
+        {...args}
       />
     </Flex>
   )
