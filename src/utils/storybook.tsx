@@ -37,7 +37,7 @@ export const createPageExport = (
                 <ArgsTable include={aiqProps} />{' '}
               </>
             )}
-            <Subheading>Styling props (from styled-system)</Subheading>
+            <Subheading>Default props (from styled-system, html)</Subheading>
             <ArgsTable exclude={aiqProps} />
 
             <Stories />
