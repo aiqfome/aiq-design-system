@@ -1,4 +1,4 @@
-import React, { CSSProperties } from 'react'
+import React, { CSSProperties, HTMLAttributes } from 'react'
 
 import styled, { DefaultTheme, css } from 'styled-components'
 
@@ -42,20 +42,13 @@ export type Props = BackgroundProps &
   FlexboxProps &
   BorderProps &
   TextAlignProps &
-  GapProps & {
+  GapProps &
+  HTMLAttributes<HTMLDivElement> & {
     variant?: 'auto' | 'centralized' | 'fullCentralized'
     isClickable?: boolean
     color?: string
     fullHeight?: boolean
     children?: any
-    className?: string
-    onClick?: (e: any) => void
-    onDragOver?: (e: any) => void
-    onDragEnter?: (e: any) => void
-    onDragLeave?: (e: any) => void
-    onDragEnd?: (e: any) => void
-    onDrop?: (e: any) => void
-    style?: any
   }
 
 const FlexStyled = styled.div<Props>`
