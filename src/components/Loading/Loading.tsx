@@ -65,6 +65,6 @@ const LoadingSpinner = styled.svg.attrs({
   }
 `
 
-export const Loading: React.FC<Props> = ({ size, color }) => {
+export const Loading: React.FC<Props> = ({ size = 'small', color }) => {
   return <LoadingSpinner size={size} color={color} />
 }
