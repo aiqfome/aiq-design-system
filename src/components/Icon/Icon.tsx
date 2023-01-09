@@ -7,11 +7,9 @@ import { Flex, Props as FlexProps } from '../Flex'
 
 export type Props = FlexProps & {
   cursor?: string
-  children?: any
-  color?: string
 }
 
-export const IconStyled = styled(Flex)<Props>`
+const IconStyled = styled(Flex)<Props>`
   ${color}
   ${space}
   ${layout}

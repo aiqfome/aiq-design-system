@@ -1,14 +1,38 @@
 import React from 'react'
 import { MdHome } from 'react-icons/md'
-import { withKnobs, text } from '@storybook/addon-knobs'
+import { text } from '@storybook/addon-knobs'
 
 import { Icon } from './Icon'
 
-export default {
-  component: Icon,
-  title: 'Icon',
-  decorators: [withKnobs]
-}
+import { createPageExport } from '../../utils/storybook'
+
+const aiqProps = [
+  'color',
+  'children',
+  'cursor',
+  'variant',
+  'fullHeight',
+  'isClickable'
+]
+
+export default createPageExport(Icon, 'Icon', aiqProps, {
+  argTypes: {
+    color: {
+      control: 'text'
+    },
+    cursor: {
+      control: 'text'
+    },
+    fullHeight: {
+      control: 'boolean'
+    },
+    variant: {
+      control: 'select',
+      options: ['auto', 'centralized', 'fullCentralized']
+    },
+    isClickable: { control: 'boolean' }
+  }
+})
 
 export const basic: React.FC = () => (
   <Icon cursor={text('Cursor', '')}>
