@@ -5,7 +5,7 @@ import { Flex } from '../Flex'
 import { Modal } from './Modal'
 import { Button } from '../Button'
 
-import { text, object, select } from '@storybook/addon-knobs'
+import { object } from '@storybook/addon-knobs'
 
 import { createPageExport } from '../../utils/storybook'
 
