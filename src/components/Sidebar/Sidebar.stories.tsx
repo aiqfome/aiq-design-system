@@ -4,8 +4,6 @@ import { BrowserRouter as Router } from 'react-router-dom'
 
 import { MdHome, MdBookmark, MdStorage, MdExitToApp } from 'react-icons/md'
 
-import { boolean } from '@storybook/addon-knobs'
-
 import { Flex } from '../Flex'
 
 import { Sidebar } from './Sidebar'
