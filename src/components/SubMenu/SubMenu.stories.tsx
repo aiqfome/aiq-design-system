@@ -3,18 +3,24 @@ import React from 'react'
 import { Text } from '../Text'
 import { SubMenu } from './SubMenu'
 
-import { withKnobs } from '@storybook/addon-knobs'
+import { createPageExport } from '../../utils/storybook'
 
-export default {
-  title: 'SubMenu',
-  component: SubMenu,
-  decorators: [withKnobs]
-}
+const aiqProps = ['content', 'children', 'menuProps', 'popoverProps']
 
-export const Basic: React.FC = () => {
+export default createPageExport(SubMenu, 'SubMenu', aiqProps, {
+  argTypes: {
+    data: { control: 'object' },
+    opened: { control: 'boolean' }
+  }
+})
+
+export const Basic = args => {
   return (
-    <SubMenu content='item'>
+    <SubMenu {...args}>
       <Text color='primary'>submenu</Text>
     </SubMenu>
   )
+}
+Basic.args = {
+  content: 'item'
 }
