@@ -4,18 +4,23 @@ import { BrowserRouter as Router } from 'react-router-dom'
 
 import { MdHome, MdBookmark, MdStorage, MdExitToApp } from 'react-icons/md'
 
-import { withKnobs, boolean } from '@storybook/addon-knobs'
+import { boolean } from '@storybook/addon-knobs'
 
 import { Flex } from '../Flex'
 
 import { Sidebar } from './Sidebar'
 import { ItemObjectProps, ItemType } from './types'
 
-export default {
-  component: Sidebar,
-  title: 'Sidebar',
-  decorators: [withKnobs]
-}
+import { createPageExport } from '../../utils/storybook'
+
+const aiqProps = ['data', 'opened', 'header', 'onClickItem']
+
+export default createPageExport(Sidebar, 'Sidebar', aiqProps, {
+  argTypes: {
+    data: { control: 'object' },
+    opened: { control: 'boolean' }
+  }
+})
 
 const sidebarData: ItemObjectProps[] = [
   {
@@ -206,23 +211,26 @@ const Header = () => {
       style={{
         overflowX: 'hidden'
       }}
-      py='8px'
+      p='32px'
       alignItems='center'
-    />
+    >
+      Header
+    </Flex>
   )
 }
 
-export const Basic: React.FC = () => {
+export const Basic = args => {
   return (
     <Router>
       <Flex backgroundColor='#E1E1E1' justifyContent='row'>
-        <Sidebar
-          header={<Header />}
-          opened={boolean('opened', true)}
-          data={sidebarData}
-        />
+        <Sidebar {...args} />
         <h1>test</h1>
       </Flex>
     </Router>
   )
+}
+Basic.args = {
+  opened: true,
+  data: sidebarData,
+  header: <Header />
 }
