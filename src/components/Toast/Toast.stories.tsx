@@ -1,16 +1,16 @@
 import React from 'react'
 
 import { ToastProvider, useToast } from './index'
-import { withKnobs, text, select } from '@storybook/addon-knobs'
+import { text, select } from '@storybook/addon-knobs'
 
 import { Flex } from '../Flex'
 import { Button } from '../Button'
 
-export default {
-  component: ToastProvider,
-  title: 'Toast',
-  decorators: [withKnobs]
-}
+import { createPageExport } from '../../utils/storybook'
+
+const aiqProps = ['children']
+
+export default createPageExport(ToastProvider, 'Toast', aiqProps)
 
 export const basic: React.FC = () => {
   const ContentToast: React.FC = () => {
