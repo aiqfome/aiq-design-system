@@ -4,52 +4,93 @@ import { TimePicker } from './TimePicker'
 
 import { Flex } from '../Flex'
 
-export default {
-  component: TimePicker,
-  title: 'TimePicker'
+import { createPageExport } from '../../utils/storybook'
+
+const aiqProps = [
+  'value',
+  'sufix',
+  'name',
+  'label',
+  'errorForm',
+  'hasSeconds',
+  'placeholder',
+  'errorMessage',
+  'type',
+  'maxWidth',
+  'onChange',
+  'variant',
+  'onChangeInput',
+  'getValue',
+  'disabled'
+]
+
+export default createPageExport(TimePicker, 'TimePicker', aiqProps, {
+  argTypes: {
+    value: { control: 'text' },
+    name: { control: 'text' },
+    label: { control: 'text' },
+    placeholder: { control: 'text' },
+    errorMessage: { control: 'text' },
+    maxWidth: { control: 'text' },
+    errorForm: { control: 'boolean' },
+    hasSeconds: { control: 'boolean' },
+    disabled: { control: 'boolean' },
+    type: { control: 'select', options: ['minSec', 'all'] },
+    variant: { control: 'select', options: ['outlined', 'default'] }
+  }
+})
+
+export const Basic = (args): ReactElement => (
+  <Flex variant='fullCentralized'>
+    <TimePicker onChange={value => console.log(value)} {...args} />
+  </Flex>
+)
+Basic.args = {
+  placeholder: 'aiqfome',
+  value: '12:30',
+  maxWidth: '100px'
 }
 
-export const Basic: React.FC = (): ReactElement => (
+export const Disabled = (args): ReactElement => (
   <Flex variant='fullCentralized'>
-    <TimePicker
-      onChange={value => console.log(value)}
-      placeholder='aiqfome'
-      maxWidth='100px'
-      value='12:30'
-    />
+    <TimePicker onChange={value => console.log(value)} {...args} />
   </Flex>
 )
+Disabled.args = {
+  placeholder: 'aiqfome',
+  value: '12:30',
+  maxWidth: '100px',
+  disabled: true
+}
 
-export const Disabled: React.FC = (): ReactElement => (
+export const Outlined = (args): ReactElement => (
   <Flex variant='fullCentralized'>
-    <TimePicker
-      onChange={value => console.log(value)}
-      placeholder='aiqfome'
-      maxWidth='100px'
-      value='12:30'
-      disabled
-    />
+    <TimePicker {...args} />
   </Flex>
 )
+Outlined.args = {
+  label: 'aiqfome',
+  variant: 'outlined',
+  maxWidth: '120px'
+}
 
-export const Outlined: React.FC = (): ReactElement => (
+export const HasSeconds = (args): ReactElement => (
   <Flex variant='fullCentralized'>
-    <TimePicker variant='outlined' label='aiqfome' maxWidth='120px' />
+    <TimePicker {...args} />
   </Flex>
 )
+HasSeconds.args = {
+  label: 'aiqfome',
+  variant: 'outlined',
+  hasSeconds: true
+}
 
-export const HasSeconds: React.FC = (): ReactElement => (
-  <Flex variant='fullCentralized'>
-    <TimePicker hasSeconds label='aiqfome' variant='outlined' />
-  </Flex>
-)
-
-export const TypeMinSec: React.FC = (): ReactElement => {
+export const TypeMinSec = (args): ReactElement => {
   const [value, setValue] = useState('23:23')
   const [hours, setHours] = useState('22:22')
   return (
     <Flex variant='fullCentralized' flexDirection='column'>
-      <TimePicker type='minSec' label='aiqfome' variant='outlined' />
+      <TimePicker {...args} />
 
       <TimePicker
         value={hours}
@@ -159,4 +200,9 @@ export const TypeMinSec: React.FC = (): ReactElement => {
       />
     </Flex>
   )
+}
+TypeMinSec.args = {
+  label: 'aiqfome',
+  variant: 'outlined',
+  type: 'minSec'
 }
