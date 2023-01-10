@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { TextareaHTMLAttributes } from 'react'
 
 import styled from 'styled-components'
 import {
@@ -12,14 +12,17 @@ import {
   MarginProps
 } from 'styled-system'
 
-export type Props = MarginProps &
+export type Props = Omit<
+  TextareaHTMLAttributes<HTMLTextAreaElement>,
+  'prefix'
+> &
+  MarginProps &
   SpaceProps &
   LayoutProps &
   FontSizeProps &
   FontWeightProps &
   TypographyProps & {
     name?: string
-    placeholder?: string
     value?: string
     sufix?: any
     containerProps?: any
