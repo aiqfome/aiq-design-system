@@ -1,58 +1,89 @@
 import React from 'react'
-import { withKnobs, boolean } from '@storybook/addon-knobs'
 
 import { Radio } from './Radio'
 import { Flex } from '../Flex'
 
-export default {
-  component: Radio,
-  title: 'Radio',
-  decorators: [withKnobs]
-}
+import { createPageExport } from '../../utils/storybook'
 
-export const Basic: React.FC = () => (
+const aiqProps = [
+  'name',
+  'value',
+  'variant',
+  'disabled',
+  'label',
+  'checked',
+  'theme'
+]
+
+export default createPageExport(Radio, 'Radio', aiqProps, {
+  argTypes: {
+    name: { control: 'text' },
+    disabled: { control: 'boolean' },
+    checked: { control: 'boolean' },
+    variant: {
+      control: 'select',
+      options: ['default', 'small']
+    }
+  }
+})
+
+export const Basic = args => (
   <Flex>
-    <Radio
-      disabled={boolean('disabled', false)}
-      checked={boolean('checked', true)}
-      mx={10}
-      name='radioBasic'
-      value='01'
-    />
+    <Radio mx={10} name='radioBasic' {...args} />
     <Radio name='radioBasic' value='02' />
   </Flex>
 )
+Basic.args = {
+  value: '01',
+  disabled: false,
+  checked: true
+}
 
-export const Disabled: React.FC = () => (
+export const Disabled = args => (
   <Flex>
-    <Radio mx={10} disabled={true} name='radioDisabled' value='01' />
+    <Radio mx={10} {...args} />
   </Flex>
 )
+Disabled.args = {
+  value: '01',
+  disabled: true,
+  name: 'radioDisabled'
+}
 
-export const Checked: React.FC = () => (
+export const Checked = args => (
   <Flex>
-    <Radio mx={10} checked={true} name='radioChecked' value='01' />
+    <Radio mx={10} {...args} />
   </Flex>
 )
+Checked.args = {
+  value: '01',
+  checked: true,
+  name: 'radioChecked'
+}
 
-export const CheckedDisabled: React.FC = () => (
+export const CheckedDisabled = args => (
   <Flex>
-    <Radio
-      mx={10}
-      disabled={true}
-      checked={true}
-      name='radioCheckedDisabled'
-      value='01'
-    />
+    <Radio mx={10} {...args} />
   </Flex>
 )
+CheckedDisabled.args = {
+  value: '01',
+  checked: true,
+  disabled: true,
+  name: 'radioCheckedDisabled'
+}
 
-export const Label: React.FC = () => (
+export const Label = args => (
   <Flex>
-    <Radio mx={10} checked={true} label='aiq' name='radio' value='aiq' />
+    <Radio mx={10} name='radio' {...args} />
     <Radio mx={10} checked={false} label='fome' name='radio' value='fome' />
   </Flex>
 )
+Label.args = {
+  checked: true,
+  label: 'aiq',
+  value: 'aiq'
+}
 
 export const LabelComponent: React.FC = () => (
   <Flex>
