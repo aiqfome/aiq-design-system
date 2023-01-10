@@ -4,25 +4,47 @@ import { Tooltip } from './Tooltip'
 import { Text } from '../Text'
 import { Flex } from '../Flex'
 
-export default {
-  component: Tooltip,
-  title: 'Tooltip'
-}
+import { createPageExport } from '../../utils/storybook'
 
-export const Basic: React.FC = (): ReactElement => {
+const aiqProps = ['children', 'body', 'variant', 'type']
+
+export default createPageExport(Tooltip, 'Tooltip', aiqProps, {
+  argTypes: {
+    variant: {
+      control: 'select',
+      options: [
+        'topLeft',
+        'topRight',
+        'topCenter',
+        'bottomLeft',
+        'bottomRight',
+        'bottomCenter'
+      ]
+    },
+    type: {
+      control: 'select',
+      options: ['default', 'balloon']
+    }
+  }
+})
+
+export const Basic = (args): ReactElement => {
   return (
     <Flex variant='fullCentralized'>
-      <Tooltip body="I'm hungry">
+      <Tooltip {...args}>
         <Text cursor='pointer'>Hamburguer</Text>
       </Tooltip>
     </Flex>
   )
 }
+Basic.args = {
+  body: "I'm hungry"
+}
 
-export const Variants: React.FC = (): ReactElement => {
+export const Variants = (args): ReactElement => {
   return (
     <Flex variant='fullCentralized'>
-      <Tooltip variant='topRight' body="I'm hungry">
+      <Tooltip {...args}>
         <Text mx={10} cursor='pointer'>
           Right-Top
         </Text>
@@ -55,11 +77,15 @@ export const Variants: React.FC = (): ReactElement => {
     </Flex>
   )
 }
+Basic.args = {
+  body: "I'm hungry",
+  variant: 'topRight'
+}
 
-export const Types: React.FC = (): ReactElement => {
+export const Types = (args): ReactElement => {
   return (
     <Flex variant='fullCentralized'>
-      <Tooltip type='default' body="I'm hungry">
+      <Tooltip {...args}>
         <Text mx={10} cursor='pointer'>
           Default
         </Text>
@@ -72,8 +98,12 @@ export const Types: React.FC = (): ReactElement => {
     </Flex>
   )
 }
+Basic.args = {
+  body: "I'm hungry",
+  type: 'default'
+}
 
-export const Body: React.FC = (): ReactElement => {
+export const Body = (args): ReactElement => {
   const Menu = () => {
     return (
       <Flex flexDirection='column'>
