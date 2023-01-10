@@ -3,28 +3,69 @@ import React from 'react'
 import { Flex } from '../Flex'
 import { Pagination } from './Pagination'
 
-export default {
-  component: Pagination,
-  title: 'Pagination'
+import { createPageExport } from '../../utils/storybook'
+
+const aiqProps = [
+  'count',
+  'color',
+  'disabled',
+  'variant',
+  'size',
+  'defaultPage',
+  'page',
+  'nextPage',
+  'prevPage',
+  'onChange'
+]
+
+export default createPageExport(Pagination, 'Pagination', aiqProps, {
+  argTypes: {
+    count: { control: 'number' },
+    defaultPage: { control: 'number' },
+    page: { control: 'number' },
+    color: { control: 'text' },
+    disabled: { control: 'boolean' },
+    variant: {
+      control: 'select',
+      options: ['default', 'noCount']
+    },
+    size: {
+      control: 'select',
+      options: ['default', 'small', 'large']
+    }
+  }
+})
+
+export const Basic = args => {
+  return <Pagination {...args} />
+}
+Basic.args = {
+  count: 10
 }
 
-export const Basic: React.FC = () => {
-  return <Pagination count={10} />
+export const WithZeroPages = args => {
+  return <Pagination {...args} />
+}
+WithZeroPages.args = {
+  count: 0
 }
 
-export const WithZeroPages: React.FC = () => {
-  return <Pagination count={0} />
+export const WithOnePages = args => {
+  return <Pagination {...args} />
+}
+WithOnePages.args = {
+  count: 1
 }
 
-export const WithOnePages: React.FC = () => {
-  return <Pagination count={1} />
+export const Disabled = args => {
+  return <Pagination {...args} />
+}
+Disabled.args = {
+  count: 10,
+  disabled: true
 }
 
-export const Disabled: React.FC = () => {
-  return <Pagination disabled count={10} />
-}
-
-export const Sizes: React.FC = () => {
+export const Sizes = () => {
   return (
     <>
       <Flex mb='20px' variant='centralized'>
@@ -42,14 +83,14 @@ export const Sizes: React.FC = () => {
   )
 }
 
-export const Variants: React.FC = () => {
+export const Variants = args => {
   function onChangePage(page) {
     console.log(page)
   }
   return (
     <>
       <Flex variant='centralized' mb='20px'>
-        <Pagination variant='noCount' onChange={onChangePage} size='large' />
+        <Pagination onChange={onChangePage} {...args} />
       </Flex>
 
       <Flex variant='centralized'>
@@ -57,4 +98,8 @@ export const Variants: React.FC = () => {
       </Flex>
     </>
   )
+}
+Variants.args = {
+  variant: 'noCount',
+  size: 'large'
 }
