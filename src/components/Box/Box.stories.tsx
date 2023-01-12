@@ -10,7 +10,7 @@ export default createPageExport(Box, 'Box', [
   'children'
 ])
 
-export const basic: React.FC = args => (
+export const Basic: React.FC = args => (
   <Box marginBottom={10} color='blue' {...args}>
     Design System
   </Box>
