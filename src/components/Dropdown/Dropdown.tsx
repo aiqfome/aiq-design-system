@@ -99,67 +99,77 @@ const ItensStyled = styled.ul<ItensStyledProps>`
   }
 `
 
-export const Dropdown: React.FC<Props> = ({
-  label,
-  opened,
-  itens,
-  maxWidth,
-  selected,
-  disabled = false,
-  onChange = () => {
-    // do nothing.
-  },
-  ...props
-}) => {
-  const [isOpen, setIsOpen] = useState(opened)
-  const [itemSelected, setItemSelect] = useState({ value: null, label: '' })
+export const Dropdown = React.forwardRef<HTMLDivElement, Props>(
+  (
+    {
+      label,
+      opened,
+      itens,
+      maxWidth,
+      selected,
+      disabled = false,
+      onChange = () => {
+        // do nothing.
+      },
+      ...props
+    },
+    ref
+  ) => {
+    const [isOpen, setIsOpen] = useState(opened)
+    const [itemSelected, setItemSelect] = useState({ value: null, label: '' })
 
-  useEffect(() => {
-    if (selected) {
-      const indexItem = itens.findIndex(item => item.value === selected)
-      if (indexItem > -1) setItemSelect(itens[indexItem])
-    }
-  }, [itens, selected])
+    useEffect(() => {
+      if (selected) {
+        const indexItem = itens.findIndex(item => item.value === selected)
+        if (indexItem > -1) setItemSelect(itens[indexItem])
+      }
+    }, [itens, selected])
 
-  function handleClickDropdown() {
-    if (!disabled) {
-      setIsOpen(!isOpen)
+    function handleClickDropdown() {
+      if (!disabled) {
+        setIsOpen(!isOpen)
+      }
     }
+
+    function handleClickItem(item) {
+      if (!disabled) {
+        setIsOpen(false)
+        onChange(item)
+        setItemSelect(item)
+      }
+    }
+
+    return (
+      <BoxStyled maxHeight='37px' maxWidth={maxWidth} {...props}>
+        <DropdownStyled
+          data-testid='dropdown'
+          onClick={handleClickDropdown}
+          disabled={disabled}
+          ref={ref}
+        >
+          <span>{itemSelected.value != null ? itemSelected.label : label}</span>
+          <button type='button'>
+            {isOpen ? (
+              <MdArrowDropUp size={24} />
+            ) : (
+              <MdArrowDropDown size={24} />
+            )}
+          </button>
+        </DropdownStyled>
+        {isOpen && (
+          <ItensStyled maxWidth={maxWidth}>
+            {itens.map(item => (
+              <li
+                data-testid='dropdown-item'
+                onClick={() => handleClickItem(item)}
+                key={item.value}
+              >
+                {item.label}
+              </li>
+            ))}
+          </ItensStyled>
+        )}
+      </BoxStyled>
+    )
   }
-
-  function handleClickItem(item) {
-    if (!disabled) {
-      setIsOpen(false)
-      onChange(item)
-      setItemSelect(item)
-    }
-  }
-
-  return (
-    <BoxStyled maxHeight='37px' maxWidth={maxWidth} {...props}>
-      <DropdownStyled
-        data-testid='dropdown'
-        onClick={handleClickDropdown}
-        disabled={disabled}
-      >
-        <span>{itemSelected.value != null ? itemSelected.label : label}</span>
-        <button type='button'>
-          {isOpen ? <MdArrowDropUp size={24} /> : <MdArrowDropDown size={24} />}
-        </button>
-      </DropdownStyled>
-      {isOpen && (
-        <ItensStyled maxWidth={maxWidth}>
-          {itens.map(item => (
-            <li
-              data-testid='dropdown-item'
-              onClick={() => handleClickItem(item)}
-              key={item.value}
-            >
-              {item.label}
-            </li>
-          ))}
-        </ItensStyled>
-      )}
-    </BoxStyled>
-  )
-}
+)
