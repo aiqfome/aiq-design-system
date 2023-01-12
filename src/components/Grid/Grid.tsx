@@ -35,7 +35,7 @@ export const GridStyled = styled.div<Props>`
   display: grid;
 `
 
-export const Box = React.forwardRef<HTMLDivElement, Props>(
+export const Grid = React.forwardRef<HTMLDivElement, Props>(
   ({ ...props }, ref) => {
     return <GridStyled {...props} ref={ref} />
   }

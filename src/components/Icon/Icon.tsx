@@ -17,9 +17,15 @@ const IconStyled = styled(Flex)<Props>`
   cursor: ${props => props.cursor};
 `
 
-export const Icon: React.FC<Props> = ({ children, ...props }) => {
-  return <IconStyled {...props}>{children}</IconStyled>
-}
+export const Icon = React.forwardRef<HTMLDivElement, Props>(
+  ({ children, ...props }, ref) => {
+    return (
+      <IconStyled ref={ref} {...props}>
+        {children}
+      </IconStyled>
+    )
+  }
+)
 
 Icon.defaultProps = {
   alignItems: 'center'
