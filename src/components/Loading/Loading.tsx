@@ -66,7 +66,7 @@ const LoadingSpinner = styled.svg.attrs({
 `
 
 export const Loading = React.forwardRef<SVGSVGElement, Props>(
-  ({ size = 'small', color }, ref) => {
-    return <LoadingSpinner size={size} color={color} ref={ref} />
-  }
+  ({ size = 'small', color, ...props }, ref) => (
+    <LoadingSpinner size={size} color={color} ref={ref} {...props} />
+  )
 )
