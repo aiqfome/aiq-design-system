@@ -168,7 +168,7 @@ export const InputNeutral = React.forwardRef<HTMLInputElement, Props>(
             disabled={disabled}
           >
             <InputSufixed
-              ref={inputRef}
+              ref={inputRef || ref}
               placeholder={placeholder}
               type={type}
               value={value}
@@ -195,7 +195,7 @@ export const InputNeutral = React.forwardRef<HTMLInputElement, Props>(
           >
             {prefix}
             <InputPrefixed
-              ref={inputRef}
+              ref={inputRef || ref}
               placeholder={placeholder}
               type={type}
               value={value}
@@ -220,7 +220,7 @@ export const InputNeutral = React.forwardRef<HTMLInputElement, Props>(
           >
             <InputSufixed
               {...props}
-              ref={inputRef}
+              ref={inputRef || ref}
               placeholder={placeholder}
               type={passwordVisible ? 'text' : 'password'}
               value={value}
@@ -248,7 +248,7 @@ export const InputNeutral = React.forwardRef<HTMLInputElement, Props>(
       <Flex {...containerProps} flexDirection='column'>
         <Input
           name={name}
-          inputRef={inputRef}
+          inputRef={inputRef || ref}
           placeholder={placeholder}
           errorForm={errorForm}
           type={type}

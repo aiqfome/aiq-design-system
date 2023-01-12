@@ -73,7 +73,7 @@ export const Input = React.forwardRef<HTMLInputElement, Props>(
                 disabled={disabled}
                 nativeAutoComplete={nativeAutoComplete}
                 ref={ref}
-                inputRef={inputRef}
+                inputRef={inputRef || ref}
                 {...props}
                 {...inputProps}
               />
@@ -97,7 +97,7 @@ export const Input = React.forwardRef<HTMLInputElement, Props>(
           disabled={disabled}
           nativeAutoComplete={nativeAutoComplete}
           ref={ref}
-          inputRef={inputRef}
+          inputRef={inputRef || ref}
           {...props}
         />
       )
@@ -141,7 +141,7 @@ export const Input = React.forwardRef<HTMLInputElement, Props>(
               data-testid='input-container'
               nativeAutoComplete={nativeAutoComplete}
               ref={ref}
-              inputRef={inputRef}
+              inputRef={inputRef || ref}
               {...inputProps}
               {...props}
             />
@@ -165,7 +165,7 @@ export const Input = React.forwardRef<HTMLInputElement, Props>(
         disabled={disabled}
         nativeAutoComplete={nativeAutoComplete}
         ref={ref}
-        inputRef={inputRef}
+        inputRef={inputRef || ref}
         {...props}
       />
     )
