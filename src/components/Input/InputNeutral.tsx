@@ -126,138 +126,143 @@ const Input: React.FC<Props> = ({
   )
 }
 
-export const InputNeutral: React.FC<Props> = ({
-  name,
-  inputRef,
-  errorForm,
-  errorMessage,
-  type = 'text',
-  sufix,
-  prefix,
-  value,
-  placeholder,
-  containerProps,
-  nativeAutoComplete,
-  disabled,
-  ...props
-}) => {
-  const [inputSelected, setInputSelected] = useState(false)
-  const [passwordVisible, setPasswordVisible] = useState(false)
+export const InputNeutral = React.forwardRef<HTMLInputElement, Props>(
+  (
+    {
+      name,
+      inputRef,
+      errorForm,
+      errorMessage,
+      type = 'text',
+      sufix,
+      prefix,
+      value,
+      placeholder,
+      containerProps,
+      nativeAutoComplete,
+      disabled,
+      ...props
+    },
+    ref
+  ) => {
+    const [inputSelected, setInputSelected] = useState(false)
+    const [passwordVisible, setPasswordVisible] = useState(false)
 
-  const { backgroundColor, border, width, maxWidth, boxProps } = props
-  const boxStyled = {
-    backgroundColor,
-    border,
-    width,
-    maxWidth,
-    ...boxProps
-  }
+    const { backgroundColor, border, width, maxWidth, boxProps } = props
+    const boxStyled = {
+      backgroundColor,
+      border,
+      width,
+      maxWidth,
+      ...boxProps
+    }
 
-  if (sufix) {
-    return (
-      <Flex {...containerProps} flexDirection='column'>
-        <ContainerSufix
-          {...boxStyled}
-          inputSelected={inputSelected}
-          onClick={() => setInputSelected(true)}
-          onBlur={() => setInputSelected(false)}
-          disabled={disabled}
-        >
-          <InputSufixed
-            ref={inputRef}
-            placeholder={placeholder}
-            type={type}
-            value={value}
-            autoComplete={nativeAutoComplete}
+    if (sufix) {
+      return (
+        <Flex {...containerProps} flexDirection='column'>
+          <ContainerSufix
+            {...boxStyled}
+            inputSelected={inputSelected}
+            onClick={() => setInputSelected(true)}
+            onBlur={() => setInputSelected(false)}
             disabled={disabled}
-            {...props}
-          />
-          {sufix}
-        </ContainerSufix>
+          >
+            <InputSufixed
+              ref={inputRef}
+              placeholder={placeholder}
+              type={type}
+              value={value}
+              autoComplete={nativeAutoComplete}
+              disabled={disabled}
+              {...props}
+            />
+            {sufix}
+          </ContainerSufix>
 
-        {errorForm && <InputErrorMessage errorMessage={errorMessage} />}
-      </Flex>
-    )
-  }
+          {errorForm && <InputErrorMessage errorMessage={errorMessage} />}
+        </Flex>
+      )
+    }
 
-  if (prefix) {
-    return (
-      <Flex {...containerProps}>
-        <ContainerSufix
-          {...boxStyled}
-          inputSelected={inputSelected}
-          onClick={() => setInputSelected(true)}
-          onBlur={() => setInputSelected(false)}
-        >
-          {prefix}
-          <InputPrefixed
-            ref={inputRef}
-            placeholder={placeholder}
-            type={type}
-            value={value}
-            autoComplete={nativeAutoComplete}
-            {...props}
-          />
-        </ContainerSufix>
+    if (prefix) {
+      return (
+        <Flex {...containerProps}>
+          <ContainerSufix
+            {...boxStyled}
+            inputSelected={inputSelected}
+            onClick={() => setInputSelected(true)}
+            onBlur={() => setInputSelected(false)}
+          >
+            {prefix}
+            <InputPrefixed
+              ref={inputRef}
+              placeholder={placeholder}
+              type={type}
+              value={value}
+              autoComplete={nativeAutoComplete}
+              {...props}
+            />
+          </ContainerSufix>
 
-        {errorForm && <InputErrorMessage errorMessage={errorMessage} />}
-      </Flex>
-    )
-  }
+          {errorForm && <InputErrorMessage errorMessage={errorMessage} />}
+        </Flex>
+      )
+    }
 
-  if (type === 'password') {
+    if (type === 'password') {
+      return (
+        <Flex {...containerProps} flexDirection='column'>
+          <ContainerSufix
+            {...boxStyled}
+            inputSelected={inputSelected}
+            onClick={() => setInputSelected(true)}
+            onBlur={() => setInputSelected(false)}
+          >
+            <InputSufixed
+              {...props}
+              ref={inputRef}
+              placeholder={placeholder}
+              type={passwordVisible ? 'text' : 'password'}
+              value={value}
+              autoComplete={nativeAutoComplete}
+            />
+            <Button
+              palette='primary'
+              mr={5}
+              onClick={() => setPasswordVisible(!passwordVisible)}
+            >
+              {passwordVisible ? (
+                <MdVisibilityOff size={22} />
+              ) : (
+                <MdVisibility size={22} />
+              )}
+            </Button>
+          </ContainerSufix>
+
+          {errorForm && <InputErrorMessage errorMessage={errorMessage} />}
+        </Flex>
+      )
+    }
+
     return (
       <Flex {...containerProps} flexDirection='column'>
-        <ContainerSufix
-          {...boxStyled}
-          inputSelected={inputSelected}
-          onClick={() => setInputSelected(true)}
-          onBlur={() => setInputSelected(false)}
-        >
-          <InputSufixed
-            {...props}
-            ref={inputRef}
-            placeholder={placeholder}
-            type={passwordVisible ? 'text' : 'password'}
-            value={value}
-            autoComplete={nativeAutoComplete}
-          />
-          <Button
-            palette='primary'
-            mr={5}
-            onClick={() => setPasswordVisible(!passwordVisible)}
-          >
-            {passwordVisible ? (
-              <MdVisibilityOff size={22} />
-            ) : (
-              <MdVisibility size={22} />
-            )}
-          </Button>
-        </ContainerSufix>
+        <Input
+          name={name}
+          inputRef={inputRef}
+          placeholder={placeholder}
+          errorForm={errorForm}
+          type={type}
+          errorMessage={errorMessage}
+          sufix={sufix}
+          value={value}
+          {...props}
+          data-testid='input'
+          nativeAutoComplete={nativeAutoComplete}
+          disabled={disabled}
+        />
 
         {errorForm && <InputErrorMessage errorMessage={errorMessage} />}
       </Flex>
     )
   }
-
-  return (
-    <Flex {...containerProps} flexDirection='column'>
-      <Input
-        name={name}
-        inputRef={inputRef}
-        placeholder={placeholder}
-        errorForm={errorForm}
-        type={type}
-        errorMessage={errorMessage}
-        sufix={sufix}
-        value={value}
-        {...props}
-        data-testid='input'
-        nativeAutoComplete={nativeAutoComplete}
-        disabled={disabled}
-      />
-
-      {errorForm && <InputErrorMessage errorMessage={errorMessage} />}
-    </Flex>
-  )
-}
+)
