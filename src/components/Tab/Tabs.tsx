@@ -142,90 +142,94 @@ const InnerFlex = styled(Flex)<TabsProps>`
     display: none;
   }
 `
+export const Tabs = React.forwardRef<HTMLUListElement, TabsProps>(
+  (
+    {
+      extra,
+      children,
+      wrapperProps,
+      onChange = () => {
+        // do nothing.
+      },
+      ...props
+    },
+    ref
+  ) => {
+    const [isMobile, setIsMobile] = useState(false)
+    const [scrollPosition, setScrollPosition] = useState<
+      'left' | 'middle' | 'right'
+    >('left')
 
-export const Tabs: React.FC<TabsProps> = ({
-  extra,
-  children,
-  wrapperProps,
-  onChange = () => {
-    // do nothing.
-  },
-  ...props
-}) => {
-  const [isMobile, setIsMobile] = useState(false)
-  const [scrollPosition, setScrollPosition] = useState<
-    'left' | 'middle' | 'right'
-  >('left')
+    const refFlex = useRef(document.createElement('div'))
 
-  const refFlex = useRef(document.createElement('div'))
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (
-        refFlex.current &&
-        refFlex.current.scrollWidth !== refFlex.current.clientWidth
-      ) {
-        setIsMobile(true)
-      } else {
-        setIsMobile(false)
-      }
-    }
-
-    if (refFlex) {
-      handleResize()
-      window.addEventListener('resize', handleResize)
-    }
-  }, [refFlex])
-
-  useEffect(() => {
-    const handleScroll = e => {
-      if (refFlex && isMobile) {
-        if (e.type === 'wheel') {
-          refFlex.current.scrollLeft += e.deltaY
-        }
-
-        if (refFlex.current.scrollLeft === 0) {
-          setScrollPosition('left')
-        } else if (
-          Math.floor(
-            refFlex.current.offsetWidth + refFlex.current.scrollLeft
-          ) === refFlex.current.scrollWidth
+    useEffect(() => {
+      const handleResize = () => {
+        if (
+          refFlex.current &&
+          refFlex.current.scrollWidth !== refFlex.current.clientWidth
         ) {
-          setScrollPosition('right')
+          setIsMobile(true)
         } else {
-          setScrollPosition('middle')
+          setIsMobile(false)
         }
       }
+
+      if (refFlex) {
+        handleResize()
+        window.addEventListener('resize', handleResize)
+      }
+    }, [refFlex])
+
+    useEffect(() => {
+      const handleScroll = e => {
+        if (refFlex && isMobile) {
+          if (e.type === 'wheel') {
+            refFlex.current.scrollLeft += e.deltaY
+          }
+
+          if (refFlex.current.scrollLeft === 0) {
+            setScrollPosition('left')
+          } else if (
+            Math.floor(
+              refFlex.current.offsetWidth + refFlex.current.scrollLeft
+            ) === refFlex.current.scrollWidth
+          ) {
+            setScrollPosition('right')
+          } else {
+            setScrollPosition('middle')
+          }
+        }
+      }
+
+      if (refFlex) {
+        refFlex.current.addEventListener('wheel', handleScroll)
+        refFlex.current.addEventListener('touchmove', handleScroll)
+      }
+    }, [refFlex, isMobile])
+
+    function handleClick(event) {
+      onChange(event, parseInt(event.currentTarget.dataset.id))
     }
 
-    if (refFlex) {
-      refFlex.current.addEventListener('wheel', handleScroll)
-      refFlex.current.addEventListener('touchmove', handleScroll)
-    }
-  }, [refFlex, isMobile])
+    return (
+      <TabStyled data-testid='tabs' ref={ref} {...props}>
+        <FlexStyled isMobile={isMobile} scrollPosition={scrollPosition}>
+          <InnerFlex
+            flex={1}
+            ref={refFlex}
+            onClick={handleClick}
+            data-testid='tabs-container'
+            {...wrapperProps}
+          >
+            {children}
+          </InnerFlex>
+        </FlexStyled>
 
-  function handleClick(event) {
-    onChange(event, parseInt(event.currentTarget.dataset.id))
+        {extra && <Flex px='12px'>{extra}</Flex>}
+      </TabStyled>
+    )
   }
-
-  return (
-    <TabStyled data-testid='tabs' {...props}>
-      <FlexStyled isMobile={isMobile} scrollPosition={scrollPosition}>
-        <InnerFlex
-          flex={1}
-          ref={refFlex}
-          onClick={handleClick}
-          data-testid='tabs-container'
-          {...wrapperProps}
-        >
-          {children}
-        </InnerFlex>
-      </FlexStyled>
-
-      {extra && <Flex px='12px'>{extra}</Flex>}
-    </TabStyled>
-  )
-}
+)
 
 Tabs.defaultProps = {
   variant: 'default'
