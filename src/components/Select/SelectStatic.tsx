@@ -99,158 +99,163 @@ const LoadingBox = styled(Box)<VariantSelect>`
     variantSelect === 'outlined' ? '13px' : '12px'};
   right: 14px;
 `
+export const SelectStatic = React.forwardRef<HTMLDivElement, Props>(
+  (
+    {
+      label,
+      variant,
+      items = [],
+      placeholder,
+      selectedItem,
+      autoComplete = true,
+      sufix,
+      isLoading,
+      errorMessage,
+      errorForm,
+      clearOnSelect = false,
+      isDependent = false,
+      dependentMessage = 'este campo tem alguma dependência',
+      emptyMessage = 'item não encontrado',
+      handleSelectedItemChange = () => {
+        // do nothing.
+      },
+      onChangeTextInput = () => {
+        // do nothing.
+      },
+      prefix,
+      inputProps,
+      ...props
+    },
+    ref
+  ) => {
+    const [inputItems, setInputItems] = useState(items)
 
-export const SelectStatic: React.FC<Props> = ({
-  label,
-  variant,
-  items = [],
-  placeholder,
-  selectedItem,
-  autoComplete = true,
-  sufix,
-  isLoading,
-  errorMessage,
-  errorForm,
-  clearOnSelect = false,
-  isDependent = false,
-  dependentMessage = 'este campo tem alguma dependência',
-  emptyMessage = 'item não encontrado',
-  handleSelectedItemChange = () => {
-    // do nothing.
-  },
-  onChangeTextInput = () => {
-    // do nothing.
-  },
-  prefix,
-  inputProps,
-  ...props
-}) => {
-  const [inputItems, setInputItems] = useState(items)
+    useEffect(() => setInputItems(items), [items])
 
-  useEffect(() => setInputItems(items), [items])
+    const { backgroundColor, border, width, maxWidth } = props
+    const boxStyled = {
+      backgroundColor,
+      border,
+      width,
+      maxWidth,
+      ...inputProps
+    }
 
-  const { backgroundColor, border, width, maxWidth } = props
-  const boxStyled = {
-    backgroundColor,
-    border,
-    width,
-    maxWidth,
-    ...inputProps
-  }
+    const {
+      isOpen,
+      getMenuProps,
+      getInputProps,
+      getComboboxProps,
+      highlightedIndex,
+      getToggleButtonProps,
+      openMenu,
+      getItemProps,
+      setInputValue
+    } = useCombobox({
+      onSelectedItemChange: handleSelectedItemChange,
+      items: isDependent ? [] : inputItems,
+      selectedItem,
+      itemToString: item => (typeof item === 'string' ? item : item.name),
+      onInputValueChange: ({ inputValue = '' }) => {
+        if (autoComplete && typeof inputValue === 'string') {
+          onChangeTextInput(inputValue)
+          setInputItems(
+            items.filter(item => {
+              const name =
+                typeof item === 'string' ? item : item.select || item.name
+              return name.toLowerCase().startsWith(inputValue.toLowerCase())
+            })
+          )
+        }
+      }
+    })
 
-  const {
-    isOpen,
-    getMenuProps,
-    getInputProps,
-    getComboboxProps,
-    highlightedIndex,
-    getToggleButtonProps,
-    openMenu,
-    getItemProps,
-    setInputValue
-  } = useCombobox({
-    onSelectedItemChange: handleSelectedItemChange,
-    items: isDependent ? [] : inputItems,
-    selectedItem,
-    itemToString: item => (typeof item === 'string' ? item : item.name),
-    onInputValueChange: ({ inputValue = '' }) => {
-      if (autoComplete && typeof inputValue === 'string') {
-        onChangeTextInput(inputValue)
-        setInputItems(
-          items.filter(item => {
-            const name =
-              typeof item === 'string' ? item : item.select || item.name
-            return name.toLowerCase().startsWith(inputValue.toLowerCase())
-          })
-        )
+    function handleClickInput() {
+      if (!isOpen) {
+        openMenu()
       }
     }
-  })
 
-  function handleClickInput() {
-    if (!isOpen) {
-      openMenu()
-    }
-  }
+    return (
+      <Container
+        isOpen={isOpen}
+        variant={variant}
+        data-testid='select-static'
+        ref={ref}
+        {...props}
+      >
+        <ul {...getMenuProps()}>
+          {isOpen &&
+            inputItems &&
+            !isDependent &&
+            inputItems.length > 0 &&
+            inputItems.map((item, index) => (
+              <Item
+                key={index}
+                data-testid='select-item'
+                highlighted={highlightedIndex === index}
+                {...getItemProps({ item, index })}
+              >
+                {typeof item === 'string' ? item : item.name}
+              </Item>
+            ))}
 
-  return (
-    <Container
-      isOpen={isOpen}
-      variant={variant}
-      data-testid='select-static'
-      {...props}
-    >
-      <ul {...getMenuProps()}>
-        {isOpen &&
-          inputItems &&
-          !isDependent &&
-          inputItems.length > 0 &&
-          inputItems.map((item, index) => (
-            <Item
-              key={index}
-              data-testid='select-item'
-              highlighted={highlightedIndex === index}
-              {...getItemProps({ item, index })}
+          {isDependent && <Item>{dependentMessage}</Item>}
+
+          {isOpen && !isDependent && inputItems && inputItems.length === 0 && (
+            <li>{emptyMessage}</li>
+          )}
+        </ul>
+
+        <Box ref={getComboboxProps().ref}>
+          <Input
+            onChange={getInputProps().onChange}
+            onBlur={getInputProps().onBlur}
+            onKeyDown={getInputProps().onKeyDown}
+            onClick={handleClickInput}
+            value={getInputProps().value}
+            inputRef={getInputProps().ref}
+            variant={variant}
+            label={label}
+            errorMessage={errorMessage}
+            errorForm={errorForm}
+            readOnly={!autoComplete}
+            prefix={prefix}
+            placeholder={placeholder}
+            {...getInputProps({
+              onClick: () => {
+                clearOnSelect && setInputValue('')
+                setInputItems(items)
+                openMenu()
+              }
+            })}
+            nativeAutoComplete='disabled'
+            {...boxStyled}
+          />
+
+          {isLoading && (
+            <LoadingBox>
+              <Loading size='small' />
+            </LoadingBox>
+          )}
+
+          {inputItems && !isLoading && (
+            <ButtonStyled
+              type='button'
+              palette='primary'
+              variantSelect={variant}
+              onClick={getToggleButtonProps().onClick}
+              refButton={getToggleButtonProps().ref}
+              aria-label='toggle menu'
             >
-              {typeof item === 'string' ? item : item.name}
-            </Item>
-          ))}
-
-        {isDependent && <Item>{dependentMessage}</Item>}
-
-        {isOpen && !isDependent && inputItems && inputItems.length === 0 && (
-          <li>{emptyMessage}</li>
-        )}
-      </ul>
-
-      <Box ref={getComboboxProps().ref}>
-        <Input
-          onChange={getInputProps().onChange}
-          onBlur={getInputProps().onBlur}
-          onKeyDown={getInputProps().onKeyDown}
-          onClick={handleClickInput}
-          value={getInputProps().value}
-          inputRef={getInputProps().ref}
-          variant={variant}
-          label={label}
-          errorMessage={errorMessage}
-          errorForm={errorForm}
-          readOnly={!autoComplete}
-          prefix={prefix}
-          placeholder={placeholder}
-          {...getInputProps({
-            onClick: () => {
-              clearOnSelect && setInputValue('')
-              setInputItems(items)
-              openMenu()
-            }
-          })}
-          nativeAutoComplete='disabled'
-          {...boxStyled}
-        />
-
-        {isLoading && (
-          <LoadingBox>
-            <Loading size='small' />
-          </LoadingBox>
-        )}
-
-        {inputItems && !isLoading && (
-          <ButtonStyled
-            type='button'
-            palette='primary'
-            variantSelect={variant}
-            onClick={getToggleButtonProps().onClick}
-            refButton={getToggleButtonProps().ref}
-            aria-label='toggle menu'
-          >
-            {sufix || <IoIosArrowDown />}
-          </ButtonStyled>
-        )}
-      </Box>
-    </Container>
-  )
-}
+              {sufix || <IoIosArrowDown />}
+            </ButtonStyled>
+          )}
+        </Box>
+      </Container>
+    )
+  }
+)
 
 SelectStatic.defaultProps = {
   items: []

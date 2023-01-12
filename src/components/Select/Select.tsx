@@ -30,10 +30,12 @@ export type Props = BoxProps & {
   dependentMessage?: string
 }
 
-export const Select: React.FC<Props> = ({ isFetchable, ...props }) => {
-  if (isFetchable) {
-    return <SelectFetchable {...props} />
-  }
+export const Select = React.forwardRef<HTMLDivElement, Props>(
+  ({ isFetchable, ...props }, ref) => {
+    if (isFetchable) {
+      return <SelectFetchable {...props} ref={ref} />
+    }
 
-  return <SelectStatic {...props} />
-}
+    return <SelectStatic {...props} ref={ref} />
+  }
+)
