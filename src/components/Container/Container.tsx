@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react'
 
 import { Divider } from '../Divider'
-import { Flex } from '../Flex'
+import { Flex, Props as FlexProps } from '../Flex'
 import { Text } from '../Text'
 import { Tabs, Tab } from '../Tab'
 
@@ -19,7 +19,7 @@ export interface Props {
   tabIndex?: number
   header?: ReactNode
   children?: ReactNode
-  containerProps?: any
+  containerProps?: FlexProps
   tabsExtra?: ReactNode
   onChangeTab?: (event: any, newValue: any) => void
 }
