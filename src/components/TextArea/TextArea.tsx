@@ -44,7 +44,6 @@ const StyledTextArea = styled.textarea<Props>`
   background: #fff;
   font-size: ${props => props.theme.fontSizes.medium};
 `
-
-export const TextArea: React.FC<Props> = props => {
-  return <StyledTextArea data-testid='textarea' {...props} />
-}
+export const TextArea = React.forwardRef<HTMLTextAreaElement, Props>(
+  (props, ref) => <StyledTextArea data-testid='textarea' ref={ref} {...props} />
+)
