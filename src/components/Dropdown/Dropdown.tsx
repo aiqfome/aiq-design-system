@@ -116,7 +116,10 @@ export const Dropdown = React.forwardRef<HTMLDivElement, Props>(
     ref
   ) => {
     const [isOpen, setIsOpen] = useState(opened)
-    const [itemSelected, setItemSelect] = useState({ value: null, label: '' })
+    const [itemSelected, setItemSelect] = useState<Item>({
+      value: null,
+      label: ''
+    })
 
     useEffect(() => {
       if (selected) {
