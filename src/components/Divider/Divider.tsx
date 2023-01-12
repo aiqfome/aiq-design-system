@@ -33,6 +33,7 @@ export const Divider = React.forwardRef<HTMLDivElement, Props>(
           width='100%'
           alignItems='center'
           justifyContent='center'
+          ref={ref}
         >
           <LineStyled height={height} backgroundColor={color} {...props} />
           {children}
