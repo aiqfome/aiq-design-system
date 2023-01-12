@@ -5,7 +5,7 @@ import { createPageExport } from '../../utils/storybook'
 
 export default createPageExport(Box, 'Box', [
   'onClick',
-  'refBox',
+  'ref',
   'className',
   'children'
 ])

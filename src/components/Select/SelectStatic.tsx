@@ -203,7 +203,7 @@ export const SelectStatic: React.FC<Props> = ({
         )}
       </ul>
 
-      <Box refBox={getComboboxProps().ref}>
+      <Box ref={getComboboxProps().ref}>
         <Input
           onChange={getInputProps().onChange}
           onBlur={getInputProps().onBlur}

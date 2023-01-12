@@ -40,7 +40,6 @@ export type Props = BorderProps &
     className?: string
     color?: string
     onClick?: () => void
-    refBox?: any
   }
 
 export const BoxStyled = styled.div`
@@ -55,7 +54,8 @@ export const BoxStyled = styled.div`
   ${position}
   ${space}
 `
-
-export const Box: React.FC<Props> = ({ refBox, ...props }) => {
-  return <BoxStyled data-testid='box' ref={refBox} {...props} />
-}
+export const Box = React.forwardRef<HTMLDivElement, Props>(
+  ({ ...props }, ref) => {
+    return <BoxStyled data-testid='box' ref={ref} {...props} />
+  }
+)

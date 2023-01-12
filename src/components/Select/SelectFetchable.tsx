@@ -209,7 +209,7 @@ export const SelectFetchable: React.FC<Props> = ({
         {isDependent && <Item>{dependentMessage}</Item>}
       </ul>
 
-      <Box refBox={getComboboxProps().ref}>
+      <Box ref={getComboboxProps().ref}>
         <Input
           onChange={getInputProps().onChange}
           onBlur={getInputProps().onBlur}
