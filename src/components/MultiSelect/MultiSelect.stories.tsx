@@ -4,10 +4,51 @@ import { Flex } from '../Flex'
 
 import { MultiSelect } from './MultiSelect'
 
-export default {
-  component: MultiSelect,
-  title: 'MultiSelect'
-}
+import { createPageExport } from '../../utils/storybook'
+
+const aiqProps = [
+  'maxWidth',
+  'filters',
+  'onChange',
+  'value',
+  'items',
+  'isLoading',
+  'isFetchable',
+  'placeholder',
+  'loadingMessage',
+  'emptyMessage',
+  'errorMessage',
+  'errorForm',
+  'isDependent',
+  'dependentMessage',
+  'disabled',
+  'removable'
+]
+
+export default createPageExport(MultiSelect, 'MultiSelect', aiqProps, {
+  argTypes: {
+    maxWidth: { control: 'text' },
+    filters: { control: 'object' },
+    value: { control: 'object' },
+    items: { control: 'object' },
+    isLoading: { control: 'boolean' },
+    isFetchable: { control: 'number' },
+    placeholder: { control: 'text' },
+    loadingMessage: { control: 'text' },
+    emptyMessage: { control: 'text' },
+    errorMessage: { control: 'text' },
+    dependentMessage: { control: 'text' },
+    errorForm: { control: 'boolean' },
+    isDependent: { control: 'boolean' },
+    disabled: { control: 'boolean' },
+    removable: { control: 'boolean' }
+  },
+  args: {
+    errorMessage: 'deu ruinzão aqui',
+    placeholder: 'cidades do aiq',
+    isLoading: false
+  }
+})
 
 const items = [
   { id: 0, name: 'Maringá' },
@@ -27,7 +68,7 @@ const filters = [
   { clear: true, name: 'limpar cidades selecionadas' }
 ]
 
-export const Basic: React.FC = (): ReactElement => {
+export const Basic = (args): ReactElement => {
   const [value, setValue] = useState([items[0]])
 
   function handleChangeMultiSelect({ selectedItems }) {
@@ -41,16 +82,14 @@ export const Basic: React.FC = (): ReactElement => {
         onChange={handleChangeMultiSelect}
         filters={filters}
         items={items}
-        isLoading={false}
-        placeholder='cidades do aiq'
         errorForm={value.length === 0}
-        errorMessage='deu ruinzão aqui'
+        {...args}
       />
     </Flex>
   )
 }
 
-export const Removable: React.FC = (): ReactElement => {
+export const Removable = (args): ReactElement => {
   const [value, setValue] = useState([items[0]])
 
   function handleChangeMultiSelect({ selectedItems }) {
@@ -64,17 +103,17 @@ export const Removable: React.FC = (): ReactElement => {
         onChange={handleChangeMultiSelect}
         filters={filters}
         items={items}
-        isLoading={false}
-        placeholder='cidades do aiq'
         errorForm={value.length === 0}
-        errorMessage='deu ruinzão aqui'
-        removable={true}
+        {...args}
       />
     </Flex>
   )
 }
+Removable.args = {
+  removable: true
+}
 
-export const Disabled: React.FC = (): ReactElement => {
+export const Disabled = (args): ReactElement => {
   const [value, setValue] = useState([items[0]])
 
   function handleChangeMultiSelect({ selectedItems }) {
@@ -88,17 +127,17 @@ export const Disabled: React.FC = (): ReactElement => {
         onChange={handleChangeMultiSelect}
         filters={filters}
         items={items}
-        isLoading={false}
-        placeholder='cidades do aiq'
         errorForm={value.length === 0}
-        errorMessage='deu ruinzão aqui'
-        disabled
+        {...args}
       />
     </Flex>
   )
 }
+Disabled.args = {
+  disabled: true
+}
 
-export const DisabledWithoutElements: React.FC = (): ReactElement => {
+export const DisabledWithoutElements = (args): ReactElement => {
   const [value, setValue] = useState([])
 
   function handleChangeMultiSelect({ selectedItems }) {
@@ -112,10 +151,12 @@ export const DisabledWithoutElements: React.FC = (): ReactElement => {
         onChange={handleChangeMultiSelect}
         filters={filters}
         items={[]}
-        isLoading={false}
-        placeholder='cidades do aiq'
         disabled
+        {...args}
       />
     </Flex>
   )
+}
+DisabledWithoutElements.args = {
+  disabled: true
 }

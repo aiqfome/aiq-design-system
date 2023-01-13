@@ -326,7 +326,7 @@ export const MultiSelectStatic: React.FC<Props> = ({
           display='flex'
           flexDirection='row'
           errorForm={errorForm}
-          refBox={el => {
+          ref={el => {
             getComboboxProps()?.ref(el)
             setRefContainer(el || null)
           }}

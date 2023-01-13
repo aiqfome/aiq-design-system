@@ -7,11 +7,9 @@ import { Flex, Props as FlexProps } from '../Flex'
 
 export type Props = FlexProps & {
   cursor?: string
-  children?: any
-  color?: string
 }
 
-export const IconStyled = styled(Flex)<Props>`
+const IconStyled = styled(Flex)<Props>`
   ${color}
   ${space}
   ${layout}
@@ -19,9 +17,15 @@ export const IconStyled = styled(Flex)<Props>`
   cursor: ${props => props.cursor};
 `
 
-export const Icon: React.FC<Props> = ({ children, ...props }) => {
-  return <IconStyled {...props}>{children}</IconStyled>
-}
+export const Icon = React.forwardRef<HTMLDivElement, Props>(
+  ({ children, ...props }, ref) => {
+    return (
+      <IconStyled ref={ref} {...props}>
+        {children}
+      </IconStyled>
+    )
+  }
+)
 
 Icon.defaultProps = {
   alignItems: 'center'

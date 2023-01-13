@@ -11,10 +11,10 @@ import {
 } from '@storybook/addon-docs'
 
 export const createPageExport = (
-  component: React.FC,
+  component: React.FC<any>,
   title: string,
   aiqProps: string[],
-  optionalConfigs: any
+  optionalConfigs: any = {}
 ) => {
   return {
     component,
@@ -37,7 +37,7 @@ export const createPageExport = (
                 <ArgsTable include={aiqProps} />{' '}
               </>
             )}
-            <Subheading>Styling props (from styled-system)</Subheading>
+            <Subheading>Default props (from styled-system, html)</Subheading>
             <ArgsTable exclude={aiqProps} />
 
             <Stories />

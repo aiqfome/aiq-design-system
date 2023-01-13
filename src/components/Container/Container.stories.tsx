@@ -8,28 +8,45 @@ import { Text } from '../Text'
 import { Container } from './Container'
 import { TabPanel } from '../Tab'
 
-export default {
-  component: Container,
-  title: 'Container'
+import { createPageExport } from '../../utils/storybook'
+
+const aiqProps = [
+  'tabs',
+  'title',
+  'tabIndex',
+  'header',
+  'children',
+  'containerProps',
+  'tabsExtra',
+  'onChangetab'
+]
+
+export default createPageExport(Container, 'Container', aiqProps, {
+  argTypes: {
+    tabs: { control: 'object' }
+  }
+})
+
+export const Basic: React.FC = (args): ReactElement => (
+  <Container {...args}>
+    <Flex variant='centralized' p={15}>
+      <Text>my content (:</Text>
+    </Flex>
+  </Container>
+)
+
+export const WithTitle = (args): ReactElement => (
+  <Container {...args}>
+    <Flex variant='centralized' p={15}>
+      <Text>my content (:</Text>
+    </Flex>
+  </Container>
+)
+WithTitle.args = {
+  title: 'Just a container!'
 }
 
-export const Basic: React.FC = (): ReactElement => (
-  <Container>
-    <Flex variant='centralized' p={15}>
-      <Text>my content (:</Text>
-    </Flex>
-  </Container>
-)
-
-export const WithTitle: React.FC = (): ReactElement => (
-  <Container title='Just a container!'>
-    <Flex variant='centralized' p={15}>
-      <Text>my content (:</Text>
-    </Flex>
-  </Container>
-)
-
-export const WithHeader: React.FC = (): ReactElement => {
+export const WithHeader: React.FC = (args): ReactElement => {
   const Header: React.FC = (): ReactElement => (
     <Flex justifyContent='space-between' p={10}>
       <Text color='almostBlack' fontSize='xxlarge'>
@@ -46,7 +63,7 @@ export const WithHeader: React.FC = (): ReactElement => {
   )
 
   return (
-    <Container header={<Header />}>
+    <Container header={<Header />} {...args}>
       <Flex variant='centralized' p={15}>
         <Text>my content (:</Text>
       </Flex>
@@ -54,7 +71,7 @@ export const WithHeader: React.FC = (): ReactElement => {
   )
 }
 
-export const WithTabs: React.FC = (): ReactElement => {
+export const WithTabs: React.FC = (args): ReactElement => {
   const [tabIndex, setTabIndex] = useState(0)
 
   const tabs = [
@@ -78,6 +95,7 @@ export const WithTabs: React.FC = (): ReactElement => {
       tabIndex={tabIndex}
       onChangeTab={onChange}
       tabsExtra='conteúdo extra'
+      {...args}
     >
       <TabPanel value={tabIndex} index={0}>
         <Flex variant='centralized' flex={1} p={15}>

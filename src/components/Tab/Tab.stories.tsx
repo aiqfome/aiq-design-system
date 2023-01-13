@@ -6,12 +6,27 @@ import { Tabs } from './Tabs'
 import { Tab } from './Tab'
 import { TabPanel } from './TabPanel'
 
-export default {
-  component: Tab,
-  title: 'Tab'
-}
+import { createPageExport } from '../../utils/storybook'
 
-export const Basic: React.FC = () => {
+const aiqProps = [
+  'extra',
+  'children',
+  'wrapperProps',
+  'isMobile',
+  'variant',
+  'scrollPosition',
+  'onChange'
+]
+
+export default createPageExport(Tabs, 'Tabs', aiqProps, {
+  argTypes: {
+    isMobile: { control: 'boolean' },
+    variant: { control: 'select', options: ['default', 'contained', 'card'] },
+    scrollPosition: { control: 'select', options: ['left', 'middle', 'right'] }
+  }
+})
+
+export const Basic: React.FC = args => {
   const [value, setValue] = useState(0)
 
   const handleChange = (event, newValue) => {
@@ -20,7 +35,7 @@ export const Basic: React.FC = () => {
 
   return (
     <Flex flexDirection='column'>
-      <Tabs onChange={handleChange} extra='teste' width='100%'>
+      <Tabs onChange={handleChange} extra='teste' width='100%' {...args}>
         <Tab value={value} index={0}>
           <Text fontSize={5} cursor='pointer'>
             Item One
@@ -70,7 +85,7 @@ export const Basic: React.FC = () => {
   )
 }
 
-export const Contained: React.FC = () => {
+export const Contained: React.FC = args => {
   const [value, setValue] = useState(0)
 
   const handleChange = (event, newValue) => {
@@ -79,7 +94,7 @@ export const Contained: React.FC = () => {
 
   return (
     <Flex flexDirection='column'>
-      <Tabs variant='contained' onChange={handleChange}>
+      <Tabs variant='contained' onChange={handleChange} {...args}>
         <Tab variant='contained' value={value} index={0}>
           <Text fontSize={2} cursor='pointer'>
             Item One
@@ -109,7 +124,7 @@ export const Contained: React.FC = () => {
   )
 }
 
-export const Card: React.FC = () => {
+export const Card: React.FC = args => {
   const [value, setValue] = useState(0)
 
   const handleChange = (event, newValue) => {
@@ -118,7 +133,7 @@ export const Card: React.FC = () => {
 
   return (
     <Flex flexDirection='column'>
-      <Tabs onChange={handleChange}>
+      <Tabs onChange={handleChange} {...args}>
         <Tab variant='card' value={value} index={0}>
           <Text fontSize={2} cursor='pointer'>
             Item One

@@ -7,27 +7,31 @@ import { Button } from '../Button'
 import { Text } from '../Text'
 import { Box } from '../Box'
 
+type VoidFunction = () => void
+
 export interface Props {
   title: string
-  form?: any
+  form?: {
+    handleSubmit: (onSubmit: VoidFunction) => void
+  }
   formProps?: any
   buttonsProps?: any
   variant?: 'big' | 'medium' | 'small'
   show?: boolean
   animation?: boolean
   zIndex?: number
-  onClose?: () => void
-  onSubmit?: () => void
+  onClose?: VoidFunction
+  onSubmit?: VoidFunction
   children?: any
   okButton?: {
     label: string
-    function?: () => void
+    function?: VoidFunction
     visible: boolean
     disabled?: boolean
   }
   cancelButton?: {
     label: string
-    function: () => void
+    function: VoidFunction
     visible: boolean
   }
 }

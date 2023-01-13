@@ -109,28 +109,25 @@ const TabStyled = styled.li<StyledProps>`
 
   ${({ variant }) => tabVariations[variant || 'default']}
 `
+export const Tab = React.forwardRef<HTMLLIElement, TabProps>(
+  ({ children, value = 0, index, ...props }, ref) => {
+    function handleClick(event) {
+      event.currentTarget.parentNode.setAttribute('data-id', index)
+    }
 
-export const Tab: React.FC<TabProps> = ({
-  children,
-  value = 0,
-  index,
-  ...props
-}) => {
-  function handleClick(event) {
-    event.currentTarget.parentNode.setAttribute('data-id', index)
+    return (
+      <TabStyled
+        data-testid='tab'
+        onClick={handleClick}
+        active={index === value}
+        ref={ref}
+        {...props}
+      >
+        {children}
+      </TabStyled>
+    )
   }
-
-  return (
-    <TabStyled
-      data-testid='tab'
-      onClick={handleClick}
-      active={index === value}
-      {...props}
-    >
-      {children}
-    </TabStyled>
-  )
-}
+)
 
 Tab.defaultProps = {
   variant: 'default'

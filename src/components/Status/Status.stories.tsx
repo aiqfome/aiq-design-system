@@ -3,14 +3,17 @@ import React, { ReactElement } from 'react'
 import { Flex } from '../Flex'
 import { Status } from './Status'
 
-export default {
-  component: Status,
-  title: 'Status'
-}
+import { createPageExport } from '../../utils/storybook'
 
-export const Basic: React.FC = (): ReactElement => (
+export default createPageExport(Status, 'Status', ['children', 'statusColor'], {
+  argTypes: {
+    statusColor: { control: 'text' }
+  }
+})
+
+export const Basic = (args): ReactElement => (
   <Flex flexDirection='column' variant='fullCentralized'>
-    <Status>status default</Status>
+    <Status {...args}>status default</Status>
     <Status statusColor='primary'>primary</Status>
     <Status statusColor='success'>success</Status>
     <Status statusColor='info'>information</Status>

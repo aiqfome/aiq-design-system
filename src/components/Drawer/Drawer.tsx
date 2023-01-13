@@ -92,61 +92,67 @@ export const DrawerStyled = styled.div<Props>`
   ${({ variation }) => drawerVariations[variation || 'right']}
 `
 
-export const Drawer: React.FC<Props> = ({
-  loading = false,
-  onClose,
-  opened = false,
-  variation = 'right',
-  children,
-  ...props
-}) => {
-  const [bodyOverflow, setBodyOverflow] = useState(false)
+export const Drawer = React.forwardRef<HTMLDivElement, Props>(
+  (
+    {
+      loading = false,
+      onClose,
+      opened = false,
+      variation = 'right',
+      children,
+      ...props
+    },
+    ref
+  ) => {
+    const [bodyOverflow, setBodyOverflow] = useState(false)
 
-  useEffect(() => {
-    if (opened) {
-      if (document.body.style.overflow !== 'hidden') {
-        document.body.style.overflow = 'hidden'
-        setBodyOverflow(true)
+    useEffect(() => {
+      if (opened) {
+        if (document.body.style.overflow !== 'hidden') {
+          document.body.style.overflow = 'hidden'
+          setBodyOverflow(true)
+        }
+      } else {
+        if (bodyOverflow) document.body.style.overflow = 'auto'
       }
-    } else {
-      if (bodyOverflow) document.body.style.overflow = 'auto'
-    }
 
-    return () => {
-      if (bodyOverflow) {
-        document.body.style.overflow = 'auto'
+      return () => {
+        if (bodyOverflow) {
+          document.body.style.overflow = 'auto'
+        }
       }
-    }
-  }, [opened, bodyOverflow])
+    }, [opened, bodyOverflow])
 
-  return (
-    <>
-      {onClose && opened && (
-        <Mask data-testid='drawer-mask' onClick={onClose} />
-      )}
+    return (
+      <>
+        {onClose && opened && (
+          <Mask data-testid='drawer-mask' onClick={onClose} />
+        )}
 
-      <DrawerStyled
-        opened={opened}
-        variation={variation}
-        data-testid='drawer-content'
-        className={opened ? 'drawer-open' : 'drawer-close'}
-        {...props}
-      >
-        <Flex overflow='auto' height='100%' flexDirection='column'>
-          {loading ? (
-            <Flex
-              flex={1}
-              height='100%'
-              alignItems='center'
-              justifyContent='center'
-            >
-              <Loading />
-            </Flex>
-          ) : (
-            children
-          )}
-        </Flex>
-      </DrawerStyled>
-    </>
-  )
-}
+        <DrawerStyled
+          opened={opened}
+          variation={variation}
+          data-testid='drawer-content'
+          className={opened ? 'drawer-open' : 'drawer-close'}
+          ref={ref}
+          {...props}
+        >
+          <Flex overflow='auto' height='100%' flexDirection='column'>
+            {loading ? (
+              <Flex
+                flex={1}
+                height='100%'
+                alignItems='center'
+                justifyContent='center'
+              >
+                <Loading />
+              </Flex>
+            ) : (
+              children
+            )}
+          </Flex>
+        </DrawerStyled>
+      </>
+    )
+  }
+)

@@ -170,44 +170,122 @@ const LabelStyled = styled.label<Props>`
     border: none;
   }
 `
+export const InputOutlined = React.forwardRef<HTMLInputElement, Props>(
+  (
+    {
+      name,
+      inputRef,
+      label,
+      placeholder = '',
+      errorForm,
+      type = 'text',
+      errorMessage,
+      sufix,
+      value,
+      backgroundColor,
+      maxWidth,
+      marginRight,
+      marginLeft,
+      containerProps,
+      disabled,
+      nativeAutoComplete,
+      ...props
+    },
+    ref
+  ) => {
+    const [showPassword, setShowPassword] = useState(false)
 
-export const InputOutlined: React.FC<Props> = ({
-  name,
-  inputRef,
-  label,
-  placeholder = '',
-  errorForm,
-  type = 'text',
-  errorMessage,
-  sufix,
-  value,
-  backgroundColor,
-  maxWidth,
-  marginRight,
-  marginLeft,
-  containerProps,
-  disabled,
-  nativeAutoComplete,
-  ...props
-}) => {
-  const [showPassword, setShowPassword] = useState(false)
+    const styledContainer = {
+      backgroundColor,
+      maxWidth,
+      marginRight,
+      marginLeft
+    }
 
-  const styledContainer = {
-    backgroundColor,
-    maxWidth,
-    marginRight,
-    marginLeft
-  }
+    if (type === 'password') {
+      return (
+        <Container
+          data-testid='input-outlined-password'
+          {...containerProps}
+          {...styledContainer}
+        >
+          <LabelStyled
+            type={type}
+            label={label}
+            errorForm={errorForm}
+            disabled={disabled}
+            placeholder={placeholder || ' '}
+          >
+            <input
+              {...props}
+              placeholder={placeholder || ' '}
+              type={showPassword ? 'text' : 'password'}
+              ref={inputRef || ref}
+              name={name}
+              disabled={disabled}
+              data-testid='input'
+              autoComplete={nativeAutoComplete}
+            />
+            {label && <Text data-testid='input-label'>{label}</Text>}
 
-  if (type === 'password') {
+            <Button
+              palette='primary'
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? (
+                <MdVisibilityOff size={22} />
+              ) : (
+                <MdVisibility size={22} />
+              )}
+            </Button>
+          </LabelStyled>
+
+          {errorForm && <InputErrorMessage errorMessage={errorMessage} />}
+        </Container>
+      )
+    }
+
+    if (sufix) {
+      return (
+        <Container
+          data-testid='input-outlined-sufix'
+          {...containerProps}
+          {...styledContainer}
+        >
+          <LabelStyled
+            label={label}
+            errorForm={errorForm}
+            disabled={disabled}
+            placeholder={placeholder || ' '}
+          >
+            <input
+              {...props}
+              placeholder={placeholder || ' '}
+              type={type}
+              value={value}
+              ref={inputRef || ref}
+              name={name}
+              disabled={disabled}
+              autoComplete='disabled'
+              data-testid='input'
+            />
+            {label && <Text data-testid='input-label'>{label}</Text>}
+
+            <Box className='sufix'>{sufix}</Box>
+          </LabelStyled>
+
+          {errorForm && <InputErrorMessage errorMessage={errorMessage} />}
+        </Container>
+      )
+    }
+
     return (
       <Container
-        data-testid='input-outlined-password'
-        {...containerProps}
         {...styledContainer}
+        {...containerProps}
+        data-testid='input-outlined'
       >
         <LabelStyled
-          type={type}
           label={label}
           errorForm={errorForm}
           disabled={disabled}
@@ -215,94 +293,20 @@ export const InputOutlined: React.FC<Props> = ({
         >
           <input
             {...props}
+            value={value}
             placeholder={placeholder || ' '}
-            type={showPassword ? 'text' : 'password'}
-            ref={inputRef}
             name={name}
+            type={type}
+            ref={inputRef || ref}
             disabled={disabled}
             data-testid='input'
             autoComplete={nativeAutoComplete}
           />
           {label && <Text data-testid='input-label'>{label}</Text>}
-
-          <Button
-            palette='primary'
-            onClick={() => setShowPassword(!showPassword)}
-          >
-            {showPassword ? (
-              <MdVisibilityOff size={22} />
-            ) : (
-              <MdVisibility size={22} />
-            )}
-          </Button>
         </LabelStyled>
 
         {errorForm && <InputErrorMessage errorMessage={errorMessage} />}
       </Container>
     )
   }
-
-  if (sufix) {
-    return (
-      <Container
-        data-testid='input-outlined-sufix'
-        {...containerProps}
-        {...styledContainer}
-      >
-        <LabelStyled
-          label={label}
-          errorForm={errorForm}
-          disabled={disabled}
-          placeholder={placeholder || ' '}
-        >
-          <input
-            {...props}
-            placeholder={placeholder || ' '}
-            type={type}
-            value={value}
-            ref={inputRef}
-            name={name}
-            disabled={disabled}
-            autoComplete='disabled'
-            data-testid='input'
-          />
-          {label && <Text data-testid='input-label'>{label}</Text>}
-
-          <Box className='sufix'>{sufix}</Box>
-        </LabelStyled>
-
-        {errorForm && <InputErrorMessage errorMessage={errorMessage} />}
-      </Container>
-    )
-  }
-
-  return (
-    <Container
-      {...styledContainer}
-      {...containerProps}
-      data-testid='input-outlined'
-    >
-      <LabelStyled
-        label={label}
-        errorForm={errorForm}
-        disabled={disabled}
-        placeholder={placeholder || ' '}
-      >
-        <input
-          {...props}
-          value={value}
-          placeholder={placeholder || ' '}
-          name={name}
-          type={type}
-          ref={inputRef}
-          disabled={disabled}
-          data-testid='input'
-          autoComplete={nativeAutoComplete}
-        />
-        {label && <Text data-testid='input-label'>{label}</Text>}
-      </LabelStyled>
-
-      {errorForm && <InputErrorMessage errorMessage={errorMessage} />}
-    </Container>
-  )
-}
+)

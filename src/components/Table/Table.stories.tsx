@@ -5,10 +5,7 @@ import { Flex } from '../Flex'
 import { Badge } from '../Badge'
 import { Container } from '../Container'
 
-export default {
-  component: Table,
-  title: 'Table'
-}
+import { createPageExport } from '../../utils/storybook'
 
 const renderBadge = value => {
   return (
@@ -79,65 +76,93 @@ const columns = [
   }
 ]
 
-export const Basic: React.FC = () => {
+const aiqProps = [
+  'scroll',
+  'data',
+  'onHoverRow',
+  'columns',
+  'hoverable',
+  'renderExpanded',
+  'onClickRow',
+  'expandedRowRender',
+  'onRowBackground'
+]
+
+export default createPageExport(Table, 'Table', aiqProps, {
+  argTypes: {
+    hoverable: { control: 'boolean' },
+    renderExpanded: { control: 'boolean' },
+    data: { control: 'object' },
+    columns: { control: 'object' },
+    scroll: { contorl: 'text' }
+  },
+  args: {
+    data,
+    columns
+  }
+})
+
+export const Basic = args => {
   return (
     <Flex variant='fullCentralized' backgroundColor='#FFF'>
-      <Table hoverable={false} data={data} columns={columns} />
+      <Table {...args} />
+    </Flex>
+  )
+}
+Basic.args = {
+  hoverable: false
+}
+
+export const WithScroll = args => {
+  return (
+    <Flex variant='fullCentralized' backgroundColor='#FFF'>
+      <Table {...args} />
+    </Flex>
+  )
+}
+WithScroll.args = {
+  scroll: '1000px'
+}
+
+export const WithExpandedRow = args => {
+  return (
+    <Flex variant='fullCentralized' backgroundColor='#FFF'>
+      <Table {...args} expandedRowRender={row => `eu amo ser ${row.job}`} />
     </Flex>
   )
 }
 
-export const WithScroll: React.FC = () => {
-  return (
-    <Flex variant='fullCentralized' backgroundColor='#FFF'>
-      <Table scroll='1000px' data={data} columns={columns} />
-    </Flex>
-  )
-}
-
-export const WithExpandedRow: React.FC = () => {
+export const WithDefaultExpandedRow = args => {
   return (
     <Flex variant='fullCentralized' backgroundColor='#FFF'>
       <Table
-        data={data}
-        columns={columns}
-        expandedRowRender={row => `eu amo ser ${row.job}`}
-      />
-    </Flex>
-  )
-}
-
-export const WithDefaultExpandedRow: React.FC = () => {
-  return (
-    <Flex variant='fullCentralized' backgroundColor='#FFF'>
-      <Table
-        data={data}
-        renderExpanded
-        columns={columns}
+        {...args}
         onRowBackground={row => (row.age > 21 ? 'lightGrey' : '')}
         expandedRowRender={row => (row.age > 21 ? `eu amo ser ${row.job}` : '')}
       />
     </Flex>
   )
 }
+WithDefaultExpandedRow.args = {
+  renderExpanded: true
+}
 
-export const WithClickAction: React.FC = () => {
+export const WithClickAction = args => {
   return (
     <Flex variant='fullCentralized' backgroundColor='#FFF'>
       <Table
-        data={data}
-        columns={columns}
+        {...args}
         onClickRow={row => console.log('todas as infos da row:', row)}
       />
     </Flex>
   )
 }
 
-export const WithContainer: React.FC = () => {
+export const WithContainer = args => {
   return (
     <Container title='My Table!'>
       <Flex flex={1} flexDirection='column' m='24px'>
-        <Table data={data} columns={columns} />
+        <Table {...args} />
       </Flex>
     </Container>
   )

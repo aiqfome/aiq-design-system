@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { HTMLAttributes } from 'react'
 import styled from 'styled-components'
 import {
   color,
@@ -18,7 +18,8 @@ export type Props = SpaceProps &
   LayoutProps &
   FontSizeProps &
   GridProps &
-  FontWeightProps & {
+  FontWeightProps &
+  HTMLAttributes<HTMLDivElement> & {
     color?: string
     children?: any
   }
@@ -34,6 +35,8 @@ export const GridStyled = styled.div<Props>`
   display: grid;
 `
 
-export const Grid: React.FC<Props> = ({ ...props }) => {
-  return <GridStyled {...props} />
-}
+export const Grid = React.forwardRef<HTMLDivElement, Props>(
+  ({ ...props }, ref) => {
+    return <GridStyled {...props} ref={ref} />
+  }
+)

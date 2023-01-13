@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { TextareaHTMLAttributes } from 'react'
 
 import styled from 'styled-components'
 import {
@@ -12,14 +12,17 @@ import {
   MarginProps
 } from 'styled-system'
 
-export type Props = MarginProps &
+export type Props = Omit<
+  TextareaHTMLAttributes<HTMLTextAreaElement>,
+  'prefix'
+> &
+  MarginProps &
   SpaceProps &
   LayoutProps &
   FontSizeProps &
   FontWeightProps &
   TypographyProps & {
     name?: string
-    placeholder?: string
     value?: string
     sufix?: any
     containerProps?: any
@@ -41,7 +44,6 @@ const StyledTextArea = styled.textarea<Props>`
   background: #fff;
   font-size: ${props => props.theme.fontSizes.medium};
 `
-
-export const TextArea: React.FC<Props> = props => {
-  return <StyledTextArea data-testid='textarea' {...props} />
-}
+export const TextArea = React.forwardRef<HTMLTextAreaElement, Props>(
+  (props, ref) => <StyledTextArea data-testid='textarea' ref={ref} {...props} />
+)

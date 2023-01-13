@@ -3,25 +3,38 @@ import React from 'react'
 import { Grid } from './Grid'
 import { Text } from '../Text'
 
-export default {
-  component: Grid,
-  title: 'Grid'
+import { createPageExport } from '../../utils/storybook'
+
+const aiqProps = ['color', 'children']
+
+export default createPageExport(Grid, 'Grid', aiqProps, {
+  argTypes: {
+    color: {
+      control: 'text'
+    }
+  }
+})
+
+export const Basic = args => (
+  <Grid {...args}>
+    <Text>Design System</Text>
+    <Text>Design System</Text>
+    <Text>Design System</Text>
+    <Text>Design System</Text>
+  </Grid>
+)
+Basic.args = {
+  color: 'primary'
 }
 
-export const basic: React.FC = () => (
-  <Grid color='primary'>
+export const TemplateColumns = args => (
+  <Grid gridTemplateColumns='1fr 2fr' {...args}>
     <Text>Design System</Text>
     <Text>Design System</Text>
     <Text>Design System</Text>
     <Text>Design System</Text>
   </Grid>
 )
-
-export const templateColumns: React.FC = () => (
-  <Grid color='primary' gridTemplateColumns='1fr 2fr'>
-    <Text>Design System</Text>
-    <Text>Design System</Text>
-    <Text>Design System</Text>
-    <Text>Design System</Text>
-  </Grid>
-)
+TemplateColumns.args = {
+  color: 'primary'
+}
