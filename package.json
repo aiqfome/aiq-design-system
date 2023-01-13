@@ -74,5 +74,6 @@
     "storybook": "^6.5.15",
     "styled-components": "^5.3.5",
     "styled-system": "^5.1.5"
-  }
+  },
+  "engines": { "node": "^16.10.0" }
 }
