@@ -124,20 +124,6 @@ export const Item: React.FC<ItemProps> = ({
   }
 
   const ItemWrapper = ({ children }) => {
-    if ((item.items && item.items.length > 0) || !item.href) {
-      return (
-        <Flex
-          flexDirection='row'
-          width='100%'
-          alignItems='center'
-          justifyContent='space-between'
-          padding='16px 22px'
-          onClick={changeVisibilitySubItem}
-        >
-          {children}
-        </Flex>
-      )
-    }
     if (item.callback) {
       return (
         <Flex
@@ -155,6 +141,22 @@ export const Item: React.FC<ItemProps> = ({
         </Flex>
       )
     }
+
+    if ((item.items && item.items.length > 0) || !item.href) {
+      return (
+        <Flex
+          flexDirection='row'
+          width='100%'
+          alignItems='center'
+          justifyContent='space-between'
+          padding='16px 22px'
+          onClick={changeVisibilitySubItem}
+        >
+          {children}
+        </Flex>
+      )
+    }
+
     return (
       <LinkStyled
         href={item.href}
