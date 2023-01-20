@@ -1,15 +1,27 @@
 import React from 'react'
 
-import { Loading } from './Loading'
+import { Loading, Props } from './Loading'
 import { Flex } from '../Flex'
 
-export default {
-  component: Loading,
-  title: 'Loading'
-}
+import { createPageExport } from '../../utils/storybook'
 
-export const basic: React.FC = () => (
+export const Basic = (args: Props) => (
   <Flex justifyContent='center' alignItems='center' height='100vh'>
-    <Loading />
+    <Loading {...args} />
   </Flex>
 )
+Basic.args = {
+  variant: 'small'
+}
+
+export default createPageExport(Basic, 'Loading', ['color', 'size'], {
+  argTypes: {
+    size: {
+      control: 'select',
+      options: ['small', 'medium', 'big']
+    },
+    color: {
+      control: 'text'
+    }
+  }
+})

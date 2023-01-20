@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import { Text } from '../Text'
 import { Box, Props as BoxProps } from '../Box'
 
-export interface Props extends BoxProps {
+export type Props = BoxProps & {
   src?: string
   palette?: string
   alt?: string

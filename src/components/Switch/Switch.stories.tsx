@@ -1,17 +1,21 @@
 import React, { ReactElement, useState } from 'react'
 
-import { withKnobs } from '@storybook/addon-knobs'
-
 import { Flex } from '../Flex'
 import { Switch } from './Switch'
 
-export default {
-  component: Switch,
-  title: 'Switch',
-  decorators: [withKnobs]
-}
+import { createPageExport } from '../../utils/storybook'
 
-export const Basic = (): ReactElement => {
+const aiqProps = ['checked', 'disabled', 'variant']
+
+export default createPageExport(Switch, 'Switch', aiqProps, {
+  argTypes: {
+    checked: { control: 'boolean' },
+    disabled: { control: 'boolean' },
+    variant: { control: 'select', options: ['default', 'small'] }
+  }
+})
+
+export const Basic = (args): ReactElement => {
   const [checked, setChecked] = useState(false)
 
   return (
@@ -21,23 +25,27 @@ export const Basic = (): ReactElement => {
         onChange={e => {
           setChecked(e.target.checked)
         }}
+        {...args}
       />
     </Flex>
   )
 }
 
-export const BasicDisabled = (): ReactElement => (
+export const BasicDisabled = (args): ReactElement => (
   <Flex variant='fullCentralized'>
     <Switch
-      disabled
       onChange={e => {
         console.log(e)
       }}
+      {...args}
     />
   </Flex>
 )
+BasicDisabled.args = {
+  disabled: true
+}
 
-export const Checked = (): ReactElement => {
+export const Checked = (args): ReactElement => {
   const [checked, setChecked] = useState(true)
 
   return (
@@ -47,22 +55,26 @@ export const Checked = (): ReactElement => {
         onChange={e => {
           setChecked(e.target.checked)
         }}
+        {...args}
       />
     </Flex>
   )
 }
 
-export const DisabledChecked = (): ReactElement => (
+export const DisabledChecked = (args): ReactElement => (
   <Flex variant='fullCentralized'>
     <Switch
-      disabled
-      checked
       onChange={e => {
         console.log(e)
       }}
+      {...args}
     />
   </Flex>
 )
+DisabledChecked.args = {
+  disabled: true,
+  checked: true
+}
 
 export const Variants = (): ReactElement => {
   const [checked1, setChecked1] = useState(false)

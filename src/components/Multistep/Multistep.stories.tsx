@@ -4,10 +4,17 @@ import { Flex } from '../Flex'
 import { Button } from '../Button'
 import { Multistep } from './Multistep'
 
-export default {
-  component: Multistep,
-  title: 'Multistep'
-}
+import { createPageExport } from '../../utils/storybook'
+
+const aiqProps = ['steps', 'stepCurrent', 'disabledClickStep', 'onClickStep']
+
+export default createPageExport(Multistep, 'Multistep', aiqProps, {
+  argTypes: {
+    steps: { control: 'object' },
+    stepCurrent: { control: 'number' },
+    disabledClickStep: { control: 'boolean' }
+  }
+})
 
 export interface Props {
   children?: any
@@ -17,15 +24,15 @@ const Step: React.FC<Props> = ({ children }) => {
   return <h1>{children}</h1>
 }
 
-export const Basic: React.FC = () => {
-  const [stepCurrent, setStepCurrent] = useState(0)
+const steps = [
+  { name: 'StepOne', component: <Step>One</Step> },
+  { name: 'StepTwo', component: <Step>Two</Step> },
+  { name: 'StepThree', component: <Step>Three</Step> },
+  { name: 'StepFour', component: <Step>Four</Step> }
+]
 
-  const steps = [
-    { name: 'StepOne', component: <Step>One</Step> },
-    { name: 'StepTwo', component: <Step>Two</Step> },
-    { name: 'StepThree', component: <Step>Three</Step> },
-    { name: 'StepFour', component: <Step>Four</Step> }
-  ]
+export const Basic = args => {
+  const [stepCurrent, setStepCurrent] = useState(0)
 
   function handleClickBtnNext() {
     setStepCurrent(stepCurrent + 1)
@@ -37,7 +44,7 @@ export const Basic: React.FC = () => {
 
   return (
     <Flex flexDirection='column'>
-      <Multistep stepCurrent={stepCurrent} steps={steps} />
+      <Multistep stepCurrent={stepCurrent} {...args} />
       <Flex flexDirection='row' marginTop='16px' variant='centralized'>
         <Button
           onClick={handleClickBtnLast}
@@ -58,16 +65,12 @@ export const Basic: React.FC = () => {
     </Flex>
   )
 }
+Basic.args = {
+  steps
+}
 
-export const DisabledClickStep: React.FC = () => {
+export const DisabledClickStep = args => {
   const [stepCurrent, setStepCurrent] = useState(0)
-
-  const steps = [
-    { name: 'StepOne', component: <Step>One</Step> },
-    { name: 'StepTwo', component: <Step>Two</Step> },
-    { name: 'StepThree', component: <Step>Three</Step> },
-    { name: 'StepFour', component: <Step>Four</Step> }
-  ]
 
   function handleClickBtnNext() {
     setStepCurrent(stepCurrent + 1)
@@ -79,11 +82,7 @@ export const DisabledClickStep: React.FC = () => {
 
   return (
     <Flex flexDirection='column'>
-      <Multistep
-        disabledClickStep={true}
-        stepCurrent={stepCurrent}
-        steps={steps}
-      />
+      <Multistep stepCurrent={stepCurrent} {...args} />
       <Flex flexDirection='row' marginTop='16px' variant='centralized'>
         <Button
           onClick={handleClickBtnLast}
@@ -103,4 +102,8 @@ export const DisabledClickStep: React.FC = () => {
       </Flex>
     </Flex>
   )
+}
+DisabledClickStep.args = {
+  steps,
+  disabledClickStep: true
 }

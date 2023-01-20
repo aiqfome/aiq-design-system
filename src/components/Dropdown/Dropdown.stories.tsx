@@ -1,6 +1,4 @@
 import React from 'react'
-import { withKnobs, text, object, boolean } from '@storybook/addon-knobs'
-
 import { Dropdown } from './Dropdown'
 import { Flex } from '../Flex'
 
@@ -9,125 +7,110 @@ import chile from '../../assets/flags/chile.svg'
 import paraguay from '../../assets/flags/paraguay.svg'
 import uruguay from '../../assets/flags/uruguay.svg'
 
-export default {
-  component: Dropdown,
-  title: 'Dropdown',
-  decorators: [withKnobs]
-}
+import { createPageExport } from '../../utils/storybook'
 
-export const Basic: React.FC = () => {
-  const itens = [
-    { label: 'Item 1', value: 1 },
-    { label: 'Item 2', value: 2 },
-    { label: 'Item 3', value: 3 },
-    { label: 'Item 4', value: 4 },
-    { label: 'Item 5', value: 5 },
-    { label: 'Item 6', value: 6 }
-  ]
+const aiqProps = [
+  'label',
+  'itens',
+  'opened',
+  'onChange',
+  'disabled',
+  'selected'
+]
 
+const itens = [
+  { label: 'Item 1', value: 1 },
+  { label: 'Item 2', value: 2 },
+  { label: 'Item 3', value: 3 },
+  { label: 'Item 4', value: 4 },
+  { label: 'Item 5', value: 5 },
+  { label: 'Item 6', value: 6 }
+]
+
+export default createPageExport(Dropdown, 'Dropdown', aiqProps, {
+  argTypes: {
+    label: { control: 'text' },
+    itens: { control: 'object' },
+    opened: { control: 'boolean' },
+    disabled: { control: 'boolean' }
+  },
+  args: {
+    label: 'Dropdown',
+    itens,
+    width: 240
+  }
+})
+
+export const Basic = args => {
   function handleChangeDropdown(item: any) {
     console.log(item)
   }
 
   return (
     <Flex variant='fullCentralized'>
-      <Dropdown
-        label={text('label', 'Dropdown')}
-        disabled={boolean('disabled', false)}
-        itens={object('itens', itens)}
-        width={240}
-        onChange={handleChangeDropdown}
-      />
+      <Dropdown onChange={handleChangeDropdown} {...args} />
     </Flex>
   )
 }
 
-export const Opened: React.FC = () => {
-  const itens = [
-    { label: 'Item 1', value: 1 },
-    { label: 'Item 2', value: 2 },
-    { label: 'Item 3', value: 3 },
-    { label: 'Item 4', value: 4 },
-    { label: 'Item 5', value: 5 },
-    { label: 'Item 6', value: 6 }
-  ]
-  const label = 'Dropdown'
-
+export const Opened = args => {
   function handleChangeDropdown(item: any) {
     console.log(item)
   }
 
   return (
     <Flex variant='fullCentralized'>
-      <Dropdown
-        label={label}
-        opened={true}
-        width={240}
-        itens={itens}
-        onChange={handleChangeDropdown}
-      />
+      <Dropdown onChange={handleChangeDropdown} {...args} />
     </Flex>
   )
 }
+Opened.args = {
+  opened: true
+}
 
-export const Disabled: React.FC = () => {
-  const itens = [
-    { label: 'Item 1', value: 1 },
-    { label: 'Item 2', value: 2 },
-    { label: 'Item 3', value: 3 },
-    { label: 'Item 4', value: 4 },
-    { label: 'Item 5', value: 5 },
-    { label: 'Item 6', value: 6 }
-  ]
-  const label = 'Dropdown'
-
+export const Disabled = args => {
   function handleChangeDropdown(item: any) {
     console.log(item)
   }
 
   return (
     <Flex variant='fullCentralized'>
-      <Dropdown
-        disabled={true}
-        label={label}
-        width={240}
-        itens={itens}
-        onChange={handleChangeDropdown}
-      />
+      <Dropdown onChange={handleChangeDropdown} {...args} />
     </Flex>
   )
 }
+Disabled.args = {
+  disabled: true
+}
 
-export const Selected: React.FC = () => {
-  const itens = [
-    { label: 'Item 1', value: 1 },
-    { label: 'Item 2', value: 2 },
-    { label: 'Item 3', value: 3 },
-    { label: 'Item 4', value: 4 },
-    { label: 'Item 5', value: 5 },
-    { label: 'Item 6', value: 6 }
-  ]
-  const label = 'Dropdown'
-
+export const Selected = args => {
   function handleChangeDropdown(item: any) {
     console.log(item)
   }
 
   return (
     <Flex variant='fullCentralized'>
-      <Dropdown
-        selected={2}
-        label={label}
-        width={240}
-        itens={itens}
-        onChange={handleChangeDropdown}
-      />
+      <Dropdown {...args} onChange={handleChangeDropdown} />
     </Flex>
   )
 }
+Selected.args = {
+  selected: 2
+}
 
-export const WithImages: React.FC = () => {
-  const itens = [
+export const WithImages = args => {
+  function handleChangeDropdown(item: any) {
+    console.log(item)
+  }
+
+  return (
+    <Flex variant='fullCentralized'>
+      <Dropdown {...args} onChange={handleChangeDropdown} />
+    </Flex>
+  )
+}
+WithImages.args = {
+  itens: [
     {
       label: <img width='24px' height='24px' src={brazil} />,
       value: 1
@@ -144,21 +127,6 @@ export const WithImages: React.FC = () => {
       label: <img src={uruguay} width='24px' height='24px' />,
       value: 4
     }
-  ]
-  const label = 'Dropdown'
-
-  function handleChangeDropdown(item: any) {
-    console.log(item)
-  }
-
-  return (
-    <Flex variant='fullCentralized'>
-      <Dropdown
-        selected={2}
-        label={label}
-        itens={itens}
-        onChange={handleChangeDropdown}
-      />
-    </Flex>
-  )
+  ],
+  selected: 2
 }

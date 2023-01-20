@@ -5,30 +5,33 @@ import { Breadcrumb } from './Breadcrumb'
 import { Link } from '../Link'
 import { Flex } from '../Flex'
 import { Text } from '../Text'
+import { createPageExport } from '../../utils/storybook'
 
-export default {
-  component: Breadcrumb,
-  title: 'Breadcrumb'
+export default createPageExport(Breadcrumb, 'Breadcrumb', ['routes'], {
+  argTypes: {
+    routes: {
+      control: 'object'
+    }
+  }
+})
+
+export const Basic = args => <Breadcrumb {...args} />
+Basic.args = {
+  routes: [
+    {
+      name: 'início',
+      icon: <MdHome />
+    },
+    {
+      path: '#',
+      name: 'relatório'
+    },
+    {
+      path: '#',
+      name: 'pedidos'
+    }
+  ]
 }
-
-export const Basic: React.FC = () => (
-  <Breadcrumb
-    routes={[
-      {
-        name: 'início',
-        icon: <MdHome />
-      },
-      {
-        path: '#',
-        name: 'relatório'
-      },
-      {
-        path: '#',
-        name: 'pedidos'
-      }
-    ]}
-  />
-)
 
 export const Overlay: React.FC = () => {
   const menu = (

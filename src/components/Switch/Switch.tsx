@@ -6,7 +6,6 @@ export type Props = DefaultTheme &
   InputHTMLAttributes<HTMLInputElement> & {
     checked?: boolean
     disabled?: boolean
-    className?: string
     variant?: 'default' | 'small'
   }
 

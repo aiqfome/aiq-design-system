@@ -1,35 +1,59 @@
 import React from 'react'
 import { MdHome } from 'react-icons/md'
-import { withKnobs, text } from '@storybook/addon-knobs'
+import { text } from '@storybook/addon-knobs'
 
 import { Icon } from './Icon'
 
-export default {
-  component: Icon,
-  title: 'Icon',
-  decorators: [withKnobs]
-}
+import { createPageExport } from '../../utils/storybook'
 
-export const basic: React.FC = () => (
-  <Icon cursor={text('Cursor', '')}>
+const aiqProps = [
+  'color',
+  'children',
+  'cursor',
+  'variant',
+  'fullHeight',
+  'isClickable'
+]
+
+export default createPageExport(Icon, 'Icon', aiqProps, {
+  argTypes: {
+    color: {
+      control: 'text'
+    },
+    cursor: {
+      control: 'text'
+    },
+    fullHeight: {
+      control: 'boolean'
+    },
+    variant: {
+      control: 'select',
+      options: ['auto', 'centralized', 'fullCentralized']
+    },
+    isClickable: { control: 'boolean' }
+  }
+})
+
+export const basic: React.FC = args => (
+  <Icon cursor={text('Cursor', '')} {...args}>
     <MdHome />
   </Icon>
 )
 
-export const centralized: React.FC = () => (
-  <Icon variant='centralized'>
+export const centralized: React.FC = args => (
+  <Icon variant='centralized' {...args}>
     <MdHome />
   </Icon>
 )
 
-export const fullCentralized: React.FC = () => (
-  <Icon variant='fullCentralized'>
+export const fullCentralized: React.FC = args => (
+  <Icon variant='fullCentralized' {...args}>
     <MdHome />
   </Icon>
 )
 
-export const cursor: React.FC = () => (
-  <Icon cursor='pointer'>
+export const cursor: React.FC = args => (
+  <Icon cursor='pointer' {...args}>
     <MdHome />
   </Icon>
 )
