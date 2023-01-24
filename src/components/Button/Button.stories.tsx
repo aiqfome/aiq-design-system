@@ -7,25 +7,53 @@ import { Button } from './Button'
 import { Flex } from '../Flex'
 import { Icon } from '../Icon'
 
-export default {
-  component: Button,
-  title: 'Button',
-  decorators: [withKnobs as any]
-}
+import { createPageExport } from '../../utils/storybook'
 
-export const Text: React.FC = (): ReactElement => (
+const aiqProps = [
+  'children',
+  'prefix',
+  'sufix',
+  'refButton',
+  'variantType',
+  'variant',
+  'palette',
+  'onClick',
+  'fullWidth',
+  'disabled',
+  'className',
+  'type'
+]
+
+export default createPageExport(Button, 'Button', aiqProps, {
+  argTypes: {
+    variant: {
+      control: 'select',
+      options: ['text', 'contained', 'outlined', 'fab', 'icon']
+    },
+    palette: {
+      control: 'select',
+      options: ['primary', 'error', 'secondary', 'neutral']
+    },
+    type: {
+      control: 'select',
+      options: ['button', 'submit', 'reset', undefined]
+    },
+    disabled: {
+      control: 'boolean'
+    },
+    fullWidth: {
+      control: 'boolean'
+    }
+  },
+  args: {
+    palette: 'primary'
+  }
+})
+
+export const Text: React.FC = (args): ReactElement => (
   <Flex variant='fullCentralized'>
     <Button
       variant='text'
-      palette={select(
-        'Palette',
-        {
-          Primary: 'primary',
-          Secondary: 'secondary',
-          Neutral: 'neutral'
-        },
-        'primary'
-      )}
       fontWeight={select(
         'Font Weight',
         {
@@ -36,13 +64,14 @@ export const Text: React.FC = (): ReactElement => (
         },
         'regular'
       )}
+      {...args}
     >
       {text('Label', 'aiqfome!')}
     </Button>
   </Flex>
 )
 
-export const Contained: React.FC = (): ReactElement => (
+export const Contained: React.FC = (args): ReactElement => (
   <Flex variant='fullCentralized'>
     <Flex
       variant='centralized'
@@ -53,15 +82,6 @@ export const Contained: React.FC = (): ReactElement => (
       <Button
         fullWidth={boolean('Full Width', false)}
         variant='contained'
-        palette={select(
-          'Palette',
-          {
-            Primary: 'primary',
-            Secondary: 'secondary',
-            Neutral: 'neutral'
-          },
-          'primary'
-        )}
         fontWeight={select(
           'Font Weight',
           {
@@ -72,6 +92,7 @@ export const Contained: React.FC = (): ReactElement => (
           },
           'regular'
         )}
+        {...args}
       >
         {text('Label', 'aiqfome!')}
       </Button>
@@ -79,7 +100,7 @@ export const Contained: React.FC = (): ReactElement => (
   </Flex>
 )
 
-export const Disabled: React.FC = (): ReactElement => (
+export const Disabled: React.FC = (args): ReactElement => (
   <Flex variant='fullCentralized'>
     <Flex
       variant='centralized'
@@ -92,7 +113,7 @@ export const Disabled: React.FC = (): ReactElement => (
         variant='contained'
         mx={6}
         disabled={true}
-        palette={'primary'}
+        {...args}
       >
         contained
       </Button>
@@ -118,7 +139,7 @@ export const Disabled: React.FC = (): ReactElement => (
   </Flex>
 )
 
-export const IconButton: React.FC = (): ReactElement => (
+export const IconButton: React.FC = (args): ReactElement => (
   <Flex variant='fullCentralized'>
     <Flex
       variant='centralized'
@@ -126,17 +147,17 @@ export const IconButton: React.FC = (): ReactElement => (
       width='400px'
       border='1px solid lightGrey'
     >
-      <Button variant='icon' mx={6}>
+      <Button variant='icon' mx={6} {...args}>
         <Icon color='primary'>
           <FaHamburger size={40} />
         </Icon>
       </Button>
-      <Button variant='icon' mx={6}>
+      <Button variant='icon' mx={6} {...args}>
         <Icon>
           <FaHamburger size={30} />
         </Icon>
       </Button>
-      <Button variant='icon' mx={6}>
+      <Button variant='icon' mx={6} {...args}>
         <Icon color='primary'>
           <FaHamburger size={20} />
         </Icon>
@@ -145,7 +166,7 @@ export const IconButton: React.FC = (): ReactElement => (
   </Flex>
 )
 
-export const Outlined: React.FC = (): ReactElement => (
+export const Outlined: React.FC = (args): ReactElement => (
   <Flex variant='fullCentralized'>
     <Flex
       variant='centralized'
@@ -156,15 +177,6 @@ export const Outlined: React.FC = (): ReactElement => (
       <Button
         variant='outlined'
         fullWidth={boolean('Full Width', false)}
-        palette={select(
-          'Palette',
-          {
-            Primary: 'primary',
-            Secondary: 'secondary',
-            Neutral: 'neutral'
-          },
-          'primary'
-        )}
         fontWeight={select(
           'Font Weight',
           {
@@ -175,6 +187,7 @@ export const Outlined: React.FC = (): ReactElement => (
           },
           'regular'
         )}
+        {...args}
       >
         {text('Label', 'aiqfome!')}
       </Button>
@@ -182,7 +195,7 @@ export const Outlined: React.FC = (): ReactElement => (
   </Flex>
 )
 
-export const Fab: React.FC = (): ReactElement => (
+export const Fab: React.FC = (args): ReactElement => (
   <Flex variant='fullCentralized'>
     <Flex
       variant='centralized'
@@ -193,15 +206,6 @@ export const Fab: React.FC = (): ReactElement => (
       <Button
         variant='fab'
         fullWidth={boolean('Full Width', false)}
-        palette={select(
-          'Palette',
-          {
-            Primary: 'primary',
-            Secondary: 'secondary',
-            Neutral: 'neutral'
-          },
-          'primary'
-        )}
         fontWeight={select(
           'Font Weight',
           {
@@ -212,6 +216,7 @@ export const Fab: React.FC = (): ReactElement => (
           },
           'regular'
         )}
+        {...args}
       >
         {text('Label', 'aiqfome!')}
       </Button>
@@ -219,27 +224,15 @@ export const Fab: React.FC = (): ReactElement => (
   </Flex>
 )
 
-export const FabIcon: React.FC = (): ReactElement => (
+export const FabIcon: React.FC = (args): ReactElement => (
   <Flex variant='fullCentralized'>
-    <Button
-      variant='fab'
-      variantType='icon'
-      palette={select(
-        'Palette',
-        {
-          Primary: 'primary',
-          Secondary: 'secondary',
-          Neutral: 'neutral'
-        },
-        'primary'
-      )}
-    >
+    <Button variant='fab' variantType='icon' {...args}>
       <FaHamburger />
     </Button>
   </Flex>
 )
 
-export const Prefix: React.FC = (): ReactElement => (
+export const Prefix: React.FC = (args): ReactElement => (
   <Flex variant='fullCentralized'>
     <Flex
       variant='centralized'
@@ -249,15 +242,6 @@ export const Prefix: React.FC = (): ReactElement => (
     >
       <Button
         fullWidth={boolean('Full Width', false)}
-        palette={select(
-          'Palette',
-          {
-            Primary: 'primary',
-            Secondary: 'secondary',
-            Neutral: 'neutral'
-          },
-          'primary'
-        )}
         variant={select(
           'variant',
           {
@@ -268,6 +252,7 @@ export const Prefix: React.FC = (): ReactElement => (
           },
           'text'
         )}
+        {...args}
         prefix={<FaHamburger />}
       >
         {text('Label', 'aiqfome!')}
@@ -276,7 +261,7 @@ export const Prefix: React.FC = (): ReactElement => (
   </Flex>
 )
 
-export const PrefixAndSufix: React.FC = (): ReactElement => (
+export const PrefixAndSufix: React.FC = (args): ReactElement => (
   <Flex variant='fullCentralized'>
     <Flex
       variant='centralized'
@@ -286,15 +271,6 @@ export const PrefixAndSufix: React.FC = (): ReactElement => (
     >
       <Button
         fullWidth={boolean('Full Width', false)}
-        palette={select(
-          'Palette',
-          {
-            Primary: 'primary',
-            Secondary: 'secondary',
-            Neutral: 'neutral'
-          },
-          'primary'
-        )}
         variant={select(
           'variant',
           {
@@ -307,6 +283,7 @@ export const PrefixAndSufix: React.FC = (): ReactElement => (
         )}
         prefix={<FaHamburger />}
         sufix={<FaWater />}
+        {...args}
       >
         {text('Label', 'aiqfome!')}
       </Button>
@@ -314,7 +291,7 @@ export const PrefixAndSufix: React.FC = (): ReactElement => (
   </Flex>
 )
 
-export const ClickAction: React.FC = (): ReactElement => {
+export const ClickAction: React.FC = (args): ReactElement => {
   const handleClick = () => {
     alert('i really want a pizza')
   }
@@ -330,15 +307,6 @@ export const ClickAction: React.FC = (): ReactElement => {
         <Button
           onClick={() => handleClick()}
           fullWidth={boolean('Full Width', false)}
-          palette={select(
-            'Palette',
-            {
-              Primary: 'primary',
-              Secondary: 'secondary',
-              Neutral: 'neutral'
-            },
-            'primary'
-          )}
           variant={select(
             'variant',
             {
@@ -350,6 +318,7 @@ export const ClickAction: React.FC = (): ReactElement => {
             'contained'
           )}
           sufix={<FaHamburger />}
+          {...args}
         >
           {text('Label', 'click me!')}
         </Button>

@@ -3,27 +3,39 @@ import { BrowserRouter as Router } from 'react-router-dom'
 
 import { Link } from './Link'
 
-export default {
-  component: Link,
-  title: 'Link'
+import { createPageExport } from '../../utils/storybook'
+
+const aiqProps = ['variant', 'href', 'children', 'color']
+
+export default createPageExport(Link, 'Link', aiqProps, {
+  argTypes: {
+    variant: {
+      control: 'select',
+      options: ['internal', 'external']
+    },
+
+    color: { control: 'text' },
+    href: { control: 'text' }
+  },
+  args: {
+    color: 'primary',
+    href: 'https://aiqfome.com/'
+  }
+})
+
+export const Basic = args => <Link {...args}>Aiqfome</Link>
+
+export const External = args => <Link {...args}>Aiqfome</Link>
+External.args = {
+  variant: 'external'
 }
 
-export const Basic: React.FC = () => (
-  <Link color='primary' href='https://aiqfome.com/'>
-    Aiqfome
-  </Link>
-)
-
-export const External: React.FC = () => (
-  <Link color='primary' variant='external' href='https://aiqfome.com/'>
-    Aiqfome
-  </Link>
-)
-
-export const Internal: React.FC = () => (
+export const Internal = args => (
   <Router>
-    <Link color='primary' variant='internal' href='/food'>
-      Aiqfome
-    </Link>
+    <Link {...args}>Aiqfome</Link>
   </Router>
 )
+Internal.args = {
+  variant: 'internal',
+  href: '/food'
+}

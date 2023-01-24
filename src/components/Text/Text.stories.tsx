@@ -4,29 +4,38 @@ import { withKnobs, text, number, boolean } from '@storybook/addon-knobs'
 import { Text } from './Text'
 import { Flex } from '../Flex'
 
-export default {
-  component: Text,
-  title: 'Text',
-  decorators: [withKnobs]
-}
+import { createPageExport } from '../../utils/storybook'
 
-export const Basic: React.FC = () => (
+const aiqProps = ['cursor', 'truncate', 'whiteSpace']
+
+export default createPageExport(Text, 'Text', aiqProps, {
+  argTypes: {
+    cursor: { control: 'text' },
+    truncate: { control: 'boolean' },
+    whiteSpace: { control: 'select', options: ['nowrap', 'normal', 'pre'] }
+  }
+})
+
+export const Basic = args => (
   <Flex variant='fullCentralized'>
     <Text
       color={text('color', 'primary')}
       fontSize={number('fontSize', 22)}
       width={text('width', '100%')}
-      cursor={text('cursor', '')}
       fontWeight={text('fontWeight', 'semiBold')}
-      truncate={boolean('truncate', false)}
       textAlign='center'
+      {...args}
     >
       {text('text', 'o design system do app mais fominha da internê!')}
     </Text>
   </Flex>
 )
+Basic.args = {
+  truncate: false,
+  cursor: ''
+}
 
-export const Truncated: React.FC = () => (
+export const Truncated = args => (
   <Flex variant='fullCentralized'>
     <Text
       color='primary'
@@ -39,3 +48,6 @@ export const Truncated: React.FC = () => (
     </Text>
   </Flex>
 )
+Truncated.args = {
+  truncate: true
+}

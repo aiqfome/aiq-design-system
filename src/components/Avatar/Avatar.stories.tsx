@@ -10,7 +10,7 @@ const aiqProps = ['src', 'alt', 'palette', 'size', 'fallback', 'variant']
 export default createPageExport(Avatar, 'Avatar', aiqProps, {
   argTypes: {
     variant: {
-      control: 'radio',
+      control: 'select',
       options: ['box', 'rounded']
     }
   },

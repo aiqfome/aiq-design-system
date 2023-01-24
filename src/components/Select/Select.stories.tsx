@@ -1,17 +1,63 @@
 import React, { useState } from 'react'
-import { withKnobs, text, object } from '@storybook/addon-knobs'
+import { text, object } from '@storybook/addon-knobs'
 import { Select } from './Select'
 import { Flex } from '../Flex'
 
 import { MdSearch } from 'react-icons/md'
 
-export default {
-  component: Select,
-  title: 'Select',
-  decorators: [withKnobs]
-}
+import { createPageExport } from '../../utils/storybook'
 
-export const Basic: React.FC = () => {
+const aiqProps = [
+  'label',
+  'items',
+  'isOpen',
+  'variant',
+  'prefix',
+  'placeholder',
+  'handleSelectedItemChange',
+  'onChangeTextInput',
+  'selectedItem',
+  'autoComplete',
+  'sufix',
+  'isLoading',
+  'errorMessage',
+  'errorForm',
+  'isFetchable',
+  'inputProps',
+  'loadingMessage',
+  'emptyMessage',
+  'defaultValue',
+  'clearOnSelect',
+  'isDependent',
+  'dependentMessage'
+]
+
+export default createPageExport(Select, 'Select', aiqProps, {
+  argTypes: {
+    label: { control: 'text' },
+    items: { control: 'object' },
+    isOpen: { control: 'boolean' },
+    variant: {
+      control: 'select',
+      options: ['outlined']
+    },
+    placeholder: { control: 'text' },
+    autoComplete: { control: 'boolean' },
+    isLoading: { control: 'boolean' },
+    errorMessage: { control: 'text' },
+    errorForm: { control: 'boolean' },
+    loadingMessage: { control: 'text' },
+    emptyMessage: { control: 'text' },
+    clearOnSelect: { control: 'boolean' },
+    isDependent: { control: 'boolean' },
+    dependentMessage: { control: 'text' }
+  },
+  args: {
+    label: 'aiq-design-system'
+  }
+})
+
+export const Basic = args => {
   const itens = ['React', 'CSS', 'PHP', 'HTML']
 
   function handleClickItemSelect(item) {
@@ -21,25 +67,22 @@ export const Basic: React.FC = () => {
   return (
     <Select
       handleSelectedItemChange={handleClickItemSelect}
-      placeholder={text('label', 'aiq-design-system')}
       items={object('items', itens)}
+      {...args}
     />
   )
 }
 
-export const Outlined: React.FC = () => {
+export const Outlined = args => {
   const itens = ['React', 'CSS', 'PHP', 'HTML']
 
-  return (
-    <Select
-      variant='outlined'
-      label={text('label', 'aiq-design-system')}
-      items={object('items', itens)}
-    />
-  )
+  return <Select items={object('items', itens)} {...args} />
+}
+Outlined.args = {
+  variant: 'outlined'
 }
 
-export const AutocompleteFalse: React.FC = () => {
+export const AutocompleteFalse = args => {
   const itens = [
     { name: 'React', id: 1 },
     { name: 'CSS', id: 2 },
@@ -49,27 +92,25 @@ export const AutocompleteFalse: React.FC = () => {
   const [selectedItem, setSelectedItem] = useState(itens[0])
   return (
     <Flex variant='fullCentralized'>
-      <Select
-        mr='32px'
-        autoComplete={false}
-        variant='outlined'
-        label={text('label', 'aiq-design-system')}
-        items={object('items', itens)}
-      />
+      <Select mr='32px' items={object('items', itens)} {...args} />
       <Select
         selectedItem={selectedItem}
         autoComplete={false}
         handleSelectedItemChange={({ selectedItem }) =>
           setSelectedItem(selectedItem)
         }
-        label={text('label', 'aiq-design-system')}
         items={object('items', itens)}
+        label={text('label', 'aiq-design-system')}
       />
     </Flex>
   )
 }
+AutocompleteFalse.args = {
+  variant: 'outlined',
+  autoComplete: false
+}
 
-export const WithSufix: React.FC = () => {
+export const WithSufix = args => {
   const itens = [
     { name: 'React', id: 1 },
     { name: 'CSS', id: 2 },
@@ -81,10 +122,9 @@ export const WithSufix: React.FC = () => {
     <Flex variant='fullCentralized'>
       <Select
         mr='32px'
-        variant='outlined'
-        label={text('label', 'aiq-design-system')}
         items={object('items', itens)}
         sufix={<MdSearch />}
+        {...args}
       />
       <Select
         selectedItem={selectedItem}
@@ -98,8 +138,11 @@ export const WithSufix: React.FC = () => {
     </Flex>
   )
 }
+WithSufix.args = {
+  variant: 'outlined'
+}
 
-export const Loading: React.FC = () => {
+export const Loading = args => {
   const itens = [
     { name: 'React', id: 1 },
     { name: 'CSS', id: 2 },
@@ -111,11 +154,9 @@ export const Loading: React.FC = () => {
     <Flex variant='fullCentralized'>
       <Select
         mr='32px'
-        variant='outlined'
-        isLoading={true}
-        label={text('label', 'aiq-design-system')}
         items={object('items', itens)}
         sufix={<MdSearch />}
+        {...args}
       />
       <Select
         selectedItem={selectedItem}
@@ -129,4 +170,8 @@ export const Loading: React.FC = () => {
       />
     </Flex>
   )
+}
+Loading.args = {
+  variant: 'outlined',
+  isLoading: true
 }

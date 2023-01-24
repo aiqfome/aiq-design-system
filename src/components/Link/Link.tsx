@@ -60,22 +60,29 @@ const ExternalStyled = styled.a<StyledProps>`
   ${styledLink}
 `
 
-export const Link: React.FC<Props> = ({
-  variant = 'external',
-  href,
-  children,
-  ...props
-}) => {
-  if (variant === 'internal') {
+export const Link = React.forwardRef<HTMLAnchorElement, Props>(
+  ({ variant = 'external', href, children, ...props }, ref) => {
+    if (variant === 'internal') {
+      return (
+        <InternalStyled
+          data-testid='link-internal'
+          to={href}
+          {...props}
+          ref={ref}
+        >
+          {children}
+        </InternalStyled>
+      )
+    }
     return (
-      <InternalStyled data-testid='link-internal' to={href} {...props}>
+      <ExternalStyled
+        data-testid='link-external'
+        href={href}
+        {...props}
+        ref={ref}
+      >
         {children}
-      </InternalStyled>
+      </ExternalStyled>
     )
   }
-  return (
-    <ExternalStyled data-testid='link-external' href={href} {...props}>
-      {children}
-    </ExternalStyled>
-  )
-}
+)

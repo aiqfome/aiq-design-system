@@ -4,7 +4,6 @@ import styled, { DefaultTheme, css } from 'styled-components'
 
 import { margin, MarginProps } from 'styled-system'
 
-import { Text } from '../Text'
 import { Box } from '../Box'
 
 export type Props = MarginProps &

@@ -36,7 +36,7 @@ export type Props = BorderProps &
     variant?: 'label' | 'default'
   }
 
-const BadgeStyled = styled(Text)`
+const BadgeStyled = styled(Text)<Props>`
   display: inline-flex;
   align-items: center;
 
@@ -95,34 +95,30 @@ const getCounter = (value, overflow) => {
   return ''
 }
 
-export const Badge: React.FC<Props> = ({
-  count,
-  variant,
-  children,
-  overflowCount,
-  className,
-  ...props
-}) => {
-  const findClassName = useCallback(() => {
-    switch (variant) {
-      case 'label':
-        return '__badge-label'
+export const Badge = React.forwardRef<HTMLSpanElement, Props>(
+  ({ count, variant, children, overflowCount, className, ...props }, ref) => {
+    const findClassName = useCallback(() => {
+      switch (variant) {
+        case 'label':
+          return '__badge-label'
 
-      default:
-        return '__badge-default'
-    }
-  }, [variant])
+        default:
+          return '__badge-default'
+      }
+    }, [variant])
 
-  return (
-    <BadgeStyled
-      data-testid='badge'
-      className={`${className} ${findClassName()}`}
-      {...props}
-    >
-      {getCounter(count, overflowCount) || children}
-    </BadgeStyled>
-  )
-}
+    return (
+      <BadgeStyled
+        data-testid='badge'
+        className={`${className} ${findClassName()}`}
+        ref={ref}
+        {...props}
+      >
+        {getCounter(count, overflowCount) || children}
+      </BadgeStyled>
+    )
+  }
+)
 
 Badge.defaultProps = {
   variant: 'default',

@@ -2,9 +2,8 @@ import React from 'react'
 
 import { LoaderBox } from './LoaderBox'
 
-export default {
-  component: LoaderBox,
-  title: 'LoaderBox'
-}
+import { createPageExport } from '../../utils/storybook'
+
+export default createPageExport(LoaderBox, 'LoaderBox', [])
 
 export const basic: React.FC = () => <LoaderBox />

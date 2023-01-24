@@ -5,15 +5,43 @@ import { Flex } from '../Flex'
 import { Modal } from './Modal'
 import { Button } from '../Button'
 
-import { withKnobs, text, object, select } from '@storybook/addon-knobs'
+import { object } from '@storybook/addon-knobs'
 
-export default {
-  component: Modal,
-  title: 'Modal',
-  decorators: [withKnobs]
-}
+import { createPageExport } from '../../utils/storybook'
 
-export const Basic: React.FC = () => {
+const aiqProps = [
+  'title',
+  'form',
+  'formProps',
+  'buttonsProps',
+  'variant',
+  'show',
+  'animation',
+  'zIndex',
+  'onClose',
+  'onSubmit',
+  'children',
+  'okButton',
+  'cancelButton'
+]
+
+export default createPageExport(Modal, 'Modal', aiqProps, {
+  argTypes: {
+    size: {
+      control: 'variant',
+      options: ['small', 'medium', 'big']
+    },
+    title: { control: 'text' },
+    show: { control: 'boolean' },
+    animation: { control: 'boolean' },
+    zIndex: { control: 'number' }
+  },
+  args: {
+    title: 'Modal'
+  }
+})
+
+export const Basic = args => {
   const [open, setOpen] = useState(false)
 
   const okButton = {
@@ -41,16 +69,11 @@ export const Basic: React.FC = () => {
         Show Modal
       </Button>
       <Modal
-        title={text('title', 'Modal')}
         show={open}
-        variant={select(
-          'Variant',
-          { Small: 'small', Medium: 'medium', Big: 'big' },
-          'medium'
-        )}
         onClose={() => setOpen(false)}
         okButton={object('okButton', okButton)}
         cancelButton={object('cancelButton', cancelButton)}
+        {...args}
       >
         <Text>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -60,8 +83,11 @@ export const Basic: React.FC = () => {
     </Flex>
   )
 }
+Basic.args = {
+  variant: 'medium'
+}
 
-export const Small: React.FC = () => {
+export const Small = args => {
   const [open, setOpen] = useState(false)
 
   const okButton = {
@@ -89,12 +115,12 @@ export const Small: React.FC = () => {
         Show Modal
       </Button>
       <Modal
-        title='Modal'
         variant='small'
         show={open}
         onClose={() => setOpen(false)}
         okButton={okButton}
         cancelButton={cancelButton}
+        {...args}
       >
         <Text>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -104,8 +130,11 @@ export const Small: React.FC = () => {
     </Flex>
   )
 }
+Basic.args = {
+  variant: 'small'
+}
 
-export const Medium: React.FC = () => {
+export const Medium = args => {
   const [open, setOpen] = useState(false)
 
   const okButton = {
@@ -133,12 +162,11 @@ export const Medium: React.FC = () => {
         Show Modal
       </Button>
       <Modal
-        title='Modal'
         show={open}
-        variant='medium'
         onClose={() => setOpen(false)}
         okButton={okButton}
         cancelButton={cancelButton}
+        {...args}
       >
         <Text>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -148,8 +176,11 @@ export const Medium: React.FC = () => {
     </Flex>
   )
 }
+Basic.args = {
+  variant: 'medium'
+}
 
-export const Big: React.FC = () => {
+export const Big = args => {
   const [open, setOpen] = useState(false)
 
   const okButton = {
@@ -177,12 +208,11 @@ export const Big: React.FC = () => {
         Show Modal
       </Button>
       <Modal
-        title='Modal'
-        variant='big'
         show={open}
         onClose={() => setOpen(false)}
         okButton={okButton}
         cancelButton={cancelButton}
+        {...args}
       >
         <Text>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -192,8 +222,11 @@ export const Big: React.FC = () => {
     </Flex>
   )
 }
+Big.args = {
+  variant: 'medium'
+}
 
-export const WithOutButtons: React.FC = () => {
+export const WithOutButtons = args => {
   const [open, setOpen] = useState(false)
 
   function handleShowModal() {
@@ -205,7 +238,7 @@ export const WithOutButtons: React.FC = () => {
       <Button palette='primary' onClick={handleShowModal} variant='contained'>
         Show Modal
       </Button>
-      <Modal title='Modal' show={open} onClose={() => setOpen(false)}>
+      <Modal show={open} onClose={() => setOpen(false)} {...args}>
         <Text>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor
@@ -215,7 +248,7 @@ export const WithOutButtons: React.FC = () => {
   )
 }
 
-export const WithAnimation: React.FC = () => {
+export const WithAnimation = args => {
   const [open, setOpen] = useState(false)
 
   const okButton = {
@@ -243,12 +276,11 @@ export const WithAnimation: React.FC = () => {
         Show Modal With Animation
       </Button>
       <Modal
-        title='Modal'
-        animation={true}
         show={open}
         onClose={() => setOpen(false)}
         okButton={okButton}
         cancelButton={cancelButton}
+        {...args}
       >
         <Text>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -258,8 +290,11 @@ export const WithAnimation: React.FC = () => {
     </Flex>
   )
 }
+WithAnimation.args = {
+  animation: true
+}
 
-export const WithZIndex: React.FC = () => {
+export const WithZIndex = args => {
   const [openModal1, setOpenModal1] = useState(false)
   const [openModal2, setOpenModal2] = useState(false)
 
@@ -288,12 +323,11 @@ export const WithZIndex: React.FC = () => {
         Show Modal
       </Button>
       <Modal
-        title='Modal 1'
-        animation={true}
         show={openModal1}
         onClose={() => setOpenModal1(false)}
         okButton={okButton}
         cancelButton={cancelButton}
+        {...args}
       >
         <Flex variant='centralized' flexDirection='column'>
           <Text marginBottom={16}>
@@ -326,4 +360,7 @@ export const WithZIndex: React.FC = () => {
       </Modal>
     </Flex>
   )
+}
+WithZIndex.args = {
+  animation: true
 }
