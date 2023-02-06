@@ -9,6 +9,11 @@ module.exports = {
     '@storybook/addon-docs'
   ],
   webpackFinal: async config => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@': path.join(__dirname, '..')
+    }
+
     config.module.rules.push({
       test: /\.(ts|tsx)$/,
       include: path.resolve(__dirname, '..'),
