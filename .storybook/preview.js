@@ -1,43 +1,41 @@
-import { addDecorator, addParameters } from '@storybook/react';
-import React from 'react';
-import {ThemeProvider} from 'styled-components';
+import { addDecorator, addParameters } from '@storybook/react'
+import React from 'react'
+import { ThemeProvider } from 'styled-components'
 
-import GlobalStyles from '../src/global/styles';
-import PopoverStyles from '../src/global/popover';
-import ActionsStyles from '../src/global/actions';
-import theme from '../src/providers/theme';
+import GlobalStyles from '../src/global/styles'
+import PopoverStyles from '../src/global/popover'
+import ActionsStyles from '../src/global/actions'
+import theme from '../src/providers/theme'
+import { StitchesThemeProvider } from '../src/providers'
 
 import { BrowserRouter } from 'react-router-dom'
 
-import '../src/providers/initializeReactDate';
-import ReactDatesOverrides from '../src/providers/styleReactDatesOverrides'
-import themeStorybook from './theme';
+import '../src/providers/initializeReactDate'
+import ReactDatesOverrides from '../src/providers/styled-component/styleReactDatesOverrides'
+import themeStorybook from './theme'
 
 function withTheme(storyFn) {
   return (
     <ThemeProvider theme={theme}>
-      <BrowserRouter>
+      <StitchesThemeProvider>
+        <BrowserRouter>
+          <GlobalStyles />
+          <PopoverStyles />
+          <ActionsStyles />
 
-        <GlobalStyles />
-        <PopoverStyles />
-        <ActionsStyles />
-
-        <ReactDatesOverrides/>
-        <div id="app-root">
-            {storyFn()}
-        </div>
-        <div id="modal-root"></div>
-      </BrowserRouter>
-      
+          <ReactDatesOverrides />
+          <div id='app-root'>{storyFn()}</div>
+          <div id='modal-root'></div>
+        </BrowserRouter>
+      </StitchesThemeProvider>
     </ThemeProvider>
-  );
+  )
 }
-
 
 addParameters({
   options: {
-    theme: themeStorybook,
-  },
-});
+    theme: themeStorybook
+  }
+})
 
-addDecorator(withTheme);
+addDecorator(withTheme)

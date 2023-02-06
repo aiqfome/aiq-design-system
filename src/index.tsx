@@ -39,6 +39,6 @@ export { MultiSelect } from './components/MultiSelect'
 export { Pagination } from './components/Pagination'
 
 export { default as themeDefault } from './providers/theme'
-export { default as styleReactDatesOverrides } from './providers/styleReactDatesOverrides'
+export { default as styleReactDatesOverrides } from './providers/styled-component/styleReactDatesOverrides'
 
-export { ThemeProvider, useTheme } from './providers'
+export { ThemeProvider, useTheme, StitchesThemeProvider } from './providers'

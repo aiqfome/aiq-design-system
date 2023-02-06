@@ -58,6 +58,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.11.2",
+    "@stitches/react": "^1.2.8",
     "dotenv-cli": "^5.0.0",
     "downshift": "^6.0.6",
     "moment": "^2.29.1",
