@@ -1,6 +1,6 @@
-import { createGlobalStyle } from 'styled-components'
+const { createGlobalStyle } = require('styled-components')
 
-export default createGlobalStyle`
+module.exports = createGlobalStyle`
   .CalendarDay__selected_span {
   background: ${({ theme }) => theme.colors.primaryLight}; 
   color: ${({ theme }) => theme.colors.primary}; 

@@ -1,10 +1,10 @@
-import { createGlobalStyle } from 'styled-components'
+const { createGlobalStyle } = require('styled-components')
 
-import 'rc-menu/assets/index.css'
-import 'rc-dropdown/assets/index.css'
-import 'rc-tooltip/assets/bootstrap.css'
+require('rc-menu/assets/index.css')
+require('rc-dropdown/assets/index.css')
+require('rc-tooltip/assets/bootstrap.css')
 
-export default createGlobalStyle`
+module.exports = createGlobalStyle`
   * {
     margin: 0;
     padding: 0;
