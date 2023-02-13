@@ -83,3 +83,7 @@ export const AiqComponent() {
 temos um template configurado no codesandbox com a lib configurada!
 
 [![Edit Button](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/aiq-design-system-yukfc)
+
+## changelogs
+
+- histórico de atualizações da [V1](./CHANGELOG.v1.md)
