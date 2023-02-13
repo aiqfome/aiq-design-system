@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState } from 'react'
 
 import { ThemeProvider as ThemeProviderStyledComponents } from 'styled-components'
 
-import designTheme from '@/src/providers/theme'
+import designTheme from '../theme'
 import GlobalStyles from '@/src/global/styles'
 import PopoverStyles from '@/src/global/popover'
 import ActionsStyles from '@/src/global/actions'
