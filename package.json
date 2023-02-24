@@ -69,7 +69,7 @@
     "react-icons": "^3.11.0",
     "react-input-mask": "^2.0.4",
     "react-router-dom": "^5.2.0",
-    "react-spring": "^9.6.1",
+    "react-spring": "9.6.1",
     "react-table": "^7.6.0",
     "storybook": "^6.5.15",
     "styled-components": "^5.3.5",
