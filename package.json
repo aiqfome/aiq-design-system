@@ -1,6 +1,6 @@
 {
   "name": "aiq-design-system",
-  "version": "0.5.120",
+  "version": "0.5.121",
   "main": "core/index.js",
   "repository": "git@github.com:aiqfome/aiq-design-system.git",
   "license": "MIT",
