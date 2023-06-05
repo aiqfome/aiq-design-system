@@ -1,14 +1,14 @@
 import React, { useEffect, useMemo, useState } from 'react'
 
-import { animated } from 'react-spring'
-import styled, { css } from 'styled-components'
 import {
+  FiAlertTriangle,
+  FiCheckCircle,
   FiInfo,
   FiXCircle,
-  FiXOctagon,
-  FiCheckCircle,
-  FiAlertTriangle
+  FiXOctagon
 } from 'react-icons/fi'
+import { animated } from 'react-spring'
+import styled, { css } from 'styled-components'
 
 import { Box } from '../Box'
 import { Message } from './Toast'
@@ -29,6 +29,7 @@ interface PropsProgress {
   init: boolean
   fixed: boolean
   variation: any
+  duration?: number
 }
 
 const toastVariations = {
@@ -65,7 +66,7 @@ const ProgressStyled = styled.div<PropsProgress>`
   flex: none;
   height: 6px;
   position: absolute;
-  animation-duration: 2.6s;
+  animation-duration: ${({ duration }) => `${duration || 2.6}s`};
   border-radius: 10px 10px 0 0;
   animation-fill-mode: forwards;
   background: ${({ theme }) => theme.colors.primary};
@@ -144,12 +145,14 @@ export const ToastContent: React.FC<Props> = ({ message, className }) => {
   const [init, setInit] = useState(false)
   const { removeToast } = useToast()
 
+  const durationMilliseconds = (message.duration || 3) * 1000
+
   useEffect(() => {
     if (!message.fixed) {
       setInit(true)
       const timer = setTimeout(() => {
         removeToast(message.id)
-      }, 3000)
+      }, durationMilliseconds)
 
       return () => {
         clearTimeout(timer)
@@ -174,6 +177,7 @@ export const ToastContent: React.FC<Props> = ({ message, className }) => {
         init={init}
         variation={variation}
         fixed={!!message.fixed}
+        duration={message.duration}
       />
 
       {variation.icon}
