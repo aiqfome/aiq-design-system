@@ -1,21 +1,22 @@
 import React from 'react'
 
-import 'react-dates/initialize'
 import { fireEvent } from '@testing-library/react'
+import 'react-dates/initialize'
 
-import { Flex } from '../Flex'
 import { Button } from '../Button'
+import { Flex } from '../Flex'
 import { render } from '../utils/test/render'
 import { ToastProvider, useToast } from './index'
 
-const ContentToast: React.FC = () => {
+const ContentToast: React.FC<{ duration?: number }> = ({ duration }) => {
   const { addToast } = useToast()
 
   function showToast() {
     addToast({
       type: 'success',
       title: 'Hi ✌️',
-      description: 'I am a success toast'
+      description: 'I am a success toast',
+      duration
     })
   }
 
@@ -85,5 +86,23 @@ describe('Toast', () => {
     fireEvent.click(button)
 
     expect(getAllByTestId('toast-content')).toHaveLength(3)
+  })
+
+  it('should have duration of 4 seconds', async () => {
+    jest.useFakeTimers()
+
+    const { getByTestId, getByText } = render(
+      <ToastProvider>
+        <ContentToast duration={4} />
+      </ToastProvider>
+    )
+
+    fireEvent.click(getByTestId('action'))
+
+    expect(getByText('I am a success toast')).toBeInTheDocument()
+
+    jest.advanceTimersByTime(4000)
+
+    expect(getByTestId('toast-container')).toHaveStyle('display: none')
   })
 })

@@ -11,6 +11,7 @@ export type Message = {
   title: string
   description: string
   fixed?: boolean
+  duration?: number
 }
 
 export interface Props {
