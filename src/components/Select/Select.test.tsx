@@ -1,5 +1,5 @@
-import React from 'react'
 import { fireEvent } from '@testing-library/react'
+import React from 'react'
 
 import { Select } from '../Select'
 import { render } from '../utils/test/render'
@@ -111,5 +111,13 @@ describe('Select', () => {
 
     const list = container.querySelectorAll('li')
     expect(list.length).toBe(1)
+  })
+
+  it('should be disabled when prop disabled is added', () => {
+    const { getByTestId } = render(<Select items={items} disabled={true} />)
+
+    const select = getByTestId('input')
+
+    expect(select).toBeDisabled()
   })
 })

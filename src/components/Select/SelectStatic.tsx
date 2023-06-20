@@ -5,9 +5,9 @@ import { useCombobox } from 'downshift'
 import { IoIosArrowDown } from 'react-icons/io'
 
 import { Box, Props as BoxPros } from '../Box'
+import { Button, Props as ButtonProps } from '../Button'
 import { Input } from '../Input'
 import { Loading } from '../Loading'
-import { Button, Props as ButtonProps } from '../Button'
 
 export type Props = BoxPros & {
   label?: string
@@ -29,6 +29,7 @@ export type Props = BoxPros & {
   loadingMessage?: string
   emptyMessage?: string
   isDependent?: boolean
+  disabled?: boolean
   dependentMessage?: string
 }
 
@@ -102,6 +103,7 @@ const LoadingBox = styled(Box)<VariantSelect>`
 export const SelectStatic = React.forwardRef<HTMLDivElement, Props>(
   (
     {
+      disabled,
       label,
       variant,
       items = [],
@@ -178,7 +180,7 @@ export const SelectStatic = React.forwardRef<HTMLDivElement, Props>(
 
     return (
       <Container
-        isOpen={isOpen}
+        isOpen={isOpen || !disabled}
         variant={variant}
         data-testid='select-static'
         ref={ref}
@@ -209,6 +211,7 @@ export const SelectStatic = React.forwardRef<HTMLDivElement, Props>(
 
         <Box ref={getComboboxProps().ref}>
           <Input
+            disabled={disabled}
             onChange={getInputProps().onChange}
             onBlur={getInputProps().onBlur}
             onKeyDown={getInputProps().onKeyDown}
