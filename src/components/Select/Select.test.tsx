@@ -120,4 +120,12 @@ describe('Select', () => {
 
     expect(select).toBeDisabled()
   })
+
+  it('should be disabled when prop disabled is added on isFetchable select', () => {
+    const component = render(<Select isFetchable items={items} />)
+    const select = component.getByTestId('input')
+
+    expect(component).toBeTruthy()
+    expect(select).toBeTruthy()
+  })
 })

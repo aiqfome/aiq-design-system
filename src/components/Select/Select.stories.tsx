@@ -193,3 +193,22 @@ export const Disabled = args => {
     />
   )
 }
+export const DisabledFetchable = args => {
+  const itens = ['React', 'CSS', 'PHP', 'HTML']
+
+  function handleClickItemSelect(item) {
+    console.log(item)
+  }
+
+  return (
+    <Select
+      isFetchable
+      disabled={true}
+      handleSelectedItemChange={handleClickItemSelect}
+      items={object('items', itens)}
+      variant='outlined'
+      label={text('label', 'aiq-design-system')}
+      {...args}
+    />
+  )
+}
