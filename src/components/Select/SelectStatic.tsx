@@ -190,6 +190,7 @@ export const SelectStatic = React.forwardRef<HTMLDivElement, Props>(
           {isOpen &&
             inputItems &&
             !isDependent &&
+            !disabled &&
             inputItems.length > 0 &&
             inputItems.map((item, index) => (
               <Item
@@ -204,9 +205,11 @@ export const SelectStatic = React.forwardRef<HTMLDivElement, Props>(
 
           {isDependent && <Item>{dependentMessage}</Item>}
 
-          {isOpen && !isDependent && inputItems && inputItems.length === 0 && (
-            <li>{emptyMessage}</li>
-          )}
+          {isOpen &&
+            !isDependent &&
+            !disabled &&
+            inputItems &&
+            inputItems.length === 0 && <li>{emptyMessage}</li>}
         </ul>
 
         <Box ref={getComboboxProps().ref}>
@@ -244,6 +247,7 @@ export const SelectStatic = React.forwardRef<HTMLDivElement, Props>(
 
           {inputItems && !isLoading && (
             <ButtonStyled
+              disabled={disabled}
               type='button'
               palette='primary'
               variantSelect={variant}

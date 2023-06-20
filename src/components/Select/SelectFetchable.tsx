@@ -204,11 +204,14 @@ export const SelectFetchable = React.forwardRef<HTMLDivElement, Props>(
               </Item>
             ))}
 
-          {isOpen && isLoading && !isDependent && <Item>{loadingMessage}</Item>}
+          {isOpen && isLoading && !disabled && !isDependent && (
+            <Item>{loadingMessage}</Item>
+          )}
 
           {isOpen &&
             inputItems &&
             !isLoading &&
+            !disabled &&
             !isDependent &&
             inputItems.length === 0 && <Item>{emptyMessage}</Item>}
 
@@ -241,6 +244,7 @@ export const SelectFetchable = React.forwardRef<HTMLDivElement, Props>(
           )}
           {inputItems && !isLoading && (
             <ButtonStyled
+              disabled={disabled}
               type='button'
               palette='primary'
               variantSelect={variant}
