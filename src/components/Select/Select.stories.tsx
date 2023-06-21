@@ -164,6 +164,7 @@ export const Loading = args => {
         handleSelectedItemChange={({ selectedItem }) =>
           setSelectedItem(selectedItem)
         }
+        label={text('label', 'aiq-design-system')}
         items={object('items', itens)}
         sufix={<MdSearch />}
       />
