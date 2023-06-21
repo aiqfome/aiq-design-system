@@ -181,7 +181,7 @@ export const SelectFetchable = React.forwardRef<HTMLDivElement, Props>(
 
     return (
       <Container
-        isOpen={isOpen || !disabled}
+        isOpen={isOpen && !disabled}
         variant={variant}
         data-testid='select-fechable'
         ref={ref}
@@ -191,6 +191,7 @@ export const SelectFetchable = React.forwardRef<HTMLDivElement, Props>(
           {isOpen &&
             inputItems &&
             !isLoading &&
+            !disabled &&
             !isDependent &&
             inputItems.length > 0 &&
             inputItems.map((item, index) => (

@@ -180,7 +180,7 @@ export const SelectStatic = React.forwardRef<HTMLDivElement, Props>(
 
     return (
       <Container
-        isOpen={isOpen || !disabled}
+        isOpen={isOpen && !disabled}
         variant={variant}
         data-testid='select-static'
         ref={ref}
