@@ -1,7 +1,7 @@
+import { object, text } from '@storybook/addon-knobs'
 import React, { useState } from 'react'
-import { text, object } from '@storybook/addon-knobs'
-import { Select } from './Select'
 import { Flex } from '../Flex'
+import { Select } from './Select'
 
 import { MdSearch } from 'react-icons/md'
 
@@ -174,4 +174,42 @@ export const Loading = args => {
 Loading.args = {
   variant: 'outlined',
   isLoading: true
+}
+
+export const Disabled = args => {
+  const itens = ['React', 'CSS', 'PHP', 'HTML']
+
+  function handleClickItemSelect(item) {
+    console.log(item)
+  }
+
+  return (
+    <Select
+      disabled={true}
+      handleSelectedItemChange={handleClickItemSelect}
+      items={object('items', itens)}
+      variant='outlined'
+      label={text('label', 'aiq-design-system')}
+      {...args}
+    />
+  )
+}
+export const DisabledFetchable = args => {
+  const itens = ['React', 'CSS', 'PHP', 'HTML']
+
+  function handleClickItemSelect(item) {
+    console.log(item)
+  }
+
+  return (
+    <Select
+      isFetchable
+      disabled={true}
+      handleSelectedItemChange={handleClickItemSelect}
+      items={object('items', itens)}
+      variant='outlined'
+      label={text('label', 'aiq-design-system')}
+      {...args}
+    />
+  )
 }

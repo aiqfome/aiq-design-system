@@ -5,9 +5,9 @@ import { useCombobox } from 'downshift'
 import { IoIosArrowDown } from 'react-icons/io'
 
 import { Box, Props as BoxPros } from '../Box'
+import { Button, Props as ButtonProps } from '../Button'
 import { Input } from '../Input'
 import { Loading } from '../Loading'
-import { Button, Props as ButtonProps } from '../Button'
 
 export type Props = BoxPros & {
   label?: string
@@ -29,6 +29,7 @@ export type Props = BoxPros & {
   loadingMessage?: string
   emptyMessage?: string
   isDependent?: boolean
+  disabled?: boolean
   dependentMessage?: string
 }
 
@@ -102,6 +103,7 @@ const LoadingBox = styled(Box)<VariantSelect>`
 export const SelectStatic = React.forwardRef<HTMLDivElement, Props>(
   (
     {
+      disabled,
       label,
       variant,
       items = [],
@@ -178,7 +180,7 @@ export const SelectStatic = React.forwardRef<HTMLDivElement, Props>(
 
     return (
       <Container
-        isOpen={isOpen}
+        isOpen={isOpen && !disabled}
         variant={variant}
         data-testid='select-static'
         ref={ref}
@@ -188,6 +190,7 @@ export const SelectStatic = React.forwardRef<HTMLDivElement, Props>(
           {isOpen &&
             inputItems &&
             !isDependent &&
+            !disabled &&
             inputItems.length > 0 &&
             inputItems.map((item, index) => (
               <Item
@@ -202,13 +205,16 @@ export const SelectStatic = React.forwardRef<HTMLDivElement, Props>(
 
           {isDependent && <Item>{dependentMessage}</Item>}
 
-          {isOpen && !isDependent && inputItems && inputItems.length === 0 && (
-            <li>{emptyMessage}</li>
-          )}
+          {isOpen &&
+            !isDependent &&
+            !disabled &&
+            inputItems &&
+            inputItems.length === 0 && <li>{emptyMessage}</li>}
         </ul>
 
         <Box ref={getComboboxProps().ref}>
           <Input
+            disabled={disabled}
             onChange={getInputProps().onChange}
             onBlur={getInputProps().onBlur}
             onKeyDown={getInputProps().onKeyDown}
@@ -241,6 +247,7 @@ export const SelectStatic = React.forwardRef<HTMLDivElement, Props>(
 
           {inputItems && !isLoading && (
             <ButtonStyled
+              disabled={disabled}
               type='button'
               palette='primary'
               variantSelect={variant}
