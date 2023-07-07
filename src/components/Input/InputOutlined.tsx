@@ -1,22 +1,23 @@
-import React, { useState, InputHTMLAttributes } from 'react'
+import React, { InputHTMLAttributes, useState } from 'react'
 
 import { MdVisibility, MdVisibilityOff } from 'react-icons/md'
 
 import styled, { css } from 'styled-components'
 
 import {
-  color,
-  space,
   SpaceProps,
-  layout,
+  color,
   fontSize,
-  fontWeight
+  fontWeight,
+  layout,
+  space
 } from 'styled-system'
 
-import { Button } from '../Button'
-import { Text } from '../Text'
 import { Box } from '../Box'
+import { Button } from '../Button'
 import { InputErrorMessage } from '../InputErrorMessage'
+import { Loading } from '../Loading'
+import { Text } from '../Text'
 
 export type Props = InputHTMLAttributes<HTMLInputElement> &
   SpaceProps & {
@@ -31,6 +32,7 @@ export type Props = InputHTMLAttributes<HTMLInputElement> &
     sufix?: any
     containerProps?: any
     disabled?: boolean
+    isLoading?: boolean
 
     maxWidth?: number | string
     backgroundColor?: number | string
@@ -164,7 +166,9 @@ const LabelStyled = styled.label<Props>`
   & > button,
   & > div.sufix {
     right: 0;
-    margin-right: 5px;
+    margin-top: 5px;
+    padding-left: 13px;
+    margin-right: 13px;
     position: absolute;
     background: none;
     border: none;
@@ -182,6 +186,7 @@ export const InputOutlined = React.forwardRef<HTMLInputElement, Props>(
       errorMessage,
       sufix,
       value,
+      isLoading,
       backgroundColor,
       maxWidth,
       marginRight,
@@ -238,6 +243,40 @@ export const InputOutlined = React.forwardRef<HTMLInputElement, Props>(
                 <MdVisibility size={22} />
               )}
             </Button>
+          </LabelStyled>
+
+          {errorForm && <InputErrorMessage errorMessage={errorMessage} />}
+        </Container>
+      )
+    }
+
+    if (isLoading) {
+      return (
+        <Container
+          data-testid='input-outlined-sufix'
+          {...containerProps}
+          {...styledContainer}
+        >
+          <LabelStyled
+            label={label}
+            errorForm={errorForm}
+            disabled={true}
+            placeholder={placeholder || ' '}
+          >
+            <input
+              {...props}
+              placeholder={placeholder || ' '}
+              type={type}
+              value={value}
+              ref={inputRef || ref}
+              name={name}
+              disabled={disabled}
+              autoComplete='disabled'
+              data-testid='input'
+            />
+            {label && <Text data-testid='input-label'>{label}</Text>}
+
+            <Box className='sufix'><Loading marginLeft={5}/></Box>
           </LabelStyled>
 
           {errorForm && <InputErrorMessage errorMessage={errorMessage} />}
