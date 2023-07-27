@@ -166,9 +166,7 @@ const LabelStyled = styled.label<Props>`
   & > button,
   & > div.sufix {
     right: 0;
-    margin-top: 5px;
-    padding-left: 13px;
-    margin-right: 13px;
+    margin-right: 5px;
     position: absolute;
     background: none;
     border: none;
