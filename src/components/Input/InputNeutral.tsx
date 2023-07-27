@@ -228,7 +228,7 @@ export const InputNeutral = React.forwardRef<HTMLInputElement, Props>(
             />
             <Button
               palette='primary'
-              mr={5}
+              ml={2} mt={2}
               onClick={() => setPasswordVisible(!passwordVisible)}
             >
               {passwordVisible ? (

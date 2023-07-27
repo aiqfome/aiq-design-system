@@ -88,7 +88,7 @@ const LabelStyled = styled.label<Props>`
 
           &:not(:focus):placeholder-shown + span {
             font-size: inherit;
-            line-height: 53px !important;
+            line-height: 48px !important;
             color: ${theme.colors.grey};
           }
         `
@@ -164,7 +164,9 @@ const LabelStyled = styled.label<Props>`
   & > button,
   & > div.sufix {
     right: 0;
-    margin-right: 5px;
+    margin-right: 13px;
+    padding-left: 13px;
+    margin-top: 3px;
     position: absolute;
     background: none;
     border: none;
@@ -230,6 +232,7 @@ export const InputOutlined = React.forwardRef<HTMLInputElement, Props>(
 
             <Button
               palette='primary'
+              mx={2}
               onClick={() => setShowPassword(!showPassword)}
             >
               {showPassword ? (
