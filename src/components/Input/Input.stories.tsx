@@ -85,7 +85,7 @@ Disabled.args = {
 export const Password = args => (
   <Flex variant='fullCentralized'>
     <Input type='password' {...args} />
-    <Input label='Aiqfome' variant='outlined' type='password' />
+    <Input label='Aiqfome' variant='outlined' type='password' {...args}/>
   </Flex>
 )
 
