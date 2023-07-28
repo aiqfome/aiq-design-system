@@ -220,7 +220,6 @@ export const InputNeutral = React.forwardRef<HTMLInputElement, Props>(
             inputSelected={inputSelected}
             onClick={() => setInputSelected(true)}
             onBlur={() => setInputSelected(false)}
-            data-testid='input-error'
           >
             <InputSufixed
               {...props}
