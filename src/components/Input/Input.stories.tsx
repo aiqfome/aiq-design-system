@@ -125,6 +125,12 @@ export const Prefix = args => (
   </Flex>
 )
 
+export const Loading = args => (
+  <Flex variant='fullCentralized'>
+    <Input isLoading={true} {...args} />
+  </Flex>
+)
+
 export const Tags = args => (
   <Flex flexDirection='column' variant='fullCentralized'>
     <Box maxWidth='600px' width='100%' mb={8}>
