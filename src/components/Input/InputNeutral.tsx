@@ -162,6 +162,7 @@ export const InputNeutral = React.forwardRef<HTMLInputElement, Props>(
         <Flex {...containerProps} flexDirection='column'>
           <ContainerSufix
             {...boxStyled}
+            errorForm={errorForm}
             inputSelected={inputSelected}
             onClick={() => setInputSelected(true)}
             onBlur={() => setInputSelected(false)}
@@ -189,6 +190,7 @@ export const InputNeutral = React.forwardRef<HTMLInputElement, Props>(
         <Flex {...containerProps}>
           <ContainerSufix
             {...boxStyled}
+            errorForm={errorForm}
             inputSelected={inputSelected}
             onClick={() => setInputSelected(true)}
             onBlur={() => setInputSelected(false)}
@@ -214,6 +216,7 @@ export const InputNeutral = React.forwardRef<HTMLInputElement, Props>(
         <Flex {...containerProps} flexDirection='column'>
           <ContainerSufix
             {...boxStyled}
+            errorForm={errorForm}
             inputSelected={inputSelected}
             onClick={() => setInputSelected(true)}
             onBlur={() => setInputSelected(false)}
