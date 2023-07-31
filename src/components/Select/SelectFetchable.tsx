@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import styled, { css } from 'styled-components'
 import { useCombobox } from 'downshift'
+import React, { useEffect, useState } from 'react'
 import { IoIosArrowDown } from 'react-icons/io'
+import styled, { css } from 'styled-components'
 
 import { Box, Props as BoxPros } from '../Box'
+import { Button, Props as ButtonProps } from '../Button'
 import { Input } from '../Input'
 import { Loading } from '../Loading'
-import { Button, Props as ButtonProps } from '../Button'
 
 export type Props = BoxPros & {
   label?: string
@@ -28,6 +28,7 @@ export type Props = BoxPros & {
   emptyMessage?: string
   inputProps?: any
   isDependent?: boolean
+  disabled?: boolean
   dependentMessage?: string
 }
 
@@ -98,6 +99,7 @@ const LoadingBox = styled(Box)<VariantSelect>`
 export const SelectFetchable = React.forwardRef<HTMLDivElement, Props>(
   (
     {
+      disabled,
       label,
       variant,
       items = [],
@@ -179,7 +181,7 @@ export const SelectFetchable = React.forwardRef<HTMLDivElement, Props>(
 
     return (
       <Container
-        isOpen={isOpen}
+        isOpen={isOpen && !disabled}
         variant={variant}
         data-testid='select-fechable'
         ref={ref}
@@ -189,6 +191,7 @@ export const SelectFetchable = React.forwardRef<HTMLDivElement, Props>(
           {isOpen &&
             inputItems &&
             !isLoading &&
+            !disabled &&
             !isDependent &&
             inputItems.length > 0 &&
             inputItems.map((item, index) => (
@@ -202,11 +205,14 @@ export const SelectFetchable = React.forwardRef<HTMLDivElement, Props>(
               </Item>
             ))}
 
-          {isOpen && isLoading && !isDependent && <Item>{loadingMessage}</Item>}
+          {isOpen && isLoading && !disabled && !isDependent && (
+            <Item>{loadingMessage}</Item>
+          )}
 
           {isOpen &&
             inputItems &&
             !isLoading &&
+            !disabled &&
             !isDependent &&
             inputItems.length === 0 && <Item>{emptyMessage}</Item>}
 
@@ -215,6 +221,7 @@ export const SelectFetchable = React.forwardRef<HTMLDivElement, Props>(
 
         <Box ref={getComboboxProps().ref}>
           <Input
+            disabled={disabled}
             onChange={getInputProps().onChange}
             onBlur={getInputProps().onBlur}
             onKeyDown={getInputProps().onKeyDown}
@@ -238,6 +245,7 @@ export const SelectFetchable = React.forwardRef<HTMLDivElement, Props>(
           )}
           {inputItems && !isLoading && (
             <ButtonStyled
+              disabled={disabled}
               type='button'
               palette='primary'
               variantSelect={variant}

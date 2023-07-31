@@ -27,6 +27,7 @@ export type Props = BoxProps & {
   defaultValue?: any
   clearOnSelect?: boolean
   isDependent?: boolean
+  disabled?: boolean
   dependentMessage?: string
 }
 
