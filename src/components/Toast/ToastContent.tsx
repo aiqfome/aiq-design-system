@@ -1,16 +1,12 @@
 import React, { useEffect, useMemo, useState } from 'react'
 
-import {
-  FiAlertTriangle,
-  FiCheckCircle,
-  FiInfo,
-  FiXCircle,
-  FiXOctagon
-} from 'react-icons/fi'
+import { MdCheck, MdClose, MdError, MdInfo, MdWarning } from 'react-icons/md'
 import { animated } from 'react-spring'
 import styled, { css } from 'styled-components'
 
 import { Box } from '../Box'
+import { Button } from '../Button'
+
 import { Message } from './Toast'
 import { useToast } from './ToastProvider'
 export interface Props {
@@ -37,25 +33,25 @@ const toastVariations = {
     background: 'info',
     color: '#fff',
     bar: 'blue',
-    icon: <FiInfo size={24} />
+    icon: <MdInfo size={24} />
   },
   success: {
     background: 'green',
     color: '#fff',
     bar: 'success',
-    icon: <FiCheckCircle size={24} />
+    icon: <MdCheck size={24} />
   },
   error: {
     background: 'red',
     color: '#fff',
     bar: 'error',
-    icon: <FiXOctagon size={24} />
+    icon: <MdError size={24} />
   },
   warning: {
     background: 'warning',
     color: '#fff',
     bar: 'orange',
-    icon: <FiAlertTriangle size={24} />
+    icon: <MdWarning size={24} />
   }
 }
 
@@ -124,7 +120,6 @@ const StyledToast = styled(animated.div)<PropsStyledToast>`
     position: absolute;
     right: 16px;
     top: 19px;
-    opacity: 0.6;
     border: 0;
     background: transparent;
     color: inherit;
@@ -187,9 +182,9 @@ export const ToastContent: React.FC<Props> = ({ message, className }) => {
         {message.description && <p>{message.description}</p>}
       </Box>
 
-      <button type='button' onClick={() => removeToast(message.id)}>
-        <FiXCircle size={18} />
-      </button>
+      <Button onClick={() => removeToast(message.id)}>
+        <MdClose size={24} color='#fff' />
+      </Button>
     </StyledToast>
   )
 }
