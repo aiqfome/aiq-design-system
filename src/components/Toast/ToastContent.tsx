@@ -36,15 +36,15 @@ const toastVariations = {
     icon: <MdInfo size={24} />
   },
   success: {
-    background: 'green',
+    background: 'success',
     color: '#fff',
-    bar: 'success',
+    bar: 'green',
     icon: <MdCheck size={24} />
   },
   error: {
-    background: 'red',
+    background: 'error',
     color: '#fff',
-    bar: 'error',
+    bar: 'red',
     icon: <MdError size={24} />
   },
   warning: {
