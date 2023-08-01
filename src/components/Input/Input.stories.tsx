@@ -16,6 +16,7 @@ const aiqProps = [
   'type',
   'errorMessage',
   'value',
+  'isLoading',
   'sufix',
   'prefix',
   'variant',
@@ -37,7 +38,8 @@ export default createPageExport(Input, 'Input', aiqProps, {
     name: { control: 'text' },
     label: { control: 'text' },
     errorMessage: { control: 'text' },
-    value: { control: 'text' }
+    value: { control: 'text' },
+    isLoading: { control: 'boolean' }
   },
   args: {
     label: 'Aiqfome'
@@ -53,6 +55,7 @@ Basic.args = {
   type: 'text',
   placeholder: 'duas pizzas é muito',
   errorForm: false,
+  isLoading: false,
   value: ''
 }
 
@@ -66,6 +69,7 @@ Outlined.args = {
   type: 'text',
   placeholder: 'duas pizzas é muito',
   errorForm: false,
+  isLoading: false,
   value: ''
 }
 
@@ -118,6 +122,12 @@ export const Sufix = args => (
 export const Prefix = args => (
   <Flex variant='fullCentralized'>
     <Input prefix={<MdSearch color='#BABCBE' />} {...args} />
+  </Flex>
+)
+
+export const Loading = args => (
+  <Flex variant='fullCentralized'>
+    <Input isLoading={true} {...args} />
   </Flex>
 )
 
