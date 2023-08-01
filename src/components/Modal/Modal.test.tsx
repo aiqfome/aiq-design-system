@@ -1,4 +1,4 @@
-import { fireEvent } from '@testing-library/react'
+import { fireEvent, queryByText } from '@testing-library/react'
 import React from 'react'
 
 import { Modal } from '../Modal'
@@ -97,5 +97,31 @@ describe('Modal', () => {
     )
 
     expect(getAllByTestId('modal-button').length).toBe(1)
+  })
+
+  it('should show tooltip on button', () => {
+    const okButton = {
+      tooltip: 'exemplo de tooltip',
+      label: 'ok',
+      function: () => {
+        console.log('ok')
+      },
+      visible: true
+    }
+
+    const content = 'My Content'
+    const { getByText, getByRole } = render(
+      <div id='modal-root'>
+        <Modal show title='title' okButton={okButton}>
+          {content}
+        </Modal>
+      </div>
+    )
+
+    const okButtonElement = getByRole('button', { name: 'ok' })
+
+    fireEvent.mouseOver(okButtonElement)
+
+    expect(getByText('exemplo de tooltip')).toBeInTheDocument()
   })
 })
