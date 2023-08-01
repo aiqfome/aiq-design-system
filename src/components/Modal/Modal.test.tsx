@@ -1,4 +1,4 @@
-import { fireEvent, queryByText } from '@testing-library/react'
+import { fireEvent } from '@testing-library/react'
 import React from 'react'
 
 import { Modal } from '../Modal'
