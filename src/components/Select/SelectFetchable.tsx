@@ -49,8 +49,7 @@ const Container = styled(Box)<Props>`
     top: ${({ variant }) => (variant === 'outlined' ? '39px' : '38px')};
     overflow: hidden;
     z-index: 1;
-    min-width: 100%;
-    width: max-content;
+    width: 100%;
     padding: 0;
     margin: 0;
     border-bottom-left-radius: 4px;
@@ -61,6 +60,8 @@ const Container = styled(Box)<Props>`
     li {
       cursor: pointer;
       padding: 6px 12px;
+      word-wrap: break-word;
+      hyphens: auto;
     }
 
     ${({ isOpen }) =>
