@@ -28,29 +28,31 @@ interface PropsProgress {
   duration?: number
 }
 
+const LOADING_BAR_COLOR = 'white'
+
 const toastVariations = {
   info: {
     background: 'info',
     color: '#fff',
-    bar: 'blue',
+    bar: LOADING_BAR_COLOR,
     icon: <MdInfo size={24} />
   },
   success: {
     background: 'success',
     color: '#fff',
-    bar: 'green',
+    bar: LOADING_BAR_COLOR,
     icon: <MdCheck size={24} />
   },
   error: {
     background: 'error',
     color: '#fff',
-    bar: 'red',
+    bar: LOADING_BAR_COLOR,
     icon: <MdError size={24} />
   },
   warning: {
     background: 'warning',
     color: '#fff',
-    bar: 'orange',
+    bar: LOADING_BAR_COLOR,
     icon: <MdWarning size={24} />
   }
 }
@@ -67,6 +69,7 @@ const ProgressStyled = styled.div<PropsProgress>`
   animation-fill-mode: forwards;
   background: ${({ theme }) => theme.colors.primary};
   animation-name: ${({ fixed }) => (!fixed ? 'progressing' : '')};
+  opacity: 40%;
   background: ${({ variation, theme }) => theme.colors[variation.bar]};
 
   @keyframes progressing {
