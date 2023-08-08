@@ -1,12 +1,13 @@
-import React, { useState, InputHTMLAttributes } from 'react'
+import React, { InputHTMLAttributes, useState } from 'react'
 import { MdVisibility, MdVisibilityOff } from 'react-icons/md'
 
 import styled, { css } from 'styled-components'
-import { space, layout, border, color } from 'styled-system'
+import { border, color, layout, space } from 'styled-system'
 
+import { Box } from '../Box'
 import { Button } from '../Button'
 import { Flex } from '../Flex'
-import { Box } from '../Box'
+import { Loading } from '../Loading'
 
 import { InputErrorMessage } from '../InputErrorMessage'
 
@@ -17,6 +18,7 @@ export type Props = InputHTMLAttributes<HTMLInputElement> & {
   type?: string
   errorMessage?: string
   value?: string
+  isLoading?: boolean
   sufix?: any
   prefix?: any
   placeholder?: string
@@ -64,6 +66,7 @@ export interface PropsContainerSufix {
   onClick?: () => void
   onBlur?: () => void
   disabled?: boolean
+  isLoading?: boolean
 }
 
 const ContainerSufix = styled(Box)<PropsContainerSufix>`
@@ -134,6 +137,7 @@ export const InputNeutral = React.forwardRef<HTMLInputElement, Props>(
       errorForm,
       errorMessage,
       type = 'text',
+      isLoading,
       sufix,
       prefix,
       value,
@@ -157,11 +161,39 @@ export const InputNeutral = React.forwardRef<HTMLInputElement, Props>(
       ...boxProps
     }
 
+    if (isLoading) {
+      return (
+        <Flex {...containerProps} flexDirection='column'>
+          <ContainerSufix
+            {...boxStyled}
+            inputSelected={inputSelected}
+            onClick={() => setInputSelected(true)}
+            onBlur={() => setInputSelected(false)}
+            disabled={true}
+          >
+            <InputSufixed
+              ref={inputRef || ref}
+              placeholder={placeholder}
+              type={type}
+              value={value}
+              autoComplete={nativeAutoComplete}
+              disabled={true}
+              {...props}
+            />
+            <Loading data-testid='loading-sufix' marginLeft={5}/>
+          </ContainerSufix>
+
+          {errorForm && <InputErrorMessage errorMessage={errorMessage} />}
+        </Flex>
+      )
+    }
+
     if (sufix) {
       return (
         <Flex {...containerProps} flexDirection='column'>
           <ContainerSufix
             {...boxStyled}
+            errorForm={errorForm}
             inputSelected={inputSelected}
             onClick={() => setInputSelected(true)}
             onBlur={() => setInputSelected(false)}
@@ -189,6 +221,7 @@ export const InputNeutral = React.forwardRef<HTMLInputElement, Props>(
         <Flex {...containerProps}>
           <ContainerSufix
             {...boxStyled}
+            errorForm={errorForm}
             inputSelected={inputSelected}
             onClick={() => setInputSelected(true)}
             onBlur={() => setInputSelected(false)}
@@ -214,6 +247,7 @@ export const InputNeutral = React.forwardRef<HTMLInputElement, Props>(
         <Flex {...containerProps} flexDirection='column'>
           <ContainerSufix
             {...boxStyled}
+            errorForm={errorForm}
             inputSelected={inputSelected}
             onClick={() => setInputSelected(true)}
             onBlur={() => setInputSelected(false)}
@@ -228,7 +262,7 @@ export const InputNeutral = React.forwardRef<HTMLInputElement, Props>(
             />
             <Button
               palette='primary'
-              mr={5}
+              ml={2} mt={2}
               onClick={() => setPasswordVisible(!passwordVisible)}
             >
               {passwordVisible ? (

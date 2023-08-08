@@ -2,8 +2,8 @@ import React, { InputHTMLAttributes } from 'react'
 
 import InputMask from 'react-input-mask'
 
-import { InputOutlined } from './InputOutlined'
 import { InputNeutral } from './InputNeutral'
+import { InputOutlined } from './InputOutlined'
 import { InputTags } from './InputTags'
 
 export type Props = Omit<InputHTMLAttributes<HTMLInputElement>, 'prefix'> & {
@@ -14,6 +14,7 @@ export type Props = Omit<InputHTMLAttributes<HTMLInputElement>, 'prefix'> & {
   type?: string
   errorMessage?: string
   value?: string
+  isLoading?: boolean
   sufix?: any
   prefix?: any
   variant?: 'outlined' | 'default' | 'tags'
@@ -41,6 +42,7 @@ export const Input = React.forwardRef<HTMLInputElement, Props>(
       sufix,
       prefix,
       value,
+      isLoading,
       variant,
       placeholder,
       mask,
@@ -71,6 +73,7 @@ export const Input = React.forwardRef<HTMLInputElement, Props>(
                 data-testid='input-container'
                 placeholder={placeholder}
                 disabled={disabled}
+                isLoading={isLoading}
                 nativeAutoComplete={nativeAutoComplete}
                 ref={ref}
                 inputRef={inputRef || ref}
@@ -95,6 +98,7 @@ export const Input = React.forwardRef<HTMLInputElement, Props>(
           placeholder={placeholder}
           onChange={onChange}
           disabled={disabled}
+          isLoading={isLoading}
           nativeAutoComplete={nativeAutoComplete}
           ref={ref}
           inputRef={inputRef || ref}
@@ -163,6 +167,7 @@ export const Input = React.forwardRef<HTMLInputElement, Props>(
         onChange={onChange}
         data-testid='input-container'
         disabled={disabled}
+        isLoading={isLoading}
         nativeAutoComplete={nativeAutoComplete}
         ref={ref}
         inputRef={inputRef || ref}

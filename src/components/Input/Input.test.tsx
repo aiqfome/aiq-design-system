@@ -1,5 +1,5 @@
-import React from 'react'
 import { fireEvent } from '@testing-library/react'
+import React from 'react'
 
 import { Input } from '../Input'
 import { render } from '../utils/test/render'
@@ -48,6 +48,16 @@ describe('Input', () => {
 
     const input = getByText('Sufix')
     expect(input).toBeTruthy()
+  })
+
+  it('should render loading and be disabled when have isLoading prop', () => {
+    const { getByTestId } = render(<Input isLoading={true} />)
+
+    const input = getByTestId('input-container')
+    expect(input).toBeDisabled()
+
+    const loadingSufix = getByTestId('loading-sufix')
+    expect(loadingSufix).toBeTruthy()
   })
 
   it('should render initial value correctly', () => {

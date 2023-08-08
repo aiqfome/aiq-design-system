@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 
-import { Text } from '../Text'
-import { Flex } from '../Flex'
-import { Modal } from './Modal'
 import { Button } from '../Button'
+import { Flex } from '../Flex'
+import { Text } from '../Text'
+import { Modal } from './Modal'
 
 import { object } from '@storybook/addon-knobs'
 
@@ -362,5 +362,59 @@ export const WithZIndex = args => {
   )
 }
 WithZIndex.args = {
+  animation: true
+}
+
+export const WithTooltip = args => {
+  const [open, setOpen] = useState(false)
+
+  function handleShowModal() {
+    setOpen(!open)
+  }
+
+  const okButton = {
+    tooltip: 'exemplo de tooltip',
+    tooltipProps: {
+      maxWidth: '200px',
+      variant: 'topCenter'
+    },
+    label: 'ok',
+    function: () => {
+      handleShowModal()
+      console.log('ok')
+    },
+    visible: true
+  }
+  const cancelButton = {
+    tooltip: 'exemplo de tooltip',
+    label: 'cancel',
+    function: () => {
+      handleShowModal()
+      console.log('cancel')
+    },
+    visible: true
+  }
+
+  return (
+    <Flex>
+      <Button palette='primary' onClick={handleShowModal} variant='contained'>
+        Show Modal With Tooltip
+      </Button>
+      <Modal
+        show={open}
+        onClose={() => setOpen(false)}
+        okButton={okButton}
+        cancelButton={cancelButton}
+        {...args}
+      >
+        <Text>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor
+        </Text>
+      </Modal>
+    </Flex>
+  )
+}
+WithAnimation.args = {
   animation: true
 }

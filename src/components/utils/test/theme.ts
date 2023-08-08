@@ -20,24 +20,7 @@ const fontWeights = {
 }
 
 const space = [
-  0,
-  2,
-  4,
-  6,
-  8,
-  10,
-  12,
-  14,
-  16,
-  18,
-  20,
-  40,
-  50,
-  60,
-  70,
-  80,
-  90,
-  100
+  0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 40, 50, 60, 70, 80, 90, 100
 ]
 
 const colors = {
@@ -65,7 +48,7 @@ const colors = {
 
   // actions
   info: '#2689ff',
-  success: '#5ddb1f',
+  success: '#5EBE2E',
   warning: '#faad14',
   error: '#ff4d4f',
 
