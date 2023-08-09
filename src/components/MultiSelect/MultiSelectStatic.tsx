@@ -107,11 +107,6 @@ const Overflow = styled(Flex)<OverflowProps>`
   width: max-content;
   z-index: 99;
 
-  @keyframes fadeIn {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
-  }
-
   display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
 
   ul {
