@@ -114,10 +114,19 @@ const Overflow = styled(Flex)<OverflowProps>`
     li {
       padding: 3px 10px;
 
-      &:hover {
-        cursor: pointer;
-        background: ${({ theme }) => theme.colors.primary};
-        color: ${({ theme }) => theme.colors.white};
+      @media (hover: hover) {
+        &:hover {
+          cursor: pointer;
+          background: ${({ theme }) => theme.colors.primary};
+          color: ${({ theme }) => theme.colors.white};
+        }
+      }
+
+      @media (hover: none) {
+        &:active {
+          background: ${({ theme }) => theme.colors.primary};
+          color: ${({ theme }) => theme.colors.white};
+        }
       }
     }
   }
@@ -126,11 +135,6 @@ const Overflow = styled(Flex)<OverflowProps>`
 const Itens = styled(Box)`
   max-height: 250px;
   overflow: auto;
-
-  .highlighted {
-    background: ${({ theme }) => theme.colors.primary};
-    color: ${({ theme }) => theme.colors.white};
-  }
 `
 
 const SelectedItem = styled(Text)`
@@ -182,12 +186,10 @@ export const MultiSelectFetchable: React.FC<Props> = ({
     getMenuProps,
     getInputProps,
     getComboboxProps,
-    highlightedIndex,
     getItemProps,
     openMenu
   } = useCombobox({
     inputValue,
-    defaultHighlightedIndex: 0,
     selectedItem: null,
     itemToString: item => (item ? '' : ''),
     items: isDependent ? [] : getFilteredItems(),
@@ -429,7 +431,6 @@ export const MultiSelectFetchable: React.FC<Props> = ({
                 !disabled &&
                 getFilteredItems().map((item, index) => (
                   <li
-                    className={highlightedIndex === index ? 'highlighted' : ''}
                     key={`${item}${index}`}
                     onClick={e => {
                       getItemProps({ item, index }).onClick(e)
