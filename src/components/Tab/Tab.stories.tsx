@@ -177,7 +177,7 @@ export const Disabled: React.FC = args => {
             <Text fontSize={2}>Item One</Text>
           </Tab>
           <Tab value={defaultValue} index={1} disabled>
-            <Text fontSize={2}>Item Two</Text>
+            <Text fontSize={2}>Item Disabled</Text>
           </Tab>
           <Tab value={defaultValue} index={2}>
             <Text fontSize={2}>Item Three</Text>
@@ -196,7 +196,7 @@ export const Disabled: React.FC = args => {
             <Text fontSize={2}>Item One</Text>
           </Tab>
           <Tab variant='contained' value={containedValue} index={1} disabled>
-            <Text fontSize={2}>Item Two</Text>
+            <Text fontSize={2}>Item Disabled</Text>
           </Tab>
           <Tab variant='contained' value={containedValue} index={2}>
             <Text fontSize={2}>Item Three</Text>
@@ -215,7 +215,7 @@ export const Disabled: React.FC = args => {
             <Text fontSize={2}>Item One</Text>
           </Tab>
           <Tab variant='card' value={cardValue} index={1} disabled>
-            <Text fontSize={2}>Item Two</Text>
+            <Text fontSize={2}>Item Disabled</Text>
           </Tab>
           <Tab variant='card' value={cardValue} index={2}>
             <Text fontSize={2}>Item Three</Text>
