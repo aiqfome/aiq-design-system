@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 import styled, { DefaultTheme, css } from 'styled-components'
 import { layout } from 'styled-system'
-import { Flex, Props as FlexProps } from '../Flex'
-import { Button } from '../Button'
-import { Text } from '../Text'
 import { Box } from '../Box'
+import { Button } from '../Button'
+import { Flex, Props as FlexProps } from '../Flex'
+import { Text } from '../Text'
+import { Tooltip } from '../Tooltip'
 
 type VoidFunction = () => void
 
@@ -28,11 +29,15 @@ export interface Props {
     function?: VoidFunction
     visible: boolean
     disabled?: boolean
+    tooltip?: string
+    tooltipProps?: object
   }
   cancelButton?: {
     label: string
     function: VoidFunction
     visible: boolean
+    tooltip?: string
+    tooltipProps?: object
   }
 }
 
@@ -177,7 +182,9 @@ const defaultButton = {
   function: () => {
     // do nothing.
   },
-  visible: false
+  visible: false,
+  tooltip: '',
+  tooltipProps: {}
 }
 
 export const Modal: React.FC<Props> = ({
@@ -202,6 +209,17 @@ export const Modal: React.FC<Props> = ({
 }) => {
   const [isMounted, setIsMounted] = useState(false)
   const [bodyOverflow, setBodyOverflow] = useState(false)
+
+  const renderTooltip = ({ Component, tooltip = '', tooltipProps = {} }) => {
+    if (!!tooltip) {
+      return (
+        <Tooltip body={tooltip} type='balloon' {...tooltipProps}>
+          {Component}
+        </Tooltip>
+      )
+    }
+    return Component
+  }
 
   useEffect(() => {
     if (show) setIsMounted(show)
@@ -286,47 +304,42 @@ export const Modal: React.FC<Props> = ({
               flexDirection='row-reverse'
               {...buttonsProps}
             >
-              {okButton.visible && (
-                <>
-                  {okButton.function ? (
-                    <Button
-                      palette='primary'
-                      onClick={handleOk}
-                      variant='contained'
-                      fontWeight='medium'
-                      data-testid='modal-button'
-                      type='button'
-                      {...okButton}
-                    >
-                      {okButton.label}
-                    </Button>
-                  ) : (
+              {okButton.visible &&
+                renderTooltip({
+                  tooltip: okButton.tooltip,
+                  tooltipProps: okButton.tooltipProps,
+                  Component: (
                     <Button
                       palette='primary'
                       variant='contained'
                       fontWeight='medium'
                       data-testid='modal-button'
-                      type='submit'
+                      type={okButton.function ? 'button' : 'submit'}
+                      onClick={okButton.function && handleOk}
                       {...okButton}
                     >
                       {okButton.label}
                     </Button>
-                  )}
-                </>
-              )}
+                  )
+                })}
 
-              {cancelButton.visible && (
-                <Button
-                  palette='primary'
-                  variant='outlined'
-                  fontWeight='medium'
-                  onClick={handleCancel}
-                  data-testid='modal-button'
-                  {...cancelButton}
-                >
-                  {cancelButton.label}
-                </Button>
-              )}
+              {cancelButton.visible &&
+                renderTooltip({
+                  tooltip: cancelButton.tooltip,
+                  tooltipProps: cancelButton.tooltipProps,
+                  Component: (
+                    <Button
+                      palette='primary'
+                      variant='outlined'
+                      fontWeight='medium'
+                      onClick={handleCancel}
+                      data-testid='modal-button'
+                      {...cancelButton}
+                    >
+                      {cancelButton.label}
+                    </Button>
+                  )
+                })}
             </Flex>
           </ModalStyled>
         </FormStyled>

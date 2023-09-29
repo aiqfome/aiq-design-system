@@ -1,7 +1,7 @@
-import React, { useContext, useCallback, createContext, useState } from 'react'
+import React, { createContext, useCallback, useContext, useState } from 'react'
 
-import { Toast, Message } from './Toast'
 import uniqueId from 'lodash/uniqueId'
+import { Message, Toast } from './Toast'
 
 const ToastContext = createContext({
   addToast: (message: any): any => {
@@ -24,19 +24,23 @@ interface ContextProps {
 export const ToastProvider: React.FC<Props> = ({ children }) => {
   const [messages, setMessages] = useState<Message | any>([])
 
-  const addToast = useCallback(({ type, title, description, fixed }) => {
-    const id = uniqueId()
+  const addToast = useCallback(
+    ({ type, title, description, fixed, duration }) => {
+      const id = uniqueId()
 
-    const toast = {
-      id,
-      type,
-      title,
-      description,
-      fixed
-    }
+      const toast = {
+        id,
+        type,
+        title,
+        description,
+        fixed,
+        duration
+      }
 
-    setMessages(messages => [...messages, toast])
-  }, [])
+      setMessages(messages => [...messages, toast])
+    },
+    []
+  )
   const removeToast = useCallback(id => {
     setMessages(messages => messages.filter(message => message.id !== id))
   }, [])

@@ -5,9 +5,9 @@ import { useCombobox } from 'downshift'
 import { IoIosArrowDown } from 'react-icons/io'
 
 import { Box, Props as BoxPros } from '../Box'
+import { Button, Props as ButtonProps } from '../Button'
 import { Input } from '../Input'
 import { Loading } from '../Loading'
-import { Button, Props as ButtonProps } from '../Button'
 
 export type Props = BoxPros & {
   label?: string
@@ -29,6 +29,7 @@ export type Props = BoxPros & {
   loadingMessage?: string
   emptyMessage?: string
   isDependent?: boolean
+  disabled?: boolean
   dependentMessage?: string
 }
 
@@ -49,8 +50,7 @@ const Container = styled(Box)<Props>`
     top: ${({ variant }) => (variant === 'outlined' ? '39px' : '38px')};
     overflow: hidden;
     z-index: 1;
-    min-width: 100%;
-    width: max-content;
+    width: 100%;
     padding: 0;
     margin: 0;
     border-bottom-left-radius: 4px;
@@ -61,8 +61,8 @@ const Container = styled(Box)<Props>`
     li {
       cursor: pointer;
       padding: 6px 12px;
-      width: max-content;
-      min-width: 100%;
+      word-wrap: break-word;
+      hyphens: auto;
     }
 
     ${({ isOpen }) =>
@@ -102,6 +102,7 @@ const LoadingBox = styled(Box)<VariantSelect>`
 export const SelectStatic = React.forwardRef<HTMLDivElement, Props>(
   (
     {
+      disabled,
       label,
       variant,
       items = [],
@@ -178,7 +179,7 @@ export const SelectStatic = React.forwardRef<HTMLDivElement, Props>(
 
     return (
       <Container
-        isOpen={isOpen}
+        isOpen={isOpen && !disabled}
         variant={variant}
         data-testid='select-static'
         ref={ref}
@@ -188,6 +189,7 @@ export const SelectStatic = React.forwardRef<HTMLDivElement, Props>(
           {isOpen &&
             inputItems &&
             !isDependent &&
+            !disabled &&
             inputItems.length > 0 &&
             inputItems.map((item, index) => (
               <Item
@@ -202,13 +204,16 @@ export const SelectStatic = React.forwardRef<HTMLDivElement, Props>(
 
           {isDependent && <Item>{dependentMessage}</Item>}
 
-          {isOpen && !isDependent && inputItems && inputItems.length === 0 && (
-            <li>{emptyMessage}</li>
-          )}
+          {isOpen &&
+            !isDependent &&
+            !disabled &&
+            inputItems &&
+            inputItems.length === 0 && <li>{emptyMessage}</li>}
         </ul>
 
         <Box ref={getComboboxProps().ref}>
           <Input
+            disabled={disabled}
             onChange={getInputProps().onChange}
             onBlur={getInputProps().onBlur}
             onKeyDown={getInputProps().onKeyDown}
@@ -241,6 +246,7 @@ export const SelectStatic = React.forwardRef<HTMLDivElement, Props>(
 
           {inputItems && !isLoading && (
             <ButtonStyled
+              disabled={disabled}
               type='button'
               palette='primary'
               variantSelect={variant}

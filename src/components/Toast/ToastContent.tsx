@@ -1,16 +1,12 @@
 import React, { useEffect, useMemo, useState } from 'react'
 
+import { MdCheck, MdClose, MdError, MdInfo, MdWarning } from 'react-icons/md'
 import { animated } from 'react-spring'
 import styled, { css } from 'styled-components'
-import {
-  FiInfo,
-  FiXCircle,
-  FiXOctagon,
-  FiCheckCircle,
-  FiAlertTriangle
-} from 'react-icons/fi'
 
 import { Box } from '../Box'
+import { Button } from '../Button'
+
 import { Message } from './Toast'
 import { useToast } from './ToastProvider'
 export interface Props {
@@ -29,32 +25,35 @@ interface PropsProgress {
   init: boolean
   fixed: boolean
   variation: any
+  duration?: number
 }
+
+const LOADING_BAR_COLOR = 'white'
 
 const toastVariations = {
   info: {
     background: 'info',
     color: '#fff',
-    bar: 'blue',
-    icon: <FiInfo size={24} />
+    bar: LOADING_BAR_COLOR,
+    icon: <MdInfo size={24} />
   },
   success: {
-    background: 'green',
+    background: 'success',
     color: '#fff',
-    bar: 'success',
-    icon: <FiCheckCircle size={24} />
+    bar: LOADING_BAR_COLOR,
+    icon: <MdCheck size={24} />
   },
   error: {
-    background: 'red',
+    background: 'error',
     color: '#fff',
-    bar: 'error',
-    icon: <FiXOctagon size={24} />
+    bar: LOADING_BAR_COLOR,
+    icon: <MdError size={24} />
   },
   warning: {
     background: 'warning',
     color: '#fff',
-    bar: 'orange',
-    icon: <FiAlertTriangle size={24} />
+    bar: LOADING_BAR_COLOR,
+    icon: <MdWarning size={24} />
   }
 }
 
@@ -65,11 +64,12 @@ const ProgressStyled = styled.div<PropsProgress>`
   flex: none;
   height: 6px;
   position: absolute;
-  animation-duration: 2.6s;
+  animation-duration: ${({ duration }) => `${duration || 2.6}s`};
   border-radius: 10px 10px 0 0;
   animation-fill-mode: forwards;
   background: ${({ theme }) => theme.colors.primary};
   animation-name: ${({ fixed }) => (!fixed ? 'progressing' : '')};
+  opacity: 40%;
   background: ${({ variation, theme }) => theme.colors[variation.bar]};
 
   @keyframes progressing {
@@ -123,7 +123,6 @@ const StyledToast = styled(animated.div)<PropsStyledToast>`
     position: absolute;
     right: 16px;
     top: 19px;
-    opacity: 0.6;
     border: 0;
     background: transparent;
     color: inherit;
@@ -144,12 +143,14 @@ export const ToastContent: React.FC<Props> = ({ message, className }) => {
   const [init, setInit] = useState(false)
   const { removeToast } = useToast()
 
+  const durationMilliseconds = (message.duration || 3) * 1000
+
   useEffect(() => {
     if (!message.fixed) {
       setInit(true)
       const timer = setTimeout(() => {
         removeToast(message.id)
-      }, 3000)
+      }, durationMilliseconds)
 
       return () => {
         clearTimeout(timer)
@@ -174,6 +175,7 @@ export const ToastContent: React.FC<Props> = ({ message, className }) => {
         init={init}
         variation={variation}
         fixed={!!message.fixed}
+        duration={message.duration}
       />
 
       {variation.icon}
@@ -183,9 +185,9 @@ export const ToastContent: React.FC<Props> = ({ message, className }) => {
         {message.description && <p>{message.description}</p>}
       </Box>
 
-      <button type='button' onClick={() => removeToast(message.id)}>
-        <FiXCircle size={18} />
-      </button>
+      <Button onClick={() => removeToast(message.id)}>
+        <MdClose size={24} color='#fff' />
+      </Button>
     </StyledToast>
   )
 }

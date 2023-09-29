@@ -57,6 +57,14 @@ WithOnePages.args = {
   count: 1
 }
 
+export const UndeterminedPages = args => {
+  return <Pagination variant='noCount' {...args} />
+}
+UndeterminedPages.args = {
+  prevPage: 'prevPage',
+  nextPage: 'nextPage'
+}
+
 export const Disabled = args => {
   return <Pagination {...args} />
 }
@@ -93,8 +101,12 @@ export const Variants = args => {
         <Pagination onChange={onChangePage} {...args} />
       </Flex>
 
-      <Flex variant='centralized'>
+      <Flex variant='centralized' mb='20px'>
         <Pagination count={8} size='large' onChange={onChangePage} />
+      </Flex>
+
+      <Flex variant='centralized'>
+        <Pagination size='large' onChange={onChangePage} variant='noCount' prevPage='prev' nextPage='next' />
       </Flex>
     </>
   )

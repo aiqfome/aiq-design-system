@@ -1,10 +1,10 @@
 import React from 'react'
 
+import { select, text } from '@storybook/addon-knobs'
 import { ToastProvider, useToast } from './index'
-import { text, select } from '@storybook/addon-knobs'
 
-import { Flex } from '../Flex'
 import { Button } from '../Button'
+import { Flex } from '../Flex'
 
 import { createPageExport } from '../../utils/storybook'
 
@@ -165,6 +165,35 @@ export const fixed: React.FC = () => {
         title: 'Hi ✌️',
         description: 'I am a fixed toast',
         fixed: true
+      })
+    }
+
+    return (
+      <Flex variant='fullCentralized'>
+        <Button palette='primary' variant='contained' onClick={showToast}>
+          Show Toast
+        </Button>
+      </Flex>
+    )
+  }
+
+  return (
+    <ToastProvider>
+      <ContentToast />
+    </ToastProvider>
+  )
+}
+
+export const successWithDuration: React.FC = () => {
+  const ContentToast: React.FC = () => {
+    const { addToast } = useToast()
+
+    function showToast() {
+      addToast({
+        duration: 8,
+        title: text('title', 'Hi ✌️'),
+        description: text('description', 'I am a toast of 8 seconds'),
+        type: 'success'
       })
     }
 
