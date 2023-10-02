@@ -210,9 +210,9 @@ export const Tabs = React.forwardRef<HTMLUListElement, TabsProps>(
     function handleClick(event) {
       const { id } = event.currentTarget.dataset
 
-      if (children[id]) {
-        onChange(event, parseInt(id))
-      }
+      if (!children[id]) return
+
+      onChange(event, parseInt(id))
     }
 
     return (
