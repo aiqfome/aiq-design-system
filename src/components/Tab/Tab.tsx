@@ -8,9 +8,11 @@ export type TabProps = SpaceProps & {
   value?: number
   active?: boolean
   variant?: 'default' | 'contained' | 'card'
+  disabled?: boolean
 }
 
 interface StyledProps {
+  disabled?: boolean
   active?: boolean
   variant?: 'default' | 'contained' | 'card'
 }
@@ -18,69 +20,108 @@ interface StyledProps {
 const tabVariations: { [index: string]: any } = {
   default: css<StyledProps>`
     padding: 8px 21px;
-    ${({ active, theme }) =>
-      active
-        ? css`
-            font-weight: ${theme.fontWeights.medium};
-            color: ${theme.colors.primary};
-            &::before {
-              background: ${theme.colors.primary};
-              animation: show 0.25s;
-              @keyframes show {
-                from {
-                  transform: scale(0);
-                }
-                to {
-                  transform: scale(1);
-                }
+    ${({ active, disabled, theme }) => {
+      if (active)
+        return css`
+          font-weight: ${theme.fontWeights.medium};
+          color: ${theme.colors.primary};
+          &::before {
+            background: ${theme.colors.primary};
+            animation: show 0.25s;
+            @keyframes show {
+              from {
+                transform: scale(0);
+              }
+              to {
+                transform: scale(1);
               }
             }
-          `
-        : css`
-            font-weight: ${theme.fontWeights.regular};
-            color: ${theme.colors.darkGrey};
-            &::before {
-              background: transparent;
-            }
-          `}
+          }
+        `
+      if (disabled)
+        return css`
+          cursor: not-allowed !important;
+          font-weight: ${theme.fontWeights.regular};
+          color: ${theme.colors.grey};
+          &::before {
+            background: transparent;
+          }
+        `
+
+      return css`
+        font-weight: ${theme.fontWeights.regular};
+        color: ${theme.colors.darkGrey};
+        &::before {
+          background: transparent;
+        }
+      `
+    }}
   `,
   contained: css<StyledProps>`
     padding: 10px 17px;
-    ${({ active, theme }) =>
-      active
-        ? css`
-            font-weight: ${theme.fontWeights.semiBold};
-            color: ${theme.colors.black};
-            background: ${theme.colors.white};
-            border-radius: 5px;
-            border: 1px solid ${theme.colors.mediumGrey};
-          `
-        : css`
-            font-weight: ${theme.fontWeights.regular};
-            color: ${theme.colors.darkGrey};
-          `}
+    ${({ active, theme, disabled }) => {
+      if (active) {
+        return css`
+          font-weight: ${theme.fontWeights.semiBold};
+          color: ${theme.colors.black};
+          background: ${theme.colors.white};
+          border-radius: 5px;
+          border: 1px solid ${theme.colors.mediumGrey};
+        `
+      }
+      if (disabled) {
+        return css`
+          cursor: not-allowed !important;
+          font-weight: ${theme.fontWeights.regular};
+          color: ${theme.colors.grey};
+          &::before {
+            background: transparent;
+          }
+        `
+      }
+
+      return css`
+        font-weight: ${theme.fontWeights.regular};
+        color: ${theme.colors.darkGrey};
+      `
+    }}
   `,
+
   card: css<StyledProps>`
     padding: 10px 17px;
-    ${({ active, theme }) =>
-      active
-        ? css`
-            color: ${theme.colors.almostBlack};
-            background: ${theme.colors.white};
-            border-radius: 5px 5px 0 0;
-            border: 1px solid ${theme.colors.mediumGrey};
-            border-bottom: 0px;
-            color: ${theme.colors.primary};
-            font-weight: ${theme.fontWeights.medium};
+    ${({ active, theme, disabled }) => {
+      if (active) {
+        return css`
+          color: ${theme.colors.almostBlack};
+          background: ${theme.colors.white};
+          border-radius: 5px 5px 0 0;
+          border: 1px solid ${theme.colors.mediumGrey};
+          border-bottom: 0px;
+          color: ${theme.colors.primary};
+          font-weight: ${theme.fontWeights.medium};
 
-            &::before {
-              background: ${theme.colors.white};
-            }
-          `
-        : css`
-            font-weight: ${theme.fontWeights.regular};
-            color: ${theme.colors.darkGrey};
-          `}
+          &::before {
+            background: ${theme.colors.white};
+          }
+        `
+      }
+
+      if (disabled) {
+        return css`
+          cursor: not-allowed !important;
+          font-weight: ${theme.fontWeights.regular};
+          color: ${theme.colors.grey};
+          &::before {
+            background: transparent;
+          }
+        `
+      }
+
+      return css`
+        font-weight: ${theme.fontWeights.regular};
+        color: ${theme.colors.darkGrey};
+      `
+    }}
   `
 }
 
@@ -110,7 +151,7 @@ const TabStyled = styled.li<StyledProps>`
   ${({ variant }) => tabVariations[variant || 'default']}
 `
 export const Tab = React.forwardRef<HTMLLIElement, TabProps>(
-  ({ children, value = 0, index, ...props }, ref) => {
+  ({ children, value = 0, index, disabled, ...props }, ref) => {
     function handleClick(event) {
       event.currentTarget.parentNode.setAttribute('data-id', index)
     }
@@ -118,7 +159,14 @@ export const Tab = React.forwardRef<HTMLLIElement, TabProps>(
     return (
       <TabStyled
         data-testid='tab'
-        onClick={handleClick}
+        onClick={e => {
+          if (disabled) {
+            return
+          }
+
+          handleClick(e)
+        }}
+        disabled={disabled}
         active={index === value}
         ref={ref}
         {...props}
