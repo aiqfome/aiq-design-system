@@ -162,3 +162,66 @@ export const Card: React.FC = args => {
     </Flex>
   )
 }
+
+export const Disabled: React.FC = args => {
+  const [defaultValue, setDefaultValue] = useState(0)
+  const [containedValue, setContainedValue] = useState(0)
+  const [cardValue, setCardValue] = useState(0)
+
+  return (
+    <>
+      <Text>Variant default:</Text>
+      <Flex flexDirection='column'>
+        <Tabs onChange={(e, newValue) => setDefaultValue(newValue)} {...args}>
+          <Tab value={defaultValue} index={0}>
+            <Text fontSize={2}>Item One</Text>
+          </Tab>
+          <Tab value={defaultValue} index={1} disabled>
+            <Text fontSize={2}>Item Disabled</Text>
+          </Tab>
+          <Tab value={defaultValue} index={2}>
+            <Text fontSize={2}>Item Three</Text>
+          </Tab>
+        </Tabs>
+      </Flex>
+
+      <Text>Variant contained:</Text>
+      <Flex flexDirection='column'>
+        <Tabs
+          variant='contained'
+          onChange={(e, newValue) => setContainedValue(newValue)}
+          {...args}
+        >
+          <Tab variant='contained' value={containedValue} index={0}>
+            <Text fontSize={2}>Item One</Text>
+          </Tab>
+          <Tab variant='contained' value={containedValue} index={1} disabled>
+            <Text fontSize={2}>Item Disabled</Text>
+          </Tab>
+          <Tab variant='contained' value={containedValue} index={2}>
+            <Text fontSize={2}>Item Three</Text>
+          </Tab>
+        </Tabs>
+      </Flex>
+
+      <Text>Variant card:</Text>
+      <Flex flexDirection='column'>
+        <Tabs
+          variant='card'
+          onChange={(e, newValue) => setCardValue(newValue)}
+          {...args}
+        >
+          <Tab variant='card' value={cardValue} index={0}>
+            <Text fontSize={2}>Item One</Text>
+          </Tab>
+          <Tab variant='card' value={cardValue} index={1} disabled>
+            <Text fontSize={2}>Item Disabled</Text>
+          </Tab>
+          <Tab variant='card' value={cardValue} index={2}>
+            <Text fontSize={2}>Item Three</Text>
+          </Tab>
+        </Tabs>
+      </Flex>
+    </>
+  )
+}

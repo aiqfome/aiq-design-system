@@ -31,21 +31,24 @@ describe('Tabs', () => {
     expect(tabs).toHaveTextContent('extra')
   })
 
-  it('should call onChange when click on tab in tabs', () => {
+  it('should call onChange when click on a tab', () => {
     const handleOnClick = jest.fn()
 
-    const { getByTestId } = render(
+    const { getByText } = render(
       <Tabs onChange={handleOnClick}>
         <Tab value={0} index={0}>
           Item One
         </Tab>
+        <Tab value={0} index={1}>
+          Item Two
+        </Tab>
       </Tabs>
     )
 
-    const container = getByTestId('tabs-container')
-    fireEvent.click(container)
+    const tab = getByText(/Item One/i)
+    fireEvent.click(tab)
 
-    expect(handleOnClick).toBeCalled()
+    expect(handleOnClick).toHaveBeenCalledTimes(1)
   })
 
   it('should have the same amount of tabs from the children prop', () => {
@@ -62,5 +65,23 @@ describe('Tabs', () => {
 
     const list = getAllByTestId('tab')
     expect(list).toHaveLength(2)
+  })
+
+  it('should disable the tab when the prop disabled is added', () => {
+    const { getByText } = render(
+      <Tabs>
+        <Tab value={0} index={0}>
+          Item One
+        </Tab>
+        <Tab value={0} index={1} disabled>
+          Item Two
+        </Tab>
+      </Tabs>
+    )
+
+    const disabledTab = getByText(/item two/i)
+
+    fireEvent.mouseOver(disabledTab)
+    expect(disabledTab).toHaveStyle('cursor: not-allowed')
   })
 })
