@@ -22,13 +22,10 @@ describe('TextArea', () => {
 
   it('should show error message when provided', () => {
     const errorMessage = 'campo obrigatório'
-    const { getByTestId } = render(
+    const { getByText } = render(
       <TextArea errorForm={!!errorMessage} errorMessage={errorMessage} />
     )
 
-    const textarea = getByTestId('textarea')
-
-    expect(textarea).toBeTruthy()
-    expect(textarea).toHaveAttribute('errorMessage', errorMessage)
+    expect(getByText(errorMessage)).toBeInTheDocument()
   })
 })
