@@ -19,4 +19,16 @@ describe('TextArea', () => {
     expect(textarea).toBeTruthy()
     expect(textarea).toHaveAttribute('placeholder', 'My placeholder')
   })
+
+  it('should show error message when provided', () => {
+    const errorMessage = 'campo obrigatório'
+    const { getByTestId } = render(
+      <TextArea errorForm={!!errorMessage} errorMessage={errorMessage} />
+    )
+
+    const textarea = getByTestId('textarea')
+
+    expect(textarea).toBeTruthy()
+    expect(textarea).toHaveAttribute('errorMessage', errorMessage)
+  })
 })

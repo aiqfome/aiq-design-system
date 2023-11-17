@@ -1,6 +1,6 @@
 import React, { TextareaHTMLAttributes } from 'react'
 
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import {
   margin,
   SpaceProps,
@@ -11,6 +11,8 @@ import {
   TypographyProps,
   MarginProps
 } from 'styled-system'
+import { InputErrorMessage } from '../InputErrorMessage'
+import { Flex } from '../Flex'
 
 export type Props = Omit<
   TextareaHTMLAttributes<HTMLTextAreaElement>,
@@ -27,7 +29,8 @@ export type Props = Omit<
     sufix?: any
     containerProps?: any
     disabled?: boolean
-
+    errorMessage?: string
+    errorForm?: boolean
     maxWidth?: number | string
     backgroundColor?: number | string
 
@@ -43,7 +46,24 @@ const StyledTextArea = styled.textarea<Props>`
   padding: 4px 8px;
   background: #fff;
   font-size: ${props => props.theme.fontSizes.medium};
+
+  ${({ theme, errorForm }) =>
+    errorForm &&
+    css`
+      border-color: ${theme.colors.error};
+    `};
 `
 export const TextArea = React.forwardRef<HTMLTextAreaElement, Props>(
-  (props, ref) => <StyledTextArea data-testid='textarea' ref={ref} {...props} />
+  ({ errorForm, errorMessage, ...props }, ref) => (
+    <Flex flexDirection='column'>
+      <StyledTextArea
+        data-testid='textarea'
+        ref={ref}
+        errorForm={errorForm}
+        {...props}
+      />
+
+      {errorForm && <InputErrorMessage errorMessage={errorMessage} />}
+    </Flex>
+  )
 )
