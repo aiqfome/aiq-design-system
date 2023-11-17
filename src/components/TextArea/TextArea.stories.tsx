@@ -1,12 +1,9 @@
-import React, { useState } from 'react'
-import { withKnobs, text, select, boolean } from '@storybook/addon-knobs'
+import React from 'react'
 
 import { Flex } from '../Flex'
 import { TextArea } from './TextArea'
 
 import { createPageExport } from '../../utils/storybook'
-import { backgroundColor } from 'styled-system'
-import { Button } from '../Button'
 
 const aiqProps = [
   'name',
@@ -16,7 +13,9 @@ const aiqProps = [
   'disabled',
   'maxWith',
   'backgroundColor',
-  'nativeAutoComplete'
+  'nativeAutoComplete',
+  'errorForm',
+  'errorMessage'
 ]
 
 export default createPageExport(TextArea, 'TextArea', aiqProps, {
@@ -25,9 +24,9 @@ export default createPageExport(TextArea, 'TextArea', aiqProps, {
     value: { control: 'text' },
     backgroundColor: { control: 'text' },
     disabled: { control: 'boolean' },
+    nativeAutoComplete: { control: 'select', options: ['on', 'disabled'] },
     errorForm: { control: 'boolean' },
-    errorMessage: { control: 'string' },
-    nativeAutoComplete: { control: 'select', options: ['on', 'disabled'] }
+    errorMessage: { control: 'text' }
   }
 })
 
