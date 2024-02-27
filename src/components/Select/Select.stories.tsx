@@ -73,6 +73,27 @@ export const Basic = args => {
   )
 }
 
+export const ClearOnSelect = args => {
+  const itens = ['React', 'CSS', 'PHP', 'HTML']
+
+  const [selectedItem, setSelectedItem] = useState('')
+
+  function handleClickItemSelect(item) {
+    setSelectedItem(item)
+  }
+
+  return (
+    <Select
+      clearOnSelect
+      handleClearSelection={setSelectedItem}
+      selectedItem={selectedItem}
+      handleSelectedItemChange={handleClickItemSelect}
+      items={object('items', itens)}
+      {...args}
+    />
+  )
+}
+
 export const Outlined = args => {
   const itens = ['React', 'CSS', 'PHP', 'HTML']
 
