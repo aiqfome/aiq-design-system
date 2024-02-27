@@ -147,4 +147,22 @@ describe('Select', () => {
 
     expect(mockHandleClearSelection).toBeCalledTimes(1)
   })
+
+  it('should call handleClearSelection prop when open select and isFetchable is true', () => {
+    const mockHandleClearSelection = jest.fn()
+
+    const component = render(
+      <Select
+        isFetchable
+        handleClearSelection={mockHandleClearSelection}
+        items={items}
+      />
+    )
+
+    const select = component.getByTestId('input')
+
+    fireEvent.click(select)
+
+    expect(mockHandleClearSelection).toBeCalledTimes(1)
+  })
 })
