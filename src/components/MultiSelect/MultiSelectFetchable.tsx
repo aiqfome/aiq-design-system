@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { MdClose } from 'react-icons/md'
 import { useCombobox, useMultipleSelection } from 'downshift'
+import { isEmpty } from 'lodash'
 
 import { Flex } from '../Flex'
 import { Box } from '../Box'
@@ -403,7 +404,7 @@ export const MultiSelectFetchable: React.FC<Props> = ({
           border='1px solid #dedede'
           {...getMenuProps()}
         >
-          {!isDependent && (
+          {!isDependent && !isEmpty(filters) && (
             <>
               <ul>
                 {filters.map((filter, index) => (
