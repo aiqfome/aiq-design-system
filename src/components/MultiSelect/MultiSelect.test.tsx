@@ -4,8 +4,10 @@ import { fireEvent } from '@testing-library/react'
 import { MultiSelect } from '../MultiSelect'
 import { render } from '../utils/test/render'
 
+const greenColor = '#6EC531'
+
 const items = [
-  { id: 0, name: 'Maringá' },
+  { id: 0, name: 'Maringá', color: greenColor },
   { id: 1, name: 'Guarapuava' },
   { id: 2, name: 'São Paulo' },
   { id: 3, name: 'Curitiba' },
@@ -137,5 +139,14 @@ describe('MultiSelect', () => {
     const select = getByTestId('select-input')
 
     expect(select).toBeDisabled()
+  })
+
+  it('should have custom color when have color prop', () => {
+    const { getByTestId } = render(
+      <MultiSelect items={items} value={[items[0]]} />
+    )
+
+    const BadgeItem = getByTestId('select-selected-item')
+    expect(BadgeItem).toHaveStyle({ backgroundColor: greenColor })
   })
 })

@@ -10,11 +10,13 @@ import { Text } from '../Text'
 import { Divider } from '../Divider'
 import { Button } from '../Button'
 import { InputErrorMessage } from '../InputErrorMessage'
+import { isEmpty } from 'lodash'
 
 type Item = {
   id: any
   name: string
   select?: string
+  color?: string
 }
 
 export interface Props {
@@ -349,7 +351,9 @@ export const MultiSelectStatic: React.FC<Props> = ({
                 display='flex'
                 flexDirection='row'
                 alignItems='center'
-                backgroundColor={disabled ? 'darkGrey' : 'primary'}
+                backgroundColor={
+                  disabled ? 'darkGrey' : selectedItem?.color || 'primary'
+                }
                 borderRadius='3px'
                 data-testid='select-selected-item'
               >
@@ -429,7 +433,7 @@ export const MultiSelectStatic: React.FC<Props> = ({
           border='1px solid #dedede'
           {...getMenuProps()}
         >
-          {!isDependent && !disabled && (
+          {!isDependent && !disabled && !isEmpty(filters) && (
             <>
               <ul>
                 {filters.map((filter, index) => (

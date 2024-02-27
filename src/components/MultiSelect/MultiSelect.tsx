@@ -6,6 +6,7 @@ import { MultiSelectStatic } from './MultiSelectStatic'
 type Item = {
   id: any
   name: string
+  color?: string
 }
 
 export interface Props {
