@@ -129,4 +129,22 @@ describe('Select', () => {
 
     expect(select).toBeDisabled()
   })
+
+  it('should call handleClearSelection prop when open select and clearOnSelect is true', () => {
+    const mockHandleClearSelection = jest.fn()
+
+    const component = render(
+      <Select
+        clearOnSelect
+        handleClearSelection={mockHandleClearSelection}
+        items={items}
+      />
+    )
+
+    const select = component.getByTestId('input')
+
+    fireEvent.click(select)
+
+    expect(mockHandleClearSelection).toBeCalledTimes(1)
+  })
 })

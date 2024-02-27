@@ -14,6 +14,7 @@ export type Props = BoxProps & {
   placeholder?: string
   handleSelectedItemChange?: (item: any) => void
   onChangeTextInput?: (text: string) => void
+  handleClearSelection?: (clear: '') => void
   selectedItem?: any
   autoComplete?: boolean
   sufix?: any
