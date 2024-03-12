@@ -6,6 +6,8 @@ import { MultiSelect } from './MultiSelect'
 
 import { createPageExport } from '../../utils/storybook'
 
+import { IoIosArrowDown } from 'react-icons/io'
+
 const aiqProps = [
   'maxWidth',
   'filters',
@@ -159,4 +161,26 @@ export const DisabledWithoutElements = (args): ReactElement => {
 }
 DisabledWithoutElements.args = {
   disabled: true
+}
+
+export const WithSuffix = (args): ReactElement => {
+  const [value, setValue] = useState([items[0]])
+
+  function handleChangeMultiSelect({ selectedItems }) {
+    setValue(selectedItems)
+  }
+
+  return (
+    <Flex variant='fullCentralized'>
+      <MultiSelect
+        value={value}
+        onChange={handleChangeMultiSelect}
+        filters={filters}
+        items={items}
+        suffix={<IoIosArrowDown />}
+        errorForm={value.length === 0}
+        {...args}
+      />
+    </Flex>
+  )
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { ReactNode, useEffect, useRef, useState } from 'react'
 
 import styled from 'styled-components'
 import { MdClose } from 'react-icons/md'
@@ -33,6 +33,7 @@ export interface Props {
   value?: Item[]
   items: Item[]
   isLoading?: boolean
+  suffix?: ReactNode
   placeholder?: string
   loadingMessage?: string
   emptyMessage?: string
@@ -149,6 +150,7 @@ export const MultiSelectFetchable: React.FC<Props> = ({
   onChange,
   value = [],
   isLoading = false,
+  suffix,
   placeholder,
   loadingMessage = 'carregando...',
   emptyMessage = 'item não encontrado ou já adicionado',
@@ -392,7 +394,7 @@ export const MultiSelectFetchable: React.FC<Props> = ({
             autoComplete='disabled'
           />
 
-          {isLoading && <Loading size='small' />}
+          {isLoading ? <Loading size='small' /> : suffix}
         </ContainerInput>
 
         <Overflow

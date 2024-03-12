@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, ReactNode } from 'react'
 
 import styled from 'styled-components'
 import { MdClose } from 'react-icons/md'
@@ -31,7 +31,7 @@ export interface Props {
   onChange?: any
   value?: Item[]
   items: Item[]
-  isLoading?: boolean
+  suffix?: ReactNode
   isFetchable?: boolean
   placeholder?: string
   errorMessage?: string
@@ -174,6 +174,7 @@ export const MultiSelectStatic: React.FC<Props> = ({
   onChange,
   value = [],
   placeholder,
+  suffix,
   errorForm,
   errorMessage,
   emptyMessage = 'item não encontrado ou já adicionado',
@@ -422,6 +423,8 @@ export const MultiSelectStatic: React.FC<Props> = ({
             )}
             autoComplete='disabled'
           />
+
+          {suffix}
         </ContainerInput>
 
         <Overflow

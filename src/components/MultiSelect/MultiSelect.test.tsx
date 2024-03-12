@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { fireEvent } from '@testing-library/react'
 
 import { MultiSelect } from '../MultiSelect'
 import { render } from '../utils/test/render'
+import { IoIosArrowDown } from 'react-icons/io'
 
 const greenColor = '#6EC531'
 
@@ -148,5 +149,19 @@ describe('MultiSelect', () => {
 
     const BadgeItem = getByTestId('select-selected-item')
     expect(BadgeItem).toHaveStyle({ backgroundColor: greenColor })
+  })
+
+  it('should show suffix when prop is provided', () => {
+    const { container } = render(
+      <MultiSelect
+        items={items}
+        value={[items[0]]}
+        suffix={<IoIosArrowDown />}
+      />
+    )
+
+    const suffix = container.querySelector('svg')
+
+    expect(suffix).toBeInTheDocument()
   })
 })

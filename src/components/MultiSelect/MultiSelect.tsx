@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 
 import { MultiSelectFetchable } from './MultiSelectFetchable'
 import { MultiSelectStatic } from './MultiSelectStatic'
@@ -22,6 +22,7 @@ export interface Props {
   value?: Item[]
   items: Item[]
   isLoading?: boolean
+  suffix?: ReactNode
   isFetchable?: boolean
   placeholder?: string
   loadingMessage?: string
