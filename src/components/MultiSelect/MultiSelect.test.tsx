@@ -164,4 +164,21 @@ describe('MultiSelect', () => {
 
     expect(suffix).toBeInTheDocument()
   })
+
+  it('should show limit message when the selected items limit is reached', () => {
+    const { container } = render(
+      <MultiSelect
+        items={items}
+        value={[items[0], items[1]]}
+        suffix={<IoIosArrowDown />}
+        selectedItemsLimit={2}
+      />
+    )
+
+    const list = container.querySelectorAll('li')
+    const firstItemText = list[0].textContent
+
+    expect(list.length).toBe(1)
+    expect(firstItemText).toContain('quantidade máxima atingida')
+  })
 })

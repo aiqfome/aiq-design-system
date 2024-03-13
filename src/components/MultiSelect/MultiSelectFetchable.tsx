@@ -32,6 +32,8 @@ export interface Props {
   onChange?: any
   value?: Item[]
   items: Item[]
+  selectedItemsLimit?: number
+  limitMessage?: string
   isLoading?: boolean
   suffix?: ReactNode
   placeholder?: string
@@ -145,6 +147,8 @@ const SelectedItem = styled(Text)`
 
 export const MultiSelectFetchable: React.FC<Props> = ({
   items,
+  selectedItemsLimit,
+  limitMessage = 'quantidade máxima atingida',
   maxWidth,
   filters = [],
   onChange,
@@ -291,6 +295,8 @@ export const MultiSelectFetchable: React.FC<Props> = ({
     }
   }
 
+  const hasReachedLimit = selectedItemsLimit === selectedItems?.length
+
   return (
     <Flex flexDirection='column' flex={1}>
       <MultiSelectStyled
@@ -432,6 +438,7 @@ export const MultiSelectFetchable: React.FC<Props> = ({
                 !isDependent &&
                 !isLoading &&
                 !disabled &&
+                !hasReachedLimit &&
                 getFilteredItems().map((item, index) => (
                   <li
                     key={`${item}${index}`}
@@ -452,6 +459,8 @@ export const MultiSelectFetchable: React.FC<Props> = ({
                 !isLoading &&
                 !isDependent &&
                 getFilteredItems().length === 0 && <li>{emptyMessage}</li>}
+
+              {hasReachedLimit && <li>{limitMessage}</li>}
             </ul>
           </Itens>
         </Overflow>

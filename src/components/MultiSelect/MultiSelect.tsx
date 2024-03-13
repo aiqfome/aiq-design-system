@@ -21,6 +21,8 @@ export interface Props {
   onChange?: any
   value?: Item[]
   items: Item[]
+  selectedItemsLimit?: number
+  limitMessage?: string
   isLoading?: boolean
   suffix?: ReactNode
   isFetchable?: boolean

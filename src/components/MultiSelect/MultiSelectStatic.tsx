@@ -31,6 +31,8 @@ export interface Props {
   onChange?: any
   value?: Item[]
   items: Item[]
+  selectedItemsLimit?: number
+  limitMessage?: string
   suffix?: ReactNode
   isFetchable?: boolean
   placeholder?: string
@@ -169,6 +171,8 @@ const CustomText = styled(Text)`
 
 export const MultiSelectStatic: React.FC<Props> = ({
   items,
+  selectedItemsLimit,
+  limitMessage = 'quantidade máxima atingida',
   maxWidth,
   filters = [],
   onChange,
@@ -315,6 +319,17 @@ export const MultiSelectStatic: React.FC<Props> = ({
       })
     }
   }
+
+  const handleSelect = ({ e, item, index }) => {
+    if (selectedItems.indexOf(item) > -1 && removable)
+      onChange({
+        selectedItems: selectedItems.filter(e => e.id !== item.id)
+      })
+    else getItemProps({ item, index }).onClick(e)
+    setItemLimit(undefined)
+  }
+
+  const hasReachedLimit = selectedItemsLimit === selectedItems?.length
 
   return (
     <Flex flexDirection='column' flex={1}>
@@ -493,21 +508,13 @@ export const MultiSelectStatic: React.FC<Props> = ({
               {isOpen &&
                 !isDependent &&
                 !disabled &&
+                !hasReachedLimit &&
                 getFilteredItems().map((item, index) => (
                   <li
                     key={`${item}${index}`}
                     data-testid='select-item'
                     {...getItemProps({ item, index })}
-                    onClick={e => {
-                      if (selectedItems.indexOf(item) > -1 && removable)
-                        onChange({
-                          selectedItems: selectedItems.filter(
-                            e => e.id !== item.id
-                          )
-                        })
-                      else getItemProps({ item, index }).onClick(e)
-                      setItemLimit(undefined)
-                    }}
+                    onClick={e => handleSelect({ e, item, index })}
                   >
                     {item.name}
                   </li>
@@ -518,6 +525,8 @@ export const MultiSelectStatic: React.FC<Props> = ({
               {isOpen && !isDependent && getFilteredItems().length === 0 && (
                 <li>{emptyMessage}</li>
               )}
+
+              {hasReachedLimit && <li>{limitMessage}</li>}
             </ul>
           </Itens>
         </Overflow>
