@@ -246,14 +246,20 @@ export const MultiSelectStatic: React.FC<Props> = ({
     refContainer?.offsetWidth
   ])
 
-  const getFilteredItems = () =>
-    items
+  const hasOnlyNumbers = (str: string) => /^[0-9]+$/.test(str)
+
+  const getFilteredItems = () => {
+    const userSearchInput = inputValue.toLowerCase()
+    return items
       .filter(
         item =>
           selectedItems.indexOf(item) < 0 &&
-          item.name.toLowerCase().startsWith(inputValue.toLowerCase())
+          (hasOnlyNumbers(userSearchInput)
+            ? item.name.toLowerCase().includes(userSearchInput)
+            : item.name.toLowerCase().startsWith(userSearchInput))
       )
       .sort((a, b) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0))
+  }
 
   const clear = () => {
     setItemLimit(undefined)
