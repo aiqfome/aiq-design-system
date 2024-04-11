@@ -10,7 +10,7 @@ const greenColor = '#6EC531'
 const items = [
   { id: 0, name: 'Maringá (ID 9457)', color: greenColor },
   { id: 1, name: 'Guarapuava (ID 9456)' },
-  { id: 2, name: 'São Paulo' },
+  { id: 2, name: 'São Paulo (ID 5694)' },
   { id: 3, name: 'Curitiba' },
   { id: 4, name: 'Cruzeiro do Sul' },
   { id: 5, name: 'Pato Branco' },

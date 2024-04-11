@@ -61,7 +61,7 @@ const items = [
   { id: 3, name: 'Curitiba (ID 2558)' },
   { id: 4, name: 'Cruzeiro do Sul (ID 2258)' },
   { id: 5, name: 'Pato Branco (ID 2218)' },
-  { id: 6, name: 'Prudentópolis (ID 9978)' },
+  { id: 6, name: 'Prudentópolis (ID 9922)' },
   { id: 7, name: 'Campo Mourão (ID 2528)' },
   { id: 8, name: 'New York (ID 2527)' }
 ]
