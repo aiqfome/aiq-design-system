@@ -251,13 +251,15 @@ export const MultiSelectStatic: React.FC<Props> = ({
   const getFilteredItems = () => {
     const userSearchInput = inputValue.toLowerCase()
     return items
-      .filter(
-        item =>
+      .filter(item => {
+        const itemId = item.name.match(/\d+/)
+        return (
           selectedItems.indexOf(item) < 0 &&
-          (hasOnlyNumbers(userSearchInput)
-            ? item.name.toLowerCase().includes(userSearchInput)
+          (hasOnlyNumbers(userSearchInput) && itemId && itemId[0]
+            ? itemId[0].startsWith(userSearchInput)
             : item.name.toLowerCase().startsWith(userSearchInput))
-      )
+        )
+      })
       .sort((a, b) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0))
   }
 
