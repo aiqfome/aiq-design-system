@@ -8,8 +8,8 @@ import { IoIosArrowDown } from 'react-icons/io'
 const greenColor = '#6EC531'
 
 const items = [
-  { id: 0, name: 'Maringá', color: greenColor },
-  { id: 1, name: 'Guarapuava' },
+  { id: 0, name: 'Maringá (ID 9457)', color: greenColor },
+  { id: 1, name: 'Guarapuava (ID 9456)' },
   { id: 2, name: 'São Paulo' },
   { id: 3, name: 'Curitiba' },
   { id: 4, name: 'Cruzeiro do Sul' },
@@ -180,5 +180,16 @@ describe('MultiSelect', () => {
 
     expect(list.length).toBe(1)
     expect(firstItemText).toContain('quantidade máxima atingida')
+  })
+
+  it('should show correct items result when search input is only numbers', () => {
+    const { getByTestId, container } = render(<MultiSelect items={items} />)
+
+    fireEvent.change(getByTestId('select-input'), {
+      target: { value: '94' }
+    })
+
+    const list = container.querySelectorAll('li')
+    expect(list.length).toBe(2)
   })
 })

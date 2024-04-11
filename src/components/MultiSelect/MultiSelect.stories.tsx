@@ -55,15 +55,15 @@ export default createPageExport(MultiSelect, 'MultiSelect', aiqProps, {
 })
 
 const items = [
-  { id: 0, name: 'Maringá' },
-  { id: 1, name: 'Guarapuava' },
-  { id: 2, name: 'São Paulo' },
-  { id: 3, name: 'Curitiba' },
-  { id: 4, name: 'Cruzeiro do Sul' },
-  { id: 5, name: 'Pato Branco' },
-  { id: 6, name: 'Prudentópolis' },
-  { id: 7, name: 'Campo Mourão' },
-  { id: 8, name: 'New York' }
+  { id: 0, name: 'Maringá (ID 9457)' },
+  { id: 1, name: 'Guarapuava (ID 9456)' },
+  { id: 2, name: 'São Paulo  (ID 2557)' },
+  { id: 3, name: 'Curitiba (ID 2558)' },
+  { id: 4, name: 'Cruzeiro do Sul (ID 2258)' },
+  { id: 5, name: 'Pato Branco (ID 2218)' },
+  { id: 6, name: 'Prudentópolis (ID 9978)' },
+  { id: 7, name: 'Campo Mourão (ID 2528)' },
+  { id: 8, name: 'New York (ID 2527)' }
 ]
 
 const filters = [
