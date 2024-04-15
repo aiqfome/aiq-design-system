@@ -7,6 +7,7 @@ import { SelectStatic } from './SelectStatic'
 
 export type Props = BoxProps & {
   label?: string
+  internalLabel?: string
   items?: Array<string | { id: any; name: any; select?: any }>
   isOpen?: boolean
   variant?: 'outlined'

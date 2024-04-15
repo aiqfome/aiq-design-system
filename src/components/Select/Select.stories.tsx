@@ -9,6 +9,7 @@ import { createPageExport } from '../../utils/storybook'
 
 const aiqProps = [
   'label',
+  'internalLabel',
   'items',
   'isOpen',
   'variant',
@@ -35,6 +36,7 @@ const aiqProps = [
 export default createPageExport(Select, 'Select', aiqProps, {
   argTypes: {
     label: { control: 'text' },
+    internalLabel: { control: 'text' },
     items: { control: 'object' },
     isOpen: { control: 'boolean' },
     variant: {

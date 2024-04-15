@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import styled, { css } from 'styled-components'
 
 import { useCombobox } from 'downshift'
@@ -8,9 +8,11 @@ import { Box, Props as BoxPros } from '../Box'
 import { Button, Props as ButtonProps } from '../Button'
 import { Input } from '../Input'
 import { Loading } from '../Loading'
+import { Text } from '../Text'
 
 export type Props = BoxPros & {
   label?: string
+  internalLabel?: string
   items?: Array<string | { id: any; name: any; select?: any }>
   isOpen?: boolean
   variant?: 'outlined'
@@ -105,6 +107,7 @@ export const SelectStatic = React.forwardRef<HTMLDivElement, Props>(
     {
       disabled,
       label,
+      internalLabel,
       variant,
       items = [],
       placeholder,
@@ -138,6 +141,7 @@ export const SelectStatic = React.forwardRef<HTMLDivElement, Props>(
     useEffect(() => setInputItems(items), [items])
 
     const { backgroundColor, border, width, maxWidth } = props
+
     const boxStyled = {
       backgroundColor,
       border,
@@ -181,6 +185,17 @@ export const SelectStatic = React.forwardRef<HTMLDivElement, Props>(
       }
     }
 
+    const completePrefix = useMemo(() => {
+      if (!prefix && !internalLabel) return null
+
+      return (
+        <div style={{ marginRight: internalLabel && '-12px', columnGap: '4px' }}>
+          {prefix}
+          <Text ml={prefix && '4px'} color='darkGrey' fontSize='small' >{internalLabel}</Text>
+        </div>
+      )
+    }, [])
+
     return (
       <Container
         isOpen={isOpen && !disabled}
@@ -190,6 +205,13 @@ export const SelectStatic = React.forwardRef<HTMLDivElement, Props>(
         {...props}
       >
         <ul {...getMenuProps()}>
+          {internalLabel && 
+            <div style={{ marginTop: '8px', marginBottom: '2px' }}>
+              <Text p='12px' color='darkGrey' fontSize={12} fontWeight='medium'>
+                {internalLabel}
+              </Text>
+            </div>
+          }
           {isOpen &&
             inputItems &&
             !isDependent &&
@@ -229,7 +251,7 @@ export const SelectStatic = React.forwardRef<HTMLDivElement, Props>(
             errorMessage={errorMessage}
             errorForm={errorForm}
             readOnly={!autoComplete}
-            prefix={prefix}
+            prefix={completePrefix}
             placeholder={placeholder}
             {...getInputProps({
               onClick: () => {
