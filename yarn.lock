@@ -11538,7 +11538,7 @@ react-select@^3.2.0:
     react-input-autosize "^3.0.0"
     react-transition-group "^4.3.0"
 
-react-spring@^9.6.1:
+react-spring@9.6.1:
   version "9.6.1"
   resolved "https://registry.yarnpkg.com/react-spring/-/react-spring-9.6.1.tgz#e715b2fa523c1a3acfdcf1aaa93e081620b8cc8e"
   integrity sha512-BeP80R4SLb1bZHW/Q62nECoScHw/fH+jzGkD7dc892HNGa+lbGIJXURc6U7N8JfZ8peEO46nPxR57aUMuYzquQ==

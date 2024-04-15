@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, ReactNode } from 'react'
 
 import styled from 'styled-components'
 import { MdClose } from 'react-icons/md'
@@ -10,11 +10,13 @@ import { Text } from '../Text'
 import { Divider } from '../Divider'
 import { Button } from '../Button'
 import { InputErrorMessage } from '../InputErrorMessage'
+import { isEmpty } from 'lodash'
 
 type Item = {
   id: any
   name: string
   select?: string
+  color?: string
 }
 
 export interface Props {
@@ -29,7 +31,9 @@ export interface Props {
   onChange?: any
   value?: Item[]
   items: Item[]
-  isLoading?: boolean
+  selectedItemsLimit?: number
+  limitMessage?: string
+  suffix?: ReactNode
   isFetchable?: boolean
   placeholder?: string
   errorMessage?: string
@@ -117,10 +121,19 @@ const Overflow = styled(Flex)<OverflowProps>`
     li {
       padding: 3px 10px;
 
-      &:hover {
-        cursor: pointer;
-        background: ${({ theme }) => theme.colors.primary};
-        color: ${({ theme }) => theme.colors.white};
+      @media (hover: hover) {
+        &:hover {
+          cursor: pointer;
+          background: ${({ theme }) => theme.colors.primary};
+          color: ${({ theme }) => theme.colors.white};
+        }
+      }
+
+      @media (hover: none) {
+        &:active {
+          background: ${({ theme }) => theme.colors.primary};
+          color: ${({ theme }) => theme.colors.white};
+        }
       }
     }
   }
@@ -129,11 +142,6 @@ const Overflow = styled(Flex)<OverflowProps>`
 const Itens = styled(Box)`
   max-height: 250px;
   overflow: auto;
-
-  .highlighted {
-    background: ${({ theme }) => theme.colors.primary};
-    color: ${({ theme }) => theme.colors.white};
-  }
 `
 
 const SelectedItem = styled(Text)`
@@ -163,11 +171,14 @@ const CustomText = styled(Text)`
 
 export const MultiSelectStatic: React.FC<Props> = ({
   items,
+  selectedItemsLimit,
+  limitMessage = 'quantidade máxima atingida',
   maxWidth,
   filters = [],
   onChange,
   value = [],
   placeholder,
+  suffix,
   errorForm,
   errorMessage,
   emptyMessage = 'item não encontrado ou já adicionado',
@@ -235,14 +246,22 @@ export const MultiSelectStatic: React.FC<Props> = ({
     refContainer?.offsetWidth
   ])
 
-  const getFilteredItems = () =>
-    items
-      .filter(
-        item =>
+  const hasOnlyNumbers = (str: string) => /^[0-9]+$/.test(str)
+
+  const getFilteredItems = () => {
+    const userSearchInput = inputValue.toLowerCase()
+    return items
+      .filter(item => {
+        const itemId = item.name.match(/\d+/)
+        return (
           selectedItems.indexOf(item) < 0 &&
-          item.name.toLowerCase().startsWith(inputValue.toLowerCase())
-      )
+          (hasOnlyNumbers(userSearchInput) && itemId && itemId[0]
+            ? itemId[0].startsWith(userSearchInput)
+            : item.name.toLowerCase().startsWith(userSearchInput))
+        )
+      })
       .sort((a, b) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0))
+  }
 
   const clear = () => {
     setItemLimit(undefined)
@@ -254,12 +273,10 @@ export const MultiSelectStatic: React.FC<Props> = ({
     getMenuProps,
     getInputProps,
     getComboboxProps,
-    highlightedIndex,
     getItemProps,
     openMenu
   } = useCombobox({
     inputValue,
-    defaultHighlightedIndex: 0,
     selectedItem: null,
     items: isDependent ? [] : getFilteredItems(),
     stateReducer: (state, actionAndChanges) => {
@@ -311,6 +328,17 @@ export const MultiSelectStatic: React.FC<Props> = ({
     }
   }
 
+  const handleSelect = ({ e, item, index }) => {
+    if (selectedItems.indexOf(item) > -1 && removable)
+      onChange({
+        selectedItems: selectedItems.filter(e => e.id !== item.id)
+      })
+    else getItemProps({ item, index }).onClick(e)
+    setItemLimit(undefined)
+  }
+
+  const hasReachedLimit = selectedItemsLimit === selectedItems?.length
+
   return (
     <Flex flexDirection='column' flex={1}>
       <MultiSelectStyled
@@ -347,7 +375,9 @@ export const MultiSelectStatic: React.FC<Props> = ({
                 display='flex'
                 flexDirection='row'
                 alignItems='center'
-                backgroundColor={disabled ? 'darkGrey' : 'primary'}
+                backgroundColor={
+                  disabled ? 'darkGrey' : selectedItem?.color || 'primary'
+                }
                 borderRadius='3px'
                 data-testid='select-selected-item'
               >
@@ -416,6 +446,8 @@ export const MultiSelectStatic: React.FC<Props> = ({
             )}
             autoComplete='disabled'
           />
+
+          {suffix}
         </ContainerInput>
 
         <Overflow
@@ -427,7 +459,7 @@ export const MultiSelectStatic: React.FC<Props> = ({
           border='1px solid #dedede'
           {...getMenuProps()}
         >
-          {!isDependent && !disabled && (
+          {!isDependent && !disabled && !isEmpty(filters) && (
             <>
               <ul>
                 {filters.map((filter, index) => (
@@ -484,22 +516,13 @@ export const MultiSelectStatic: React.FC<Props> = ({
               {isOpen &&
                 !isDependent &&
                 !disabled &&
+                !hasReachedLimit &&
                 getFilteredItems().map((item, index) => (
                   <li
-                    className={highlightedIndex === index ? 'highlighted' : ''}
                     key={`${item}${index}`}
                     data-testid='select-item'
                     {...getItemProps({ item, index })}
-                    onClick={e => {
-                      if (selectedItems.indexOf(item) > -1 && removable)
-                        onChange({
-                          selectedItems: selectedItems.filter(
-                            e => e.id !== item.id
-                          )
-                        })
-                      else getItemProps({ item, index }).onClick(e)
-                      setItemLimit(undefined)
-                    }}
+                    onClick={e => handleSelect({ e, item, index })}
                   >
                     {item.name}
                   </li>
@@ -510,6 +533,8 @@ export const MultiSelectStatic: React.FC<Props> = ({
               {isOpen && !isDependent && getFilteredItems().length === 0 && (
                 <li>{emptyMessage}</li>
               )}
+
+              {hasReachedLimit && <li>{limitMessage}</li>}
             </ul>
           </Itens>
         </Overflow>

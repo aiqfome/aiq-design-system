@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 
 import { MultiSelectFetchable } from './MultiSelectFetchable'
 import { MultiSelectStatic } from './MultiSelectStatic'
@@ -6,6 +6,7 @@ import { MultiSelectStatic } from './MultiSelectStatic'
 type Item = {
   id: any
   name: string
+  color?: string
 }
 
 export interface Props {
@@ -20,7 +21,10 @@ export interface Props {
   onChange?: any
   value?: Item[]
   items: Item[]
+  selectedItemsLimit?: number
+  limitMessage?: string
   isLoading?: boolean
+  suffix?: ReactNode
   isFetchable?: boolean
   placeholder?: string
   loadingMessage?: string

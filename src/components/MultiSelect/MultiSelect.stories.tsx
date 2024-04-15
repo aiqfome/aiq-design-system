@@ -6,12 +6,15 @@ import { MultiSelect } from './MultiSelect'
 
 import { createPageExport } from '../../utils/storybook'
 
+import { IoIosArrowDown } from 'react-icons/io'
+
 const aiqProps = [
   'maxWidth',
   'filters',
   'onChange',
   'value',
   'items',
+  'selectedItemsLimit',
   'isLoading',
   'isFetchable',
   'placeholder',
@@ -31,6 +34,7 @@ export default createPageExport(MultiSelect, 'MultiSelect', aiqProps, {
     filters: { control: 'object' },
     value: { control: 'object' },
     items: { control: 'object' },
+    selectedItemsLimit: { control: 'number' },
     isLoading: { control: 'boolean' },
     isFetchable: { control: 'number' },
     placeholder: { control: 'text' },
@@ -51,15 +55,15 @@ export default createPageExport(MultiSelect, 'MultiSelect', aiqProps, {
 })
 
 const items = [
-  { id: 0, name: 'Maringá' },
-  { id: 1, name: 'Guarapuava' },
-  { id: 2, name: 'São Paulo' },
-  { id: 3, name: 'Curitiba' },
-  { id: 4, name: 'Cruzeiro do Sul' },
-  { id: 5, name: 'Pato Branco' },
-  { id: 6, name: 'Prudentópolis' },
-  { id: 7, name: 'Campo Mourão' },
-  { id: 8, name: 'New York' }
+  { id: 0, name: 'Maringá (ID 9457)' },
+  { id: 1, name: 'Guarapuava (ID 9456)' },
+  { id: 2, name: 'São Paulo  (ID 2557)' },
+  { id: 3, name: 'Curitiba (ID 2558)' },
+  { id: 4, name: 'Cruzeiro do Sul (ID 2258)' },
+  { id: 5, name: 'Pato Branco (ID 2218)' },
+  { id: 6, name: 'Prudentópolis (ID 9922)' },
+  { id: 7, name: 'Campo Mourão (ID 2528)' },
+  { id: 8, name: 'New York (ID 2527)' }
 ]
 
 const filters = [
@@ -159,4 +163,26 @@ export const DisabledWithoutElements = (args): ReactElement => {
 }
 DisabledWithoutElements.args = {
   disabled: true
+}
+
+export const WithSuffix = (args): ReactElement => {
+  const [value, setValue] = useState([items[0]])
+
+  function handleChangeMultiSelect({ selectedItems }) {
+    setValue(selectedItems)
+  }
+
+  return (
+    <Flex variant='fullCentralized'>
+      <MultiSelect
+        value={value}
+        onChange={handleChangeMultiSelect}
+        filters={filters}
+        items={items}
+        suffix={<IoIosArrowDown />}
+        errorForm={value.length === 0}
+        {...args}
+      />
+    </Flex>
+  )
 }

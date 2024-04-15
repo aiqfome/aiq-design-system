@@ -1,8 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { ReactNode, useEffect, useRef, useState } from 'react'
 
 import styled from 'styled-components'
 import { MdClose } from 'react-icons/md'
 import { useCombobox, useMultipleSelection } from 'downshift'
+import { isEmpty } from 'lodash'
 
 import { Flex } from '../Flex'
 import { Box } from '../Box'
@@ -31,7 +32,10 @@ export interface Props {
   onChange?: any
   value?: Item[]
   items: Item[]
+  selectedItemsLimit?: number
+  limitMessage?: string
   isLoading?: boolean
+  suffix?: ReactNode
   placeholder?: string
   loadingMessage?: string
   emptyMessage?: string
@@ -114,10 +118,19 @@ const Overflow = styled(Flex)<OverflowProps>`
     li {
       padding: 3px 10px;
 
-      &:hover {
-        cursor: pointer;
-        background: ${({ theme }) => theme.colors.primary};
-        color: ${({ theme }) => theme.colors.white};
+      @media (hover: hover) {
+        &:hover {
+          cursor: pointer;
+          background: ${({ theme }) => theme.colors.primary};
+          color: ${({ theme }) => theme.colors.white};
+        }
+      }
+
+      @media (hover: none) {
+        &:active {
+          background: ${({ theme }) => theme.colors.primary};
+          color: ${({ theme }) => theme.colors.white};
+        }
       }
     }
   }
@@ -126,11 +139,6 @@ const Overflow = styled(Flex)<OverflowProps>`
 const Itens = styled(Box)`
   max-height: 250px;
   overflow: auto;
-
-  .highlighted {
-    background: ${({ theme }) => theme.colors.primary};
-    color: ${({ theme }) => theme.colors.white};
-  }
 `
 
 const SelectedItem = styled(Text)`
@@ -139,11 +147,14 @@ const SelectedItem = styled(Text)`
 
 export const MultiSelectFetchable: React.FC<Props> = ({
   items,
+  selectedItemsLimit,
+  limitMessage = 'quantidade máxima atingida',
   maxWidth,
   filters = [],
   onChange,
   value = [],
   isLoading = false,
+  suffix,
   placeholder,
   loadingMessage = 'carregando...',
   emptyMessage = 'item não encontrado ou já adicionado',
@@ -182,12 +193,10 @@ export const MultiSelectFetchable: React.FC<Props> = ({
     getMenuProps,
     getInputProps,
     getComboboxProps,
-    highlightedIndex,
     getItemProps,
     openMenu
   } = useCombobox({
     inputValue,
-    defaultHighlightedIndex: 0,
     selectedItem: null,
     itemToString: item => (item ? '' : ''),
     items: isDependent ? [] : getFilteredItems(),
@@ -285,6 +294,8 @@ export const MultiSelectFetchable: React.FC<Props> = ({
       })
     }
   }
+
+  const hasReachedLimit = selectedItemsLimit === selectedItems?.length
 
   return (
     <Flex flexDirection='column' flex={1}>
@@ -389,7 +400,7 @@ export const MultiSelectFetchable: React.FC<Props> = ({
             autoComplete='disabled'
           />
 
-          {isLoading && <Loading size='small' />}
+          {isLoading ? <Loading size='small' /> : suffix}
         </ContainerInput>
 
         <Overflow
@@ -401,7 +412,7 @@ export const MultiSelectFetchable: React.FC<Props> = ({
           border='1px solid #dedede'
           {...getMenuProps()}
         >
-          {!isDependent && (
+          {!isDependent && !isEmpty(filters) && (
             <>
               <ul>
                 {filters.map((filter, index) => (
@@ -427,9 +438,9 @@ export const MultiSelectFetchable: React.FC<Props> = ({
                 !isDependent &&
                 !isLoading &&
                 !disabled &&
+                !hasReachedLimit &&
                 getFilteredItems().map((item, index) => (
                   <li
-                    className={highlightedIndex === index ? 'highlighted' : ''}
                     key={`${item}${index}`}
                     onClick={e => {
                       getItemProps({ item, index }).onClick(e)
@@ -448,6 +459,8 @@ export const MultiSelectFetchable: React.FC<Props> = ({
                 !isLoading &&
                 !isDependent &&
                 getFilteredItems().length === 0 && <li>{emptyMessage}</li>}
+
+              {hasReachedLimit && <li>{limitMessage}</li>}
             </ul>
           </Itens>
         </Overflow>

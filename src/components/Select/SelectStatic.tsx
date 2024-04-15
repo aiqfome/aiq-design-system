@@ -18,6 +18,7 @@ export type Props = BoxPros & {
   placeholder?: string
   handleSelectedItemChange?: (item: any) => void
   onChangeTextInput?: (text: string) => void
+  handleClearSelection?: (clear: '') => void
   selectedItem?: any
   autoComplete?: boolean
   sufix?: any
@@ -121,6 +122,9 @@ export const SelectStatic = React.forwardRef<HTMLDivElement, Props>(
         // do nothing.
       },
       onChangeTextInput = () => {
+        // do nothing.
+      },
+      handleClearSelection = () => {
         // do nothing.
       },
       prefix,
@@ -229,7 +233,11 @@ export const SelectStatic = React.forwardRef<HTMLDivElement, Props>(
             placeholder={placeholder}
             {...getInputProps({
               onClick: () => {
-                clearOnSelect && setInputValue('')
+                if (clearOnSelect) {
+                  setInputValue('')
+                  handleClearSelection('')
+                }
+
                 setInputItems(items)
                 openMenu()
               }

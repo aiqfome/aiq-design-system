@@ -222,7 +222,15 @@ export const Pagination: React.FC<Props> = ({
             </Text>
           </PaginationItem>
 
-          {currentPage - 2 > 0 && (
+          {currentPage >= 4 && currentPage < 5 && (
+            <PaginationItem size={size} onClick={disabled ? undefined : () => handleClickPage(2)}>
+              <Text color='almostBlack' fontSize='default'>
+                2
+              </Text>
+            </PaginationItem>
+          )}
+
+          {currentPage > 4 && (
             <PaginationItem size={size} cursor='auto'>
               <Text color='almostBlack' fontSize='default'>
                 ...
@@ -230,10 +238,32 @@ export const Pagination: React.FC<Props> = ({
             </PaginationItem>
           )}
 
+          {pagesToShow.map(page =>
+            page < currentPage && (
+            <PaginationItem
+              data-testid={`pagination-item-${page}`}
+              size={size}
+              key={page.toString()}
+              onClick={disabled ? undefined : () => handleClickPage(page)}
+            >
+              <Text color='almostBlack' fontSize='default'>
+                {page}
+              </Text>
+            </PaginationItem>
+          ))}
+
           {currentPage > 1 && (
             <PaginationItem size={size} active>
               <Text color='almostBlack' fontSize='default'>
                 {currentPage}
+              </Text>
+            </PaginationItem>
+          )}
+
+          {nextPage && (
+            <PaginationItem size={size} cursor='auto'>
+              <Text color='almostBlack' fontSize='default'>
+                ...
               </Text>
             </PaginationItem>
           )}

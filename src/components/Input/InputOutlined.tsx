@@ -101,7 +101,8 @@ const LabelStyled = styled.label<Props>`
 
     &:focus {
       border-color: ${({ theme }) => theme.colors.primary};
-      border-top-color: transparent;
+      border-top-color: ${({ theme, label }) =>
+        label ? 'transparent' : theme.colors.primary};
       box-shadow: inset 1px 0 ${({ theme }) => theme.colors.primaryLight},
         inset -1px 0 ${({ theme }) => theme.colors.primaryLight},
         inset 0 -1px ${({ theme }) => theme.colors.primaryLight};
@@ -277,7 +278,9 @@ export const InputOutlined = React.forwardRef<HTMLInputElement, Props>(
             />
             {label && <Text data-testid='input-label'>{label}</Text>}
 
-            <Box className='sufix'><Loading marginLeft={5}/></Box>
+            <Box className='sufix'>
+              <Loading marginLeft={5} />
+            </Box>
           </LabelStyled>
 
           {errorForm && <InputErrorMessage errorMessage={errorMessage} />}

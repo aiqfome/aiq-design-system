@@ -17,6 +17,7 @@ export type Props = BoxPros & {
   placeholder?: string
   handleSelectedItemChange?: (item: any) => void
   onChangeTextInput?: (text: string) => void
+  handleClearSelection?: (clear: '') => void
   selectedItem?: any
   autoComplete?: boolean
   sufix?: any
@@ -122,6 +123,9 @@ export const SelectFetchable = React.forwardRef<HTMLDivElement, Props>(
       onChangeTextInput = () => {
         // do nothing.
       },
+      handleClearSelection = () => {
+        // do nothing.
+      },
       prefix,
       inputProps,
       ...props
@@ -176,6 +180,7 @@ export const SelectFetchable = React.forwardRef<HTMLDivElement, Props>(
       setInputItems(items)
       if (!isOpen) {
         setInputValue('')
+        handleClearSelection('')
         openMenu()
       }
     }

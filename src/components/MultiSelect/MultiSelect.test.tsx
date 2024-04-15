@@ -1,13 +1,16 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { fireEvent } from '@testing-library/react'
 
 import { MultiSelect } from '../MultiSelect'
 import { render } from '../utils/test/render'
+import { IoIosArrowDown } from 'react-icons/io'
+
+const greenColor = '#6EC531'
 
 const items = [
-  { id: 0, name: 'Maringá' },
-  { id: 1, name: 'Guarapuava' },
-  { id: 2, name: 'São Paulo' },
+  { id: 0, name: 'Maringá (ID 9457)', color: greenColor },
+  { id: 1, name: 'Guarapuava (ID 9456)' },
+  { id: 2, name: 'São Paulo (ID 5694)' },
   { id: 3, name: 'Curitiba' },
   { id: 4, name: 'Cruzeiro do Sul' },
   { id: 5, name: 'Pato Branco' },
@@ -137,5 +140,56 @@ describe('MultiSelect', () => {
     const select = getByTestId('select-input')
 
     expect(select).toBeDisabled()
+  })
+
+  it('should have custom color when have color prop', () => {
+    const { getByTestId } = render(
+      <MultiSelect items={items} value={[items[0]]} />
+    )
+
+    const BadgeItem = getByTestId('select-selected-item')
+    expect(BadgeItem).toHaveStyle({ backgroundColor: greenColor })
+  })
+
+  it('should show suffix when prop is provided', () => {
+    const { container } = render(
+      <MultiSelect
+        items={items}
+        value={[items[0]]}
+        suffix={<IoIosArrowDown />}
+      />
+    )
+
+    const suffix = container.querySelector('svg')
+
+    expect(suffix).toBeInTheDocument()
+  })
+
+  it('should show limit message when the selected items limit is reached', () => {
+    const { container } = render(
+      <MultiSelect
+        items={items}
+        value={[items[0], items[1]]}
+        suffix={<IoIosArrowDown />}
+        selectedItemsLimit={2}
+      />
+    )
+
+    const list = container.querySelectorAll('li')
+    const firstItemText = list[0].textContent
+
+    expect(list.length).toBe(1)
+    expect(firstItemText).toContain('quantidade máxima atingida')
+  })
+
+  it('should show correct items result when search input is only numbers', () => {
+    const { getByTestId, container } = render(<MultiSelect items={items} />)
+
+    fireEvent.change(getByTestId('select-input'), {
+      target: { value: '94' }
+    })
+
+    const list = container.querySelectorAll('li')
+    expect(list.length).toBe(2)
   })
 })
