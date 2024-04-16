@@ -192,7 +192,7 @@ export const SelectFetchable = React.forwardRef<HTMLDivElement, Props>(
       if (!prefix && !internalLabel) return null
 
       return (
-        <div style={{ marginRight: internalLabel && '-12px', columnGap: '4px' }}>
+        <div style={{ marginRight: internalLabel && '-12px', width: 'max-content' }}>
           {prefix}
           <Text ml={prefix && '4px'} color='darkGrey' fontSize='small' >{internalLabel}</Text>
         </div>
