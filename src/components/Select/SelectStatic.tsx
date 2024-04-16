@@ -107,7 +107,7 @@ export const SelectStatic = React.forwardRef<HTMLDivElement, Props>(
     {
       disabled,
       label,
-      internalLabel = 'criado por',
+      internalLabel,
       variant,
       items = [],
       placeholder,
