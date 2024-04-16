@@ -1,5 +1,5 @@
 import { useCombobox } from 'downshift'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { IoIosArrowDown } from 'react-icons/io'
 import styled, { css } from 'styled-components'
 
@@ -7,9 +7,11 @@ import { Box, Props as BoxPros } from '../Box'
 import { Button, Props as ButtonProps } from '../Button'
 import { Input } from '../Input'
 import { Loading } from '../Loading'
+import { Text } from '../Text'
 
 export type Props = BoxPros & {
   label?: string
+  internalLabel?: string
   items?: Array<string | { id: any; name: any; select?: any }>
   isOpen?: boolean
   variant?: 'outlined'
@@ -103,6 +105,7 @@ export const SelectFetchable = React.forwardRef<HTMLDivElement, Props>(
     {
       disabled,
       label,
+      internalLabel,
       variant,
       items = [],
       placeholder,
@@ -185,6 +188,17 @@ export const SelectFetchable = React.forwardRef<HTMLDivElement, Props>(
       }
     }
 
+    const completePrefix = useMemo(() => {
+      if (!prefix && !internalLabel) return null
+
+      return (
+        <div style={{ marginRight: internalLabel && '-12px', columnGap: '4px' }}>
+          {prefix}
+          <Text ml={prefix && '4px'} color='darkGrey' fontSize='small' >{internalLabel}</Text>
+        </div>
+      )
+    }, [])
+
     return (
       <Container
         isOpen={isOpen && !disabled}
@@ -194,6 +208,13 @@ export const SelectFetchable = React.forwardRef<HTMLDivElement, Props>(
         {...props}
       >
         <ul {...getMenuProps()}>
+          {internalLabel && 
+            <div style={{ marginTop: '8px', marginBottom: '2px' }}>
+              <Text p='12px' color='darkGrey' fontSize={12} fontWeight='medium'>
+                {internalLabel}
+              </Text>
+            </div>
+          }
           {isOpen &&
             inputItems &&
             !isLoading &&
@@ -239,7 +260,7 @@ export const SelectFetchable = React.forwardRef<HTMLDivElement, Props>(
             errorMessage={errorMessage}
             errorForm={errorForm}
             readOnly={!autoComplete}
-            prefix={prefix}
+            prefix={completePrefix}
             placeholder={placeholder}
             nativeAutoComplete='disabled'
             {...boxStyled}
