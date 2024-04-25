@@ -186,7 +186,9 @@ export const MultiSelectFetchable: React.FC<Props> = ({
   })
 
   const getFilteredItems = () =>
-    items.filter(item => selectedItems.indexOf(item) < 0)
+    items.filter(item =>
+      selectedItems.every(selectedItem => selectedItem.id !== item.id)
+    )
 
   const {
     isOpen,
