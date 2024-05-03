@@ -254,7 +254,7 @@ export const MultiSelectStatic: React.FC<Props> = ({
       .filter(item => {
         const itemId = item.name.match(/\d+/)
         return (
-          selectedItems.indexOf(item) < 0 &&
+          selectedItems.every(selectedItem => selectedItem.id !== item.id) &&
           (hasOnlyNumbers(userSearchInput) && itemId && itemId[0]
             ? itemId[0].startsWith(userSearchInput)
             : item.name.toLowerCase().startsWith(userSearchInput))
